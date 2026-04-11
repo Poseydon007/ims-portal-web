@@ -3,9 +3,45 @@
 
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
-import { educationTopics } from "@/lib/educationData";
+import { educationTopics, EducationTopic } from "@/lib/educationData";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { getLoginUrl } from "@/const";
+import {
+  HardHat,
+  ClipboardList,
+  Settings2,
+  Wrench,
+  Scale,
+  BookOpen,
+  type LucideIcon,
+} from "lucide-react";
+
+// Premium icon map — Lucide stroke icons per topic slug
+const TOPIC_ICONS: Record<string, LucideIcon> = {
+  hse: HardHat,
+  ims: ClipboardList,
+  operations: Settings2,
+  equipment: Wrench,
+  regulatory: Scale,
+};
+
+function TopicIcon({ slug, color }: { slug: string; color: string }) {
+  const Icon = TOPIC_ICONS[slug] ?? BookOpen;
+  return (
+    <div
+      className="flex items-center justify-center rounded-full flex-shrink-0"
+      style={{
+        width: "40px",
+        height: "40px",
+        background: `linear-gradient(135deg, #081C2E 0%, #0d2a42 100%)`,
+        border: `1.5px solid ${color}40`,
+        boxShadow: `0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.06)`,
+      }}
+    >
+      <Icon size={18} strokeWidth={1.75} color={color} />
+    </div>
+  );
+}
 
 export default function Education() {
   const { isAuthenticated, loading } = useImsAuth();
@@ -25,7 +61,19 @@ export default function Education() {
       <Layout>
         <div style={{ backgroundColor: "#081C2E" }} className="py-16">
           <div className="container text-center">
-            <div className="text-4xl mb-4">🎓</div>
+            <div className="flex items-center justify-center mb-4">
+            <div
+              className="flex items-center justify-center rounded-full"
+              style={{
+                width: "56px",
+                height: "56px",
+                background: "linear-gradient(135deg, rgba(196,154,40,0.15) 0%, rgba(255,255,255,0.05) 100%)",
+                border: "1.5px solid rgba(196,154,40,0.3)",
+              }}
+            >
+              <BookOpen size={26} strokeWidth={1.5} color="#C49A28" />
+            </div>
+          </div>
             <h1 className="text-white text-2xl font-bold mb-3">Education & Learning</h1>
             <p className="text-white/60 text-sm mb-6 max-w-md mx-auto">
               Access training videos, manuals, guides, and learning materials. Sign in with your company account to continue.
@@ -135,7 +183,7 @@ export default function Education() {
                   {/* Icon + code badge */}
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-2xl">{topic.icon}</span>
+                      <TopicIcon slug={topic.slug} color={topic.color === "#081C2E" ? "#C49A28" : topic.color} />
                       <span
                         className="text-xs font-bold px-2 py-1 rounded"
                         style={{ backgroundColor: "#e8edf4", color: "#081C2E" }}
