@@ -25,3 +25,13 @@
 - [x] Admin-only route protection (user management, submissions view)
 - [x] Registration is admin-controlled only (no open signup)
 - [x] Timestamp all form submissions with server time (not client)
+
+## Education & Learning Section
+- [x] Education landing page at /education — topic category grid (HSE, Operations, IMS, Equipment, Regulatory)
+- [x] Education topic page at /education/:slug — resource cards with type badges (Video, PDF, Manual, Guide)
+- [x] Resource card: video thumbnail with play icon linking to video URL (no inline embed)
+- [x] Resource card: PDF/manual with download/view button
+- [x] "Education" link added to main header nav (visible to all logged-in users)
+- [ ] Education section card added to home page (deferred — home page already has category grid)
+- [x] Static data file for education topics and resources (educationData.ts)
+- [x] Login-gated: only logged-in users can access education content

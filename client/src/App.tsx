@@ -13,6 +13,8 @@ import JHAForm from "./pages/forms/JHAForm";
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 import Login from "./pages/Login";
 import UserManagement from "./pages/admin/UserManagement";
+import Education from "./pages/Education";
+import EducationTopic from "./pages/EducationTopic";
 
 function Router() {
   return (
@@ -30,6 +32,10 @@ function Router() {
       {/* Active Forms */}
       <Route path="/forms/near-miss" component={NearMissForm} />
       <Route path="/forms/jha" component={JHAForm} />
+
+      {/* Education & Learning */}
+      <Route path="/education" component={Education} />
+      <Route path="/education/:slug" component={EducationTopic} />
 
       {/* Admin */}
       <Route path="/admin/submissions" component={SubmissionsAdmin} />

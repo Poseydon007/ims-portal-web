@@ -61,23 +61,31 @@ export function TopNav() {
         <div className="flex items-center gap-4">
           {!loading && isAuthenticated && user ? (
             <div className="flex items-center gap-3">
-              {/* Admin links */}
-              {user.role === "admin" && (
-                <div className="hidden md:flex items-center gap-2">
-                  <Link href="/admin/submissions">
-                    <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
-                      style={{ color: "#C49A28", backgroundColor: "rgba(196,154,40,0.1)" }}>
-                      Submissions
-                    </span>
-                  </Link>
-                  <Link href="/admin/users">
-                    <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
-                      style={{ color: "#C49A28", backgroundColor: "rgba(196,154,40,0.1)" }}>
-                      Users
-                    </span>
-                  </Link>
-                </div>
-              )}
+              {/* Nav links */}
+              <div className="hidden md:flex items-center gap-2">
+                <Link href="/education">
+                  <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
+                    style={{ color: "rgba(255,255,255,0.7)", backgroundColor: "rgba(255,255,255,0.05)" }}>
+                    🎓 Education
+                  </span>
+                </Link>
+                {user.role === "admin" && (
+                  <>
+                    <Link href="/admin/submissions">
+                      <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
+                        style={{ color: "#C49A28", backgroundColor: "rgba(196,154,40,0.1)" }}>
+                        Submissions
+                      </span>
+                    </Link>
+                    <Link href="/admin/users">
+                      <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
+                        style={{ color: "#C49A28", backgroundColor: "rgba(196,154,40,0.1)" }}>
+                        Users
+                      </span>
+                    </Link>
+                  </>
+                )}
+              </div>
               {/* User info */}
               <div className="text-right hidden sm:block">
                 <div className="text-white text-xs font-semibold leading-tight">
