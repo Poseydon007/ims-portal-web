@@ -50,3 +50,9 @@
 - [x] More vertical spacing in header
 - [x] Move user name/role/sign-out below IMS Document Portal title (right column, stacked)
 - [x] Center nav tabs (Education, Submissions, Users) between logo and IMS portal title
+
+## Header Nav Redesign (Education stacked)
+- [x] Education tab moved below Submissions + Users row
+- [x] Education tab width matches full width of Submissions + Users combined
+- [x] Glass morphism background on Education tab
+- [x] Smooth hover and entrance animations on nav tabs
