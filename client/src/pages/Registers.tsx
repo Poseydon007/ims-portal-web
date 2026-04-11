@@ -1,13 +1,13 @@
 // Registers page — lists all IMS REG documents
 // Click name → preview image modal
 // "Open in Drive" button → admin and supervisor only
+// Drive links confirmed from TE Google Drive folder (April 11, 2026)
 
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import {
   FileSpreadsheet,
-  FileText,
   ExternalLink,
   X,
   Search,
@@ -29,7 +29,46 @@ interface RegisterEntry {
   purpose?: string;
 }
 
+// All 12 confirmed spreadsheet registers from Google Drive (April 11, 2026)
+// Note: TE-IMS-REF-SYS-006 is a REF (Reference) file included as a key data register
 const REGISTERS: RegisterEntry[] = [
+  // SYS
+  {
+    code: "TE-IMS-REG-SYS-001",
+    title: "IMS Master Register and Migration Log",
+    rev: "Rev03",
+    format: "xlsx",
+    category: "SYS",
+    department: "Management",
+    driveUrl: "https://drive.google.com/open?id=1oQ4qMpcW2e9KbzhvpiGTCGfosghHsRG6",
+    owner: "COO",
+    standard: "ISO 9001:2015 Cl. 4.4; ISO 14001:2015 Cl. 4.4; ISO 45001:2018 Cl. 4.4",
+    purpose: "Master index of all IMS documents. Tracks document codes, revisions, status, and migration history across the entire TEMC document hierarchy.",
+  },
+  {
+    code: "TE-IMS-REG-SYS-004",
+    title: "Corrective Action Request Log",
+    rev: "Rev01",
+    format: "xlsx",
+    category: "SYS",
+    department: "Management",
+    driveUrl: "https://drive.google.com/open?id=1SoRd7yw17cTpXacyRM_n6RosKiB3C1bm",
+    owner: "COO",
+    standard: "ISO 9001:2015 Cl. 10.2; ISO 14001:2015 Cl. 10.2; ISO 45001:2018 Cl. 10.2",
+    purpose: "Tracks all corrective actions raised across TEMC, including root cause, assigned owner, target date, and closure status.",
+  },
+  {
+    code: "TE-IMS-REG-SYS-007",
+    title: "Risk and Opportunity Register",
+    rev: "Rev01",
+    format: "xlsx",
+    category: "SYS",
+    department: "Management",
+    driveUrl: "https://drive.google.com/open?id=1owwhYbOCK2rYo8fQHokgXjMHupbn8M3v",
+    owner: "COO",
+    standard: "ISO 9001:2015 Cl. 6.1; ISO 14001:2015 Cl. 6.1; ISO 45001:2018 Cl. 6.1",
+    purpose: "Identifies and tracks strategic and operational risks and opportunities across the IMS, with likelihood, impact, and treatment actions.",
+  },
   // HSE
   {
     code: "TE-IMS-REG-HSE-001",
@@ -38,34 +77,10 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "HSE",
     department: "HSE",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1y3obnGImfhOfhzlLd7lS4vnjuvsoAHT8",
+    driveUrl: "https://drive.google.com/open?id=1y3obnGImfhOfhzlLd7lS4vnjuvsoAHT8",
     owner: "HSE Manager",
-    standard: "ISO 45001:2018 Cl. 6.1",
-    purpose: "Tracks all identified risks and their controls across TEMC operations.",
-  },
-  {
-    code: "TE-IMS-REG-HSE-002",
-    title: "PPE Issue & Inspection Register",
-    rev: "Rev00",
-    format: "docx",
-    category: "HSE",
-    department: "HSE",
-    driveUrl: "https://docs.google.com/document/d/1Cf-ZJfNiJIJFtqtc9XuqVKZi-BWdqNsF",
-    owner: "HSE Manager",
-    standard: "ISO 45001:2018 Cl. 8.1.2",
-    purpose: "Records PPE issued to personnel and inspection status.",
-  },
-  {
-    code: "TE-IMS-REG-HSE-003",
-    title: "Emergency Contacts Directory",
-    rev: "Rev01",
-    format: "docx",
-    category: "HSE",
-    department: "HSE",
-    driveUrl: "https://docs.google.com/document/d/1EilKj-U61_Eedn4YLnPqEGLyplc_LE4P",
-    owner: "HSE Manager",
-    standard: "ISO 45001:2018 Cl. 8.2",
-    purpose: "Master directory of all emergency contacts for TEMC sites.",
+    standard: "ISO 45001:2018 Cl. 6.1.2",
+    purpose: "Tracks all identified safety and health risks across TEMC operations, with risk ratings, controls, and residual risk levels.",
   },
   {
     code: "TE-IMS-REG-HSE-005",
@@ -74,7 +89,7 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "HSE",
     department: "HSE",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1wlpH5fvudTwcD5l8sbhkDM9eui_31NMA",
+    driveUrl: "https://drive.google.com/open?id=1wlpH5fvudTwcD5l8sbhkDM9eui_31NMA",
     previewUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/REG-HSE-005-preview_24aefd00.png",
     owner: "HSE Manager",
     standard: "ISO 45001:2018 Cl. 10.2; Saudi Labour Law Royal Decree M/51 Art. 142; MHRSD OSH",
@@ -87,72 +102,22 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "HSE",
     department: "HSE",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1iKTFANZoASvBbXvbHXkTEJxrqAdCKTEk",
+    driveUrl: "https://drive.google.com/open?id=1iKTFANZoASvBbXvbHXkTEJxrqAdCKTEk",
     owner: "HSE Manager",
     standard: "ISO 45001:2018 Cl. 6.1.2",
-    purpose: "Hazard Identification, Risk Assessment register for all TEMC activities.",
-  },
-  // GOV
-  {
-    code: "TE-IMS-REG-GOV-001",
-    title: "IMS Objectives & Targets Register",
-    rev: "Rev00",
-    format: "docx",
-    category: "GOV",
-    department: "Management",
-    driveUrl: "https://docs.google.com/document/d/1FhwiV6EwqCtN6F94pTXMLP6n7Pf3lojj",
-    owner: "COO",
-    standard: "ISO 9001:2015 Cl. 6.2; ISO 14001:2015 Cl. 6.2; ISO 45001:2018 Cl. 6.2",
-    purpose: "Tracks IMS objectives, targets, KPIs, responsible parties, and progress.",
-  },
-  // SYS
-  {
-    code: "TE-IMS-REG-SYS-002",
-    title: "KPI Dashboard & Performance Log",
-    rev: "Rev00",
-    format: "docx",
-    category: "SYS",
-    department: "Management",
-    driveUrl: "https://docs.google.com/document/d/12oXdknwUVEoOg3noZShv0sza5ByFqUE-",
-    owner: "COO",
-    standard: "ISO 9001:2015 Cl. 9.1; ISO 14001:2015 Cl. 9.1; ISO 45001:2018 Cl. 9.1",
-    purpose: "Consolidated KPI dashboard and performance log for management review.",
+    purpose: "Hazard Identification and Risk Assessment register for all TEMC activities, tasks, and workplaces.",
   },
   {
-    code: "TE-IMS-REG-SYS-003",
-    title: "Legal & Regulatory Compliance Register",
-    rev: "Rev00",
-    format: "docx",
-    category: "SYS",
-    department: "Management",
-    driveUrl: "https://docs.google.com/document/d/1_QJQJAfp2sNDH-UDHztxhmHXFOqqJ_6V",
-    owner: "COO",
-    standard: "ISO 14001:2015 Cl. 6.1.3; ISO 45001:2018 Cl. 6.1.3",
-    purpose: "Register of all applicable legal and regulatory requirements for TEMC.",
-  },
-  {
-    code: "TE-IMS-REG-SYS-004",
-    title: "Corrective Action Request Log",
-    rev: "Rev01",
+    code: "TE-IMS-REG-HSE-010",
+    title: "Environmental Aspect and Impact Register",
+    rev: "Rev02",
     format: "xlsx",
-    category: "SYS",
-    department: "Management",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1SoRd7yw17cTpXacyRM_n6RosKiB3C1bm",
-    owner: "COO",
-    standard: "ISO 9001:2015 Cl. 10.2; ISO 14001:2015 Cl. 10.2; ISO 45001:2018 Cl. 10.2",
-    purpose: "Tracks all corrective actions, root causes, and closure status.",
-  },
-  {
-    code: "TE-IMS-REG-SYS-007",
-    title: "Risk and Opportunity Register",
-    rev: "Rev01",
-    format: "xlsx",
-    category: "SYS",
-    department: "Management",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1owwhYbOCK2rYo8fQHok",
-    owner: "COO",
-    standard: "ISO 9001:2015 Cl. 6.1; ISO 14001:2015 Cl. 6.1; ISO 45001:2018 Cl. 6.1",
-    purpose: "Identifies and tracks risks and opportunities across the IMS.",
+    category: "HSE",
+    department: "HSE",
+    driveUrl: "https://drive.google.com/open?id=13BAsrsfDWVla3YgFRw-M4BlS0gMTsYZM",
+    owner: "HSE Manager",
+    standard: "ISO 14001:2015 Cl. 6.1.2",
+    purpose: "Identifies and evaluates environmental aspects and their impacts from TEMC operations, including significance ratings and control measures.",
   },
   // LOG
   {
@@ -162,10 +127,10 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "LOG",
     department: "Logistics",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1n5y9uMq7RzZzEkZf0Q_OxVKBwkQhV7Tv",
+    driveUrl: "https://drive.google.com/open?id=1n5y9uMq7RzZzEkZf0Q_OxVKBwkQhV7Tv",
     owner: "Operations Manager",
     standard: "ISO 45001:2018 Cl. 8.1.3",
-    purpose: "Records vehicle handover between drivers, including condition and fuel status.",
+    purpose: "Records vehicle handover between drivers, including vehicle condition, fuel level, mileage, and driver sign-off.",
   },
   // MAINT
   {
@@ -175,10 +140,10 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "MAINT",
     department: "Maintenance",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1b0yP_8JelkA5czQ4d5X9QQgxNHmJzGYA",
+    driveUrl: "https://drive.google.com/open?id=1b0yP_8JelkA5czQ4d5X9QQgxNHmJzGYA",
     owner: "Maintenance Supervisor",
     standard: "ISO 9001:2015 Cl. 7.1.3",
-    purpose: "Tracks all maintenance activities, service intervals, and equipment status.",
+    purpose: "Tracks all maintenance activities, service intervals, work orders, and equipment status across TEMC assets.",
   },
   {
     code: "TE-IMS-REG-MAINT-002",
@@ -187,10 +152,10 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "MAINT",
     department: "Maintenance",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1mCoetiLjBFnwZg8CZWuMoOObc5aTKi2X",
+    driveUrl: "https://drive.google.com/open?id=1mCoetiLjBFnwZg8CZWuMoOObc5aTKi2X",
     owner: "Maintenance Supervisor",
     standard: "ISO 14001:2015 Cl. 8.1",
-    purpose: "Records all fuel refuelling events, quantities, and vehicle/equipment IDs.",
+    purpose: "Records all fuel refuelling events, quantities dispensed, vehicle/equipment IDs, and operator details.",
   },
   // TRN
   {
@@ -200,30 +165,41 @@ const REGISTERS: RegisterEntry[] = [
     format: "xlsx",
     category: "TRN",
     department: "HR",
-    driveUrl: "https://docs.google.com/spreadsheets/d/1YUu_54FE-EynpXvnJvBQSjZ9yxCuKelu",
+    driveUrl: "https://drive.google.com/open?id=1YUu_54FE-EynpXvnJvBQSjZ9yxCuKelu",
     owner: "HR Manager",
     standard: "ISO 9001:2015 Cl. 7.2; ISO 45001:2018 Cl. 7.2",
-    purpose: "Maps training requirements and competence levels for all roles at TEMC.",
+    purpose: "Maps training requirements and competence levels for all roles at TEMC. Tracks training completion, certifications, and gaps.",
+  },
+  // REF (Reference Data — included as key data register)
+  {
+    code: "TE-IMS-REF-SYS-006",
+    title: "KPI Tables and Reference Data",
+    rev: "Rev01",
+    format: "xlsx",
+    category: "REF",
+    department: "Management",
+    driveUrl: "https://drive.google.com/open?id=1SiCZjJBBsCt2OXZXU7A_982azcn-pFEc",
+    owner: "COO",
+    standard: "ISO 9001:2015 Cl. 9.1; ISO 14001:2015 Cl. 9.1; ISO 45001:2018 Cl. 9.1",
+    purpose: "Reference tables for KPI targets, performance benchmarks, and management review data used across the IMS.",
   },
 ];
 
 const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   HSE:   { bg: "#fff3cd", text: "#7a4f00", border: "#f0c040" },
-  GOV:   { bg: "#e8edf4", text: "#081C2E", border: "#b0bdd0" },
   SYS:   { bg: "#e8f4f0", text: "#1a5c45", border: "#7ac4a8" },
   LOG:   { bg: "#f0e8f4", text: "#4a1a6b", border: "#c0a0d8" },
   MAINT: { bg: "#fde8e8", text: "#7a1a1a", border: "#f0a0a0" },
   TRN:   { bg: "#e8f0fd", text: "#1a3a7a", border: "#a0b8f0" },
+  REF:   { bg: "#e8edf4", text: "#081C2E", border: "#b0bdd0" },
 };
 
-const DEPARTMENTS = ["All", "HSE", "Management", "Logistics", "Maintenance", "HR"];
-const CATEGORIES = ["All", "HSE", "GOV", "SYS", "LOG", "MAINT", "TRN"];
+const CATEGORIES = ["All", "HSE", "SYS", "LOG", "MAINT", "TRN", "REF"];
 
 export default function Registers() {
   const { user, isAuthenticated } = useImsAuth();
   const [search, setSearch] = useState("");
   const [filterCat, setFilterCat] = useState("All");
-  const [filterDept, setFilterDept] = useState("All");
   const [preview, setPreview] = useState<RegisterEntry | null>(null);
 
   const canOpenDrive = isAuthenticated && (user?.role === "admin" || user?.role === "supervisor");
@@ -233,9 +209,11 @@ export default function Registers() {
       r.code.toLowerCase().includes(search.toLowerCase()) ||
       r.title.toLowerCase().includes(search.toLowerCase());
     const matchCat = filterCat === "All" || r.category === filterCat;
-    const matchDept = filterDept === "All" || r.department === filterDept;
-    return matchSearch && matchCat && matchDept;
+    return matchSearch && matchCat;
   });
+
+  const xlsxCount = REGISTERS.filter(r => r.format === "xlsx").length;
+  const catCount = new Set(REGISTERS.map(r => r.category)).size;
 
   return (
     <Layout>
@@ -268,9 +246,9 @@ export default function Registers() {
           <div className="container py-2 flex flex-wrap gap-6">
             {[
               { value: REGISTERS.length, label: "Total Registers" },
-              { value: REGISTERS.filter(r => r.format === "xlsx").length, label: "Spreadsheets" },
-              { value: REGISTERS.filter(r => r.format === "docx").length, label: "Documents" },
-              { value: new Set(REGISTERS.map(r => r.category)).size, label: "Categories" },
+              { value: xlsxCount, label: "Spreadsheets" },
+              { value: catCount, label: "Categories" },
+              { value: "Rev01–03", label: "Revision Range" },
             ].map(s => (
               <div key={s.label} className="text-center px-3">
                 <div className="text-xl font-extrabold tabular-nums" style={{ color: "#C49A28" }}>{s.value}</div>
@@ -399,7 +377,7 @@ export default function Registers() {
                           </div>
                         ) : (
                           <div className="flex items-center justify-center gap-1">
-                            <FileText size={14} className="text-blue-600" />
+                            <FileSpreadsheet size={14} className="text-blue-600" />
                             <span className="text-xs text-blue-700 font-medium">DOCX</span>
                           </div>
                         )}
@@ -520,7 +498,7 @@ export default function Registers() {
                   {preview.format === "xlsx" ? (
                     <FileSpreadsheet size={48} className="text-green-400 mb-3" />
                   ) : (
-                    <FileText size={48} className="text-blue-400 mb-3" />
+                    <FileSpreadsheet size={48} className="text-green-400 mb-3" />
                   )}
                   <div className="text-sm font-medium text-gray-500">Preview not yet available</div>
                   <div className="text-xs text-gray-400 mt-1">Open the file in Google Drive to view its contents</div>

@@ -72,10 +72,10 @@
 - [ ] Summary stats bar (total, by type, by department) auto-calculated from live data
 
 ## IMS Registers Page (Drive-linked)
-- [ ] Registers page at /registers — lists all REG files with preview + Drive link
-- [ ] Click name → modal with preview image (PNG/JPG screenshot of file)
-- [ ] "Open in Drive" button — admin and supervisor only, opens Google Drive link
-- [ ] Field workers see list and preview but no Drive link button
-- [ ] REG-HSE-005 as first working example with real preview image
-- [ ] Upload preview image to CDN
-- [ ] Register nav link in header for all logged-in users
+- [x] Registers page at /registers — lists all REG files with preview + Drive link
+- [x] Click name → modal with preview image (PNG/JPG screenshot of file)
+- [x] "Open in Drive" button — admin and supervisor only, opens Google Drive link
+- [x] Field workers see list and preview but no Drive link button
+- [x] REG-HSE-005 as first working example with real preview image
+- [x] Upload preview image to CDN
+- [x] Register nav link in header for all logged-in users
