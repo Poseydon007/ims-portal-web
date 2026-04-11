@@ -19,6 +19,7 @@ export interface ImsDocument {
   available: boolean; // whether the HTML view is built
   formUrl?: string; // if set, this document has a live digital form at this URL
   viewUrl?: string; // if set, this document has a live HTML view page at this URL
+  driveUrl?: string; // if set, this document has a live file in Google Drive (admin/supervisor only)
 }
 
 export const categories: DocCategory[] = [
@@ -174,21 +175,21 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
   ],
   reg: [
     { code: "TE-IMS-REG-GOV-001", title: "IMS Objectives & Targets Register", rev: "Rev00", date: "—", status: "pending", slug: "TE-IMS-REG-GOV-001", available: false },
-    { code: "TE-IMS-REG-HSE-001", title: "Risk Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-001", available: false },
+    { code: "TE-IMS-REG-HSE-001", title: "Risk Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-001", available: false, driveUrl: "https://drive.google.com/open?id=1y3obnGImfhOfhzlLd7lS4vnjuvsoAHT8" },
     { code: "TE-IMS-REG-HSE-002", title: "PPE Issue & Inspection Register", rev: "Rev00", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-002", available: false },
     { code: "TE-IMS-REG-HSE-003", title: "Emergency Contacts Directory", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-003", available: false },
-    { code: "TE-IMS-REG-HSE-005", title: "Incident and Accident Index Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-005", available: false },
-    { code: "TE-IMS-REG-HSE-007", title: "HIRA Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-007", available: false },
-    { code: "TE-IMS-REG-HSE-010", title: "Environmental Aspect and Impact Register", rev: "Rev02", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-010", available: false },
-    { code: "TE-IMS-REG-LOG-001", title: "Vehicle Handover Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-LOG-001", available: false },
-    { code: "TE-IMS-REG-MAINT-001", title: "Maintenance Log and Service Record", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-MAINT-001", available: false },
-    { code: "TE-IMS-REG-MAINT-002", title: "Fuel Refuelling Log", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-MAINT-002", available: false },
-    { code: "TE-IMS-REG-SYS-001", title: "IMS Master Register and Migration Log", rev: "Rev03", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-001", available: false },
+    { code: "TE-IMS-REG-HSE-005", title: "Incident and Accident Index Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-005", available: false, driveUrl: "https://drive.google.com/open?id=1wlpH5fvudTwcD5l8sbhkDM9eui_31NMA" },
+    { code: "TE-IMS-REG-HSE-007", title: "HIRA Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-007", available: false, driveUrl: "https://drive.google.com/open?id=1iKTFANZoASvBbXvbHXkTEJxrqAdCKTEk" },
+    { code: "TE-IMS-REG-HSE-010", title: "Environmental Aspect and Impact Register", rev: "Rev02", date: "—", status: "pending", slug: "TE-IMS-REG-HSE-010", available: false, driveUrl: "https://drive.google.com/open?id=13BAsrsfDWVla3YgFRw-M4BlS0gMTsYZM" },
+    { code: "TE-IMS-REG-LOG-001", title: "Vehicle Handover Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-LOG-001", available: false, driveUrl: "https://drive.google.com/open?id=1n5y9uMq7RzZzEkZf0Q_OxVKBwkQhV7Tv" },
+    { code: "TE-IMS-REG-MAINT-001", title: "Maintenance Log and Service Record", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-MAINT-001", available: false, driveUrl: "https://drive.google.com/open?id=1b0yP_8JelkA5czQ4d5X9QQgxNHmJzGYA" },
+    { code: "TE-IMS-REG-MAINT-002", title: "Fuel Refuelling Log", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-MAINT-002", available: false, driveUrl: "https://drive.google.com/open?id=1mCoetiLjBFnwZg8CZWuMoOObc5aTKi2X" },
+    { code: "TE-IMS-REG-SYS-001", title: "IMS Master Register and Migration Log", rev: "Rev03", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-001", available: false, driveUrl: "https://drive.google.com/open?id=1oQ4qMpcW2e9KbzhvpiGTCGfosghHsRG6" },
     { code: "TE-IMS-REG-SYS-002", title: "KPI Dashboard & Performance Log", rev: "Rev00", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-002", available: false },
     { code: "TE-IMS-REG-SYS-003", title: "Legal & Regulatory Compliance Register", rev: "Rev00", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-003", available: false },
-    { code: "TE-IMS-REG-SYS-004", title: "Corrective Action Request Log", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-004", available: false },
-    { code: "TE-IMS-REG-SYS-007", title: "Risk and Opportunity Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-007", available: false },
-    { code: "TE-IMS-REG-TRN-001", title: "Training and Competence Matrix", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-TRN-001", available: false },
+    { code: "TE-IMS-REG-SYS-004", title: "Corrective Action Request Log", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-004", available: false, driveUrl: "https://drive.google.com/open?id=1SoRd7yw17cTpXacyRM_n6RosKiB3C1bm" },
+    { code: "TE-IMS-REG-SYS-007", title: "Risk and Opportunity Register", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-SYS-007", available: false, driveUrl: "https://drive.google.com/open?id=1owwhYbOCK2rYo8fQHokgXjMHupbn8M3v" },
+    { code: "TE-IMS-REG-TRN-001", title: "Training and Competence Matrix", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REG-TRN-001", available: false, driveUrl: "https://drive.google.com/open?id=1YUu_54FE-EynpXvnJvBQSjZ9yxCuKelu" },
   ],
   sop: [
     { code: "TE-IMS-SOP-GEO-001", title: "Core Cutting and Handling SOP", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-SOP-GEO-001", available: false },

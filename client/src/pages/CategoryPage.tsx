@@ -5,6 +5,8 @@ import { Link, useParams } from "wouter";
 import Layout from "@/components/Layout";
 import { Breadcrumb } from "@/components/Layout";
 import { categories, documentsByCategory, ImsDocument } from "@/lib/imsData";
+import { useImsAuth } from "@/hooks/useImsAuth";
+import { ExternalLink } from "lucide-react";
 
 const statusBadge = (status: ImsDocument["status"]) => {
   if (status === "approved") {
@@ -41,6 +43,8 @@ export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
   const cat = categories.find((c) => c.slug === slug);
   const docs = documentsByCategory[slug ?? ""] ?? [];
+  const { user, isAuthenticated } = useImsAuth();
+  const canOpenDrive = isAuthenticated && (user?.role === "admin" || user?.role === "supervisor");
 
   if (!cat) {
     return (
@@ -138,8 +142,19 @@ export default function CategoryPage() {
                       >
                         {doc.title}
                       </Link>
+                    ) : canOpenDrive && doc.driveUrl ? (
+                      <a
+                        href={doc.driveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium hover:underline flex items-center gap-1 group"
+                        style={{ color: "#081C2E" }}
+                      >
+                        {doc.title}
+                        <ExternalLink size={12} className="opacity-0 group-hover:opacity-60 flex-shrink-0" style={{ color: "#C49A28" }} />
+                      </a>
                     ) : (
-                      <span className="italic" style={{ color: "#8a9ab0" }}>
+                      <span className={doc.driveUrl ? "" : "italic"} style={{ color: doc.driveUrl ? "#081C2E" : "#8a9ab0" }}>
                         {doc.title}
                       </span>
                     )}
@@ -170,6 +185,17 @@ export default function CategoryPage() {
                       >
                         View →
                       </Link>
+                    ) : canOpenDrive && doc.driveUrl ? (
+                      <a
+                        href={doc.driveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap hover:opacity-80"
+                        style={{ backgroundColor: "#C49A28", color: "white" }}
+                      >
+                        <ExternalLink size={11} />
+                        Open
+                      </a>
                     ) : (
                       <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>
                     )}
