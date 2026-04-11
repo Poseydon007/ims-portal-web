@@ -10,7 +10,7 @@ import { toast } from "sonner";
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
 const GRAY_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogovectorgray_20d7a465.png";
-const WHITE_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_f1c9a8a7.png";
+const WHITE_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png";
 
 // Risk colour mapping
 const riskColor: Record<string, string> = {
