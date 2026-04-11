@@ -64,33 +64,46 @@ export function TopNav() {
         {!loading && isAuthenticated && user ? (
           <div className="hidden md:flex flex-col items-center justify-center px-6 gap-1.5">
 
-            {/* Row 1: Admin tabs (Submissions + Users) */}
-            {user.role === "admin" && (
-              <div className="flex items-center gap-1" id="admin-nav-row">
-                <Link href="/admin/submissions">
-                  <span
-                    className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
-                    style={{
-                      color: isActive("/admin/submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                      borderBottom: isActive("/admin/submissions") ? "2px solid #C49A28" : "2px solid transparent",
-                    }}
-                  >
-                    Submissions
-                  </span>
-                </Link>
-                <Link href="/admin/users">
-                  <span
-                    className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
-                    style={{
-                      color: isActive("/admin/users") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                      borderBottom: isActive("/admin/users") ? "2px solid #C49A28" : "2px solid transparent",
-                    }}
-                  >
-                    Users
-                  </span>
-                </Link>
-              </div>
-            )}
+            {/* Row 1: Home + Admin tabs */}
+            <div className="flex items-center gap-1" id="admin-nav-row">
+              <Link href="/">
+                <span
+                  className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
+                  style={{
+                    color: location === "/" ? "#C49A28" : "rgba(255,255,255,0.7)",
+                    borderBottom: location === "/" ? "2px solid #C49A28" : "2px solid transparent",
+                  }}
+                >
+                  Home
+                </span>
+              </Link>
+              {user.role === "admin" && (
+                <>
+                  <Link href="/admin/submissions">
+                    <span
+                      className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
+                      style={{
+                        color: isActive("/admin/submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                        borderBottom: isActive("/admin/submissions") ? "2px solid #C49A28" : "2px solid transparent",
+                      }}
+                    >
+                      Submissions
+                    </span>
+                  </Link>
+                  <Link href="/admin/users">
+                    <span
+                      className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
+                      style={{
+                        color: isActive("/admin/users") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                        borderBottom: isActive("/admin/users") ? "2px solid #C49A28" : "2px solid transparent",
+                      }}
+                    >
+                      Users
+                    </span>
+                  </Link>
+                </>
+              )}
+            </div>
 
             {/* Row 2: Education — full width of row above, glass morphism */}
             <Link href="/education" className="w-full no-underline">
