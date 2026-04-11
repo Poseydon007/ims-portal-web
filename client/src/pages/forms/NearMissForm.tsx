@@ -167,7 +167,7 @@ export default function NearMissForm() {
           <img
             src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogovectorgray_20d7a465.png"
             alt="True East Mining"
-            className="h-16"
+            style={{ width: "90px", height: "90px", objectFit: "contain" }}
           />
           <div className="text-right">
             <p className="text-xs font-mono" style={{ color: "#8a9ab0" }}>TE-IMS-FRM-HSE-003</p>
