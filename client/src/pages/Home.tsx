@@ -1,21 +1,80 @@
 // Design: Clean Light Corporate — navy #081C2E, gold #C49A28
-// Landing page: stats banner + 7 category cards in responsive grid
+// Landing page: hero + 4-stat animated banner + 7 category cards
 
 import { Link } from "wouter";
+import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import { categories } from "@/lib/imsData";
 
-const categoryIcons: Record<string, string> = {
-  FRM: "📋",
-  PROC: "⚙️",
-  REG: "📊",
-  SOP: "📌",
-  REF: "📎",
-  POL: "🏛️",
-  PLN: "🗺️",
-};
-
 const totalDocs = categories.reduce((sum, c) => sum + c.count, 0);
+
+// ── Animated counter hook ──
+function useCountUp(target: number | null, duration = 1200) {
+  const [value, setValue] = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (target === null) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(eased * target));
+      if (progress < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [target, duration]);
+
+  return value;
+}
+
+// ── Single stat item ──
+interface StatProps {
+  value: string | number;
+  label: string;
+  animate?: boolean;
+  delay?: number;
+}
+
+function StatItem({ value, label, animate = false, delay = 0 }: StatProps) {
+  const [triggered, setTriggered] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setTimeout(() => setTriggered(true), delay); obs.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [delay]);
+
+  const numericTarget = animate && typeof value === "number" ? (triggered ? value : null) : null;
+  const counted = useCountUp(numericTarget);
+  const display = animate && typeof value === "number" ? counted : value;
+
+  return (
+    <div ref={ref} className="text-center px-6 py-1">
+      <div
+        className="text-3xl md:text-4xl font-extrabold tabular-nums transition-all"
+        style={{ color: "#C49A28", fontFamily: "'Nunito Sans', sans-serif" }}
+      >
+        {display}
+      </div>
+      <div
+        className="text-xs mt-1.5 tracking-widest uppercase font-semibold"
+        style={{ color: "rgba(255,255,255,0.45)" }}
+      >
+        {label}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -25,13 +84,8 @@ export default function Home() {
         style={{ backgroundColor: "#081C2E" }}
         className="relative overflow-hidden"
       >
-        {/* Decorative gold line */}
-        <div
-          style={{ backgroundColor: "#C49A28", height: "1px", opacity: 0.3 }}
-          className="absolute bottom-0 left-0 right-0"
-        />
-        <div className="container py-12 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="container pt-10 pb-6 relative z-10">
+          <div className="flex flex-col gap-4">
             <div>
               <div
                 style={{ color: "#C49A28" }}
@@ -48,26 +102,20 @@ export default function Home() {
                 ISO 9001, ISO 14001, and ISO 45001 standards.
               </p>
             </div>
-            {/* Stats */}
-            <div className="flex gap-6 shrink-0">
-              <div className="text-center">
-                <div className="text-white text-3xl font-extrabold" style={{ color: "#C49A28" }}>
-                  {totalDocs}
-                </div>
-                <div className="text-white/50 text-xs mt-1 tracking-wide uppercase">Total Docs</div>
-              </div>
-              <div className="text-center">
-                <div className="text-white text-3xl font-extrabold" style={{ color: "#C49A28" }}>
-                  {categories.length}
-                </div>
-                <div className="text-white/50 text-xs mt-1 tracking-wide uppercase">Categories</div>
-              </div>
-              <div className="text-center">
-                <div className="text-white text-3xl font-extrabold" style={{ color: "#C49A28" }}>
-                  3
-                </div>
-                <div className="text-white/50 text-xs mt-1 tracking-wide uppercase">ISO Standards</div>
-              </div>
+          </div>
+        </div>
+
+        {/* ── Stats Bar ── */}
+        <div
+          style={{ borderTop: "1px solid rgba(196,154,40,0.2)", borderBottom: "1px solid rgba(196,154,40,0.2)" }}
+          className="mt-2"
+        >
+          <div className="container">
+            <div className="flex flex-wrap justify-start md:justify-between divide-x divide-white/10 py-1">
+              <StatItem value={totalDocs} label="Total Documents" animate delay={0} />
+              <StatItem value={categories.length} label="Categories" animate delay={100} />
+              <StatItem value="Rev01" label="Current Revision" />
+              <StatItem value="Apr 2026" label="Last Updated" />
             </div>
           </div>
         </div>
