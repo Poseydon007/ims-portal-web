@@ -1,4 +1,4 @@
-// Design: Clean Light Corporate — navy #0E2841, gold #C49A28
+// Design: Clean Light Corporate — navy #081C2E, gold #C49A28
 // Landing page: stats banner + 7 category cards in responsive grid
 
 import { Link } from "wouter";
@@ -22,7 +22,7 @@ export default function Home() {
     <Layout>
       {/* ── Hero Banner ── */}
       <div
-        style={{ backgroundColor: "#0E2841" }}
+        style={{ backgroundColor: "#081C2E" }}
         className="relative overflow-hidden"
       >
         {/* Decorative gold line */}
@@ -86,7 +86,7 @@ export default function Home() {
             <span
               key={s}
               className="text-xs font-medium px-2.5 py-1 rounded"
-              style={{ backgroundColor: "#e8edf4", color: "#0E2841" }}
+              style={{ backgroundColor: "#e8edf4", color: "#081C2E" }}
             >
               {s}
             </span>
@@ -97,7 +97,7 @@ export default function Home() {
       {/* ── Category Cards ── */}
       <div className="container py-10">
         <div className="mb-6">
-          <h2 className="text-lg font-bold" style={{ color: "#0E2841" }}>
+          <h2 className="text-lg font-bold" style={{ color: "#081C2E" }}>
             Document Categories
           </h2>
           <p className="text-sm mt-1" style={{ color: "#6b7a8d" }}>
@@ -118,14 +118,14 @@ export default function Home() {
               >
                 {/* Card top accent */}
                 <div
-                  style={{ backgroundColor: "#0E2841", height: "3px", borderRadius: "4px 4px 0 0" }}
+                  style={{ backgroundColor: "#081C2E", height: "3px", borderRadius: "4px 4px 0 0" }}
                 />
                 <div className="p-5">
                   {/* Code badge */}
                   <div className="flex items-start justify-between mb-3">
                     <span
                       className="te-code text-xs font-bold px-2 py-1 rounded"
-                      style={{ backgroundColor: "#e8edf4", color: "#0E2841" }}
+                      style={{ backgroundColor: "#e8edf4", color: "#081C2E" }}
                     >
                       {cat.code}
                     </span>
@@ -139,7 +139,7 @@ export default function Home() {
                   {/* Title */}
                   <h3
                     className="font-bold text-sm leading-snug mb-1.5 group-hover:underline"
-                    style={{ color: "#0E2841" }}
+                    style={{ color: "#081C2E" }}
                   >
                     {cat.name}
                   </h3>

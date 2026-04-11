@@ -1,4 +1,4 @@
-// Design: Clean Light Corporate — navy #0E2841, gold #C49A28, Nunito Sans
+// Design: Clean Light Corporate — navy #081C2E, gold #C49A28, Nunito Sans
 // TopNav: dark navy bar with white logo, gold bottom border
 // Footer: dark navy with white text, ghost logo watermark
 
@@ -20,7 +20,7 @@ interface LayoutProps {
 export function TopNav() {
   return (
     <header
-      style={{ backgroundColor: "#0E2841", borderBottom: "3px solid #C49A28" }}
+      style={{ backgroundColor: "#081C2E", borderBottom: "3px solid #C49A28" }}
       className="sticky top-0 z-50 shadow-lg"
     >
       <div className="container flex items-center justify-between h-14">
@@ -63,14 +63,14 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
       style={{ backgroundColor: "#f4f6f9", borderColor: "#dde3ec" }}
     >
       <div className="container flex items-center gap-1.5 h-9 text-xs">
-        <Link href="/" style={{ color: "#0E2841" }} className="hover:underline font-medium">
+        <Link href="/" style={{ color: "#081C2E" }} className="hover:underline font-medium">
           Home
         </Link>
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-1.5">
             <span style={{ color: "#8a9ab0" }}>›</span>
             {item.href ? (
-              <Link href={item.href} style={{ color: "#0E2841" }} className="hover:underline font-medium">
+              <Link href={item.href} style={{ color: "#081C2E" }} className="hover:underline font-medium">
                 {item.label}
               </Link>
             ) : (
@@ -86,7 +86,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
 export function PageHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div
-      style={{ backgroundColor: "#0E2841" }}
+      style={{ backgroundColor: "#081C2E" }}
       className="relative overflow-hidden"
     >
       {/* Watermark logo */}
@@ -109,7 +109,7 @@ export function PageHeader({ title, subtitle }: { title: string; subtitle?: stri
 export function Footer() {
   return (
     <footer
-      style={{ backgroundColor: "#0E2841", borderTop: "1px solid rgba(196,154,40,0.3)" }}
+      style={{ backgroundColor: "#081C2E", borderTop: "1px solid rgba(196,154,40,0.3)" }}
       className="mt-auto"
     >
       <div className="container py-6 flex flex-col sm:flex-row items-center justify-between gap-4">

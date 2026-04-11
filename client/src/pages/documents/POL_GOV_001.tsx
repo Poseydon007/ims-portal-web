@@ -22,7 +22,7 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
     <h2
       id={id}
       className="text-sm font-bold mt-8 mb-3 pb-2"
-      style={{ color: "#0E2841", borderBottom: "2px solid #C49A28" }}
+      style={{ color: "#081C2E", borderBottom: "2px solid #C49A28" }}
     >
       {children}
     </h2>
@@ -31,7 +31,7 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
 
 function BulletItem({ bold, children }: { bold: string; children: React.ReactNode }) {
   return (
-    <li className="flex gap-2 mb-2 text-sm leading-relaxed" style={{ color: "#0E2841" }}>
+    <li className="flex gap-2 mb-2 text-sm leading-relaxed" style={{ color: "#081C2E" }}>
       <span style={{ color: "#C49A28", marginTop: "2px" }}>•</span>
       <span>
         <strong>{bold}</strong> — {children}
@@ -60,7 +60,7 @@ export default function POL_GOV_001() {
       >
         <div className="container flex items-center justify-between py-3 gap-4 flex-wrap">
           <div>
-            <h1 className="font-bold text-base" style={{ color: "#0E2841" }}>
+            <h1 className="font-bold text-base" style={{ color: "#081C2E" }}>
               Integrated HSE Policy Statement
             </h1>
             <div className="flex items-center gap-3 mt-0.5 flex-wrap">
@@ -82,14 +82,14 @@ export default function POL_GOV_001() {
             <Link
               href="/docs/pol"
               className="text-xs font-semibold px-3 py-1.5 rounded border hover:bg-gray-50 transition-colors"
-              style={{ borderColor: "#dde3ec", color: "#0E2841" }}
+              style={{ borderColor: "#dde3ec", color: "#081C2E" }}
             >
               ← Back to Policies
             </Link>
             <button
               onClick={handlePrint}
               className="text-xs font-semibold px-3 py-1.5 rounded border hover:bg-gray-50 transition-colors"
-              style={{ borderColor: "#dde3ec", color: "#0E2841" }}
+              style={{ borderColor: "#dde3ec", color: "#081C2E" }}
             >
               ⎙ Print
             </button>
@@ -122,7 +122,7 @@ export default function POL_GOV_001() {
                   <dt className="text-xs font-semibold" style={{ color: "#8a9ab0" }}>{k}</dt>
                   <dd
                     className="text-xs mt-0.5 font-medium"
-                    style={{ color: k === "Status" ? "#155724" : "#0E2841" }}
+                    style={{ color: k === "Status" ? "#155724" : "#081C2E" }}
                   >
                     {k === "Document Code" ? (
                       <span className="te-code">{v}</span>
@@ -144,7 +144,7 @@ export default function POL_GOV_001() {
                   key={s.id}
                   href={`#${s.id}`}
                   className="block text-xs py-1 px-2 rounded hover:bg-blue-50 transition-colors"
-                  style={{ color: "#0E2841" }}
+                  style={{ color: "#081C2E" }}
                 >
                   {s.label}
                 </a>
@@ -173,12 +173,12 @@ export default function POL_GOV_001() {
             </div>
 
             {/* Document content */}
-            <div className="px-8 py-6" style={{ color: "#0E2841", fontFamily: "'Nunito Sans', sans-serif" }}>
+            <div className="px-8 py-6" style={{ color: "#081C2E", fontFamily: "'Nunito Sans', sans-serif" }}>
 
               {/* Title block */}
               <div
                 className="rounded px-5 py-4 mb-6"
-                style={{ backgroundColor: "#0E2841" }}
+                style={{ backgroundColor: "#081C2E" }}
               >
                 <h1 className="text-white text-xl font-extrabold tracking-wide text-center uppercase">
                   Integrated HSE Policy Statement
@@ -205,7 +205,7 @@ export default function POL_GOV_001() {
 
               {/* Section 1 */}
               <SectionHeading id="s1">1. Policy Statement</SectionHeading>
-              <p className="text-sm leading-relaxed" style={{ color: "#0E2841" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#081C2E" }}>
                 True East Mining Company (TEMC) is committed to the highest standards of Health,
                 Safety, and Environmental performance in every aspect of its mineral exploration,
                 drilling, and related operations in the Kingdom of Saudi Arabia.
@@ -222,7 +222,7 @@ export default function POL_GOV_001() {
 
               {/* Section 3 */}
               <SectionHeading id="s3">3. Our Strategic Commitments</SectionHeading>
-              <p className="text-sm leading-relaxed mb-3" style={{ color: "#0E2841" }}>
+              <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>
                 To deliver these beliefs TEMC will:
               </p>
               <ul className="list-none pl-0 space-y-1">
@@ -260,7 +260,7 @@ export default function POL_GOV_001() {
 
               {/* Section 4 */}
               <SectionHeading id="s4">4. Application</SectionHeading>
-              <p className="text-sm leading-relaxed" style={{ color: "#0E2841" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#081C2E" }}>
                 This policy applies to all True East Mining operations, personnel, contractors, and
                 visitors. It is reviewed annually or following significant operational, regulatory,
                 or strategic changes.
@@ -276,7 +276,7 @@ export default function POL_GOV_001() {
                   "NCEC / MEWA — Environmental Regulations.",
                   "Ma'aden Contractor HSE Standards (where applicable).",
                 ].map((ref) => (
-                  <li key={ref} className="flex gap-2 text-sm" style={{ color: "#0E2841" }}>
+                  <li key={ref} className="flex gap-2 text-sm" style={{ color: "#081C2E" }}>
                     <span style={{ color: "#C49A28" }}>•</span>
                     <span>{ref}</span>
                   </li>
@@ -287,7 +287,7 @@ export default function POL_GOV_001() {
               <SectionHeading id="s6">6. Revision History</SectionHeading>
               <table className="w-full text-xs border-collapse">
                 <thead>
-                  <tr style={{ backgroundColor: "#0E2841" }}>
+                  <tr style={{ backgroundColor: "#081C2E" }}>
                     {["Rev", "Date", "Description of Changes", "Author"].map((h) => (
                       <th key={h} className="text-left px-3 py-2 text-white/80 font-semibold tracking-wide">
                         {h}
@@ -314,7 +314,7 @@ export default function POL_GOV_001() {
               <SectionHeading id="s7">7. Approval</SectionHeading>
               <table className="w-full text-xs border-collapse">
                 <thead>
-                  <tr style={{ backgroundColor: "#0E2841" }}>
+                  <tr style={{ backgroundColor: "#081C2E" }}>
                     {["Role", "Name", "Signature", "Date"].map((h) => (
                       <th key={h} className="text-left px-3 py-2 text-white/80 font-semibold tracking-wide">
                         {h}
@@ -343,7 +343,7 @@ export default function POL_GOV_001() {
             {/* Document footer (mimics Word footer) */}
             <div
               className="flex items-center justify-between px-6 py-3 border-t"
-              style={{ borderColor: "#dde3ec", backgroundColor: "#0E2841" }}
+              style={{ borderColor: "#dde3ec", backgroundColor: "#081C2E" }}
             >
               <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
                 True East Mining Company &nbsp;·&nbsp; Integrated Management System &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Page 1

@@ -1,4 +1,4 @@
-// Design: Clean Light Corporate — navy #0E2841, gold #C49A28
+// Design: Clean Light Corporate — navy #081C2E, gold #C49A28
 // Level 2: Document list table for a given category
 
 import { Link, useParams } from "wouter";
@@ -46,7 +46,7 @@ export default function CategoryPage() {
     return (
       <Layout>
         <div className="container py-20 text-center">
-          <p className="text-lg font-semibold" style={{ color: "#0E2841" }}>
+          <p className="text-lg font-semibold" style={{ color: "#081C2E" }}>
             Category not found.
           </p>
           <Link href="/" style={{ color: "#C49A28" }} className="text-sm mt-2 inline-block hover:underline">
@@ -62,7 +62,7 @@ export default function CategoryPage() {
       <Breadcrumb items={[{ label: `${cat.code} — ${cat.name}` }]} />
 
       {/* Page header */}
-      <div style={{ backgroundColor: "#0E2841" }} className="relative overflow-hidden">
+      <div style={{ backgroundColor: "#081C2E" }} className="relative overflow-hidden">
         <div className="absolute right-0 top-0 h-full flex items-center pr-8 pointer-events-none select-none" style={{ opacity: 0.06 }}>
           <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-white_8b25e5cd.png" alt="" className="h-32 w-auto" />
         </div>
@@ -86,7 +86,7 @@ export default function CategoryPage() {
       <div className="container py-8">
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm" style={{ color: "#6b7a8d" }}>
-            Showing <strong style={{ color: "#0E2841" }}>{docs.length}</strong> documents in this category
+            Showing <strong style={{ color: "#081C2E" }}>{docs.length}</strong> documents in this category
           </p>
           <Link href="/" className="text-xs font-semibold hover:underline" style={{ color: "#C49A28" }}>
             ← Portal Home
@@ -96,7 +96,7 @@ export default function CategoryPage() {
         <div className="rounded border overflow-hidden" style={{ borderColor: "#dde3ec" }}>
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr style={{ backgroundColor: "#0E2841" }}>
+              <tr style={{ backgroundColor: "#081C2E" }}>
                 <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-44">
                   Document Code
                 </th>
@@ -125,7 +125,7 @@ export default function CategoryPage() {
                   style={{ borderTop: i > 0 ? "1px solid #edf0f5" : undefined }}
                 >
                   <td className="px-4 py-3">
-                    <span className="te-code text-xs" style={{ color: "#0E2841" }}>
+                    <span className="te-code text-xs" style={{ color: "#081C2E" }}>
                       {doc.code}
                     </span>
                   </td>
@@ -134,7 +134,7 @@ export default function CategoryPage() {
                       <Link
                         href={`/docs/${slug}/${doc.slug}`}
                         className="font-medium hover:underline"
-                        style={{ color: "#0E2841" }}
+                        style={{ color: "#081C2E" }}
                       >
                         {doc.title}
                       </Link>
@@ -158,7 +158,7 @@ export default function CategoryPage() {
                       <Link
                         href={`/docs/${slug}/${doc.slug}`}
                         className="text-xs font-bold px-3 py-1.5 rounded transition-colors"
-                        style={{ backgroundColor: "#0E2841", color: "#fff" }}
+                        style={{ backgroundColor: "#081C2E", color: "#fff" }}
                       >
                         View →
                       </Link>

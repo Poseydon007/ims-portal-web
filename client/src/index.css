@@ -44,7 +44,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* ── TE Brand tokens ── */
-  --te-navy: oklch(0.22 0.055 240);
+  --te-navy: oklch(0.16 0.055 240);
   --te-navy-deep: oklch(0.16 0.055 240);
   --te-gold: oklch(0.72 0.12 75);
   --te-gold-light: oklch(0.88 0.08 75);
@@ -54,7 +54,7 @@
   --radius: 0.5rem;
 
   /* TE Brand */
-  --te-navy-hex: #0E2841;
+  --te-navy-hex: #081C2E;
   --te-gold-hex: #C49A28;
 
   /* Light theme — clean white corporate */
