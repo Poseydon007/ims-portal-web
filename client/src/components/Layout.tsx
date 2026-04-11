@@ -29,7 +29,8 @@ export function TopNav() {
           <img
             src={LOGO_WHITE}
             alt="True East Mining Company"
-            className="h-8 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+            style={{ width: "50px", height: "50px", objectFit: "contain" }}
+            className="opacity-90 group-hover:opacity-100 transition-opacity"
           />
           <div className="hidden sm:block">
             <div className="text-white font-bold text-sm leading-tight tracking-wide">
