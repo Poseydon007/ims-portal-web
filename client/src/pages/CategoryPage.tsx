@@ -64,7 +64,7 @@ export default function CategoryPage() {
       {/* Page header */}
       <div style={{ backgroundColor: "#081C2E" }} className="relative overflow-hidden">
         <div className="absolute right-0 top-0 h-full flex items-center pr-8 pointer-events-none select-none" style={{ opacity: 0.06 }}>
-          <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-white_8b25e5cd.png" alt="" className="h-32 w-auto" />
+          <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png" alt="" className="h-32 w-auto" />
         </div>
         <div className="container py-8 relative z-10">
           <div className="flex items-start gap-4">
@@ -154,7 +154,15 @@ export default function CategoryPage() {
                   </td>
                   <td className="px-4 py-3">{statusBadge(doc.status)}</td>
                   <td className="px-4 py-3 text-center">
-                    {doc.available ? (
+                    {doc.formUrl ? (
+                      <Link
+                        href={doc.formUrl}
+                        className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
+                        style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
+                      >
+                        Fill Form ✎
+                      </Link>
+                    ) : doc.available ? (
                       <Link
                         href={`/docs/${slug}/${doc.slug}`}
                         className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"

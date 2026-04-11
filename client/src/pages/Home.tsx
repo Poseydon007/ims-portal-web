@@ -86,7 +86,7 @@ export default function Home() {
       >
         {/* Watermark logo */}
         <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png"
+          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogotransback_aaedc603.png"
           alt=""
           aria-hidden="true"
           className="absolute pointer-events-none select-none"

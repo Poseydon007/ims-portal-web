@@ -17,6 +17,7 @@ export interface ImsDocument {
   status: "approved" | "pending" | "draft";
   slug: string; // URL slug for the document view page
   available: boolean; // whether the HTML view is built
+  formUrl?: string; // if set, this document has a live digital form at this URL
 }
 
 export const categories: DocCategory[] = [
@@ -83,7 +84,7 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
   frm: [
     { code: "TE-IMS-FRM-HSE-001", title: "Job Hazard Analysis", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-001", available: false },
     { code: "TE-IMS-FRM-HSE-002", title: "Incident Flash Notification", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-002", available: false },
-    { code: "TE-IMS-FRM-HSE-003", title: "Near Miss Report Form", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-003", available: false },
+    { code: "TE-IMS-FRM-HSE-003", title: "Near Miss Report Form", rev: "Rev01", date: "Apr 2026", status: "approved", slug: "TE-IMS-FRM-HSE-003", available: true, formUrl: "/forms/near-miss" },
     { code: "TE-IMS-FRM-HSE-004", title: "First Aid Kit Register and Checklist", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-004", available: false },
     { code: "TE-IMS-FRM-HSE-006", title: "HSE Committee Meeting Minutes", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-006", available: false },
     { code: "TE-IMS-FRM-HSE-007", title: "Planned Task Observation (PTO) Form", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-007", available: false },
@@ -217,7 +218,7 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
   ],
 };
 
-export const LOGO_WHITE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-white_8b25e5cd.png";
-export const LOGO_GRAY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-gray_2c3708cb.png";
-export const LOGO_COLOR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-color_e537a8bb.png";
-export const LOGO_TRANS = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_9192bf1b.png";
+export const LOGO_WHITE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png";
+export const LOGO_GRAY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogovectorgray_20d7a465.png";
+export const LOGO_COLOR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png";
+export const LOGO_TRANS = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogotransback_aaedc603.png";

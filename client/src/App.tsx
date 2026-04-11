@@ -7,6 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import POL_GOV_001 from "./pages/documents/POL_GOV_001";
+import NearMissForm from "./pages/forms/NearMissForm";
+import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 
 function Router() {
   return (
@@ -16,6 +18,12 @@ function Router() {
 
       {/* Level 3 — Document view pages (must come before category route) */}
       <Route path="/docs/pol/TE-IMS-POL-GOV-001" component={POL_GOV_001} />
+
+      {/* Active Forms */}
+      <Route path="/forms/near-miss" component={NearMissForm} />
+
+      {/* Admin */}
+      <Route path="/admin/submissions" component={SubmissionsAdmin} />
 
       {/* Level 2 — Category list pages */}
       <Route path="/docs/:slug" component={CategoryPage} />
