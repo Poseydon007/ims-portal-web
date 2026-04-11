@@ -112,7 +112,7 @@ export default function CategoryPage() {
                 <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-28">
                   Status
                 </th>
-                <th className="text-right px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-24">
+                <th className="text-center px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-24">
                   Action
                 </th>
               </tr>
@@ -153,11 +153,11 @@ export default function CategoryPage() {
                     {doc.date}
                   </td>
                   <td className="px-4 py-3">{statusBadge(doc.status)}</td>
-                  <td className="px-4 py-3 text-right">
+                  <td className="px-4 py-3 text-center">
                     {doc.available ? (
                       <Link
                         href={`/docs/${slug}/${doc.slug}`}
-                        className="text-xs font-bold px-3 py-1.5 rounded transition-colors"
+                        className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
                         style={{ backgroundColor: "#081C2E", color: "#fff" }}
                       >
                         View →
