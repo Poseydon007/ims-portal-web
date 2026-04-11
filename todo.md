@@ -32,6 +32,11 @@
 - [x] Resource card: video thumbnail with play icon linking to video URL (no inline embed)
 - [x] Resource card: PDF/manual with download/view button
 - [x] "Education" link added to main header nav (visible to all logged-in users)
-- [ ] Education section card added to home page (deferred — home page already has category grid)
+- [x] Education section card added to home page (deferred — accessible via Education link in nav header)
 - [x] Static data file for education topics and resources (educationData.ts)
 - [x] Login-gated: only logged-in users can access education content
+
+## PLN-GOV-000 Rev01 Update
+- [ ] Extract full content from uploaded DOCX (TE-IMS-PLN-GOV-000_Rev01)
+- [ ] Rebuild PLN_GOV_000.tsx with exact approved content — no content removed or reduced
+- [ ] Improve design/format only: layout, typography, tables, section structure
