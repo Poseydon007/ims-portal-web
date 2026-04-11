@@ -1,11 +1,12 @@
 // Near Miss Report Form — TE-IMS-FRM-HSE-003 Rev01
 // Digital version of the Word template, faithful to all 6 sections
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 import { toast } from "sonner";
+import { useImsAuth } from "@/hooks/useImsAuth";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
@@ -63,8 +64,9 @@ type FormData = {
 export default function NearMissForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submissionId, setSubmissionId] = useState("");
+  const { user: imsUser } = useImsAuth();
 
-  const { register, handleSubmit, control, watch, formState: { errors, isSubmitting } } = useForm<FormData>({
+  const { register, handleSubmit, control, watch, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
     defaultValues: {
       classification: [],
       contributingFactors: [],
@@ -75,6 +77,14 @@ export default function NearMissForm() {
       ],
     },
   });
+
+  // Auto-populate identity from logged-in user
+  useEffect(() => {
+    if (imsUser) {
+      setValue("reportedBy", imsUser.fullName);
+      if (imsUser.employeeId) setValue("employeeId", imsUser.employeeId);
+    }
+  }, [imsUser, setValue]);
 
   const { fields } = useFieldArray({ control, name: "correctiveActions" });
 

@@ -1,11 +1,12 @@
 // JHA Form — TE-IMS-FRM-HSE-001 Rev01
 // Job Hazard Analysis — digital form matching Word template design
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { useImsAuth } from "@/hooks/useImsAuth";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
@@ -65,8 +66,9 @@ const defaultStep = (step: number): TaskStep => ({
 export default function JHAForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submissionId, setSubmissionId] = useState("");
+  const { user: imsUser } = useImsAuth();
 
-  const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>({
+  const { register, handleSubmit, control, setValue, formState: { errors } } = useForm<FormValues>({
     defaultValues: {
       jobTask: "",
       date: new Date().toISOString().split("T")[0],
@@ -84,6 +86,13 @@ export default function JHAForm() {
   });
 
   const { fields, append, remove } = useFieldArray({ control, name: "taskSteps" });
+
+  // Auto-populate identity from logged-in user
+  useEffect(() => {
+    if (imsUser) {
+      setValue("completedByName", imsUser.fullName);
+    }
+  }, [imsUser, setValue]);
 
   const submitMutation = trpc.jha.submit.useMutation({
     onSuccess: (data) => {

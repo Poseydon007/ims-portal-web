@@ -1,7 +1,7 @@
 import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 /**
- * Core user table backing auth flow.
+ * Core user table backing Manus OAuth auth flow (kept for compatibility).
  */
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
@@ -17,6 +17,41 @@ export const users = mysqlTable("users", {
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
+
+/**
+ * IMS Portal Users — custom email/password authentication.
+ * Roles: admin, supervisor, field_worker
+ */
+export const imsUsers = mysqlTable("ims_users", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  passwordHash: text("passwordHash").notNull(),
+  fullName: varchar("fullName", { length: 255 }).notNull(),
+  employeeId: varchar("employeeId", { length: 64 }),
+  role: mysqlEnum("role", ["admin", "supervisor", "field_worker"]).default("field_worker").notNull(),
+  department: varchar("department", { length: 128 }),
+  status: mysqlEnum("status", ["active", "inactive"]).default("active").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  lastSignedIn: timestamp("lastSignedIn"),
+});
+
+export type ImsUser = typeof imsUsers.$inferSelect;
+export type InsertImsUser = typeof imsUsers.$inferInsert;
+
+/**
+ * IMS Portal Sessions — JWT session tracking.
+ */
+export const imsSessions = mysqlTable("ims_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  token: varchar("token", { length: 512 }).notNull().unique(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ImsSession = typeof imsSessions.$inferSelect;
+export type InsertImsSession = typeof imsSessions.$inferInsert;
 
 // ── Near Miss Report Submissions ──
 export const nearMissSubmissions = mysqlTable("near_miss_submissions", {
@@ -56,6 +91,9 @@ export const nearMissSubmissions = mysqlTable("near_miss_submissions", {
   hseOfficerName: text("hseOfficerName"),
   hseOfficerDate: varchar("hseOfficerDate", { length: 20 }),
 
+  // Submitter identity
+  submittedByUserId: int("submittedByUserId"),
+
   // Metadata
   submittedAt: timestamp("submittedAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -90,6 +128,9 @@ export const jhaSubmissions = mysqlTable("jha_submissions", {
   reviewedByDate: varchar("reviewedByDate", { length: 20 }),
   siteManagerName: text("siteManagerName"),
   siteManagerDate: varchar("siteManagerDate", { length: 20 }),
+
+  // Submitter identity
+  submittedByUserId: int("submittedByUserId"),
 
   // Metadata
   submittedAt: timestamp("submittedAt").defaultNow().notNull(),

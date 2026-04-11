@@ -18,6 +18,7 @@ import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { exec } from "child_process";
 import { promisify } from "util";
+import { imsAuthRouter } from "./routers/imsAuthRouter";
 
 const execAsync = promisify(exec);
 
@@ -96,6 +97,7 @@ async function syncToGoogleSheet(submission: {
 
 export const appRouter = router({
   system: systemRouter,
+  imsAuth: imsAuthRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -128,11 +130,16 @@ export const appRouter = router({
         hseOfficerName: z.string().optional(),
         hseOfficerDate: z.string().optional(),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
         // Generate submission ID: NM-YYYY-XXXX
         const year = new Date().getFullYear();
         const rand = Math.floor(1000 + Math.random() * 9000);
         const submissionId = `NM-${year}-${rand}`;
+
+        // Server-side identity: use IMS auth user if available
+        const imsUser = ctx.imsUser;
+        const reportedBy = imsUser ? imsUser.fullName : input.reportedBy;
+        const employeeId = imsUser?.employeeId ?? input.employeeId ?? null;
 
         const submission = await createNearMissSubmission({
           submissionId,
@@ -141,8 +148,9 @@ export const appRouter = router({
           timeOfOccurrence: input.timeOfOccurrence ?? null,
           location: input.location ?? null,
           departmentSite: input.departmentSite ?? null,
-          reportedBy: input.reportedBy,
-          employeeId: input.employeeId ?? null,
+          reportedBy,
+          employeeId,
+          submittedByUserId: imsUser?.id ?? null,
           classification: input.classification ?? null,
           classificationOther: input.classificationOther ?? null,
           description: input.description,
@@ -237,10 +245,14 @@ export const appRouter = router({
         siteManagerName: z.string().optional(),
         siteManagerDate: z.string().optional(),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
         const year = new Date().getFullYear();
         const rand = Math.floor(1000 + Math.random() * 9000);
         const submissionId = `JHA-${year}-${rand}`;
+
+        // Server-side identity: use IMS auth user if available
+        const imsUser = ctx.imsUser;
+        const completedByName = imsUser ? imsUser.fullName : (input.completedByName ?? null);
 
         const submission = await createJhaSubmission({
           submissionId,
@@ -252,7 +264,8 @@ export const appRouter = router({
           supervisor: input.supervisor ?? null,
           reviewedBy: input.reviewedBy ?? null,
           taskSteps: JSON.stringify(input.taskSteps),
-          completedByName: input.completedByName ?? null,
+          completedByName,
+          submittedByUserId: imsUser?.id ?? null,
           completedByDate: input.completedByDate ?? null,
           reviewedByName: input.reviewedByName ?? null,
           reviewedByDate: input.reviewedByDate ?? null,

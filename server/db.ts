@@ -1,6 +1,11 @@
 import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertJhaSubmission, InsertNearMissSubmission, InsertUser, jhaSubmissions, nearMissSubmissions, users } from "../drizzle/schema";
+import {
+  InsertJhaSubmission, InsertNearMissSubmission, InsertUser,
+  jhaSubmissions, nearMissSubmissions, users,
+  imsUsers, imsSessions,
+  InsertImsUser, InsertImsSession, ImsUser,
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -50,7 +55,82 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// ── Near Miss Submissions ──
+// ═══════════════════════════════════════════════════════════
+// IMS Custom Auth — Users
+// ═══════════════════════════════════════════════════════════
+
+export async function createImsUser(data: InsertImsUser): Promise<ImsUser> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(imsUsers).values(data);
+  const result = await db.select().from(imsUsers).where(eq(imsUsers.email, data.email)).limit(1);
+  return result[0];
+}
+
+export async function getImsUserByEmail(email: string): Promise<ImsUser | null> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(imsUsers).where(eq(imsUsers.email, email.toLowerCase())).limit(1);
+  return result[0] ?? null;
+}
+
+export async function getImsUserById(id: number): Promise<ImsUser | null> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(imsUsers).where(eq(imsUsers.id, id)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function getAllImsUsers(): Promise<ImsUser[]> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.select().from(imsUsers).orderBy(desc(imsUsers.createdAt));
+}
+
+export async function updateImsUser(id: number, data: Partial<Pick<ImsUser, "fullName" | "employeeId" | "role" | "department" | "status" | "passwordHash">>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(imsUsers).set(data).where(eq(imsUsers.id, id));
+}
+
+export async function updateImsUserLastSignedIn(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(imsUsers).set({ lastSignedIn: new Date() }).where(eq(imsUsers.id, id));
+}
+
+// ═══════════════════════════════════════════════════════════
+// IMS Custom Auth — Sessions
+// ═══════════════════════════════════════════════════════════
+
+export async function createImsSession(data: InsertImsSession) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(imsSessions).values(data);
+}
+
+export async function getImsSessionByToken(token: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(imsSessions).where(eq(imsSessions.token, token)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function deleteImsSession(token: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(imsSessions).where(eq(imsSessions.token, token));
+}
+
+export async function deleteImsSessionsByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(imsSessions).where(eq(imsSessions.userId, userId));
+}
+
+// ═══════════════════════════════════════════════════════════
+// Near Miss Submissions
+// ═══════════════════════════════════════════════════════════
 
 export async function createNearMissSubmission(data: InsertNearMissSubmission) {
   const db = await getDb();
@@ -89,7 +169,9 @@ export async function markSheetSynced(id: number) {
   await db.update(nearMissSubmissions).set({ sheetSynced: 1 }).where(eq(nearMissSubmissions.id, id));
 }
 
-// ── JHA Submissions ──
+// ═══════════════════════════════════════════════════════════
+// JHA Submissions
+// ═══════════════════════════════════════════════════════════
 
 export async function createJhaSubmission(data: InsertJhaSubmission) {
   const db = await getDb();

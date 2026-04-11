@@ -10,6 +10,7 @@ const t = initTRPC.context<TrpcContext>().create({
 export const router = t.router;
 export const publicProcedure = t.procedure;
 
+// Manus OAuth protected procedure (existing)
 const requireUser = t.middleware(async opts => {
   const { ctx, next } = opts;
 
@@ -39,6 +40,47 @@ export const adminProcedure = t.procedure.use(
       ctx: {
         ...ctx,
         user: ctx.user,
+      },
+    });
+  }),
+);
+
+// ── IMS Custom Auth Middleware ──
+// Requires imsUser to be authenticated via email/password
+const requireImsUser = t.middleware(async opts => {
+  const { ctx, next } = opts;
+
+  if (!ctx.imsUser) {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Please log in to access this resource" });
+  }
+
+  if (ctx.imsUser.status !== "active") {
+    throw new TRPCError({ code: "FORBIDDEN", message: "Your account has been deactivated" });
+  }
+
+  return next({
+    ctx: {
+      ...ctx,
+      imsUser: ctx.imsUser,
+    },
+  });
+});
+
+export const imsProtectedProcedure = t.procedure.use(requireImsUser);
+
+// IMS Admin — requires imsUser with admin role
+export const imsAdminProcedure = t.procedure.use(
+  t.middleware(async opts => {
+    const { ctx, next } = opts;
+
+    if (!ctx.imsUser || ctx.imsUser.role !== "admin") {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+    }
+
+    return next({
+      ctx: {
+        ...ctx,
+        imsUser: ctx.imsUser,
       },
     });
   }),

@@ -11,10 +11,15 @@ import PLN_GOV_000 from "./pages/documents/PLN_GOV_000";
 import NearMissForm from "./pages/forms/NearMissForm";
 import JHAForm from "./pages/forms/JHAForm";
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
+import Login from "./pages/Login";
+import UserManagement from "./pages/admin/UserManagement";
 
 function Router() {
   return (
     <Switch>
+      {/* Auth */}
+      <Route path="/login" component={Login} />
+
       {/* Level 1 — Landing page */}
       <Route path="/" component={Home} />
 
@@ -28,6 +33,7 @@ function Router() {
 
       {/* Admin */}
       <Route path="/admin/submissions" component={SubmissionsAdmin} />
+      <Route path="/admin/users" component={UserManagement} />
 
       {/* Level 2 — Category list pages */}
       <Route path="/docs/:slug" component={CategoryPage} />
