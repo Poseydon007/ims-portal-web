@@ -1,6 +1,6 @@
 // Layout: TopNav + Footer + optional Breadcrumbs
-// TopNav: 3-column — Logo | Nav (Submissions+Users row, Education full-width below) | IMS Portal + user
-// Education tab: glass morphism, full width of admin row, smooth animations
+// TopNav: 3-column — Logo | Nav (Home always visible + admin tabs + Education) | IMS Portal + user
+// Home button always visible regardless of auth state or screen size
 
 import { Link, useLocation } from "wouter";
 import { LOGO_WHITE } from "@/lib/imsData";
@@ -60,53 +60,56 @@ export function TopNav() {
           </div>
         </Link>
 
-        {/* ── Center: Stacked nav (admin row + Education below) ── */}
-        {!loading && isAuthenticated && user ? (
-          <div className="hidden md:flex flex-col items-center justify-center px-6 gap-1.5">
+        {/* ── Center: Nav — always visible ── */}
+        <div className="flex flex-col items-center justify-center px-4 gap-1.5 flex-1">
 
-            {/* Row 1: Home + Admin tabs */}
-            <div className="flex items-center gap-1" id="admin-nav-row">
-              <Link href="/">
-                <span
-                  className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
-                  style={{
-                    color: location === "/" ? "#C49A28" : "rgba(255,255,255,0.7)",
-                    borderBottom: location === "/" ? "2px solid #C49A28" : "2px solid transparent",
-                  }}
-                >
-                  Home
-                </span>
-              </Link>
-              {user.role === "admin" && (
-                <>
-                  <Link href="/admin/submissions">
-                    <span
-                      className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
-                      style={{
-                        color: isActive("/admin/submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                        borderBottom: isActive("/admin/submissions") ? "2px solid #C49A28" : "2px solid transparent",
-                      }}
-                    >
-                      Submissions
-                    </span>
-                  </Link>
-                  <Link href="/admin/users">
-                    <span
-                      className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10"
-                      style={{
-                        color: isActive("/admin/users") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                        borderBottom: isActive("/admin/users") ? "2px solid #C49A28" : "2px solid transparent",
-                      }}
-                    >
-                      Users
-                    </span>
-                  </Link>
-                </>
-              )}
-            </div>
+          {/* Row 1: Home (always) + Admin tabs (admin only) */}
+          <div className="flex items-center gap-1 flex-wrap justify-center">
+            {/* HOME — always visible for all users */}
+            <Link href="/">
+              <span
+                className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
+                style={{
+                  color: location === "/" ? "#C49A28" : "rgba(255,255,255,0.85)",
+                  borderBottom: location === "/" ? "2px solid #C49A28" : "2px solid transparent",
+                }}
+              >
+                Home
+              </span>
+            </Link>
 
-            {/* Row 2: Education — full width of row above, glass morphism */}
-            <Link href="/education" className="w-full no-underline">
+            {/* Admin-only tabs */}
+            {!loading && isAuthenticated && user?.role === "admin" && (
+              <>
+                <Link href="/admin/submissions">
+                  <span
+                    className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
+                    style={{
+                      color: isActive("/admin/submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                      borderBottom: isActive("/admin/submissions") ? "2px solid #C49A28" : "2px solid transparent",
+                    }}
+                  >
+                    Submissions
+                  </span>
+                </Link>
+                <Link href="/admin/users">
+                  <span
+                    className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
+                    style={{
+                      color: isActive("/admin/users") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                      borderBottom: isActive("/admin/users") ? "2px solid #C49A28" : "2px solid transparent",
+                    }}
+                  >
+                    Users
+                  </span>
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Row 2: Education — glass morphism, full width, visible when logged in */}
+          {!loading && isAuthenticated && user && (
+            <Link href="/education" className="w-full no-underline" style={{ maxWidth: "240px" }}>
               <div
                 className="relative flex items-center justify-center gap-1.5 px-3 py-1 rounded cursor-pointer overflow-hidden group/edu"
                 style={{
@@ -144,11 +147,8 @@ export function TopNav() {
                 </span>
               </div>
             </Link>
-
-          </div>
-        ) : (
-          <div className="flex-1" />
-        )}
+          )}
+        </div>
 
         {/* ── Right: IMS Portal label + user info stacked ── */}
         <div
