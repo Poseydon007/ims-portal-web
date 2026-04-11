@@ -3,6 +3,7 @@
 // Design: TE navy #081C2E, gold #C49A28, clean structured layout with sidebar TOC
 
 import { useState } from "react";
+import { Wrench, UserPlus, ClipboardCheck, BarChart3 } from "lucide-react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
 import { LOGO_WHITE } from "@/lib/imsData";
@@ -31,9 +32,32 @@ function SectionHeading({ number, title }: { number: string; title: string }) {
   );
 }
 
+const EXPERIENCE_ITEMS = [
+  {
+    icon: <Wrench className="w-5 h-5" style={{ color: GOLD }} />,
+    label: "On the rig at 2 a.m.",
+    text: "A driller identifies a high-risk task → opens the relevant Level 3 SOP → executes safely using the Level 4 checklist.",
+  },
+  {
+    icon: <UserPlus className="w-5 h-5" style={{ color: GOLD }} />,
+    label: "A new employee",
+    text: "Reads this Foundation Playbook during their induction → understands the corporate culture → completes their mandatory Pillar 2 (People & Capability) training.",
+  },
+  {
+    icon: <ClipboardCheck className="w-5 h-5" style={{ color: GOLD }} />,
+    label: "An Auditor / Ma'aden Inspector",
+    text: "Starts with this exact document → navigates the 8-pillar tree → experiences 100% full traceability and compliance.",
+  },
+  {
+    icon: <BarChart3 className="w-5 h-5" style={{ color: GOLD }} />,
+    label: "Executive Management",
+    text: "Opens Pillar 8 (Performance & Learning) → reviews real-time KPIs → tracks audit findings → drives strategic, continual improvement actions.",
+  },
+];
+
 const TOC_ITEMS = [
   { id: "confidentiality", label: "Confidentiality Note" },
-  { id: "ceo-message", label: "Message from the CEO" },
+  { id: "ceo-message", label: "Message from the COO" },
   { id: "purpose", label: "1. Purpose of the IMS" },
   { id: "scope", label: "2. Scope & Boundaries" },
   { id: "org-structure", label: "3. Organizational Structure" },
@@ -171,7 +195,7 @@ export default function PLN_GOV_000() {
 
             {/* ── CEO Message ── */}
             <section id="ceo-message">
-              <SectionHeading number="§" title="Message from the CEO" />
+              <SectionHeading number="§" title="Message from the COO" />
               <div
                 className="rounded border p-6"
                 style={{ backgroundColor: "#fff", borderColor: BORDER, borderLeft: `4px solid ${GOLD}` }}
@@ -192,8 +216,8 @@ export default function PLN_GOV_000() {
                   One Company. One System. Zero Harm.
                 </p>
                 <div className="pt-3" style={{ borderTop: `1px solid ${BORDER}` }}>
-                  <p className="text-sm font-bold" style={{ color: NAVY }}>Bader Alsharif, CEO</p>
-                  <p className="text-xs" style={{ color: TEXT_MUTED }}>Chief Executive Officer · True East Mining Company · April 2026</p>
+                  <p className="text-sm font-bold" style={{ color: NAVY }}>Joao de Melo, COO</p>
+                  <p className="text-xs" style={{ color: TEXT_MUTED }}>Chief Operating Officer · True East Mining Company · April 2026</p>
                 </div>
               </div>
             </section>
@@ -271,7 +295,7 @@ export default function PLN_GOV_000() {
             <section id="org-structure">
               <SectionHeading number="3" title="Our Organizational Structure" />
               <div className="rounded border overflow-hidden" style={{ borderColor: BORDER }}>
-                <div className="px-4 py-2 text-xs font-semibold" style={{ backgroundColor: NAVY, color: GOLD }}>
+                <div className="px-4 py-2 text-xs font-semibold" style={{ backgroundColor: NAVY, color: "#ffffff" }}>
                   Key Leadership Roles &amp; IMS Accountability
                 </div>
                 <table className="w-full text-xs">
@@ -434,7 +458,7 @@ export default function PLN_GOV_000() {
 
               {/* Level 0 & 1 */}
               <div className="mb-5">
-                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: NAVY, color: GOLD }}>
+                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: NAVY, color: "#ffffff" }}>
                   Level 0 &amp; 1: Foundation, Policies &amp; Plans (GOV / POL / PLN) — 7 Documents
                 </div>
                 <div className="rounded-b border border-t-0 p-4" style={{ borderColor: BORDER, backgroundColor: "#fff" }}>
@@ -459,7 +483,7 @@ export default function PLN_GOV_000() {
 
               {/* Level 2 Procedures */}
               <div className="mb-5">
-                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: GOLD }}>
+                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}>
                   Level 2: Core Procedures (PROC) — 33 Documents
                 </div>
                 <div className="rounded-b border border-t-0 p-4" style={{ borderColor: BORDER, backgroundColor: "#fff" }}>
@@ -510,7 +534,7 @@ export default function PLN_GOV_000() {
 
               {/* Level 3 SOPs */}
               <div className="mb-5">
-                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: GOLD }}>
+                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}>
                   Level 3: Standard Operating Procedures (SOP) — 10 Documents
                 </div>
                 <div className="rounded-b border border-t-0 p-4" style={{ borderColor: BORDER, backgroundColor: "#fff" }}>
@@ -538,7 +562,7 @@ export default function PLN_GOV_000() {
 
               {/* Level 4 Forms & Registers */}
               <div className="mb-5">
-                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: GOLD }}>
+                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}>
                   Level 4: Forms, Registers &amp; Checklists (FRM / REG) — 69 Documents
                 </div>
                 <div className="rounded-b border border-t-0 p-4" style={{ borderColor: BORDER, backgroundColor: "#fff" }}>
@@ -625,7 +649,7 @@ export default function PLN_GOV_000() {
 
               {/* Level 5 References */}
               <div className="mb-5">
-                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: GOLD }}>
+                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}>
                   Level 5: System References (REF) — 9 Documents
                 </div>
                 <div className="rounded-b border border-t-0 p-4" style={{ borderColor: BORDER, backgroundColor: "#fff" }}>
@@ -652,7 +676,7 @@ export default function PLN_GOV_000() {
 
               {/* Drawings */}
               <div className="mb-5">
-                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: GOLD }}>
+                <div className="text-xs font-bold px-3 py-2 rounded-t" style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}>
                   Drawings (DWG) — 0 Released
                 </div>
                 <div className="rounded-b border border-t-0 p-4" style={{ borderColor: BORDER, backgroundColor: "#fff" }}>
@@ -732,34 +756,15 @@ export default function PLN_GOV_000() {
                   This Integrated Management System is not a static binder sitting on an office shelf. It is our daily operating system—alive, updated regularly, and actively used by every level of the organization:
                 </p>
                 <div className="space-y-3">
-                  {[
-                    {
-                      icon: "🔧",
-                      label: "On the rig at 2 a.m.",
-                      text: "A driller identifies a high-risk task → opens the relevant Level 3 SOP → executes safely using the Level 4 checklist.",
-                    },
-                    {
-                      icon: "👷",
-                      label: "A new employee",
-                      text: "Reads this Foundation Playbook during their induction → understands the corporate culture → completes their mandatory Pillar 2 (People & Capability) training.",
-                    },
-                    {
-                      icon: "📋",
-                      label: "An Auditor / Ma'aden Inspector",
-                      text: "Starts with this exact document → navigates the 8-pillar tree → experiences 100% full traceability and compliance.",
-                    },
-                    {
-                      icon: "📊",
-                      label: "Executive Management",
-                      text: "Opens Pillar 8 (Performance & Learning) → reviews real-time KPIs → tracks audit findings → drives strategic, continual improvement actions.",
-                    },
-                  ].map(({ icon, label, text }) => (
+                  {EXPERIENCE_ITEMS.map(({ icon, label, text }) => (
                     <div
                       key={label}
                       className="flex items-start gap-3 p-3 rounded"
                       style={{ backgroundColor: LIGHT_BG, border: `1px solid ${BORDER}` }}
                     >
-                      <span className="text-xl flex-shrink-0">{icon}</span>
+                      <div className="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center" style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}` }}>
+                        {icon}
+                      </div>
                       <div>
                         <p className="text-xs font-bold mb-0.5" style={{ color: NAVY }}>{label}</p>
                         <p className="text-xs leading-relaxed" style={{ color: TEXT_BODY }}>{text}</p>
@@ -818,7 +823,7 @@ export default function PLN_GOV_000() {
                     <tr style={{ backgroundColor: "#fafbfc" }}>
                       <td className="px-3 py-2.5 font-semibold" style={{ color: NAVY }}>01</td>
                       <td className="px-3 py-2.5" style={{ color: TEXT_BODY }}>11 Apr 2026</td>
-                      <td className="px-3 py-2.5" style={{ color: TEXT_BODY }}>Register rebuilt against the current active library (128 controlled documents). Metadata corrected, approval block updated (IMS Project Team / Joao Melo, CEO), retired slots policy, risk classification standard, and cross-references added. Drawings slot reserved (0 released).</td>
+                      <td className="px-3 py-2.5" style={{ color: TEXT_BODY }}>Register rebuilt against the current active library (128 controlled documents). Metadata corrected, approval block updated (IMS Project Team / Joao de Melo, COO), retired slots policy, risk classification standard, and cross-references added. Drawings slot reserved (0 released).</td>
                       <td className="px-3 py-2.5" style={{ color: TEXT_BODY }}>IMS Project Team</td>
                     </tr>
                   </tbody>
@@ -827,7 +832,7 @@ export default function PLN_GOV_000() {
 
               {/* Approval Block */}
               <div className="rounded border overflow-hidden" style={{ borderColor: BORDER }}>
-                <div className="px-4 py-2 text-xs font-bold" style={{ backgroundColor: NAVY, color: GOLD }}>
+                  <div className="px-4 py-2 text-xs font-bold" style={{ backgroundColor: NAVY, color: "#ffffff" }}>
                   Document Approval Block
                 </div>
                 <table className="w-full text-xs">
@@ -838,7 +843,7 @@ export default function PLN_GOV_000() {
                       ["Revision", "Rev01"],
                       ["Date", "11 April 2026"],
                       ["Prepared by", "IMS Project Team"],
-                      ["Approved by", "Joao Melo, COO"],
+                      ["Approved by", "Joao de Melo, COO"],
                       ["Status", "Approved for Implementation – Internal Use Only"],
                     ].map(([label, value], i) => (
                       <tr

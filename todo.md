@@ -37,6 +37,11 @@
 - [x] Login-gated: only logged-in users can access education content
 
 ## PLN-GOV-000 Rev01 Update
-- [ ] Extract full content from uploaded DOCX (TE-IMS-PLN-GOV-000_Rev01)
-- [ ] Rebuild PLN_GOV_000.tsx with exact approved content — no content removed or reduced
-- [ ] Improve design/format only: layout, typography, tables, section structure
+- [x] Extract full content from uploaded DOCX (TE-IMS-PLN-GOV-000_Rev01)
+- [x] Rebuild PLN_GOV_000.tsx with exact approved content — no content removed or reduced
+- [x] Improve design/format only: layout, typography, tables, section structure
+
+## PLN-GOV-000 Design Refinements
+- [x] Change CEO to COO, name to Joao de Melo in CEO/COO message block
+- [x] All dark section header text (table headers, level banners) set to white
+- [x] Replace emoji icons in "How People Experience" section with premium Lucide icons
