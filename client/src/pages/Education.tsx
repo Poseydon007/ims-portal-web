@@ -38,7 +38,7 @@ function TopicIcon({ slug, color }: { slug: string; color: string }) {
         boxShadow: `0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.06)`,
       }}
     >
-      <Icon size={18} strokeWidth={1.75} color={color} />
+      <Icon size={18} strokeWidth={1.75} color="#ffffff" />
     </div>
   );
 }
