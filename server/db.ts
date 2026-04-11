@@ -1,6 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertNearMissSubmission, InsertUser, nearMissSubmissions, users } from "../drizzle/schema";
+import { InsertJhaSubmission, InsertNearMissSubmission, InsertUser, jhaSubmissions, nearMissSubmissions, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -87,4 +87,41 @@ export async function markSheetSynced(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.update(nearMissSubmissions).set({ sheetSynced: 1 }).where(eq(nearMissSubmissions.id, id));
+}
+
+// ── JHA Submissions ──
+
+export async function createJhaSubmission(data: InsertJhaSubmission) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(jhaSubmissions).values(data);
+  const result = await db.select().from(jhaSubmissions)
+    .where(eq(jhaSubmissions.submissionId, data.submissionId)).limit(1);
+  return result[0];
+}
+
+export async function getJhaSubmissions() {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.select().from(jhaSubmissions).orderBy(desc(jhaSubmissions.submittedAt));
+}
+
+export async function getJhaSubmissionById(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(jhaSubmissions)
+    .where(eq(jhaSubmissions.id, id)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function updateJhaStatus(id: number, status: "submitted" | "under_review" | "closed") {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(jhaSubmissions).set({ status }).where(eq(jhaSubmissions.id, id));
+}
+
+export async function markJhaSheetSynced(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(jhaSubmissions).set({ sheetSynced: 1 }).where(eq(jhaSubmissions.id, id));
 }

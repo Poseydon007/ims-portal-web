@@ -64,3 +64,38 @@ export const nearMissSubmissions = mysqlTable("near_miss_submissions", {
 
 export type NearMissSubmission = typeof nearMissSubmissions.$inferSelect;
 export type InsertNearMissSubmission = typeof nearMissSubmissions.$inferInsert;
+
+// ── Job Hazard Analysis Submissions ──
+export const jhaSubmissions = mysqlTable("jha_submissions", {
+  id: int("id").autoincrement().primaryKey(),
+  submissionId: varchar("submissionId", { length: 32 }).notNull().unique(), // e.g. JHA-2026-0001
+  status: mysqlEnum("status", ["submitted", "under_review", "closed"]).default("submitted").notNull(),
+
+  // Section 1: Job Information
+  jobTask: text("jobTask").notNull(),
+  date: varchar("date", { length: 20 }).notNull(),
+  departmentSite: text("departmentSite"),
+  jhaNumber: varchar("jhaNumber", { length: 32 }),
+  supervisor: text("supervisor"),
+  reviewedBy: text("reviewedBy"),
+
+  // Section 3: Task Step Hazard Analysis (JSON array)
+  // [{step, taskStep, hazards, initialRisk, controls, residualRisk, responsible}]
+  taskSteps: text("taskSteps").notNull(),
+
+  // Section 4: Sign-Off
+  completedByName: text("completedByName"),
+  completedByDate: varchar("completedByDate", { length: 20 }),
+  reviewedByName: text("reviewedByName"),
+  reviewedByDate: varchar("reviewedByDate", { length: 20 }),
+  siteManagerName: text("siteManagerName"),
+  siteManagerDate: varchar("siteManagerDate", { length: 20 }),
+
+  // Metadata
+  submittedAt: timestamp("submittedAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  sheetSynced: int("sheetSynced").default(0),
+});
+
+export type JhaSubmission = typeof jhaSubmissions.$inferSelect;
+export type InsertJhaSubmission = typeof jhaSubmissions.$inferInsert;

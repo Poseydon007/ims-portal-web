@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import POL_GOV_001 from "./pages/documents/POL_GOV_001";
 import NearMissForm from "./pages/forms/NearMissForm";
+import JHAForm from "./pages/forms/JHAForm";
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
 
       {/* Active Forms */}
       <Route path="/forms/near-miss" component={NearMissForm} />
+      <Route path="/forms/jha" component={JHAForm} />
 
       {/* Admin */}
       <Route path="/admin/submissions" component={SubmissionsAdmin} />

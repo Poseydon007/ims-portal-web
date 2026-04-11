@@ -82,7 +82,7 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
     { code: "TE-IMS-POL-GOV-004", title: "Drug and Alcohol Policy", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-POL-GOV-004", available: false },
   ],
   frm: [
-    { code: "TE-IMS-FRM-HSE-001", title: "Job Hazard Analysis", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-001", available: false },
+    { code: "TE-IMS-FRM-HSE-001", title: "Job Hazard Analysis", rev: "Rev01", date: "Apr 2026", status: "approved", slug: "TE-IMS-FRM-HSE-001", available: true, formUrl: "/forms/jha" },
     { code: "TE-IMS-FRM-HSE-002", title: "Incident Flash Notification", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-002", available: false },
     { code: "TE-IMS-FRM-HSE-003", title: "Near Miss Report Form", rev: "Rev01", date: "Apr 2026", status: "approved", slug: "TE-IMS-FRM-HSE-003", available: true, formUrl: "/forms/near-miss" },
     { code: "TE-IMS-FRM-HSE-004", title: "First Aid Kit Register and Checklist", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-FRM-HSE-004", available: false },
