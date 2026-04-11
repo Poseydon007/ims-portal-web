@@ -29,6 +29,13 @@
       "when": 1775929164534,
       "tag": "0003_faulty_gertrude_yorkes",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1775933436852,
+      "tag": "0004_unknown_white_tiger",
+      "breakpoints": true
     }
   ]
 }

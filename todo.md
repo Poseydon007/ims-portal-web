@@ -56,3 +56,26 @@
 - [x] Education tab width matches full width of Submissions + Users combined
 - [x] Glass morphism background on Education tab
 - [x] Smooth hover and entrance animations on nav tabs
+
+## IMS Master Register (REG-SYS-001)
+- [ ] Database schema: ims_register table (code, type, department, seq, rev, title, format, status, filename, note, createdBy, updatedBy, createdAt, updatedAt)
+- [ ] Push migration with pnpm db:push
+- [ ] tRPC procedures: register.list (public), register.getById (public), register.create (admin), register.update (admin), register.changeStatus (admin)
+- [ ] Admin-only guard on create/update/changeStatus — no deletion, only status change
+- [ ] Seed database from XLSX Master Register sheet (128 documents)
+- [ ] Register page at /register — searchable, filterable by type and department, paginated
+- [ ] Admin edit panel — modal edit for admins only
+- [ ] Admin add new entry form
+- [ ] Status change: Active / Retired / Legacy (admin only, timestamped)
+- [ ] Every change records updatedBy (user id) and updatedAt timestamp
+- [ ] Register link added to header nav
+- [ ] Summary stats bar (total, by type, by department) auto-calculated from live data
+
+## IMS Registers Page (Drive-linked)
+- [ ] Registers page at /registers — lists all REG files with preview + Drive link
+- [ ] Click name → modal with preview image (PNG/JPG screenshot of file)
+- [ ] "Open in Drive" button — admin and supervisor only, opens Google Drive link
+- [ ] Field workers see list and preview but no Drive link button
+- [ ] REG-HSE-005 as first working example with real preview image
+- [ ] Upload preview image to CDN
+- [ ] Register nav link in header for all logged-in users

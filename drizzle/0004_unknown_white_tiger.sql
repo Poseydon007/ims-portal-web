@@ -1,0 +1,22 @@
+CREATE TABLE `ims_register` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`code` varchar(64) NOT NULL,
+	`type` varchar(64) NOT NULL,
+	`typeLabel` varchar(128),
+	`department` varchar(64),
+	`departmentLabel` varchar(128),
+	`seq` varchar(16),
+	`rev` varchar(16),
+	`title` varchar(512) NOT NULL,
+	`format` varchar(32),
+	`status` enum('ACTIVE','RETIRED','MERGED','LEGACY') NOT NULL DEFAULT 'ACTIVE',
+	`filename` varchar(512),
+	`note` text,
+	`viewUrl` varchar(512),
+	`createdByUserId` int,
+	`updatedByUserId` int,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `ims_register_id` PRIMARY KEY(`id`),
+	CONSTRAINT `ims_register_code_unique` UNIQUE(`code`)
+);

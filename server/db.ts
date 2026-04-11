@@ -1,10 +1,11 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, like, or } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   InsertJhaSubmission, InsertNearMissSubmission, InsertUser,
   jhaSubmissions, nearMissSubmissions, users,
   imsUsers, imsSessions,
   InsertImsUser, InsertImsSession, ImsUser,
+  imsRegister, InsertImsRegisterEntry, ImsRegisterEntry,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -206,4 +207,67 @@ export async function markJhaSheetSynced(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.update(jhaSubmissions).set({ sheetSynced: 1 }).where(eq(jhaSubmissions.id, id));
+}
+
+// ════════════════════════════════════════════════════════════
+// IMS Master Document Register
+// ════════════════════════════════════════════════════════════
+
+export async function getRegisterEntries(opts?: { search?: string; type?: string; department?: string; status?: string }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  let query = db.select().from(imsRegister).$dynamic();
+  if (opts?.status) query = query.where(eq(imsRegister.status, opts.status as ImsRegisterEntry['status']));
+  const results = await query.orderBy(imsRegister.code);
+  // Apply search/type/department filters in JS (simpler than dynamic drizzle chaining)
+  return results.filter(r => {
+    if (opts?.type && r.type !== opts.type) return false;
+    if (opts?.department && r.department !== opts.department) return false;
+    if (opts?.search) {
+      const s = opts.search.toLowerCase();
+      return r.code.toLowerCase().includes(s) || r.title.toLowerCase().includes(s);
+    }
+    return true;
+  });
+}
+
+export async function getRegisterEntryById(id: number): Promise<ImsRegisterEntry | null> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(imsRegister).where(eq(imsRegister.id, id)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function getRegisterEntryByCode(code: string): Promise<ImsRegisterEntry | null> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(imsRegister).where(eq(imsRegister.code, code)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function createRegisterEntry(data: InsertImsRegisterEntry): Promise<ImsRegisterEntry> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(imsRegister).values(data);
+  const result = await db.select().from(imsRegister).where(eq(imsRegister.code, data.code)).limit(1);
+  return result[0];
+}
+
+export async function updateRegisterEntry(id: number, data: Partial<Omit<ImsRegisterEntry, 'id' | 'createdAt' | 'createdByUserId'>>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(imsRegister).set(data).where(eq(imsRegister.id, id));
+}
+
+export async function bulkInsertRegisterEntries(entries: InsertImsRegisterEntry[]): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  // Insert in batches of 50
+  let inserted = 0;
+  for (let i = 0; i < entries.length; i += 50) {
+    const batch = entries.slice(i, i + 50);
+    await db.insert(imsRegister).values(batch).onDuplicateKeyUpdate({ set: { updatedAt: new Date() } });
+    inserted += batch.length;
+  }
+  return inserted;
 }

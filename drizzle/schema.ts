@@ -140,3 +140,30 @@ export const jhaSubmissions = mysqlTable("jha_submissions", {
 
 export type JhaSubmission = typeof jhaSubmissions.$inferSelect;
 export type InsertJhaSubmission = typeof jhaSubmissions.$inferInsert;
+
+// ── IMS Master Document Register ──
+export const imsRegister = mysqlTable("ims_register", {
+  id: int("id").autoincrement().primaryKey(),
+  code: varchar("code", { length: 64 }).notNull().unique(),   // e.g. TE-IMS-FRM-HSE-001
+  type: varchar("type", { length: 64 }).notNull(),             // FRM, PROC, SOP, PLN, REG, MAN, POL, REF
+  typeLabel: varchar("typeLabel", { length: 128 }),            // Full label e.g. "FRM — Form / Template"
+  department: varchar("department", { length: 64 }),           // HSE, OPS, SYS, etc.
+  departmentLabel: varchar("departmentLabel", { length: 128 }), // Full label
+  seq: varchar("seq", { length: 16 }),                        // sequence number
+  rev: varchar("rev", { length: 16 }),                        // e.g. Rev01
+  title: varchar("title", { length: 512 }).notNull(),
+  format: varchar("format", { length: 32 }),                  // DOCX, XLSX, PDF
+  status: mysqlEnum("status", ["ACTIVE", "RETIRED", "MERGED", "LEGACY"]).default("ACTIVE").notNull(),
+  filename: varchar("filename", { length: 512 }),
+  note: text("note"),
+  viewUrl: varchar("viewUrl", { length: 512 }),               // internal portal URL if page exists
+
+  // Audit trail
+  createdByUserId: int("createdByUserId"),
+  updatedByUserId: int("updatedByUserId"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ImsRegisterEntry = typeof imsRegister.$inferSelect;
+export type InsertImsRegisterEntry = typeof imsRegister.$inferInsert;

@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import UserManagement from "./pages/admin/UserManagement";
 import Education from "./pages/Education";
 import EducationTopic from "./pages/EducationTopic";
+import Registers from "./pages/Registers";
 
 function Router() {
   return (
@@ -36,6 +37,9 @@ function Router() {
       {/* Education & Learning */}
       <Route path="/education" component={Education} />
       <Route path="/education/:slug" component={EducationTopic} />
+
+      {/* Registers */}
+      <Route path="/registers" component={Registers} />
 
       {/* Admin */}
       <Route path="/admin/submissions" component={SubmissionsAdmin} />
