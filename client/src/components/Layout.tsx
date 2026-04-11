@@ -1,5 +1,6 @@
 // Layout: TopNav + Footer + optional Breadcrumbs
 // TopNav: dark navy bar with white logo, gold bottom border, auth status
+// New layout: 3-column — Logo | Nav tabs (centered) | IMS Portal + user info stacked
 // Footer: dark navy with white text, ghost logo watermark
 
 import { Link, useLocation } from "wouter";
@@ -38,14 +39,15 @@ export function TopNav() {
       style={{ backgroundColor: "#081C2E", borderBottom: "3px solid #C49A28" }}
       className="sticky top-0 z-50 shadow-lg"
     >
-      <div className="container flex items-center justify-between h-14">
-        {/* Left: Logo + Company Name */}
-        <Link href="/" className="flex items-center gap-3 no-underline group">
+      <div className="container flex items-stretch justify-between" style={{ minHeight: "72px" }}>
+
+        {/* ── Left: Logo + Company Name ── */}
+        <Link href="/" className="flex items-center gap-3 no-underline group py-3">
           <img
             src={LOGO_WHITE}
             alt="True East Mining Company"
-            style={{ width: "50px", height: "50px", objectFit: "contain" }}
-            className="opacity-90 group-hover:opacity-100 transition-opacity"
+            style={{ width: "52px", height: "52px", objectFit: "contain" }}
+            className="opacity-90 group-hover:opacity-100 transition-opacity flex-shrink-0"
           />
           <div className="hidden sm:block">
             <div className="text-white font-bold text-sm leading-tight tracking-wide">
@@ -57,65 +59,50 @@ export function TopNav() {
           </div>
         </Link>
 
-        {/* Right: Auth status + Portal label */}
-        <div className="flex items-center gap-4">
-          {!loading && isAuthenticated && user ? (
-            <div className="flex items-center gap-3">
-              {/* Nav links */}
-              <div className="hidden md:flex items-center gap-2">
-                <Link href="/education">
-                  <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
-                    style={{ color: "rgba(255,255,255,0.7)", backgroundColor: "rgba(255,255,255,0.05)" }}>
-                    🎓 Education
-                  </span>
-                </Link>
-                {user.role === "admin" && (
-                  <>
-                    <Link href="/admin/submissions">
-                      <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
-                        style={{ color: "#C49A28", backgroundColor: "rgba(196,154,40,0.1)" }}>
-                        Submissions
-                      </span>
-                    </Link>
-                    <Link href="/admin/users">
-                      <span className="text-xs font-semibold px-2 py-1 rounded cursor-pointer transition-colors"
-                        style={{ color: "#C49A28", backgroundColor: "rgba(196,154,40,0.1)" }}>
-                        Users
-                      </span>
-                    </Link>
-                  </>
-                )}
-              </div>
-              {/* User info */}
-              <div className="text-right hidden sm:block">
-                <div className="text-white text-xs font-semibold leading-tight">
-                  {user.fullName}
-                </div>
-                <div className="text-xs opacity-40" style={{ color: "#C49A28" }}>
-                  {ROLE_LABELS[user.role] ?? user.role}
-                </div>
-              </div>
-              {/* Logout */}
-              <button
-                onClick={handleLogout}
-                className="text-xs font-semibold px-2.5 py-1 rounded transition-colors"
-                style={{ color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.15)" }}
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : !loading ? (
-            <Link href="/login">
+        {/* ── Center: Nav tabs (only when authenticated) ── */}
+        {!loading && isAuthenticated && user ? (
+          <div className="hidden md:flex items-center justify-center gap-1 px-4">
+            <Link href="/education">
               <span
-                className="text-xs font-bold px-3 py-1.5 rounded cursor-pointer"
-                style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
+                className="text-xs font-semibold px-3 py-1.5 rounded cursor-pointer transition-colors hover:bg-white/10"
+                style={{ color: "rgba(255,255,255,0.75)" }}
               >
-                Sign In
+                Education
               </span>
             </Link>
-          ) : null}
+            {user.role === "admin" && (
+              <>
+                <Link href="/admin/submissions">
+                  <span
+                    className="text-xs font-semibold px-3 py-1.5 rounded cursor-pointer transition-colors hover:bg-white/10"
+                    style={{ color: "#C49A28" }}
+                  >
+                    Submissions
+                  </span>
+                </Link>
+                <Link href="/admin/users">
+                  <span
+                    className="text-xs font-semibold px-3 py-1.5 rounded cursor-pointer transition-colors hover:bg-white/10"
+                    style={{ color: "#C49A28" }}
+                  >
+                    Users
+                  </span>
+                </Link>
+              </>
+            )}
+          </div>
+        ) : (
+          /* Empty center spacer when not authenticated */
+          <div className="flex-1" />
+        )}
 
-          <div className="text-right hidden lg:block pl-3" style={{ borderLeft: "1px solid rgba(255,255,255,0.1)" }}>
+        {/* ── Right: IMS Portal label + user info stacked ── */}
+        <div
+          className="flex flex-col items-end justify-center py-3 pl-4"
+          style={{ borderLeft: "1px solid rgba(255,255,255,0.1)" }}
+        >
+          {/* Portal label — always visible */}
+          <div className="text-right">
             <div className="text-white text-xs font-semibold tracking-widest uppercase opacity-80">
               IMS Document Portal
             </div>
@@ -123,7 +110,40 @@ export function TopNav() {
               Internal Use Only
             </div>
           </div>
+
+          {/* User info + sign out — below portal label */}
+          {!loading && isAuthenticated && user ? (
+            <div className="flex items-center gap-2 mt-1.5">
+              <div className="text-right">
+                <div className="text-white text-xs font-semibold leading-tight">
+                  {user.fullName}
+                </div>
+                <div className="text-xs" style={{ color: "#C49A28", opacity: 0.8 }}>
+                  {ROLE_LABELS[user.role] ?? user.role}
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="text-xs font-semibold px-2 py-0.5 rounded transition-colors hover:bg-white/10"
+                style={{ color: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.15)" }}
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : !loading ? (
+            <div className="mt-1.5">
+              <Link href="/login">
+                <span
+                  className="text-xs font-bold px-3 py-1 rounded cursor-pointer"
+                  style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
+                >
+                  Sign In
+                </span>
+              </Link>
+            </div>
+          ) : null}
         </div>
+
       </div>
     </header>
   );
@@ -166,8 +186,6 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
 export default function Layout({
   children,
   breadcrumbs,
-  title,
-  subtitle,
 }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f4f6f9" }}>

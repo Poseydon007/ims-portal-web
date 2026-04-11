@@ -45,3 +45,8 @@
 - [x] Change CEO to COO, name to Joao de Melo in CEO/COO message block
 - [x] All dark section header text (table headers, level banners) set to white
 - [x] Replace emoji icons in "How People Experience" section with premium Lucide icons
+
+## Header Layout Redesign
+- [x] More vertical spacing in header
+- [x] Move user name/role/sign-out below IMS Document Portal title (right column, stacked)
+- [x] Center nav tabs (Education, Submissions, Users) between logo and IMS portal title
