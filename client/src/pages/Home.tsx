@@ -84,6 +84,14 @@ export default function Home() {
         style={{ backgroundColor: "#081C2E" }}
         className="relative overflow-hidden"
       >
+        {/* Watermark logo */}
+        <img
+          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none"
+          style={{ width: "360px", opacity: 0.08, right: "-20px", top: "50%", transform: "translateY(-50%)" }}
+        />
         <div className="container pt-10 pb-6 relative z-10">
           <div className="flex flex-col gap-4">
             <div>
