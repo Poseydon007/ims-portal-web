@@ -59,15 +59,15 @@ function StatItem({ value, label, animate = false, delay = 0 }: StatProps) {
   const display = animate && typeof value === "number" ? counted : value;
 
   return (
-    <div ref={ref} className="text-center px-6 py-1">
+    <div ref={ref} className="text-center px-4 py-0.5">
       <div
-        className="text-3xl md:text-4xl font-extrabold tabular-nums transition-all"
+        className="text-xl md:text-2xl font-extrabold tabular-nums transition-all"
         style={{ color: "#C49A28", fontFamily: "'Nunito Sans', sans-serif" }}
       >
         {display}
       </div>
       <div
-        className="text-xs mt-1.5 tracking-widest uppercase font-semibold"
+        className="text-[10px] mt-1 tracking-widest uppercase font-semibold"
         style={{ color: "rgba(255,255,255,0.45)" }}
       >
         {label}
