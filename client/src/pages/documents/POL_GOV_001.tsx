@@ -164,7 +164,7 @@ export default function POL_GOV_001() {
               className="flex items-center justify-between px-6 py-4 border-b"
               style={{ borderColor: "#dde3ec", backgroundColor: "#fafbfc" }}
             >
-              <img src={LOGO_GRAY} alt="True East Mining Company" className="h-12 w-auto" />
+              <img src={LOGO_GRAY} alt="True East Mining Company" style={{ width: "80px", height: "80px", objectFit: "contain" }} />
               <div className="text-right">
                 <div className="te-code text-xs" style={{ color: "#8a9ab0" }}>
                   TE-IMS-POL-GOV-001_Rev01
