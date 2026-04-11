@@ -18,6 +18,7 @@ export interface ImsDocument {
   slug: string; // URL slug for the document view page
   available: boolean; // whether the HTML view is built
   formUrl?: string; // if set, this document has a live digital form at this URL
+  viewUrl?: string; // if set, this document has a live HTML view page at this URL
 }
 
 export const categories: DocCategory[] = [
@@ -213,7 +214,7 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
     { code: "TE-IMS-REF-SYS-006", title: "KPI Tables and Reference Data", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REF-SYS-006", available: false },
   ],
   pln: [
-    { code: "TE-IMS-PLN-GOV-000", title: "IMS Playbook — Foundation Document", rev: "Rev00", date: "—", status: "pending", slug: "TE-IMS-PLN-GOV-000", available: false },
+    { code: "TE-IMS-PLN-GOV-000", title: "IMS Playbook — Foundation Document", rev: "Rev00", date: "01 Mar 2026", status: "approved", slug: "TE-IMS-PLN-GOV-000", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-GOV-000" },
     { code: "TE-IMS-PLN-001", title: "IMS Implementation Plan", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-PLN-001", available: false },
     { code: "TE-IMS-PLN-002", title: "Annual HSE Plan", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-PLN-002", available: false },
   ],

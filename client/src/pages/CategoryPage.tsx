@@ -132,7 +132,7 @@ export default function CategoryPage() {
                   <td className="px-4 py-3">
                     {doc.available ? (
                       <Link
-                        href={doc.formUrl ?? `/docs/${slug}/${doc.slug}`}
+                        href={doc.formUrl ?? doc.viewUrl ?? `/docs/${slug}/${doc.slug}`}
                         className="font-medium hover:underline"
                         style={{ color: "#081C2E" }}
                       >
@@ -164,7 +164,7 @@ export default function CategoryPage() {
                       </Link>
                     ) : doc.available ? (
                       <Link
-                        href={`/docs/${slug}/${doc.slug}`}
+                        href={doc.viewUrl ?? `/docs/${slug}/${doc.slug}`}
                         className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
                         style={{ backgroundColor: "#081C2E", color: "#fff" }}
                       >
