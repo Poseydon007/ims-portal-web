@@ -67,7 +67,7 @@ export const categories: DocCategory[] = [
     code: "PLN",
     name: "Plans",
     description: "Strategic and operational plans supporting IMS implementation and project delivery.",
-    count: 2,
+    count: 3,
     slug: "pln",
   },
 ];
@@ -213,6 +213,7 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
     { code: "TE-IMS-REF-SYS-006", title: "KPI Tables and Reference Data", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-REF-SYS-006", available: false },
   ],
   pln: [
+    { code: "TE-IMS-PLN-GOV-000", title: "IMS Playbook — Foundation Document", rev: "Rev00", date: "—", status: "pending", slug: "TE-IMS-PLN-GOV-000", available: false },
     { code: "TE-IMS-PLN-001", title: "IMS Implementation Plan", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-PLN-001", available: false },
     { code: "TE-IMS-PLN-002", title: "Annual HSE Plan", rev: "Rev01", date: "—", status: "pending", slug: "TE-IMS-PLN-002", available: false },
   ],
