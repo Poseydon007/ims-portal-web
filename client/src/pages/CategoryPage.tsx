@@ -97,7 +97,7 @@ export default function CategoryPage() {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr style={{ backgroundColor: "#081C2E" }}>
-                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-44">
+                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
                   Document Code
                 </th>
                 <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70">
@@ -124,7 +124,7 @@ export default function CategoryPage() {
                   className="transition-colors hover:bg-blue-50/40"
                   style={{ borderTop: i > 0 ? "1px solid #edf0f5" : undefined }}
                 >
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 whitespace-nowrap">
                     <span className="te-code text-xs" style={{ color: "#081C2E" }}>
                       {doc.code}
                     </span>
