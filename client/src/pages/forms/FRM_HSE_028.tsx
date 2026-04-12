@@ -536,7 +536,7 @@ export default function FRM_HSE_028() {
                             <input
                               type="number"
                               className="w-full p-1 text-center bg-transparent border-none"
-                              value={formData.summaryDept[row.key as keyof typeof formData.summaryDept].count}
+                              value={(formData.summaryDept[row.key as keyof typeof formData.summaryDept] as { count: string; notes: string }).count}
                               onChange={(e) => {
                                 const newSummary = { ...formData.summaryDept };
                                 (newSummary[row.key as keyof typeof formData.summaryDept] as any).count = e.target.value;
@@ -548,7 +548,7 @@ export default function FRM_HSE_028() {
                             <input
                               type="text"
                               className="w-full p-1 bg-transparent border-none"
-                              value={formData.summaryDept[row.key as keyof typeof formData.summaryDept].notes}
+                              value={(formData.summaryDept[row.key as keyof typeof formData.summaryDept] as { count: string; notes: string }).notes}
                               onChange={(e) => {
                                 const newSummary = { ...formData.summaryDept };
                                 (newSummary[row.key as keyof typeof formData.summaryDept] as any).notes = e.target.value;

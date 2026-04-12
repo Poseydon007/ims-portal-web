@@ -21,7 +21,7 @@ export default function FRM_HSE_034() {
     notificationInAdvance: "",
 
     // 2. Reason for Observation
-    reasonForObservation: [],
+    reasonForObservation: [] as string[],
 
     // 3. Task Evaluation
     evaluation: {

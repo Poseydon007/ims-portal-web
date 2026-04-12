@@ -72,7 +72,7 @@ export default function FRM_HSE_003() {
       ...prev,
       [section]: {
         ...prev[section],
-        [field]: !prev[section][field as keyof typeof prev.classification],
+        [field]: !(prev[section] as Record<string, boolean | string>)[field],
       },
     }));
   };
