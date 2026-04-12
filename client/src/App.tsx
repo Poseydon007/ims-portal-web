@@ -38,6 +38,9 @@ import TE_IMS_REF_HSE_002 from "./pages/documents/TE_IMS_REF_HSE_002";
 import TE_IMS_REF_SYS_000 from "./pages/documents/TE_IMS_REF_SYS_000";
 import TE_IMS_REF_SYS_001 from "./pages/documents/TE_IMS_REF_SYS_001";
 import TE_IMS_REF_SYS_002 from "./pages/documents/TE_IMS_REF_SYS_002";
+import REF_SYS_003 from "./pages/documents/REF_SYS_003";
+import REF_SYS_004 from "./pages/documents/REF_SYS_004";
+import REF_SYS_005 from "./pages/documents/REF_SYS_005";
 
 // PROC pages
 import TE_IMS_PROC_HSE_001 from "./pages/documents/TE_IMS_PROC_HSE_001";
@@ -119,6 +122,9 @@ function Router() {
       <Route path="/docs/ref/TE-IMS-REF-SYS-000" component={TE_IMS_REF_SYS_000} />
       <Route path="/docs/ref/TE-IMS-REF-SYS-001" component={TE_IMS_REF_SYS_001} />
       <Route path="/docs/ref/TE-IMS-REF-SYS-002" component={TE_IMS_REF_SYS_002} />
+      <Route path="/docs/ref/TE-IMS-REF-SYS-003" component={REF_SYS_003} />
+      <Route path="/docs/ref/TE-IMS-REF-SYS-004" component={REF_SYS_004} />
+      <Route path="/docs/ref/TE-IMS-REF-SYS-005" component={REF_SYS_005} />
 
       {/* SOP */}
       <Route path="/docs/sop/TE-IMS-SOP-GEO-001" component={SOP_GEO_001} />
