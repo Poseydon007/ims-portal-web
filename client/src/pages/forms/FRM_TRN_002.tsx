@@ -464,14 +464,14 @@ export default function FRM_TRN_002() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                disabled={mutation.isLoading}
+                disabled={mutation.isPending}
                 className={`
                   bg-[#081C2E] text-white px-10 py-3 rounded-md font-bold uppercase tracking-widest
                   hover:bg-[#C49A28] transition-all duration-300 shadow-lg
-                  ${mutation.isLoading ? "opacity-50 cursor-not-allowed" : ""}
+                  ${mutation.isPending ? "opacity-50 cursor-not-allowed" : ""}
                 `}
               >
-                {mutation.isLoading ? "Submitting..." : "Submit Form"}
+                {mutation.isPending ? "Submitting..." : "Submit Form"}
               </button>
             </div>
           </div>

@@ -421,13 +421,13 @@ export default function FRM_HSE_030() {
             <div className="flex justify-end pt-4">
               <button
                 type="submit"
-                disabled={submitMutation.isLoading}
+                disabled={submitMutation.isPending}
                 className={`
                   bg-[#081C2E] text-white px-8 py-3 rounded-lg font-bold transition-all
-                  ${submitMutation.isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#C49A28]'}
+                  ${submitMutation.isPending ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#C49A28]'}
                 `}
               >
-                {submitMutation.isLoading ? 'SUBMITTING...' : 'SUBMIT INSPECTION REGISTER'}
+                {submitMutation.isPending ? 'SUBMITTING...' : 'SUBMIT INSPECTION REGISTER'}
               </button>
             </div>
           </div>

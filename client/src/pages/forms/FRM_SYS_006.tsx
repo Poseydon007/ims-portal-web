@@ -578,14 +578,14 @@ export default function FRM_SYS_006() {
             <div className="flex justify-end pt-6 border-t border-[#dde3ec]">
               <button
                 type="submit"
-                disabled={mutation.isLoading}
+                disabled={mutation.isPending}
                 className={`
                   bg-[#081C2E] text-white px-10 py-4 rounded-lg font-bold uppercase tracking-widest shadow-lg
                   hover:bg-[#122b42] hover:scale-[1.02] active:scale-[0.98] transition-all
                   disabled:bg-gray-400 disabled:cursor-not-allowed
                 `}
               >
-                {mutation.isLoading ? (
+                {mutation.isPending ? (
                   <span className="flex items-center">
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

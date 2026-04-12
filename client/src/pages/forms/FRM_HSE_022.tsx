@@ -712,10 +712,10 @@ export default function FRM_HSE_022() {
             <div className="mt-8 flex justify-end">
               <button
                 type="submit"
-                disabled={mutation.isLoading}
-                className={`bg-[#081C2E] text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:bg-[#0a263d] transition-colors ${mutation.isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={mutation.isPending}
+                className={`bg-[#081C2E] text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:bg-[#0a263d] transition-colors ${mutation.isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                {mutation.isLoading ? "Submitting..." : "Submit Investigation Report"}
+                {mutation.isPending ? "Submitting..." : "Submit Investigation Report"}
               </button>
             </div>
           </div>

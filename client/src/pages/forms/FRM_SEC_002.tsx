@@ -478,12 +478,12 @@ export default function FRM_SEC_002() {
           <div className="flex justify-end">
             <button
               type="submit"
-              disabled={mutation.isLoading}
+              disabled={mutation.isPending}
               className={`bg-[#081C2E] text-white px-10 py-3 rounded-lg font-bold text-lg shadow-lg hover:bg-opacity-90 transition-all ${
-                mutation.isLoading ? "opacity-70 cursor-not-allowed" : ""
+                mutation.isPending ? "opacity-70 cursor-not-allowed" : ""
               }`}
             >
-              {mutation.isLoading ? "Submitting..." : "Submit Visitor Register"}
+              {mutation.isPending ? "Submitting..." : "Submit Visitor Register"}
             </button>
           </div>
         </form>

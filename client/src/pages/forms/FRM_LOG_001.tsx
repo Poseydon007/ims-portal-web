@@ -680,10 +680,10 @@ export default function FRM_LOG_001() {
           <div className="flex justify-end">
             <button
               type="submit"
-              disabled={mutation.isLoading}
-              className={`bg-[#081C2E] text-white px-8 py-3 rounded font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all ${mutation.isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={mutation.isPending}
+              className={`bg-[#081C2E] text-white px-8 py-3 rounded font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all ${mutation.isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              {mutation.isLoading ? "Submitting..." : "Submit Journey Plan"}
+              {mutation.isPending ? "Submitting..." : "Submit Journey Plan"}
             </button>
           </div>
         </form>

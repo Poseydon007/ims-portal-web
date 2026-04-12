@@ -463,12 +463,12 @@ export default function FRM_HSE_036() {
             )}
             <button
               type="submit"
-              disabled={mutation.isLoading}
+              disabled={mutation.isPending}
               className={`w-full md:w-auto px-8 py-3 bg-[#081C2E] text-white font-bold rounded shadow hover:bg-opacity-90 transition-all flex items-center justify-center gap-2 ${
-                mutation.isLoading ? "opacity-70 cursor-not-allowed" : ""
+                mutation.isPending ? "opacity-70 cursor-not-allowed" : ""
               }`}
             >
-              {mutation.isLoading ? (
+              {mutation.isPending ? (
                 <>
                   <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

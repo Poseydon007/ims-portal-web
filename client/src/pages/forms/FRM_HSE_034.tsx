@@ -770,10 +770,10 @@ export default function FRM_HSE_034() {
               {error && <div className="text-red-600 font-semibold">{error}</div>}
               <button 
                 type="submit" 
-                disabled={mutation.isLoading}
+                disabled={mutation.isPending}
                 className="bg-[#081C2E] text-white px-12 py-3 rounded-lg font-bold text-lg hover:bg-[#112d47] transition-colors disabled:opacity-50"
               >
-                {mutation.isLoading ? "Submitting..." : "Submit PTO Form"}
+                {mutation.isPending ? "Submitting..." : "Submit PTO Form"}
               </button>
             </div>
           </div>

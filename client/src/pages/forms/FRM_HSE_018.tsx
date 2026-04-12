@@ -523,10 +523,10 @@ export default function FRM_HSE_018() {
             <div className="flex justify-end pt-4">
               <button
                 type="submit"
-                disabled={mutation.isLoading}
-                className={`bg-[#081C2E] text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:bg-[#1a3a5a] transition-all flex items-center ${mutation.isLoading ? "opacity-70 cursor-not-allowed" : ""}`}
+                disabled={mutation.isPending}
+                className={`bg-[#081C2E] text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:bg-[#1a3a5a] transition-all flex items-center ${mutation.isPending ? "opacity-70 cursor-not-allowed" : ""}`}
               >
-                {mutation.isLoading ? (
+                {mutation.isPending ? (
                   <>
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

@@ -386,10 +386,10 @@ export default function FRM_SEC_001() {
           <div className="flex justify-end">
             <button
               type="submit"
-              disabled={mutation.isLoading}
+              disabled={mutation.isPending}
               className={`bg-[#081C2E] text-white px-8 py-3 rounded font-bold uppercase tracking-widest hover:bg-[#C49A28] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center`}
             >
-              {mutation.isLoading ? (
+              {mutation.isPending ? (
                 <>
                   <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

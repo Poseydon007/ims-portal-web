@@ -637,10 +637,10 @@ export default function FRM_HSE_026() {
               {error && <div className="text-red-600 mb-4 text-sm font-semibold">{error}</div>}
               <button
                 type="submit"
-                disabled={mutation.isLoading}
+                disabled={mutation.isPending}
                 className="bg-[#081C2E] text-white px-12 py-3 rounded-lg font-bold hover:bg-[#12304d] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
               >
-                {mutation.isLoading ? (
+                {mutation.isPending ? (
                   <>
                     <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

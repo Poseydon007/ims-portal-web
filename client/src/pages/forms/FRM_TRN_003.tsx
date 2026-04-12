@@ -509,12 +509,12 @@ export default function FRM_TRN_003() {
           <div className="flex justify-end pt-6">
             <button
               type="submit"
-              disabled={mutation.isLoading}
+              disabled={mutation.isPending}
               className={`px-8 py-3 bg-[#081C2E] text-white font-bold rounded shadow-lg hover:bg-[#0a263d] transition-all transform active:scale-95 flex items-center space-x-2 ${
-                mutation.isLoading ? "opacity-70 cursor-not-allowed" : ""
+                mutation.isPending ? "opacity-70 cursor-not-allowed" : ""
               }`}
             >
-              {mutation.isLoading ? (
+              {mutation.isPending ? (
                 <>
                   <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />

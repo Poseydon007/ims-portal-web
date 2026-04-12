@@ -701,12 +701,12 @@ export default function FRM_LOG_002() {
             <div className="flex justify-end pt-6">
               <button
                 type="submit"
-                disabled={mutation.isLoading}
+                disabled={mutation.isPending}
                 className={`px-8 py-3 bg-[#081C2E] text-white font-bold rounded shadow-lg hover:bg-[#C49A28] transition-colors uppercase tracking-wider ${
-                  mutation.isLoading ? "opacity-50 cursor-not-allowed" : ""
+                  mutation.isPending ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                {mutation.isLoading ? "Submitting..." : "Submit Daily Checklist"}
+                {mutation.isPending ? "Submitting..." : "Submit Daily Checklist"}
               </button>
             </div>
           </div>
