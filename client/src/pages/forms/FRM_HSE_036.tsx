@@ -137,7 +137,7 @@ export default function FRM_HSE_036() {
             ← Portal Home
           </Link>
           <span className="text-gray-400 mx-2">/</span>
-          <span className="text-gray-600">FRM</span>
+          <Link href="/docs/frm" className="text-gray-600 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="text-gray-400 mx-2">/</span>
           <span className="text-gray-900 font-semibold">Fire Fighter Appointment Letter</span>
         </nav>

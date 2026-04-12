@@ -141,7 +141,7 @@ export default function FRM_HSE_019() {
             ← Portal Home
           </Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500 uppercase text-sm tracking-wider">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 uppercase text-sm tracking-wider hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-500 uppercase text-sm tracking-wider">Fire Drill Report</span>
         </nav>

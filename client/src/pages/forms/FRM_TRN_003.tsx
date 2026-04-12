@@ -169,7 +169,7 @@ export default function FRM_TRN_003() {
             ← Portal Home
           </Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-600">FRM</span>
+          <Link href="/docs/frm" className="text-gray-600 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-800 font-semibold text-navy">Training Attendance Register</span>
         </nav>

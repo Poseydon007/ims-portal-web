@@ -153,7 +153,7 @@ export default function FRM_HSE_014() {
         <nav className="mb-6 text-sm">
           <Link href="/" className="text-[#081C2E] hover:underline">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-500">PPE Kit Spot-Check Verification Form</span>
         </nav>

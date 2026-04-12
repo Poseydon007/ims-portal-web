@@ -157,7 +157,7 @@ export default function FRM_HSE_025() {
         <nav className="mb-6">
           <Link href="/" className="text-[#081C2E] hover:underline font-semibold">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-600">FRM</span>
+          <Link href="/docs/frm" className="text-gray-600 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-600">Dangerous Occurrence Investigation Report</span>
         </nav>

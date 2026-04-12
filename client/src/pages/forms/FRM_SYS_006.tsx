@@ -226,7 +226,7 @@ export default function FRM_SYS_006() {
         <nav className="mb-6 text-sm">
           <Link href="/" className="text-[#C49A28] hover:underline font-semibold">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500 uppercase tracking-wider font-bold">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 uppercase tracking-wider font-bold hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-800 font-bold">QA Task Follow-Up Checklist</span>
         </nav>

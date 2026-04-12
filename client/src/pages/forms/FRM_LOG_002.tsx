@@ -208,7 +208,7 @@ export default function FRM_LOG_002() {
         <nav className="mb-6">
           <Link href="/" className="text-[#081C2E] hover:text-[#C49A28] font-medium">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-600">FRM</span>
+          <Link href="/docs/frm" className="text-gray-600 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-600 font-semibold">Daily Vehicle Checklist</span>
         </nav>

@@ -220,7 +220,7 @@ export default function FRM_HSE_007() {
         <nav className="mb-6">
           <Link href="/" className="text-[#C49A28] hover:text-[#081C2E] transition-colors font-medium">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-900 font-semibold">Planned Task Observation (PTO) Form</span>
         </nav>

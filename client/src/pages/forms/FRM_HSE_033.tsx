@@ -308,6 +308,7 @@ export default function FRM_HSE_033() {
           <Link href="/" className="text-[#C49A28] hover:underline flex items-center gap-2">
             ← Portal Home
           </Link>
+          <div className="flex items-center gap-1 text-sm mt-1"><Link href="/" className="text-gray-500 hover:text-[#C49A28]">Portal Home</Link><span className="text-gray-400 mx-1">/</span><Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28]">FRM</Link></div>
           <h1 className="text-2xl font-bold text-[#081C2E] mt-2">SITE HSE MONTHLY REPORT TEMPLATE</h1>
         </div>
 

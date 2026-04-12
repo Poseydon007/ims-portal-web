@@ -229,7 +229,7 @@ export default function FRM_HSE_017() {
             ← Portal Home
           </Link>
           <nav className="text-sm text-gray-500 mb-4">
-            Portal Home &gt; FRM &gt; Emergency Drill Planning and Record
+            <Link href="/" className="text-gray-500 hover:text-[#C49A28]">Portal Home</Link> <span className="text-gray-400 mx-1">/</span> <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28]">FRM</Link> <span className="text-gray-400 mx-1">/</span> <span className="font-semibold text-[#081C2E]">Emergency Drill Planning and Record</span>
           </nav>
         </div>
 

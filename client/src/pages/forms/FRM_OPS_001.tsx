@@ -165,7 +165,7 @@ export default function FRM_OPS_001() {
           <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
             <span>Portal Home</span>
             <span>&gt;</span>
-            <span>FRM</span>
+            <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
             <span>&gt;</span>
             <span className="text-[#C49A28] font-semibold">Daily Drilling Report</span>
           </div>

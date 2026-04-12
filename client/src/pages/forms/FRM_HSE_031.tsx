@@ -186,7 +186,7 @@ export default function FRM_HSE_031() {
         <nav className="mb-6">
           <Link href="/" className="text-gray-600 hover:text-navy-900 transition-colors">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-400">FRM</span>
+          <Link href="/docs/frm" className="text-gray-400 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="font-semibold" style={{ color: styles.navy }}>Equipment Inspection and Deviation Register</span>
         </nav>

@@ -223,7 +223,7 @@ export default function FRM_HSE_020() {
             ← Portal Home
           </Link>
           <nav className="text-sm text-gray-500 mb-2">
-            Portal Home &gt; FRM &gt; Fire Extinguisher Inspection Log
+            <Link href="/" className="text-gray-500 hover:text-[#C49A28]">Portal Home</Link> <span className="text-gray-400 mx-1">/</span> <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28]">FRM</Link> <span className="text-gray-400 mx-1">/</span> <span className="font-semibold text-[#081C2E]">Fire Extinguisher Inspection Log</span>
           </nav>
         </div>
 

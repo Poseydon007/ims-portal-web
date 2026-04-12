@@ -206,7 +206,7 @@ export default function FRM_MAINT_002() {
             ← Portal Home
           </Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="font-semibold">Fuel Refuelling Log - Single Event</span>
         </nav>

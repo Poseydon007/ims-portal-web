@@ -141,7 +141,7 @@ export default function FRM_MAINT_003() {
     <Layout>
       <div style={styles.container}>
         <div style={styles.breadcrumb}>
-          <Link href="/">← Portal Home</Link> <span style={{ margin: "0 10px" }}>/</span> <span>FRM</span> <span style={{ margin: "0 10px" }}>/</span> <strong>Portable Electrical Equipment Register</strong>
+          <Link href="/">← Portal Home</Link> <span style={{ margin: "0 10px" }}>/</span> <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link> <span style={{ margin: "0 10px" }}>/</span> <strong>Portable Electrical Equipment Register</strong>
         </div>
 
         <table style={styles.docControl}>

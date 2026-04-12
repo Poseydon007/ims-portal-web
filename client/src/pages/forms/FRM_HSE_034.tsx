@@ -238,7 +238,7 @@ export default function FRM_HSE_034() {
           <Link href="/" className="text-[#081C2E] hover:underline flex items-center gap-2">
             ← Portal Home
           </Link>
-          <span className="text-gray-500 text-sm ml-6">Portal Home &gt; FRM &gt; Planned Task Observation Form</span>
+          <span className="text-gray-500 text-sm ml-6"><Link href="/" className="text-gray-500 hover:text-[#C49A28]">Portal Home</Link> <span className="text-gray-400 mx-1">/</span> <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28]">FRM</Link> <span className="text-gray-400 mx-1">/</span> <span className="font-semibold text-[#081C2E]">Planned Task Observation Form</span></span>
         </nav>
 
         <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg overflow-hidden border border-[#dde3ec]">

@@ -138,7 +138,7 @@ export default function FRM_HSE_030() {
         <div className="mb-4">
           <Link href="/" className="text-[#081C2E] hover:underline">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500 font-semibold">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 font-semibold hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-500">Fire Fighting Equipment Register Checklist</span>
         </div>

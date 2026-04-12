@@ -249,7 +249,7 @@ export default function FRM_OPS_002() {
             ← Portal Home
           </Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-500 uppercase tracking-tight">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 uppercase tracking-tight hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-800 font-semibold">Stuck Rod Recovery Report</span>
         </nav>

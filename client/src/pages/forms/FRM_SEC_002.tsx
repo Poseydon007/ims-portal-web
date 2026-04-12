@@ -181,7 +181,7 @@ export default function FRM_SEC_002() {
             </a>
           </Link>
           <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-600">FRM</span>
+          <Link href="/docs/frm" className="text-gray-600 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-900 font-semibold">Visitor Register</span>
         </nav>

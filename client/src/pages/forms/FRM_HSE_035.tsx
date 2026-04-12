@@ -137,6 +137,7 @@ export default function FRM_HSE_035() {
           <Link href="/" className="text-[#081C2E] hover:underline flex items-center gap-2 font-semibold">
             ← Portal Home
           </Link>
+          <div className="flex items-center gap-1 text-sm mt-1"><Link href="/" className="text-gray-500 hover:text-[#C49A28]">Portal Home</Link><span className="text-gray-400 mx-1">/</span><Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28]">FRM</Link></div>
         </nav>
 
         <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-[#dde3ec]">

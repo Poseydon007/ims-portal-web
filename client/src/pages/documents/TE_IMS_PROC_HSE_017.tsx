@@ -1,77 +1,157 @@
-// TE-IMS-PROC-HSE-017 — TE-IMS-PROC-HSE-017
-// Auto-generated from source DOCX. Content is verbatim; only design/format changed.
+// TE-IMS-PROC-HSE-017 — Manual Handling Procedure
+// Design: Standardized policy layout — left sidebar (Doc Info + TOC) + main content area
+
 import { Link } from "wouter";
-import Layout from "@/components/Layout";
+import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
+import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
+
+const sections = [
+  { id: "s1", label: "1. Purpose" },
+  { id: "s2", label: "2. Scope" },
+];
+
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2
+      id={id}
+      className="text-sm font-bold mt-8 mb-3 pb-2"
+      style={{ color: "#081C2E", borderBottom: "2px solid #C49A28" }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function SubHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="text-sm font-bold mt-5 mb-2" style={{ color: "#081C2E" }}>
+      {children}
+    </h3>
+  );
+}
+
+function Bullet({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="flex gap-2 mb-2 text-sm leading-relaxed" style={{ color: "#374151" }}>
+      <span style={{ color: "#C49A28", marginTop: "2px" }}>•</span>
+      <span>{children}</span>
+    </li>
+  );
+}
 
 export default function TE_IMS_PROC_HSE_017() {
   return (
-    <Layout>
-      {/* ── Document Header ── */}
-      <div style={{ backgroundColor: "#081C2E" }} className="relative overflow-hidden">
-        <div className="container pt-8 pb-6 relative z-10">
-          <div className="flex flex-col gap-3">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: "rgba(196,154,40,0.15)", color: "#C49A28" }}>
-                  Procedure
-                </span>
-                <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.4)" }}>
-                  TE-IMS-PROC-HSE-017
-                </span>
-              </div>
-              <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight tracking-tight">
-                TE-IMS-PROC-HSE-017
-              </h1>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f4f6f9" }}>
+      <TopNav />
+      <Breadcrumb
+        items={[
+          { label: "PROC — Procedures", href: "/docs/proc" },
+          { label: "Manual Handling Procedure" },
+        ]}
+      />
+
+      {/* Sub-header */}
+      <div className="border-b" style={{ backgroundColor: "#fff", borderColor: "#dde3ec" }}>
+        <div className="container flex items-center justify-between py-3 gap-4 flex-wrap">
+          <div>
+            <h1 className="font-bold text-base" style={{ color: "#081C2E" }}>
+              Manual Handling Procedure
+            </h1>
+            <div className="flex items-center gap-3 mt-0.5 flex-wrap">
+              <span className="te-code text-xs" style={{ color: "#6b7a8d" }}>TE-IMS-PROC-HSE-017_Rev01</span>
+              <span style={{ color: "#c0c8d4" }}>·</span>
+              <span className="text-xs" style={{ color: "#6b7a8d" }}>10 Apr 2026</span>
+              <span style={{ color: "#c0c8d4" }}>·</span>
+              <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: "#d4edda", color: "#155724" }}>
+                ✓ Approved for Implementation
+              </span>
             </div>
-            <div className="flex flex-wrap gap-4 mt-1">
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>Rev01</span>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>True East Mining Company</span>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>IMS — Procedure</span>
-            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link href="/docs/proc" className="text-xs font-semibold px-3 py-1.5 rounded border hover:bg-gray-50 transition-colors" style={{ borderColor: "#dde3ec", color: "#081C2E" }}>
+              ← Back to Procedures
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* ── Back Navigation ── */}
-      <div className="container pt-4 pb-2">
-        <Link href="/docs/proc" className="text-xs font-medium hover:underline flex items-center gap-1" style={{ color: "#6b7a8d" }}>
-          ← Back to Procedures
-        </Link>
-      </div>
+      {/* Main content area */}
+      <div className="container py-8 flex gap-8 items-start">
+        {/* Sidebar */}
+        <aside className="hidden lg:block w-52 shrink-0 sticky top-20 rounded border" style={{ backgroundColor: "#fff", borderColor: "#dde3ec" }}>
+          <div className="p-4 border-b" style={{ borderColor: "#dde3ec" }}>
+            <div className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#8a9ab0" }}>Document Info</div>
+            <dl className="space-y-2">
+              {[
+                ["Document Code", "TE-IMS-PROC-HSE-017"],
+                ["Revision", "Rev 01"],
+                ["Date", "10 Apr 2026"],
+                ["Status", "✓ Approved"],
+                ["Category", "Procedure"],
+                ["Scope", "All TEMC operations, employees, contractors & visitors"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="text-xs font-semibold" style={{ color: "#8a9ab0" }}>{k}</dt>
+                  <dd className="text-xs mt-0.5 font-medium" style={{ color: k === "Status" ? "#155724" : "#081C2E" }}>
+                    {k === "Document Code" ? <span className="te-code">{v}</span> : v}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="p-4">
+            <div className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#8a9ab0" }}>Contents</div>
+            <nav className="space-y-1">
+              {sections.map((s) => (
+                <a key={s.id} href={`#${s.id}`} className="block text-xs py-1 px-2 rounded hover:bg-blue-50 transition-colors" style={{ color: "#081C2E" }}>
+                  {s.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
 
-      {/* ── Document Body ── */}
-      <div className="container pb-16">
-        <div className="max-w-4xl">
+        {/* Document body */}
+        <div className="flex-1 min-w-0">
+          <div className="rounded border bg-white overflow-hidden" style={{ borderColor: "#dde3ec" }}>
+            {/* Document header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "#dde3ec", backgroundColor: "#fafbfc" }}>
+              <img src={LOGO_GRAY} alt="True East Mining Company" style={{ width: "80px", height: "80px", objectFit: "contain" }} />
+              <div className="text-right">
+                <div className="te-code text-xs" style={{ color: "#8a9ab0" }}>TE-IMS-PROC-HSE-017_Rev01</div>
+              </div>
+            </div>
 
+            {/* Document content */}
+            <div className="px-8 py-6" style={{ color: "#081C2E", fontFamily: "'Nunito Sans', sans-serif" }}>
 
-            <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
-              <table className="w-full text-sm border-collapse">
-                <thead style={{ backgroundColor: "#081C2E" }}>
-                  <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>MANUAL HANDLING PROCEDURE</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>MANUAL HANDLING PROCEDURE</th>
-                  </tr>
-                </thead>
+              {/* Title block */}
+              <div className="rounded px-5 py-4 mb-6" style={{ backgroundColor: "#081C2E" }}>
+                <h1 className="text-white text-xl font-extrabold tracking-wide text-center uppercase">
+                  Manual Handling Procedure
+                </h1>
+              </div>
+
+              {/* Document info table */}
+              <table className="w-full text-xs border-collapse mb-6" style={{ borderColor: "#dde3ec" }}>
                 <tbody>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Document</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>TE-IMS-PROC-HSE-017</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Revision</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>01</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Date</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>10.04.2026</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Status</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Approved for Implementation</td>
-                </tr>
+                  <tr>
+                    <td className="border px-3 py-2 font-semibold w-1/4" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Document</td>
+                    <td className="border px-3 py-2 te-code" style={{ borderColor: "#dde3ec" }}>TE-IMS-PROC-HSE-017</td>
+                    <td className="border px-3 py-2 font-semibold w-1/4" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Revision</td>
+                    <td className="border px-3 py-2" style={{ borderColor: "#dde3ec" }}>01</td>
+                  </tr>
+                  <tr>
+                    <td className="border px-3 py-2 font-semibold" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Date</td>
+                    <td className="border px-3 py-2" style={{ borderColor: "#dde3ec" }}>10 Apr 2026</td>
+                    <td className="border px-3 py-2 font-semibold" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Status</td>
+                    <td className="border px-3 py-2 font-bold" style={{ borderColor: "#dde3ec", color: "#155724" }}>Approved for Implementation</td>
+                  </tr>
                 </tbody>
               </table>
-            </div>
+
+              {/* Document body content */}
+
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
 
@@ -493,8 +573,21 @@ export default function TE_IMS_PROC_HSE_017() {
                 </tbody>
               </table>
             </div>
+
+            </div>
+
+            {/* Document footer */}
+            <div className="flex items-center justify-between px-6 py-3 border-t" style={{ borderColor: "#dde3ec", backgroundColor: "#081C2E" }}>
+              <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                True East Mining Company &nbsp;·&nbsp; Integrated Management System &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Page 1
+              </span>
+              <img src={LOGO_WHITE} alt="" className="h-5 w-auto opacity-30" />
+            </div>
+          </div>
         </div>
       </div>
-    </Layout>
+
+      <Footer />
+    </div>
   );
 }

@@ -183,7 +183,7 @@ export default function FRM_HSE_029() {
       <div className="max-w-5xl mx-auto p-6 bg-[#f4f6f9]">
         <div className="mb-6">
           <Link href="/" className="text-[#081C2E] hover:underline font-semibold">← Portal Home</Link>
-          <div className="text-sm text-gray-600 mt-2">Portal Home &gt; FRM &gt; PPE Weekly Inspection Checklist</div>
+          <div className="text-sm text-gray-600 mt-2"><Link href="/" className="text-gray-500 hover:text-[#C49A28]">Portal Home</Link> <span className="text-gray-400 mx-1">/</span> <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28]">FRM</Link> <span className="text-gray-400 mx-1">/</span> <span className="font-semibold text-[#081C2E]">PPE Weekly Inspection Checklist</span></div>
         </div>
 
         <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-[#dde3ec]">

@@ -119,7 +119,7 @@ export default function FRM_MAINT_001() {
         <nav className="mb-4">
           <Link href="/" className="text-[#081C2E] hover:underline">← Portal Home</Link>
           <span className="mx-2">/</span>
-          <span className="text-gray-500">FRM</span>
+          <Link href="/docs/frm" className="text-gray-500 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
           <span className="mx-2">/</span>
           <span className="font-bold">Machine Guarding Inspection Register</span>
         </nav>
