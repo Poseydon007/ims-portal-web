@@ -216,7 +216,7 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
     { code: "TE-IMS-REF-SYS-003", title: "ISO 14001:2015 Certificate", rev: "Rev00", date: "07-01-2025", status: "approved", slug: "TE-IMS-REF-SYS-003", available: true, viewUrl: "/docs/ref/TE-IMS-REF-SYS-003" },
     { code: "TE-IMS-REF-SYS-004", title: "ISO 45001:2018 Certificate", rev: "Rev00", date: "07-01-2025", status: "approved", slug: "TE-IMS-REF-SYS-004", available: true, viewUrl: "/docs/ref/TE-IMS-REF-SYS-004" },
     { code: "TE-IMS-REF-SYS-005", title: "ISO 9001:2015 Certificate", rev: "Rev00", date: "07-01-2025", status: "approved", slug: "TE-IMS-REF-SYS-005", available: true, viewUrl: "/docs/ref/TE-IMS-REF-SYS-005" },
-    { code: "TE-IMS-REF-SYS-006", title: "KPI Tables and Reference Data", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-REF-SYS-006", available: true, driveUrl: "https://docs.google.com/spreadsheets/d/1SiCZjJBBsCt2OXZXU7A_982azcn-pFEc/edit?usp=drive_link" },
+    { code: "TE-IMS-REF-SYS-006", title: "KPI Tables and Reference Data", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-REF-SYS-006", available: false, driveUrl: "https://docs.google.com/spreadsheets/d/1SiCZjJBBsCt2OXZXU7A_982azcn-pFEc/edit?usp=drive_link" },
   ],
   pln: [
     { code: "TE-IMS-PLN-GOV-000", title: "IMS Playbook - Foundation Document", rev: "Rev00", date: "01 Mar 2026", status: "approved", slug: "TE-IMS-PLN-GOV-000", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-GOV-000" },

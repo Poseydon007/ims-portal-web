@@ -1,585 +1,440 @@
-// TE-IMS-REF-SYS-001 — TE-IMS-REF-SYS-001
-// Auto-generated from source DOCX. Content is verbatim; only design/format changed.
+// TE-IMS-REF-SYS-001 Rev01 — Document Identification and Numbering Rules
+// Design: Standardized policy layout — left sidebar (Doc Info + TOC) + main content area
+
 import { Link } from "wouter";
-import Layout from "@/components/Layout";
+import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
+import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
+
+const sections = [
+  { id: "s1", label: "1. Purpose" },
+  { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Special Case: Finance Documents" },
+  { id: "s4", label: "4. Document Type Codes" },
+  { id: "s5", label: "5. Department / Function Codes" },
+  { id: "s6", label: "6. Core Numbering Structure" },
+  { id: "s7", label: "7. Full Syntax Examples" },
+  { id: "s8", label: "8. Naming Conventions" },
+  { id: "s9", label: "9. Revision Rules" },
+  { id: "s10", label: "10. Responsibilities" },
+  { id: "s11", label: "11. Revision History" },
+];
+
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2
+      id={id}
+      className="text-sm font-bold mt-8 mb-3 pb-2"
+      style={{ color: "#081C2E", borderBottom: "2px solid #C49A28" }}
+    >
+      {children}
+    </h2>
+  );
+}
 
 export default function TE_IMS_REF_SYS_001() {
   return (
-    <Layout>
-      {/* ── Document Header ── */}
-      <div style={{ backgroundColor: "#081C2E" }} className="relative overflow-hidden">
-        <div className="container pt-8 pb-6 relative z-10">
-          <div className="flex flex-col gap-3">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: "rgba(196,154,40,0.15)", color: "#C49A28" }}>
-                  Reference
-                </span>
-                <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.4)" }}>
-                  TE-IMS-REF-SYS-001
-                </span>
-              </div>
-              <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight tracking-tight">
-                TE-IMS-REF-SYS-001
-              </h1>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f4f6f9" }}>
+      <TopNav />
+      <Breadcrumb
+        items={[
+          { label: "REF — References", href: "/docs/ref" },
+          { label: "Document Identification and Numbering Rules" },
+        ]}
+      />
+
+      {/* Sub-header */}
+      <div className="border-b" style={{ backgroundColor: "#fff", borderColor: "#dde3ec" }}>
+        <div className="container flex items-center justify-between py-3 gap-4 flex-wrap">
+          <div>
+            <h1 className="font-bold text-base" style={{ color: "#081C2E" }}>
+              Document Identification and Numbering Rules
+            </h1>
+            <div className="flex items-center gap-3 mt-0.5 flex-wrap">
+              <span className="te-code text-xs" style={{ color: "#6b7a8d" }}>TE-IMS-REF-SYS-001_Rev01</span>
+              <span style={{ color: "#c0c8d4" }}>·</span>
+              <span className="text-xs" style={{ color: "#6b7a8d" }}>01 Mar 2026</span>
+              <span style={{ color: "#c0c8d4" }}>·</span>
+              <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: "#d4edda", color: "#155724" }}>
+                ✓ Approved for Implementation
+              </span>
             </div>
-            <div className="flex flex-wrap gap-4 mt-1">
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>Rev01</span>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>True East Mining Company</span>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>IMS — Reference</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link href="/docs/ref" className="text-xs font-semibold px-3 py-1.5 rounded border hover:bg-gray-50 transition-colors" style={{ borderColor: "#dde3ec", color: "#081C2E" }}>
+              ← Back to References
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Main content area */}
+      <div className="container py-8 flex gap-8 items-start">
+        {/* Sidebar */}
+        <aside className="hidden lg:block w-52 shrink-0 sticky top-20 rounded border" style={{ backgroundColor: "#fff", borderColor: "#dde3ec" }}>
+          <div className="p-4 border-b" style={{ borderColor: "#dde3ec" }}>
+            <div className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#8a9ab0" }}>Document Info</div>
+            <dl className="space-y-2">
+              {[
+                ["Document Code", "TE-IMS-REF-SYS-001"],
+                ["Revision", "Rev 01"],
+                ["Date", "01 March 2026"],
+                ["Status", "✓ Approved"],
+                ["Category", "Reference"],
+                ["Scope", "All IMS controlled documents across TEMC"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="text-xs font-semibold" style={{ color: "#8a9ab0" }}>{k}</dt>
+                  <dd className="text-xs mt-0.5 font-medium" style={{ color: k === "Status" ? "#155724" : "#081C2E" }}>
+                    {k === "Document Code" ? <span className="te-code">{v}</span> : v}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="p-4">
+            <div className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#8a9ab0" }}>Contents</div>
+            <nav className="space-y-1">
+              {sections.map((s) => (
+                <a key={s.id} href={`#${s.id}`} className="block text-xs py-1 px-2 rounded hover:bg-blue-50 transition-colors" style={{ color: "#081C2E" }}>
+                  {s.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        {/* Document body */}
+        <div className="flex-1 min-w-0">
+          <div className="rounded border bg-white overflow-hidden" style={{ borderColor: "#dde3ec" }}>
+            {/* Document header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "#dde3ec", backgroundColor: "#fafbfc" }}>
+              <img src={LOGO_GRAY} alt="True East Mining Company" style={{ width: "80px", height: "80px", objectFit: "contain" }} />
+              <div className="text-right">
+                <div className="te-code text-xs" style={{ color: "#8a9ab0" }}>TE-IMS-REF-SYS-001_Rev01</div>
+              </div>
+            </div>
+
+            {/* Document content */}
+            <div className="px-8 py-6" style={{ color: "#081C2E", fontFamily: "'Nunito Sans', sans-serif" }}>
+
+              {/* Title block */}
+              <div className="rounded px-5 py-4 mb-6" style={{ backgroundColor: "#081C2E" }}>
+                <h1 className="text-white text-xl font-extrabold tracking-wide text-center uppercase">
+                  Document Identification and Numbering Rules
+                </h1>
+              </div>
+
+              {/* Document info table */}
+              <table className="w-full text-xs border-collapse mb-2" style={{ borderColor: "#dde3ec" }}>
+                <tbody>
+                  <tr>
+                    <td className="border px-3 py-2 font-semibold w-1/4" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Document</td>
+                    <td className="border px-3 py-2 te-code" style={{ borderColor: "#dde3ec" }}>TE-IMS-REF-SYS-001</td>
+                    <td className="border px-3 py-2 font-semibold w-1/4" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Revision</td>
+                    <td className="border px-3 py-2" style={{ borderColor: "#dde3ec" }}>01</td>
+                  </tr>
+                  <tr>
+                    <td className="border px-3 py-2 font-semibold" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Date</td>
+                    <td className="border px-3 py-2" style={{ borderColor: "#dde3ec" }}>01.03.2026</td>
+                    <td className="border px-3 py-2 font-semibold" style={{ borderColor: "#dde3ec", backgroundColor: "#f4f6f9" }}>Status</td>
+                    <td className="border px-3 py-2 font-bold" style={{ borderColor: "#dde3ec", color: "#155724" }}>Approved for Implementation</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              {/* Section 1 */}
+              <SectionHeading id="s1">1. Purpose</SectionHeading>
+              <p className="text-sm leading-relaxed mb-3" style={{ color: "#374151" }}>
+                This document defines the mandatory and standardised rules for assigning unique identifiers to all controlled documents within True East Mining Company's Integrated Management System (IMS).
+              </p>
+              <p className="text-sm leading-relaxed mb-2" style={{ color: "#374151" }}>It ensures:</p>
+              <ul className="list-none pl-0 space-y-1 mb-3">
+                {[
+                  "Every document has a clear, consistent, and instantly meaningful identity.",
+                  "Full traceability from legacy/old documents to the new system.",
+                  "Easy search, filtering, sorting, and retrieval by users in the field and office.",
+                  "No ambiguity for project-specific versus company-wide documents.",
+                  "Scalability for future growth (new projects, rigs, departments, document volumes).",
+                  "Alignment with ISO 9001, 14001, and 45001 requirements for documented information control.",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                    <span style={{ color: "#C49A28" }}>•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm leading-relaxed" style={{ color: "#374151" }}>
+                This establishes the baseline logic for the entire True East IMS document database.
+              </p>
+
+              {/* Section 2 */}
+              <SectionHeading id="s2">2. Scope</SectionHeading>
+              <p className="text-sm leading-relaxed mb-2" style={{ color: "#374151" }}>
+                Applies to all controlled documents managed under the True East IMS, including but not limited to:
+              </p>
+              <ul className="list-none pl-0 space-y-1 mb-3">
+                {[
+                  "Policies, Manuals, Procedures, Plans",
+                  "SOPs, Work Instructions",
+                  "Forms, Checklists, Registers, Logs",
+                  "Drawings",
+                  "References, Appendices, External Standards",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                    <span style={{ color: "#C49A28" }}>•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm leading-relaxed" style={{ color: "#374151" }}>
+                <strong>Excludes:</strong> Uncontrolled records (emails, informal notes, drafts not yet approved for release).
+              </p>
+
+              {/* Section 3 */}
+              <SectionHeading id="s3">3. Special Case: Treatment of Finance &amp; Accounting Documents</SectionHeading>
+              <p className="text-sm leading-relaxed mb-3" style={{ color: "#374151" }}>
+                High-level finance policies, procedures, process flows, approval workflows, and non-sensitive general forms/templates are fully included within the IMS and follow the standard TE-IMS numbering and control rules.
+              </p>
+              <p className="text-sm leading-relaxed" style={{ color: "#374151" }}>
+                Detailed transactional records, ledgers, invoices, receipts, payroll data, bank reconciliations, tax filings, and any other sensitive or software-generated financial documents are strictly excluded from the main IMS document control. These are managed separately under the Finance Department's dedicated accounting/ERP system. Only summary-level or control-level finance outputs are referenced or attached in the IMS where necessary for oversight.
+              </p>
+
+              {/* Section 4 */}
+              <SectionHeading id="s4">4. Document Type Codes</SectionHeading>
+              <div className="overflow-x-auto mb-4 rounded border" style={{ borderColor: "#dde3ec" }}>
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr style={{ backgroundColor: "#081C2E" }}>
+                      {["Code", "Full Name", "Typical Documents / Examples"].map((h) => (
+                        <th key={h} className="text-left px-3 py-2 font-semibold tracking-wide" style={{ color: "#ffffff" }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ["POL", "Policies", "HSE Policy, Quality Policy, HR Policy"],
+                      ["MAN", "Manuals / Playbooks", "IMS Manual, Foundation Playbook"],
+                      ["PROC", "Procedures", "Document Control, Incident Management, Risk Assessment"],
+                      ["PLN", "Plans", "Emergency Response Plan, Training Plan, Mobilization Plan"],
+                      ["SOP", "SOPs & Work Instructions", "Rigging Up SOP, Core Handling SOP"],
+                      ["FRM", "Forms & Checklists", "Daily Drilling Report, PPE Issue Form, Incident Report"],
+                      ["REG", "Registers & Logs", "Master Document Register, Risk Register, Training Matrix"],
+                      ["DWG", "Drawings", "Pad Layout, Rig Configuration, Directional Plan"],
+                      ["REF", "References & Appendices", "Ma'aden Standards, Equipment Manuals, External Regulations"],
+                    ].map(([code, name, examples], i) => (
+                      <tr key={code} style={{ backgroundColor: i % 2 === 0 ? "rgba(8,28,46,0.03)" : undefined }}>
+                        <td className="border px-3 py-2 te-code font-semibold" style={{ borderColor: "#edf0f5" }}>{code}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{name}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5", color: "#6b7a8d" }}>{examples}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Section 5 */}
+              <SectionHeading id="s5">5. Department / Function Codes</SectionHeading>
+              <div className="overflow-x-auto mb-4 rounded border" style={{ borderColor: "#dde3ec" }}>
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr style={{ backgroundColor: "#081C2E" }}>
+                      {["Code", "Full Name / Function", "Typical Documents Owned"].map((h) => (
+                        <th key={h} className="text-left px-3 py-2 font-semibold tracking-wide" style={{ color: "#ffffff" }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ["ADMIN", "Administration / General", "Office procedures, communications"],
+                      ["COMM", "Commercial / Contracts", "Bidding, contracts, client agreements"],
+                      ["ENG", "Engineering / Technical", "Designs, technical drawings, pad layouts"],
+                      ["FIN", "Finance / Accounting", "IMS-level policies, expense workflows"],
+                      ["GEO", "Geology / Core Management", "Core logs, sampling forms, orientation procedures"],
+                      ["GOV", "Governance / Corporate", "Foundation Playbooks, Top Management Policies"],
+                      ["HR", "Human Resources", "Hiring, leave, onboarding"],
+                      ["HSE", "Health, Safety & Environment", "Risk assessments, environmental rehab, waste management, emergency plans"],
+                      ["IT", "Information Technology / Cyber", "IT policies, cybersecurity standards"],
+                      ["LC", "Local Content / ESG", "Saudization reports, community plans"],
+                      ["LOG", "Logistics / Journey Mgt.", "Rig moves, JMPs, convoy plans, fleet management"],
+                      ["MAINT", "Maintenance / Equipment", "Preventive maintenance logs (PMP), rig inspections"],
+                      ["OPS", "Operations / Drilling / Field", "Drilling SOPs, shift handovers"],
+                      ["PMO", "Project Management Office", "Project execution plans, client reporting"],
+                      ["SCM", "Supply Chain / Procurement", "Vendor evaluation, warehouse management"],
+                      ["SEC", "Security", "Site access control, restricted zone operations"],
+                      ["SYS", "System / Document Control", "Master registers, internal audits, document rules"],
+                      ["TRN", "Training & Competence", "Training matrices, certification logs"],
+                    ].map(([code, name, docs], i) => (
+                      <tr key={code} style={{ backgroundColor: i % 2 === 0 ? "rgba(8,28,46,0.03)" : undefined }}>
+                        <td className="border px-3 py-2 te-code font-semibold" style={{ borderColor: "#edf0f5" }}>{code}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{name}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5", color: "#6b7a8d" }}>{docs}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Section 6 */}
+              <SectionHeading id="s6">6. Core Numbering Structure</SectionHeading>
+              <p className="text-sm leading-relaxed mb-3" style={{ color: "#374151" }}>
+                All documents follow this locked alphanumeric format. Hyphens (<code>-</code>) strictly separate structural groups, while underscores (<code>_</code>) strictly attach the Revision.
+              </p>
+              <div className="rounded p-4 mb-3 text-sm font-mono" style={{ backgroundColor: "#f4f6f9", color: "#081C2E", border: "1px solid #dde3ec" }}>
+                <div className="mb-1"><strong>Standard Company-Wide:</strong></div>
+                <div className="mb-3 text-xs" style={{ color: "#6b7a8d" }}>TE-IMS-[Type]-[Dept]-[Sequential_3-digit]_[Revision]</div>
+                <div className="mb-1"><strong>Project-Specific (Conditional):</strong></div>
+                <div className="text-xs" style={{ color: "#6b7a8d" }}>TE-IMS-[Type]-[Dept]-[Project_Identifier]-[Sequential_3-digit]_[Revision]</div>
+              </div>
+              <div className="overflow-x-auto mb-4 rounded border" style={{ borderColor: "#dde3ec" }}>
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr style={{ backgroundColor: "#081C2E" }}>
+                      {["#", "Component", "Format / Rules", "Mandatory", "Example", "Rationale"].map((h) => (
+                        <th key={h} className="text-left px-3 py-2 font-semibold tracking-wide" style={{ color: "#ffffff" }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ["1", "Company", "Always TE", "Yes", "TE", "Company branding & separation from subsidiaries."],
+                      ["2", "System", "Always IMS", "Yes", "IMS", "Identifies as part of the Integrated Mgmt. System."],
+                      ["3", "Type", "3–4 letter code (Section 4)", "Yes", "PROC", "Defines document level in the hierarchy."],
+                      ["4", "Dept", "3–5 letter code (Section 5)", "Yes", "HSE", "Shows ownership & functional area."],
+                      ["5", "Project ID", "Short alphanumeric (max 6)", "Conditional", "PR001", "Mandatory only for project/rig-specific documents."],
+                      ["6", "Sequence", "001–999 (3 digits)", "Yes", "001", "Unique identifier mapped directly into that document."],
+                      ["7", "Revision", "_Rev00 (initial), _Rev01...", "Yes", "_Rev00", "Clear version tracking attached via underscore."],
+                    ].map(([num, comp, fmt, mand, ex, rat], i) => (
+                      <tr key={num} style={{ backgroundColor: i % 2 === 0 ? "rgba(8,28,46,0.03)" : undefined }}>
+                        <td className="border px-3 py-2 font-semibold" style={{ borderColor: "#edf0f5" }}>{num}</td>
+                        <td className="border px-3 py-2 font-semibold" style={{ borderColor: "#edf0f5" }}>{comp}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{fmt}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{mand}</td>
+                        <td className="border px-3 py-2 te-code" style={{ borderColor: "#edf0f5" }}>{ex}</td>
+                        <td className="border px-3 py-2" style={{ borderColor: "#edf0f5", color: "#6b7a8d" }}>{rat}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Section 7 */}
+              <SectionHeading id="s7">7. Full Syntax Examples</SectionHeading>
+              <p className="text-sm font-semibold mb-2" style={{ color: "#081C2E" }}>Standard Corporate Documents:</p>
+              <ul className="list-none pl-0 space-y-1 mb-4">
+                {[
+                  "Company-wide Policy: TE-IMS-POL-HSE-001_Rev00",
+                  "Generic Procedure: TE-IMS-PROC-OPS-005_Rev02",
+                  "Standard Form: TE-IMS-FRM-LOG-001_Rev00",
+                  "Master Risk Register: TE-IMS-REG-HSE-001_Rev00",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                    <span style={{ color: "#C49A28" }}>•</span>
+                    <span className="te-code">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm font-semibold mb-2" style={{ color: "#081C2E" }}>Project/Site-Specific Documents:</p>
+              <ul className="list-none pl-0 space-y-1">
+                {[
+                  "Project Execution Plan: TE-IMS-PLN-PMO-PR001-001_Rev00",
+                  "Rig Inspection Log (Specific Rig): TE-IMS-REG-MAINT-RIG05-001_Rev00",
+                  "Pad Layout Drawing: TE-IMS-DWG-ENG-SAR03-001_Rev01",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                    <span style={{ color: "#C49A28" }}>•</span>
+                    <span className="te-code">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Section 8 */}
+              <SectionHeading id="s8">8. Naming Conventions: Document Code vs. File Name</SectionHeading>
+              <p className="text-sm leading-relaxed mb-3" style={{ color: "#374151" }}>
+                To keep the official Document Code short, mathematically pure, and easy to type in cross-references, the descriptive name of the document is removed from the official code but added to the computer file name.
+              </p>
+              <ul className="list-none pl-0 space-y-1 mb-3">
+                <li className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                  <span style={{ color: "#C49A28" }}>•</span>
+                  <span><strong>Official Code (inside the document header):</strong> <span className="te-code">TE-IMS-FRM-OPS-001_Rev00</span></span>
+                </li>
+                <li className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                  <span style={{ color: "#C49A28" }}>•</span>
+                  <span><strong>File Name (when saving to SharePoint/Windows):</strong> <span className="te-code">TE-IMS-FRM-OPS-001_Rev00 - Daily Drilling Report.docx</span></span>
+                </li>
+              </ul>
+              <p className="text-sm leading-relaxed" style={{ color: "#374151" }}>
+                This ensures that if the title of a document slightly changes in the future, the underlying alphanumeric control code remains intact.
+              </p>
+
+              {/* Section 9 */}
+              <SectionHeading id="s9">9. Revision Rules</SectionHeading>
+              <ul className="list-none pl-0 space-y-1">
+                {[
+                  "_Rev00 = Initial approved release.",
+                  "_Rev01 to _Rev99 = Updates and changes.",
+                  "Full revision history is kept in the document control footer of the actual document and tracked centrally in the Master Document Register (TE-IMS-REG-SYS-001_Rev00).",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                    <span style={{ color: "#C49A28" }}>•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Section 10 */}
+              <SectionHeading id="s10">10. Responsibilities &amp; Implementation</SectionHeading>
+              <ul className="list-none pl-0 space-y-1">
+                {[
+                  ["IMS Project Lead", "Maintains this reference document and dictates structural logic."],
+                  ["Document Controller", "Enforces rules during document creation, migration, and filing."],
+                  ["Department Heads", "Validate department codes and descriptors in their respective areas."],
+                  ["All Users", "Follow rules when naming or searching for documents."],
+                ].map(([role, duty]) => (
+                  <li key={role} className="flex gap-2 text-sm" style={{ color: "#374151" }}>
+                    <span style={{ color: "#C49A28" }}>•</span>
+                    <span><strong>{role}</strong> — {duty}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Section 11 — Revision History */}
+              <SectionHeading id="s11">11. Revision History</SectionHeading>
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr style={{ backgroundColor: "#081C2E" }}>
+                    {["Rev", "Date", "Description of Changes", "Author"].map((h) => (
+                      <th key={h} className="text-left px-3 py-2 font-semibold tracking-wide" style={{ color: "#ffffff" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["01", "01 Mar 2026", "Initial draft — Core logic upgraded to pure alphanumeric syntax. Departments updated (SCM, GOV, SYS).", "Joao Melo"],
+                  ].map(([rev, date, desc, author], i) => (
+                    <tr key={rev} style={{ borderTop: i > 0 ? "1px solid #edf0f5" : undefined }}>
+                      <td className="border px-3 py-2 te-code" style={{ borderColor: "#edf0f5" }}>{rev}</td>
+                      <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{date}</td>
+                      <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{desc}</td>
+                      <td className="border px-3 py-2" style={{ borderColor: "#edf0f5" }}>{author}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+            </div>
+
+            {/* Document footer */}
+            <div className="flex items-center justify-between px-6 py-3 border-t" style={{ borderColor: "#dde3ec", backgroundColor: "#081C2E" }}>
+              <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                True East Mining Company &nbsp;·&nbsp; Integrated Management System &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Page 1
+              </span>
+              <img src={LOGO_WHITE} alt="" className="h-5 w-auto opacity-30" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Back Navigation ── */}
-      <div className="container pt-4 pb-2">
-        <Link href="/docs/ref" className="text-xs font-medium hover:underline flex items-center gap-1" style={{ color: "#6b7a8d" }}>
-          ← Back to References
-        </Link>
-      </div>
-
-      {/* ── Document Body ── */}
-      <div className="container pb-16">
-        <div className="max-w-4xl">
-
-
-            <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
-              <table className="w-full text-sm border-collapse">
-                <thead style={{ backgroundColor: "#081C2E" }}>
-                  <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Document Code</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>TE-IMS-REF-SYS-001_Rev01</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>TE-IMS-REF-SYS-001_Rev01</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>TE-IMS-REF-SYS-001_Rev01</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Title</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Document Identification and Numbering Rules</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Document Identification and Numbering Rules</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Document Identification and Numbering Rules</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Version</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>1.0</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>1.0</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>1.0</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Date</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>01 March 2026</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>01 March 2026</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>01 March 2026</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Prepared by</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>JM_ALICE (IMS Project Lead)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Signature:</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}></td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Approved by</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>[CEO / Managing Director Name]</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Signature:</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}></td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Status</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Approved for Implementation – Internal Use Only</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Approved for Implementation – Internal Use Only</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Approved for Implementation – Internal Use Only</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Next Review</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Upon formal incorporation into TE-IMS-PROC-SYS-001_Rev00 (Document Control Procedure)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Upon formal incorporation into TE-IMS-PROC-SYS-001_Rev00 (Document Control Procedure)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Upon formal incorporation into TE-IMS-PROC-SYS-001_Rev00 (Document Control Procedure)</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Purpose</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This document defines the mandatory and standardized rules for assigning unique identifiers to all controlled documents within True East Mining Company’s Integrated Management System (IMS).</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>It ensures:</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Every document has a clear, consistent, and instantly meaningful identity.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Full traceability from legacy/old documents to the new system.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Easy search, filtering, sorting, and retrieval by users in the field and office.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>No ambiguity for project-specific versus company-wide documents.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Scalability for future growth (new projects, rigs, departments, document volumes).</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Alignment with ISO 9001, 14001, and 45001 requirements for documented information control.</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This establishes the baseline logic for the entire True East IMS document database.</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Scope</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Applies to all controlled documents managed under the True East IMS, including but not limited to:</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Policies, Manuals, Procedures, Plans</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>SOPs, Work Instructions</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Forms, Checklists, Registers, Logs</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Drawings</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>References, Appendices, External Standards</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Excludes: Uncontrolled records (emails, informal notes, drafts not yet approved for release).</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Special Case: Treatment of Finance &amp; Accounting Documents</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>High-level finance policies, procedures, process flows, approval workflows, and non-sensitive general forms/templates are fully included within the IMS and follow the standard TE-IMS numbering and control rules.</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Detailed transactional records, ledgers, invoices, receipts, payroll data, bank reconciliations, tax filings, and any other sensitive or software-generated financial documents are strictly excluded from the main IMS document control. These are managed separately under the Finance Department’s dedicated accounting/ERP system. Only summary-level or control-level finance outputs are referenced or attached in the IMS where necessary for oversight.</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Document Type Codes</span>
-              </li>
-            </ul>
-
-            <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
-              <table className="w-full text-sm border-collapse">
-                <thead style={{ backgroundColor: "#081C2E" }}>
-                  <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Code</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Full Name</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Typical Documents / Examples</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>POL</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Policies</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>HSE Policy, Quality Policy, HR Policy</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>MAN</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Manuals / Playbooks</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>IMS Manual, Foundation Playbook</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>PROC</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Procedures</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Document Control, Incident Management, Risk Assessment</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>PLN</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Plans</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Emergency Response Plan, Training Plan, Mobilization Plan</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>SOP</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>SOPs &amp; Work Instructions</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Rigging Up SOP, Core Handling SOP</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>FRM</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Forms &amp; Checklists</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Daily Drilling Report, PPE Issue Form, Incident Report</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>REG</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Registers &amp; Logs</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Master Document Register, Risk Register, Training Matrix</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>DWG</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Drawings</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Pad Layout, Rig Configuration, Directional Plan</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>REF</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>References &amp; Appendices</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Ma'aden Standards, Equipment Manuals, External Regulations</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Department / Function Codes</span>
-              </li>
-            </ul>
-
-            <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
-              <table className="w-full text-sm border-collapse">
-                <thead style={{ backgroundColor: "#081C2E" }}>
-                  <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Code</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Full Name / Function</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Typical Documents Owned</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>ADMIN</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Administration / General</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Office procedures, communications</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>COMM</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Commercial / Contracts</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Bidding, contracts, client agreements</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>ENG</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Engineering / Technical</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Designs, technical drawings, pad layouts</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>FIN</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Finance / Accounting</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>IMS-level policies, expense workflows</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>GEO</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Geology / Core Management</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Core logs, sampling forms, orientation procedures</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>GOV</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Governance / Corporate</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Foundation Playbooks, Top Management Policies</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>HR</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Human Resources</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Hiring, leave, onboarding</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>HSE</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Health, Safety &amp; Environment</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Risk assessments, environmental rehab, waste management, emergency plans</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>IT</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Information Technology / Cyber</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>IT policies, cybersecurity standards</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>LC</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Local Content / ESG</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Saudization reports, community plans</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>LOG</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Logistics / Journey Mgt.</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Rig moves, JMPs, convoy plans, fleet management</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>MAINT</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Maintenance / Equipment</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Preventive maintenance logs (PMP), rig inspections</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>OPS</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Operations / Drilling / Field</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Drilling SOPs, shift handovers</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>PMO</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Project Management Office</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Project execution plans, client reporting</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>SCM</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Supply Chain / Procurement</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Vendor evaluation, warehouse management (Replaces PROC)</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>SEC</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Security</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Site access control, restricted zone operations</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>SYS</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>System / Document Control</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Master registers, internal audits, document rules (Replaces QMS)</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>TRN</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Training &amp; Competence</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Training matrices, certification logs</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Core Numbering Structure</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>All documents follow this locked alphanumeric format. Hyphens (-) are strictly used to separate structural Groups, while underscores (_) are strictly used to attach the Revision.</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Standard Company-Wide Document:</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>TE-IMS-[Type]-[Dept]-[Sequential_3-digit]_[Revision]</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Project-Specific Document (Conditional):</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>TE-IMS-[Type]-[Dept]-[Project_Identifier]-[Sequential_3-digit]_[Revision]</p>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Component Breakdown &amp; Rules</p>
-
-            <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
-              <table className="w-full text-sm border-collapse">
-                <thead style={{ backgroundColor: "#081C2E" }}>
-                  <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>#</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Component</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Format / Rules</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Mandatory</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Ex. Value</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Rationale / When Used</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>1</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Company</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Always TE</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Yes</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>TE</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Company branding &amp; separation from subsidiaries.</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>2</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>System</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Always IMS</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Yes</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>IMS</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Identifies as part of the Integrated Mgmt. System.</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>3</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Type</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>3-4 letter code (Section 4)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Yes</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>PROC</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Defines document level in the hierarchy.</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>4</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Dept</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>3–5 letter code (Section 5)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Yes</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>HSE</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Shows ownership &amp; functional area.</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>5</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Project ID</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Short alphanumeric (max 6)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Conditional</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>PR001</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Mandatory only for project/rig-specific documents.</td>
-                </tr>
-                <tr >
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>6</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Sequence</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>001–999 (3 digits)</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Yes</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>001</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Unique identifier mapped directly into that document.</td>
-                </tr>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>7</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Revision</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>_Rev00 (initial), _Rev01...</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Yes</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>_Rev00</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Clear version tracking attached via underscore.</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Full Syntax Examples</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Standard Corporate Documents:</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Company-wide Policy: TE-IMS-POL-HSE-001_Rev00</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Generic Procedure: TE-IMS-PROC-OPS-005_Rev02</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Standard Form: TE-IMS-FRM-LOG-001_Rev00</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Master Risk Register: TE-IMS-REG-HSE-001_Rev00</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Project/Site-Specific Documents:</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Project Execution Plan: TE-IMS-PLN-PMO-PR001-001_Rev00</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Rig Inspection Log (Specific Rig): TE-IMS-REG-MAINT-RIG05-001_Rev00</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Pad Layout Drawing: TE-IMS-DWG-ENG-SAR03-001_Rev01</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Naming Conventions: The Document Code vs. The File Name</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>To keep the official Document Code short, mathematically pure, and easy to type in cross-references, the descriptive name of the document is removed from the official code but added to the computer file name.</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>The Official Code (Inside the document header): TE-IMS-FRM-OPS-001_Rev00</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>The File Name (When saving to SharePoint/Windows): TE-IMS-FRM-OPS-001_Rev00 - Daily Drilling Report.docx</span>
-              </li>
-            </ul>
-
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This ensures that if the title of a document slightly changes in the future, the underlying alphanumeric control code remains intact.</p>
-
-            <ul className="list-none mb-3 space-y-1">
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Revision Rules</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>_Rev00 = Initial approved release.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>_Rev01 to _Rev99 = Updates and changes.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Full revision history will be kept in the document control footer of the actual document and tracked centrally in the Master Document Register (TE-IMS-REG-SYS-001_Rev00).</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Responsibilities &amp; Implementation</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>IMS Project Lead: Maintains this reference document and dictates structural logic.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Document Controller: Enforces rules during document creation, migration, and filing.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>Department Heads: Validate department codes and descriptors in their respective areas.</span>
-              </li>
-              <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
-                <span style={{ color: "#C49A28", flexShrink: 0 }}>▸</span>
-                <span>All Users: Follow rules when naming or searching for documents.</span>
-              </li>
-            </ul>
-
-            <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
-              <table className="w-full text-sm border-collapse">
-                <thead style={{ backgroundColor: "#081C2E" }}>
-                  <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Rev</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Date</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Description</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Author</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>01</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>01 Mar 2026</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Initial draft – Core logic upgraded to pure alphanumeric syntax. Departments updated (SCM, GOV, SYS).</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Joao Melo</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-        </div>
-      </div>
-    </Layout>
+      <Footer />
+    </div>
   );
 }
