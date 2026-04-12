@@ -27,6 +27,8 @@ import SOP_OPS_002 from "./pages/documents/SOP_OPS_002";
 import TE_IMS_POL_GOV_002 from "./pages/documents/TE_IMS_POL_GOV_002";
 import TE_IMS_POL_HSE_001 from "./pages/documents/TE_IMS_POL_HSE_001";
 import TE_IMS_POL_LC_001 from "./pages/documents/TE_IMS_POL_LC_001";
+import POL_GOV_003 from "./pages/documents/POL_GOV_003";
+import POL_GOV_004 from "./pages/documents/POL_GOV_004";
 
 // PLN pages
 import TE_IMS_PLN_HSE_001 from "./pages/documents/TE_IMS_PLN_HSE_001";
@@ -111,6 +113,8 @@ function Router() {
       <Route path="/docs/pol/TE-IMS-POL-GOV-002" component={TE_IMS_POL_GOV_002} />
       <Route path="/docs/pol/TE-IMS-POL-HSE-001" component={TE_IMS_POL_HSE_001} />
       <Route path="/docs/pol/TE-IMS-POL-LC-001" component={TE_IMS_POL_LC_001} />
+      <Route path="/docs/pol/TE-IMS-POL-GOV-003" component={POL_GOV_003} />
+      <Route path="/docs/pol/TE-IMS-POL-GOV-004" component={POL_GOV_004} />
 
       {/* PLN */}
       <Route path="/docs/pln/TE-IMS-PLN-HSE-001" component={TE_IMS_PLN_HSE_001} />
