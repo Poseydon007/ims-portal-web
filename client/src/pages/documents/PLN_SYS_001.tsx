@@ -1,4 +1,4 @@
-// TE-IMS-PLN-001 — IMS Implementation Plan
+// TE-IMS-PLN-SYS-001 — IMS Implementation Plan
 // Drafted in accordance with ISO 9001:2015, ISO 14001:2015, ISO 45001:2018 requirements.
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
@@ -16,7 +16,7 @@ export default function PLN_001() {
                   Plan
                 </span>
                 <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.4)" }}>
-                  TE-IMS-PLN-001
+                  TE-IMS-PLN-SYS-001
                 </span>
               </div>
               <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight tracking-tight">
@@ -55,7 +55,7 @@ export default function PLN_001() {
               <tbody>
                 <tr style={{ backgroundColor: "rgba(8,28,46,0.03)" }}>
                   <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Document</td>
-                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>TE-IMS-PLN-001</td>
+                  <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>TE-IMS-PLN-SYS-001</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 text-xs" style={{ color: "#081C2E" }}>Revision</td>

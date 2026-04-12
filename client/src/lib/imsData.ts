@@ -222,8 +222,8 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
     { code: "TE-IMS-PLN-GOV-000", title: "IMS Playbook - Foundation Document", rev: "Rev00", date: "01 Mar 2026", status: "approved", slug: "TE-IMS-PLN-GOV-000", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-GOV-000" },
     { code: "TE-IMS-PLN-HSE-001", title: "Major Emergency Preparedness Plan", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-PLN-HSE-001", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-HSE-001" },
     { code: "TE-IMS-PLN-HSE-003", title: "Working at Height Rescue Plan", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-PLN-HSE-003", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-HSE-003" },
-    { code: "TE-IMS-PLN-001", title: "IMS Implementation Plan", rev: "Rev01", date: "12.04.2026", status: "approved", slug: "TE-IMS-PLN-001", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-001" },
-    { code: "TE-IMS-PLN-002", title: "Annual HSE Plan", rev: "Rev01", date: "12.04.2026", status: "approved", slug: "TE-IMS-PLN-002", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-002" },
+    { code: "TE-IMS-PLN-SYS-001", title: "IMS Implementation Plan", rev: "Rev01", date: "12.04.2026", status: "approved", slug: "TE-IMS-PLN-SYS-001", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-SYS-001" },
+    { code: "TE-IMS-PLN-HSE-002", title: "Annual HSE Plan", rev: "Rev01", date: "12.04.2026", status: "approved", slug: "TE-IMS-PLN-HSE-002", available: true, viewUrl: "/docs/pln/TE-IMS-PLN-HSE-002" },
   ],
 };
 
