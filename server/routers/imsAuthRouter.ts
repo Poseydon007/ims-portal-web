@@ -1,5 +1,6 @@
 // IMS Auth Router — email/password login, logout, me, user management
 import { z } from "zod";
+import { parse as parseCookie } from "cookie";
 import { router, publicProcedure, imsProtectedProcedure, imsAdminProcedure } from "../_core/trpc";
 import { getSessionCookieOptions } from "../_core/cookies";
 import {
@@ -70,8 +71,7 @@ export const imsAuthRouter = router({
     // Try to delete session from DB
     const cookies = ctx.req.headers.cookie;
     if (cookies) {
-      const { parse } = require("cookie");
-      const parsed = parse(cookies);
+      const parsed = parseCookie(cookies);
       const token = parsed[IMS_COOKIE_NAME];
       if (token) {
         deleteImsSession(token).catch(() => {});
