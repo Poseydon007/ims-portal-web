@@ -79,3 +79,82 @@
 - [x] REG-HSE-005 as first working example with real preview image
 - [x] Upload preview image to CDN
 - [x] Register nav link in header for all logged-in users
+
+## Static Document Pages — SOP (10 docs)
+- [ ] SOP-GEO-001 — Core Cutting and Handling SOP
+- [ ] SOP-HSE-001 — Planned Task Observation SOP
+- [ ] SOP-HSE-002 — Confined Space Entry SOP
+- [ ] SOP-HSE-003 — Lock-Out Tag-Out SOP
+- [ ] SOP-HSE-004 — Hot Work SOP
+- [ ] SOP-LOG-001 — Driving Safety SOP
+- [ ] SOP-MAINT-001 — Machine Guarding Inspection SOP
+- [ ] SOP-MAINT-002 — Refueling and Fuel Handling SOP
+- [ ] SOP-OPS-001 — Diamond Drilling Operation SOP
+- [ ] SOP-OPS-002 — Night Shift Drilling SOP
+
+## Static Document Pages — POL (3 remaining)
+- [ ] POL-GOV-002 — Ethics and Anti-Bribery Policy
+- [ ] POL-HSE-001 — Stop Work Authority Policy
+- [ ] POL-LC-001 — Local Content and Saudization Policy
+
+## Static Document Pages — PLN (2 remaining)
+- [ ] PLN-HSE-001 — Major Emergency Preparedness Plan
+- [ ] PLN-HSE-003 — Working at Height Rescue Plan
+
+## Static Document Pages — REF (8 docs)
+- [ ] REF-HSE-001 — Emergency Preparedness Reference
+- [ ] REF-HSE-002 — Fire Fighting Procedure Reference
+- [ ] REF-SYS-000 — Executive Overview of the IMS
+- [ ] REF-SYS-001 — Document Identification and Numbering Rules
+- [ ] REF-SYS-002 — Treatment of Finance and Accounting Documents
+- [ ] REF-SYS-003 — ISO 14001 Certificate (PDF viewer)
+- [ ] REF-SYS-004 — ISO 45001 Certificate (PDF viewer)
+- [ ] REF-SYS-005 — ISO 9001 Certificate (PDF viewer)
+
+## Static Document Pages — PROC (25 docs)
+- [ ] PROC-HSE-001 — Fatigue Management Procedure
+- [ ] PROC-HSE-002 — Heat Stress Prevention Procedure
+- [ ] PROC-HSE-003 — Hazard Identification and Risk Assessment Procedure
+- [ ] PROC-HSE-004 — Site Emergency Preparedness Procedure
+- [ ] PROC-HSE-006 — Incident and Accident Investigation Procedure
+- [ ] PROC-HSE-007 — Toolbox Talks Procedure
+- [ ] PROC-HSE-008 — Waste Management Procedure
+- [ ] PROC-HSE-009 — Fire Prevention, Control and Fire Fighting Procedure
+- [ ] PROC-HSE-010 — HSE Site Monthly Reporting Procedure
+- [ ] PROC-HSE-011 — Periodic Inspection Procedure
+- [ ] PROC-HSE-012 — HSE Site Audit Procedure
+- [ ] PROC-HSE-013 — Spill Management Procedure
+- [ ] PROC-HSE-014 — Site Rehabilitation Procedure
+- [ ] PROC-HSE-015 — Risk and Opportunity Procedure
+- [ ] PROC-HSE-016 — Personal Protective Equipment Procedure
+- [ ] PROC-HSE-017 — Manual Handling Procedure
+- [ ] PROC-HSE-018 — Environmental Aspects Identification Procedure
+- [ ] PROC-HSE-019 — Site Safety Appointments Procedure
+- [ ] PROC-LOG-001 — Company Vehicle Usage Procedure
+- [ ] PROC-LOG-002 — Journey Management Procedure
+- [ ] PROC-MAINT-001 — Maintenance Management Procedure
+- [ ] PROC-OPS-001 — Drilling Operations Control Procedure
+- [ ] PROC-SCM-001 — Site Supply Procedure
+- [ ] PROC-SEC-001 — Security Procedure
+- [ ] PROC-SYS-001 — Document Control Procedure
+- [ ] PROC-SYS-002 — Management Review Procedure
+- [ ] PROC-SYS-003 — Change Management Procedure
+- [ ] PROC-SYS-004 — Internal Audit Procedure
+- [ ] PROC-SYS-005 — Continual Improvement and CAPA Procedure
+- [ ] PROC-SYS-006 — Checklist and Register Control Procedure
+- [ ] PROC-SYS-008 — Corrective Action Procedure
+- [ ] PROC-SYS-009 — QHSE Objectives Procedure
+- [ ] PROC-TRN-001 — Staff Training and Competency Procedure
+
+## Register UI Consolidation
+- [ ] Remove "Registers" nav tab from Layout.tsx header
+- [ ] Remove /registers route from App.tsx
+- [ ] Upgrade /docs/reg CategoryPage to use rich register UI (CAT badge, FORMAT, OWNER, Preview, Open buttons)
+- [ ] Fix TypeScript errors in generated PROC/PLN/REF pages (style={{ vs {{{{ mismatch in tables)
+
+## Live Forms — Batch 1 (High-use HSE field forms)
+- [ ] FRM-HSE-009 — Take 5 Hazard Assessment Form (live form + DB register)
+- [ ] FRM-HSE-032 — Toolbox Talk Daily Attendance Register (live form + DB register)
+- [ ] FRM-HSE-011 — Permit to Work (PTW) (live form + DB register)
+- [ ] FRM-HSE-022 — Incident and Accident Investigation Report (live form + DB register)
+- [ ] FRM-HSE-020 — Fire Extinguisher Inspection Log (live form + DB register)

@@ -1,43 +1,232 @@
 // Design: Clean Light Corporate — navy #081C2E, gold #C49A28
 // Level 2: Document list table for a given category
+// REG category gets a rich view with CAT badge, FORMAT, OWNER, Preview, Open buttons
 
 import { Link, useParams } from "wouter";
 import Layout from "@/components/Layout";
 import { Breadcrumb } from "@/components/Layout";
 import { categories, documentsByCategory, ImsDocument } from "@/lib/imsData";
 import { useImsAuth } from "@/hooks/useImsAuth";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileSpreadsheet, FileText } from "lucide-react";
+import { useState } from "react";
 
 const statusBadge = (status: ImsDocument["status"]) => {
   if (status === "approved") {
     return (
-      <span
-        className="text-xs font-bold px-2 py-0.5 rounded"
-        style={{ backgroundColor: "#d4edda", color: "#155724" }}
-      >
+      <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: "#d4edda", color: "#155724" }}>
         Approved
       </span>
     );
   }
   if (status === "draft") {
     return (
-      <span
-        className="text-xs font-bold px-2 py-0.5 rounded"
-        style={{ backgroundColor: "#fff3cd", color: "#856404" }}
-      >
+      <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: "#fff3cd", color: "#856404" }}>
         Draft
       </span>
     );
   }
   return (
-    <span
-      className="text-xs font-medium px-2 py-0.5 rounded"
-      style={{ backgroundColor: "#e8edf4", color: "#6b7a8d" }}
-    >
+    <span className="text-xs font-medium px-2 py-0.5 rounded" style={{ backgroundColor: "#e8edf4", color: "#6b7a8d" }}>
       Pending
     </span>
   );
 };
+
+// Extract sub-category from code e.g. TE-IMS-REG-HSE-001 → HSE
+function getCatBadge(code: string) {
+  const parts = code.split("-");
+  // TE-IMS-REG-HSE-001 → index 3 is HSE
+  return parts.length >= 4 ? parts[3] : "";
+}
+
+const CAT_COLORS: Record<string, { bg: string; color: string }> = {
+  HSE: { bg: "rgba(220,53,69,0.12)", color: "#c0392b" },
+  SYS: { bg: "rgba(8,28,46,0.12)", color: "#081C2E" },
+  LOG: { bg: "rgba(52,152,219,0.12)", color: "#1a6fa8" },
+  MAINT: { bg: "rgba(155,89,182,0.12)", color: "#7d3c98" },
+  TRN: { bg: "rgba(39,174,96,0.12)", color: "#1e8449" },
+  GOV: { bg: "rgba(196,154,40,0.15)", color: "#9a7a10" },
+  REF: { bg: "rgba(127,140,141,0.15)", color: "#566573" },
+};
+
+function FormatBadge({ format }: { format?: string }) {
+  if (!format) return <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>;
+  const isXlsx = format === "XLSX";
+  return (
+    <span className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded"
+      style={{
+        backgroundColor: isXlsx ? "rgba(39,174,96,0.12)" : "rgba(52,152,219,0.12)",
+        color: isXlsx ? "#1e8449" : "#1a6fa8",
+      }}>
+      {isXlsx ? <FileSpreadsheet size={11} /> : <FileText size={11} />}
+      {format}
+    </span>
+  );
+}
+
+// Rich REG category view
+function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenDrive: boolean }) {
+  const [search, setSearch] = useState("");
+  const [catFilter, setCatFilter] = useState("All");
+
+  const catOptions = ["All", ...Array.from(new Set(docs.map(d => getCatBadge(d.code)))).sort()];
+
+  const filtered = docs.filter(d => {
+    const matchSearch = search === "" ||
+      d.title.toLowerCase().includes(search.toLowerCase()) ||
+      d.code.toLowerCase().includes(search.toLowerCase());
+    const matchCat = catFilter === "All" || getCatBadge(d.code) === catFilter;
+    return matchSearch && matchCat;
+  });
+
+  const xlsxCount = docs.filter(d => d.format === "XLSX").length;
+  const docxCount = docs.filter(d => d.format === "DOCX").length;
+
+  return (
+    <div className="container py-8">
+      {/* Stats bar */}
+      <div className="flex flex-wrap gap-6 mb-6">
+        <div className="text-center">
+          <div className="text-2xl font-extrabold" style={{ color: "#C49A28" }}>{docs.length}</div>
+          <div className="text-xs tracking-widest uppercase font-semibold mt-0.5" style={{ color: "#8a9ab0" }}>Total Registers</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-extrabold" style={{ color: "#1e8449" }}>{xlsxCount}</div>
+          <div className="text-xs tracking-widest uppercase font-semibold mt-0.5" style={{ color: "#8a9ab0" }}>Spreadsheets</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-extrabold" style={{ color: "#1a6fa8" }}>{docxCount}</div>
+          <div className="text-xs tracking-widest uppercase font-semibold mt-0.5" style={{ color: "#8a9ab0" }}>Word Docs</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-extrabold" style={{ color: "#081C2E" }}>{catOptions.length - 1}</div>
+          <div className="text-xs tracking-widest uppercase font-semibold mt-0.5" style={{ color: "#8a9ab0" }}>Categories</div>
+        </div>
+      </div>
+
+      {/* Search + filter */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <input
+          type="text"
+          placeholder="Search by code or title..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="text-sm px-3 py-2 rounded border outline-none focus:ring-2"
+          style={{ borderColor: "#dde3ec", minWidth: 220, color: "#081C2E" }}
+        />
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-semibold" style={{ color: "#8a9ab0" }}>Category:</span>
+          {catOptions.map(opt => (
+            <button
+              key={opt}
+              onClick={() => setCatFilter(opt)}
+              className="text-xs font-bold px-3 py-1 rounded transition-all"
+              style={{
+                backgroundColor: catFilter === opt ? "#081C2E" : "#e8edf4",
+                color: catFilter === opt ? "#fff" : "#081C2E",
+              }}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="rounded border overflow-hidden" style={{ borderColor: "#dde3ec" }}>
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr style={{ backgroundColor: "#081C2E" }}>
+              <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">Document Code</th>
+              <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70">Title</th>
+              <th className="text-center px-3 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-16">Cat.</th>
+              <th className="text-center px-3 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-16">Rev.</th>
+              <th className="text-center px-3 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-24">Format</th>
+              <th className="text-left px-3 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-36">Owner</th>
+              <th className="text-center px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-32">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((doc, i) => {
+              const cat = getCatBadge(doc.code);
+              const catStyle = CAT_COLORS[cat] ?? { bg: "rgba(8,28,46,0.08)", color: "#081C2E" };
+              return (
+                <tr
+                  key={doc.code}
+                  className="transition-colors hover:bg-blue-50/40"
+                  style={{ borderTop: i > 0 ? "1px solid #edf0f5" : undefined }}
+                >
+                  <td className="px-4 py-3 whitespace-nowrap">
+                    <span className="te-code text-xs font-mono" style={{ color: "#081C2E" }}>{doc.code}</span>
+                  </td>
+                  <td className="px-4 py-3">
+                    {canOpenDrive && doc.driveUrl ? (
+                      <a
+                        href={doc.driveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium hover:underline flex items-center gap-1 group"
+                        style={{ color: "#081C2E" }}
+                      >
+                        {doc.title}
+                        <ExternalLink size={11} className="opacity-0 group-hover:opacity-60 flex-shrink-0" style={{ color: "#C49A28" }} />
+                      </a>
+                    ) : (
+                      <span style={{ color: "#081C2E" }}>{doc.title}</span>
+                    )}
+                  </td>
+                  <td className="px-3 py-3 text-center">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ backgroundColor: catStyle.bg, color: catStyle.color }}>
+                      {cat}
+                    </span>
+                  </td>
+                  <td className="px-3 py-3 text-center">
+                    <span className="te-code text-xs" style={{ color: "#6b7a8d" }}>{doc.rev}</span>
+                  </td>
+                  <td className="px-3 py-3 text-center">
+                    <FormatBadge format={doc.format} />
+                  </td>
+                  <td className="px-3 py-3 text-xs" style={{ color: "#6b7a8d" }}>
+                    {doc.owner ?? "—"}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    {canOpenDrive && doc.driveUrl ? (
+                      <a
+                        href={doc.driveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap hover:opacity-80"
+                        style={{ backgroundColor: "#C49A28", color: "white" }}
+                      >
+                        <ExternalLink size={11} />
+                        Open
+                      </a>
+                    ) : (
+                      <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+            {filtered.length === 0 && (
+              <tr>
+                <td colSpan={7} className="px-4 py-8 text-center text-sm" style={{ color: "#8a9ab0" }}>
+                  No registers match your search.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="text-xs mt-3" style={{ color: "#8a9ab0" }}>
+        {canOpenDrive
+          ? "Click any title or the Open button to access the live file in Google Drive."
+          : "Contact your supervisor or administrator to access register files."}
+      </p>
+    </div>
+  );
+}
 
 export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -86,126 +275,130 @@ export default function CategoryPage() {
         </div>
       </div>
 
-      {/* Document table */}
-      <div className="container py-8">
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-sm" style={{ color: "#6b7a8d" }}>
-            Showing <strong style={{ color: "#081C2E" }}>{docs.length}</strong> documents in this category
-          </p>
-          <Link href="/" className="text-xs font-semibold hover:underline" style={{ color: "#C49A28" }}>
-            ← Portal Home
-          </Link>
-        </div>
+      {/* REG gets rich view; all other categories get standard table */}
+      {slug === "reg" ? (
+        <RegCategoryView docs={docs} canOpenDrive={canOpenDrive} />
+      ) : (
+        <div className="container py-8">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-sm" style={{ color: "#6b7a8d" }}>
+              Showing <strong style={{ color: "#081C2E" }}>{docs.length}</strong> documents in this category
+            </p>
+            <Link href="/" className="text-xs font-semibold hover:underline" style={{ color: "#C49A28" }}>
+              ← Portal Home
+            </Link>
+          </div>
 
-        <div className="rounded border overflow-hidden" style={{ borderColor: "#dde3ec" }}>
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr style={{ backgroundColor: "#081C2E" }}>
-                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
-                  Document Code
-                </th>
-                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70">
-                  Title
-                </th>
-                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-20">
-                  Rev
-                </th>
-                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-28">
-                  Date
-                </th>
-                <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-28">
-                  Status
-                </th>
-                <th className="text-center px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-24">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {docs.map((doc, i) => (
-                <tr
-                  key={doc.code}
-                  className="transition-colors hover:bg-blue-50/40"
-                  style={{ borderTop: i > 0 ? "1px solid #edf0f5" : undefined }}
-                >
-                  <td className="px-4 py-3 whitespace-nowrap">
-                    <span className="te-code text-xs" style={{ color: "#081C2E" }}>
-                      {doc.code}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    {doc.available ? (
-                      <Link
-                        href={doc.formUrl ?? doc.viewUrl ?? `/docs/${slug}/${doc.slug}`}
-                        className="font-medium hover:underline"
-                        style={{ color: "#081C2E" }}
-                      >
-                        {doc.title}
-                      </Link>
-                    ) : canOpenDrive && doc.driveUrl ? (
-                      <a
-                        href={doc.driveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium hover:underline flex items-center gap-1 group"
-                        style={{ color: "#081C2E" }}
-                      >
-                        {doc.title}
-                        <ExternalLink size={12} className="opacity-0 group-hover:opacity-60 flex-shrink-0" style={{ color: "#C49A28" }} />
-                      </a>
-                    ) : (
-                      <span className={doc.driveUrl ? "" : "italic"} style={{ color: doc.driveUrl ? "#081C2E" : "#8a9ab0" }}>
-                        {doc.title}
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="te-code text-xs" style={{ color: "#6b7a8d" }}>
-                      {doc.rev}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-xs" style={{ color: "#6b7a8d" }}>
-                    {doc.date}
-                  </td>
-                  <td className="px-4 py-3">{statusBadge(doc.status)}</td>
-                  <td className="px-4 py-3 text-center">
-                    {doc.formUrl ? (
-                      <Link
-                        href={doc.formUrl}
-                        className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
-                        style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
-                      >
-                        Fill Form ✎
-                      </Link>
-                    ) : doc.available ? (
-                      <Link
-                        href={doc.viewUrl ?? `/docs/${slug}/${doc.slug}`}
-                        className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
-                        style={{ backgroundColor: "#081C2E", color: "#fff" }}
-                      >
-                        View →
-                      </Link>
-                    ) : canOpenDrive && doc.driveUrl ? (
-                      <a
-                        href={doc.driveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap hover:opacity-80"
-                        style={{ backgroundColor: "#C49A28", color: "white" }}
-                      >
-                        <ExternalLink size={11} />
-                        Open
-                      </a>
-                    ) : (
-                      <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>
-                    )}
-                  </td>
+          <div className="rounded border overflow-hidden" style={{ borderColor: "#dde3ec" }}>
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr style={{ backgroundColor: "#081C2E" }}>
+                  <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
+                    Document Code
+                  </th>
+                  <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70">
+                    Title
+                  </th>
+                  <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-20">
+                    Rev
+                  </th>
+                  <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-28">
+                    Date
+                  </th>
+                  <th className="text-left px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-28">
+                    Status
+                  </th>
+                  <th className="text-center px-4 py-3 text-xs font-bold tracking-widest uppercase text-white/70 w-24">
+                    Action
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {docs.map((doc, i) => (
+                  <tr
+                    key={doc.code}
+                    className="transition-colors hover:bg-blue-50/40"
+                    style={{ borderTop: i > 0 ? "1px solid #edf0f5" : undefined }}
+                  >
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <span className="te-code text-xs" style={{ color: "#081C2E" }}>
+                        {doc.code}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      {doc.available ? (
+                        <Link
+                          href={doc.formUrl ?? doc.viewUrl ?? `/docs/${slug}/${doc.slug}`}
+                          className="font-medium hover:underline"
+                          style={{ color: "#081C2E" }}
+                        >
+                          {doc.title}
+                        </Link>
+                      ) : canOpenDrive && doc.driveUrl ? (
+                        <a
+                          href={doc.driveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium hover:underline flex items-center gap-1 group"
+                          style={{ color: "#081C2E" }}
+                        >
+                          {doc.title}
+                          <ExternalLink size={12} className="opacity-0 group-hover:opacity-60 flex-shrink-0" style={{ color: "#C49A28" }} />
+                        </a>
+                      ) : (
+                        <span className={doc.driveUrl ? "" : "italic"} style={{ color: doc.driveUrl ? "#081C2E" : "#8a9ab0" }}>
+                          {doc.title}
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="te-code text-xs" style={{ color: "#6b7a8d" }}>
+                        {doc.rev}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-xs" style={{ color: "#6b7a8d" }}>
+                      {doc.date}
+                    </td>
+                    <td className="px-4 py-3">{statusBadge(doc.status)}</td>
+                    <td className="px-4 py-3 text-center">
+                      {doc.formUrl ? (
+                        <Link
+                          href={doc.formUrl}
+                          className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
+                          style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
+                        >
+                          Fill Form ✎
+                        </Link>
+                      ) : doc.available ? (
+                        <Link
+                          href={doc.viewUrl ?? `/docs/${slug}/${doc.slug}`}
+                          className="inline-block text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
+                          style={{ backgroundColor: "#081C2E", color: "#fff" }}
+                        >
+                          View →
+                        </Link>
+                      ) : canOpenDrive && doc.driveUrl ? (
+                        <a
+                          href={doc.driveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap hover:opacity-80"
+                          style={{ backgroundColor: "#C49A28", color: "white" }}
+                        >
+                          <ExternalLink size={11} />
+                          Open
+                        </a>
+                      ) : (
+                        <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </Layout>
   );
 }
