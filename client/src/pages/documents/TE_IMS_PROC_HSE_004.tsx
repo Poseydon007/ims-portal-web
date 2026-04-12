@@ -48,8 +48,8 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>SITE EMERGENCY PREPAREDNESS PROCEDURE</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>SITE EMERGENCY PREPAREDNESS PROCEDURE</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>SITE EMERGENCY PREPAREDNESS PROCEDURE</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>SITE EMERGENCY PREPAREDNESS PROCEDURE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,8 +124,8 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Role</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Responsibilities</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Role</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Responsibilities</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -169,9 +169,9 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>#</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Scenario</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Key Response Priorities</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>#</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Scenario</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Key Response Priorities</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -266,8 +266,8 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>ERT Position</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Function</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>ERT Position</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Function</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -321,9 +321,9 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Drill Type</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Frequency</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Scenarios</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Drill Type</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Frequency</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Scenarios</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -389,9 +389,9 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>KPI</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Target</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Frequency</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>KPI</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Target</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Frequency</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -451,9 +451,9 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Record</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Owner</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Retention</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Record</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Owner</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Retention</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -500,10 +500,10 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Rev</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Date</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Description of Changes</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Author</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Rev</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Date</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Description of Changes</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Author</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -527,10 +527,10 @@ export default function TE_IMS_PROC_HSE_004() {
               <table className="w-full text-sm border-collapse">
                 <thead style={{ backgroundColor: "#081C2E" }}>
                   <tr>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Role</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Name</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Signature</th>
-                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#C49A28" }}>Date</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Role</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Name</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Signature</th>
+                  <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider" style={{ color: "#ffffff" }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>
