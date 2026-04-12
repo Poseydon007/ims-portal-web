@@ -71,7 +71,7 @@ export const categories: DocCategory[] = [
     code: "PLN",
     name: "Plans",
     description: "Strategic and operational plans supporting IMS implementation and project delivery.",
-    count: 3,
+    count: 5,
     slug: "pln",
   },
 ];
