@@ -2,6 +2,7 @@
 // TopNav: 3-column — Logo | Nav (Home always visible + admin tabs + Education) | IMS Portal + user
 // Home button always visible regardless of auth state or screen size
 
+import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { LOGO_WHITE } from "@/lib/imsData";
 import { useImsAuth } from "@/hooks/useImsAuth";
@@ -241,6 +242,29 @@ export default function Layout({
   children,
   breadcrumbs,
 }: LayoutProps) {
+  const { isAuthenticated, loading } = useImsAuth();
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      navigate("/login");
+    }
+  }, [loading, isAuthenticated, navigate]);
+
+  if (loading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#081C2E" }}>
+        <div className="flex flex-col items-center gap-3">
+          <div
+            className="w-8 h-8 border-2 rounded-full animate-spin"
+            style={{ borderColor: "rgba(196,154,40,0.3)", borderTopColor: "#C49A28" }}
+          />
+          <span className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f4f6f9" }}>
       <TopNav />

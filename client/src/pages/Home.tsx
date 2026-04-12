@@ -1,10 +1,11 @@
 // Design: Clean Light Corporate — navy #081C2E, gold #C49A28
 // Landing page: hero + 4-stat animated banner + 7 category cards
 
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import { categories } from "@/lib/imsData";
+import { useImsAuth } from "@/hooks/useImsAuth";
 
 const totalDocs = categories.reduce((sum, c) => sum + c.count, 0);
 
@@ -77,6 +78,26 @@ function StatItem({ value, label, animate = false, delay = 0 }: StatProps) {
 }
 
 export default function Home() {
+  const { isAuthenticated, loading } = useImsAuth();
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      navigate("/login");
+    }
+  }, [loading, isAuthenticated, navigate]);
+
+  if (loading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#081C2E" }}>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "#C49A28", borderTopColor: "transparent" }} />
+          <span className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Layout>
       {/* ── Hero Banner ── */}
