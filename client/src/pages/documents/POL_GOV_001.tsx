@@ -41,8 +41,6 @@ function BulletItem({ bold, children }: { bold: string; children: React.ReactNod
 }
 
 export default function POL_GOV_001() {
-  const handlePrint = () => window.print();
-
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f4f6f9" }}>
       <TopNav />
@@ -86,13 +84,7 @@ export default function POL_GOV_001() {
             >
               ← Back to Policies
             </Link>
-            <button
-              onClick={handlePrint}
-              className="text-xs font-semibold px-3 py-1.5 rounded border hover:bg-gray-50 transition-colors"
-              style={{ borderColor: "#dde3ec", color: "#081C2E" }}
-            >
-              ⎙ Print
-            </button>
+
           </div>
         </div>
       </div>
