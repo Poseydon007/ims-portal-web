@@ -24,6 +24,7 @@ import { notifyOwner } from "./_core/notification";
 import { exec } from "child_process";
 import { promisify } from "util";
 import { imsAuthRouter } from "./routers/imsAuthRouter";
+import { formSubmissionsRouter } from "./routers/formSubmissionsRouter";
 
 const execAsync = promisify(exec);
 
@@ -103,6 +104,7 @@ async function syncToGoogleSheet(submission: {
 const _appRouterBase = router({
   system: systemRouter,
   imsAuth: imsAuthRouter,
+  formSubmissions: formSubmissionsRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

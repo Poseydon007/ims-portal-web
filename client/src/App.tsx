@@ -84,6 +84,59 @@ import TE_IMS_PROC_TRN_001 from "./pages/documents/TE_IMS_PROC_TRN_001";
 // Forms
 import NearMissForm from "./pages/forms/NearMissForm";
 import JHAForm from "./pages/forms/JHAForm";
+import FRM_HSE_001 from "@/pages/forms/FRM_HSE_001";
+import FRM_HSE_002 from "@/pages/forms/FRM_HSE_002";
+import FRM_HSE_003 from "@/pages/forms/FRM_HSE_003";
+import FRM_HSE_004 from "@/pages/forms/FRM_HSE_004";
+import FRM_HSE_006 from "@/pages/forms/FRM_HSE_006";
+import FRM_HSE_007 from "@/pages/forms/FRM_HSE_007";
+import FRM_HSE_009 from "@/pages/forms/FRM_HSE_009";
+import FRM_HSE_010 from "@/pages/forms/FRM_HSE_010";
+import FRM_HSE_011 from "@/pages/forms/FRM_HSE_011";
+import FRM_HSE_012 from "@/pages/forms/FRM_HSE_012";
+import FRM_HSE_013 from "@/pages/forms/FRM_HSE_013";
+import FRM_HSE_014 from "@/pages/forms/FRM_HSE_014";
+import FRM_HSE_015 from "@/pages/forms/FRM_HSE_015";
+import FRM_HSE_016 from "@/pages/forms/FRM_HSE_016";
+import FRM_HSE_017 from "@/pages/forms/FRM_HSE_017";
+import FRM_HSE_018 from "@/pages/forms/FRM_HSE_018";
+import FRM_HSE_019 from "@/pages/forms/FRM_HSE_019";
+import FRM_HSE_020 from "@/pages/forms/FRM_HSE_020";
+import FRM_HSE_021 from "@/pages/forms/FRM_HSE_021";
+import FRM_HSE_022 from "@/pages/forms/FRM_HSE_022";
+import FRM_HSE_023 from "@/pages/forms/FRM_HSE_023";
+import FRM_HSE_024 from "@/pages/forms/FRM_HSE_024";
+import FRM_HSE_025 from "@/pages/forms/FRM_HSE_025";
+import FRM_HSE_026 from "@/pages/forms/FRM_HSE_026";
+import FRM_HSE_027 from "@/pages/forms/FRM_HSE_027";
+import FRM_HSE_028 from "@/pages/forms/FRM_HSE_028";
+import FRM_HSE_029 from "@/pages/forms/FRM_HSE_029";
+import FRM_HSE_030 from "@/pages/forms/FRM_HSE_030";
+import FRM_HSE_031 from "@/pages/forms/FRM_HSE_031";
+import FRM_HSE_032 from "@/pages/forms/FRM_HSE_032";
+import FRM_HSE_033 from "@/pages/forms/FRM_HSE_033";
+import FRM_HSE_034 from "@/pages/forms/FRM_HSE_034";
+import FRM_HSE_035 from "@/pages/forms/FRM_HSE_035";
+import FRM_HSE_036 from "@/pages/forms/FRM_HSE_036";
+import FRM_HSE_037 from "@/pages/forms/FRM_HSE_037";
+import FRM_HSE_039 from "@/pages/forms/FRM_HSE_039";
+import FRM_HSE_040 from "@/pages/forms/FRM_HSE_040";
+import FRM_LOG_001 from "@/pages/forms/FRM_LOG_001";
+import FRM_LOG_002 from "@/pages/forms/FRM_LOG_002";
+import FRM_MAINT_001 from "@/pages/forms/FRM_MAINT_001";
+import FRM_MAINT_002 from "@/pages/forms/FRM_MAINT_002";
+import FRM_MAINT_003 from "@/pages/forms/FRM_MAINT_003";
+import FRM_OPS_001 from "@/pages/forms/FRM_OPS_001";
+import FRM_OPS_002 from "@/pages/forms/FRM_OPS_002";
+import FRM_SEC_001 from "@/pages/forms/FRM_SEC_001";
+import FRM_SEC_002 from "@/pages/forms/FRM_SEC_002";
+import FRM_SYS_001 from "@/pages/forms/FRM_SYS_001";
+import FRM_SYS_002 from "@/pages/forms/FRM_SYS_002";
+import FRM_SYS_003 from "@/pages/forms/FRM_SYS_003";
+import FRM_SYS_005 from "@/pages/forms/FRM_SYS_005";
+import FRM_SYS_006 from "@/pages/forms/FRM_SYS_006";
+import FRM_TRN_002 from "@/pages/forms/FRM_TRN_002";
+import FRM_TRN_003 from "@/pages/forms/FRM_TRN_003";
 
 // Admin
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
@@ -184,6 +237,59 @@ function Router() {
       {/* Active Forms */}
       <Route path="/forms/near-miss" component={NearMissForm} />
       <Route path="/forms/jha" component={JHAForm} />
+      <Route path="/forms/frm-hse-001" component={FRM_HSE_001} />
+      <Route path="/forms/frm-hse-002" component={FRM_HSE_002} />
+      <Route path="/forms/frm-hse-003" component={FRM_HSE_003} />
+      <Route path="/forms/frm-hse-004" component={FRM_HSE_004} />
+      <Route path="/forms/frm-hse-006" component={FRM_HSE_006} />
+      <Route path="/forms/frm-hse-007" component={FRM_HSE_007} />
+      <Route path="/forms/frm-hse-009" component={FRM_HSE_009} />
+      <Route path="/forms/frm-hse-010" component={FRM_HSE_010} />
+      <Route path="/forms/frm-hse-011" component={FRM_HSE_011} />
+      <Route path="/forms/frm-hse-012" component={FRM_HSE_012} />
+      <Route path="/forms/frm-hse-013" component={FRM_HSE_013} />
+      <Route path="/forms/frm-hse-014" component={FRM_HSE_014} />
+      <Route path="/forms/frm-hse-015" component={FRM_HSE_015} />
+      <Route path="/forms/frm-hse-016" component={FRM_HSE_016} />
+      <Route path="/forms/frm-hse-017" component={FRM_HSE_017} />
+      <Route path="/forms/frm-hse-018" component={FRM_HSE_018} />
+      <Route path="/forms/frm-hse-019" component={FRM_HSE_019} />
+      <Route path="/forms/frm-hse-020" component={FRM_HSE_020} />
+      <Route path="/forms/frm-hse-021" component={FRM_HSE_021} />
+      <Route path="/forms/frm-hse-022" component={FRM_HSE_022} />
+      <Route path="/forms/frm-hse-023" component={FRM_HSE_023} />
+      <Route path="/forms/frm-hse-024" component={FRM_HSE_024} />
+      <Route path="/forms/frm-hse-025" component={FRM_HSE_025} />
+      <Route path="/forms/frm-hse-026" component={FRM_HSE_026} />
+      <Route path="/forms/frm-hse-027" component={FRM_HSE_027} />
+      <Route path="/forms/frm-hse-028" component={FRM_HSE_028} />
+      <Route path="/forms/frm-hse-029" component={FRM_HSE_029} />
+      <Route path="/forms/frm-hse-030" component={FRM_HSE_030} />
+      <Route path="/forms/frm-hse-031" component={FRM_HSE_031} />
+      <Route path="/forms/frm-hse-032" component={FRM_HSE_032} />
+      <Route path="/forms/frm-hse-033" component={FRM_HSE_033} />
+      <Route path="/forms/frm-hse-034" component={FRM_HSE_034} />
+      <Route path="/forms/frm-hse-035" component={FRM_HSE_035} />
+      <Route path="/forms/frm-hse-036" component={FRM_HSE_036} />
+      <Route path="/forms/frm-hse-037" component={FRM_HSE_037} />
+      <Route path="/forms/frm-hse-039" component={FRM_HSE_039} />
+      <Route path="/forms/frm-hse-040" component={FRM_HSE_040} />
+      <Route path="/forms/frm-log-001" component={FRM_LOG_001} />
+      <Route path="/forms/frm-log-002" component={FRM_LOG_002} />
+      <Route path="/forms/frm-maint-001" component={FRM_MAINT_001} />
+      <Route path="/forms/frm-maint-002" component={FRM_MAINT_002} />
+      <Route path="/forms/frm-maint-003" component={FRM_MAINT_003} />
+      <Route path="/forms/frm-ops-001" component={FRM_OPS_001} />
+      <Route path="/forms/frm-ops-002" component={FRM_OPS_002} />
+      <Route path="/forms/frm-sec-001" component={FRM_SEC_001} />
+      <Route path="/forms/frm-sec-002" component={FRM_SEC_002} />
+      <Route path="/forms/frm-sys-001" component={FRM_SYS_001} />
+      <Route path="/forms/frm-sys-002" component={FRM_SYS_002} />
+      <Route path="/forms/frm-sys-003" component={FRM_SYS_003} />
+      <Route path="/forms/frm-sys-005" component={FRM_SYS_005} />
+      <Route path="/forms/frm-sys-006" component={FRM_SYS_006} />
+      <Route path="/forms/frm-trn-002" component={FRM_TRN_002} />
+      <Route path="/forms/frm-trn-003" component={FRM_TRN_003} />
 
       {/* Education & Learning */}
       <Route path="/education" component={Education} />
