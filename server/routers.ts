@@ -21,12 +21,9 @@ import {
 } from "./db";
 import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
-import { exec } from "child_process";
-import { promisify } from "util";
 import { imsAuthRouter } from "./routers/imsAuthRouter";
 import { formSubmissionsRouter } from "./routers/formSubmissionsRouter";
-
-const execAsync = promisify(exec);
+import { appendFormSubmission } from "./googleSheets";
 
 const correctiveActionSchema = z.object({
   action: z.string(),
@@ -66,11 +63,18 @@ async function syncToGoogleSheet(submission: {
           .join(" | ")
       : "";
 
-    const row = [
+    const headers = [
+      "Submission ID", "Submitted At", "Status",
+      "Date of Occurrence", "Time of Occurrence", "Location", "Department / Site",
+      "Reported By", "Employee ID", "Classification", "Classification (Other)",
+      "Description", "Contributing Factors", "Contributing Factors (Other)",
+      "Potential Severity", "Potential Likelihood", "Corrective Actions",
+      "Supervisor Name", "HSE Officer Name",
+    ];
+    const values = [
       submission.submissionId,
       submission.submittedAt.toISOString(),
       submission.status,
-      submission.submissionId,
       submission.dateOfOccurrence,
       submission.timeOfOccurrence ?? "",
       submission.location ?? "",
@@ -85,15 +89,10 @@ async function syncToGoogleSheet(submission: {
       submission.potentialSeverity ?? "",
       submission.potentialLikelihood ?? "",
       actions,
-      "",
-      "",
       submission.supervisorName ?? "",
       submission.hseOfficerName ?? "",
     ];
-
-    const rowJson = JSON.stringify(row);
-    const cmd = `gws sheets spreadsheets values append --params '{"spreadsheetId":"1yF54b5SGJcl7avg0rq6a-JzSR4NJ3gmZl7vTi28B9Dg","range":"Near Miss Reports!A:V","valueInputOption":"RAW","insertDataOption":"INSERT_ROWS"}' --json '{"values":[${rowJson}]}'`;
-    await execAsync(cmd);
+    await appendFormSubmission("TE-IMS-FRM-HSE-003", headers, values);
     return true;
   } catch (err) {
     console.error("[Sheets Sync] Failed:", err);
@@ -300,9 +299,13 @@ const _appRouterBase = router({
               input.completedByName ?? "",
               input.siteManagerName ?? "",
             ];
-            const rowJson = JSON.stringify(row);
-            const cmd = `gws sheets spreadsheets values append --params '{"spreadsheetId":"1yF54b5SGJcl7avg0rq6a-JzSR4NJ3gmZl7vTi28B9Dg","range":"JHA Submissions!A:K","valueInputOption":"RAW","insertDataOption":"INSERT_ROWS"}' --json '{"values":[${rowJson}]}'`;
-            await execAsync(cmd);
+            const jhaHeaders = [
+              "Submission ID", "Submitted At", "Status",
+              "Job / Task", "Date", "Department / Site",
+              "Supervisor", "Reviewed By", "Task Steps",
+              "Completed By", "Site Manager",
+            ];
+            await appendFormSubmission("TE-IMS-FRM-HSE-001", jhaHeaders, row);
             await markJhaSheetSynced(submission.id);
           } catch (err) {
             console.error("[Sheets Sync JHA] Failed:", err);
