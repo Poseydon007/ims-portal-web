@@ -341,7 +341,7 @@ export default function PLN_GOV_000() {
                   <thead>
                     <tr style={{ backgroundColor: NAVY }}>
                       {["Objective", "Target (2026)", "KPI / Measure", "Responsible", "Frequency"].map((h) => (
-                        <th key={h} className="text-left px-3 py-2.5 font-bold" style={{ color: GOLD }}>{h}</th>
+                        <th key={h} className="text-left px-3 py-2.5 font-bold" style={{ color: "#ffffff" }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -421,7 +421,7 @@ export default function PLN_GOV_000() {
                   <thead>
                     <tr style={{ backgroundColor: NAVY }}>
                       {["Level", "Name", "Purpose", "Ownership", "Example Documents"].map((h) => (
-                        <th key={h} className="text-left px-3 py-2.5 font-bold" style={{ color: GOLD }}>{h}</th>
+                        <th key={h} className="text-left px-3 py-2.5 font-bold" style={{ color: "#ffffff" }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -809,7 +809,7 @@ export default function PLN_GOV_000() {
                   <thead>
                     <tr style={{ backgroundColor: NAVY }}>
                       {["Rev", "Date", "Description", "Author"].map((h) => (
-                        <th key={h} className="text-left px-3 py-2.5 font-bold" style={{ color: GOLD }}>{h}</th>
+                        <th key={h} className="text-left px-3 py-2.5 font-bold" style={{ color: "#ffffff" }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
