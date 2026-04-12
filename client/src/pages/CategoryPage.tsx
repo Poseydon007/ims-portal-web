@@ -84,6 +84,13 @@ function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenD
 
   return (
     <div className="container py-8">
+      {/* Back nav */}
+      <div className="mb-4">
+        <Link href="/" className="text-xs font-semibold hover:underline flex items-center gap-1" style={{ color: "#C49A28" }}>
+          ← Portal Home
+        </Link>
+      </div>
+
       {/* Stats bar */}
       <div className="flex flex-wrap gap-6 mb-6">
         <div className="text-center">
