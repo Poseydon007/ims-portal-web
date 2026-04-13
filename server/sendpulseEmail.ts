@@ -136,8 +136,44 @@ export async function notifyNewSubmission(opts: {
   });
 }
 
-// ── Notification: Submission approved and forwarded to HSE Officer ───────────
-export async function notifyForwardedToHse(opts: {
+// ── Notification: Submission forwarded to HSE Manager ───────────────────────────
+export async function notifyForwardedToHseManager(opts: {
+  hseManagerName: string;
+  hseManagerEmail: string;
+  reportNumber: string;
+  formTitle: string;
+  submittedByName: string;
+  supervisorName: string;
+  approvedAt: string;
+  portalUrl: string;
+}): Promise<void> {
+  const html = baseHtml(
+    "Submission Forwarded — HSE Manager Review Required",
+    `<p>Hello <strong>${opts.hseManagerName}</strong>,</p>
+    <p>A form submission has been reviewed and approved by the Supervisor, and is now awaiting your HSE Manager review.</p>
+    <div class="badge">${opts.reportNumber}</div>
+    <table class="info-table">
+      <tr><td>Form</td><td>${opts.formTitle}</td></tr>
+      <tr><td>Submitted By</td><td>${opts.submittedByName}</td></tr>
+      <tr><td>Supervisor Approved</td><td>${opts.supervisorName} — ${opts.approvedAt}</td></tr>
+      <tr><td>Report No.</td><td>${opts.reportNumber}</td></tr>
+    </table>
+    <p>Please log in to the IMS Portal to review and forward to the HSE Officer.</p>
+    <a href="${opts.portalUrl}/approvals" class="action-btn">Go to Approvals Queue →</a>`
+  );
+
+  const text = `Hello ${opts.hseManagerName},\n\nA submission has been approved by the Supervisor and requires your HSE Manager review.\n\nReport No: ${opts.reportNumber}\nForm: ${opts.formTitle}\nSubmitted By: ${opts.submittedByName}\nSupervisor: ${opts.supervisorName}\n\nLog in to the IMS Portal: ${opts.portalUrl}/approvals`;
+
+  await sendEmail({
+    to: [{ name: opts.hseManagerName, email: opts.hseManagerEmail }],
+    subject: `[IMS] HSE Manager Review Required — ${opts.reportNumber}`,
+    htmlBody: html,
+    textBody: text,
+  });
+}
+
+// ── Notification: Submission approved and forwarded to HSE Officer ───────────────────
+export async function notifyForwardedToHse(ts: {
   hseOfficerName: string;
   hseOfficerEmail: string;
   reportNumber: string;

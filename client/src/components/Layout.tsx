@@ -21,6 +21,7 @@ interface LayoutProps {
 
 const ROLE_LABELS: Record<string, string> = {
   admin: "Admin",
+  hse_manager: "HSE Manager",
   supervisor: "Supervisor",
   field_worker: "Field Worker",
 };
@@ -79,8 +80,8 @@ export function TopNav() {
               </span>
             </Link>
 
-            {/* Approval Queue — supervisor + admin */}
-            {!loading && isAuthenticated && (user?.role === "supervisor" || user?.role === "admin") && (
+            {/* Approval Queue — supervisor + hse_manager + admin */}
+            {!loading && isAuthenticated && (user?.role === "supervisor" || user?.role === "hse_manager" || user?.role === "admin") && (
               <Link href="/approvals">
                 <span
                   className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"

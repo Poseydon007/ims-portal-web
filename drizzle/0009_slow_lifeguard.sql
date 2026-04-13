@@ -1,0 +1,1 @@
+ALTER TABLE `ims_users` MODIFY COLUMN `role` enum('admin','hse_manager','supervisor','field_worker') NOT NULL DEFAULT 'field_worker';

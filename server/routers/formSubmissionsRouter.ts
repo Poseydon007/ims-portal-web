@@ -7,6 +7,7 @@ import { eq, desc, and, like, sql } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
 import {
   notifyNewSubmission,
+  notifyForwardedToHseManager,
   notifyForwardedToHse,
   notifyReturned,
   notifyClosed,
@@ -14,13 +15,15 @@ import {
 import { imsUsers } from "../../drizzle/schema";
 
 // ── Workflow definition ──────────────────────────────────────────────────────
-// Step 1: Supervisor Review  (role: supervisor or admin)
-// Step 2: HSE Officer Approval (role: admin)
-// Step 3: Closed
+// Step 1: Supervisor Review      (role: supervisor or admin)
+// Step 2: HSE Manager Review     (role: hse_manager or admin)
+// Step 3: HSE Officer Approval   (role: admin)
+// Step 4: Closed
 
 const WORKFLOW_STEPS = [
-  { step: 1, label: "Supervisor Review",    requiredRoles: ["supervisor", "admin"] as string[], nextStatus: "pending_hse_approval" as const },
-  { step: 2, label: "HSE Officer Approval", requiredRoles: ["admin"] as string[],              nextStatus: "closed" as const },
+  { step: 1, label: "Supervisor Review",    requiredRoles: ["supervisor", "admin"] as string[], nextStatus: "pending_hse_manager_review" as const },
+  { step: 2, label: "HSE Manager Review",   requiredRoles: ["hse_manager", "admin"] as string[], nextStatus: "pending_hse_approval" as const },
+  { step: 3, label: "HSE Officer Approval", requiredRoles: ["admin"] as string[],              nextStatus: "closed" as const },
 ];
 
 // ── Report Number Prefix Map ─────────────────────────────────────────────────
@@ -230,8 +233,27 @@ export const formSubmissionsRouter = router({
       const approvedAt = new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh" });
       const rptNo = submission.reportNumber ?? input.submissionId;
 
-      if (currentStep.nextStatus === "pending_hse_approval") {
-        // Step 1 approved — notify all admins (HSE Officers)
+      if (currentStep.nextStatus === "pending_hse_manager_review") {
+        // Step 1 approved — notify all HSE Managers
+        const hseManagers = await db
+          .select({ fullName: imsUsers.fullName, email: imsUsers.email })
+          .from(imsUsers)
+          .where(sql`${imsUsers.role} IN ('hse_manager', 'admin')`);
+        for (const mgr of hseManagers) {
+          if (!mgr.email) continue;
+          notifyForwardedToHseManager({
+            hseManagerName:  mgr.fullName,
+            hseManagerEmail: mgr.email,
+            reportNumber:    rptNo,
+            formTitle:       submission.formTitle ?? input.submissionId,
+            submittedByName: submission.submittedByName ?? "Unknown",
+            supervisorName:  ctx.imsUser.fullName ?? ctx.imsUser.email,
+            approvedAt,
+            portalUrl: portalUrl2,
+          }).catch(() => {});
+        }
+      } else if (currentStep.nextStatus === "pending_hse_approval") {
+        // Step 2 approved — notify all admins (HSE Officers)
         const admins = await db
           .select({ fullName: imsUsers.fullName, email: imsUsers.email })
           .from(imsUsers)
@@ -242,7 +264,7 @@ export const formSubmissionsRouter = router({
             hseOfficerName:  admin.fullName,
             hseOfficerEmail: admin.email,
             reportNumber:    rptNo,
-            formTitle:       submission.formTitle,
+            formTitle:       submission.formTitle ?? input.submissionId,
             submittedByName: submission.submittedByName ?? "Unknown",
             supervisorName:  ctx.imsUser.fullName ?? ctx.imsUser.email,
             approvedAt,
@@ -447,6 +469,9 @@ export const formSubmissionsRouter = router({
       const actionableStatuses: string[] = [];
       if (actorRole === "supervisor" || actorRole === "admin") {
         actionableStatuses.push("pending_supervisor_review");
+      }
+      if (actorRole === "hse_manager" || actorRole === "admin") {
+        actionableStatuses.push("pending_hse_manager_review");
       }
       if (actorRole === "admin") {
         actionableStatuses.push("pending_hse_approval");

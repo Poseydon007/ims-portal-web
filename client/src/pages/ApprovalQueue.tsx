@@ -16,10 +16,11 @@ import { Link } from "wouter";
 // ── Status badge ─────────────────────────────────────────────────────────────
 function StatusBadge({ status }: { status: string }) {
   const config: Record<string, { label: string; bg: string; text: string }> = {
-    pending_supervisor_review: { label: "Pending Supervisor",  bg: "#fff3cd", text: "#856404" },
-    pending_hse_approval:      { label: "Pending HSE Approval", bg: "#cce5ff", text: "#004085" },
-    returned:                  { label: "Returned",             bg: "#f8d7da", text: "#721c24" },
-    closed:                    { label: "Closed",               bg: "#d4edda", text: "#155724" },
+    pending_supervisor_review:    { label: "Pending Supervisor",    bg: "#fff3cd", text: "#856404" },
+    pending_hse_manager_review:   { label: "Pending HSE Manager",   bg: "#ffe0b2", text: "#e65100" },
+    pending_hse_approval:         { label: "Pending HSE Approval",  bg: "#cce5ff", text: "#004085" },
+    returned:                     { label: "Returned",              bg: "#f8d7da", text: "#721c24" },
+    closed:                       { label: "Closed",                bg: "#d4edda", text: "#155724" },
   };
   const c = config[status] ?? { label: status, bg: "#e9ecef", text: "#495057" };
   return (
@@ -447,7 +448,7 @@ export default function ApprovalQueue() {
   }
 
   const isAdmin = user.role === "admin";
-  const roleLabel = isAdmin ? "HSE Officer / Admin" : "Supervisor";
+  const roleLabel = isAdmin ? "HSE Officer / Admin" : user.role === "hse_manager" ? "HSE Manager" : "Supervisor";
 
   return (
     <Layout>

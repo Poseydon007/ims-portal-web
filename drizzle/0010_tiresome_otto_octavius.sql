@@ -1,0 +1,1 @@
+ALTER TABLE `form_responses` MODIFY COLUMN `status` enum('pending_supervisor_review','pending_hse_manager_review','pending_hse_approval','returned','closed') NOT NULL DEFAULT 'pending_supervisor_review';

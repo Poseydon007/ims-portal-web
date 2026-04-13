@@ -10,12 +10,14 @@ const GOLD = "#C49A28";
 
 const ROLE_LABELS: Record<string, string> = {
   admin: "Admin",
+  hse_manager: "HSE Manager",
   supervisor: "Supervisor",
   field_worker: "Field Worker",
 };
 
 const ROLE_COLORS: Record<string, { backgroundColor: string; color: string }> = {
   admin: { backgroundColor: "#fce4ec", color: "#c62828" },
+  hse_manager: { backgroundColor: "#fff3e0", color: "#e65100" },
   supervisor: { backgroundColor: "#e3f2fd", color: "#1565c0" },
   field_worker: { backgroundColor: "#e8f5e9", color: "#2e7d32" },
 };
@@ -30,7 +32,7 @@ type CreateForm = {
   password: string;
   fullName: string;
   employeeId: string;
-  role: "admin" | "supervisor" | "field_worker";
+  role: "admin" | "hse_manager" | "supervisor" | "field_worker";
   department: string;
 };
 
@@ -214,6 +216,7 @@ export default function UserManagement() {
                 >
                   <option value="field_worker">Field Worker</option>
                   <option value="supervisor">Supervisor</option>
+                  <option value="hse_manager">HSE Manager</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>
@@ -304,6 +307,7 @@ export default function UserManagement() {
                           >
                             <option value="field_worker">Field Worker</option>
                             <option value="supervisor">Supervisor</option>
+                            <option value="hse_manager">HSE Manager</option>
                             <option value="admin">Admin</option>
                           </select>
                         </td>

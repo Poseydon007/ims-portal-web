@@ -28,7 +28,7 @@ export const imsUsers = mysqlTable("ims_users", {
   passwordHash: text("passwordHash").notNull(),
   fullName: varchar("fullName", { length: 255 }).notNull(),
   employeeId: varchar("employeeId", { length: 64 }),
-  role: mysqlEnum("role", ["admin", "supervisor", "field_worker"]).default("field_worker").notNull(),
+  role: mysqlEnum("role", ["admin", "hse_manager", "supervisor", "field_worker"]).default("field_worker").notNull(),
   department: varchar("department", { length: 128 }),
   position: varchar("position", { length: 128 }),
   status: mysqlEnum("status", ["active", "inactive"]).default("active").notNull(),
@@ -150,7 +150,7 @@ export const formResponses = mysqlTable("form_responses", {
   formCode: varchar("formCode", { length: 64 }).notNull(),   // e.g. TE-IMS-FRM-HSE-003
   formTitle: varchar("formTitle", { length: 255 }),
   responseData: text("responseData").notNull(),               // JSON blob of all form fields
-  status: mysqlEnum("status", ["pending_supervisor_review", "pending_hse_approval", "returned", "closed"]).default("pending_supervisor_review").notNull(),
+  status: mysqlEnum("status", ["pending_supervisor_review", "pending_hse_manager_review", "pending_hse_approval", "returned", "closed"]).default("pending_supervisor_review").notNull(),
   currentStep: int("currentStep").default(1),                  // 1=supervisor, 2=hse_officer, 3=closed
   submittedByUserId: int("submittedByUserId"),
   submittedByName: varchar("submittedByName", { length: 255 }),

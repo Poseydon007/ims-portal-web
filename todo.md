@@ -188,3 +188,11 @@
 - [ ] Remove Near Miss Report No. input field entirely from FRM-HSE-003 form (must not appear at all)
 - [ ] Set up email notifications to supervisor and HSE officer when form submitted
 - [ ] Set up email notifications when approval action taken (approved/returned)
+
+## Add HSE Manager Role
+- [ ] Add hse_manager to imsUsers role enum in schema.ts
+- [ ] Push db migration for new enum value
+- [ ] Add HSE Manager as Step 2 in approval workflow (between Supervisor and Admin/HSE Officer)
+- [ ] Update User Management role dropdown to include HSE Manager
+- [ ] Update all frontend role display labels to show "HSE Manager" correctly
+- [ ] Update email notifications to notify HSE Manager at correct step
