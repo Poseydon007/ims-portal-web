@@ -1,14 +1,25 @@
 /**
- * SendPulse Email Notification Helper
- * Uses the SendPulse REST API to send transactional emails for the IMS approval workflow.
- * API docs: https://sendpulse.com/integrations/api/smtp
+ * IMS Email Notification Helper
+ * Uses Gmail SMTP via nodemailer for transactional emails in the IMS approval workflow.
+ * Credentials: GMAIL_USER + GMAIL_APP_PASSWORD environment variables.
  */
 
-import { ENV } from "./_core/env";
+import nodemailer from "nodemailer";
 
-const SENDPULSE_API_URL = "https://api.sendpulse.com/smtp/emails";
-const FROM_EMAIL = "melo.j@tru-east.com";
-const FROM_NAME = "True East IMS Portal";
+const FROM_NAME  = "True East IMS Portal";
+
+function getTransporter() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  if (!user || !pass) {
+    console.warn("[Email] GMAIL_USER or GMAIL_APP_PASSWORD not set — emails disabled.");
+    return null;
+  }
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  });
+}
 
 interface EmailPayload {
   to: { name: string; email: string }[];
@@ -18,43 +29,24 @@ interface EmailPayload {
 }
 
 async function sendEmail(payload: EmailPayload): Promise<boolean> {
-  const apiKey = ENV.sendpulseApiKey;
-  if (!apiKey) {
-    console.warn("[SendPulse] SENDPULSE_API_KEY not set — email skipped.");
-    return false;
-  }
+  const transporter = getTransporter();
+  if (!transporter) return false;
 
-  // HTML must be Base64-encoded for SendPulse
-  const htmlBase64 = Buffer.from(payload.htmlBody, "utf-8").toString("base64");
-
-  const body = {
-    email: {
-      html: htmlBase64,
-      text: payload.textBody,
-      subject: payload.subject,
-      from: { name: FROM_NAME, email: FROM_EMAIL },
-      to: payload.to,
-    },
-  };
+  const fromEmail = process.env.GMAIL_USER ?? "";
+  const toAddresses = payload.to.map(r => `"${r.name}" <${r.email}>`).join(", ");
 
   try {
-    const res = await fetch(SENDPULSE_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(body),
+    const info = await transporter.sendMail({
+      from: `"${FROM_NAME}" <${fromEmail}>`,
+      to: toAddresses,
+      subject: payload.subject,
+      text: payload.textBody,
+      html: payload.htmlBody,
     });
-
-    const json = (await res.json()) as { result?: boolean; error?: string };
-    if (!res.ok || !json.result) {
-      console.error("[SendPulse] Send failed:", json);
-      return false;
-    }
+    console.log(`[Email] Sent OK: ${info.messageId} → ${toAddresses}`);
     return true;
-  } catch (err) {
-    console.error("[SendPulse] Request error:", err);
+  } catch (err: any) {
+    console.error("[Email] Send failed:", err?.message ?? err);
     return false;
   }
 }
