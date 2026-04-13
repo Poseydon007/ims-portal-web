@@ -206,7 +206,7 @@ export default function SubmissionPrintView() {
               </div>
             </div>
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png"
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png"
               alt="True East"
               className="h-12 opacity-90"
             />
@@ -339,7 +339,7 @@ export default function SubmissionPrintView() {
             >
               Digital Signatures
             </h2>
-<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {/* Submitted By */}
               {(() => {
                 const submittedAt = data.submittedAt
@@ -386,22 +386,7 @@ export default function SubmissionPrintView() {
                   </div>
                 );
               })()}
-              {/* HSE Officer — step 3 */}
-              {(() => {
-                const s = data.approvalHistory?.find(h => h.step === 3 && h.action === "approved");
-                return (
-                  <div className="rounded border p-3" style={{ borderColor: s ? "#dde3ec" : "#e5e7eb", backgroundColor: s ? "#f9fafb" : "#f3f4f6" }}>
-                    <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#8a9ab0" }}>HSE Officer</div>
-                    {s ? (
-                      <>
-                        <div className="font-semibold text-sm" style={{ color: "#081C2E" }}>{s.actorName}</div>
-                        <div className="text-xs mt-1" style={{ color: "#6b7a8d" }}>{new Date(s.actionAt).toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</div>
-                        <div className="mt-2 text-xs px-2 py-0.5 rounded inline-block" style={{ backgroundColor: "#dcfce7", color: "#16a34a" }}>✓ Digitally Signed</div>
-                      </>
-                    ) : <div className="text-xs italic" style={{ color: "#9ca3af" }}>Pending approval</div>}
-                  </div>
-                );
-              })()}
+
             </div>
           </div>
         </div>

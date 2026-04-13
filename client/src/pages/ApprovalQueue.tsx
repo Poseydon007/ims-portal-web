@@ -436,7 +436,7 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
           {/* Digital Signatures */}
           <div>
             <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">Digital Signatures</div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Submitted By */}
               <div className="rounded border p-3" style={{ borderColor: "#dde3ec", backgroundColor: "#f9fafb" }}>
                 <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#8a9ab0" }}>Submitted By</div>
@@ -488,26 +488,7 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
                   </div>
                 );
               })()}
-              {/* HSE Officer — step 3 */}
-              {(() => {
-                const step = data.approvalHistory?.find(h => h.step === 3 && h.action === "approved");
-                return (
-                  <div className="rounded border p-3" style={{ borderColor: step ? "#dde3ec" : "#e5e7eb", backgroundColor: step ? "#f9fafb" : "#f3f4f6" }}>
-                    <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#8a9ab0" }}>HSE Officer</div>
-                    {step ? (
-                      <>
-                        <div className="font-semibold text-sm" style={{ color: "#081C2E" }}>{step.actorName}</div>
-                        <div className="text-xs mt-1" style={{ color: "#6b7a8d" }}>
-                          {new Date(step.actionAt).toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}
-                        </div>
-                        <div className="mt-2 text-xs px-2 py-0.5 rounded inline-block" style={{ backgroundColor: "#dcfce7", color: "#16a34a" }}>✓ Digitally Signed</div>
-                      </>
-                    ) : (
-                      <div className="text-xs italic" style={{ color: "#9ca3af" }}>Pending approval</div>
-                    )}
-                  </div>
-                );
-              })()}
+
             </div>
           </div>
         </div>

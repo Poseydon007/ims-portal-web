@@ -61,6 +61,9 @@ export default function NearMissForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submissionId, setSubmissionId] = useState("");
   const { user: imsUser } = useImsAuth();
+  const [submissionDateTime] = useState(() =>
+    new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })
+  );
 
   const { register, handleSubmit, control, watch, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
     defaultValues: {
@@ -377,7 +380,7 @@ export default function NearMissForm() {
               <label style={labelStyle} className="block mb-1">Submission Date &amp; Time</label>
               <input
                 type="text"
-                value={new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                value={submissionDateTime}
                 readOnly
                 className="w-full border rounded px-3 py-2 bg-gray-50"
                 style={inputStyle}

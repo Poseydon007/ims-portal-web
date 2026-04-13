@@ -7,7 +7,7 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
@@ -333,7 +333,7 @@ export default function AllSubmissionsAdmin() {
               { value: "all",                         label: "All" },
               { value: "pending_supervisor_review",   label: "Pending Supervisor" },
               { value: "pending_hse_manager_review",  label: "Pending HSE Manager" },
-              { value: "pending_hse_approval",        label: "Pending HSE" },
+              { value: "pending_hse_approval",        label: "Pending HSE Approval" },
               { value: "returned",                    label: "Returned" },
               { value: "closed",                      label: "Closed" },
             ].map(opt => (
@@ -423,6 +423,14 @@ export default function AllSubmissionsAdmin() {
                               </button>
                             </>
                           )}
+                          {/* View / Print */}
+                          <Link
+                            href={`/submissions/${item.submissionId}/print`}
+                            className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-blue-50 transition-colors"
+                            style={{ borderColor: "#1565c0", color: "#1565c0" }}
+                          >
+                            View
+                          </Link>
                           {/* Edit report number */}
                           <button
                             onClick={() => setEditModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null })}

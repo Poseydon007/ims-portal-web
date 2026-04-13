@@ -213,3 +213,9 @@
 - [x] SubmissionPrintView signatures block: show supervisor name + approval timestamp from approvalHistory step 1
 - [x] SubmissionPrintView signatures block: show HSE officer name + approval timestamp from approvalHistory step 2
 - [x] ApprovalQueue detail panel: same digital signature data as print view
+
+## Bug Fixes (Apr 13 — v4)
+- [ ] Submission date: auto-fill with today's date+time on form load, make fully read-only
+- [ ] Remove duplicate "Pending HSE" filter button in All Submissions admin view
+- [ ] Restore Print/PDF button on submission print view (lost after recent edits)
+- [ ] Add Excel (.xlsx) export button for admin to download all Near Miss submissions
