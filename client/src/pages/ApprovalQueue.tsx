@@ -2,8 +2,9 @@
  * Approval Queue — shows pending form submissions for the logged-in user's role.
  *
  * - Supervisors see: pending_supervisor_review items
- * - Admins see: pending_supervisor_review + pending_hse_approval items
+ * - Admins see: pending_supervisor_review + pending_hse_approval + returned items
  * - Each item can be approved (with optional comment) or returned (with required comment)
+ * - Admins can also edit the report number or delete a submission
  */
 
 import { useState } from "react";
@@ -31,7 +32,7 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-// ── Action modal ─────────────────────────────────────────────────────────────
+// ── Action modal (approve / return) ──────────────────────────────────────────
 interface ActionModalProps {
   submissionId: string;
   formTitle: string | null;
@@ -79,14 +80,12 @@ function ActionModal({ submissionId, formTitle, action, onClose, onDone }: Actio
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden">
-        {/* Modal header */}
         <div className="bg-[#081C2E] px-5 py-4">
           <h3 className="text-white font-bold text-sm">
             {action === "approve" ? "Approve Submission" : "Return for Correction"}
           </h3>
           <p className="text-white/60 text-xs mt-0.5">{formTitle}</p>
         </div>
-
         <div className="p-5">
           {action === "approve" ? (
             <p className="text-sm text-gray-600 mb-4">
@@ -99,7 +98,6 @@ function ActionModal({ submissionId, formTitle, action, onClose, onDone }: Actio
               A comment explaining the reason is <strong>required</strong>.
             </p>
           )}
-
           <div className="mb-4">
             <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wide">
               {action === "approve" ? "Comment (optional)" : "Reason for Return *"}
@@ -116,33 +114,152 @@ function ActionModal({ submissionId, formTitle, action, onClose, onDone }: Actio
               className="w-full border border-[#dde3ec] rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C49A28] resize-none"
             />
           </div>
-
           {error && (
-            <div className="mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded text-xs text-red-700">
-              {error}
-            </div>
+            <div className="mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded text-xs text-red-700">{error}</div>
           )}
-
           <div className="flex gap-3 justify-end">
-            <button
-              onClick={onClose}
-              disabled={isPending}
-              className="px-4 py-2 text-sm border border-[#dde3ec] rounded text-gray-600 hover:bg-gray-50 transition-colors"
-            >
+            <button onClick={onClose} disabled={isPending} className="px-4 py-2 text-sm border border-[#dde3ec] rounded text-gray-600 hover:bg-gray-50 transition-colors">
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={isPending}
-              className={`px-5 py-2 text-sm font-bold rounded text-white transition-opacity hover:opacity-90 disabled:opacity-60 ${
-                action === "approve" ? "bg-[#C49A28]" : "bg-red-600"
-              }`}
+              className={`px-5 py-2 text-sm font-bold rounded text-white transition-opacity hover:opacity-90 disabled:opacity-60 ${action === "approve" ? "bg-[#C49A28]" : "bg-red-600"}`}
             >
-              {isPending
-                ? "Processing..."
-                : action === "approve"
-                ? "Confirm Approval"
-                : "Return Form"}
+              {isPending ? "Processing..." : action === "approve" ? "Confirm Approval" : "Return Form"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Admin: Edit Report Number Modal ──────────────────────────────────────────
+function EditReportNumberModal({
+  submissionId,
+  currentReportNumber,
+  onClose,
+  onDone,
+}: {
+  submissionId: string;
+  currentReportNumber: string | null;
+  onClose: () => void;
+  onDone: () => void;
+}) {
+  const [value, setValue] = useState(currentReportNumber ?? "");
+  const [error, setError] = useState<string | null>(null);
+  const utils = trpc.useUtils();
+
+  const mutation = trpc.formSubmissions.updateReportNumber.useMutation({
+    onSuccess: () => {
+      utils.formSubmissions.listPendingApprovals.invalidate();
+      onDone();
+    },
+    onError: (err) => setError(err.message),
+  });
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-sm mx-4 overflow-hidden">
+        <div className="bg-[#081C2E] px-5 py-4">
+          <h3 className="text-white font-bold text-sm">Edit Report Number</h3>
+          <p className="text-white/60 text-xs mt-0.5 font-mono">{submissionId}</p>
+        </div>
+        <div className="p-5">
+          <p className="text-xs text-gray-600 mb-4">
+            Modify the auto-generated report number. This action is logged and only available to admins.
+          </p>
+          <div className="mb-4">
+            <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wide">
+              Report Number *
+            </label>
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder="e.g. NM-2026-001"
+              className="w-full border border-[#dde3ec] rounded px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#C49A28]"
+            />
+          </div>
+          {error && (
+            <div className="mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded text-xs text-red-700">{error}</div>
+          )}
+          <div className="flex gap-3 justify-end">
+            <button onClick={onClose} className="px-4 py-2 text-sm border border-[#dde3ec] rounded text-gray-600 hover:bg-gray-50">
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                setError(null);
+                if (!value.trim()) { setError("Report number cannot be empty."); return; }
+                mutation.mutate({ submissionId, reportNumber: value.trim() });
+              }}
+              disabled={mutation.isPending}
+              className="px-5 py-2 text-sm font-bold rounded text-white disabled:opacity-60 hover:opacity-90"
+              style={{ backgroundColor: "#C49A28" }}
+            >
+              {mutation.isPending ? "Saving..." : "Save"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Admin: Delete Confirmation Modal ─────────────────────────────────────────
+function DeleteModal({
+  submissionId,
+  reportNumber,
+  formTitle,
+  onClose,
+  onDone,
+}: {
+  submissionId: string;
+  reportNumber: string | null;
+  formTitle: string | null;
+  onClose: () => void;
+  onDone: () => void;
+}) {
+  const [error, setError] = useState<string | null>(null);
+  const utils = trpc.useUtils();
+
+  const mutation = trpc.formSubmissions.deleteSubmission.useMutation({
+    onSuccess: () => {
+      utils.formSubmissions.listPendingApprovals.invalidate();
+      onDone();
+    },
+    onError: (err) => setError(err.message),
+  });
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-sm mx-4 overflow-hidden">
+        <div className="bg-red-700 px-5 py-4">
+          <h3 className="text-white font-bold text-sm">Delete Submission</h3>
+          <p className="text-white/70 text-xs mt-0.5">{formTitle}</p>
+        </div>
+        <div className="p-5">
+          <p className="text-sm text-gray-700 mb-2">
+            You are about to <strong>permanently delete</strong> this submission. This action cannot be undone.
+          </p>
+          <div className="mb-4 p-2.5 bg-red-50 border border-red-200 rounded text-xs font-mono text-red-700">
+            {reportNumber ?? submissionId}
+          </div>
+          {error && (
+            <div className="mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded text-xs text-red-700">{error}</div>
+          )}
+          <div className="flex gap-3 justify-end">
+            <button onClick={onClose} className="px-4 py-2 text-sm border border-[#dde3ec] rounded text-gray-600 hover:bg-gray-50">
+              Cancel
+            </button>
+            <button
+              onClick={() => { setError(null); mutation.mutate({ submissionId }); }}
+              disabled={mutation.isPending}
+              className="px-5 py-2 text-sm font-bold rounded text-white bg-red-600 disabled:opacity-60 hover:opacity-90"
+            >
+              {mutation.isPending ? "Deleting..." : "Delete Permanently"}
             </button>
           </div>
         </div>
@@ -179,18 +296,18 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
   return (
     <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center bg-black/50 p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
-        {/* Header */}
         <div className="bg-[#081C2E] px-5 py-4 flex items-start justify-between flex-shrink-0">
           <div>
             <h3 className="text-white font-bold text-sm">{data.formTitle}</h3>
-            <p className="text-white/60 text-xs mt-0.5 font-mono">{data.submissionId}</p>
+            {data.reportNumber && (
+              <div className="text-[#C49A28] text-sm font-bold font-mono mt-0.5">{data.reportNumber}</div>
+            )}
+            <p className="text-white/50 text-xs mt-0.5 font-mono">{data.submissionId}</p>
           </div>
           <button onClick={onClose} className="text-white/60 hover:text-white text-lg leading-none ml-4">×</button>
         </div>
 
-        {/* Body */}
         <div className="overflow-y-auto p-5 flex-1">
-          {/* Meta */}
           <div className="flex flex-wrap gap-3 mb-5">
             <StatusBadge status={data.status} />
             <span className="text-xs text-gray-500">
@@ -201,7 +318,6 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
             </span>
           </div>
 
-          {/* Form data */}
           <div className="mb-5">
             <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">Form Data</div>
             <div className="border border-[#dde3ec] rounded overflow-hidden">
@@ -224,7 +340,6 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
             </div>
           </div>
 
-          {/* Approval history */}
           {data.approvalHistory && data.approvalHistory.length > 0 && (
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">Approval History</div>
@@ -232,11 +347,7 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
                 {data.approvalHistory.map((step) => (
                   <div
                     key={step.id}
-                    className={`p-3 rounded border text-xs ${
-                      step.action === "approved"
-                        ? "bg-green-50 border-green-200"
-                        : "bg-red-50 border-red-200"
-                    }`}
+                    className={`p-3 rounded border text-xs ${step.action === "approved" ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-semibold">
@@ -246,12 +357,8 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
                         {step.actionAt ? new Date(step.actionAt).toLocaleString() : ""}
                       </span>
                     </div>
-                    <div className="text-gray-600">
-                      By <strong>{step.actorName}</strong> ({step.actorRole})
-                    </div>
-                    {step.comment && (
-                      <div className="mt-1 text-gray-700 italic">"{step.comment}"</div>
-                    )}
+                    <div className="text-gray-600">By <strong>{step.actorName}</strong> ({step.actorRole})</div>
+                    {step.comment && <div className="mt-1 text-gray-700 italic">"{step.comment}"</div>}
                   </div>
                 ))}
               </div>
@@ -266,11 +373,24 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function ApprovalQueue() {
   const { user, loading: authLoading } = useImsAuth();
+
   const [actionModal, setActionModal] = useState<{
     submissionId: string;
     formTitle: string | null;
     action: "approve" | "return";
   } | null>(null);
+
+  const [editModal, setEditModal] = useState<{
+    submissionId: string;
+    reportNumber: string | null;
+  } | null>(null);
+
+  const [deleteModal, setDeleteModal] = useState<{
+    submissionId: string;
+    reportNumber: string | null;
+    formTitle: string | null;
+  } | null>(null);
+
   const [detailId, setDetailId] = useState<string | null>(null);
   const [doneMessage, setDoneMessage] = useState<string | null>(null);
 
@@ -278,20 +398,19 @@ export default function ApprovalQueue() {
     refetchOnWindowFocus: false,
   });
 
-  const handleDone = () => {
+  const handleDone = (msg?: string) => {
     setActionModal(null);
-    setDoneMessage("Action completed successfully.");
+    setEditModal(null);
+    setDeleteModal(null);
+    setDoneMessage(msg ?? "Action completed successfully.");
     refetch();
     setTimeout(() => setDoneMessage(null), 4000);
   };
 
-  // ── Auth guard ──
   if (authLoading) {
     return (
       <Layout>
-        <div className="max-w-4xl mx-auto p-6 text-center text-sm text-gray-500 py-20">
-          Loading...
-        </div>
+        <div className="max-w-4xl mx-auto p-6 text-center text-sm text-gray-500 py-20">Loading...</div>
       </Layout>
     );
   }
@@ -301,9 +420,7 @@ export default function ApprovalQueue() {
       <Layout>
         <div className="max-w-4xl mx-auto p-6 text-center py-20">
           <p className="text-sm text-gray-600 mb-4">Please log in to access the Approval Queue.</p>
-          <Link href="/login" className="text-sm text-[#C49A28] hover:underline font-semibold">
-            Sign In →
-          </Link>
+          <Link href="/login" className="text-sm text-[#C49A28] hover:underline font-semibold">Sign In →</Link>
         </div>
       </Layout>
     );
@@ -313,60 +430,53 @@ export default function ApprovalQueue() {
     return (
       <Layout>
         <div className="max-w-4xl mx-auto p-6 text-center py-20">
-          <p className="text-sm text-gray-600">
-            The Approval Queue is only accessible to Supervisors and HSE Officers.
-          </p>
+          <p className="text-sm text-gray-600">The Approval Queue is only accessible to Supervisors and HSE Officers.</p>
         </div>
       </Layout>
     );
   }
 
-  const roleLabel = user.role === "admin" ? "HSE Officer / Admin" : "Supervisor";
+  const isAdmin = user.role === "admin";
+  const roleLabel = isAdmin ? "HSE Officer / Admin" : "Supervisor";
 
   return (
     <Layout>
       <div className="max-w-5xl mx-auto p-6" style={{ fontFamily: "'Nunito Sans', sans-serif" }}>
 
-        {/* Breadcrumb */}
         <nav className="mb-6 text-sm">
           <Link href="/" className="text-[#C49A28] hover:underline">← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="font-semibold text-[#081C2E]">Approval Queue</span>
         </nav>
 
-        {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-[#081C2E] uppercase tracking-tight mb-1">
-            Approval Queue
-          </h1>
+          <h1 className="text-2xl font-bold text-[#081C2E] uppercase tracking-tight mb-1">Approval Queue</h1>
           <p className="text-xs text-gray-500">
             Logged in as <strong>{user.fullName}</strong> — {roleLabel}. Review and action pending submissions below.
+            {isAdmin && <span className="ml-2 text-[#C49A28] font-semibold">Admin controls (edit/delete) are available.</span>}
           </p>
         </div>
 
-        {/* Success toast */}
         {doneMessage && (
           <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded text-sm text-green-800 font-medium">
             ✓ {doneMessage}
           </div>
         )}
 
-        {/* Content */}
         {isLoading ? (
           <div className="text-center py-20 text-sm text-gray-500">Loading pending submissions...</div>
         ) : !pending || pending.length === 0 ? (
           <div className="text-center py-20">
             <div className="text-4xl mb-4">✓</div>
             <p className="text-sm font-semibold text-gray-700 mb-1">No pending items</p>
-            <p className="text-xs text-gray-500">
-              All submissions in your queue have been actioned. Check back later.
-            </p>
+            <p className="text-xs text-gray-500">All submissions in your queue have been actioned. Check back later.</p>
           </div>
         ) : (
           <div className="border border-[#dde3ec] rounded-lg shadow-sm overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-[#081C2E] text-white">
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide">Report No.</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide">Form</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide">Submitted By</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide">Date</th>
@@ -380,9 +490,16 @@ export default function ApprovalQueue() {
                     key={item.submissionId}
                     className={`border-b border-[#dde3ec] last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}
                   >
+                    {/* Report Number */}
+                    <td className="px-4 py-3">
+                      <div className="font-bold font-mono text-xs" style={{ color: "#C49A28" }}>
+                        {item.reportNumber ?? "—"}
+                      </div>
+                    </td>
+                    {/* Form info */}
                     <td className="px-4 py-3">
                       <div className="font-semibold text-[#081C2E] text-xs">{item.formTitle}</div>
-                      <div className="text-xs text-gray-400 font-mono mt-0.5">{item.submissionId}</div>
+                      <div className="text-xs text-gray-400 font-mono mt-0.5 truncate max-w-[180px]">{item.submissionId}</div>
                     </td>
                     <td className="px-4 py-3 text-xs text-gray-700">{item.submittedByName}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">
@@ -392,34 +509,49 @@ export default function ApprovalQueue() {
                       <StatusBadge status={item.status} />
                     </td>
                     <td className="px-4 py-3">
-                      <div className="flex items-center gap-2 justify-end">
+                      <div className="flex items-center gap-1.5 justify-end flex-wrap">
+                        {/* View */}
                         <button
                           onClick={() => setDetailId(item.submissionId)}
                           className="text-xs px-2.5 py-1 border border-[#dde3ec] rounded text-gray-600 hover:bg-gray-100 transition-colors"
                         >
                           View
                         </button>
+                        {/* Approve */}
                         <button
-                          onClick={() => setActionModal({
-                            submissionId: item.submissionId,
-                            formTitle: item.formTitle ?? null,
-                            action: "approve",
-                          })}
+                          onClick={() => setActionModal({ submissionId: item.submissionId, formTitle: item.formTitle ?? null, action: "approve" })}
                           className="text-xs px-2.5 py-1 rounded text-white font-semibold transition-opacity hover:opacity-90"
                           style={{ backgroundColor: "#C49A28" }}
                         >
                           Approve
                         </button>
+                        {/* Return */}
                         <button
-                          onClick={() => setActionModal({
-                            submissionId: item.submissionId,
-                            formTitle: item.formTitle ?? null,
-                            action: "return",
-                          })}
+                          onClick={() => setActionModal({ submissionId: item.submissionId, formTitle: item.formTitle ?? null, action: "return" })}
                           className="text-xs px-2.5 py-1 rounded text-white font-semibold bg-red-600 transition-opacity hover:opacity-90"
                         >
                           Return
                         </button>
+                        {/* Admin-only: Edit report number */}
+                        {isAdmin && (
+                          <button
+                            onClick={() => setEditModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null })}
+                            className="text-xs px-2.5 py-1 border border-[#C49A28] rounded text-[#C49A28] font-semibold hover:bg-amber-50 transition-colors"
+                            title="Edit Report Number (Admin only)"
+                          >
+                            Edit No.
+                          </button>
+                        )}
+                        {/* Admin-only: Delete */}
+                        {isAdmin && (
+                          <button
+                            onClick={() => setDeleteModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
+                            className="text-xs px-2.5 py-1 border border-red-300 rounded text-red-600 font-semibold hover:bg-red-50 transition-colors"
+                            title="Delete Submission (Admin only)"
+                          >
+                            Delete
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -437,7 +569,26 @@ export default function ApprovalQueue() {
           formTitle={actionModal.formTitle}
           action={actionModal.action}
           onClose={() => setActionModal(null)}
-          onDone={handleDone}
+          onDone={() => handleDone()}
+        />
+      )}
+
+      {editModal && (
+        <EditReportNumberModal
+          submissionId={editModal.submissionId}
+          currentReportNumber={editModal.reportNumber}
+          onClose={() => setEditModal(null)}
+          onDone={() => handleDone("Report number updated.")}
+        />
+      )}
+
+      {deleteModal && (
+        <DeleteModal
+          submissionId={deleteModal.submissionId}
+          reportNumber={deleteModal.reportNumber}
+          formTitle={deleteModal.formTitle}
+          onClose={() => setDeleteModal(null)}
+          onDone={() => handleDone("Submission deleted.")}
         />
       )}
 

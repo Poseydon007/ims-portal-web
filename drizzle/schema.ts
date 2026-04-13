@@ -146,6 +146,7 @@ export type InsertJhaSubmission = typeof jhaSubmissions.$inferInsert;
 export const formResponses = mysqlTable("form_responses", {
   id: int("id").autoincrement().primaryKey(),
   submissionId: varchar("submissionId", { length: 64 }).notNull().unique(),
+  reportNumber: varchar("reportNumber", { length: 32 }),      // e.g. NM-2026-001, auto-generated server-side
   formCode: varchar("formCode", { length: 64 }).notNull(),   // e.g. TE-IMS-FRM-HSE-003
   formTitle: varchar("formTitle", { length: 255 }),
   responseData: text("responseData").notNull(),               // JSON blob of all form fields

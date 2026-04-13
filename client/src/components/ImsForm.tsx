@@ -8,7 +8,7 @@
  *   required role (field_worker < supervisor < admin).
  * - Applies True East IMS branding (navy #081C2E, gold #C49A28).
  * - Handles form submission via the tRPC formSubmissions.submit endpoint.
- * - Shows digital approval workflow status after submission.
+ * - Shows digital approval workflow status and auto-generated report number after submission.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -114,7 +114,7 @@ function WorkflowSteps({ currentStatus }: { currentStatus: string }) {
     <div className="flex items-center gap-2 flex-wrap">
       {steps.map((step, i) => {
         const isSubmitted = i === 0;
-        const stepStatusIndex = i - 1; // steps[0] = submitted (no status), steps[1..3] = statuses
+        const stepStatusIndex = i - 1;
         const isDone = isSubmitted || (currentIndex >= stepStatusIndex && currentIndex >= 0);
         const isActive = !isSubmitted && currentStatus === step.key;
 
@@ -165,6 +165,7 @@ export default function ImsForm({
   const { user, loading } = useImsAuth();
   const [submitted, setSubmitted] = useState(false);
   const [submissionId, setSubmissionId] = useState<string | null>(null);
+  const [reportNumber, setReportNumber] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const surveyRef = useRef<Model | null>(null);
 
@@ -174,6 +175,7 @@ export default function ImsForm({
     onSuccess: (data) => {
       setSubmitted(true);
       setSubmissionId(data.submissionId);
+      setReportNumber(data.reportNumber ?? null);
     },
     onError: (err) => {
       setSubmitError(err.message || "Submission failed. Please try again.");
@@ -205,7 +207,6 @@ export default function ImsForm({
       [identityFields.employeeId ?? "employeeId"]: user.employeeId ?? "",
       [identityFields.department ?? "department"]: user.department ?? "",
       [identityFields.position ?? "position"]: user.position ?? "",
-      // Also fill sign-off reported-by name if it exists in the form
       signoffReportedByName: user.fullName ?? "",
     };
     Object.entries(fieldMap).forEach(([name, value]) => {
@@ -235,17 +236,38 @@ export default function ImsForm({
       <div className="max-w-4xl mx-auto p-6">
         <div className="border border-[#dde3ec] rounded-lg shadow-sm overflow-hidden">
           {/* Header */}
-          <div className="bg-[#081C2E] px-6 py-4">
+          <div className="bg-[#081C2E] px-6 py-4 flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#C49A28] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">✓</div>
             <h2 className="text-white text-lg font-bold">Form Submitted Successfully</h2>
           </div>
+
           <div className="bg-white p-6">
-            <p className="text-sm text-gray-700 mb-4">
+            <p className="text-sm text-gray-700 mb-5">
               Your <strong>{title}</strong> has been submitted and is now awaiting Supervisor Review.
             </p>
 
+            {/* Report Number — primary reference */}
+            {reportNumber && (
+              <div
+                className="mb-5 p-4 rounded-lg border-2 flex flex-col gap-1"
+                style={{ borderColor: "#C49A28", backgroundColor: "#fffbf0" }}
+              >
+                <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "#C49A28" }}>
+                  Report Number
+                </div>
+                <div className="text-2xl font-extrabold font-mono" style={{ color: "#081C2E" }}>
+                  {reportNumber}
+                </div>
+                <div className="text-xs text-gray-500 mt-0.5">
+                  Quote this number in all follow-up communications, emails, and investigations related to this report.
+                </div>
+              </div>
+            )}
+
+            {/* System ID — secondary, smaller */}
             {submissionId && (
-              <div className="mb-5 p-3 bg-gray-50 border border-[#dde3ec] rounded text-xs font-mono text-gray-600">
-                Submission ID: <strong>{submissionId}</strong>
+              <div className="mb-5 p-2.5 bg-gray-50 border border-[#dde3ec] rounded text-xs font-mono text-gray-500">
+                System ID: {submissionId}
               </div>
             )}
 
@@ -257,9 +279,9 @@ export default function ImsForm({
               <WorkflowSteps currentStatus="pending_supervisor_review" />
             </div>
 
-            <div className="text-xs text-gray-500 mb-6 p-3 bg-amber-50 border border-amber-200 rounded">
-              <strong>Next step:</strong> A Supervisor will review and approve this submission.
-              You will be notified when the status changes.
+            <div className="text-xs text-gray-600 mb-6 p-3 bg-amber-50 border border-amber-200 rounded leading-relaxed">
+              <strong>Next step:</strong> A Supervisor will review and approve this submission in the portal.
+              The Supervisor and HSE Officer will be notified automatically. You will be notified when the status changes.
             </div>
 
             <Link href="/" className="text-sm text-[#C49A28] hover:underline font-semibold">
@@ -296,6 +318,7 @@ export default function ImsForm({
         <h1 className="text-2xl font-bold text-[#081C2E] uppercase tracking-tight mb-1">{title}</h1>
         <p className="text-xs text-gray-500">
           Complete this form and submit. All fields marked * are required.
+          A unique report number will be auto-generated upon submission.
         </p>
       </header>
 

@@ -97,12 +97,12 @@ export function TopNav() {
             {/* Admin-only tabs */}
             {!loading && isAuthenticated && user?.role === "admin" && (
               <>
-                <Link href="/admin/submissions">
+                <Link href="/admin/all-submissions">
                   <span
                     className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
                     style={{
-                      color: isActive("/admin/submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                      borderBottom: isActive("/admin/submissions") ? "2px solid #C49A28" : "2px solid transparent",
+                      color: isActive("/admin/all-submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                      borderBottom: isActive("/admin/all-submissions") ? "2px solid #C49A28" : "2px solid transparent",
                     }}
                   >
                     Submissions

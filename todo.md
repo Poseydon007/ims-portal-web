@@ -172,3 +172,14 @@
 - [x] Approval Queue: Return for correction with required comment
 - [x] Nav link "Approvals" added to header for supervisors and admins
 - [x] Provisory test users: Abduljawad Bouguelta (admin/HSE Officer) + Mahmoud Sifa (supervisor)
+
+## Auto-Generated Report Numbers + Admin Controls
+- [ ] Server-side: reportNumber generation logic (e.g. NM-2026-001, sequential per formCode per year)
+- [ ] DB: add reportNumber column to formResponses table, push migration
+- [ ] Submit procedure: auto-generate reportNumber on server before insert
+- [ ] FRM-HSE-003: show reportNumber read-only on success screen
+- [ ] ImsForm: display reportNumber prominently on success screen
+- [ ] Admin-only: allow admin to edit reportNumber on a submission
+- [ ] Admin-only: allow admin to delete a submission (with confirmation)
+- [ ] Submissions Admin page: show reportNumber column, add delete button (admin only)
+- [ ] Approval Queue: show reportNumber in submission list and detail view
