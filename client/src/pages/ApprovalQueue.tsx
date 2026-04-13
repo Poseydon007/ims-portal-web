@@ -7,13 +7,70 @@
  * - Admins can also edit the report number or delete a submission
  */
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 
-// ── Status badge ─────────────────────────────────────────────────────────────
+// ── Smart field value renderer + Status badge ───────────────────────────────
+function formatKey(key: string): string {
+  return key.replace(/_/g, " ").replace(/([A-Z])/g, " $1").replace(/\b\w/g, c => c.toUpperCase()).trim();
+}
+
+function renderFieldValue(val: unknown): React.ReactNode {
+  if (val === null || val === undefined || val === "") return <span className="text-gray-400">—</span>;
+  if (typeof val === "boolean") return val ? "Yes" : "No";
+
+  let parsed: unknown = val;
+  if (typeof val === "string") {
+    const trimmed = val.trim();
+    if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+      try { parsed = JSON.parse(trimmed); } catch { /* leave as string */ }
+    }
+  }
+
+  if (Array.isArray(parsed)) {
+    if (parsed.length === 0) return <span className="text-gray-400">—</span>;
+    if (typeof parsed[0] === "object" && parsed[0] !== null) {
+      const keys = Object.keys(parsed[0] as Record<string, unknown>);
+      return (
+        <table className="w-full border-collapse text-xs mt-0.5" style={{ borderRadius: 4 }}>
+          <thead>
+            <tr style={{ backgroundColor: "#081C2E" }}>
+              {keys.map(k => <th key={k} className="text-left py-1 px-2 text-white font-semibold" style={{ fontSize: 10 }}>{formatKey(k)}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {(parsed as Record<string, unknown>[]).map((row, i) => (
+              <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#f8fafc" : "#fff", borderBottom: "1px solid #edf0f5" }}>
+                {keys.map(k => <td key={k} className="py-1 px-2" style={{ fontSize: 11 }}>{row[k] == null || row[k] === "" ? "—" : String(row[k])}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+    return (
+      <ul className="list-none pl-0 m-0 space-y-0.5">
+        {(parsed as unknown[]).map((item, i) => <li key={i}>{String(item)}</li>)}
+      </ul>
+    );
+  }
+
+  if (typeof parsed === "object" && parsed !== null) {
+    return (
+      <div className="space-y-0.5">
+        {Object.entries(parsed as Record<string, unknown>).map(([k, v]) => (
+          <div key={k}><span className="font-semibold text-gray-500">{formatKey(k)}:</span> {v == null ? "—" : String(v)}</div>
+        ))}
+      </div>
+    );
+  }
+
+  return <span>{String(parsed)}</span>;
+}
+
 function StatusBadge({ status }: { status: string }) {
   const config: Record<string, { label: string; bg: string; text: string }> = {
     pending_supervisor_review:    { label: "Pending Supervisor",    bg: "#fff3cd", text: "#856404" },
@@ -342,7 +399,7 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
                           {key.replace(/([A-Z])/g, " $1").replace(/_/g, " ").trim()}
                         </td>
                         <td className="px-3 py-2 text-xs text-gray-800 align-top">
-                          {typeof val === "object" ? JSON.stringify(val, null, 2) : String(val ?? "")}
+                          {renderFieldValue(val)}
                         </td>
                       </tr>
                     ))}

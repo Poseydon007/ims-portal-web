@@ -4,7 +4,7 @@
  * Renders all form fields, report number, status, and full approval history.
  * Uses browser print (window.print()) — no external dependency needed.
  */
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 
@@ -32,12 +32,80 @@ function formatKey(key: string): string {
     .trim();
 }
 
-// ── Render a single field value ───────────────────────────────────────────────
-function renderValue(val: unknown): string {
-  if (val === null || val === undefined || val === "") return "—";
+// ── Render a single field value as JSX ───────────────────────────────────────
+function renderValue(val: unknown): React.ReactNode {
+  if (val === null || val === undefined || val === "") return <span className="text-gray-400">—</span>;
   if (typeof val === "boolean") return val ? "Yes" : "No";
-  if (typeof val === "object") return JSON.stringify(val);
-  return String(val);
+
+  // Try to parse JSON strings
+  let parsed: unknown = val;
+  if (typeof val === "string") {
+    const trimmed = val.trim();
+    if ((trimmed.startsWith("[") || trimmed.startsWith("{"))) {
+      try { parsed = JSON.parse(trimmed); } catch { /* leave as string */ }
+    }
+  }
+
+  // Array of primitives → comma-separated list
+  if (Array.isArray(parsed)) {
+    if (parsed.length === 0) return <span className="text-gray-400">—</span>;
+
+    // Array of objects → render as mini-table (e.g. corrective actions)
+    if (typeof parsed[0] === "object" && parsed[0] !== null) {
+      const keys = Object.keys(parsed[0] as Record<string, unknown>);
+      return (
+        <table className="w-full border-collapse text-xs mt-1" style={{ borderRadius: 4, overflow: "hidden" }}>
+          <thead>
+            <tr style={{ backgroundColor: "#081C2E" }}>
+              {keys.map(k => (
+                <th key={k} className="text-left py-1.5 px-2 text-white font-semibold" style={{ fontSize: 11 }}>
+                  {formatKey(k)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(parsed as Record<string, unknown>[]).map((row, i) => (
+              <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#f8fafc" : "#fff", borderBottom: "1px solid #edf0f5" }}>
+                {keys.map(k => (
+                  <td key={k} className="py-1.5 px-2" style={{ color: "#1a202c", fontSize: 12 }}>
+                    {row[k] === null || row[k] === undefined || row[k] === "" ? "—" : String(row[k])}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+
+    // Array of strings → bullet list
+    return (
+      <ul className="list-none pl-0 m-0">
+        {(parsed as unknown[]).map((item, i) => (
+          <li key={i} className="text-sm" style={{ color: "#1a202c" }}>
+            {String(item)}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  // Plain object → key: value lines
+  if (typeof parsed === "object" && parsed !== null) {
+    return (
+      <div className="text-xs space-y-0.5">
+        {Object.entries(parsed as Record<string, unknown>).map(([k, v]) => (
+          <div key={k}>
+            <span className="font-semibold text-gray-500">{formatKey(k)}:</span>{" "}
+            <span style={{ color: "#1a202c" }}>{v === null || v === undefined ? "—" : String(v)}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return <span>{String(parsed)}</span>;
 }
 
 // ── Skip internal fields ──────────────────────────────────────────────────────
