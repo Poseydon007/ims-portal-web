@@ -183,3 +183,8 @@
 - [ ] Admin-only: allow admin to delete a submission (with confirmation)
 - [ ] Submissions Admin page: show reportNumber column, add delete button (admin only)
 - [ ] Approval Queue: show reportNumber in submission list and detail view
+
+## Fix: Report No. Field & Email Notifications
+- [ ] Remove Near Miss Report No. input field entirely from FRM-HSE-003 form (must not appear at all)
+- [ ] Set up email notifications to supervisor and HSE officer when form submitted
+- [ ] Set up email notifications when approval action taken (approved/returned)

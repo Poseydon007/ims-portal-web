@@ -169,6 +169,12 @@ export default function ImsForm({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const surveyRef = useRef<Model | null>(null);
 
+  // Pre-generate report number when form opens
+  const { data: preGenData } = trpc.formSubmissions.preGenerateReportNumber.useQuery(
+    { formCode },
+    { enabled: !!user && !submitted }
+  );
+
   const readOnly = !canSubmit(user?.role, minRole);
 
   const mutation = trpc.formSubmissions.submit.useMutation({
@@ -198,6 +204,16 @@ export default function ImsForm({
   useEffect(() => {
     applyImsTheme(survey, readOnly);
   }, [readOnly]);
+
+  // Inject pre-generated report number into the reportNo field (read-only)
+  useEffect(() => {
+    if (!preGenData?.reportNumber) return;
+    const q = survey.getQuestionByName("reportNo");
+    if (q) {
+      survey.setValue("reportNo", preGenData.reportNumber);
+      q.readOnly = true;
+    }
+  }, [preGenData]);
 
   // Auto-fill identity fields from logged-in user
   useEffect(() => {
@@ -284,9 +300,21 @@ export default function ImsForm({
               The Supervisor and HSE Officer will be notified automatically. You will be notified when the status changes.
             </div>
 
-            <Link href="/" className="text-sm text-[#C49A28] hover:underline font-semibold">
-              ← Back to Portal Home
-            </Link>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <Link href="/" className="text-sm text-[#C49A28] hover:underline font-semibold">
+                ← Back to Portal Home
+              </Link>
+              {submissionId && (
+                <a
+                  href={`/submissions/${submissionId}/print`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded border border-[#081C2E] text-[#081C2E] hover:bg-[#081C2E] hover:text-white transition-colors"
+                >
+                  🖨 Print / Save as PDF
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

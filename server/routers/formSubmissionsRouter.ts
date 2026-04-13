@@ -5,6 +5,13 @@ import { getDb } from "../db";
 import { formResponses, approvalSteps } from "../../drizzle/schema";
 import { eq, desc, and, like, sql } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
+import {
+  notifyNewSubmission,
+  notifyForwardedToHse,
+  notifyReturned,
+  notifyClosed,
+} from "../sendpulseEmail";
+import { imsUsers } from "../../drizzle/schema";
 
 // ── Workflow definition ──────────────────────────────────────────────────────
 // Step 1: Supervisor Review  (role: supervisor or admin)
@@ -146,6 +153,26 @@ export const formSubmissionsRouter = router({
           content: `Submitted by ${ctx.imsUser.fullName ?? ctx.imsUser.email}. Pending Supervisor Review.\nReport No: ${reportNumber}\nID: ${submissionId}`,
         }).catch(() => {/* non-blocking */});
 
+        // Email all supervisors and admins about the new submission
+        const portalUrl = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
+        const reviewers = await db
+          .select({ fullName: imsUsers.fullName, email: imsUsers.email })
+          .from(imsUsers)
+          .where(sql`${imsUsers.role} IN ('supervisor', 'admin')`);
+
+        for (const reviewer of reviewers) {
+          if (!reviewer.email) continue;
+          notifyNewSubmission({
+            supervisorName:  reviewer.fullName,
+            supervisorEmail: reviewer.email,
+            reportNumber,
+            formTitle:       input.formTitle ?? input.formCode,
+            submittedByName: ctx.imsUser.fullName ?? ctx.imsUser.email,
+            submittedAt:     new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh" }),
+            portalUrl,
+          }).catch(() => {});
+        }
+
         return { success: true, submissionId, reportNumber };
       } catch (err) {
         console.error("[formSubmissions.submit] Error:", err);
@@ -198,6 +225,51 @@ export const formSubmissionsRouter = router({
         content: `${submission.formTitle} (${submission.reportNumber ?? input.submissionId}) approved by ${ctx.imsUser.fullName ?? ctx.imsUser.email}.\nStatus → ${currentStep.nextStatus}`,
       }).catch(() => {});
 
+      // Send email notifications based on the step
+      const portalUrl2 = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
+      const approvedAt = new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh" });
+      const rptNo = submission.reportNumber ?? input.submissionId;
+
+      if (currentStep.nextStatus === "pending_hse_approval") {
+        // Step 1 approved — notify all admins (HSE Officers)
+        const admins = await db
+          .select({ fullName: imsUsers.fullName, email: imsUsers.email })
+          .from(imsUsers)
+          .where(eq(imsUsers.role, "admin"));
+        for (const admin of admins) {
+          if (!admin.email) continue;
+          notifyForwardedToHse({
+            hseOfficerName:  admin.fullName,
+            hseOfficerEmail: admin.email,
+            reportNumber:    rptNo,
+            formTitle:       submission.formTitle,
+            submittedByName: submission.submittedByName ?? "Unknown",
+            supervisorName:  ctx.imsUser.fullName ?? ctx.imsUser.email,
+            approvedAt,
+            portalUrl: portalUrl2,
+          }).catch(() => {});
+        }
+      } else if (currentStep.nextStatus === "closed") {
+        // Step 2 approved — notify the original submitter
+        if (submission.submittedByUserId) {
+          const [submitter] = await db
+            .select({ fullName: imsUsers.fullName, email: imsUsers.email })
+            .from(imsUsers)
+            .where(eq(imsUsers.id, submission.submittedByUserId));
+          if (submitter?.email) {
+            notifyClosed({
+              submitterName:  submitter.fullName,
+              submitterEmail: submitter.email,
+              reportNumber:   rptNo,
+              formTitle:      submission.formTitle,
+              closedByName:   ctx.imsUser.fullName ?? ctx.imsUser.email,
+              closedAt:       approvedAt,
+              portalUrl: portalUrl2,
+            }).catch(() => {});
+          }
+        }
+      }
+
       return { success: true, newStatus: currentStep.nextStatus };
     }),
 
@@ -243,6 +315,28 @@ export const formSubmissionsRouter = router({
         title:   `Form Returned — ${submission.formTitle}`,
         content: `${submission.reportNumber ?? input.submissionId} returned by ${ctx.imsUser.fullName ?? ctx.imsUser.email}.\nReason: ${input.comment}`,
       }).catch(() => {});
+
+      // Email the original submitter about the return
+      if (submission.submittedByUserId) {
+        const portalUrl3 = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
+        const [submitter] = await db
+          .select({ fullName: imsUsers.fullName, email: imsUsers.email })
+          .from(imsUsers)
+          .where(eq(imsUsers.id, submission.submittedByUserId));
+        if (submitter?.email) {
+          notifyReturned({
+            submitterName:  submitter.fullName,
+            submitterEmail: submitter.email,
+            reportNumber:   submission.reportNumber ?? input.submissionId,
+            formTitle:      submission.formTitle,
+            returnedByName: ctx.imsUser.fullName ?? ctx.imsUser.email,
+            returnedByRole: ctx.imsUser.role,
+            comment:        input.comment,
+            returnedAt:     new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh" }),
+            portalUrl: portalUrl3,
+          }).catch(() => {});
+        }
+      }
 
       return { success: true, newStatus: "returned" };
     }),
@@ -392,6 +486,16 @@ export const formSubmissionsRouter = router({
         .where(eq(formResponses.formCode, input.formCode))
         .orderBy(desc(formResponses.submittedAt));
       return rows.map(r => ({ ...r, responseData: JSON.parse(r.responseData ?? "{}") }));
+    }),
+
+  // ── Pre-generate a report number when form opens (read-only display before submit) ──
+  preGenerateReportNumber: imsProtectedProcedure
+    .input(z.object({ formCode: z.string() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const reportNumber = await generateReportNumber(db, input.formCode);
+      return { reportNumber };
     }),
 
   listAll: imsProtectedProcedure.query(async ({ ctx }) => {

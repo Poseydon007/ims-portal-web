@@ -138,6 +138,9 @@ import FRM_SYS_006 from "@/pages/forms/FRM_SYS_006";
 import FRM_TRN_002 from "@/pages/forms/FRM_TRN_002";
 import FRM_TRN_003 from "@/pages/forms/FRM_TRN_003";
 
+// Print view
+import SubmissionPrintView from "./pages/SubmissionPrintView";
+
 // Admin
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 import AllSubmissionsAdmin from "./pages/admin/AllSubmissionsAdmin";
@@ -304,6 +307,9 @@ function Router() {
 
       {/* Approval Queue — supervisors and admins */}
       <Route path="/approvals" component={ApprovalQueue} />
+
+      {/* Print / PDF view for a submission */}
+      <Route path="/submissions/:submissionId/print" component={SubmissionPrintView} />
 
       {/* Level 2 — Category list pages */}
       <Route path="/docs/:slug" component={CategoryPage} />

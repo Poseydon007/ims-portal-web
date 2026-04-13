@@ -27,8 +27,8 @@ const SCHEMA = {
               name: "reportNo",
               title: "Near Miss Report No.",
               isRequired: true,
-              placeholder: "e.g. NM-2026-001",
-              description: "Auto-generated or assigned by HSE Officer",
+              readOnly: true,
+              description: "Auto-assigned when form is opened",
             },
             {
               type: "text",

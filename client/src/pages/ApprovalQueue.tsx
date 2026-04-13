@@ -308,14 +308,24 @@ function SubmissionDetail({ submissionId, onClose }: { submissionId: string; onC
         </div>
 
         <div className="overflow-y-auto p-5 flex-1">
-          <div className="flex flex-wrap gap-3 mb-5">
-            <StatusBadge status={data.status} />
-            <span className="text-xs text-gray-500">
-              Submitted by <strong>{data.submittedByName}</strong>
-            </span>
-            <span className="text-xs text-gray-500">
-              {data.submittedAt ? new Date(data.submittedAt).toLocaleString() : ""}
-            </span>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <div className="flex flex-wrap gap-3 items-center">
+              <StatusBadge status={data.status} />
+              <span className="text-xs text-gray-500">
+                Submitted by <strong>{data.submittedByName}</strong>
+              </span>
+              <span className="text-xs text-gray-500">
+                {data.submittedAt ? new Date(data.submittedAt).toLocaleString() : ""}
+              </span>
+            </div>
+            <a
+              href={`/submissions/${data.submissionId}/print`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded border border-[#081C2E] text-[#081C2E] hover:bg-[#081C2E] hover:text-white transition-colors flex-shrink-0"
+            >
+              🖨 Print / PDF
+            </a>
           </div>
 
           <div className="mb-5">
