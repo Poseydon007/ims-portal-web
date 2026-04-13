@@ -50,6 +50,13 @@
       "when": 1776092947285,
       "tag": "0006_slow_raza",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1776094332666,
+      "tag": "0007_black_moon_knight",
+      "breakpoints": true
     }
   ]
 }

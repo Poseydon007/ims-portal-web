@@ -290,17 +290,18 @@ const SCHEMA = {
           ],
         },
 
-        // ── Section 7: Sign-Off ──
+        // ── Section 7: Submitted By ──
+        // Supervisor Review and HSE Officer Approval are handled via the
+        // digital approval workflow — they do NOT appear as manual fields here.
         {
           type: "panel",
           name: "section_signoff",
-          title: "7. Sign-Off",
+          title: "7. Submitted By",
           elements: [
-            // Reported By sign-off — auto-filled same as Section 1
             {
               type: "text",
               name: "signoffReportedByName",
-              title: "Reported By — Full Name",
+              title: "Submitted By — Full Name",
               isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile",
@@ -308,35 +309,7 @@ const SCHEMA = {
             {
               type: "text",
               name: "signoffReportedByDate",
-              title: "Reported By — Date",
-              inputType: "date",
-              isRequired: true,
-            },
-            // Supervisor sign-off
-            {
-              type: "text",
-              name: "signoffSupervisorName",
-              title: "Reviewed By (Supervisor) — Full Name",
-              isRequired: true,
-            },
-            {
-              type: "text",
-              name: "signoffSupervisorDate",
-              title: "Reviewed By (Supervisor) — Date",
-              inputType: "date",
-              isRequired: true,
-            },
-            // HSE Officer sign-off
-            {
-              type: "text",
-              name: "signoffHseOfficerName",
-              title: "Approved By (HSE Officer) — Full Name",
-              isRequired: true,
-            },
-            {
-              type: "text",
-              name: "signoffHseOfficerDate",
-              title: "Approved By (HSE Officer) — Date",
+              title: "Submission Date",
               inputType: "date",
               isRequired: true,
             },

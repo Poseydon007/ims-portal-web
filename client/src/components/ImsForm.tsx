@@ -7,17 +7,17 @@
  * - Enforces read-only mode when the user's role is below the form's minimum
  *   required role (field_worker < supervisor < admin).
  * - Applies True East IMS branding (navy #081C2E, gold #C49A28).
- * - Handles form submission via the existing tRPC formSubmissions.submit endpoint.
+ * - Handles form submission via the tRPC formSubmissions.submit endpoint.
+ * - Shows digital approval workflow status after submission.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import "survey-core/survey-core.min.css";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
-import { useState } from "react";
 
 // ── Role hierarchy ──────────────────────────────────────────────────────────
 type ImsRole = "field_worker" | "supervisor" | "admin";
@@ -50,7 +50,6 @@ interface ImsFormProps {
   /**
    * Names of identity fields in the schema that should be auto-filled
    * and locked from the logged-in user.
-   * Defaults: ["reportedBy", "employeeId", "department", "position"]
    */
   identityFields?: {
     fullName?: string;
@@ -62,7 +61,6 @@ interface ImsFormProps {
 
 // ── Apply True East theme to SurveyJS ───────────────────────────────────────
 function applyImsTheme(survey: Model, readOnly: boolean) {
-  // Override SurveyJS CSS variables via the theme
   survey.applyTheme({
     cssVariables: {
       "--sjs-primary-backcolor": "#C49A28",
@@ -96,6 +94,64 @@ function applyImsTheme(survey: Model, readOnly: boolean) {
   }
 }
 
+// ── Workflow Step Indicator ──────────────────────────────────────────────────
+function WorkflowSteps({ currentStatus }: { currentStatus: string }) {
+  const steps = [
+    { key: "submitted",                  label: "Submitted" },
+    { key: "pending_supervisor_review",  label: "Supervisor Review" },
+    { key: "pending_hse_approval",       label: "HSE Approval" },
+    { key: "closed",                     label: "Closed" },
+  ];
+
+  const statusOrder = [
+    "pending_supervisor_review",
+    "pending_hse_approval",
+    "closed",
+  ];
+  const currentIndex = statusOrder.indexOf(currentStatus);
+
+  return (
+    <div className="flex items-center gap-2 flex-wrap">
+      {steps.map((step, i) => {
+        const isSubmitted = i === 0;
+        const stepStatusIndex = i - 1; // steps[0] = submitted (no status), steps[1..3] = statuses
+        const isDone = isSubmitted || (currentIndex >= stepStatusIndex && currentIndex >= 0);
+        const isActive = !isSubmitted && currentStatus === step.key;
+
+        return (
+          <div key={step.key} className="flex items-center gap-2">
+            {i > 0 && <div className="h-px w-6 bg-gray-300" />}
+            <div className="flex items-center gap-1.5">
+              <div
+                className={`w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold flex-shrink-0 ${
+                  isDone
+                    ? "bg-[#C49A28] text-white"
+                    : isActive
+                    ? "bg-blue-100 border-2 border-blue-400 text-blue-600"
+                    : "bg-gray-100 border border-gray-300 text-gray-400"
+                }`}
+              >
+                {isDone ? "✓" : i}
+              </div>
+              <span
+                className={`text-xs ${
+                  isDone
+                    ? "text-gray-700 font-semibold"
+                    : isActive
+                    ? "text-blue-700 font-semibold"
+                    : "text-gray-400"
+                }`}
+              >
+                {step.label}
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── Component ────────────────────────────────────────────────────────────────
 export default function ImsForm({
   formCode,
@@ -108,15 +164,16 @@ export default function ImsForm({
 }: ImsFormProps) {
   const { user, loading } = useImsAuth();
   const [submitted, setSubmitted] = useState(false);
-
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const surveyRef = useRef<Model | null>(null);
 
   const readOnly = !canSubmit(user?.role, minRole);
 
   const mutation = trpc.formSubmissions.submit.useMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
       setSubmitted(true);
+      setSubmissionId(data.submissionId);
     },
     onError: (err) => {
       setSubmitError(err.message || "Submission failed. Please try again.");
@@ -176,15 +233,39 @@ export default function ImsForm({
   if (submitted) {
     return (
       <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-green-50 border border-green-200 text-green-800 p-6 rounded-lg shadow-sm">
-          <h2 className="text-xl font-bold mb-2">Form Submitted Successfully</h2>
-          <p className="mb-4 text-sm">
-            The {title} has been recorded and the register updated.
-          </p>
+        <div className="border border-[#dde3ec] rounded-lg shadow-sm overflow-hidden">
+          {/* Header */}
+          <div className="bg-[#081C2E] px-6 py-4">
+            <h2 className="text-white text-lg font-bold">Form Submitted Successfully</h2>
+          </div>
+          <div className="bg-white p-6">
+            <p className="text-sm text-gray-700 mb-4">
+              Your <strong>{title}</strong> has been submitted and is now awaiting Supervisor Review.
+            </p>
 
-          <Link href="/" className="text-sm text-[#081C2E] hover:underline">
-            ← Back to Portal Home
-          </Link>
+            {submissionId && (
+              <div className="mb-5 p-3 bg-gray-50 border border-[#dde3ec] rounded text-xs font-mono text-gray-600">
+                Submission ID: <strong>{submissionId}</strong>
+              </div>
+            )}
+
+            {/* Workflow status */}
+            <div className="mb-6">
+              <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">
+                Approval Workflow Status
+              </div>
+              <WorkflowSteps currentStatus="pending_supervisor_review" />
+            </div>
+
+            <div className="text-xs text-gray-500 mb-6 p-3 bg-amber-50 border border-amber-200 rounded">
+              <strong>Next step:</strong> A Supervisor will review and approve this submission.
+              You will be notified when the status changes.
+            </div>
+
+            <Link href="/" className="text-sm text-[#C49A28] hover:underline font-semibold">
+              ← Back to Portal Home
+            </Link>
+          </div>
         </div>
       </div>
     );

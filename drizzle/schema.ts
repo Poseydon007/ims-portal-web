@@ -149,7 +149,8 @@ export const formResponses = mysqlTable("form_responses", {
   formCode: varchar("formCode", { length: 64 }).notNull(),   // e.g. TE-IMS-FRM-HSE-003
   formTitle: varchar("formTitle", { length: 255 }),
   responseData: text("responseData").notNull(),               // JSON blob of all form fields
-  status: mysqlEnum("status", ["submitted", "under_review", "closed"]).default("submitted").notNull(),
+  status: mysqlEnum("status", ["pending_supervisor_review", "pending_hse_approval", "returned", "closed"]).default("pending_supervisor_review").notNull(),
+  currentStep: int("currentStep").default(1),                  // 1=supervisor, 2=hse_officer, 3=closed
   submittedByUserId: int("submittedByUserId"),
   submittedByName: varchar("submittedByName", { length: 255 }),
   submittedAt: timestamp("submittedAt").defaultNow().notNull(),
@@ -158,6 +159,24 @@ export const formResponses = mysqlTable("form_responses", {
 
 export type FormResponse = typeof formResponses.$inferSelect;
 export type InsertFormResponse = typeof formResponses.$inferInsert;
+
+/**
+ * Approval Steps — tracks each approval/return action in the workflow.
+ */
+export const approvalSteps = mysqlTable("approval_steps", {
+  id: int("id").autoincrement().primaryKey(),
+  submissionId: varchar("submissionId", { length: 64 }).notNull(),  // FK to formResponses.submissionId
+  step: int("step").notNull(),                                       // 1=supervisor, 2=hse_officer
+  stepLabel: varchar("stepLabel", { length: 128 }),                  // e.g. "Supervisor Review"
+  action: mysqlEnum("action", ["approved", "returned"]).notNull(),
+  actorUserId: int("actorUserId").notNull(),
+  actorName: varchar("actorName", { length: 255 }),
+  actorRole: varchar("actorRole", { length: 64 }),
+  comment: text("comment"),
+  actionAt: timestamp("actionAt").defaultNow().notNull(),
+});
+export type ApprovalStep = typeof approvalSteps.$inferSelect;
+export type InsertApprovalStep = typeof approvalSteps.$inferInsert;
 
 // ── IMS Master Document Register ──
 export const imsRegister = mysqlTable("ims_register", {

@@ -158,3 +158,17 @@
 - [ ] FRM-HSE-011 — Permit to Work (PTW) (live form + DB register)
 - [ ] FRM-HSE-022 — Incident and Accident Investigation Report (live form + DB register)
 - [ ] FRM-HSE-020 — Fire Extinguisher Inspection Log (live form + DB register)
+
+## Digital Approval Workflow — FRM-HSE-003 Pilot
+- [x] DB schema: formResponses table with status, currentStep, submittedByName fields
+- [x] DB schema: approvalSteps table with step, action, actorName, actorRole, comment fields
+- [x] Workflow engine: WORKFLOW_STEPS config (Supervisor Review → HSE Approval → Closed)
+- [x] tRPC procedures: submit, approve, returnForCorrection, getSubmission, listPendingApprovals
+- [x] FRM-HSE-003: Remove manual Supervisor and HSE Officer sign-off fields
+- [x] FRM-HSE-003: Show digital workflow status on success screen
+- [x] Approval Queue page at /approvals — visible to supervisors and admins
+- [x] Approval Queue: View submission detail with form data and approval history
+- [x] Approval Queue: Approve action with optional comment
+- [x] Approval Queue: Return for correction with required comment
+- [x] Nav link "Approvals" added to header for supervisors and admins
+- [x] Provisory test users: Abduljawad Bouguelta (admin/HSE Officer) + Mahmoud Sifa (supervisor)

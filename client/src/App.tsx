@@ -141,6 +141,7 @@ import FRM_TRN_003 from "@/pages/forms/FRM_TRN_003";
 // Admin
 import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 import UserManagement from "./pages/admin/UserManagement";
+import ApprovalQueue from "./pages/ApprovalQueue";
 
 // Auth
 import Login from "./pages/Login";
@@ -298,6 +299,9 @@ function Router() {
       {/* Admin */}
       <Route path="/admin/submissions" component={SubmissionsAdmin} />
       <Route path="/admin/users" component={UserManagement} />
+
+      {/* Approval Queue — supervisors and admins */}
+      <Route path="/approvals" component={ApprovalQueue} />
 
       {/* Level 2 — Category list pages */}
       <Route path="/docs/:slug" component={CategoryPage} />

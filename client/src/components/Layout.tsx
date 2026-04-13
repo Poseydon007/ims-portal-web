@@ -79,6 +79,21 @@ export function TopNav() {
               </span>
             </Link>
 
+            {/* Approval Queue — supervisor + admin */}
+            {!loading && isAuthenticated && (user?.role === "supervisor" || user?.role === "admin") && (
+              <Link href="/approvals">
+                <span
+                  className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
+                  style={{
+                    color: isActive("/approvals") ? "#C49A28" : "rgba(255,255,255,0.85)",
+                    borderBottom: isActive("/approvals") ? "2px solid #C49A28" : "2px solid transparent",
+                  }}
+                >
+                  Approvals
+                </span>
+              </Link>
+            )}
+
             {/* Admin-only tabs */}
             {!loading && isAuthenticated && user?.role === "admin" && (
               <>
