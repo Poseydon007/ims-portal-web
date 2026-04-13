@@ -116,7 +116,7 @@ export const educationTopics: EducationTopic[] = [
         description: "Complete reference guide for the True East Day-to-Day Document (DTD) numbering and registration system. Covers code structure, how to register a document, the document lifecycle, all 16 type codes, 18 department codes, golden rules, and FAQ.",
         type: "manual",
         available: true,
-        url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/DTDInstructionsManual_0c522e70.html",
+        url: "/DTDInstructionsManual.html",
         tags: ["DTD", "document control", "registration", "numbering"],
       },
       {
@@ -125,7 +125,7 @@ export const educationTopics: EducationTopic[] = [
         description: "5-module instructor-led training guide for the DTD system. Includes exercises, real-world scenarios, a post-training quiz, and trainer notes. Use for onboarding sessions and staff inductions.",
         type: "manual",
         available: true,
-        url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/DTDTrainingManual_ebf54117.html",
+        url: "/DTDTrainingManual.html",
         tags: ["DTD", "training", "onboarding", "quiz"],
       },
     ],

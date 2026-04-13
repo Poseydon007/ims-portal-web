@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTD System — Instructions Manual | True East Mining</title>
+<style>
+/* System fonts - fully self-contained, no external dependencies */
+
+:root {
+  --navy: #1B2838;
+  --navy-light: #2B4E8C;
+  --navy-dark: #131E2B;
+  --gold: #D4A843;
+  --gold-light: #F0D68A;
+  --teal: #2EAAAA;
+  --teal-light: #3ECFCF;
+  --text: #2D3748;
+  --text-light: #718096;
+  --bg: #F7F8FA;
+  --white: #FFFFFF;
+  --border: #E2E8F0;
+  --success: #38A169;
+  --warning: #D69E2E;
+  --danger: #E53E3E;
+  --info: #3182CE;
+  --card-shadow: 0 1px 3px rgba(31,56,100,0.08), 0 4px 12px rgba(31,56,100,0.04);
+  --card-hover: 0 4px 16px rgba(31,56,100,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Arial, 'Segoe UI', Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === HEADER === */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(31,56,100,0.3);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 72px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-logo {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.header-logo-img {
+  width: 56px; height: 56px;
+  object-fit: contain;
+}
+
+.header-arabic {
+  font-size: 0.72rem;
+  opacity: 0.5;
+  font-weight: 400;
+  direction: rtl;
+}
+
+.header-title h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.header-title span {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.header-meta {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: right;
+  line-height: 1.4;
+}
+
+/* === SEARCH === */
+.search-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 0.8rem;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.8rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-family: Arial, 'Segoe UI', Helvetica, sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.search-bar input::placeholder { color: rgba(255,255,255,0.4); }
+.search-bar input:focus { background: rgba(255,255,255,0.2); }
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-wrapper::before {
+  content: "⌕";
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  opacity: 0.5;
+  color: white;
+}
+
+/* === LAYOUT === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  min-height: calc(100vh - 120px);
+}
+
+/* === SIDEBAR NAV === */
+.sidebar {
+  position: sticky;
+  top: 140px;
+  align-self: start;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+.nav-section {
+  margin-bottom: 1.5rem;
+}
+
+.nav-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  padding: 0 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+
+.nav-link:hover {
+  background: white;
+  color: var(--navy);
+  border-left-color: var(--gold);
+}
+
+.nav-link.active {
+  background: white;
+  color: var(--navy);
+  font-weight: 600;
+  border-left-color: var(--navy);
+  box-shadow: var(--card-shadow);
+}
+
+/* === MAIN CONTENT === */
+.content {
+  min-width: 0;
+}
+
+.section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.2s;
+}
+
+.section:hover { box-shadow: var(--card-hover); }
+
+.section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section h2 .icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--gold) 0%, #B8860B 100%);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 1.2rem 0 0.5rem;
+}
+
+.section p {
+  margin-bottom: 0.8rem;
+  font-size: 0.92rem;
+}
+
+/* === CODE BLOCKS === */
+.code-block {
+  background: var(--navy-dark);
+  color: #E2E8F0;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.82rem;
+  margin: 0.8rem 0;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.code-block .highlight { color: var(--gold-light); font-weight: 500; }
+.code-block .dim { opacity: 0.5; }
+
+/* === STEP BLOCKS === */
+.steps {
+  counter-reset: step;
+  margin: 1rem 0;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.step:last-child { border-bottom: none; }
+
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  width: 32px; height: 32px;
+  background: var(--navy);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.step-content { flex: 1; }
+.step-content strong { color: var(--navy); }
+.step-content p { margin: 0.3rem 0 0; font-size: 0.88rem; color: var(--text-light); }
+
+/* === TABLES === */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th {
+  background: var(--navy);
+  color: white;
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:nth-child(even) { background: #F8FAFC; }
+tr:hover { background: #EDF2F7; }
+
+td code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: #EDF2F7;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+/* === ALERTS === */
+.alert {
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  font-size: 0.88rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.alert-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+.alert-info { background: #EBF8FF; border-left: 3px solid var(--info); color: #2A4365; }
+.alert-warning { background: #FFFFF0; border-left: 3px solid var(--warning); color: #744210; }
+.alert-danger { background: #FFF5F5; border-left: 3px solid var(--danger); color: #742A2A; }
+.alert-success { background: #F0FFF4; border-left: 3px solid var(--success); color: #22543D; }
+
+/* === COLLAPSIBLE FAQ === */
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: 0.8rem 1rem;
+  background: #F8FAFC;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.faq-question:hover { background: #EDF2F7; }
+
+.faq-question::after {
+  content: "+";
+  font-size: 1.2rem;
+  font-weight: 400;
+  transition: transform 0.2s;
+}
+
+.faq-item.open .faq-question::after {
+  content: "−";
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-answer-inner {
+  padding: 1rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* === BADGES === */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-available { background: #C6F6D5; color: #22543D; }
+.badge-draft { background: #FEFCBF; color: #744210; }
+.badge-issued { background: #BEE3F8; color: #2A4365; }
+.badge-voided { background: #FED7D7; color: #742A2A; }
+.badge-superseded { background: #E9D8FD; color: #44337A; }
+
+/* === QUICK REF CARDS === */
+.quick-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.quick-card {
+  background: #F8FAFC;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.quick-card .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  margin-bottom: 0.3rem;
+}
+
+.quick-card .value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* === FLOW DIAGRAM === */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.flow-arrow { color: var(--text-light); font-size: 1.2rem; }
+
+.flow-available { background: #C6F6D5; color: #22543D; }
+.flow-draft { background: #FEFCBF; color: #744210; }
+.flow-issued { background: #BEE3F8; color: #2A4365; }
+.flow-voided { background: #FED7D7; color: #742A2A; }
+.flow-superseded { background: #E9D8FD; color: #44337A; }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .container { grid-template-columns: 1fr; padding: 1rem; }
+  .sidebar { display: none; }
+  .header-meta { display: none; }
+  .header-top { padding: 1rem; }
+}
+
+@media print {
+  .header { position: static; }
+  .sidebar { display: none; }
+  .container { grid-template-columns: 1fr; }
+  .section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #A0AEC0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-brand">
+      <img src="data:image/png;base64,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" alt="True East Mining" class="header-logo-img">
+      <div class="header-title">
+        <h1>TRUE EAST MINING COMPANY</h1>
+        <span class="header-arabic">الشرق الحقيقي</span>
+        <span>DTD System — Instructions Manual</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <strong>IMS DOCUMENT PORTAL</strong><br>
+      Internal Use Only
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="Search instructions... (e.g. 'how to register', 'voided', 'purchase order')" />
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">Getting Started</div>
+      <a href="#overview" class="nav-link active">What is DTD?</a>
+      <a href="#quickref" class="nav-link">Quick Reference</a>
+      <a href="#code-structure" class="nav-link">Code Structure</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">How To</div>
+      <a href="#register" class="nav-link">Register a Document</a>
+      <a href="#lifecycle" class="nav-link">Document Lifecycle</a>
+      <a href="#find-code" class="nav-link">Find Your Code</a>
+      <a href="#file-naming" class="nav-link">Name Your File</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Reference</div>
+      <a href="#type-codes" class="nav-link">16 Type Codes</a>
+      <a href="#dept-codes" class="nav-link">18 Department Codes</a>
+      <a href="#dept-type-map" class="nav-link">Who Produces What</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Rules & Help</div>
+      <a href="#rules" class="nav-link">Golden Rules</a>
+      <a href="#mistakes" class="nav-link">Common Mistakes</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#contacts" class="nav-link">Support & Contacts</a>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- OVERVIEW -->
+    <div class="section" id="overview">
+      <h2><span class="icon">📋</span> What is the DTD System?</h2>
+      <p>The <strong>Day-to-Day Document (DTD)</strong> system is True East Mining's official numbering and registration system for all operational documents produced during daily business — letters, reports, purchase orders, tenders, invoices, drawings, meeting minutes, and more.</p>
+      <p>Every document produced by True East that leaves your desk, goes to a client, vendor, government entity, or gets filed officially <strong>must</strong> be registered in the DTD Register and carry a unique DTD code.</p>
+
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div><strong>DTD vs IMS:</strong> The IMS Library (TE-IMS) contains controlled templates, policies, and procedures. The DTD system (TE-DTD) is for the operational documents you produce daily using those templates. Think of IMS as the rulebook, DTD as the game.</div>
+      </div>
+
+      <div class="quick-cards">
+        <div class="quick-card">
+          <div class="label">Prefix</div>
+          <div class="value">TE-DTD</div>
+        </div>
+        <div class="quick-card">
+          <div class="label">Document Types</div>
+          <div class="value">16</div>
+        </div>
+        <div class="quick-card">
+          <div class="label">Departments</div>
+          <div class="value">18</div>
+        </div>
+        <div class="quick-card">
+          <div class="label">Pre-allocated Codes</div>
+          <div class="value">581</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK REF -->
+    <div class="section" id="quickref">
+      <h2><span class="icon">⚡</span> Quick Reference</h2>
+      <p>Need to register a document fast? Here's the 60-second version:</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-content">
+            <strong>Open the DTD Register</strong>
+            <p>Go to the shared DTD Register (Excel/Google Sheets). Find the tab matching your document type.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Find your department's section</strong>
+            <p>Scroll to your department. Codes are grouped by department within each tab.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Claim the next available code</strong>
+            <p>Find the first row with Status = <span class="badge badge-available">Available</span>. Change it to <span class="badge badge-draft">Draft</span>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Fill in your details</strong>
+            <p>Enter: Document Title, your name as Originator, and today's date as Date Claimed.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Use the DTD code on your document</strong>
+            <p>The code in column B is now yours. Put it in the document header/filename immediately.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Update when issued</strong>
+            <p>When the document is approved and sent, change Status to <span class="badge badge-issued">Issued</span>. Fill in Date Issued, Recipient, and Delivery Method.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CODE STRUCTURE -->
+    <div class="section" id="code-structure">
+      <h2><span class="icon">🔤</span> Code Structure</h2>
+      <p>Every DTD code follows this exact structure:</p>
+
+      <div class="code-block">
+<span class="dim">Format:</span>  <span class="highlight">TE-DTD</span>-<span class="highlight">[Type]</span>-<span class="highlight">[Dept]</span>-<span class="highlight">[Year]</span>-<span class="highlight">[Seq]</span>
+
+<span class="dim">Example:</span> TE-DTD-<span class="highlight">LTR</span>-<span class="highlight">COMM</span>-<span class="highlight">2026</span>-<span class="highlight">003</span>
+
+<span class="dim">Meaning:</span> True East | Day-to-Day | Letter | Commercial Dept | Year 2026 | 3rd in sequence
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Component</th><th>What It Means</th><th>Example</th></tr>
+          <tr><td><code>TE-DTD</code></td><td>Company prefix + Day-to-Day marker (always fixed)</td><td>TE-DTD</td></tr>
+          <tr><td><code>[Type]</code></td><td>Document type code — 3 letters from the 16 types</td><td>LTR, PO, RPT</td></tr>
+          <tr><td><code>[Dept]</code></td><td>Department code — the team producing the document</td><td>COMM, ENG, FIN</td></tr>
+          <tr><td><code>[Year]</code></td><td>Calendar year of registration (4 digits)</td><td>2026</td></tr>
+          <tr><td><code>[Seq]</code></td><td>Sequential number within the type tab (3 digits)</td><td>001, 025, 103</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- HOW TO REGISTER -->
+    <div class="section" id="register">
+      <h2><span class="icon">✏️</span> How to Register a Document</h2>
+      <h3>Before You Start</h3>
+      <p>You must register your document <strong>before</strong> you create it. The DTD code needs to exist in the register first, then goes on the document. Never create the document first and try to get a number later.</p>
+
+      <h3>Step-by-Step Process</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-content">
+            <strong>Identify your document type</strong>
+            <p>What are you producing? A letter? A report? A purchase order? Match it to one of the 16 type codes (see the <a href="#type-codes">Type Codes</a> reference below).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Open the correct tab in the DTD Register</strong>
+            <p>Each document type has its own tab. Go to the tab matching your type code (e.g., "LTR" tab for letters, "PO" tab for purchase orders).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Find your department's block</strong>
+            <p>Within the tab, codes are grouped by department. Scroll to your department's section. The Department column tells you where you are.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Claim the next available row</strong>
+            <p>Find the first row where Status = <span class="badge badge-available">Available</span>. Change the Status to <span class="badge badge-draft">Draft</span>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Fill in the required fields</strong>
+            <p><strong>Document Title:</strong> Clear, descriptive title (e.g., "Cover Letter — Ma'aden Proposal Submission")<br>
+            <strong>Originator:</strong> Your full name<br>
+            <strong>Date Claimed:</strong> Today's date</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>Use the DTD code immediately</strong>
+            <p>Copy the code from column B (e.g., <code>TE-DTD-LTR-COMM-2026-003</code>) and place it in your document header and filename.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <strong>When issued, update the register</strong>
+            <p>Once the document is approved, signed, and sent:<br>
+            — Change Status to <span class="badge badge-issued">Issued</span><br>
+            — Fill in Date Issued, Recipient, and Delivery Method</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div><strong>First come, first served.</strong> If you claim a code, it's yours. If someone else got to it first, take the next one. Never overwrite someone else's claimed row.</div>
+      </div>
+    </div>
+
+    <!-- LIFECYCLE -->
+    <div class="section" id="lifecycle">
+      <h2><span class="icon">🔄</span> Document Lifecycle</h2>
+      <p>Every DTD code goes through a defined lifecycle. The status in the register must always reflect the current state:</p>
+
+      <div class="flow">
+        <span class="flow-step flow-available">Available</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step flow-draft">Draft</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step flow-issued">Issued</span>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-light); margin-top:0.5rem;">Normal flow: pre-allocated → claimed for drafting → approved and sent</p>
+
+      <h3>Special Statuses</h3>
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Status</th><th>Meaning</th><th>When to Use</th></tr>
+          <tr><td><span class="badge badge-available">Available</span></td><td>Pre-allocated, not yet claimed</td><td>Default state — don't touch unless you're claiming it</td></tr>
+          <tr><td><span class="badge badge-draft">Draft</span></td><td>Claimed, document in preparation</td><td>The moment you decide to produce this document</td></tr>
+          <tr><td><span class="badge badge-issued">Issued</span></td><td>Document approved, signed, and sent</td><td>After final approval and delivery to recipient</td></tr>
+          <tr><td><span class="badge badge-voided">Voided</span></td><td>Cancelled before issuance</td><td>You claimed it but the document is no longer needed — add a note explaining why</td></tr>
+          <tr><td><span class="badge badge-superseded">Superseded</span></td><td>Replaced by a newer version</td><td>A new document replaces this one — note the new DTD code</td></tr>
+        </table>
+      </div>
+
+      <div class="alert alert-danger">
+        <span class="alert-icon">🚫</span>
+        <div><strong>Never go backwards.</strong> You cannot change Issued back to Draft, or Voided back to Available. Once a status advances, it stays. If you need a new version, claim a new code.</div>
+      </div>
+    </div>
+
+    <!-- FIND YOUR CODE -->
+    <div class="section" id="find-code">
+      <h2><span class="icon">🔍</span> Find Your Code</h2>
+      <p>Not sure which tab to use? Here's how to match your document to the right type code:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <tr><th>You're producing...</th><th>Go to tab</th><th>Code</th></tr>
+          <tr><td>A letter to a client, vendor, or government</td><td>LTR</td><td><code>TE-DTD-LTR-...</code></td></tr>
+          <tr><td>A tender or proposal for a bid</td><td>TND</td><td><code>TE-DTD-TND-...</code></td></tr>
+          <tr><td>A purchase order for materials or services</td><td>PO</td><td><code>TE-DTD-PO-...</code></td></tr>
+          <tr><td>A report (technical, geological, HSE, financial)</td><td>RPT</td><td><code>TE-DTD-RPT-...</code></td></tr>
+          <tr><td>An invoice or billing document</td><td>INV</td><td><code>TE-DTD-INV-...</code></td></tr>
+          <tr><td>A contract or agreement</td><td>CTR</td><td><code>TE-DTD-CTR-...</code></td></tr>
+          <tr><td>Meeting minutes or record</td><td>MTG</td><td><code>TE-DTD-MTG-...</code></td></tr>
+          <tr><td>A drawing, map, or sketch</td><td>DWG</td><td><code>TE-DTD-DWG-...</code></td></tr>
+          <tr><td>A presentation or slide deck</td><td>PRS</td><td><code>TE-DTD-PRS-...</code></td></tr>
+          <tr><td>A daily log, shift report, or record</td><td>LOG</td><td><code>TE-DTD-LOG-...</code></td></tr>
+          <tr><td>A transmittal cover sheet</td><td>TMT</td><td><code>TE-DTD-TMT-...</code></td></tr>
+          <tr><td>An internal memo</td><td>MEM</td><td><code>TE-DTD-MEM-...</code></td></tr>
+          <tr><td>A quotation or price offer</td><td>QOT</td><td><code>TE-DTD-QOT-...</code></td></tr>
+          <tr><td>A certificate (training, completion, safety)</td><td>CRT</td><td><code>TE-DTD-CRT-...</code></td></tr>
+          <tr><td>A project plan or schedule</td><td>PLN</td><td><code>TE-DTD-PLN-...</code></td></tr>
+          <tr><td>A non-conformance report</td><td>NCR</td><td><code>TE-DTD-NCR-...</code></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- FILE NAMING -->
+    <div class="section" id="file-naming">
+      <h2><span class="icon">📁</span> File Naming Convention</h2>
+      <p>Once you have your DTD code, use it in the filename:</p>
+
+      <div class="code-block">
+<span class="dim">Format:</span>  <span class="highlight">[DTD Code]</span> - <span class="highlight">[Document Title]</span>.<span class="highlight">[ext]</span>
+
+<span class="dim">Examples:</span>
+TE-DTD-LTR-COMM-2026-003 - Cover Letter Ma'aden Proposal.pdf
+TE-DTD-PO-SCM-2026-015 - Diamond Bits Supplier ABC.pdf
+TE-DTD-RPT-GEO-2026-008 - BH-15 Geological Completion Report.docx
+TE-DTD-DWG-ENG-2026-002 - Rig Foundation Layout Rev A.dwg
+      </div>
+
+      <h3>Filing Structure</h3>
+      <div class="code-block">
+<span class="dim">Folder structure:</span>
+📁 DTD Documents/
+  📁 2026/
+    📁 COMM/
+      📁 TND/    <span class="dim">(tenders)</span>
+      📁 LTR/    <span class="dim">(letters)</span>
+      📁 CTR/    <span class="dim">(contracts)</span>
+    📁 ENG/
+      📁 DWG/    <span class="dim">(drawings)</span>
+      📁 RPT/    <span class="dim">(reports)</span>
+      📁 TMT/    <span class="dim">(transmittals)</span>
+    📁 SCM/
+      📁 PO/     <span class="dim">(purchase orders)</span>
+      ...
+      </div>
+    </div>
+
+    <!-- TYPE CODES -->
+    <div class="section" id="type-codes">
+      <h2><span class="icon">📑</span> 16 Document Type Codes</h2>
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Code</th><th>Document Type</th><th>Examples</th></tr>
+          <tr><td><code>TND</code></td><td>Tenders & Proposals</td><td>Bid submissions, technical proposals, EOIs</td></tr>
+          <tr><td><code>CTR</code></td><td>Contracts & Agreements</td><td>Client contracts, vendor agreements, MOUs</td></tr>
+          <tr><td><code>LTR</code></td><td>Letters & Correspondence</td><td>Official letters, cover letters, notifications</td></tr>
+          <tr><td><code>TMT</code></td><td>Transmittals</td><td>Document transmittal cover sheets</td></tr>
+          <tr><td><code>MEM</code></td><td>Memorandums</td><td>Internal memos, staff notices</td></tr>
+          <tr><td><code>RPT</code></td><td>Reports</td><td>Technical, geological, HSE, financial reports</td></tr>
+          <tr><td><code>PRS</code></td><td>Presentations</td><td>Client presentations, project updates, pitches</td></tr>
+          <tr><td><code>INV</code></td><td>Invoices & Billing</td><td>Client invoices, progress claims, billing</td></tr>
+          <tr><td><code>QOT</code></td><td>Quotations</td><td>Price quotations, cost estimates</td></tr>
+          <tr><td><code>PO</code></td><td>Purchase Orders</td><td>Material orders, service orders, rental POs</td></tr>
+          <tr><td><code>CRT</code></td><td>Certificates</td><td>Training, completion, safety, equipment certs</td></tr>
+          <tr><td><code>MTG</code></td><td>Meeting Records</td><td>Minutes, action items, attendance records</td></tr>
+          <tr><td><code>PLN</code></td><td>Project Plans</td><td>Mobilisation plans, drilling programs, schedules</td></tr>
+          <tr><td><code>DWG</code></td><td>Drawings & Sketches</td><td>Engineering drawings, geological maps, layouts</td></tr>
+          <tr><td><code>LOG</code></td><td>Logs & Daily Records</td><td>Drilling logs, shift reports, daily HSE logs</td></tr>
+          <tr><td><code>NCR</code></td><td>Non-Conformance Reports</td><td>Quality NCRs, safety NCRs, supplier NCRs</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- DEPT CODES -->
+    <div class="section" id="dept-codes">
+      <h2><span class="icon">🏢</span> 18 Department Codes</h2>
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Code</th><th>Department</th><th>Typical DTD Documents</th></tr>
+          <tr><td><code>ADMIN</code></td><td>Administration</td><td>Letters, memos, transmittals, meeting records</td></tr>
+          <tr><td><code>COMM</code></td><td>Commercial</td><td>Tenders, contracts, letters, invoices, quotations, presentations</td></tr>
+          <tr><td><code>ENG</code></td><td>Engineering</td><td>Reports, drawings, transmittals, plans, tenders</td></tr>
+          <tr><td><code>FIN</code></td><td>Finance</td><td>Invoices, reports, memos, letters</td></tr>
+          <tr><td><code>GEO</code></td><td>Geology</td><td>Reports, drawings, logs, tenders, certificates</td></tr>
+          <tr><td><code>GOV</code></td><td>Government Relations</td><td>Letters, contracts, memos, meeting records</td></tr>
+          <tr><td><code>HR</code></td><td>Human Resources</td><td>Contracts, memos, letters, certificates, meeting records</td></tr>
+          <tr><td><code>HSE</code></td><td>Health, Safety & Environment</td><td>Reports, logs, NCRs, certificates, plans, meeting records</td></tr>
+          <tr><td><code>IT</code></td><td>Information Technology</td><td>Reports, memos, POs, contracts, meeting records</td></tr>
+          <tr><td><code>LC</code></td><td>Legal & Compliance</td><td>Contracts, letters, memos, meeting records</td></tr>
+          <tr><td><code>LOG</code></td><td>Logistics</td><td>Logs, reports, POs</td></tr>
+          <tr><td><code>MAINT</code></td><td>Maintenance</td><td>Reports, logs, POs, drawings, certificates, NCRs</td></tr>
+          <tr><td><code>OPS</code></td><td>Operations</td><td>Reports, logs, plans, POs, tenders, meeting records</td></tr>
+          <tr><td><code>PMO</code></td><td>Project Management</td><td>Plans, tenders, contracts, transmittals, presentations, meeting records</td></tr>
+          <tr><td><code>SCM</code></td><td>Supply Chain</td><td>POs, contracts, tenders, quotations, NCRs</td></tr>
+          <tr><td><code>SEC</code></td><td>Security</td><td>Logs, reports, memos, meeting records</td></tr>
+          <tr><td><code>SYS</code></td><td>Systems / IMS</td><td>IMS governance documents only (not typical DTD producer)</td></tr>
+          <tr><td><code>TRN</code></td><td>Training</td><td>Certificates, plans, reports</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- WHO PRODUCES WHAT -->
+    <div class="section" id="dept-type-map">
+      <h2><span class="icon">🗺️</span> Who Produces What</h2>
+      <p>Not every department produces every document type. The register only allocates codes where it makes operational sense. Here's the mapping:</p>
+
+      <div class="alert alert-info">
+        <span class="alert-icon">💡</span>
+        <div>If your department isn't listed for a document type you need, contact the IMS Lead. They will add your department to that tab — there may be a legitimate edge case.</div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Type</th><th>Departments Allocated</th></tr>
+          <tr><td><code>TND</code> Tenders</td><td>COMM, ENG, OPS, PMO, SCM, GEO</td></tr>
+          <tr><td><code>CTR</code> Contracts</td><td>COMM, LC, SCM, HR, ENG, PMO, OPS, IT, GOV</td></tr>
+          <tr><td><code>LTR</code> Letters</td><td>COMM, GOV, HR, LC, PMO, ENG, OPS, ADMIN, FIN, HSE, GEO, SCM, SEC</td></tr>
+          <tr><td><code>TMT</code> Transmittals</td><td>ENG, GEO, COMM, PMO, OPS, SCM, ADMIN</td></tr>
+          <tr><td><code>MEM</code> Memos</td><td>HR, ADMIN, OPS, ENG, FIN, HSE, PMO, LC, GOV, COMM, IT, SEC</td></tr>
+          <tr><td><code>RPT</code> Reports</td><td>GEO, ENG, HSE, OPS, FIN, PMO, MAINT, COMM, IT, SEC, LOG</td></tr>
+          <tr><td><code>PRS</code> Presentations</td><td>COMM, PMO, ENG, GEO, OPS, HSE, HR, FIN</td></tr>
+          <tr><td><code>INV</code> Invoices</td><td>FIN, COMM, SCM</td></tr>
+          <tr><td><code>QOT</code> Quotations</td><td>COMM, SCM, ENG</td></tr>
+          <tr><td><code>PO</code> Purchase Orders</td><td>SCM, OPS, MAINT, ENG, IT, LOG</td></tr>
+          <tr><td><code>CRT</code> Certificates</td><td>TRN, HSE, HR, ENG, OPS, MAINT, GEO</td></tr>
+          <tr><td><code>MTG</code> Meeting Records</td><td>PMO, OPS, ENG, HSE, COMM, HR, ADMIN, FIN, GEO, SCM, IT, GOV, LC, MAINT, SEC</td></tr>
+          <tr><td><code>PLN</code> Plans</td><td>PMO, ENG, OPS, HSE, GEO, COMM, MAINT</td></tr>
+          <tr><td><code>DWG</code> Drawings</td><td>ENG, GEO, MAINT, OPS</td></tr>
+          <tr><td><code>LOG</code> Logs</td><td>OPS, HSE, GEO, MAINT, LOG, SEC, ENG</td></tr>
+          <tr><td><code>NCR</code> NCRs</td><td>HSE, ENG, OPS, GEO, MAINT, SCM</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- GOLDEN RULES -->
+    <div class="section" id="rules">
+      <h2><span class="icon">⚖️</span> Golden Rules</h2>
+
+      <div class="alert alert-danger">
+        <span class="alert-icon">1️⃣</span>
+        <div><strong>Register BEFORE you create.</strong> The number must exist in the register before it appears on any document. No exceptions.</div>
+      </div>
+
+      <div class="alert alert-danger">
+        <span class="alert-icon">2️⃣</span>
+        <div><strong>Never reuse a number.</strong> Every DTD code is used exactly once, forever. Voided codes stay voided. Superseded codes stay superseded.</div>
+      </div>
+
+      <div class="alert alert-danger">
+        <span class="alert-icon">3️⃣</span>
+        <div><strong>Never delete a row.</strong> The register is a permanent record. If something is wrong, void it and add a note — don't delete it.</div>
+      </div>
+
+      <div class="alert alert-warning">
+        <span class="alert-icon">4️⃣</span>
+        <div><strong>One code = one document.</strong> Don't share a DTD code across multiple documents. Each document gets its own unique code.</div>
+      </div>
+
+      <div class="alert alert-warning">
+        <span class="alert-icon">5️⃣</span>
+        <div><strong>Update status promptly.</strong> When a document moves from Draft to Issued, update the register the same day. Don't let it go stale.</div>
+      </div>
+
+      <div class="alert alert-info">
+        <span class="alert-icon">6️⃣</span>
+        <div><strong>Use the right type and department.</strong> A purchase order is a PO, not a LTR. An engineering report from Engineering uses ENG, not COMM. If unsure, ask the IMS Lead.</div>
+      </div>
+    </div>
+
+    <!-- COMMON MISTAKES -->
+    <div class="section" id="mistakes">
+      <h2><span class="icon">❌</span> Common Mistakes to Avoid</h2>
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Mistake</th><th>Why It's Wrong</th><th>Do This Instead</th></tr>
+          <tr><td>Creating the document first, then getting a number</td><td>The document may already be sent without a controlled code</td><td>Register first, create second</td></tr>
+          <tr><td>Using someone else's DTD code</td><td>That code is permanently assigned to their document</td><td>Claim your own next available code</td></tr>
+          <tr><td>Deleting a row because you made an error</td><td>Breaks the audit trail — auditors need to see every number</td><td>Set status to Voided and add a note</td></tr>
+          <tr><td>Issuing a PO under LTR because "it's a letter to the vendor"</td><td>A PO is a purchase order regardless of format</td><td>Use the correct document type code</td></tr>
+          <tr><td>Not updating status after sending</td><td>Register shows Draft but document is already with the client</td><td>Update to Issued with date and recipient</td></tr>
+          <tr><td>Using the same code for a revised version</td><td>Each version is a separate document in DTD</td><td>Claim a new code, mark the old one Superseded</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section" id="faq">
+      <h2><span class="icon">❓</span> Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What if all codes for my department/type are used up?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">Contact the IMS Lead. They will add more pre-allocated codes to your section following the next available sequence number. The system is designed to grow.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">My department isn't listed on the tab I need. What do I do?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">Contact the IMS Lead. If there's a legitimate business reason for your department to produce that document type, they will add your department to that tab. The initial allocation covers the most common combinations, but edge cases happen.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">I claimed a code but the document was cancelled. What now?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">Change the status to <span class="badge badge-voided">Voided</span> and add a note in the Notes column explaining why (e.g., "Project cancelled by client" or "Superseded by revised scope"). Never delete the row or reuse the number.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I use the DTD system for internal draft documents?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">The DTD system is for documents that will be officially issued — to clients, vendors, government, or filed as official company records. Informal working drafts, personal notes, and scratch calculations don't need DTD codes. If in doubt, ask: "Will this document leave my desk or become an official record?" If yes, register it.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Do emails need DTD codes?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">Regular emails do not. However, if an email serves as an official letter or transmittal (e.g., a formal submission email to a client), consider creating a proper letter (LTR) or transmittal (TMT) document with a DTD code and attaching it to the email.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What happens at the start of a new year?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">The IMS Lead will create a new set of pre-allocated codes with the new year (e.g., 2027). Sequence numbers reset to 001. The previous year's register is archived but remains accessible for reference.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Where do I find the DTD Register?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">The register is maintained as a shared file (Google Sheets or SharePoint) accessible to all relevant staff. Ask your department head or the IMS Lead for the link. Bookmark it — you'll use it regularly.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Who is the IMS Lead?</div>
+        <div class="faq-answer"><div class="faq-answer-inner">The IMS Lead is the person responsible for maintaining the Integrated Management System, including the DTD Register. They manage the register, add codes, resolve disputes, and conduct periodic audits. Contact details are in the Support section below.</div></div>
+      </div>
+    </div>
+
+    <!-- CONTACTS -->
+    <div class="section" id="contacts">
+      <h2><span class="icon">📞</span> Support & Contacts</h2>
+      <p>For any questions about the DTD system, document registration, or if you encounter issues with the register:</p>
+
+      <div class="quick-cards">
+        <div class="quick-card">
+          <div class="label">Primary Contact</div>
+          <div class="value" style="font-size:0.95rem;">IMS Lead / Document Controller</div>
+        </div>
+        <div class="quick-card">
+          <div class="label">Escalation</div>
+          <div class="value" style="font-size:0.95rem;">IMS Project Lead</div>
+        </div>
+      </div>
+
+      <h3>Related Documents</h3>
+      <div class="table-wrapper">
+        <table>
+          <tr><th>Document</th><th>Code</th><th>Purpose</th></tr>
+          <tr><td>DTD Numbering Rules</td><td><code>TE-IMS-REF-SYS-003</code></td><td>Complete rules and code definitions</td></tr>
+          <tr><td>DTD Control Policy</td><td><code>TE-IMS-POL-SYS-002</code></td><td>Policy governing the DTD system</td></tr>
+          <tr><td>DTD Registration Procedure</td><td><code>TE-IMS-PROC-SYS-005</code></td><td>Detailed procedure with RACI matrix</td></tr>
+          <tr><td>DTD Registration SOP</td><td><code>TE-IMS-SOP-SYS-001</code></td><td>Quick step-by-step guide</td></tr>
+          <tr><td>DTD Document Register</td><td><code>TE-IMS-REG-COMM-001</code></td><td>The live register (this manual explains how to use it)</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const inner = answer.querySelector('.faq-answer-inner');
+    item.classList.toggle('open');
+    answer.style.maxHeight = item.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  });
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  document.querySelectorAll('.section').forEach(section => {
+    if (!query) { section.style.display = ''; return; }
+    const text = section.textContent.toLowerCase();
+    section.style.display = text.includes(query) ? '' : 'none';
+  });
+});
+
+// Active nav on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// Smooth scroll
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</scrip

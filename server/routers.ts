@@ -23,6 +23,7 @@ import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { imsAuthRouter } from "./routers/imsAuthRouter";
 import { formSubmissionsRouter } from "./routers/formSubmissionsRouter";
+import { educationRouter } from "./routers/educationRouter";
 import { appendFormSubmission } from "./googleSheets";
 
 const correctiveActionSchema = z.object({
@@ -470,6 +471,7 @@ export const registerRouter = router({
 export const appRouter = router({
   ..._appRouterBase._def.record,
   register: registerRouter,
+  education: educationRouter,
 });
 
 export type AppRouter = typeof appRouter;

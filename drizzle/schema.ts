@@ -205,3 +205,15 @@ export const imsRegister = mysqlTable("ims_register", {
 
 export type ImsRegisterEntry = typeof imsRegister.$inferSelect;
 export type InsertImsRegisterEntry = typeof imsRegister.$inferInsert;
+
+// ── Training Completions — tracks when a user passes a quiz/training resource ──
+export const trainingCompletions = mysqlTable("training_completions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),              // references imsUsers.id
+  resourceId: varchar("resourceId", { length: 64 }).notNull(), // e.g. "ims-005"
+  score: int("score"),                          // quiz score out of 100 (null if not scored)
+  passedAt: timestamp("passedAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type TrainingCompletion = typeof trainingCompletions.$inferSelect;
+export type InsertTrainingCompletion = typeof trainingCompletions.$inferInsert;

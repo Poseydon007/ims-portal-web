@@ -1,6 +1,7 @@
 // Education Topic Page — resource cards for a single topic
 // Videos: thumbnail + play icon linking to URL (no inline embed)
 // PDFs/Manuals: download/view button
+// Training completions: tracked via DB, checkmark shown on completed resources
 
 import { Link, useRoute } from "wouter";
 import Layout from "@/components/Layout";
@@ -11,6 +12,8 @@ import {
   type EducationResource,
 } from "@/lib/educationData";
 import { useImsAuth } from "@/hooks/useImsAuth";
+import { trpc } from "@/lib/trpc";
+import { useEffect, useCallback } from "react";
 
 // ── Resource type icons ──
 const TYPE_ICONS: Record<string, string> = {
@@ -22,28 +25,44 @@ const TYPE_ICONS: Record<string, string> = {
 };
 
 // ── Resource Card ──
-function ResourceCard({ resource }: { resource: EducationResource }) {
+function ResourceCard({
+  resource,
+  completed,
+  completedAt,
+  onOpen,
+}: {
+  resource: EducationResource;
+  completed: boolean;
+  completedAt?: Date;
+  onOpen: (resource: EducationResource) => void;
+}) {
   const typeColor = RESOURCE_TYPE_COLORS[resource.type];
   const typeLabel = RESOURCE_TYPE_LABELS[resource.type];
   const icon = TYPE_ICONS[resource.type] ?? "📎";
 
-  const handleOpen = () => {
-    if (resource.url) {
-      window.open(resource.url, "_blank", "noopener,noreferrer");
-    }
-  };
-
   return (
     <div
-      className="rounded border bg-white transition-all duration-200 hover:shadow-md"
-      style={{ borderColor: "#dde3ec" }}
+      className="rounded border bg-white transition-all duration-200 hover:shadow-md relative"
+      style={{ borderColor: completed ? "#22c55e" : "#dde3ec" }}
     >
+      {/* Completion badge — top right corner */}
+      {completed && (
+        <div
+          className="absolute top-2 right-2 z-10 flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold"
+          style={{ backgroundColor: "#22c55e", color: "#fff" }}
+          title={completedAt ? `Completed ${new Date(completedAt).toLocaleDateString()}` : "Completed"}
+        >
+          <span>✓</span>
+          <span>Completed</span>
+        </div>
+      )}
+
       {/* Video thumbnail area */}
       {resource.type === "video" && (
         <div
           className="relative rounded-t overflow-hidden cursor-pointer group"
           style={{ backgroundColor: "#0d2235", height: "160px" }}
-          onClick={resource.available && resource.url ? handleOpen : undefined}
+          onClick={resource.available && resource.url ? () => onOpen(resource) : undefined}
         >
           {resource.thumbnailUrl ? (
             <img
@@ -53,12 +72,7 @@ function ResourceCard({ resource }: { resource: EducationResource }) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <div
-                className="text-4xl opacity-30"
-                style={{ color: "#C49A28" }}
-              >
-                ▶
-              </div>
+              <div className="text-4xl opacity-30" style={{ color: "#C49A28" }}>▶</div>
             </div>
           )}
 
@@ -146,7 +160,7 @@ function ResourceCard({ resource }: { resource: EducationResource }) {
         {/* Action button */}
         {resource.type !== "video" && (
           <button
-            onClick={resource.available && resource.url ? handleOpen : undefined}
+            onClick={resource.available && resource.url ? () => onOpen(resource) : undefined}
             disabled={!resource.available}
             className="w-full py-2 rounded text-xs font-semibold transition-all"
             style={
@@ -165,7 +179,7 @@ function ResourceCard({ resource }: { resource: EducationResource }) {
 
         {resource.type === "video" && resource.available && resource.url && (
           <button
-            onClick={handleOpen}
+            onClick={() => onOpen(resource)}
             className="w-full py-2 rounded text-xs font-semibold transition-all"
             style={{ backgroundColor: "#C49A28", color: "#081C2E", cursor: "pointer" }}
           >
@@ -183,6 +197,43 @@ export default function EducationTopic() {
   const { isAuthenticated, loading } = useImsAuth();
 
   const topic = educationTopics.find(t => t.slug === params?.slug);
+
+  // Fetch completions for the current user
+  const { data: completions, refetch: refetchCompletions } = trpc.education.getMyCompletions.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Mutation to record a completion
+  const recordCompletion = trpc.education.recordCompletion.useMutation({
+    onSuccess: () => {
+      refetchCompletions();
+    },
+  });
+
+  // Listen for postMessage from opened training windows
+  const handleMessage = useCallback(
+    (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return;
+      const data = event.data;
+      if (data?.type === "IMS_TRAINING_COMPLETE" && data.resourceId && data.passed) {
+        recordCompletion.mutate({ resourceId: data.resourceId, score: data.score });
+      }
+    },
+    [recordCompletion]
+  );
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [handleMessage]);
+
+  // Open resource in a new window (so postMessage back works via window.opener)
+  const handleOpen = useCallback((resource: EducationResource) => {
+    if (resource.url) {
+      window.open(resource.url, "_blank");
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -227,6 +278,7 @@ export default function EducationTopic() {
 
   const availableCount = topic.resources.filter(r => r.available).length;
   const comingSoonCount = topic.resources.filter(r => !r.available).length;
+  const completedCount = topic.resources.filter(r => completions?.[r.id]).length;
 
   return (
     <Layout>
@@ -281,6 +333,12 @@ export default function EducationTopic() {
                 <div className="text-xl font-extrabold" style={{ color: "#C49A28" }}>{comingSoonCount}</div>
                 <div className="text-[10px] mt-1 tracking-widest uppercase font-semibold" style={{ color: "rgba(255,255,255,0.45)" }}>Coming Soon</div>
               </div>
+              {completedCount > 0 && (
+                <div className="text-center px-4 py-0.5">
+                  <div className="text-xl font-extrabold" style={{ color: "#22c55e" }}>{completedCount}</div>
+                  <div className="text-[10px] mt-1 tracking-widest uppercase font-semibold" style={{ color: "rgba(255,255,255,0.45)" }}>Completed</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -299,7 +357,13 @@ export default function EducationTopic() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {topic.resources.map(resource => (
-              <ResourceCard key={resource.id} resource={resource} />
+              <ResourceCard
+                key={resource.id}
+                resource={resource}
+                completed={!!completions?.[resource.id]}
+                completedAt={completions?.[resource.id]?.passedAt}
+                onOpen={handleOpen}
+              />
             ))}
           </div>
         )}

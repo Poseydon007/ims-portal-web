@@ -219,3 +219,12 @@
 - [ ] Remove duplicate "Pending HSE" filter button in All Submissions admin view
 - [ ] Restore Print/PDF button on submission print view (lost after recent edits)
 - [ ] Add Excel (.xlsx) export button for admin to download all Near Miss submissions
+
+## DTD Training Completion Tracking
+- [ ] Add training_completions table to drizzle schema (userId, resourceId, score, passedAt)
+- [ ] Push DB migration for training_completions
+- [ ] Add tRPC procedures: education.recordCompletion and education.getCompletions
+- [ ] Modify DTD Training Manual HTML to postMessage quiz result to opener window on pass
+- [ ] Update EducationTopic page to listen for postMessage and call recordCompletion mutation
+- [ ] Show green checkmark badge on resource card when user has a completion record
+- [ ] Show completion count on Education main page IMS topic card
