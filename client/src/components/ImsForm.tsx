@@ -165,12 +165,11 @@ export default function ImsForm({
   useEffect(() => {
     survey.onComplete.add((sender) => {
       const data = sender.data;
-      const headers = Object.keys(data);
-      const values = headers.map((k) => {
-        const v = data[k];
-        return Array.isArray(v) ? v.join(", ") : String(v ?? "");
+      mutation.mutate({
+        formCode,
+        formTitle: survey.title,
+        data: { ...data, _formCode: formCode },
       });
-      mutation.mutate({ formCode, headers: ["Form Code", ...headers], values: [formCode, ...values] });
     });
   }, []);
 

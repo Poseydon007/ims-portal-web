@@ -43,6 +43,13 @@
       "when": 1776087659154,
       "tag": "0005_dusty_giant_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1776092947285,
+      "tag": "0006_slow_raza",
+      "breakpoints": true
     }
   ]
 }

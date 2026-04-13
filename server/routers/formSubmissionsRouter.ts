@@ -1,47 +1,40 @@
 import { z } from "zod";
 import { protectedProcedure, router } from "../_core/trpc";
-import { appendFormSubmission, getOrCreateSheet, getSheetUrl } from "../googleSheets";
 import { TRPCError } from "@trpc/server";
+import { getDb } from "../db";
+import { formResponses } from "../../drizzle/schema";
+import { eq, desc } from "drizzle-orm";
 
-// Generic form submission — accepts any form code + field map
+// Generic form submission — accepts any form code + JSON data blob
 const submitFormSchema = z.object({
-  formCode: z.string(), // e.g. "TE-IMS-FRM-HSE-001"
-  headers: z.array(z.string()), // column headers matching form fields
-  values: z.array(z.union([z.string(), z.number(), z.null()])), // row values
+  formCode: z.string(), // e.g. "TE-IMS-FRM-HSE-003"
+  formTitle: z.string().optional(),
+  data: z.record(z.unknown()), // full SurveyJS result data as JSON object
 });
 
 export const formSubmissionsRouter = router({
-  // Submit any form — appends one row to the form's Google Sheet register
+  // Submit any form — saves one row to the formResponses table
   submit: protectedProcedure
     .input(submitFormSchema)
     .mutation(async ({ input, ctx }) => {
       try {
-        // Prepend submission metadata columns
-        const allHeaders = [
-          "Submission ID",
-          "Submitted By",
-          "Submitted At",
-          ...input.headers,
-        ];
         const submissionId = `${input.formCode}-${Date.now()}`;
-        const allValues = [
-          submissionId,
-          ctx.user.name || ctx.user.email || ctx.user.openId,
-          new Date().toISOString(),
-          ...input.values,
-        ];
 
-        const result = await appendFormSubmission(
-          input.formCode,
-          allHeaders,
-          allValues
-        );
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+        await db.insert(formResponses).values({
+          submissionId,
+          formCode: input.formCode,
+          formTitle: input.formTitle ?? input.formCode,
+          responseData: JSON.stringify(input.data),
+          submittedByUserId: ctx.user.id,
+          submittedByName: ctx.user.name ?? ctx.user.email ?? ctx.user.openId,
+          status: "submitted",
+        });
 
         return {
           success: true,
           submissionId,
-          spreadsheetId: result.spreadsheetId,
-          sheetUrl: getSheetUrl(result.spreadsheetId),
         };
       } catch (err) {
         console.error("[formSubmissions.submit] Error:", err);
@@ -52,25 +45,34 @@ export const formSubmissionsRouter = router({
       }
     }),
 
-  // Get the Google Sheets URL for a specific form's register
-  getRegisterUrl: protectedProcedure
-    .input(z.object({ formCode: z.string(), headers: z.array(z.string()) }))
+  // List all submissions for a specific form (admin only)
+  listByForm: protectedProcedure
+    .input(z.object({ formCode: z.string() }))
     .query(async ({ input }) => {
-      try {
-        const spreadsheetId = await getOrCreateSheet(
-          input.formCode,
-          ["Submission ID", "Submitted By", "Submitted At", ...input.headers]
-        );
-        return {
-          spreadsheetId,
-          sheetUrl: getSheetUrl(spreadsheetId),
-        };
-      } catch (err) {
-        console.error("[formSubmissions.getRegisterUrl] Error:", err);
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Failed to retrieve register URL.",
-        });
-      }
+      const db = await getDb();
+      if (!db) return [];
+      const rows = await db
+        .select()
+        .from(formResponses)
+        .where(eq(formResponses.formCode, input.formCode))
+        .orderBy(desc(formResponses.submittedAt));
+      return rows.map((r) => ({
+        ...r,
+        responseData: JSON.parse(r.responseData ?? "{}"),
+      }));
     }),
+
+  // List all submissions across all forms (admin only)
+  listAll: protectedProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const rows = await db
+      .select()
+      .from(formResponses)
+      .orderBy(desc(formResponses.submittedAt));
+    return rows.map((r) => ({
+      ...r,
+      responseData: JSON.parse(r.responseData ?? "{}"),
+    }));
+  }),
 });

@@ -142,6 +142,23 @@ export const jhaSubmissions = mysqlTable("jha_submissions", {
 export type JhaSubmission = typeof jhaSubmissions.$inferSelect;
 export type InsertJhaSubmission = typeof jhaSubmissions.$inferInsert;
 
+// ── Generic Form Responses — stores all form submissions as JSON ──
+export const formResponses = mysqlTable("form_responses", {
+  id: int("id").autoincrement().primaryKey(),
+  submissionId: varchar("submissionId", { length: 64 }).notNull().unique(),
+  formCode: varchar("formCode", { length: 64 }).notNull(),   // e.g. TE-IMS-FRM-HSE-003
+  formTitle: varchar("formTitle", { length: 255 }),
+  responseData: text("responseData").notNull(),               // JSON blob of all form fields
+  status: mysqlEnum("status", ["submitted", "under_review", "closed"]).default("submitted").notNull(),
+  submittedByUserId: int("submittedByUserId"),
+  submittedByName: varchar("submittedByName", { length: 255 }),
+  submittedAt: timestamp("submittedAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type FormResponse = typeof formResponses.$inferSelect;
+export type InsertFormResponse = typeof formResponses.$inferInsert;
+
 // ── IMS Master Document Register ──
 export const imsRegister = mysqlTable("ims_register", {
   id: int("id").autoincrement().primaryKey(),
