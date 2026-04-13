@@ -393,8 +393,8 @@ export default function NearMissForm() {
                   <div className="text-xs italic" style={{ color: "#6b7a8d" }}>Recorded automatically upon approval in the IMS portal</div>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold mb-1" style={{ color: "#8a9ab0" }}>HSE OFFICER SIGN-OFF</div>
-                  <div className="text-xs italic" style={{ color: "#6b7a8d" }}>Recorded automatically upon final approval in the IMS portal</div>
+                  <div className="text-xs font-semibold mb-1" style={{ color: "#8a9ab0" }}>HSE MANAGER SIGN-OFF</div>
+                  <div className="text-xs italic" style={{ color: "#6b7a8d" }}>Recorded automatically upon HSE Manager approval in the IMS portal</div>
                 </div>
               </div>
             </div>

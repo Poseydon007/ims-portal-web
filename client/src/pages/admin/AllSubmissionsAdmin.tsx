@@ -1,24 +1,62 @@
 /**
  * All Submissions — Admin view of all form submissions across all forms.
- * Shows report numbers, status, and provides admin-only edit/delete/approve/return controls.
+ * Section 1: Submissions table with approve/return/edit/delete/view controls.
+ * Section 2: Near Miss Log — horizontal spreadsheet-style register with Excel download.
  */
 
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
 
+// ── Near Miss Log column definitions ─────────────────────────────────────────
+// Maps responseData field name → display label
+const NM_LOG_COLUMNS: { key: string; label: string }[] = [
+  { key: "reportNo",                label: "Report No." },
+  { key: "dateOfOccurrence",        label: "Date of Occurrence" },
+  { key: "timeOfOccurrence",        label: "Time of Occurrence" },
+  { key: "location",                label: "Location / Site Area" },
+  { key: "department",              label: "Department" },
+  { key: "site",                    label: "Site / Project" },
+  { key: "reportedBy",              label: "Reported By" },
+  { key: "employeeId",              label: "Employee ID" },
+  { key: "position",                label: "Position / Job Title" },
+  { key: "classification",          label: "Classification" },
+  { key: "classificationOther",     label: "Classification (Other)" },
+  { key: "description",             label: "Description" },
+  { key: "immediateAction",         label: "Immediate Action Taken" },
+  { key: "contributingFactors",     label: "Contributing Factors" },
+  { key: "contributingFactorsOther",label: "Contributing Factors (Other)" },
+  { key: "likelihood",              label: "Likelihood" },
+  { key: "consequence",             label: "Consequence" },
+  { key: "riskRating",              label: "Risk Rating" },
+  { key: "correctiveActions",       label: "Corrective Actions" },
+];
+
+function flattenValue(val: unknown): string {
+  if (val === null || val === undefined) return "";
+  if (typeof val === "string") return val;
+  if (typeof val === "number" || typeof val === "boolean") return String(val);
+  if (Array.isArray(val)) {
+    return val
+      .map(v => (typeof v === "object" && v !== null ? Object.values(v as Record<string, unknown>).join(" | ") : String(v)))
+      .join("; ");
+  }
+  if (typeof val === "object") return JSON.stringify(val);
+  return String(val);
+}
+
 function StatusBadge({ status }: { status: string }) {
   const config: Record<string, { label: string; bg: string; text: string }> = {
-    pending_supervisor_review:  { label: "Pending Supervisor",    bg: "#fff3cd", text: "#856404" },
-    pending_hse_manager_review: { label: "Pending HSE Manager",   bg: "#ffe0b2", text: "#7c4a00" },
-    pending_hse_approval:       { label: "Pending HSE Approval",  bg: "#cce5ff", text: "#004085" },
-    returned:                   { label: "Returned",              bg: "#f8d7da", text: "#721c24" },
-    closed:                     { label: "Closed",                bg: "#d4edda", text: "#155724" },
+    pending_supervisor_review:  { label: "Pending Supervisor",       bg: "#fff3cd", text: "#856404" },
+    pending_hse_manager_review: { label: "Pending HSE Manager",      bg: "#ffe0b2", text: "#7c4a00" },
+    pending_hse_approval:       { label: "Pending Final Approval",   bg: "#cce5ff", text: "#004085" },
+    returned:                   { label: "Returned",                 bg: "#f8d7da", text: "#721c24" },
+    closed:                     { label: "Closed",                   bg: "#d4edda", text: "#155724" },
   };
   const c = config[status] ?? { label: status, bg: "#e9ecef", text: "#495057" };
   return (
@@ -45,7 +83,7 @@ function EditReportNumberModal({
   const utils = trpc.useUtils();
 
   const mutation = trpc.formSubmissions.updateReportNumber.useMutation({
-    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); onDone(); },
+    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); utils.formSubmissions.listAllWithData.invalidate(); onDone(); },
     onError: (err) => setError(err.message),
   });
 
@@ -104,7 +142,7 @@ function DeleteModal({
   const utils = trpc.useUtils();
 
   const mutation = trpc.formSubmissions.deleteSubmission.useMutation({
-    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); onDone(); },
+    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); utils.formSubmissions.listAllWithData.invalidate(); onDone(); },
     onError: (err) => setError(err.message),
   });
 
@@ -156,7 +194,7 @@ function ApproveModal({
   const utils = trpc.useUtils();
 
   const mutation = trpc.formSubmissions.approve.useMutation({
-    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); onDone(); },
+    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); utils.formSubmissions.listAllWithData.invalidate(); onDone(); },
     onError: (err) => setError(err.message),
   });
 
@@ -224,7 +262,7 @@ function ReturnModal({
   const utils = trpc.useUtils();
 
   const mutation = trpc.formSubmissions.returnForCorrection.useMutation({
-    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); onDone(); },
+    onSuccess: () => { utils.formSubmissions.listAll.invalidate(); utils.formSubmissions.listAllWithData.invalidate(); onDone(); },
     onError: (err) => setError(err.message),
   });
 
@@ -264,16 +302,97 @@ function ReturnModal({
   );
 }
 
+// ── Near Miss Log Section ─────────────────────────────────────────────────────
+function NearMissLog() {
+  const { data: allData, isLoading } = trpc.formSubmissions.listAllWithData.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
+
+  // Filter to Near Miss submissions only
+  const nmRows = (allData ?? []).filter(r => r.formCode === "TE-IMS-FRM-HSE-003");
+
+  if (isLoading) {
+    return <div className="text-sm text-gray-500 py-8 text-center">Loading log data...</div>;
+  }
+
+  if (nmRows.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-sm text-gray-500">No Near Miss submissions found.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+      <table className="text-xs min-w-max w-full border-collapse">
+        <thead>
+          <tr style={{ backgroundColor: NAVY }}>
+            {/* Fixed metadata columns */}
+            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap sticky left-0 z-10" style={{ backgroundColor: NAVY, minWidth: "110px" }}>
+              Report No.
+            </th>
+            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "100px" }}>
+              Submitted By
+            </th>
+            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "90px" }}>
+              Date Filed
+            </th>
+            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "130px" }}>
+              Status
+            </th>
+            {/* Dynamic form field columns */}
+            {NM_LOG_COLUMNS.map(col => (
+              <th key={col.key} className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "140px" }}>
+                {col.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {nmRows.map((row, i) => {
+            const fields = (row.responseData ?? {}) as Record<string, unknown>;
+            return (
+              <tr
+                key={row.submissionId}
+                className={`border-b border-gray-100 last:border-0 hover:bg-blue-50/30 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}
+              >
+                <td className="px-3 py-2 font-mono font-bold sticky left-0 z-10 border-r border-gray-100" style={{ backgroundColor: i % 2 === 0 ? "white" : "#f9fafb", color: GOLD }}>
+                  {row.reportNumber ?? "—"}
+                </td>
+                <td className="px-3 py-2 text-gray-700 whitespace-nowrap">{row.submittedByName ?? "—"}</td>
+                <td className="px-3 py-2 text-gray-500 whitespace-nowrap">
+                  {row.submittedAt ? new Date(row.submittedAt).toLocaleDateString("en-SA") : "—"}
+                </td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <StatusBadge status={row.status} />
+                </td>
+                {NM_LOG_COLUMNS.map(col => (
+                  <td key={col.key} className="px-3 py-2 text-gray-700 max-w-[220px]">
+                    <div className="truncate" title={flattenValue(fields[col.key])}>
+                      {flattenValue(fields[col.key]) || <span className="text-gray-300">—</span>}
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function AllSubmissionsAdmin() {
   const { user, loading: authLoading } = useImsAuth();
 
-  const [editModal, setEditModal]     = useState<{ submissionId: string; reportNumber: string | null } | null>(null);
-  const [deleteModal, setDeleteModal] = useState<{ submissionId: string; reportNumber: string | null; formTitle: string | null } | null>(null);
+  const [editModal, setEditModal]       = useState<{ submissionId: string; reportNumber: string | null } | null>(null);
+  const [deleteModal, setDeleteModal]   = useState<{ submissionId: string; reportNumber: string | null; formTitle: string | null } | null>(null);
   const [approveModal, setApproveModal] = useState<{ submissionId: string; reportNumber: string | null; formTitle: string | null; status: string } | null>(null);
-  const [returnModal, setReturnModal] = useState<{ submissionId: string; reportNumber: string | null; formTitle: string | null } | null>(null);
-  const [toast, setToast]             = useState<string | null>(null);
-  const [filter, setFilter]           = useState<string>("all");
+  const [returnModal, setReturnModal]   = useState<{ submissionId: string; reportNumber: string | null; formTitle: string | null } | null>(null);
+  const [toast, setToast]               = useState<string | null>(null);
+  const [filter, setFilter]             = useState<string>("all");
 
   const { data: submissions, isLoading, refetch } = trpc.formSubmissions.listAll.useQuery(undefined, {
     refetchOnWindowFocus: false,
@@ -306,157 +425,188 @@ export default function AllSubmissionsAdmin() {
   }
 
   const PENDING_STATUSES = ["pending_supervisor_review", "pending_hse_manager_review", "pending_hse_approval"];
-
   const filtered = submissions?.filter(s => filter === "all" || s.status === filter) ?? [];
 
   return (
     <Layout>
       <div className="max-w-7xl mx-auto p-6" style={{ fontFamily: "'Nunito Sans', sans-serif" }}>
 
+        {/* Breadcrumb */}
         <nav className="mb-6 text-sm">
           <Link href="/" className="hover:underline" style={{ color: GOLD }}>← Portal Home</Link>
           <span className="mx-2 text-gray-400">/</span>
           <span className="font-semibold" style={{ color: NAVY }}>All Submissions</span>
         </nav>
 
-        <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <h1 className="text-2xl font-bold uppercase tracking-tight mb-1" style={{ color: NAVY }}>All Submissions</h1>
-            <p className="text-xs text-gray-500">
-              Admin view — {filtered.length} submission{filtered.length !== 1 ? "s" : ""} shown.
-              Report numbers are auto-generated. Only admins can edit, delete, approve, or return.
-            </p>
-          </div>
-          {/* Status filter */}
-          <div className="flex gap-2 flex-wrap">
-            {[
+        {/* ── SECTION 1: Submissions Table ─────────────────────────────────── */}
+        <div className="mb-10">
+          <div className="mb-5 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <h1 className="text-2xl font-bold uppercase tracking-tight mb-1" style={{ color: NAVY }}>All Submissions</h1>
+              <p className="text-xs text-gray-500">
+                Admin view — {filtered.length} submission{filtered.length !== 1 ? "s" : ""} shown.
+                Report numbers are auto-generated. Only admins can edit, delete, approve, or return.
+              </p>
+            </div>
+            {/* Status filter buttons */}
+            <div className="flex gap-2 flex-wrap">
+              {[
               { value: "all",                         label: "All" },
               { value: "pending_supervisor_review",   label: "Pending Supervisor" },
               { value: "pending_hse_manager_review",  label: "Pending HSE Manager" },
-              { value: "pending_hse_approval",        label: "Pending HSE Approval" },
+              { value: "pending_hse_approval",        label: "Pending Final Approval" },
               { value: "returned",                    label: "Returned" },
               { value: "closed",                      label: "Closed" },
-            ].map(opt => (
-              <button
-                key={opt.value}
-                onClick={() => setFilter(opt.value)}
-                className="text-xs px-3 py-1.5 rounded border font-semibold transition-colors"
-                style={
-                  filter === opt.value
-                    ? { backgroundColor: NAVY, color: "white", borderColor: NAVY }
-                    : { backgroundColor: "white", color: NAVY, borderColor: "#dde3ec" }
-                }
-              >
-                {opt.label}
-              </button>
-            ))}
+              ].map(opt => (
+                <button
+                  key={opt.value}
+                  onClick={() => setFilter(opt.value)}
+                  className="text-xs px-3 py-1.5 rounded border font-semibold transition-colors"
+                  style={
+                    filter === opt.value
+                      ? { backgroundColor: NAVY, color: "white", borderColor: NAVY }
+                      : { backgroundColor: "white", color: NAVY, borderColor: "#dde3ec" }
+                  }
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
+
+          {toast && (
+            <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded text-sm text-green-800 font-medium">
+              ✓ {toast}
+            </div>
+          )}
+
+          {isLoading ? (
+            <div className="text-center py-20 text-sm text-gray-500">Loading submissions...</div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-sm text-gray-500">No submissions found for the selected filter.</p>
+            </div>
+          ) : (
+            <div className="border border-gray-200 rounded-lg shadow-sm overflow-hidden overflow-x-auto">
+              <table className="w-full text-sm min-w-[800px]">
+                <thead>
+                  <tr className="text-white text-xs" style={{ backgroundColor: NAVY }}>
+                    <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Report No.</th>
+                    <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Form</th>
+                    <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Submitted By</th>
+                    <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Date</th>
+                    <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Status</th>
+                    <th className="px-4 py-3 text-right font-semibold uppercase tracking-wide">Admin Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((item, i) => {
+                    const isPending = PENDING_STATUSES.includes(item.status);
+                    return (
+                      <tr
+                        key={item.submissionId}
+                        className={`border-b border-gray-100 last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/40"}`}
+                      >
+                        <td className="px-4 py-3">
+                          <span className="font-bold font-mono text-xs" style={{ color: GOLD }}>
+                            {item.reportNumber ?? "—"}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="font-semibold text-xs text-gray-800">{item.formTitle ?? "—"}</div>
+                          <div className="text-xs text-gray-400 font-mono mt-0.5 truncate max-w-[200px]">{item.submissionId}</div>
+                        </td>
+                        <td className="px-4 py-3 text-xs text-gray-700">{item.submittedByName}</td>
+                        <td className="px-4 py-3 text-xs text-gray-500">
+                          {item.submittedAt ? new Date(item.submittedAt).toLocaleDateString() : "—"}
+                        </td>
+                        <td className="px-4 py-3">
+                          <StatusBadge status={item.status} />
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-1.5 justify-end flex-wrap">
+                            {isPending && (
+                              <>
+                                <button
+                                  onClick={() => setApproveModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null, status: item.status })}
+                                  className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-green-50 transition-colors"
+                                  style={{ borderColor: "#16a34a", color: "#16a34a" }}
+                                >
+                                  Approve
+                                </button>
+                                <button
+                                  onClick={() => setReturnModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
+                                  className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-amber-50 transition-colors"
+                                  style={{ borderColor: "#d97706", color: "#d97706" }}
+                                >
+                                  Return
+                                </button>
+                              </>
+                            )}
+                            <Link
+                              href={`/submissions/${item.submissionId}/print`}
+                              className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-blue-50 transition-colors"
+                              style={{ borderColor: "#1565c0", color: "#1565c0" }}
+                            >
+                              View
+                            </Link>
+                            <button
+                              onClick={() => setEditModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null })}
+                              className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-amber-50 transition-colors"
+                              style={{ borderColor: GOLD, color: GOLD }}
+                            >
+                              Edit No.
+                            </button>
+                            <button
+                              onClick={() => setDeleteModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
+                              className="text-xs px-2.5 py-1 border border-red-300 rounded text-red-600 font-semibold hover:bg-red-50 transition-colors"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
 
-        {toast && (
-          <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded text-sm text-green-800 font-medium">
-            ✓ {toast}
+        {/* ── SECTION 2: Near Miss Log ──────────────────────────────────────── */}
+        <div>
+          {/* Section header */}
+          <div className="mb-4 flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-1">
+                <div className="w-1 h-6 rounded" style={{ backgroundColor: GOLD }} />
+                <h2 className="text-lg font-bold uppercase tracking-tight" style={{ color: NAVY }}>
+                  Near Miss Occurrence Log
+                </h2>
+              </div>
+              <p className="text-xs text-gray-500 ml-4">
+                Cumulative register of all Near Miss submissions — all fields displayed horizontally. Scroll right to see all columns.
+              </p>
+            </div>
+            {/* Download Excel */}
+            <a
+              href="/api/export/near-miss"
+              download
+              className="inline-flex items-center gap-1.5 text-xs px-4 py-2 rounded font-bold transition-colors"
+              style={{ backgroundColor: "#16a34a", color: "white", textDecoration: "none" }}
+            >
+              ↓ Download Excel
+            </a>
           </div>
-        )}
 
-        {isLoading ? (
-          <div className="text-center py-20 text-sm text-gray-500">Loading submissions...</div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-sm text-gray-500">No submissions found for the selected filter.</p>
-          </div>
-        ) : (
-          <div className="border border-gray-200 rounded-lg shadow-sm overflow-hidden overflow-x-auto">
-            <table className="w-full text-sm min-w-[800px]">
-              <thead>
-                <tr className="text-white text-xs" style={{ backgroundColor: NAVY }}>
-                  <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Report No.</th>
-                  <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Form</th>
-                  <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Submitted By</th>
-                  <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Date</th>
-                  <th className="px-4 py-3 text-left font-semibold uppercase tracking-wide">Status</th>
-                  <th className="px-4 py-3 text-right font-semibold uppercase tracking-wide">Admin Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((item, i) => {
-                  const isPending = PENDING_STATUSES.includes(item.status);
-                  return (
-                    <tr
-                      key={item.submissionId}
-                      className={`border-b border-gray-100 last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/40"}`}
-                    >
-                      <td className="px-4 py-3">
-                        <span className="font-bold font-mono text-xs" style={{ color: GOLD }}>
-                          {item.reportNumber ?? "—"}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="font-semibold text-xs text-gray-800">{item.formTitle ?? "—"}</div>
-                        <div className="text-xs text-gray-400 font-mono mt-0.5 truncate max-w-[200px]">{item.submissionId}</div>
-                      </td>
-                      <td className="px-4 py-3 text-xs text-gray-700">{item.submittedByName}</td>
-                      <td className="px-4 py-3 text-xs text-gray-500">
-                        {item.submittedAt ? new Date(item.submittedAt).toLocaleDateString() : "—"}
-                      </td>
-                      <td className="px-4 py-3">
-                        <StatusBadge status={item.status} />
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-1.5 justify-end flex-wrap">
-                          {/* Approve & Return — only for pending submissions */}
-                          {isPending && (
-                            <>
-                              <button
-                                onClick={() => setApproveModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null, status: item.status })}
-                                className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-green-50 transition-colors"
-                                style={{ borderColor: "#16a34a", color: "#16a34a" }}
-                              >
-                                Approve
-                              </button>
-                              <button
-                                onClick={() => setReturnModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
-                                className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-amber-50 transition-colors"
-                                style={{ borderColor: "#d97706", color: "#d97706" }}
-                              >
-                                Return
-                              </button>
-                            </>
-                          )}
-                          {/* View / Print */}
-                          <Link
-                            href={`/submissions/${item.submissionId}/print`}
-                            className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-blue-50 transition-colors"
-                            style={{ borderColor: "#1565c0", color: "#1565c0" }}
-                          >
-                            View
-                          </Link>
-                          {/* Edit report number */}
-                          <button
-                            onClick={() => setEditModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null })}
-                            className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-amber-50 transition-colors"
-                            style={{ borderColor: GOLD, color: GOLD }}
-                          >
-                            Edit No.
-                          </button>
-                          {/* Delete */}
-                          <button
-                            onClick={() => setDeleteModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
-                            className="text-xs px-2.5 py-1 border border-red-300 rounded text-red-600 font-semibold hover:bg-red-50 transition-colors"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
+          {/* Log table */}
+          <NearMissLog />
+        </div>
+
       </div>
 
+      {/* ── Modals ─────────────────────────────────────────────────────────── */}
       {editModal && (
         <EditReportNumberModal
           submissionId={editModal.submissionId}

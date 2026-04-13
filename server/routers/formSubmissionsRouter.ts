@@ -547,4 +547,30 @@ export const formSubmissionsRouter = router({
       submittedAt:     r.submittedAt,
     }));
   }),
+
+  listAllWithData: imsProtectedProcedure.query(async ({ ctx }) => {
+    if (ctx.imsUser.role !== "admin") {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
+    }
+    const db = await getDb();
+    if (!db) return [];
+    const rows = await db
+      .select()
+      .from(formResponses)
+      .orderBy(desc(formResponses.submittedAt));
+    return rows.map(r => {
+      let parsed: Record<string, unknown> = {};
+      try { parsed = JSON.parse(r.responseData ?? "{}"); } catch { /* ignore */ }
+      return {
+        submissionId:    r.submissionId,
+        reportNumber:    r.reportNumber,
+        formCode:        r.formCode,
+        formTitle:       r.formTitle,
+        status:          r.status,
+        submittedByName: r.submittedByName,
+        submittedAt:     r.submittedAt,
+        responseData:    parsed,
+      };
+    });
+  }),
 });

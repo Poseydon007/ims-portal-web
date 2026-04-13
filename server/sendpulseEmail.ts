@@ -165,7 +165,7 @@ export async function notifyForwardedToHseManager(opts: {
 }
 
 // ── Notification: Submission approved and forwarded to HSE Officer ───────────────────
-export async function notifyForwardedToHse(ts: {
+export async function notifyForwardedToHse(opts: {
   hseOfficerName: string;
   hseOfficerEmail: string;
   reportNumber: string;

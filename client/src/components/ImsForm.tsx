@@ -226,12 +226,15 @@ export default function ImsForm({
   // Auto-fill identity fields from logged-in user
   useEffect(() => {
     if (!user) return;
+    // Today's date in YYYY-MM-DD for date input fields
+    const today = new Date().toISOString().split("T")[0];
     const fieldMap: Record<string, string> = {
       [identityFields.fullName ?? "reportedBy"]: user.fullName ?? "",
       [identityFields.employeeId ?? "employeeId"]: user.employeeId ?? "",
       [identityFields.department ?? "department"]: user.department ?? "",
       [identityFields.position ?? "position"]: user.position ?? "",
       signoffReportedByName: user.fullName ?? "",
+      signoffReportedByDate: today,
     };
     Object.entries(fieldMap).forEach(([name, value]) => {
       if (survey.getQuestionByName(name)) {
