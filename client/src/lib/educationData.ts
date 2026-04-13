@@ -107,7 +107,8 @@ export const educationTopics: EducationTopic[] = [
         title: "Document Control Explained",
         description: "Why document control matters, how revisions work, and what controlled vs. uncontrolled copies mean.",
         type: "guide",
-        available: false,
+        available: true,
+        url: "/DocumentControlExplained.html",
         tags: ["document control", "revision", "ISO 9001"],
       },
       {
