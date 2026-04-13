@@ -28,7 +28,12 @@ queryClient.getQueryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.query.state.error;
     redirectToLoginIfUnauthorized(error);
-    console.error("[API Query Error]", error);
+    // Suppress transient HTML parse errors (server restart briefly returning index.html)
+    const msg = error instanceof Error ? error.message : String(error);
+    const isTransientHtmlError = msg.includes("Unexpected token") && msg.includes("doctype");
+    if (!isTransientHtmlError) {
+      console.error("[API Query Error]", error);
+    }
   }
 });
 

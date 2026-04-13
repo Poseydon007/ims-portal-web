@@ -170,9 +170,17 @@ export default function ImsForm({
   const surveyRef = useRef<Model | null>(null);
 
   // Pre-generate report number when form opens
+  // retry:false prevents repeated calls if server is temporarily unavailable
   const { data: preGenData } = trpc.formSubmissions.preGenerateReportNumber.useQuery(
     { formCode },
-    { enabled: !!user && !submitted }
+    {
+      enabled: !!user && !submitted,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
+      // Don't throw — if it fails, the field stays blank and user can still submit
+      // (report number will be generated server-side on submit)
+    }
   );
 
   const readOnly = !canSubmit(user?.role, minRole);
