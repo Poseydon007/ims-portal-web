@@ -9,6 +9,7 @@ export type ImsUserInfo = {
   employeeId: string | null;
   role: "admin" | "supervisor" | "field_worker";
   department: string | null;
+  position: string | null;
   status: string;
 };
 

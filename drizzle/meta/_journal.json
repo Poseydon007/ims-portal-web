@@ -36,6 +36,13 @@
       "when": 1775933436852,
       "tag": "0004_unknown_white_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1776087659154,
+      "tag": "0005_dusty_giant_girl",
+      "breakpoints": true
     }
   ]
 }

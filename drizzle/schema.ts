@@ -30,6 +30,7 @@ export const imsUsers = mysqlTable("ims_users", {
   employeeId: varchar("employeeId", { length: 64 }),
   role: mysqlEnum("role", ["admin", "supervisor", "field_worker"]).default("field_worker").notNull(),
   department: varchar("department", { length: 128 }),
+  position: varchar("position", { length: 128 }),
   status: mysqlEnum("status", ["active", "inactive"]).default("active").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

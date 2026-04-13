@@ -1,0 +1,1 @@
+ALTER TABLE `ims_users` ADD `position` varchar(128);

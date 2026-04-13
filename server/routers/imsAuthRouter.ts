@@ -61,6 +61,7 @@ export const imsAuthRouter = router({
           employeeId: user.employeeId,
           role: user.role,
           department: user.department,
+          position: user.position,
         },
       };
     }),
@@ -91,6 +92,7 @@ export const imsAuthRouter = router({
       employeeId: ctx.imsUser.employeeId,
       role: ctx.imsUser.role,
       department: ctx.imsUser.department,
+      position: ctx.imsUser.position,
       status: ctx.imsUser.status,
     };
   }),
@@ -104,6 +106,7 @@ export const imsAuthRouter = router({
       employeeId: z.string().optional(),
       role: z.enum(["admin", "supervisor", "field_worker"]),
       department: z.string().optional(),
+      position: z.string().optional(),
     }))
     .mutation(async ({ input }) => {
       // Check if email already exists
@@ -120,6 +123,7 @@ export const imsAuthRouter = router({
         employeeId: input.employeeId ?? null,
         role: input.role,
         department: input.department ?? null,
+        position: input.position ?? null,
         status: "active",
       });
 
@@ -144,6 +148,7 @@ export const imsAuthRouter = router({
       employeeId: u.employeeId,
       role: u.role,
       department: u.department,
+      position: u.position,
       status: u.status,
       lastSignedIn: u.lastSignedIn,
       createdAt: u.createdAt,
@@ -158,6 +163,7 @@ export const imsAuthRouter = router({
       employeeId: z.string().optional(),
       role: z.enum(["admin", "supervisor", "field_worker"]).optional(),
       department: z.string().optional(),
+      position: z.string().optional(),
       status: z.enum(["active", "inactive"]).optional(),
       password: z.string().min(6).optional(),
     }))
@@ -167,6 +173,7 @@ export const imsAuthRouter = router({
       if (input.employeeId !== undefined) updateData.employeeId = input.employeeId;
       if (input.role) updateData.role = input.role;
       if (input.department !== undefined) updateData.department = input.department;
+      if (input.position !== undefined) updateData.position = input.position;
       if (input.status) updateData.status = input.status;
       if (input.password) updateData.passwordHash = await hashPassword(input.password);
 
