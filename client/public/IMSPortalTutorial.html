@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Use the IMS Document Portal | True East Mining Company</title>
+<style>
+:root {
+  --navy: #081C2E;
+  --navy-mid: #0f2d47;
+  --navy-light: #1a3f5c;
+  --gold: #C49A28;
+  --gold-light: #e8c96a;
+  --text: #2D3748;
+  --text-light: #718096;
+  --bg: #F7F8FA;
+  --white: #FFFFFF;
+  --border: #E2E8F0;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Arial, 'Segoe UI', Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === HEADER === */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  color: white;
+  padding: 3rem 0 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(196,154,40,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+.header-logo-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+}
+
+.header-right h1 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.header-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.header-subtitle {
+  font-size: 0.92rem;
+  opacity: 0.65;
+  margin-bottom: 0;
+  max-width: 560px;
+}
+
+.header-meta {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  font-size: 0.78rem;
+  opacity: 0.5;
+  font-weight: 600;
+}
+
+/* === STICKY NAV === */
+.sticky-nav {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0.7rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.sticky-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-family: Arial, 'Segoe UI', Helvetica, sans-serif;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.nav-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+
+/* === MAIN === */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* === SECTIONS === */
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.section-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--navy);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.section-header h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+/* === CONTENT BLOCKS === */
+p {
+  font-size: 0.92rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 1.5rem 0 0.6rem;
+}
+
+h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 1rem 0 0.4rem;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+/* === CALLOUT BOXES === */
+.callout {
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+  font-size: 0.88rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+.callout-info { background: #EBF8FF; border-left: 3px solid var(--info); color: #1e40af; }
+.callout-warning { background: #FFFBEB; border-left: 3px solid var(--warning); color: #92400e; }
+.callout-success { background: #F0FFF4; border-left: 3px solid var(--success); color: #166534; }
+.callout-tip { background: #F5F3FF; border-left: 3px solid #7c3aed; color: #4c1d95; }
+
+/* === STEP BLOCKS === */
+.steps {
+  counter-reset: step-counter;
+  margin: 1.2rem 0;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  align-items: flex-start;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.step-content { flex: 1; }
+.step-content strong { display: block; font-size: 0.92rem; color: var(--navy); margin-bottom: 0.2rem; }
+.step-content p { font-size: 0.87rem; margin-bottom: 0; color: var(--text-light); }
+
+/* === TABLE === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+.data-table th {
+  background: var(--navy);
+  color: white;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.data-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.data-table tr:nth-child(even) td { background: #f8fafc; }
+.data-table tr:hover td { background: #f0f4f8; }
+
+/* === BADGES === */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-navy { background: #e8edf4; color: var(--navy); }
+.badge-gold { background: #fef3c7; color: #92400e; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.badge-gray { background: #f1f5f9; color: #475569; }
+
+/* === SCREEN MOCKUP === */
+.screen-mock {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1.2rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.screen-mock-bar {
+  background: var(--navy);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.screen-mock-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.screen-mock-url {
+  background: rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
+  font-family: monospace;
+  flex: 1;
+  max-width: 400px;
+}
+
+.screen-mock-body {
+  padding: 1.2rem 1.5rem;
+  font-size: 0.85rem;
+}
+
+/* === FLOW DIAGRAM === */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.flow-box {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  min-width: 100px;
+}
+
+.flow-arrow {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+/* === CODE === */
+code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: #EDF2F7;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--navy);
+}
+
+/* === ROLE CARD === */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.role-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  border-top: 3px solid var(--navy);
+}
+
+.role-card h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 0.5rem;
+}
+
+.role-card ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.role-card li {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-bottom: 0.2rem;
+}
+
+/* === FOOTER === */
+.footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.78rem;
+}
+
+.footer a { color: var(--gold); text-decoration: none; }
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  .header-inner { grid-template-columns: 1fr; }
+  .header-logo-img { display: none; }
+  .header-right h1 { font-size: 1.5rem; }
+  .role-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <img
+        src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png"
+        alt="True East Mining Company"
+        class="header-logo-img"
+      />
+    </div>
+    <div class="header-right">
+      <div class="header-eyebrow">True East Mining Company — IMS</div>
+      <h1>How to Use the IMS Document Portal</h1>
+      <p class="header-subtitle">
+        A complete guide for all staff — from signing in for the first time to submitting forms,
+        reading documents, tracking approvals, and understanding how the system works.
+      </p>
+      <div class="header-meta">
+        <span>📖 Full User Guide</span>
+        <span>🕐 ~15 min read</span>
+        <span>Rev 01 — April 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ STICKY NAV -->
+<div class="sticky-nav">
+  <div class="sticky-nav-inner">
+    <a href="#what-is" class="nav-btn">What Is It?</a>
+    <a href="#access" class="nav-btn">Access & Login</a>
+    <a href="#navigation" class="nav-btn">Navigation</a>
+    <a href="#documents" class="nav-btn">Documents</a>
+    <a href="#forms" class="nav-btn">Forms</a>
+    <a href="#approvals" class="nav-btn">Approvals</a>
+    <a href="#roles" class="nav-btn">Roles</a>
+    <a href="#admin" class="nav-btn">Admin</a>
+    <a href="#education" class="nav-btn">Education</a>
+    <a href="#faq" class="nav-btn">FAQ</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ MAIN -->
+<div class="main">
+
+  <!-- ══════════════════════════════════════════════ SECTION 1 -->
+  <div class="section" id="what-is">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <h2>What Is the IMS Document Portal?</h2>
+    </div>
+
+    <p>
+      The <strong>IMS Document Portal</strong> is the central digital system for True East Mining Company's
+      Integrated Management System (IMS). It is the single place where all company documents, forms,
+      procedures, policies, and records are stored, accessed, submitted, and controlled.
+    </p>
+
+    <p>
+      Before this portal existed, documents were scattered across email threads, shared drives, USB sticks,
+      and printed folders. Version control was unreliable, approvals happened informally, and there was no
+      audit trail. The portal solves all of that.
+    </p>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ️</span>
+      <div>
+        <strong>IMS stands for Integrated Management System.</strong> It is the framework that combines
+        quality (ISO 9001), health & safety (ISO 45001), and environment (ISO 14001) management into a
+        single unified system. True East's IMS is aligned with all three international standards plus
+        KSA Mining Investment Law and MHRSD OHS Regulations.
+      </div>
+    </div>
+
+    <h3>What the Portal Does</h3>
+    <p>The portal has five core functions:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Function</th>
+          <th>What It Means in Practice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Document Library</strong></td>
+          <td>Browse and read all controlled IMS documents — policies, procedures, SOPs, forms, registers, plans, and reference materials. Always the current approved version.</td>
+        </tr>
+        <tr>
+          <td><strong>Form Submission</strong></td>
+          <td>Submit digital forms (Near Miss reports, JHAs, Permits to Work, inspection checklists, etc.) directly from any device. No paper, no printing, no scanning.</td>
+        </tr>
+        <tr>
+          <td><strong>Approval Workflow</strong></td>
+          <td>Every form submission goes through a 3-step approval chain (Supervisor → HSE Manager → Final Approval). The portal tracks every step, sends email notifications, and maintains a full audit trail.</td>
+        </tr>
+        <tr>
+          <td><strong>Occurrence Log</strong></td>
+          <td>All submissions are automatically recorded in a cumulative register. Admins can download the full log as an Excel file at any time.</td>
+        </tr>
+        <tr>
+          <td><strong>Education & Training</strong></td>
+          <td>Access training materials, manuals, and guides. Completion of training quizzes is tracked per user.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Who Uses It?</h3>
+    <p>
+      Every employee at True East Mining Company uses the portal. The level of access depends on your role.
+      A field worker can submit forms and read documents. A supervisor can approve submissions from their team.
+      An HSE Manager can review and approve at a higher level. An admin has full control over everything.
+    </p>
+
+    <div class="callout callout-success">
+      <span class="callout-icon">✅</span>
+      <div>
+        <strong>The portal is accessible from any device with a browser</strong> — desktop, laptop, tablet,
+        or mobile phone. No app installation required. You only need your company email and password.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 2 -->
+  <div class="section" id="access">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <h2>Getting Access and Signing In</h2>
+    </div>
+
+    <h3>How to Get an Account</h3>
+    <p>
+      Accounts are created by the system administrator. You cannot self-register. When you join True East,
+      your line manager or HR will request an account for you. You will receive your login credentials
+      (email and temporary password) by email or directly from your supervisor.
+    </p>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div>
+        <strong>If you do not have an account yet,</strong> contact your supervisor or the Management
+        Representative. Do not attempt to share another employee's login — all actions are logged under
+        the account that performs them.
+      </div>
+    </div>
+
+    <h3>How to Sign In</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Open the portal in your browser</strong>
+          <p>Navigate to the portal URL provided by your company. The address looks like: <code>teimsportal-3yvzojsy.manus.space</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Enter your company email address</strong>
+          <p>Use your official True East email — for example, <code>ahmed.ali@tru-east.com</code>. Personal email addresses will not work.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Enter your password</strong>
+          <p>Type your password. Passwords are case-sensitive. If you have forgotten your password, contact the system administrator to reset it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Click "Sign In"</strong>
+          <p>You will be taken to the Home page. Your name and role will appear in the top-right corner of every page once you are logged in.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-mock">
+      <div class="screen-mock-bar">
+        <div class="screen-mock-dot" style="background:#ef4444"></div>
+        <div class="screen-mock-dot" style="background:#f59e0b"></div>
+        <div class="screen-mock-dot" style="background:#22c55e"></div>
+        <div class="screen-mock-url">teimsportal-3yvzojsy.manus.space/login</div>
+      </div>
+      <div class="screen-mock-body">
+        <div style="text-align:center; padding: 1rem 0;">
+          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.15em; color:#C49A28; text-transform:uppercase; margin-bottom:0.3rem;">INTEGRATED MANAGEMENT SYSTEM</div>
+          <div style="font-size:1.2rem; font-weight:800; color:#081C2E; margin-bottom:0.2rem;">IMS Document Portal</div>
+          <div style="font-size:0.8rem; color:#6b7a8d; margin-bottom:1.5rem;">Sign in with your company credentials</div>
+          <div style="max-width:340px; margin:0 auto; text-align:left;">
+            <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; color:#4a5568; text-transform:uppercase; margin-bottom:0.3rem;">EMAIL ADDRESS</div>
+            <div style="border:1px solid #dde3ec; border-radius:6px; padding:0.6rem 0.8rem; font-size:0.85rem; color:#6b7a8d; margin-bottom:0.8rem;">your.name@tru-east.com</div>
+            <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; color:#4a5568; text-transform:uppercase; margin-bottom:0.3rem;">PASSWORD</div>
+            <div style="border:1px solid #dde3ec; border-radius:6px; padding:0.6rem 0.8rem; font-size:0.85rem; color:#6b7a8d; margin-bottom:1rem;">••••••••</div>
+            <div style="background:#C49A28; color:#081C2E; text-align:center; padding:0.7rem; border-radius:6px; font-weight:800; font-size:0.85rem; letter-spacing:0.08em;">SIGN IN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Signing Out</h3>
+    <p>
+      Always sign out when you finish using the portal, especially on shared computers. Click your name
+      in the top-right corner and select <strong>"Sign Out"</strong>. Your session will end immediately.
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 3 -->
+  <div class="section" id="navigation">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <h2>Navigating the Portal</h2>
+    </div>
+
+    <p>
+      The portal has a fixed navigation bar at the top of every page. It contains everything you need
+      to move between sections. The items you see depend on your role.
+    </p>
+
+    <div class="screen-mock">
+      <div class="screen-mock-bar">
+        <div class="screen-mock-dot" style="background:#ef4444"></div>
+        <div class="screen-mock-dot" style="background:#f59e0b"></div>
+        <div class="screen-mock-dot" style="background:#22c55e"></div>
+        <div class="screen-mock-url">teimsportal-3yvzojsy.manus.space</div>
+      </div>
+      <div class="screen-mock-body" style="background:#081C2E; color:white; display:flex; align-items:center; justify-content:space-between; padding:0.8rem 1.2rem;">
+        <div style="display:flex; align-items:center; gap:0.8rem;">
+          <div style="width:32px; height:32px; background:rgba(255,255,255,0.1); border-radius:6px;"></div>
+          <div>
+            <div style="font-size:0.7rem; font-weight:800; color:white; letter-spacing:0.05em;">TRUE EAST MINING COMPANY</div>
+            <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">الشرق الحقيقي</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:1rem; align-items:center; font-size:0.78rem; font-weight:700;">
+          <span style="color:#C49A28;">Home</span>
+          <span style="color:rgba(255,255,255,0.6);">Approvals</span>
+          <span style="color:rgba(255,255,255,0.6);">Submissions</span>
+          <span style="color:rgba(255,255,255,0.6);">Users</span>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:0.65rem; font-weight:700; color:#C49A28; letter-spacing:0.1em; text-transform:uppercase;">IMS DOCUMENT PORTAL</div>
+          <div style="font-size:0.6rem; color:rgba(255,255,255,0.4);">Internal Use Only</div>
+          <div style="font-size:0.72rem; color:white; margin-top:0.2rem;">Melo J. &nbsp;<span style="background:#C49A28; color:#081C2E; padding:0.1rem 0.4rem; border-radius:3px; font-size:0.62rem;">Admin</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Navigation Items Explained</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Where It Goes</th>
+          <th>Who Sees It</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Home</strong></td>
+          <td>The main landing page with all document categories and the IMS Document Portal overview.</td>
+          <td>Everyone</td>
+        </tr>
+        <tr>
+          <td><strong>Approvals</strong></td>
+          <td>Your personal approval queue — forms waiting for your action as a supervisor, HSE manager, or admin.</td>
+          <td>Supervisors, HSE Managers, Admins</td>
+        </tr>
+        <tr>
+          <td><strong>Submissions</strong></td>
+          <td>Admin view of all form submissions across all users, with filter by status and Excel export.</td>
+          <td>Admins only</td>
+        </tr>
+        <tr>
+          <td><strong>Users</strong></td>
+          <td>User management — create, edit, activate, deactivate accounts and assign roles.</td>
+          <td>Admins only</td>
+        </tr>
+        <tr>
+          <td><strong>Education</strong></td>
+          <td>Training materials, manuals, guides, and videos organized by topic.</td>
+          <td>All logged-in users</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The Home Page</h3>
+    <p>
+      The Home page is your starting point. It shows the IMS Document Portal header with key statistics
+      (total documents, categories, current revision, last update date), the ISO standards the portal
+      aligns with, and a grid of document category cards.
+    </p>
+    <p>
+      Each category card shows the category code, the number of documents in it, the category name,
+      and a short description. Click any card to browse all documents in that category.
+    </p>
+
+    <h3>Document Categories on the Home Page</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Category</th>
+          <th>What It Contains</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-navy">FRM</span></td>
+          <td><strong>Forms</strong></td>
+          <td>All active IMS forms — HSE, logistics, maintenance, operations, security, training, and system forms.</td>
+          <td>53</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">PROC</span></td>
+          <td><strong>Procedures</strong></td>
+          <td>Documented procedures governing HSE, operations, logistics, maintenance, and system management.</td>
+          <td>33</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">REG</span></td>
+          <td><strong>Registers & Logs</strong></td>
+          <td>Live registers, tracking logs, compliance records, and performance monitoring tools.</td>
+          <td>16</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">SOP</span></td>
+          <td><strong>Standard Operating Procedures</strong></td>
+          <td>Step-by-step operational instructions for high-risk and critical site tasks.</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">REF</span></td>
+          <td><strong>References</strong></td>
+          <td>Supporting reference documents, ISO certificates, regulatory frameworks, and KPI data.</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">POL</span></td>
+          <td><strong>Policies</strong></td>
+          <td>Company-level policy statements governing HSE, governance, and operational commitments.</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">PLN</span></td>
+          <td><strong>Plans</strong></td>
+          <td>Strategic and operational plans supporting IMS implementation and project delivery.</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 4 -->
+  <div class="section" id="documents">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <h2>Reading and Finding Documents</h2>
+    </div>
+
+    <p>
+      The document library is the core of the portal. Every controlled document in the True East IMS
+      is stored here. Documents are organized by category and identified by a unique code.
+    </p>
+
+    <h3>Understanding Document Codes</h3>
+    <p>
+      Every document has a code that tells you exactly what it is and where it belongs. The format is:
+    </p>
+    <div style="background:#081C2E; color:#e2e8f0; padding:1rem 1.5rem; border-radius:8px; font-family:monospace; font-size:0.9rem; margin:1rem 0; line-height:2;">
+      <span style="color:#C49A28;">TE</span>-<span style="color:#60a5fa;">IMS</span>-<span style="color:#34d399;">POL</span>-<span style="color:#f87171;">GOV</span>-<span style="color:#a78bfa;">001</span>
+      <br>
+      <span style="color:#C49A28; font-size:0.75rem;">Company</span>&nbsp;&nbsp;&nbsp;
+      <span style="color:#60a5fa; font-size:0.75rem;">System</span>&nbsp;&nbsp;&nbsp;
+      <span style="color:#34d399; font-size:0.75rem;">Type</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="color:#f87171; font-size:0.75rem;">Department</span>&nbsp;&nbsp;
+      <span style="color:#a78bfa; font-size:0.75rem;">Sequence</span>
+    </div>
+
+    <p>
+      <strong>Example:</strong> <code>TE-IMS-FRM-HSE-003</code> means: True East / IMS / Form / Health, Safety & Environment / number 003 — which is the Near Miss Report Form.
+    </p>
+
+    <h3>How to Find a Document</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>From the Home page, click the relevant category card</strong>
+          <p>For example, if you want to find a policy, click the "Policies" card. If you want a form, click "Forms".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Browse the document list</strong>
+          <p>The category page shows all documents in that category as a table. Each row shows the document code, title, revision number, date, and status.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Click "View" to open the document</strong>
+          <p>Documents open as formatted HTML pages directly in the browser. No PDF download required. The document is always the current approved version.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>For forms with a submission button, click "Fill Form"</strong>
+          <p>Forms that can be submitted digitally have a "Fill Form" button that opens the interactive form. See Section 5 for how to submit forms.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Document Status Indicators</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-green">Approved</span></td>
+          <td>The document is current, reviewed, and approved. This is the version you should use.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-gold">Pending</span></td>
+          <td>The document exists in the portal but is still under review or awaiting final approval. Use with caution — confirm with your supervisor.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-gray">Draft</span></td>
+          <td>The document is in preparation. Not yet for operational use.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div>
+        <strong>Document Control Notice:</strong> All documents in this portal are controlled under the
+        True East Mining Company IMS. Printed copies are uncontrolled. Always refer to this portal for
+        the current approved version. For document requests or submissions, contact the Management Representative.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 5 -->
+  <div class="section" id="forms">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <h2>Submitting Forms</h2>
+    </div>
+
+    <p>
+      Forms are the most frequently used part of the portal for field staff. Instead of filling in paper
+      forms and handing them to a supervisor, you fill in the digital form on any device and submit it.
+      The system automatically routes it through the approval chain, sends email notifications, and records
+      everything in the occurrence log.
+    </p>
+
+    <h3>How to Find and Open a Form</h3>
+    <p>
+      From the Home page, click the <strong>"Forms" (FRM)</strong> category card. You will see a list of
+      all available forms. Find the form you need and click <strong>"Fill Form"</strong>.
+    </p>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">💡</span>
+      <div>
+        <strong>Direct URL shortcut:</strong> If you know the form code, you can go directly to it.
+        For example, the Near Miss Report Form is at <code>/forms/frm-hse-003</code>. Your supervisor
+        may share direct links for the forms your team uses most often.
+      </div>
+    </div>
+
+    <h3>Filling In a Form — Step by Step</h3>
+    <p>
+      Let's use the <strong>Near Miss Report Form (TE-IMS-FRM-HSE-003)</strong> as a concrete example.
+      The same process applies to all forms.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Auto-filled fields appear at the top</strong>
+          <p>Your Full Name, Employee ID, Position, Department, and Submission Date are automatically filled in from your account. These fields are locked — you cannot change them. This ensures accurate attribution of every report.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Fill in the Report Details section</strong>
+          <p>Enter the Date of Occurrence, Time of Occurrence, Location/Site Area, and Site/Project Name. The Report Number (e.g., NM-2026-001) is generated automatically — you do not need to enter it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Complete each section in order</strong>
+          <p>The form is divided into logical sections. For the Near Miss form: (1) Report Details, (2) Classification, (3) Description, (4) Contributing Factors, (5) Risk Rating, (6) Corrective Actions, (7) Sign-off. Work through each section completely before moving to the next.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Complete the Risk Rating section</strong>
+          <p>Select the Likelihood (1–5) and Consequence (1–4) of the near miss. The Risk Rating (Low / Medium / High / Extreme) is calculated automatically from your selections. You do not need to calculate it yourself.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Enter Corrective Actions</strong>
+          <p>For each corrective action, enter: what the action is, who is responsible, and the target due date. You can add multiple corrective actions using the "Add Row" button.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <strong>Review and submit</strong>
+          <p>Read through the form to check your entries. Required fields are marked with a red asterisk (*). If any required field is empty, the form will not submit and will highlight what is missing. When everything is complete, click <strong>"Submit Report"</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>What Happens After You Submit</h3>
+    <p>
+      Immediately after submission, the following happens automatically:
+    </p>
+    <ol>
+      <li>A unique Report Number is assigned (e.g., <code>NM-2026-001</code>)</li>
+      <li>The form status is set to <span class="badge badge-blue">Pending Supervisor Review</span></li>
+      <li>Your direct supervisor receives an email notification with the report number and a link to review it</li>
+      <li>The submission is recorded in the Near Miss Occurrence Log</li>
+      <li>You receive a confirmation email with the report number</li>
+    </ol>
+
+    <div class="callout callout-success">
+      <span class="callout-icon">✅</span>
+      <div>
+        <strong>You can track your submission</strong> by going to the Home page and clicking on the
+        "My Submissions" section (if visible for your role), or by asking your supervisor for the status.
+        Admins can see all submissions in the Submissions panel.
+      </div>
+    </div>
+
+    <h3>Available Forms by Category</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Examples</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>HSE Forms</strong></td>
+          <td>Job Hazard Analysis, Near Miss Report, Incident Flash Notification, Permit to Work, Take 5 Hazard Assessment, PPE Inspection, First Aid Kit Checklist, HSE Committee Meeting Minutes, Planned Task Observation, and more (40+ forms)</td>
+        </tr>
+        <tr>
+          <td><strong>Logistics Forms</strong></td>
+          <td>Vehicle Handover Register, Driver Daily Checklist</td>
+        </tr>
+        <tr>
+          <td><strong>Maintenance Forms</strong></td>
+          <td>Equipment Inspection Checklist, Maintenance Work Order, Preventive Maintenance Schedule</td>
+        </tr>
+        <tr>
+          <td><strong>Operations Forms</strong></td>
+          <td>Drilling Daily Report, Site Activity Log</td>
+        </tr>
+        <tr>
+          <td><strong>Security Forms</strong></td>
+          <td>Site Access Control Log, Security Incident Report</td>
+        </tr>
+        <tr>
+          <td><strong>Training Forms</strong></td>
+          <td>Training Attendance Register, Competency Assessment Record</td>
+        </tr>
+        <tr>
+          <td><strong>System Forms</strong></td>
+          <td>Document Change Request, Non-Conformance Report, Internal Audit Checklist, Corrective Action Request</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 6 -->
+  <div class="section" id="approvals">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <h2>The Approval Workflow</h2>
+    </div>
+
+    <p>
+      Every form submission goes through a structured 3-step approval process before it is closed.
+      This ensures that every report is reviewed by the right people at the right level, and that
+      nothing falls through the cracks.
+    </p>
+
+    <h3>The Three Steps</h3>
+
+    <div class="flow">
+      <div class="flow-box" style="background:#dbeafe; color:#1e40af;">Step 1<br><strong>Supervisor</strong></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="background:#fef3c7; color:#92400e;">Step 2<br><strong>HSE Manager</strong></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="background:#f0fdf4; color:#166534;">Step 3<br><strong>Final Approval</strong></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="background:#dcfce7; color:#166534;"><strong>Closed ✓</strong></div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Who Acts</th>
+          <th>Status During This Step</th>
+          <th>What They Do</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Step 1</strong></td>
+          <td>Direct Supervisor</td>
+          <td><span class="badge badge-blue">Pending Supervisor Review</span></td>
+          <td>Reviews the submission, verifies the facts, checks the corrective actions, and either approves or returns with comments.</td>
+        </tr>
+        <tr>
+          <td><strong>Step 2</strong></td>
+          <td>HSE Manager</td>
+          <td><span class="badge badge-gold">Pending HSE Manager Review</span></td>
+          <td>Reviews from an HSE perspective, assesses the risk rating, verifies corrective actions are adequate, and either approves or returns.</td>
+        </tr>
+        <tr>
+          <td><strong>Step 3</strong></td>
+          <td>Admin / Management</td>
+          <td><span class="badge badge-navy">Pending Final Approval</span></td>
+          <td>Final sign-off. Confirms the report is complete and the corrective actions are formally accepted. Closes the report.</td>
+        </tr>
+        <tr>
+          <td><strong>Closed</strong></td>
+          <td>—</td>
+          <td><span class="badge badge-green">Closed</span></td>
+          <td>The report is fully processed and archived. It remains in the occurrence log permanently.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>How to Approve a Submission (Supervisors and HSE Managers)</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>You receive an email notification</strong>
+          <p>When a submission reaches your step, you receive an email with the report number, the submitter's name, and a direct link to review it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Click the link or go to Approvals in the portal</strong>
+          <p>The "Approvals" tab in the top navigation shows all submissions currently waiting for your action. The count badge shows how many are pending.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Click "Review" to open the submission</strong>
+          <p>You will see the full form as submitted, with all fields and the submitter's information. Review every section carefully.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Choose to Approve or Return</strong>
+          <p>If the submission is complete and correct, click <strong>"Approve"</strong>. The form moves to the next step automatically. If something is wrong or missing, click <strong>"Return"</strong> — you must enter a comment explaining what needs to be corrected.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>What Happens When a Form is Returned</h3>
+    <p>
+      If a submission is returned at any step, the following happens:
+    </p>
+    <ol>
+      <li>The status changes to <span class="badge badge-red">Returned</span></li>
+      <li>The original submitter receives an email with the return reason</li>
+      <li>The submission goes back to Step 1 (Supervisor Review) — it restarts the full workflow</li>
+      <li>The submitter can view the return comment in the submission detail</li>
+      <li>The submitter should correct the issue and resubmit</li>
+    </ol>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ️</span>
+      <div>
+        <strong>All approval actions are permanently recorded.</strong> The audit trail shows who approved
+        or returned each submission, at what time, and what comment they left. This cannot be deleted or
+        edited after the fact.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 7 -->
+  <div class="section" id="roles">
+    <div class="section-header">
+      <div class="section-number">7</div>
+      <h2>User Roles and Permissions</h2>
+    </div>
+
+    <p>
+      The portal has four user roles. Your role determines what you can see and do. Roles are assigned
+      by the system administrator and reflect your position in the company.
+    </p>
+
+    <div class="role-grid">
+      <div class="role-card" style="border-top-color:#6b7280;">
+        <h4>🔧 Field Worker</h4>
+        <ul>
+          <li>Sign in and view documents</li>
+          <li>Submit forms</li>
+          <li>View own submissions</li>
+          <li>Access Education section</li>
+          <li>Cannot approve submissions</li>
+        </ul>
+      </div>
+      <div class="role-card" style="border-top-color:#3b82f6;">
+        <h4>👷 Supervisor</h4>
+        <ul>
+          <li>All Field Worker permissions</li>
+          <li>Approve / Return submissions at Step 1</li>
+          <li>View submissions from their team</li>
+          <li>Receive Step 1 email notifications</li>
+        </ul>
+      </div>
+      <div class="role-card" style="border-top-color:#f59e0b;">
+        <h4>🦺 HSE Manager</h4>
+        <ul>
+          <li>All Supervisor permissions</li>
+          <li>Approve / Return at Step 2</li>
+          <li>View all HSE submissions</li>
+          <li>Receive Step 2 email notifications</li>
+        </ul>
+      </div>
+      <div class="role-card" style="border-top-color:#C49A28;">
+        <h4>⭐ Admin</h4>
+        <ul>
+          <li>All permissions</li>
+          <li>Final approval at Step 3</li>
+          <li>View all submissions (all forms)</li>
+          <li>Edit report numbers</li>
+          <li>Delete submissions</li>
+          <li>Manage users</li>
+          <li>Download Excel logs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div>
+        <strong>Your role is set by the administrator.</strong> If you believe your role is incorrect
+        (for example, you are a supervisor but cannot see the Approvals tab), contact the system
+        administrator to verify and update your account.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 8 -->
+  <div class="section" id="admin">
+    <div class="section-header">
+      <div class="section-number">8</div>
+      <h2>Admin Functions</h2>
+    </div>
+
+    <p>
+      Admins have access to three additional sections: Submissions, Users, and the full Near Miss
+      Occurrence Log. These are only visible to users with the Admin role.
+    </p>
+
+    <h3>All Submissions (Admin View)</h3>
+    <p>
+      The Submissions page shows every form submission across all users and all form types.
+      It has two sections:
+    </p>
+
+    <h4>Section 1 — Submissions Table</h4>
+    <p>
+      A filterable table showing all submissions. You can filter by status:
+      <span class="badge badge-gray">All</span>
+      <span class="badge badge-blue">Pending Supervisor</span>
+      <span class="badge badge-gold">Pending HSE Manager</span>
+      <span class="badge badge-navy">Pending Final Approval</span>
+      <span class="badge badge-red">Returned</span>
+      <span class="badge badge-green">Closed</span>
+    </p>
+    <p>
+      For each submission, admins can:
+    </p>
+    <ul>
+      <li><strong>View</strong> — open the full submission in read-only mode</li>
+      <li><strong>Edit No.</strong> — manually correct the report number if needed</li>
+      <li><strong>Delete</strong> — permanently remove the submission (use with caution)</li>
+    </ul>
+
+    <h4>Section 2 — Near Miss Occurrence Log</h4>
+    <p>
+      Below the submissions table is a horizontal spreadsheet-style register showing all Near Miss
+      submissions with every form field as a column. This is the cumulative occurrence log. It includes:
+    </p>
+    <ul>
+      <li>Report No., Submission Date, Submitter Name, Employee ID, Department, Site</li>
+      <li>Date and Time of Occurrence, Location</li>
+      <li>Classification, Description, Immediate Action</li>
+      <li>Contributing Factors, Risk Likelihood, Risk Consequence, Risk Rating</li>
+      <li>Corrective Actions, Status</li>
+    </ul>
+    <p>
+      Click the green <strong>"↓ Download Excel"</strong> button to export the full log as an
+      <code>.xlsx</code> file. The export includes all submissions regardless of the current filter.
+    </p>
+
+    <h3>User Management</h3>
+    <p>
+      The Users page allows admins to manage all portal accounts. From this page you can:
+    </p>
+    <ul>
+      <li><strong>Create a new user</strong> — enter their full name, email, employee ID, department, position, and assign a role. The system generates login credentials.</li>
+      <li><strong>Edit a user</strong> — update any field including role and department.</li>
+      <li><strong>Activate / Deactivate</strong> — deactivated users cannot sign in but their data is preserved.</li>
+      <li><strong>Reset password</strong> — generate a new temporary password for a user who is locked out.</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">💡</span>
+      <div>
+        <strong>Best practice:</strong> When an employee leaves the company, deactivate their account
+        immediately — do not delete it. Deletion removes the audit trail for all their submissions.
+        Deactivation preserves the record while preventing further access.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 9 -->
+  <div class="section" id="education">
+    <div class="section-header">
+      <div class="section-number">9</div>
+      <h2>Education & Training</h2>
+    </div>
+
+    <p>
+      The Education section is accessible from the gold "Education" button in the top navigation bar.
+      It contains training materials, manuals, guides, and videos organized into five topic areas.
+    </p>
+
+    <h3>Topic Areas</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Topic</th>
+          <th>What It Covers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-navy">HSE</span></td>
+          <td><strong>Health, Safety & Environment</strong></td>
+          <td>Near miss reporting, JHA, emergency response, PPE guides</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">IMS</span></td>
+          <td><strong>Integrated Management System</strong></td>
+          <td>IMS framework overview, document control, DTD system manuals</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">OPS</span></td>
+          <td><strong>Operations & Procedures</strong></td>
+          <td>Site induction, permit to work system</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">EQP</span></td>
+          <td><strong>Equipment & Machinery</strong></td>
+          <td>Pre-start inspection, equipment operation guides</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-navy">REG</span></td>
+          <td><strong>Regulatory & Compliance</strong></td>
+          <td>KSA Mining Law, MHRSD OHS regulations</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Currently Available Resources</h3>
+    <p>
+      Two resources are currently live in the IMS topic:
+    </p>
+    <ul>
+      <li><strong>DTD System — Instructions Manual:</strong> The complete reference guide for the True East Day-to-Day Document (DTD) numbering and registration system. Covers the code structure, how to register a document, the document lifecycle, all 16 type codes, 18 department codes, golden rules, and FAQ.</li>
+      <li><strong>DTD System — Training Manual:</strong> A 5-module instructor-led training guide with exercises, real-world scenarios, a post-training quiz (5 questions, passing score 4/5), and trainer notes.</li>
+    </ul>
+
+    <h3>Completion Tracking</h3>
+    <p>
+      When you complete the DTD Training Manual quiz with a score of 4/5 or higher, the portal
+      automatically records your completion. The resource card will show a green
+      <span class="badge badge-green">✓ Completed</span> badge the next time you visit the Education section.
+      This completion record is permanent and linked to your account.
+    </p>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ️</span>
+      <div>
+        More training materials are being added progressively. Resources marked <span class="badge badge-gray">Coming Soon</span> will become available as they are prepared and approved.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ SECTION 10 -->
+  <div class="section" id="faq">
+    <div class="section-header">
+      <div class="section-number">10</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <h3>I forgot my password. What do I do?</h3>
+    <p>
+      Contact your system administrator or the Management Representative. They will reset your password
+      and provide you with a new temporary one. There is no self-service password reset — all account
+      changes go through the administrator.
+    </p>
+
+    <h3>I submitted a form but made a mistake. Can I edit it?</h3>
+    <p>
+      Once submitted, you cannot edit a form yourself. However, the approver at Step 1 (your supervisor)
+      can return the form to you with a comment explaining what needs to be corrected. Once returned,
+      the form goes back to you and you can resubmit with the corrections. If the form has already been
+      approved and closed, contact the admin to discuss options.
+    </p>
+
+    <h3>Why is my name and employee ID already filled in on the form?</h3>
+    <p>
+      The portal automatically fills in your identity fields (Full Name, Employee ID, Position, Department,
+      Submission Date) from your account profile. This ensures accurate attribution and prevents errors.
+      These fields are locked and cannot be changed on the form — if your profile information is wrong,
+      contact the administrator to update your account.
+    </p>
+
+    <h3>I don't see the Approvals tab. Why?</h3>
+    <p>
+      The Approvals tab is only visible to users with the Supervisor, HSE Manager, or Admin role. If you
+      are a supervisor but cannot see it, your role in the system may not have been set correctly. Contact
+      the administrator to verify your role.
+    </p>
+
+    <h3>What is the difference between "Pending HSE Manager" and "Pending Final Approval"?</h3>
+    <p>
+      These are two separate steps in the approval chain. "Pending HSE Manager" means the form is at
+      Step 2 — waiting for the HSE Manager to review and approve. "Pending Final Approval" means it has
+      passed the HSE Manager and is at Step 3 — waiting for the Admin/Management to give final sign-off
+      and close the report.
+    </p>
+
+    <h3>How do I know if my submission has been approved?</h3>
+    <p>
+      You receive an email notification at each step. When the form is fully closed, you receive a final
+      email confirming closure. You can also ask your supervisor or the admin to check the status.
+    </p>
+
+    <h3>Can I access the portal on my phone?</h3>
+    <p>
+      Yes. The portal is fully responsive and works on mobile browsers. Open your phone's browser,
+      navigate to the portal URL, and sign in normally. All features — including form submission —
+      work on mobile.
+    </p>
+
+    <h3>What is the DTD system and why do I need to learn it?</h3>
+    <p>
+      DTD stands for Day-to-Day Document. It is the numbering and registration system for all operational
+      documents you produce in your daily work — purchase orders, letters, reports, memos, etc. Every
+      document you create should be registered with a DTD code so it can be tracked and retrieved.
+      The DTD Training Manual in the Education section covers this in full detail.
+    </p>
+
+    <h3>I see a document marked "Pending" — can I use it?</h3>
+    <p>
+      A "Pending" document exists in the portal but has not yet received final approval. You should
+      use it with caution and confirm with your supervisor or the Management Representative before
+      relying on it for operational decisions. Always prefer "Approved" documents where available.
+    </p>
+
+    <h3>Who do I contact for portal support?</h3>
+    <p>
+      For account issues (login, password, role), contact the system administrator.<br>
+      For document questions (content, revision, approval), contact the Management Representative.<br>
+      For technical issues (the portal is not loading, a form is not working), contact the administrator
+      and describe the issue with as much detail as possible (what page, what action, what error message).
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ QUICK REFERENCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">✦</div>
+      <h2>Quick Reference Card</h2>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Where to Go</th>
+          <th>Who Can Do It</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Read a policy or procedure</td>
+          <td>Home → Click category card → Click "View"</td>
+          <td>All users</td>
+        </tr>
+        <tr>
+          <td>Submit a Near Miss report</td>
+          <td>Home → Forms → TE-IMS-FRM-HSE-003 → Fill Form</td>
+          <td>All users</td>
+        </tr>
+        <tr>
+          <td>Submit a JHA</td>
+          <td>Home → Forms → TE-IMS-FRM-HSE-001 → Fill Form</td>
+          <td>All users</td>
+        </tr>
+        <tr>
+          <td>Approve a pending submission</td>
+          <td>Top nav → Approvals → Review → Approve</td>
+          <td>Supervisors, HSE Managers, Admins</td>
+        </tr>
+        <tr>
+          <td>Return a submission with comments</td>
+          <td>Top nav → Approvals → Review → Return (add comment)</td>
+          <td>Supervisors, HSE Managers, Admins</td>
+        </tr>
+        <tr>
+          <td>View all submissions</td>
+          <td>Top nav → Submissions</td>
+          <td>Admins only</td>
+        </tr>
+        <tr>
+          <td>Download the Near Miss log as Excel</td>
+          <td>Submissions → Near Miss Log → ↓ Download Excel</td>
+          <td>Admins only</td>
+        </tr>
+        <tr>
+          <td>Create a new user account</td>
+          <td>Top nav → Users → Create User</td>
+          <td>Admins only</td>
+        </tr>
+        <tr>
+          <td>Access training materials</td>
+          <td>Top nav → Education → Select topic</td>
+          <td>All logged-in users</td>
+        </tr>
+        <tr>
+          <td>Complete the DTD training quiz</td>
+          <td>Education → IMS → DTD Training Manual → Open Resource</td>
+          <td>All logged-in users</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER -->
+<div class="footer">
+  <div style="margin-bottom:0.5rem;">
+    <strong style="color:rgba(255,255,255,0.7);">True East Mining Company</strong> — IMS Document Portal
+  </div>
+  <div>
+    This guide is for internal use only. For the latest version, always refer to the portal.
+    Contact the Management Representative for questions about IMS documentation.
+  </div>
+  <div style="margin-top:1rem; font-size:0.7rem;">
+    Rev 01 — April 2026 &nbsp;|&nbsp; TE-IMS-REF-SYS-PORTAL-001
+  </div>
+</div>
+
+</body>
+</html>

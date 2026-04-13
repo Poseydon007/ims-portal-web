@@ -96,11 +96,11 @@ export const educationTopics: EducationTopic[] = [
       {
         id: "ims-002",
         title: "How to Use the IMS Document Portal",
-        description: "Tutorial on navigating the portal, finding documents, submitting forms, and understanding document categories.",
-        type: "video",
-        available: false,
-        duration: "6 min",
-        tags: ["portal", "tutorial", "documents"],
+        description: "Complete user guide covering what the portal is, how to sign in, navigate, read documents, submit forms, track approvals, and use the Education section. Includes role permissions, admin functions, and a full FAQ.",
+        type: "manual",
+        available: true,
+        url: "/IMSPortalTutorial.html",
+        tags: ["portal", "tutorial", "documents", "guide"],
       },
       {
         id: "ims-003",
