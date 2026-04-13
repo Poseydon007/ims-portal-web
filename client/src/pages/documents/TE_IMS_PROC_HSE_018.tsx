@@ -8,6 +8,17 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Aspect Identification Process" },
+  { id: "s6", label: "6. Categories of Aspects to Consider" },
+  { id: "s7", label: "7. Significance Evaluation" },
+  { id: "s8", label: "8. Drilling-Sector Indicative Aspects" },
+  { id: "s9", label: "9. Record of Significant Aspects" },
+  { id: "s10", label: "10. Monitoring, KPIs and Continuous Improvement" },
+  { id: "s11", label: "11. References" },
+  { id: "s12", label: "12. Related Documents" },
+  { id: "s13", label: "13. Records and Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +164,15 @@ export default function TE_IMS_PROC_HSE_018() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>To establish a systematic methodology for identifying environmental aspects of True East Mining's activities, products and services, evaluating their impacts, determining significance and keeping the information current. This procedure implements ISO 14001:2015 Clause 6.1.2 (Environmental Aspects) and underpins the company's environmental objectives, operational controls and legal compliance in the Kingdom of Saudi Arabia.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all True East Mining activities, products and services across exploration drilling, core handling, camp operations, vehicle fleet, laydown yards, supply chain and decommissioning. It covers environmental aspects under normal, abnormal (start-up/shut-down) and emergency conditions, and both direct aspects under TE control and indirect aspects influenced through contractors, suppliers and interested parties.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -212,7 +223,7 @@ export default function TE_IMS_PROC_HSE_018() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -259,83 +270,141 @@ export default function TE_IMS_PROC_HSE_018() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Aspect Identification Process</p>
+            <SectionHeading id="s5">5. Aspect Identification Process</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.1 Approach</p>
+            <SubHeading>5.1 Approach</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The HSE Manager (EMR), together with Department Heads, conducts a comprehensive review of all activities, products and services at least annually and whenever a trigger under Section 5.3 occurs. ISO 14001 awareness training is delivered before each review cycle.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.2 Identification Methods</p>
+            <SubHeading>5.2 Identification Methods</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Interviews and walkthroughs with employees and supervisors.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Interviews and walkthroughs with employees and supervisors.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Site inspections and environmental walk-downs.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Site inspections and environmental walk-downs.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review of documents, procedures and operational records.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review of documents, procedures and operational records.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Monitoring and measurement data — emissions, waste, water, fuel use.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Monitoring and measurement data — emissions, waste, water, fuel use.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review of legal register and regulatory notices.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review of legal register and regulatory notices.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review of previous environmental incidents, complaints and corrective actions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review of previous environmental incidents, complaints and corrective actions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Interested-party feedback and community communications.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Interested-party feedback and community communications.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.3 Follow-up Reviews (Triggers)</p>
+            <SubHeading>5.3 Follow-up Reviews (Triggers)</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The aspect register is re-evaluated whenever one or more of the following conditions occur:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Change in process, activity, product, service or methodology.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Change in process, activity, product, service or methodology.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Significant change in the scope or mission of the organisation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Significant change in the scope or mission of the organisation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Expansion of existing activities — new rig, new site, new campaign.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Expansion of existing activities — new rig, new site, new campaign.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• New or changed legal / regulatory requirements (MHRSD, NCEC, MEWA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>New or changed legal / regulatory requirements (MHRSD, NCEC, MEWA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Occurrence of an environmental incident, near miss or complaint.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Occurrence of an environmental incident, near miss or complaint.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Management Review outcomes or Management decision.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Management Review outcomes or Management decision.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At minimum, annually.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At minimum, annually.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Categories of Aspects to Consider</p>
+            <SectionHeading id="s6">6. Categories of Aspects to Consider</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>During identification, the review team must consider all of the following (ISO 14001 Clause 6.1.2 guidance), under normal (N), abnormal (A) and emergency (E) conditions:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Emissions to air — dust, engine exhaust, VOCs, GHG.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Emissions to air — dust, engine exhaust, VOCs, GHG.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Releases to water — sanitary effluent, drilling fluids, wash water.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Releases to water — sanitary effluent, drilling fluids, wash water.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Releases to land / soil contamination — spills, leaks, buried waste.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Releases to land / soil contamination — spills, leaks, buried waste.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Waste generation and disposal — hazardous and non-hazardous, solid and liquid.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Waste generation and disposal — hazardous and non-hazardous, solid and liquid.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use of raw materials and natural resources — water, fuel, chemicals, aggregates.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use of raw materials and natural resources — water, fuel, chemicals, aggregates.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use of energy — diesel, grid power, solar.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use of energy — diesel, grid power, solar.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Noise, vibration, light and heat.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Noise, vibration, light and heat.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Physical land disturbance — access roads, pads, trenches, rehabilitation obligations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Physical land disturbance — access roads, pads, trenches, rehabilitation obligations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Biodiversity and wildlife impacts.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Biodiversity and wildlife impacts.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Cultural and heritage site considerations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Cultural and heritage site considerations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Local environmental issues and community concerns.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Local environmental issues and community concerns.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Legal and regulatory requirements and compliance status.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Legal and regulatory requirements and compliance status.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Current environmental management practices and procedures.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Current environmental management practices and procedures.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lessons learned from previous environmental incidents.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lessons learned from previous environmental incidents.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Other relevant issues — green belt, dust suppression, revegetation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Other relevant issues — green belt, dust suppression, revegetation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Significance Evaluation</p>
+            <SectionHeading id="s7">7. Significance Evaluation</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7.1 Default Significance Categories</p>
+            <SubHeading>7.1 Default Significance Categories</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Any aspect that falls into one or more of the following categories is considered significant by default, regardless of numerical rating:</p>
 
@@ -368,7 +437,7 @@ export default function TE_IMS_PROC_HSE_018() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7.2 Quantitative SSPD Assessment</p>
+            <SubHeading>7.2 Quantitative SSPD Assessment</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Aspects that do not trigger the default categories are rated using the SSPD method: Scale, Severity, Probability and Duration — each scored 1 to 4. The Risk Priority Number (RPN) is the sum of the four scores. Aspects with RPN ≥10 are considered significant.</p>
 
@@ -444,7 +513,7 @@ export default function TE_IMS_PROC_HSE_018() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>RPN = S + Sv + P + D. Any RPN ≥10 is classified as SIGNIFICANT. Significant aspects must have an assigned operational control, objective or target under TE-IMS-PROC-SYS-005.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Drilling-Sector Indicative Aspects</p>
+            <SectionHeading id="s8">8. Drilling-Sector Indicative Aspects</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following list is indicative (not exhaustive) and must be tailored to each site. Full detail is maintained in the Aspect Register (TE-IMS-REG-HSE-010).</p>
 
@@ -497,11 +566,11 @@ export default function TE_IMS_PROC_HSE_018() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Record of Significant Aspects</p>
+            <SectionHeading id="s9">9. Record of Significant Aspects</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The HSE Manager maintains the Environmental Aspect and Impact Register (TE-IMS-REG-HSE-010) as the single source of truth. It includes: activity, aspect, impact, conditions (N/A/E), legal reference, significance category/score, existing controls, responsible person and review date. The register is updated as soon as new or changed aspects are identified and reviewed annually at minimum.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Monitoring, KPIs and Continuous Improvement</p>
+            <SectionHeading id="s10">10. Monitoring, KPIs and Continuous Improvement</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -536,51 +605,91 @@ export default function TE_IMS_PROC_HSE_018() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual Review — aspects reviewed annually or on trigger per Section 5.3.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual Review — aspects reviewed annually or on trigger per Section 5.3.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Management Review — significant aspects and their status reported to Management Review per TE-IMS-PROC-SYS-002.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Management Review — significant aspects and their status reported to Management Review per TE-IMS-PROC-SYS-002.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. References</p>
+            <SectionHeading id="s11">11. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Environmental Management Systems, Clause 6.1.2 Environmental Aspects.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Environmental Management Systems, Clause 6.1.2 Environmental Aspects.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14004:2016 — Environmental Management Systems — General guidelines.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14004:2016 — Environmental Management Systems — General guidelines.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Quality Management Systems, Clause 4.1/4.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Quality Management Systems, Clause 4.1/4.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — OH&amp;S Management Systems.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — OH&amp;S Management Systems.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — National Center for Environmental Compliance (KSA) regulations and guidelines.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — National Center for Environmental Compliance (KSA) regulations and guidelines.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MEWA — Ministry of Environment, Water and Agriculture, KSA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MEWA — Ministry of Environment, Water and Agriculture, KSA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Management Regulation (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Management Regulation (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Green Initiative — environmental stewardship commitments.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Green Initiative — environmental stewardship commitments.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Related Documents</p>
+            <SectionHeading id="s12">12. Related Documents</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-POL-HSE-001 — HSE and Environmental Policy</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-POL-HSE-001 — HSE and Environmental Policy</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-004 — Site Emergency Preparedness Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-004 — Site Emergency Preparedness Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-013 — Spill Management Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-013 — Spill Management Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-014 — Site Rehabilitation Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-014 — Site Rehabilitation Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-015 — Risk and Opportunity Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-015 — Risk and Opportunity Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-002 — Management Review Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-002 — Management Review Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-005 — Continual Improvement and CAPA Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-005 — Continual Improvement and CAPA Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-HSE-010 — Environmental Aspect and Impact Register</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-HSE-010 — Environmental Aspect and Impact Register</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-040 — Waste Handling and Disposal Schedule</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-040 — Waste Handling and Disposal Schedule</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-SYS-003 — Legal and Regulatory Compliance Register</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-SYS-003 — Legal and Regulatory Compliance Register</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Records and Retention</p>
+            <SectionHeading id="s13">13. Records and Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

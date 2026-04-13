@@ -8,6 +8,21 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Driver Authorisation and Training" },
+  { id: "s6", label: "6. Vehicle Handover and Key Control" },
+  { id: "s7", label: "7. Tracking and Monitoring" },
+  { id: "s8", label: "8. General Rules of Operation" },
+  { id: "s9", label: "9. Heat and Flammable Items Control" },
+  { id: "s10", label: "10. Driving in Adverse Conditions" },
+  { id: "s11", label: "11. Maintenance and On-Board Safety Equipment" },
+  { id: "s12", label: "12. Incident Reporting" },
+  { id: "s13", label: "13. Compliance and Enforcement" },
+  { id: "s14", label: "14. Performance Indicators" },
+  { id: "s15", label: "15. Review and Continual Improvement" },
+  { id: "s16", label: "16. References" },
+  { id: "s17", label: "17. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,29 +168,41 @@ export default function TE_IMS_PROC_LOG_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes safe, efficient, and compliant guidelines for the use, handover, tracking, maintenance, and operation of all company vehicles at True East Mining Company (TEMC) sites. It protects personnel, assets, and the environment, and aligns with ISO 45001:2018, MHRSD traffic and occupational safety regulations in the Kingdom of Saudi Arabia, and client fleet safety standards (including Ma'aden and other operators).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all company-owned, leased, or rented vehicles — light vehicles, 4x4s, heavy trucks, buses, and utility buggies — and to all drivers, passengers, and transportation activities within TEMC operations. It covers site access roads, camp operations, client site driving, and on-highway journeys between company sites and offices.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Authorized Driver — a TEMC employee or contractor who holds a valid KSA licence for the vehicle class, has completed TEMC defensive driving training, and is formally approved by the Transportation Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Authorized Driver — a TEMC employee or contractor who holds a valid KSA licence for the vehicle class, has completed TEMC defensive driving training, and is formally approved by the Transportation Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Site Vehicle — a vehicle used inside a TEMC or client operating area — subject to additional rules (GPS, buggy whip, speed limits).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Site Vehicle — a vehicle used inside a TEMC or client operating area — subject to additional rules (GPS, buggy whip, speed limits).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Handover — the formal transfer of a vehicle between drivers or shifts, recorded on the Vehicle Handover Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Handover — the formal transfer of a vehicle between drivers or shifts, recorded on the Vehicle Handover Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Daily Vehicle Checklist — the pre-start inspection completed at the beginning of every shift before the vehicle is moved.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Daily Vehicle Checklist — the pre-start inspection completed at the beginning of every shift before the vehicle is moved.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Out of Service — vehicle tagged and removed from operation pending repair or investigation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Out of Service — vehicle tagged and removed from operation pending repair or investigation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• IVMS / GPS Telematics — in-vehicle monitoring system — records location, speed, harsh events, and driver behaviour.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>IVMS / GPS Telematics — in-vehicle monitoring system — records location, speed, harsh events, and driver behaviour.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -218,121 +245,215 @@ export default function TE_IMS_PROC_LOG_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Driver Authorisation and Training</p>
+            <SectionHeading id="s5">5. Driver Authorisation and Training</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Licensing — only drivers holding a valid KSA licence of the correct class may operate a company vehicle. A photocopy is held in the driver file.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Licensing — only drivers holding a valid KSA licence of the correct class may operate a company vehicle. A photocopy is held in the driver file.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Medical fitness — drivers must be medically fit — vision, cardiac, diabetes, and fatigue-affecting conditions assessed per TEMC health screening.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Medical fitness — drivers must be medically fit — vision, cardiac, diabetes, and fatigue-affecting conditions assessed per TEMC health screening.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mandatory training — Defensive Driving, Desert / Off-Road Driving, Daily Vehicle Inspection, Emergency Breakdown Response, Journey Management familiarisation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mandatory training — Defensive Driving, Desert / Off-Road Driving, Daily Vehicle Inspection, Emergency Breakdown Response, Journey Management familiarisation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Assessment — a practical road check by the Transportation Manager or delegate before formal authorisation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Assessment — a practical road check by the Transportation Manager or delegate before formal authorisation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Records — driver authorisation letter, training certificates, and licence copies retained in the IMS personnel file.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Records — driver authorisation letter, training certificates, and licence copies retained in the IMS personnel file.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Refresher — defensive driving refresher every 2 years or immediately after any incident.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Refresher — defensive driving refresher every 2 years or immediately after any incident.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Vehicle Handover and Key Control</p>
+            <SectionHeading id="s6">6. Vehicle Handover and Key Control</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Handover between drivers or shifts requires a joint visual check of tyres, lights, fluid leaks, brakes, wipers, horn, seatbelts, and interior cleanliness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Handover between drivers or shifts requires a joint visual check of tyres, lights, fluid leaks, brakes, wipers, horn, seatbelts, and interior cleanliness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Both issuing and receiving drivers sign the Vehicle Handover Register (TE-IMS-FRM-LOG-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Both issuing and receiving drivers sign the Vehicle Handover Register (TE-IMS-FRM-LOG-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Keys are handed directly to the authorised driver. Do not leave keys in the ignition of an unoccupied vehicle.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Keys are handed directly to the authorised driver. Do not leave keys in the ignition of an unoccupied vehicle.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Any defect identified at handover is recorded and the vehicle not accepted until repaired or tagged Out of Service.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Any defect identified at handover is recorded and the vehicle not accepted until repaired or tagged Out of Service.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Tracking and Monitoring</p>
+            <SectionHeading id="s7">7. Tracking and Monitoring</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All site vehicles are fitted with IVMS / GPS telematics to monitor real-time location, speed, route, and harsh driving events.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All site vehicles are fitted with IVMS / GPS telematics to monitor real-time location, speed, route, and harsh driving events.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• A functional reverse hooter or alarm is mandatory on all site vehicles.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>A functional reverse hooter or alarm is mandatory on all site vehicles.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Where required by client, a high-visibility buggy whip or safety flag is fitted and used in active mining areas (e.g. Ma'aden standard).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Where required by client, a high-visibility buggy whip or safety flag is fitted and used in active mining areas (e.g. Ma'aden standard).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• IVMS exception reports reviewed weekly by the Transportation Manager; repeat exceptions trigger counselling or suspension of driving privileges.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>IVMS exception reports reviewed weekly by the Transportation Manager; repeat exceptions trigger counselling or suspension of driving privileges.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. General Rules of Operation</p>
+            <SectionHeading id="s8">8. General Rules of Operation</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-start inspection — every shift, using the Daily Vehicle Checklist (TE-IMS-FRM-LOG-002). Vehicle must not move until the checklist is complete.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-start inspection — every shift, using the Daily Vehicle Checklist (TE-IMS-FRM-LOG-002). Vehicle must not move until the checklist is complete.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Seatbelts — mandatory for driver and every passenger, every journey.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Seatbelts — mandatory for driver and every passenger, every journey.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Reverse parking — mandatory — nose out — for safe forward-facing emergency exit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Reverse parking — mandatory — nose out — for safe forward-facing emergency exit.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Uphill parking — turn wheels toward the curb, engage handbrake, engage Reverse (manual) or Park (automatic).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Uphill parking — turn wheels toward the curb, engage handbrake, engage Reverse (manual) or Park (automatic).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Downhill parking — turn wheels away from the curb, engage handbrake, engage 1st gear (manual) or Park (automatic).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Downhill parking — turn wheels away from the curb, engage handbrake, engage 1st gear (manual) or Park (automatic).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Idling — never leave air-conditioning running with occupants inside an unattended vehicle. Never leave keys in the ignition.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Idling — never leave air-conditioning running with occupants inside an unattended vehicle. Never leave keys in the ignition.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Speed limits — obey all KSA and client mandated limits. Reduce speed for poor road, traffic, weather, or night conditions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Speed limits — obey all KSA and client mandated limits. Reduce speed for poor road, traffic, weather, or night conditions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Distractions — zero tolerance for mobile phone use while driving. Drivers must pull over safely to use a phone. No horseplay in the cabin.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Distractions — zero tolerance for mobile phone use while driving. Drivers must pull over safely to use a phone. No horseplay in the cabin.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fatigue — maximum continuous driving 2 hours, then rest break. Maximum 10 hours driving per 24-hour period.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fatigue — maximum continuous driving 2 hours, then rest break. Maximum 10 hours driving per 24-hour period.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Heat and Flammable Items Control</p>
+            <SectionHeading id="s9">9. Heat and Flammable Items Control</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>KSA desert temperatures can exceed 70°C inside a closed vehicle. The following items must be removed from the cabin before parking in sun, or stored in a shaded, ventilated area:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lighters and matches.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lighters and matches.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Body sprays, aerosols, and pressurised containers.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Body sprays, aerosols, and pressurised containers.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pressurised or frozen water bottles.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pressurised or frozen water bottles.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Battery chargers, power banks, and lithium batteries.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Battery chargers, power banks, and lithium batteries.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mobile phones and sunglasses left on the dash.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mobile phones and sunglasses left on the dash.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Loose paperwork or flammable upholstery covers.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Loose paperwork or flammable upholstery covers.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Driving in Adverse Conditions</p>
+            <SectionHeading id="s10">10. Driving in Adverse Conditions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Heavy rain / flash flood — reduce speed, increase following distance, headlights ON, wipers functioning. NEVER drive through a flowing wadi — turn around.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Heavy rain / flash flood — reduce speed, increase following distance, headlights ON, wipers functioning. NEVER drive through a flowing wadi — turn around.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Strong wind / dust storm — reduce speed, headlights and hazards ON, pull over safely if visibility drops below 100 m.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Strong wind / dust storm — reduce speed, headlights and hazards ON, pull over safely if visibility drops below 100 m.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Night driving — reduce speed, use high beam where safe, watch for camels and livestock on KSA roads — a major hazard.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Night driving — reduce speed, use high beam where safe, watch for camels and livestock on KSA roads — a major hazard.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Off-road / desert — tyre pressure adjusted, 4x4 engaged, travel in convoy where practical, journey management plan activated (PROC-LOG-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Off-road / desert — tyre pressure adjusted, 4x4 engaged, travel in convoy where practical, journey management plan activated (PROC-LOG-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fog or low visibility — reduce speed, fog lights ON, stop and wait if unsafe.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fog or low visibility — reduce speed, fog lights ON, stop and wait if unsafe.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Maintenance and On-Board Safety Equipment</p>
+            <SectionHeading id="s11">11. Maintenance and On-Board Safety Equipment</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Servicing per manufacturer schedule — recorded in TE-IMS-REG-MAINT-001.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Servicing per manufacturer schedule — recorded in TE-IMS-REG-MAINT-001.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Every vehicle carries: fully stocked First Aid kit, serviceable fire extinguisher (≥2 kg ABC), reflective warning triangles, spare tyre with jack and wheel brace, high-visibility vests for all occupants, tow rope, water, and torch.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Every vehicle carries: fully stocked First Aid kit, serviceable fire extinguisher (≥2 kg ABC), reflective warning triangles, spare tyre with jack and wheel brace, high-visibility vests for all occupants, tow rope, water, and torch.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Tyres inspected for wear, cuts, and pressure daily; replace at ≤ 2 mm tread.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Tyres inspected for wear, cuts, and pressure daily; replace at ≤ 2 mm tread.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical defects (brakes, steering, lights, tyres) are reported immediately; vehicle tagged Out of Service until repaired.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical defects (brakes, steering, lights, tyres) are reported immediately; vehicle tagged Out of Service until repaired.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Maintenance history retained per PROC-MAINT-001.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Maintenance history retained per PROC-MAINT-001.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Incident Reporting</p>
+            <SectionHeading id="s12">12. Incident Reporting</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All collisions, rollovers, near-misses, and property damage events are reported immediately to Supervisor and HSE Manager via Flash Notification (TE-IMS-FRM-HSE-005).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All collisions, rollovers, near-misses, and property damage events are reported immediately to Supervisor and HSE Manager via Flash Notification (TE-IMS-FRM-HSE-005).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Formal investigation follows PROC-HSE-006 Incident Investigation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Formal investigation follows PROC-HSE-006 Incident Investigation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Vehicle involved is secured, photographed, and kept Out of Service until cleared.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Vehicle involved is secured, photographed, and kept Out of Service until cleared.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Driver is stood down pending investigation where injury or significant damage occurred.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Driver is stood down pending investigation where injury or significant damage occurred.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Compliance and Enforcement</p>
+            <SectionHeading id="s13">13. Compliance and Enforcement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drivers must comply with all KSA MHRSD traffic regulations, Saudi Traffic Department rules, and client road safety standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drivers must comply with all KSA MHRSD traffic regulations, Saudi Traffic Department rules, and client road safety standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-compliance — speeding, no seatbelt, mobile phone, alcohol/drug — triggers progressive action: counselling → suspension of driving privileges → termination and report to authorities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-compliance — speeding, no seatbelt, mobile phone, alcohol/drug — triggers progressive action: counselling → suspension of driving privileges → termination and report to authorities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HSE conducts unannounced vehicle and driver spot audits.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HSE conducts unannounced vehicle and driver spot audits.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Zero tolerance for driving under the influence of alcohol, illicit drugs, or impairing medication.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Zero tolerance for driving under the influence of alcohol, illicit drugs, or impairing medication.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Performance Indicators</p>
+            <SectionHeading id="s14">14. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -380,29 +501,47 @@ export default function TE_IMS_PROC_LOG_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>15. Review and Continual Improvement</p>
+            <SectionHeading id="s15">15. Review and Continual Improvement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual review, or following any significant incident or regulatory change.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual review, or following any significant incident or regulatory change.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Incident and IVMS trends reviewed monthly and fed into the HSE management review.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Incident and IVMS trends reviewed monthly and fed into the HSE management review.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lessons learned shared via toolbox talks and driver bulletins.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lessons learned shared via toolbox talks and driver bulletins.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>16. References</p>
+            <SectionHeading id="s16">16. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 8.1.2 Operational Controls.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 8.1.2 Operational Controls.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clause 8.1 Operational Controls (fuel and environment).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clause 8.1 Operational Controls (fuel and environment).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Traffic Regulations (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Traffic Regulations (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Traffic Department — General Traffic Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Traffic Department — General Traffic Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Client fleet and road safety standards (e.g. Ma'aden).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Client fleet and road safety standards (e.g. Ma'aden).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-LOG-002 Journey Management Procedure; PROC-MAINT-001 Maintenance Management; SOP-LOG-001 Driving Safety SOP; PROC-HSE-006 Incident Investigation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-LOG-002 Journey Management Procedure; PROC-MAINT-001 Maintenance Management; SOP-LOG-001 Driving Safety SOP; PROC-HSE-006 Incident Investigation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>17. Related Documents and Records</p>
+            <SectionHeading id="s17">17. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

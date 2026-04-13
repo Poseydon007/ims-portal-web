@@ -8,6 +8,15 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Objectives" },
+  { id: "s5", label: "5. Benefits of Risk Management" },
+  { id: "s6", label: "6. Risk Management Process" },
+  { id: "s7", label: "7. Responsibilities" },
+  { id: "s8", label: "8. Monitoring, KPIs and Continuous Improvement" },
+  { id: "s9", label: "9. References" },
+  { id: "s10", label: "10. Related Documents" },
+  { id: "s11", label: "11. Records and Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +162,15 @@ export default function TE_IMS_PROC_HSE_015() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>To establish a consistent framework for identifying, analysing, evaluating, treating and monitoring risks and opportunities affecting True East Mining's operations, personnel, assets, environment and business objectives. This procedure operationalises ISO 9001:2015 Clause 6.1, ISO 14001:2015 Clause 6.1 and ISO 45001:2018 Clause 6.1 — risk-based thinking across the full IMS.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies across all True East Mining activities, sites, projects, functions and processes, including strategic, operational, HSE, environmental, financial, compliance, contractor and reputational risks. It covers both hazardous risks (negative effects) and opportunities (positive effects) of uncertainty.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -216,61 +225,101 @@ export default function TE_IMS_PROC_HSE_015() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Objectives</p>
+            <SectionHeading id="s4">4. Objectives</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Provide a systematic approach to the early identification and management of risks and opportunities across the IMS.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Provide a systematic approach to the early identification and management of risks and opportunities across the IMS.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Apply consistent risk assessment criteria organisation-wide.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Apply consistent risk assessment criteria organisation-wide.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Make accurate and concise risk information available to inform strategic and operational decisions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Make accurate and concise risk information available to inform strategic and operational decisions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Adopt cost-effective treatment strategies that reduce risks to an acceptable level.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Adopt cost-effective treatment strategies that reduce risks to an acceptable level.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Monitor and review risks continuously to ensure exposure remains within appetite.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Monitor and review risks continuously to ensure exposure remains within appetite.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Convert identified opportunities into improvement actions through the Continual Improvement Procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Convert identified opportunities into improvement actions through the Continual Improvement Procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Benefits of Risk Management</p>
+            <SectionHeading id="s5">5. Benefits of Risk Management</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Increased likelihood of achieving strategic and business objectives.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Increased likelihood of achieving strategic and business objectives.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Higher standard of accountability at all levels of the organisation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Higher standard of accountability at all levels of the organisation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• More effective decision-making through better understanding of risk exposure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>More effective decision-making through better understanding of risk exposure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Timely delivery of services and performance objectives.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Timely delivery of services and performance objectives.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safeguarding of assets — human, physical, environmental, financial and reputational.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safeguarding of assets — human, physical, environmental, financial and reputational.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Compliance with ISO 9001/14001/45001 clause 6.1 and KSA regulatory obligations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Compliance with ISO 9001/14001/45001 clause 6.1 and KSA regulatory obligations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Risk Management Process</p>
+            <SectionHeading id="s6">6. Risk Management Process</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.1 Establish the Context</p>
+            <SubHeading>6.1 Establish the Context</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Define internal and external factors influencing objectives — SWOT, PESTEL, interested parties (ISO 9001 Clauses 4.1 and 4.2), stakeholder requirements, KSA regulatory environment, contractual obligations, operational constraints and strategic direction.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.2 Identify Risks and Opportunities</p>
+            <SubHeading>6.2 Identify Risks and Opportunities</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Risks and opportunities must be identified systematically using a combination of techniques:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Job Hazard Analysis (JHA) and Take 5 cards at task level.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Job Hazard Analysis (JHA) and Take 5 cards at task level.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Formal HIRA (Hazard Identification and Risk Assessment) workshops for drilling, core handling, driving, hot work and all high-risk tasks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Formal HIRA (Hazard Identification and Risk Assessment) workshops for drilling, core handling, driving, hot work and all high-risk tasks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Management review inputs, audit findings and incident investigations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Management review inputs, audit findings and incident investigations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Supplier, contractor and interested-party feedback.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Supplier, contractor and interested-party feedback.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Environmental aspects and impacts register (ISO 14001 Clause 6.1.2).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Environmental aspects and impacts register (ISO 14001 Clause 6.1.2).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Legal and regulatory horizon scanning (MHRSD, NCEC, Ministry of Energy, Ministry of Industry and Mineral Resources).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Legal and regulatory horizon scanning (MHRSD, NCEC, Ministry of Energy, Ministry of Industry and Mineral Resources).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Market, commercial, financial and reputational scanning by MD and Finance.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Market, commercial, financial and reputational scanning by MD and Finance.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• &quot;Over the horizon&quot; scanning — emerging technologies, climate trends, political and regulatory change.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>&quot;Over the horizon&quot; scanning — emerging technologies, climate trends, political and regulatory change.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.3 Analyse Risks</p>
+            <SubHeading>6.3 Analyse Risks</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>For each risk, describe the Event, Cause and Impact. Assess existing controls, their effectiveness, then rate Likelihood and Severity.</p>
 
@@ -380,41 +429,59 @@ export default function TE_IMS_PROC_HSE_015() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.4 Evaluate Risks</p>
+            <SubHeading>6.4 Evaluate Risks</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The risk level determines whether further treatment is required. Outputs of this phase are: (a) a prioritised risk register, (b) identified treatment actions, and (c) residual risk assessment. Where an action differs from the standard requirement for the risk category, deviation must be authorised in writing by the Managing Director.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.5 Treat Risks</p>
+            <SubHeading>6.5 Treat Risks</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Treatment options (apply the hierarchy of controls for HSE risks):</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Avoid — change business process, scope or objective to eliminate the risk (highest priority for HIGH/EXTREME HSE risks).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Avoid — change business process, scope or objective to eliminate the risk (highest priority for HIGH/EXTREME HSE risks).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Reduce Likelihood — implement preventive controls that reduce the probability of the event.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Reduce Likelihood — implement preventive controls that reduce the probability of the event.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Reduce Consequence — implement mitigative controls that reduce the impact if the event occurs.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Reduce Consequence — implement mitigative controls that reduce the impact if the event occurs.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Share / Transfer — transfer ownership and liability through insurance, contracts or partnerships where appropriate.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Share / Transfer — transfer ownership and liability through insurance, contracts or partnerships where appropriate.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Retain — accept the risk when it is within appetite and cost of further treatment exceeds benefit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Retain — accept the risk when it is within appetite and cost of further treatment exceeds benefit.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Each treatment action requires: responsible person, realistic due date, cost allocation, and performance measure. Actions are tracked in the Risk and Opportunity Register (TE-IMS-REG-HSE-008).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.6 Monitor and Review</p>
+            <SubHeading>6.6 Monitor and Review</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Risk Owners monitor their assigned risks continuously and report status monthly to the HSE Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Risk Owners monitor their assigned risks continuously and report status monthly to the HSE Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HSE Manager reviews the full Risk and Opportunity Register quarterly and escalates HIGH/EXTREME risks to the Site Manager and Managing Director.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HSE Manager reviews the full Risk and Opportunity Register quarterly and escalates HIGH/EXTREME risks to the Site Manager and Managing Director.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Management Review (TE-IMS-PROC-SYS-002) receives a summary of top risks, treatment progress and emerging risks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Management Review (TE-IMS-PROC-SYS-002) receives a summary of top risks, treatment progress and emerging risks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Internal Audit (TE-IMS-PROC-SYS-004) tests the effectiveness of controls on HIGH risks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Internal Audit (TE-IMS-PROC-SYS-004) tests the effectiveness of controls on HIGH risks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.7 Opportunities</p>
+            <SubHeading>6.7 Opportunities</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The same process applies to opportunities. Where an opportunity is identified (improved technology, new contract, process efficiency, commercial advantage), it is logged in the Risk and Opportunity Register, evaluated for feasibility and benefit, and converted to an improvement action via TE-IMS-PROC-SYS-005 Continual Improvement and CAPA.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Responsibilities</p>
+            <SectionHeading id="s7">7. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -461,7 +528,7 @@ export default function TE_IMS_PROC_HSE_015() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Monitoring, KPIs and Continuous Improvement</p>
+            <SectionHeading id="s8">8. Monitoring, KPIs and Continuous Improvement</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -496,43 +563,75 @@ export default function TE_IMS_PROC_HSE_015() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. References</p>
+            <SectionHeading id="s9">9. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Quality Management Systems, Clause 6.1 Actions to Address Risks and Opportunities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Quality Management Systems, Clause 6.1 Actions to Address Risks and Opportunities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Environmental Management Systems, Clause 6.1.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Environmental Management Systems, Clause 6.1.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — OH&amp;S Management Systems, Clause 6.1.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — OH&amp;S Management Systems, Clause 6.1.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 31000:2018 — Risk Management Guidelines.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 31000:2018 — Risk Management Guidelines.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• IEC 31010:2019 — Risk Assessment Techniques.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>IEC 31010:2019 — Risk Assessment Techniques.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Management Regulation (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Management Regulation (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ministry of Industry and Mineral Resources — Mining Investment Law and executive regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ministry of Industry and Mineral Resources — Mining Investment Law and executive regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Related Documents</p>
+            <SectionHeading id="s10">10. Related Documents</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-POL-HSE-001 — HSE Policy</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-POL-HSE-001 — HSE Policy</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-002 — Management Review Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-002 — Management Review Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-004 — Internal Audit Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-004 — Internal Audit Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-005 — Continual Improvement and CAPA Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-005 — Continual Improvement and CAPA Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-018 — Environmental Aspects Identification Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-018 — Environmental Aspects Identification Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-001 — Job Hazard Analysis Form</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-001 — Job Hazard Analysis Form</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-009 — Take 5 Hazard Assessment</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-009 — Take 5 Hazard Assessment</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-HSE-008 — Risk and Opportunity Register</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-HSE-008 — Risk and Opportunity Register</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-HSE-007 — HIRA Register</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-HSE-007 — HIRA Register</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Records and Retention</p>
+            <SectionHeading id="s11">11. Records and Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

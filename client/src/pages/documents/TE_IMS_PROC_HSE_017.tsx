@@ -8,6 +8,14 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Risk Factors" },
+  { id: "s6", label: "6. Procedure" },
+  { id: "s7", label: "7. Monitoring, KPIs and Continuous Improvement" },
+  { id: "s8", label: "8. References" },
+  { id: "s9", label: "9. Related Documents" },
+  { id: "s10", label: "10. Records and Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +161,15 @@ export default function TE_IMS_PROC_HSE_017() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>To minimise the risk of musculoskeletal injuries (MSIs) and incidents associated with manual handling tasks at True East Mining sites. This is achieved by establishing safe practices, targeted training, dynamic task-level risk assessments and mandating mechanical aids wherever practical, in compliance with ISO 45001:2018 and KSA MHRSD occupational safety regulations.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all employees, contractors, sub-contractors and visitors performing manual handling tasks (lifting, lowering, pushing, pulling, carrying, moving) at drilling sites, processing areas, workshops, laydown yards, camps and remote desert locations. It explicitly covers heavy or awkward items such as drill rods, wet core boxes, hand tools, cement and drilling-additive bags, water drums and operational equipment.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -200,7 +208,7 @@ export default function TE_IMS_PROC_HSE_017() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -243,59 +251,97 @@ export default function TE_IMS_PROC_HSE_017() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Risk Factors</p>
+            <SectionHeading id="s5">5. Risk Factors</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Personnel must remain highly vigilant of the following manual handling risk factors present on True East Mining sites:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Heavy, awkward or unstable loads — long drill rods, water-logged core boxes, cement sacks, coiled hoses.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Heavy, awkward or unstable loads — long drill rods, water-logged core boxes, cement sacks, coiled hoses.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Repetitive handling or tasks requiring awkward, twisting or bent-back postures.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Repetitive handling or tasks requiring awkward, twisting or bent-back postures.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Uneven, rocky or slippery ground — desert terrain, muddy rig mats, snow of drill cuttings.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Uneven, rocky or slippery ground — desert terrain, muddy rig mats, snow of drill cuttings.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Extreme high temperatures — rapid fatigue, sweaty palms, reduced grip strength (cross-refer PROC-HSE-002 Heat Stress).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Extreme high temperatures — rapid fatigue, sweaty palms, reduced grip strength (cross-refer PROC-HSE-002 Heat Stress).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Long carrying distances or areas with poor lighting (night shift operations).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Long carrying distances or areas with poor lighting (night shift operations).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-existing musculoskeletal conditions or recent injuries.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-existing musculoskeletal conditions or recent injuries.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Inadequate PPE — unsuitable gloves, missing metatarsal protection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Inadequate PPE — unsuitable gloves, missing metatarsal protection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Time pressure, rushed work or understaffed crews.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Time pressure, rushed work or understaffed crews.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Procedure</p>
+            <SectionHeading id="s6">6. Procedure</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.1 Hierarchy of Controls (Avoid → Reduce → Assess → Train)</p>
+            <SubHeading>6.1 Hierarchy of Controls (Avoid → Reduce → Assess → Train)</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Avoid — avoid manual handling entirely where possible by using mechanical aids — cranes, trolleys, forklifts, rod handlers, core box lifters.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Avoid — avoid manual handling entirely where possible by using mechanical aids — cranes, trolleys, forklifts, rod handlers, core box lifters.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Reduce Risk — if manual handling cannot be avoided, break loads into smaller units, redesign the task to eliminate bending, or mandate a team lift.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Reduce Risk — if manual handling cannot be avoided, break loads into smaller units, redesign the task to eliminate bending, or mandate a team lift.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Assess — assess every task before handling by asking the questions in Section 6.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Assess — assess every task before handling by asking the questions in Section 6.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Train — train all personnel on safe handling — initial induction plus annual refresher.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Train — train all personnel on safe handling — initial induction plus annual refresher.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.2 Pre-Lift Assessment Checklist (Dynamic)</p>
+            <SubHeading>6.2 Pre-Lift Assessment Checklist (Dynamic)</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Before any significant lift, every person must ask themselves:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Can a mechanical aid be used instead?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Can a mechanical aid be used instead?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Can the load be reduced, dismantled or split?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Can the load be reduced, dismantled or split?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Does the job require a team lift?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Does the job require a team lift?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Is the pathway clear, well-lit and free of trip hazards?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Is the pathway clear, well-lit and free of trip hazards?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Is the final stacking area safe — stable ground, safe height, proper packing?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Is the final stacking area safe — stable ground, safe height, proper packing?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Am I physically capable of this lift today — rested, hydrated, injury-free?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Am I physically capable of this lift today — rested, hydrated, injury-free?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Is my PPE appropriate for the load?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Is my PPE appropriate for the load?</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>If the answer to any of these raises concern, the lift must not proceed without additional controls. Stop Work Authority applies.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.3 Safe Manual Handling Technique</p>
+            <SubHeading>6.3 Safe Manual Handling Technique</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Always plan the lift before touching the object:</p>
 
@@ -317,7 +363,7 @@ export default function TE_IMS_PROC_HSE_017() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Step 9: Visibility — if your view is obstructed by the load, get help or use a dedicated spotter.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.4 Indicative Weight Limits (Single Person, Healthy Adult)</p>
+            <SubHeading>6.4 Indicative Weight Limits (Single Person, Healthy Adult)</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>These are guidance values only — actual limits must be adjusted for individual capability, posture, duration, frequency, grip quality, environmental conditions and heat stress. When in doubt, use a mechanical aid or team lift.</p>
 
@@ -360,53 +406,89 @@ export default function TE_IMS_PROC_HSE_017() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW] — confirm alignment with MHRSD-referenced limits and any project-specific contractor standards.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.5 Team Lifting</p>
+            <SubHeading>6.5 Team Lifting</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>When a load is too heavy or awkward for one person:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Nominate a Leader — one person must be nominated to call the commands.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Nominate a Leader — one person must be nominated to call the commands.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Coordinate — lift, move and lower exactly together.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Coordinate — lift, move and lower exactly together.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Balance — ensure an equal share of the load based on height and strength.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Balance — ensure an equal share of the load based on height and strength.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Communicate — use clear, loud commands — 'Ready… Lift!', 'Lower… Now'.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Communicate — use clear, loud commands — 'Ready… Lift!', 'Lower… Now'.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Match Heights — team members should be of similar height where possible; if not, distribute load to compensate.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Match Heights — team members should be of similar height where possible; if not, distribute load to compensate.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Stop and Reset — if any member loses grip, balance or control, the leader must call an immediate stop.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Stop and Reset — if any member loses grip, balance or control, the leader must call an immediate stop.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.6 PPE and Equipment</p>
+            <SubHeading>6.6 PPE and Equipment</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Wear cut-resistant impact gloves appropriate to the load.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Wear cut-resistant impact gloves appropriate to the load.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Steel-toe boots with metatarsal protection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Steel-toe boots with metatarsal protection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• High-visibility reflective overalls and hard hat.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>High-visibility reflective overalls and hard hat.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Back support belts are NOT mandated by TE (evidence on effectiveness is limited); may be used where individually prescribed by occupational health.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Back support belts are NOT mandated by TE (evidence on effectiveness is limited); may be used where individually prescribed by occupational health.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use mechanical aids — trolleys, dollies, hoists, rod handlers, forklifts — whenever available and you are authorised/trained to use them.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use mechanical aids — trolleys, dollies, hoists, rod handlers, forklifts — whenever available and you are authorised/trained to use them.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.7 Training and Awareness</p>
+            <SubHeading>6.7 Training and Awareness</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mandatory manual handling training during initial induction plus annual refresher.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mandatory manual handling training during initial induction plus annual refresher.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Task-specific training for rod handling, core box handling and cement/additive handling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Task-specific training for rod handling, core box handling and cement/additive handling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Supervisors include manual handling topics in Toolbox Talks at least monthly and before any campaign with heavy handling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Supervisors include manual handling topics in Toolbox Talks at least monthly and before any campaign with heavy handling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Training and attendance records documented in TE-IMS-REG-TRN-001 Training Matrix for a minimum of 5 years.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Training and attendance records documented in TE-IMS-REG-TRN-001 Training Matrix for a minimum of 5 years.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.8 Incident Reporting</p>
+            <SubHeading>6.8 Incident Reporting</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report any muscular strain, near miss or difficulty performing a task immediately using the Incident Flash Notification Form (TE-IMS-FRM-HSE-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report any muscular strain, near miss or difficulty performing a task immediately using the Incident Flash Notification Form (TE-IMS-FRM-HSE-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Follow up with full investigation using TE-IMS-FRM-HSE-022 Incident and Accident Investigation Report.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Follow up with full investigation using TE-IMS-FRM-HSE-022 Incident and Accident Investigation Report.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HSE team conducts root-cause analysis per TE-IMS-PROC-SYS-005 CAPA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HSE team conducts root-cause analysis per TE-IMS-PROC-SYS-005 CAPA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Monitoring, KPIs and Continuous Improvement</p>
+            <SectionHeading id="s7">7. Monitoring, KPIs and Continuous Improvement</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -441,45 +523,79 @@ export default function TE_IMS_PROC_HSE_017() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Field Audits — HSE Manager conducts quarterly field audits of physical handling practices and the condition of mechanical aids.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Field Audits — HSE Manager conducts quarterly field audits of physical handling practices and the condition of mechanical aids.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review — procedure reviewed annually or immediately after any MSI/musculoskeletal incident.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review — procedure reviewed annually or immediately after any MSI/musculoskeletal incident.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. References</p>
+            <SectionHeading id="s8">8. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — OH&amp;S Management Systems (Clauses 6.1.2, 7.2, 8.1.2).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — OH&amp;S Management Systems (Clauses 6.1.2, 7.2, 8.1.2).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 7.1.4 Environment for operation of processes.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 7.1.4 Environment for operation of processes.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Management Regulation (KSA), ergonomic hazards and safe lifting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Management Regulation (KSA), ergonomic hazards and safe lifting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 11228 series — Ergonomics — Manual handling (Parts 1–3).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 11228 series — Ergonomics — Manual handling (Parts 1–3).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NIOSH Lifting Equation — best-practice benchmark for lifting capacity analysis.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NIOSH Lifting Equation — best-practice benchmark for lifting capacity analysis.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Related Documents</p>
+            <SectionHeading id="s9">9. Related Documents</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-POL-HSE-001 — HSE Policy</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-POL-HSE-001 — HSE Policy</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-001 — Fatigue Management Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-001 — Fatigue Management Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-002 — Heat Stress Prevention Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-002 — Heat Stress Prevention Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-HSE-016 — PPE Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-HSE-016 — PPE Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-005 — Continual Improvement and CAPA Procedure</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-005 — Continual Improvement and CAPA Procedure</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-001 — Job Hazard Analysis Form</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-001 — Job Hazard Analysis Form</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-002 — Incident Flash Notification</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-002 — Incident Flash Notification</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-022 — Incident and Accident Investigation Report</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-022 — Incident and Accident Investigation Report</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-MAINT-001 — Machine Guarding Inspection Register</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-MAINT-001 — Machine Guarding Inspection Register</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-TRN-001 — Training and Competence Matrix</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-TRN-001 — Training and Competence Matrix</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Records and Retention</p>
+            <SectionHeading id="s10">10. Records and Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

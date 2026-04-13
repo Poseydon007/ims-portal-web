@@ -8,6 +8,18 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. General Requirements" },
+  { id: "s6", label: "6. Controlled Register Catalogue" },
+  { id: "s7", label: "7. Creation and Approval" },
+  { id: "s8", label: "8. Issue and Use" },
+  { id: "s9", label: "9. Review and Audit" },
+  { id: "s10", label: "10. Corrective Action" },
+  { id: "s11", label: "11. Retention and Disposal" },
+  { id: "s12", label: "12. Performance Indicators" },
+  { id: "s13", label: "13. References" },
+  { id: "s14", label: "14. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,25 +165,33 @@ export default function TE_IMS_PROC_SYS_006() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes a standardised process for creating, issuing, completing, reviewing, retaining, and disposing of checklists and registers within the True East Mining Company (TEMC) Integrated Management System. Checklists and registers are the core records that prove day-to-day operational, safety, and environmental controls are actually in place. This procedure ensures they are consistent, auditable, and traceable, and supports ISO 9001:2015 (Clause 7.5 Documented Information), ISO 14001:2015, and ISO 45001:2018 (Clauses 7.5, 8.1, 9.1, 10.2).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to every controlled checklist and register used across TEMC operations in the Kingdom of Saudi Arabia — firefighting equipment, first aid, machine guarding, portable electrical equipment, PPE issue, safety harness, working at height, vehicle inspection, toolbox talk attendance, training attendance, visitor log, gate register, maintenance log, environmental inspection, waste manifest, and any similar record.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Checklist — a pre-printed or digital form used to verify that a set of defined items or conditions have been checked.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Checklist — a pre-printed or digital form used to verify that a set of defined items or conditions have been checked.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Register — a chronological record of events, inspections, issues, or actions — typically accumulating entries over time.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Register — a chronological record of events, inspections, issues, or actions — typically accumulating entries over time.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Controlled Document — an IMS document with a unique code, revision, owner, and formal approval.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Controlled Document — an IMS document with a unique code, revision, owner, and formal approval.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Record Custodian — the person or role responsible for maintaining, storing, and archiving a specific register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Record Custodian — the person or role responsible for maintaining, storing, and archiving a specific register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -206,21 +226,33 @@ export default function TE_IMS_PROC_SYS_006() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. General Requirements</p>
+            <SectionHeading id="s5">5. General Requirements</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All checklists and registers use a standardised TEMC format — document code, title, revision, date, owner, and clear headings.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All checklists and registers use a standardised TEMC format — document code, title, revision, date, owner, and clear headings.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Digital or physical medium — both acceptable if integrity and access are controlled.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Digital or physical medium — both acceptable if integrity and access are controlled.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Entries are real-time or as soon as practicable after the event; no retrospective entries without clear annotation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Entries are real-time or as soon as practicable after the event; no retrospective entries without clear annotation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All entries are legible, dated, and signed (or digitally authenticated) by the responsible person.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All entries are legible, dated, and signed (or digitally authenticated) by the responsible person.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrections are made with a single strikethrough, initialled, and dated; never erased or over-written.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrections are made with a single strikethrough, initialled, and dated; never erased or over-written.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Registers are stored securely — locked cabinet for physical, controlled access for digital — to prevent loss, tampering, or unauthorised access.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Registers are stored securely — locked cabinet for physical, controlled access for digital — to prevent loss, tampering, or unauthorised access.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Controlled Register Catalogue</p>
+            <SectionHeading id="s6">6. Controlled Register Catalogue</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The Management Representative maintains a master catalogue of all controlled checklists and registers, each with owner, frequency, retention, and ISO clause anchor. The minimum standard for the following core registers is:</p>
 
@@ -288,53 +320,89 @@ export default function TE_IMS_PROC_SYS_006() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Creation and Approval</p>
+            <SectionHeading id="s7">7. Creation and Approval</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• New checklists or registers are proposed by the process owner to the Management Representative.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>New checklists or registers are proposed by the process owner to the Management Representative.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The MR assigns a TE-IMS document code (FRM or REG), revision 00, and ensures format alignment with IMS standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The MR assigns a TE-IMS document code (FRM or REG), revision 00, and ensures format alignment with IMS standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drafts are reviewed by QA / HSE and approved by the Managing Director before release.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drafts are reviewed by QA / HSE and approved by the Managing Director before release.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Released checklists and registers are listed in the Master Document List (REG-SYS-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Released checklists and registers are listed in the Master Document List (REG-SYS-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Issue and Use</p>
+            <SectionHeading id="s8">8. Issue and Use</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Current approved revision is the only one in use; superseded revisions are withdrawn.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Current approved revision is the only one in use; superseded revisions are withdrawn.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Field copies (paper) are clearly marked &quot;Current Revision&quot; or equivalent; printed copies without control marking are uncontrolled.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Field copies (paper) are clearly marked &quot;Current Revision&quot; or equivalent; printed copies without control marking are uncontrolled.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Digital checklists use the current template only; older templates are archived.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Digital checklists use the current template only; older templates are archived.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Users trained on how and when to complete each checklist before use.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Users trained on how and when to complete each checklist before use.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Review and Audit</p>
+            <SectionHeading id="s9">9. Review and Audit</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Department Heads review completed entries in their area at least monthly for completeness, accuracy, and timeliness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Department Heads review completed entries in their area at least monthly for completeness, accuracy, and timeliness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The HSE Manager audits HSE-related registers quarterly — verifies entries, cross-checks against incidents, maintenance logs, and training records.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The HSE Manager audits HSE-related registers quarterly — verifies entries, cross-checks against incidents, maintenance logs, and training records.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Internal Audit (PROC-SYS-001) verifies this procedure as part of the IMS audit plan.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Internal Audit (PROC-SYS-001) verifies this procedure as part of the IMS audit plan.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Findings are documented and corrective actions raised under PROC-SYS-008.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Findings are documented and corrective actions raised under PROC-SYS-008.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Corrective Action</p>
+            <SectionHeading id="s10">10. Corrective Action</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-conformances — missing entries, overdue inspections, unsigned records — are raised via Corrective Action Request (FRM-SYS-001) under PROC-SYS-008.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-conformances — missing entries, overdue inspections, unsigned records — are raised via Corrective Action Request (FRM-SYS-001) under PROC-SYS-008.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrective actions closed within 7 days for minor gaps; target closure per PROC-SYS-008 for major findings.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrective actions closed within 7 days for minor gaps; target closure per PROC-SYS-008 for major findings.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Repeat non-conformance triggers root cause analysis and training refresher.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Repeat non-conformance triggers root cause analysis and training refresher.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Retention and Disposal</p>
+            <SectionHeading id="s11">11. Retention and Disposal</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Each register is retained for its specified minimum retention period, or longer if required by KSA regulation or client contract.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Each register is retained for its specified minimum retention period, or longer if required by KSA regulation or client contract.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At end-of-retention: physical records shredded under supervision; digital records securely deleted; disposal logged in the Records Disposal Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At end-of-retention: physical records shredded under supervision; digital records securely deleted; disposal logged in the Records Disposal Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Sensitive employee, medical, or client-confidential records follow the stricter retention and disposal requirements applicable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Sensitive employee, medical, or client-confidential records follow the stricter retention and disposal requirements applicable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Performance Indicators</p>
+            <SectionHeading id="s12">12. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -377,17 +445,25 @@ export default function TE_IMS_PROC_SYS_006() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. References</p>
+            <SectionHeading id="s13">13. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 7.5 Documented Information.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 7.5 Documented Information.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clause 7.5 Documented Information.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clause 7.5 Documented Information.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 7.2 Competence, 7.5 Documented Information, 8.1 Operational Control, 9.1 Monitoring, 10.2 Incident / Non-Conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 7.2 Competence, 7.5 Documented Information, 8.1 Operational Control, 9.1 Monitoring, 10.2 Incident / Non-Conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-SYS-001 Internal Audit; PROC-SYS-008 Corrective Action; IMS Master Document List (REG-SYS-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-SYS-001 Internal Audit; PROC-SYS-008 Corrective Action; IMS Master Document List (REG-SYS-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Related Documents and Records</p>
+            <SectionHeading id="s14">14. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

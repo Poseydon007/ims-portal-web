@@ -8,6 +8,17 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions and Acronyms" },
+  { id: "s4", label: "4. References" },
+  { id: "s5", label: "5. Responsibilities" },
+  { id: "s6", label: "6. Pre-Drilling Planning" },
+  { id: "s7", label: "7. Rig Mobilization and Setup" },
+  { id: "s8", label: "8. Drilling Operations Control" },
+  { id: "s9", label: "9. Post-Drilling and Rehabilitation" },
+  { id: "s10", label: "10. Incident and Deviation Handling" },
+  { id: "s11", label: "11. Training and Competence" },
+  { id: "s12", label: "12. Monitoring, KPIs and Continual Improvement" },
+  { id: "s13", label: "13. Records and Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,7 +164,7 @@ export default function TE_IMS_PROC_OPS_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes the high-level controls and requirements for safe, efficient, and environmentally compliant drilling operations (diamond core, percussion, exploration, and production) conducted by True East Mining Company at all operational sites within the Kingdom of Saudi Arabia.</p>
 
@@ -178,7 +189,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all drilling operations executed by or on behalf of True East Mining at any company-operated or contractor-operated site. It covers:</p>
 
@@ -211,7 +222,7 @@ export default function TE_IMS_PROC_OPS_001() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Exclusions: Non-drilling operations (vehicle movement outside the rig envelope, workshop maintenance, office activities, and construction works) are governed by separate IMS procedures and are outside the scope of this document.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions and Acronyms</p>
+            <SectionHeading id="s3">3. Definitions and Acronyms</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following terms and acronyms are used throughout this procedure:</p>
 
@@ -284,7 +295,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. References</p>
+            <SectionHeading id="s4">4. References</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure is aligned with the following international standards, Saudi regulations, and True East IMS documents:</p>
 
@@ -399,7 +410,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Responsibilities</p>
+            <SectionHeading id="s5">5. Responsibilities</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following roles have defined accountabilities for the execution of drilling operations under this procedure:</p>
 
@@ -452,7 +463,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Pre-Drilling Planning</p>
+            <SectionHeading id="s6">6. Pre-Drilling Planning</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Before any rig is mobilized to site, the following planning activities shall be completed and documented:</p>
 
@@ -470,7 +481,7 @@ export default function TE_IMS_PROC_OPS_001() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Step 7: Pre-Mobilization Meeting — Hold a formal pre-mobilization meeting with the drilling team, HSE, and relevant support functions. Record the meeting and any outstanding actions.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Rig Mobilization and Setup</p>
+            <SectionHeading id="s7">7. Rig Mobilization and Setup</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Rig movement and setup are high-consequence activities that must be controlled as follows:</p>
 
@@ -501,9 +512,9 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Drilling Operations Control</p>
+            <SectionHeading id="s8">8. Drilling Operations Control</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.1 Crew Readiness and Daily Controls</p>
+            <SubHeading>8.1 Crew Readiness and Daily Controls</SubHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -528,7 +539,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.2 Equipment and Energy Control</p>
+            <SubHeading>8.2 Equipment and Energy Control</SubHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -549,7 +560,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.3 Environmental Control</p>
+            <SubHeading>8.3 Environmental Control</SubHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -574,7 +585,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.4 Shift Handover and Night Operations</p>
+            <SubHeading>8.4 Shift Handover and Night Operations</SubHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -595,7 +606,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Post-Drilling and Rehabilitation</p>
+            <SectionHeading id="s9">9. Post-Drilling and Rehabilitation</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Upon completion of drilling at any hole or site, the following activities shall be executed:</p>
 
@@ -626,7 +637,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Incident and Deviation Handling</p>
+            <SectionHeading id="s10">10. Incident and Deviation Handling</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Incidents, near misses, and deviations shall be handled as follows:</p>
 
@@ -660,7 +671,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Training and Competence</p>
+            <SectionHeading id="s11">11. Training and Competence</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -685,7 +696,7 @@ export default function TE_IMS_PROC_OPS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Monitoring, KPIs and Continual Improvement</p>
+            <SectionHeading id="s12">12. Monitoring, KPIs and Continual Improvement</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Drilling operations performance shall be monitored monthly by the Operations Director and reviewed quarterly at the Management Review. The following KPIs apply:</p>
 
@@ -734,7 +745,7 @@ export default function TE_IMS_PROC_OPS_001() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW] Target values above are industry baselines. Final KPI targets shall be confirmed by the CEO and recorded in the TE-IMS-REG-GOV-001 IMS Objectives and Targets Register.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Records and Retention</p>
+            <SectionHeading id="s13">13. Records and Retention</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following records are generated by this procedure. Storage, retention, and disposal shall follow TE-IMS-PROC-SYS-001 Document Control Procedure.</p>
 

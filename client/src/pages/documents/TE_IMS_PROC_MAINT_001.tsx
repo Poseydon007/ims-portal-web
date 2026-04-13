@@ -8,6 +8,17 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Maintenance Types and Controls" },
+  { id: "s6", label: "6. Planning and Scheduling" },
+  { id: "s7", label: "7. Execution and Documentation" },
+  { id: "s8", label: "8. Breakdown and Emergency Response" },
+  { id: "s9", label: "9. Verification and Effectiveness" },
+  { id: "s10", label: "10. Performance Indicators" },
+  { id: "s11", label: "11. Training and Competence" },
+  { id: "s12", label: "12. References" },
+  { id: "s13", label: "13. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,35 +164,53 @@ export default function TE_IMS_PROC_MAINT_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes a systematic process for planning, scheduling, executing, recording, and continually improving maintenance activities on all True East Mining Company (TEMC) assets — drill rigs, generators, vehicles, pumps, compressors, workshop equipment, and camp facilities. The objective is to achieve safe working conditions during maintenance, high equipment availability and reliability, prevention of breakdowns and incidents, and compliance with ISO 9001:2015 (Clause 8.5), ISO 45001:2018 (Clause 8.1.2), ISO 14001:2015 (Clause 8.1), and KSA regulatory requirements (MHRSD, NCEC).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all maintenance activities — preventive, predictive, corrective, and emergency — on company-owned or rented assets used in drilling, exploration, transport, camp, and support operations in the Kingdom of Saudi Arabia. Major capital repairs and third-party specialised maintenance (e.g. rig engine rebuilds) are excluded from routine maintenance and managed under Procurement / Contractor Management.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Preventive Maintenance (PM) — scheduled maintenance performed at fixed intervals (time, hours, km) to prevent failure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Preventive Maintenance (PM) — scheduled maintenance performed at fixed intervals (time, hours, km) to prevent failure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Predictive Maintenance (PdM) — condition-based maintenance triggered by monitoring (vibration, oil analysis, thermography).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Predictive Maintenance (PdM) — condition-based maintenance triggered by monitoring (vibration, oil analysis, thermography).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrective Maintenance (CM) — work performed to restore a failed item or correct a defect.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrective Maintenance (CM) — work performed to restore a failed item or correct a defect.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Emergency Maintenance (EM) — immediate action to restore safety or critical operations after an unplanned failure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Emergency Maintenance (EM) — immediate action to restore safety or critical operations after an unplanned failure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical Equipment — equipment whose failure would stop production, create a safety hazard, or cause environmental impact.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical Equipment — equipment whose failure would stop production, create a safety hazard, or cause environmental impact.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Work Order — the controlled document authorising and recording a maintenance task.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Work Order — the controlled document authorising and recording a maintenance task.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LOTO — lockout / tagout — isolation of energy sources before work begins (per SOP-HSE-003).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LOTO — lockout / tagout — isolation of energy sources before work begins (per SOP-HSE-003).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MTBF — Mean Time Between Failures — reliability KPI.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MTBF — Mean Time Between Failures — reliability KPI.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• OEE — Overall Equipment Effectiveness — availability × performance × quality.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>OEE — Overall Equipment Effectiveness — availability × performance × quality.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -224,7 +253,7 @@ export default function TE_IMS_PROC_MAINT_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Maintenance Types and Controls</p>
+            <SectionHeading id="s5">5. Maintenance Types and Controls</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -260,69 +289,121 @@ export default function TE_IMS_PROC_MAINT_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.1 Mandatory Safety Controls</p>
+            <SubHeading>5.1 Mandatory Safety Controls</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LOTO mandatory for all energy isolation — electrical, hydraulic, pneumatic, mechanical (SOP-HSE-003).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LOTO mandatory for all energy isolation — electrical, hydraulic, pneumatic, mechanical (SOP-HSE-003).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Machine guarding — all guards in place and functional before release to service (SOP-MAINT-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Machine guarding — all guards in place and functional before release to service (SOP-MAINT-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• PPE — hard hat, safety glasses, gloves, overalls, steel-toe boots; task-specific additions (face shield, hearing, respiratory).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>PPE — hard hat, safety glasses, gloves, overalls, steel-toe boots; task-specific additions (face shield, hearing, respiratory).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Hot Work Permit required for welding, grinding, cutting (SOP-HSE-004).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Hot Work Permit required for welding, grinding, cutting (SOP-HSE-004).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Confined Space Permit required for tank / pump / pit entry (SOP-HSE-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Confined Space Permit required for tank / pump / pit entry (SOP-HSE-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Spill prevention — drip trays, spill kits, bunding during oil and fuel work (PROC-HSE-015).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Spill prevention — drip trays, spill kits, bunding during oil and fuel work (PROC-HSE-015).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Working at Height controls apply to elevated maintenance (PLN-HSE-003).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Working at Height controls apply to elevated maintenance (PLN-HSE-003).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Planning and Scheduling</p>
+            <SectionHeading id="s6">6. Planning and Scheduling</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual maintenance plan prepared at year start using OEM manuals, historical data, operating hours, and risk.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual maintenance plan prepared at year start using OEM manuals, historical data, operating hours, and risk.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Schedule updated monthly based on usage, defects, and seasonal factors (e.g. more cooling-system checks in summer).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Schedule updated monthly based on usage, defects, and seasonal factors (e.g. more cooling-system checks in summer).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical equipment scheduled during low-activity periods where possible (weekend shutdowns).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical equipment scheduled during low-activity periods where possible (weekend shutdowns).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Spare parts and consumables pre-staged — Procurement lead time built into the schedule.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Spare parts and consumables pre-staged — Procurement lead time built into the schedule.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Planned downtime coordinated with Operations and communicated at daily and weekly meetings.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Planned downtime coordinated with Operations and communicated at daily and weekly meetings.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Execution and Documentation</p>
+            <SectionHeading id="s7">7. Execution and Documentation</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Work Order — every task uses TE-IMS-FRM-MAINT-002 — describes task, parts, tools, JHA reference, safety controls.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Work Order — every task uses TE-IMS-FRM-MAINT-002 — describes task, parts, tools, JHA reference, safety controls.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-job brief — toolbox talk at the start of each task covering hazards, isolation, permits, PPE, and emergency procedures.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-job brief — toolbox talk at the start of each task covering hazards, isolation, permits, PPE, and emergency procedures.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Records — date, time, technician, work done, parts used, issues found, time taken — recorded on the Work Order and in the Maintenance Log (TE-IMS-REG-MAINT-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Records — date, time, technician, work done, parts used, issues found, time taken — recorded on the Work Order and in the Maintenance Log (TE-IMS-REG-MAINT-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-work test — function test and re-commissioning before release to operations. Signed off by competent person.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-work test — function test and re-commissioning before release to operations. Signed off by competent person.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Housekeeping — work area left clean; waste segregated; tools returned; guards reinstated.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Housekeeping — work area left clean; waste segregated; tools returned; guards reinstated.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Breakdown and Emergency Response</p>
+            <SectionHeading id="s8">8. Breakdown and Emergency Response</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Operator reports defect via radio and defect card immediately.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Operator reports defect via radio and defect card immediately.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Equipment isolated and tagged Out of Service if unsafe to continue.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Equipment isolated and tagged Out of Service if unsafe to continue.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Maintenance Supervisor classifies severity (Safety-Critical / Production-Critical / Non-Critical) and assigns response priority.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Maintenance Supervisor classifies severity (Safety-Critical / Production-Critical / Non-Critical) and assigns response priority.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Stop Work Authority is exercised when safety controls are missing or defeated.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Stop Work Authority is exercised when safety controls are missing or defeated.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-event review for any breakdown affecting safety or critical production — root cause analysis per PROC-SYS-005.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-event review for any breakdown affecting safety or critical production — root cause analysis per PROC-SYS-005.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Verification and Effectiveness</p>
+            <SectionHeading id="s9">9. Verification and Effectiveness</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Monthly review of maintenance performance — downtime, breakdowns, compliance, spares consumption, cost.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Monthly review of maintenance performance — downtime, breakdowns, compliance, spares consumption, cost.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-maintenance function test on critical equipment (rigs, generators, winches) before return to service.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-maintenance function test on critical equipment (rigs, generators, winches) before return to service.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual management review of the maintenance programme — budget, KPIs, changes.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual management review of the maintenance programme — budget, KPIs, changes.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Trend analysis identifies repeat failures and drives design, training, or procedure changes.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Trend analysis identifies repeat failures and drives design, training, or procedure changes.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Performance Indicators</p>
+            <SectionHeading id="s10">10. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -375,29 +456,47 @@ export default function TE_IMS_PROC_MAINT_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Training and Competence</p>
+            <SectionHeading id="s11">11. Training and Competence</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All maintenance personnel trained in this procedure, LOTO, machine guarding, permit-to-work, first aid, and safe work practices (initial + annual refresher).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All maintenance personnel trained in this procedure, LOTO, machine guarding, permit-to-work, first aid, and safe work practices (initial + annual refresher).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Competence recorded in the Training and Competence Matrix (TE-IMS-REG-TRN-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Competence recorded in the Training and Competence Matrix (TE-IMS-REG-TRN-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Specialist tasks (welding, hydraulics, HV electrical) require additional certification.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Specialist tasks (welding, hydraulics, HV electrical) require additional certification.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. References</p>
+            <SectionHeading id="s12">12. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 8.5 Production and Service Provision (Infrastructure 7.1.3).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 8.5 Production and Service Provision (Infrastructure 7.1.3).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 8.1.2 Eliminating Hazards and Reducing OH&amp;S Risks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 8.1.2 Eliminating Hazards and Reducing OH&amp;S Risks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clause 8.1 Operational Planning and Control.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clause 8.1 Operational Planning and Control.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Regulation (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Regulation (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC / MEWA — Environmental management requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC / MEWA — Environmental management requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC SOP-HSE-002 Confined Space; SOP-HSE-003 LOTO; SOP-HSE-004 Hot Work; SOP-MAINT-001 Machine Guarding; SOP-MAINT-002 Refueling; PROC-HSE-015 Waste and Spill; PROC-SYS-005 CAPA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC SOP-HSE-002 Confined Space; SOP-HSE-003 LOTO; SOP-HSE-004 Hot Work; SOP-MAINT-001 Machine Guarding; SOP-MAINT-002 Refueling; PROC-HSE-015 Waste and Spill; PROC-SYS-005 CAPA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Related Documents and Records</p>
+            <SectionHeading id="s13">13. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

@@ -8,6 +8,16 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions and Abbreviations" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Objective Setting Process" },
+  { id: "s6", label: "6. Monitoring and Measurement" },
+  { id: "s7", label: "7. Review and Reporting" },
+  { id: "s8", label: "8. Revision of Objectives" },
+  { id: "s9", label: "9. Example Objective Categories" },
+  { id: "s10", label: "10. Performance Indicators (for this procedure)" },
+  { id: "s11", label: "11. References" },
+  { id: "s12", label: "12. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,29 +163,41 @@ export default function TE_IMS_PROC_SYS_009() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure defines how True East Mining Company (TEMC) sets, communicates, monitors, reviews, and reports Quality, Health, Safety, and Environment (QHSE) objectives across the Integrated Management System. It ensures that objectives drive measurable continual improvement and are consistent with the TEMC QHSE Policy, ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 (all Clause 6.2).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC processes, departments, and sites, including drilling operations, maintenance, HSE, logistics, procurement, HR, and administration. It covers corporate-level objectives set by the Managing Director and departmental objectives cascaded from them.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions and Abbreviations</p>
+            <SectionHeading id="s3">3. Definitions and Abbreviations</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• QHSE Objective — a specific, measurable target for quality, health, safety, or environmental performance.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>QHSE Objective — a specific, measurable target for quality, health, safety, or environmental performance.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• SMART — Specific, Measurable, Achievable, Realistic, Time-bound — the required quality of every objective.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>SMART — Specific, Measurable, Achievable, Realistic, Time-bound — the required quality of every objective.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• KPI — Key Performance Indicator — the metric used to track an objective.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>KPI — Key Performance Indicator — the metric used to track an objective.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MR — Management Representative.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MR — Management Representative.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MD — Managing Director.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MD — Managing Director.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HOD — Head of Department.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HOD — Head of Department.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -210,45 +232,75 @@ export default function TE_IMS_PROC_SYS_009() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Objective Setting Process</p>
+            <SectionHeading id="s5">5. Objective Setting Process</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.1 Corporate Objectives — the Managing Director, supported by the MR and senior management, sets annual corporate QHSE Objectives aligned with the TEMC QHSE Policy, strategic plan, risks and opportunities (Clause 6.1), legal requirements, and customer commitments.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.1 Corporate Objectives — the Managing Director, supported by the MR and senior management, sets annual corporate QHSE Objectives aligned with the TEMC QHSE Policy, strategic plan, risks and opportunities (Clause 6.1), legal requirements, and customer commitments.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.2 SMART Quality — every objective is Specific, Measurable, Achievable, Realistic, and Time-bound, with a clearly identified KPI, baseline, target, and review frequency.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.2 SMART Quality — every objective is Specific, Measurable, Achievable, Realistic, and Time-bound, with a clearly identified KPI, baseline, target, and review frequency.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.3 Departmental Objectives — HODs cascade corporate objectives into departmental objectives relevant to their process. Each departmental objective has an owner, data source, baseline, target, and review frequency.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.3 Departmental Objectives — HODs cascade corporate objectives into departmental objectives relevant to their process. Each departmental objective has an owner, data source, baseline, target, and review frequency.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.4 Approval and Communication — the MD approves the consolidated QHSE Objectives Register. The MR communicates objectives to all departments and to the workforce through toolbox talks, notice boards, and induction.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.4 Approval and Communication — the MD approves the consolidated QHSE Objectives Register. The MR communicates objectives to all departments and to the workforce through toolbox talks, notice boards, and induction.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.5 Action Plans — for each objective, the owner prepares a brief action plan — tasks, resources, responsibilities, timeline. Plans are reviewed and updated quarterly.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.5 Action Plans — for each objective, the owner prepares a brief action plan — tasks, resources, responsibilities, timeline. Plans are reviewed and updated quarterly.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Monitoring and Measurement</p>
+            <SectionHeading id="s6">6. Monitoring and Measurement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Departments collect KPI data per the defined review frequency (monthly, quarterly, annually).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Departments collect KPI data per the defined review frequency (monthly, quarterly, annually).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Data is submitted to the MR on schedule; late or missing data is flagged and followed up.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Data is submitted to the MR on schedule; late or missing data is flagged and followed up.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The MR maintains the QHSE Objectives Monitoring Record (REG-SYS-003) — current value, trend, status (on track / at risk / off track).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The MR maintains the QHSE Objectives Monitoring Record (REG-SYS-003) — current value, trend, status (on track / at risk / off track).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Objectives trending off-target trigger a corrective action under PROC-SYS-008.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Objectives trending off-target trigger a corrective action under PROC-SYS-008.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Review and Reporting</p>
+            <SectionHeading id="s7">7. Review and Reporting</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Quarterly: HODs review their objectives with the MR; corrective action raised for any off-track objective.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Quarterly: HODs review their objectives with the MR; corrective action raised for any off-track objective.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annually: the MR consolidates a full QHSE Objectives Report for the Management Review (PROC-SYS-003).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annually: the MR consolidates a full QHSE Objectives Report for the Management Review (PROC-SYS-003).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Management Review endorses performance, approves revised objectives for the next cycle, and commits resources.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Management Review endorses performance, approves revised objectives for the next cycle, and commits resources.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• During internal audits, the MR verifies that objectives are understood, measured, and driving improvement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>During internal audits, the MR verifies that objectives are understood, measured, and driving improvement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Revision of Objectives</p>
+            <SectionHeading id="s8">8. Revision of Objectives</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Objectives may be revised mid-cycle if: strategic direction changes, a significant incident occurs, regulatory requirements change, client expectations shift, or the objective is found unachievable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Objectives may be revised mid-cycle if: strategic direction changes, a significant incident occurs, regulatory requirements change, client expectations shift, or the objective is found unachievable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Changes are approved by the MD, logged in the Objectives Register with a revision note, and communicated to affected departments.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Changes are approved by the MD, logged in the Objectives Register with a revision note, and communicated to affected departments.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Example Objective Categories</p>
+            <SectionHeading id="s9">9. Example Objective Categories</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -294,7 +346,7 @@ export default function TE_IMS_PROC_SYS_009() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Performance Indicators (for this procedure)</p>
+            <SectionHeading id="s10">10. Performance Indicators (for this procedure)</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -337,17 +389,25 @@ export default function TE_IMS_PROC_SYS_009() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. References</p>
+            <SectionHeading id="s11">11. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 6.2 Quality Objectives and Planning to Achieve Them.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 6.2 Quality Objectives and Planning to Achieve Them.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clause 6.2 Environmental Objectives and Planning to Achieve Them.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clause 6.2 Environmental Objectives and Planning to Achieve Them.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 6.2 OH&amp;S Objectives and Planning to Achieve Them.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 6.2 OH&amp;S Objectives and Planning to Achieve Them.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC QHSE Policy; PROC-SYS-001 Internal Audit; PROC-SYS-003 Management Review; PROC-SYS-008 Corrective Action; PROC-SYS-006 Checklist and Register Control.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC QHSE Policy; PROC-SYS-001 Internal Audit; PROC-SYS-003 Management Review; PROC-SYS-008 Corrective Action; PROC-SYS-006 Checklist and Register Control.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Related Documents and Records</p>
+            <SectionHeading id="s12">12. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

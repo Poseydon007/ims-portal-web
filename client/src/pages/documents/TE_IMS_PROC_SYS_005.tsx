@@ -6,8 +6,16 @@ import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
 import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 
 const sections = [
-  { id: "s1", label: "1. Purpose" },
-  { id: "s2", label: "2. Scope" },
+  { id: "s1", label: "1. PURPOSE" },
+  { id: "s2", label: "2. SCOPE" },
+  { id: "s3", label: "3. DEFINITIONS" },
+  { id: "s4", label: "4. RESPONSIBILITIES" },
+  { id: "s5", label: "5. PROCEDURE STEPS" },
+  { id: "s6", label: "6. Verify Effectiveness — IMS Project Lead verifies actions are implemented and effective (e.g., no recurrence within 3 months). Document verification in the CAPA Report and close the CAPA in the Register." },
+  { id: "s7", label: "7. Communicate &amp; Share Lessons — Communicate lessons learned via Toolbox Talks (TE-IMS-PROC-HSE-007). Include major findings in the Management Review (TE-IMS-PROC-SYS-002)." },
+  { id: "s8", label: "8. RELATED DOCUMENTS" },
+  { id: "s9", label: "9. APPROVAL &amp; SIGN-OFF" },
+  { id: "s10", label: "10. REVISION HISTORY" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,7 +161,7 @@ export default function TE_IMS_PROC_SYS_005() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. PURPOSE</p>
+            <SectionHeading id="s1">1. PURPOSE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes a systematic process for:</p>
 
@@ -193,7 +201,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. SCOPE</p>
+            <SectionHeading id="s2">2. SCOPE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to:</p>
 
@@ -212,7 +220,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. DEFINITIONS</p>
+            <SectionHeading id="s3">3. DEFINITIONS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -237,7 +245,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. RESPONSIBILITIES</p>
+            <SectionHeading id="s4">4. RESPONSIBILITIES</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -262,9 +270,9 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. PROCEDURE STEPS</p>
+            <SectionHeading id="s5">5. PROCEDURE STEPS</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Identify &amp; Report — Any employee or contractor identifies a non-conformity, incident, near miss, or improvement opportunity. Reports are submitted immediately using:</p>
+            <SectionHeading id="s1">1. Identify &amp; Report — Any employee or contractor identifies a non-conformity, incident, near miss, or improvement opportunity. Reports are submitted immediately using:</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>› TE-IMS-FRM-HSE-002 — Incident / Accident Flash Notification (for incidents).</p>
 
@@ -272,7 +280,7 @@ export default function TE_IMS_PROC_SYS_005() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>› Verbal or email notice to supervisor / HSE for minor non-conformities and improvement ideas.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Evaluate &amp; Classify — IMS Project Lead / HSE Manager evaluates within 24 hours:</p>
+            <SectionHeading id="s2">2. Evaluate &amp; Classify — IMS Project Lead / HSE Manager evaluates within 24 hours:</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>› Immediate containment actions (stop work, secure area, first aid).</p>
 
@@ -280,7 +288,7 @@ export default function TE_IMS_PROC_SYS_005() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>› Assigns CAPA number in the CAPA Register (TE-IMS-REG-SYS-002).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Investigate Root Cause — Use a structured method (5 Whys, fishbone diagram, fault tree analysis). Involve relevant personnel (witnesses, operators, supervisors).</p>
+            <SectionHeading id="s3">3. Investigate Root Cause — Use a structured method (5 Whys, fishbone diagram, fault tree analysis). Involve relevant personnel (witnesses, operators, supervisors).</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Risk-based investigation teams:</p>
 
@@ -312,15 +320,15 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Develop &amp; Approve Actions — Determine corrective actions (eliminate root cause) and preventive actions (avoid similar issues). Assign owner, deadline, and verification method. Approve actions: HSE Manager for minor; CEO for major.</p>
+            <SectionHeading id="s4">4. Develop &amp; Approve Actions — Determine corrective actions (eliminate root cause) and preventive actions (avoid similar issues). Assign owner, deadline, and verification method. Approve actions: HSE Manager for minor; CEO for major.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Implement Actions — Owner executes actions within the agreed deadline. Update affected documents (procedures, SOPs, forms) if required.</p>
+            <SectionHeading id="s5">5. Implement Actions — Owner executes actions within the agreed deadline. Update affected documents (procedures, SOPs, forms) if required.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Verify Effectiveness — IMS Project Lead verifies actions are implemented and effective (e.g., no recurrence within 3 months). Document verification in the CAPA Report and close the CAPA in the Register.</p>
+            <SectionHeading id="s6">6. Verify Effectiveness — IMS Project Lead verifies actions are implemented and effective (e.g., no recurrence within 3 months). Document verification in the CAPA Report and close the CAPA in the Register.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Communicate &amp; Share Lessons — Communicate lessons learned via Toolbox Talks (TE-IMS-PROC-HSE-007). Include major findings in the Management Review (TE-IMS-PROC-SYS-002).</p>
+            <SectionHeading id="s7">7. Communicate &amp; Share Lessons — Communicate lessons learned via Toolbox Talks (TE-IMS-PROC-HSE-007). Include major findings in the Management Review (TE-IMS-PROC-SYS-002).</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. RECORDS &amp; RETENTION</p>
+            <SectionHeading id="s6">6. RECORDS &amp; RETENTION</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -337,7 +345,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. MONITORING &amp; CONTINUAL IMPROVEMENT</p>
+            <SectionHeading id="s7">7. MONITORING &amp; CONTINUAL IMPROVEMENT</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -350,7 +358,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. RELATED DOCUMENTS</p>
+            <SectionHeading id="s8">8. RELATED DOCUMENTS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -383,7 +391,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. APPROVAL &amp; SIGN-OFF</p>
+            <SectionHeading id="s9">9. APPROVAL &amp; SIGN-OFF</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure is approved for implementation across True East Mining Company's Integrated Management System.</p>
 
@@ -420,7 +428,7 @@ export default function TE_IMS_PROC_SYS_005() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. REVISION HISTORY</p>
+            <SectionHeading id="s10">10. REVISION HISTORY</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

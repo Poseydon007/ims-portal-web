@@ -6,8 +6,9 @@ import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
 import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 
 const sections = [
-  { id: "s1", label: "1. Purpose" },
-  { id: "s2", label: "2. Scope" },
+  { id: "s6", label: "6. Required Personal Protective Equipment (PPE)" },
+  { id: "s7", label: "7. References" },
+  { id: "s8", label: "8. Related Documents" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -369,7 +370,7 @@ export default function TE_IMS_PROC_HSE_013() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Incident Reporting: ALL spills, regardless of size, must be reported using the Flash Notification Form (TE-IMS-FRM-HSE-005_Flash_Report_Rev00).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Required Personal Protective Equipment (PPE)</p>
+            <SectionHeading id="s6">6. Required Personal Protective Equipment (PPE)</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>When responding to a spill, personnel must wear:</p>
 
@@ -381,7 +382,7 @@ export default function TE_IMS_PROC_HSE_013() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Appropriate respiratory protection (if dealing with volatile fumes or enclosed spaces).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. References</p>
+            <SectionHeading id="s7">7. References</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>ISO 14001:2015 – Environmental Management Systems (Clauses 6.1.2, 8.1, 8.2 Emergency Preparedness and Response).</p>
 
@@ -389,7 +390,7 @@ export default function TE_IMS_PROC_HSE_013() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>NCEC – National Center for Environmental Compliance (KSA regulations for spill management and soil remediation).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Related Documents</p>
+            <SectionHeading id="s8">8. Related Documents</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>TE-IMS-PROC-ENV-001_Rev00 – Waste Management Procedure</p>
 

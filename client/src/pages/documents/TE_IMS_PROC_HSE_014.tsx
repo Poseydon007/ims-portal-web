@@ -8,6 +8,17 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Pre-Rehabilitation Planning" },
+  { id: "s6", label: "6. Drill Hole Abandonment" },
+  { id: "s7", label: "7. Site Rehabilitation Execution" },
+  { id: "s8", label: "8. Success Criteria" },
+  { id: "s9", label: "9. PPE Requirements" },
+  { id: "s10", label: "10. Monitoring and Post-Rehabilitation Audit" },
+  { id: "s11", label: "11. Performance Indicators" },
+  { id: "s12", label: "12. References" },
+  { id: "s13", label: "13. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,31 +164,45 @@ export default function TE_IMS_PROC_HSE_014() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes the requirements for the safe, effective, and auditable rehabilitation of all True East Mining Company (TEMC) drilling and exploration sites on completion of activities. The objective is to return disturbed land as close as practicable to its pre-disturbance condition, prevent soil erosion, groundwater contamination, and habitat loss, and ensure full compliance with ISO 14001:2015, ISO 45001:2018, MEWA, NCEC, and the Saudi Mineral Investment Law and its Implementing Regulations.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC exploration and drilling sites in the Kingdom of Saudi Arabia, including drill pads, sumps, sample storage areas, access tracks, gridlines, camps, and temporary yards. It covers employees, contractors, and subcontractors involved in planning, executing, and verifying rehabilitation. Site-specific rehabilitation plans may add further requirements where host-licence conditions demand them.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rehabilitation — the process of restoring disturbed land to a stable, safe, and environmentally acceptable condition.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rehabilitation — the process of restoring disturbed land to a stable, safe, and environmentally acceptable condition.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-disturbance Baseline — the documented condition of the site before any disturbance, captured via photos, GPS coordinates, soil and vegetation notes.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-disturbance Baseline — the documented condition of the site before any disturbance, captured via photos, GPS coordinates, soil and vegetation notes.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drill Hole Abandonment — the permanent sealing and identification of a drill hole in compliance with regulatory and environmental standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drill Hole Abandonment — the permanent sealing and identification of a drill hole in compliance with regulatory and environmental standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Sump — an excavated pit used during drilling to manage drilling fluids, cuttings, or water.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Sump — an excavated pit used during drilling to manage drilling fluids, cuttings, or water.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Topsoil — the upper 0.1–0.3 m of soil containing organic matter and seed bank; preserved separately during disturbance for re-spreading.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Topsoil — the upper 0.1–0.3 m of soil containing organic matter and seed bank; preserved separately during disturbance for re-spreading.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Contaminated Cuttings — drill cuttings that are acidic, saline, radioactive, or chemically altered such that they cannot be safely dispersed.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Contaminated Cuttings — drill cuttings that are acidic, saline, radioactive, or chemically altered such that they cannot be safely dispersed.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Completion Report — the formal record confirming rehabilitation is complete, signed by HSE Manager and accepted by Site Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Completion Report — the formal record confirming rehabilitation is complete, signed by HSE Manager and accepted by Site Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -220,57 +245,101 @@ export default function TE_IMS_PROC_HSE_014() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Pre-Rehabilitation Planning</p>
+            <SectionHeading id="s5">5. Pre-Rehabilitation Planning</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Regulatory review — confirm obligations under the current exploration licence, NCEC guidelines, MEWA requirements, and Saudi Mineral Investment Law Implementing Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Regulatory review — confirm obligations under the current exploration licence, NCEC guidelines, MEWA requirements, and Saudi Mineral Investment Law Implementing Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Stakeholder consultation — engage host licence area representatives, landowners, and local authorities where applicable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Stakeholder consultation — engage host licence area representatives, landowners, and local authorities where applicable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Baseline documentation — photograph each disturbed location from fixed GPS points. Capture vegetation cover and soil profile notes. Records stored in the site rehabilitation file.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Baseline documentation — photograph each disturbed location from fixed GPS points. Capture vegetation cover and soil profile notes. Records stored in the site rehabilitation file.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rehabilitation plan — site-specific plan covering scope, sequence, resources, verification steps, responsible persons, and target completion date.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rehabilitation plan — site-specific plan covering scope, sequence, resources, verification steps, responsible persons, and target completion date.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Risk assessment — identify immediate hazards — unstable ground, open holes, sharp objects, contaminated zones, residual chemicals — and define controls before entry.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Risk assessment — identify immediate hazards — unstable ground, open holes, sharp objects, contaminated zones, residual chemicals — and define controls before entry.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mobilisation — confirm equipment, fuel, PPE, and waste-handling capacity before work starts.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mobilisation — confirm equipment, fuel, PPE, and waste-handling capacity before work starts.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Drill Hole Abandonment</p>
+            <SectionHeading id="s6">6. Drill Hole Abandonment</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Remove all drill rods, liners, and temporary casing before sealing.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Remove all drill rods, liners, and temporary casing before sealing.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Classify drill cuttings — contaminated (acidic, saline, radioactive, discoloured) vs non-contaminated — before disposal decisions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Classify drill cuttings — contaminated (acidic, saline, radioactive, discoloured) vs non-contaminated — before disposal decisions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Return contaminated cuttings to the hole, sump, or an approved lined excavation. Do not disperse.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Return contaminated cuttings to the hole, sump, or an approved lined excavation. Do not disperse.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-contaminated cuttings may be raked over the area and used for contouring.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-contaminated cuttings may be raked over the area and used for contouring.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Prevent aquifer cross-contamination — seal hole at aquifer transitions where encountered.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Prevent aquifer cross-contamination — seal hole at aquifer transitions where encountered.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Plug the hole with cement in sections per licence conditions. Insert a PVC plug 0.5–1.0 m below surface where plastic plugging is allowed.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Plug the hole with cement in sections per licence conditions. Insert a PVC plug 0.5–1.0 m below surface where plastic plugging is allowed.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Embed a permanent ID marker showing hole ID, total depth, and abandonment date.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Embed a permanent ID marker showing hole ID, total depth, and abandonment date.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Steel casing that cannot be removed shall be cut ≥0.5 m below surface and capped or welded shut — never left protruding.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Steel casing that cannot be removed shall be cut ≥0.5 m below surface and capped or welded shut — never left protruding.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Site Rehabilitation Execution</p>
+            <SectionHeading id="s7">7. Site Rehabilitation Execution</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Sumps — backfill with stored excavated material, respread topsoil, and restore surface contour.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Sumps — backfill with stored excavated material, respread topsoil, and restore surface contour.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Access tracks and gridlines — rip compacted ground along natural contour lines (not downslope) to loosen soil, promote infiltration, and reduce erosion. Restore natural drainage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Access tracks and gridlines — rip compacted ground along natural contour lines (not downslope) to loosen soil, promote infiltration, and reduce erosion. Restore natural drainage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Topsoil and overburden — respread evenly across the disturbed footprint to re-establish seed bank conditions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Topsoil and overburden — respread evenly across the disturbed footprint to re-establish seed bank conditions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Survey markers — minimise permanent markers. Use biodegradable wooden pegs instead of steel stakes wherever licence conditions allow.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Survey markers — minimise permanent markers. Use biodegradable wooden pegs instead of steel stakes wherever licence conditions allow.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Waste removal — 100% removal of sample bags, packaging, plastic, scrap metal, hydrocarbon-contaminated soil, and general waste. Dispose per TEMC Waste Management Procedure and NCEC requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Waste removal — 100% removal of sample bags, packaging, plastic, scrap metal, hydrocarbon-contaminated soil, and general waste. Dispose per TEMC Waste Management Procedure and NCEC requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Hydrocarbon impact — excavate visibly contaminated soil, contain, and dispose through licensed contractor. Record quantity removed.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Hydrocarbon impact — excavate visibly contaminated soil, contain, and dispose through licensed contractor. Record quantity removed.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Revegetation — where the licence requires active revegetation, apply approved native seed mix; monitor germination at 3, 6, and 12 months.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Revegetation — where the licence requires active revegetation, apply approved native seed mix; monitor germination at 3, 6, and 12 months.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Final inspection — HSE team walks the site, verifies compliance, re-photographs from baseline GPS points, and documents findings in the Rehabilitation Completion Report.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Final inspection — HSE team walks the site, verifies compliance, re-photographs from baseline GPS points, and documents findings in the Rehabilitation Completion Report.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Success Criteria</p>
+            <SectionHeading id="s8">8. Success Criteria</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Rehabilitation is considered successful when the following are met:</p>
 
@@ -323,33 +392,55 @@ export default function TE_IMS_PROC_HSE_014() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. PPE Requirements</p>
+            <SectionHeading id="s9">9. PPE Requirements</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Hard hat.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Hard hat.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Steel-toe safety boots with aggressive tread for uneven ground.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Steel-toe safety boots with aggressive tread for uneven ground.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safety glasses (dark for day, clear for night).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safety glasses (dark for day, clear for night).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• High-visibility reflective coveralls.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>High-visibility reflective coveralls.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Heavy-duty gloves — impact gloves for rod and casing handling, chemical-resistant for cement, waste, or hydrocarbon contact.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Heavy-duty gloves — impact gloves for rod and casing handling, chemical-resistant for cement, waste, or hydrocarbon contact.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Respiratory protection (P2/P3) when handling dust or contaminated cuttings.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Respiratory protection (P2/P3) when handling dust or contaminated cuttings.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Monitoring and Post-Rehabilitation Audit</p>
+            <SectionHeading id="s10">10. Monitoring and Post-Rehabilitation Audit</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Initial audit on completion — HSE Manager verifies all success criteria.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Initial audit on completion — HSE Manager verifies all success criteria.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Short-term audit at 3 months — check for erosion, subsidence, topsoil loss.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Short-term audit at 3 months — check for erosion, subsidence, topsoil loss.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Long-term audit at 6–12 months — assess vegetation recovery and ground stability.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Long-term audit at 6–12 months — assess vegetation recovery and ground stability.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-event audit after major rainfall or sandstorm — check for damage or waste exposure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-event audit after major rainfall or sandstorm — check for damage or waste exposure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-conformities raised on FRM-SYS-003 CAR and closed per PROC-SYS-005.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-conformities raised on FRM-SYS-003 CAR and closed per PROC-SYS-005.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Performance Indicators</p>
+            <SectionHeading id="s11">11. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -397,23 +488,37 @@ export default function TE_IMS_PROC_HSE_014() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. References</p>
+            <SectionHeading id="s12">12. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Environmental Management — Clauses 6.1.2, 8.1, 8.2, 9.1.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Environmental Management — Clauses 6.1.2, 8.1, 8.2, 9.1.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Occupational Health and Safety — Clauses 6.1.2, 8.1.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Occupational Health and Safety — Clauses 6.1.2, 8.1.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Mineral Investment Law and its Implementing Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Mineral Investment Law and its Implementing Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ministry of Industry and Mineral Resources (MIM) — Exploration Licence Conditions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ministry of Industry and Mineral Resources (MIM) — Exploration Licence Conditions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MEWA — Environmental Protection Standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MEWA — Environmental Protection Standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — Environmental Rehabilitation Guidelines.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — Environmental Rehabilitation Guidelines.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Green Initiative — biodiversity and rehabilitation objectives.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Green Initiative — biodiversity and rehabilitation objectives.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Related Documents and Records</p>
+            <SectionHeading id="s13">13. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

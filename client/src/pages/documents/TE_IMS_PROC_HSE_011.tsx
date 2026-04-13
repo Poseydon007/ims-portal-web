@@ -8,6 +8,17 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Inspection Types and Frequencies" },
+  { id: "s6", label: "6. Planning and Preparation" },
+  { id: "s7", label: "7. Conducting the Inspection" },
+  { id: "s8", label: "8. Finding Classification" },
+  { id: "s9", label: "9. Reporting and Corrective Actions" },
+  { id: "s10", label: "10. Integration with Other Processes" },
+  { id: "s11", label: "11. Performance Indicators" },
+  { id: "s12", label: "12. References" },
+  { id: "s13", label: "13. Related Forms and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,29 +164,41 @@ export default function TE_IMS_PROC_HSE_011() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes a structured, risk-based approach to planned periodic HSE inspections at True East Mining Company (TEMC) drilling and exploration sites. The objective is to detect hazards early, verify compliance with ISO 45001:2018, ISO 14001:2015, MHRSD, and Saudi Civil Defense requirements, confirm that controls remain effective, and feed data into the Monthly HSE Report and management review process.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC owned and contracted sites and associated facilities (rigs, core yards, workshops, fuel and chemical storage, camps, vehicles, access tracks). It covers safety, health, environmental, and emergency equipment inspections and is executed by competent TEMC or contractor personnel on planned frequencies.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Inspection — a planned, systematic check against a checklist or standard to confirm compliance or identify deviations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Inspection — a planned, systematic check against a checklist or standard to confirm compliance or identify deviations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit — a broader, independent review of the HSE management system (see PROC-HSE-012).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit — a broader, independent review of the HSE management system (see PROC-HSE-012).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Finding — any observation, non-conformity, or improvement opportunity recorded during an inspection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Finding — any observation, non-conformity, or improvement opportunity recorded during an inspection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical Finding — a condition that poses imminent risk to life, health, environment, or major asset — requires immediate Stop Work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical Finding — a condition that poses imminent risk to life, health, environment, or major asset — requires immediate Stop Work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Major Finding — a non-conformity or serious hazard requiring action within 7 days.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Major Finding — a non-conformity or serious hazard requiring action within 7 days.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Minor Finding — a low-risk observation or housekeeping issue requiring action within 30 days.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Minor Finding — a low-risk observation or housekeeping issue requiring action within 30 days.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -218,7 +241,7 @@ export default function TE_IMS_PROC_HSE_011() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Inspection Types and Frequencies</p>
+            <SectionHeading id="s5">5. Inspection Types and Frequencies</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -294,31 +317,51 @@ export default function TE_IMS_PROC_HSE_011() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Planning and Preparation</p>
+            <SectionHeading id="s6">6. Planning and Preparation</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual inspection plan prepared by the HSE Manager and approved by the SSE, covering all inspection types, frequencies, and areas.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual inspection plan prepared by the HSE Manager and approved by the SSE, covering all inspection types, frequencies, and areas.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Standardised checklists are used for each inspection type — kept in the IMS master and version controlled.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Standardised checklists are used for each inspection type — kept in the IMS master and version controlled.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Inspection team competency is verified — HSE induction, familiarity with the checklist, PPE trained.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Inspection team competency is verified — HSE induction, familiarity with the checklist, PPE trained.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Access and entry permissions obtained before the inspection (confined space, restricted zones).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Access and entry permissions obtained before the inspection (confined space, restricted zones).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Conducting the Inspection</p>
+            <SectionHeading id="s7">7. Conducting the Inspection</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-inspection briefing — the team reviews checklist, scope, hazards, PPE, emergency procedures, and muster.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-inspection briefing — the team reviews checklist, scope, hazards, PPE, emergency procedures, and muster.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Walk-through — follow the checklist; examine equipment, controls, work practices, housekeeping, signage, permits, PPE, waste, and spills.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Walk-through — follow the checklist; examine equipment, controls, work practices, housekeeping, signage, permits, PPE, waste, and spills.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Observations and photographs — record findings with location, photo, and brief description. Note both deficiencies and good practices.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Observations and photographs — record findings with location, photo, and brief description. Note both deficiencies and good practices.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Personnel engagement — talk to workers, ask about hazards, confirm awareness of procedures and emergency plans.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Personnel engagement — talk to workers, ask about hazards, confirm awareness of procedures and emergency plans.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Immediate action — critical findings trigger Stop Work Authority. Isolate, tag, or barricade until resolved.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Immediate action — critical findings trigger Stop Work Authority. Isolate, tag, or barricade until resolved.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Closing meeting — team reviews findings with site management before departing.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Closing meeting — team reviews findings with site management before departing.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Finding Classification</p>
+            <SectionHeading id="s8">8. Finding Classification</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -354,29 +397,47 @@ export default function TE_IMS_PROC_HSE_011() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Reporting and Corrective Actions</p>
+            <SectionHeading id="s9">9. Reporting and Corrective Actions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• A formal Inspection Report is produced within 1 working day of the inspection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>A formal Inspection Report is produced within 1 working day of the inspection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Every finding becomes a tracked action — owner, due date, classification.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Every finding becomes a tracked action — owner, due date, classification.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Major and critical findings are raised as CARs per FRM-SYS-003 Corrective Action Request.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Major and critical findings are raised as CARs per FRM-SYS-003 Corrective Action Request.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Closure evidence (photo, document, or re-inspection) is attached to each action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Closure evidence (photo, document, or re-inspection) is attached to each action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Open actions tracked in the site HSE dashboard and escalated if overdue.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Open actions tracked in the site HSE dashboard and escalated if overdue.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Integration with Other Processes</p>
+            <SectionHeading id="s10">10. Integration with Other Processes</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Findings and trends feed into the Monthly HSE Report (PROC-HSE-010).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Findings and trends feed into the Monthly HSE Report (PROC-HSE-010).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Repeat or systemic findings drive CAPA per PROC-SYS-005.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Repeat or systemic findings drive CAPA per PROC-SYS-005.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical equipment findings feed into the maintenance backlog.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical equipment findings feed into the maintenance backlog.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Inspection data informs the annual internal audit scope (PROC-HSE-012 and PROC-SYS-004).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Inspection data informs the annual internal audit scope (PROC-HSE-012 and PROC-SYS-004).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Performance Indicators</p>
+            <SectionHeading id="s11">11. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -424,19 +485,29 @@ export default function TE_IMS_PROC_HSE_011() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. References</p>
+            <SectionHeading id="s12">12. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 8.1, 9.1, 10.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 8.1, 9.1, 10.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clauses 8.1, 9.1, 10.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clauses 8.1, 9.1, 10.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Regulation (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Regulation (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Civil Defense — Fire Safety and Emergency Equipment Inspection Standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Civil Defense — Fire Safety and Emergency Equipment Inspection Standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-HSE-010 Monthly Reporting; PROC-HSE-012 HSE Site Audit; PROC-SYS-004 Internal Audit; PROC-SYS-005 CAPA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-HSE-010 Monthly Reporting; PROC-HSE-012 HSE Site Audit; PROC-SYS-004 Internal Audit; PROC-SYS-005 CAPA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Related Forms and Records</p>
+            <SectionHeading id="s13">13. Related Forms and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

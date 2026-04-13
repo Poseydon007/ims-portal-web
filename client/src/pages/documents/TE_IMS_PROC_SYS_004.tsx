@@ -6,8 +6,18 @@ import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
 import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 
 const sections = [
-  { id: "s1", label: "1. Purpose" },
-  { id: "s2", label: "2. Scope" },
+  { id: "s1", label: "1. PURPOSE" },
+  { id: "s2", label: "2. SCOPE" },
+  { id: "s3", label: "3. RESPONSIBILITIES" },
+  { id: "s4", label: "4. AUDITOR SELECTION &amp; COMPETENCE" },
+  { id: "s5", label: "5. AUDIT PROGRAM" },
+  { id: "s6", label: "6. AUDIT EXECUTION STEPS" },
+  { id: "s7", label: "7. Report — Issue the Audit Report (TE-IMS-FRM-SYS-001) within 7 days of the closing meeting." },
+  { id: "s8", label: "8. RECORDS &amp; RETENTION" },
+  { id: "s9", label: "9. MONITORING &amp; CONTINUAL IMPROVEMENT" },
+  { id: "s10", label: "10. RELATED DOCUMENTS" },
+  { id: "s11", label: "11. APPROVAL &amp; SIGN-OFF" },
+  { id: "s12", label: "12. REVISION HISTORY" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,7 +163,7 @@ export default function TE_IMS_PROC_SYS_004() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. PURPOSE</p>
+            <SectionHeading id="s1">1. PURPOSE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes a systematic, planned process for conducting internal audits of the Integrated Management System (IMS) at True East Mining Company to verify:</p>
 
@@ -189,7 +199,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. SCOPE</p>
+            <SectionHeading id="s2">2. SCOPE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all internal audits of the IMS, including:</p>
 
@@ -208,7 +218,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. RESPONSIBILITIES</p>
+            <SectionHeading id="s3">3. RESPONSIBILITIES</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -229,7 +239,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. AUDITOR SELECTION &amp; COMPETENCE</p>
+            <SectionHeading id="s4">4. AUDITOR SELECTION &amp; COMPETENCE</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -259,7 +269,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. AUDIT PROGRAM</p>
+            <SectionHeading id="s5">5. AUDIT PROGRAM</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -316,23 +326,23 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. AUDIT EXECUTION STEPS</p>
+            <SectionHeading id="s6">6. AUDIT EXECUTION STEPS</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Plan the Audit — Assign auditor(s), define scope, and set schedule. Notify the auditee at least 2 weeks in advance.</p>
+            <SectionHeading id="s1">1. Plan the Audit — Assign auditor(s), define scope, and set schedule. Notify the auditee at least 2 weeks in advance.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Prepare — Review relevant documents (procedures, previous audit reports, risk register, objectives and targets).</p>
+            <SectionHeading id="s2">2. Prepare — Review relevant documents (procedures, previous audit reports, risk register, objectives and targets).</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Conduct Opening Meeting — Explain purpose, scope, and method of the audit; confirm schedule and availability.</p>
+            <SectionHeading id="s3">3. Conduct Opening Meeting — Explain purpose, scope, and method of the audit; confirm schedule and availability.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Collect Evidence — Gather evidence through interviews, observations, document review, and site walk-throughs.</p>
+            <SectionHeading id="s4">4. Collect Evidence — Gather evidence through interviews, observations, document review, and site walk-throughs.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Identify Findings — Document conformities, non-conformities (classified as minor or major), and opportunities for improvement.</p>
+            <SectionHeading id="s5">5. Identify Findings — Document conformities, non-conformities (classified as minor or major), and opportunities for improvement.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Closing Meeting — Present findings to the auditee and obtain agreement on identified non-conformities.</p>
+            <SectionHeading id="s6">6. Closing Meeting — Present findings to the auditee and obtain agreement on identified non-conformities.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Report — Issue the Audit Report (TE-IMS-FRM-SYS-001) within 7 days of the closing meeting.</p>
+            <SectionHeading id="s7">7. Report — Issue the Audit Report (TE-IMS-FRM-SYS-001) within 7 days of the closing meeting.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. CORRECTIVE ACTIONS &amp; FOLLOW-UP</p>
+            <SectionHeading id="s7">7. CORRECTIVE ACTIONS &amp; FOLLOW-UP</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -353,7 +363,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. RECORDS &amp; RETENTION</p>
+            <SectionHeading id="s8">8. RECORDS &amp; RETENTION</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -370,7 +380,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. MONITORING &amp; CONTINUAL IMPROVEMENT</p>
+            <SectionHeading id="s9">9. MONITORING &amp; CONTINUAL IMPROVEMENT</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -383,7 +393,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. RELATED DOCUMENTS</p>
+            <SectionHeading id="s10">10. RELATED DOCUMENTS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -412,7 +422,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. APPROVAL &amp; SIGN-OFF</p>
+            <SectionHeading id="s11">11. APPROVAL &amp; SIGN-OFF</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure is approved for implementation across True East Mining Company's Integrated Management System.</p>
 
@@ -449,7 +459,7 @@ export default function TE_IMS_PROC_SYS_004() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. REVISION HISTORY</p>
+            <SectionHeading id="s12">12. REVISION HISTORY</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

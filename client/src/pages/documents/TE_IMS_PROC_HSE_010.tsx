@@ -8,6 +8,18 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Reporting Schedule and Data Sources" },
+  { id: "s6", label: "6. Required Report Content" },
+  { id: "s7", label: "7. Performance Metric Formulae" },
+  { id: "s8", label: "8. Data Collection, Validation, and Quality Control" },
+  { id: "s9", label: "9. Review and Approval Workflow" },
+  { id: "s10", label: "10. Submission and Filing" },
+  { id: "s11", label: "11. Continuous Improvement" },
+  { id: "s12", label: "12. Performance Indicators" },
+  { id: "s13", label: "13. References" },
+  { id: "s14", label: "14. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,35 +165,53 @@ export default function TE_IMS_PROC_HSE_010() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure defines how True East Mining Company (TEMC) produces, reviews, approves, submits, and archives the HSE Monthly Site Report for each active operation. The report is the primary HSE performance record shared with management, clients, and regulators, and is the evidence base for continual improvement, management review, and compliance with ISO 45001:2018, ISO 14001:2015, and KSA regulatory expectations (MHRSD, MEWA, NCEC).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC owned and contracted drilling, exploration, and support operations in the Kingdom of Saudi Arabia. It covers reports prepared by Site HSE Managers and consolidated at corporate level by the HSE Manager. All employees and contractors providing data to the report are in scope.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Monthly HSE Report — the formal monthly report covering HSE performance, incidents, inspections, training, environment, and man-hours for a TEMC site.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Monthly HSE Report — the formal monthly report covering HSE performance, incidents, inspections, training, environment, and man-hours for a TEMC site.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LTI (Lost Time Injury) — work-related injury resulting in absence from work on the next full shift or later.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LTI (Lost Time Injury) — work-related injury resulting in absence from work on the next full shift or later.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MTC (Medical Treatment Case) — injury requiring medical treatment beyond first aid, without lost time.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MTC (Medical Treatment Case) — injury requiring medical treatment beyond first aid, without lost time.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• FAC (First Aid Case) — injury treated by first aid only.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>FAC (First Aid Case) — injury treated by first aid only.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TRIFR — Total Recordable Injury Frequency Rate per 1,000,000 hours worked (Fatalities + LTI + RWC + MTC).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TRIFR — Total Recordable Injury Frequency Rate per 1,000,000 hours worked (Fatalities + LTI + RWC + MTC).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LTIFR — Lost Time Injury Frequency Rate per 1,000,000 hours worked.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LTIFR — Lost Time Injury Frequency Rate per 1,000,000 hours worked.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Near Miss — an event that could have resulted in harm but did not.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Near Miss — an event that could have resulted in harm but did not.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HiPo (High-Potential Event) — an incident or near miss with the potential to cause serious or fatal harm.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HiPo (High-Potential Event) — an incident or near miss with the potential to cause serious or fatal harm.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Man-Hours Worked — total hours worked by employees and contractors on site during the reporting period.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Man-Hours Worked — total hours worked by employees and contractors on site during the reporting period.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -228,17 +258,25 @@ export default function TE_IMS_PROC_HSE_010() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Reporting Schedule and Data Sources</p>
+            <SectionHeading id="s5">5. Reporting Schedule and Data Sources</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report prepared for the calendar month ending; data cut-off: last day of the month.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report prepared for the calendar month ending; data cut-off: last day of the month.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Draft issued by the Site HSE Manager by the 3rd working day of the following month.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Draft issued by the Site HSE Manager by the 3rd working day of the following month.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corporate consolidation and MD delivery by the 5th working day.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corporate consolidation and MD delivery by the 5th working day.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Data sources: incident log, inspection register, training register, toolbox talks, drill register, waste manifests, fuel log, permit log, contractor timesheets, first aid log, near-miss register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Data sources: incident log, inspection register, training register, toolbox talks, drill register, waste manifests, fuel log, permit log, contractor timesheets, first aid log, near-miss register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Required Report Content</p>
+            <SectionHeading id="s6">6. Required Report Content</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -314,63 +352,109 @@ export default function TE_IMS_PROC_HSE_010() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Performance Metric Formulae</p>
+            <SectionHeading id="s7">7. Performance Metric Formulae</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LTIFR — = (Number of LTIs ÷ Total hours worked) × 1,000,000</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LTIFR — = (Number of LTIs ÷ Total hours worked) × 1,000,000</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TRIFR — = ((Fatalities + LTI + RWC + MTC) ÷ Total hours worked) × 1,000,000</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TRIFR — = ((Fatalities + LTI + RWC + MTC) ÷ Total hours worked) × 1,000,000</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Severity Rate — = (Days lost ÷ Total hours worked) × 1,000,000</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Severity Rate — = (Days lost ÷ Total hours worked) × 1,000,000</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Near-Miss Ratio — = Near misses ÷ Recordable injuries. A healthy reporting culture has a ratio ≥ 10:1.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Near-Miss Ratio — = Near misses ÷ Recordable injuries. A healthy reporting culture has a ratio ≥ 10:1.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All incidents reported to site are included — omission of any incident is treated as a reporting breach.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All incidents reported to site are included — omission of any incident is treated as a reporting breach.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Data Collection, Validation, and Quality Control</p>
+            <SectionHeading id="s8">8. Data Collection, Validation, and Quality Control</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The Site HSE Officer cross-checks all data for internal consistency — hours, headcount, incident counts, training register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The Site HSE Officer cross-checks all data for internal consistency — hours, headcount, incident counts, training register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Incidents are reconciled with the Flash Reports issued during the month. Every Flash must appear in the monthly.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Incidents are reconciled with the Flash Reports issued during the month. Every Flash must appear in the monthly.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Environmental data is reconciled with waste manifests and fuel records.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Environmental data is reconciled with waste manifests and fuel records.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrective action dates are validated against the CAR register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrective action dates are validated against the CAR register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Any discrepancy identified after submission is corrected with a formal erratum to the same distribution list.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Any discrepancy identified after submission is corrected with a formal erratum to the same distribution list.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Review and Approval Workflow</p>
+            <SectionHeading id="s9">9. Review and Approval Workflow</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 1 — Compile draft — Site HSE Officer completes draft using TE-IMS-FRM-HSE-033 Monthly HSE Report template.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 1 — Compile draft — Site HSE Officer completes draft using TE-IMS-FRM-HSE-033 Monthly HSE Report template.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 2 — Internal HSE review — Site HSE Manager reviews for accuracy, completeness, and tone.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 2 — Internal HSE review — Site HSE Manager reviews for accuracy, completeness, and tone.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 3 — SSE review — Drilling Superintendent or SSE reviews operational entries, signs off.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 3 — SSE review — Drilling Superintendent or SSE reviews operational entries, signs off.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 4 — Corporate consolidation — Corporate HSE Manager consolidates multiple sites, adds company-level commentary.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 4 — Corporate consolidation — Corporate HSE Manager consolidates multiple sites, adds company-level commentary.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 5 — MD approval — Managing Director receives and signs off before external distribution.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 5 — MD approval — Managing Director receives and signs off before external distribution.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 6 — Distribution — To client / regulator (where applicable), saved to IMS master.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 6 — Distribution — To client / regulator (where applicable), saved to IMS master.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 7 — Site communication — Key findings shared in toolbox talks and HSE noticeboards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 7 — Site communication — Key findings shared in toolbox talks and HSE noticeboards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Submission and Filing</p>
+            <SectionHeading id="s10">10. Submission and Filing</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Submit final report by the 5th working day of the following month to the required client portal and/or regulator.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Submit final report by the 5th working day of the following month to the required client portal and/or regulator.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Controlled copy filed in the IMS master by date: IMS/Records/HSE-Monthly/YYYY-MM/.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Controlled copy filed in the IMS master by date: IMS/Records/HSE-Monthly/YYYY-MM/.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Retention: minimum 5 years (longer if client contract requires).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Retention: minimum 5 years (longer if client contract requires).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Continuous Improvement</p>
+            <SectionHeading id="s11">11. Continuous Improvement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Trends reviewed at monthly management review (per PROC-SYS-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Trends reviewed at monthly management review (per PROC-SYS-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Systemic issues raised as CARs (FRM-SYS-003) and managed per PROC-SYS-005.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Systemic issues raised as CARs (FRM-SYS-003) and managed per PROC-SYS-005.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual review of the report template for relevance and usefulness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual review of the report template for relevance and usefulness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Performance Indicators</p>
+            <SectionHeading id="s12">12. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -418,23 +502,37 @@ export default function TE_IMS_PROC_HSE_010() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. References</p>
+            <SectionHeading id="s13">13. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Occupational Health and Safety — Clauses 9.1 (Monitoring), 9.3 (Management Review).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Occupational Health and Safety — Clauses 9.1 (Monitoring), 9.3 (Management Review).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Environmental Management — Clauses 9.1, 9.3.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Environmental Management — Clauses 9.1, 9.3.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Reporting Obligations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Reporting Obligations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MEWA and NCEC — Environmental Reporting Requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MEWA and NCEC — Environmental Reporting Requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-SYS-002 Management Review Procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-SYS-002 Management Review Procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-SYS-005 Continual Improvement and CAPA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-SYS-005 Continual Improvement and CAPA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-033 Site HSE Monthly Report Template.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-033 Site HSE Monthly Report Template.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Related Documents and Records</p>
+            <SectionHeading id="s14">14. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

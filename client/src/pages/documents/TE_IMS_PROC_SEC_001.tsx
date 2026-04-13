@@ -8,6 +8,19 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Access Control" },
+  { id: "s6", label: "6. Visitor Management" },
+  { id: "s7", label: "7. Vehicle and Material Movement" },
+  { id: "s8", label: "8. Security Patrols" },
+  { id: "s9", label: "9. Key Control" },
+  { id: "s10", label: "10. Asset and Information Protection" },
+  { id: "s11", label: "11. Security Incident Response" },
+  { id: "s12", label: "12. Training and Awareness" },
+  { id: "s13", label: "13. Performance Indicators" },
+  { id: "s14", label: "14. References" },
+  { id: "s15", label: "15. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,29 +166,41 @@ export default function TE_IMS_PROC_SEC_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes the minimum standards for physical security, access control, visitor management, asset protection, and security-incident response at all True East Mining Company (TEMC) offices, drill sites, camps, yards, and fuel/chemical storage areas in the Kingdom of Saudi Arabia. It protects personnel, assets, information, and operations from unauthorised access, theft, sabotage, and hostile events, and supports ISO 45001:2018 (Clauses 8.1.2, 8.2) and KSA regulatory requirements.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC employees, contractors, visitors, suppliers, and security service providers at every TEMC-controlled location — head office, project offices, drilling camps, exploration sites, workshops, fuel storage, core yards, and temporary project locations.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Security — the state of being free from danger, threat, unauthorised access, or loss.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Security — the state of being free from danger, threat, unauthorised access, or loss.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Access Control — system of approvals, credentials, and physical controls managing who enters and leaves a site.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Access Control — system of approvals, credentials, and physical controls managing who enters and leaves a site.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Visitor — any non-TEMC person on site — client, contractor, supplier, consultant, auditor, government inspector, guest.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Visitor — any non-TEMC person on site — client, contractor, supplier, consultant, auditor, government inspector, guest.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Security Incident — any breach, attempted breach, theft, vandalism, trespass, threat, or suspicious activity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Security Incident — any breach, attempted breach, theft, vandalism, trespass, threat, or suspicious activity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Restricted Area — designated area with additional access controls — fuel storage, explosives magazine, core library, server room, finance office.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Restricted Area — designated area with additional access controls — fuel storage, explosives magazine, core library, server room, finance office.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Security Provider — approved third-party contractor providing guards, patrols, alarm, or monitoring services.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Security Provider — approved third-party contractor providing guards, patrols, alarm, or monitoring services.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -214,95 +239,167 @@ export default function TE_IMS_PROC_SEC_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Access Control</p>
+            <SectionHeading id="s5">5. Access Control</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All TEMC sites are perimeter-controlled with manned gate, barrier, fence, or designated entry point.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All TEMC sites are perimeter-controlled with manned gate, barrier, fence, or designated entry point.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Employees display a valid company ID at all times.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Employees display a valid company ID at all times.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Entry and exit of all personnel and vehicles logged in the Gate Register (FRM-SEC-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Entry and exit of all personnel and vehicles logged in the Gate Register (FRM-SEC-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Contractor access requires valid TEMC site induction, ID, and a sponsor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Contractor access requires valid TEMC site induction, ID, and a sponsor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Restricted areas (fuel storage, core library, server room, finance office) require additional authorisation by the Site Manager or function head.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Restricted areas (fuel storage, core library, server room, finance office) require additional authorisation by the Site Manager or function head.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Out-of-hours access requires pre-authorisation from the Site Manager or SSE.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Out-of-hours access requires pre-authorisation from the Site Manager or SSE.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Visitor Management</p>
+            <SectionHeading id="s6">6. Visitor Management</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Visitors park in the designated external parking area.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Visitors park in the designated external parking area.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Guard obtains visitor name, organisation, and host. Telephones the host for permission to admit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Guard obtains visitor name, organisation, and host. Telephones the host for permission to admit.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• On approval, visitor signs the Visitor Register (FRM-SEC-002) — name, company, ID / Iqama, purpose, entry time — and surrenders ID for the duration of the visit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>On approval, visitor signs the Visitor Register (FRM-SEC-002) — name, company, ID / Iqama, purpose, entry time — and surrenders ID for the duration of the visit.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Visitor receives a Visitor Badge. The host escorts the visitor at all times on site.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Visitor receives a Visitor Badge. The host escorts the visitor at all times on site.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• On departure, ID is returned, badge collected, and exit time recorded.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>On departure, ID is returned, badge collected, and exit time recorded.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Out-of-hours visits are not permitted unless pre-arranged in writing. In disputes, the guard contacts the designated out-of-hours number posted in the Guard House.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Out-of-hours visits are not permitted unless pre-arranged in writing. In disputes, the guard contacts the designated out-of-hours number posted in the Guard House.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Vehicle and Material Movement</p>
+            <SectionHeading id="s7">7. Vehicle and Material Movement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Inbound deliveries: guard verifies driver, vehicle, and delivery documentation. Notifies the Warehouse, Logistics, or Maintenance supervisor. Directs the driver to the correct unloading bay.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Inbound deliveries: guard verifies driver, vehicle, and delivery documentation. Notifies the Warehouse, Logistics, or Maintenance supervisor. Directs the driver to the correct unloading bay.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Outbound goods: guard checks and stamps the Gate Pass (FRM-SEC-003). Only signed and authorised Gate Passes permit exit of company property.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Outbound goods: guard checks and stamps the Gate Pass (FRM-SEC-003). Only signed and authorised Gate Passes permit exit of company property.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Personal vehicles and bags may be subject to inspection at the gate in accordance with TEMC policy and KSA law.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Personal vehicles and bags may be subject to inspection at the gate in accordance with TEMC policy and KSA law.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fuel tankers and chemical deliveries follow SOP-MAINT-002 and PROC-SCM-001.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fuel tankers and chemical deliveries follow SOP-MAINT-002 and PROC-SCM-001.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Security Patrols</p>
+            <SectionHeading id="s8">8. Security Patrols</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Guards conduct perimeter and internal patrols per the roster issued by the Security Coordinator.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Guards conduct perimeter and internal patrols per the roster issued by the Security Coordinator.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Patrol findings recorded on the Daily Security Patrol Report (FRM-SEC-004).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Patrol findings recorded on the Daily Security Patrol Report (FRM-SEC-004).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Any suspicious activity, breach, damage, or unauthorised person is reported immediately to the Security Coordinator / Site Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Any suspicious activity, breach, damage, or unauthorised person is reported immediately to the Security Coordinator / Site Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Patrol timing is varied to avoid predictability; check-in points used on remote sites.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Patrol timing is varied to avoid predictability; check-in points used on remote sites.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Key Control</p>
+            <SectionHeading id="s9">9. Key Control</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All operational and restricted-area keys are held in a locked Key Cabinet in the Guard House or Security Office.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All operational and restricted-area keys are held in a locked Key Cabinet in the Guard House or Security Office.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Keys are issued only to authorised personnel, recorded in the Key Register (FRM-SEC-005) with signature on issue and return.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Keys are issued only to authorised personnel, recorded in the Key Register (FRM-SEC-005) with signature on issue and return.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The Key Cabinet is kept locked whenever not in active use.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The Key Cabinet is kept locked whenever not in active use.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lost keys are reported immediately; affected locks rekeyed or replaced.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lost keys are reported immediately; affected locks rekeyed or replaced.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Asset and Information Protection</p>
+            <SectionHeading id="s10">10. Asset and Information Protection</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Company equipment removed from site only with an approved Gate Pass (FRM-SEC-003).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Company equipment removed from site only with an approved Gate Pass (FRM-SEC-003).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Confidential documents (contracts, financials, exploration data, employee files) stored in locked cabinets or controlled digital systems.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Confidential documents (contracts, financials, exploration data, employee files) stored in locked cabinets or controlled digital systems.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• IT access, passwords, and data handled under the IT / Information Security procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>IT access, passwords, and data handled under the IT / Information Security procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Photography and mobile phone use in restricted or client areas only with prior authorisation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Photography and mobile phone use in restricted or client areas only with prior authorisation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Security Incident Response</p>
+            <SectionHeading id="s11">11. Security Incident Response</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Any security event — intrusion, theft, vandalism, threat, suspicious activity, trespass — is reported immediately to Security Coordinator and Site Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Any security event — intrusion, theft, vandalism, threat, suspicious activity, trespass — is reported immediately to Security Coordinator and Site Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Personnel do not personally confront intruders. Observe, report, preserve evidence.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Personnel do not personally confront intruders. Observe, report, preserve evidence.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• For violent or armed events, dial Saudi Police 999 and Civil Defense 998 immediately. Secure and evacuate if required.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>For violent or armed events, dial Saudi Police 999 and Civil Defense 998 immediately. Secure and evacuate if required.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All incidents logged in the Security Incident Register (REG-SEC-001) and investigated per PROC-HSE-006 Incident Investigation where applicable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All incidents logged in the Security Incident Register (REG-SEC-001) and investigated per PROC-HSE-006 Incident Investigation where applicable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Major security events escalate to PLN-HSE-001 Major Emergency Preparedness Plan.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Major security events escalate to PLN-HSE-001 Major Emergency Preparedness Plan.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Training and Awareness</p>
+            <SectionHeading id="s12">12. Training and Awareness</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Security guards trained in access control, visitor management, patrol, incident response, and KSA legal limits on the use of force. Certification maintained.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Security guards trained in access control, visitor management, patrol, incident response, and KSA legal limits on the use of force. Certification maintained.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All employees receive security awareness at induction — ID, visitor escort, reporting suspicious activity, data protection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All employees receive security awareness at induction — ID, visitor escort, reporting suspicious activity, data protection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual refresher or immediately after any security incident.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual refresher or immediately after any security incident.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Performance Indicators</p>
+            <SectionHeading id="s13">13. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -350,19 +447,29 @@ export default function TE_IMS_PROC_SEC_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. References</p>
+            <SectionHeading id="s14">14. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 8.1.2 Operational Controls, 8.2 Emergency Preparedness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 8.1.2 Operational Controls, 8.2 Emergency Preparedness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• KSA High Commission for Industrial Security (HCIS) guidance (where applicable).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>KSA High Commission for Industrial Security (HCIS) guidance (where applicable).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• KSA Labour Law and Public Security Law.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>KSA Labour Law and Public Security Law.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PLN-HSE-001 Major Emergency Preparedness; PROC-HSE-006 Incident Investigation; PROC-SCM-001 Site Supply; SOP-MAINT-002 Refueling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PLN-HSE-001 Major Emergency Preparedness; PROC-HSE-006 Incident Investigation; PROC-SCM-001 Site Supply; SOP-MAINT-002 Refueling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>15. Related Documents and Records</p>
+            <SectionHeading id="s15">15. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

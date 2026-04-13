@@ -8,6 +8,15 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Responsibilities" },
+  { id: "s4", label: "4. Frequency and Duration" },
+  { id: "s5", label: "5. How to Conduct a Toolbox Talk" },
+  { id: "s6", label: "6. Record Keeping" },
+  { id: "s7", label: "7. Effectiveness and Continual Improvement" },
+  { id: "s8", label: "8. Approved Toolbox Talk Topics — Quick Reference Library" },
+  { id: "s9", label: "9. Performance Indicators" },
+  { id: "s10", label: "10. References" },
+  { id: "s11", label: "11. Records Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +162,15 @@ export default function TE_IMS_PROC_HSE_007() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>To establish a standardised, effective process for conducting daily and task-specific Toolbox Talks (TBTs) that reinforce safe behaviours, raise hazard awareness, and promote a strong safety culture across all True East Mining Company (TEMC) operations. Toolbox Talks are short, interactive discussions that help prevent incidents by addressing real site risks in a practical and engaging way. This procedure supports ISO 45001:2018 (Clauses 5.4 Consultation, 7.2 Competence, 7.3 Awareness, 8.1.2 Eliminating Hazards).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC sites — drilling rigs, exploration camps, processing areas, workshops, core yards, and remote desert locations — and covers all employees, contractors, and visitors. Toolbox Talks are mandatory before every shift and before every high-risk task.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Responsibilities</p>
+            <SectionHeading id="s3">3. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -192,175 +201,307 @@ export default function TE_IMS_PROC_HSE_007() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Frequency and Duration</p>
+            <SectionHeading id="s4">4. Frequency and Duration</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Daily — conducted immediately before shift start. Strictly limited to 10–15 minutes maximum to maintain engagement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Daily — conducted immediately before shift start. Strictly limited to 10–15 minutes maximum to maintain engagement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Task-Specific — additional talks held immediately before high-risk tasks — hot work, working at heights, confined space entry, complex lifts, night shift operations, chemical handling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Task-Specific — additional talks held immediately before high-risk tasks — hot work, working at heights, confined space entry, complex lifts, night shift operations, chemical handling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Incident-Driven — an emergency toolbox talk is held after any significant incident, near miss, or regulatory change relevant to site activities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Incident-Driven — an emergency toolbox talk is held after any significant incident, near miss, or regulatory change relevant to site activities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. How to Conduct a Toolbox Talk</p>
+            <SectionHeading id="s5">5. How to Conduct a Toolbox Talk</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Choose a highly relevant topic from the approved library or base it on a current, real-time site risk.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Choose a highly relevant topic from the approved library or base it on a current, real-time site risk.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Gather the team in a safe, quiet area away from heavy machinery noise.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Gather the team in a safe, quiet area away from heavy machinery noise.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use visual aids, physical tools, photos, or short videos where available.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use visual aids, physical tools, photos, or short videos where available.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Explain the specific hazard and why it matters, using real examples from the site or the broader mining industry.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Explain the specific hazard and why it matters, using real examples from the site or the broader mining industry.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Discuss required controls and safe practices, actively encouraging questions and worker input.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Discuss required controls and safe practices, actively encouraging questions and worker input.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Demonstrate the safe practice physically where practical (manual handling posture, PASS method for fire extinguishers, 3 points of contact on a ladder).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Demonstrate the safe practice physically where practical (manual handling posture, PASS method for fire extinguishers, 3 points of contact on a ladder).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Summarise the key points and ask the crew for a verbal commitment to safety.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Summarise the key points and ask the crew for a verbal commitment to safety.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Record Keeping</p>
+            <SectionHeading id="s6">6. Record Keeping</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use the official Toolbox Talk Register (FRM-HSE-008).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use the official Toolbox Talk Register (FRM-HSE-008).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Record the topic, date, site, all attendees with signatures, feedback received, and any corrective actions arising from the discussion.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Record the topic, date, site, all attendees with signatures, feedback received, and any corrective actions arising from the discussion.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Retain records in the site IMS file for a minimum of 3 years.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Retain records in the site IMS file for a minimum of 3 years.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrective actions arising from a toolbox talk feed the IMS Action Register and are tracked to closure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrective actions arising from a toolbox talk feed the IMS Action Register and are tracked to closure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Effectiveness and Continual Improvement</p>
+            <SectionHeading id="s7">7. Effectiveness and Continual Improvement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Supervisors assess worker understanding through direct observation during the shift following the talk.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Supervisors assess worker understanding through direct observation during the shift following the talk.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The HSE Manager conducts a monthly review of attendance logs and recurring topics.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The HSE Manager conducts a monthly review of attendance logs and recurring topics.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Topics are updated and rotated based on recent incidents, near misses, audit findings, or seasonal risks (extreme heat stress in the KSA summer, sandstorms, Ramadan fatigue).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Topics are updated and rotated based on recent incidents, near misses, audit findings, or seasonal risks (extreme heat stress in the KSA summer, sandstorms, Ramadan fatigue).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TBT effectiveness is reviewed as an input to the Management Review (PROC-SYS-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TBT effectiveness is reviewed as an input to the Management Review (PROC-SYS-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Approved Toolbox Talk Topics — Quick Reference Library</p>
+            <SectionHeading id="s8">8. Approved Toolbox Talk Topics — Quick Reference Library</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following standardised topics are tailored specifically to TEMC and KSA drilling operations. Supervisors rotate these regularly and supplement with incident- or site-specific topics.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.1 Topic 1 — Manual Handling</p>
+            <SubHeading>8.1 Topic 1 — Manual Handling</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• More than 25% of mining injuries involve manual handling. Always assess the load first.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>More than 25% of mining injuries involve manual handling. Always assess the load first.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ask: Can I use a mechanical aid? Can the load be reduced? Is the walking route clear?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ask: Can I use a mechanical aid? Can the load be reduced? Is the walking route clear?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safe lifting rules: feet apart, bend at the knees, back straight, firm grip, lift smoothly using leg muscles, keep the load close to the body, avoid twisting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safe lifting rules: feet apart, bend at the knees, back straight, firm grip, lift smoothly using leg muscles, keep the load close to the body, avoid twisting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Never carry loads that block your vision.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Never carry loads that block your vision.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• For awkward loads or items &gt;20 kg, use a team lift or mechanical aid. Wear cut-resistant gloves and steel-toe boots.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>For awkward loads or items &gt;20 kg, use a team lift or mechanical aid. Wear cut-resistant gloves and steel-toe boots.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.2 Topic 2 — Hazardous Substances (Drilling Fluids and Chemicals)</p>
+            <SubHeading>8.2 Topic 2 — Hazardous Substances (Drilling Fluids and Chemicals)</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drilling additives, diesel, and cleaning chemicals can severely harm skin, eyes, or lungs.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drilling additives, diesel, and cleaning chemicals can severely harm skin, eyes, or lungs.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Always consult the Safety Data Sheet (SDS) before using a new substance.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Always consult the Safety Data Sheet (SDS) before using a new substance.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Hierarchy of Controls: substitute with a safer product where possible, use engineering controls (ventilation, enclosed mixing), follow procedures, use PPE as the last line of defence (chemical-resistant gloves, goggles, respirators).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Hierarchy of Controls: substitute with a safer product where possible, use engineering controls (ventilation, enclosed mixing), follow procedures, use PPE as the last line of defence (chemical-resistant gloves, goggles, respirators).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Never eat, drink, or smoke while handling chemicals. Wash hands immediately after use and report spills.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Never eat, drink, or smoke while handling chemicals. Wash hands immediately after use and report spills.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.3 Topic 3 — Safe Use of Diesel</p>
+            <SubHeading>8.3 Topic 3 — Safe Use of Diesel</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Diesel is flammable and prolonged contact causes skin and lung damage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Diesel is flammable and prolonged contact causes skin and lung damage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Wear nitrile gloves, safety goggles, and FR overalls during handling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Wear nitrile gloves, safety goggles, and FR overalls during handling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Refuel outdoors only with the engine completely off and cooled.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Refuel outdoors only with the engine completely off and cooled.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use drip trays and keep spill kits nearby.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use drip trays and keep spill kits nearby.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• No smoking, mobile phones, or ignition sources within 20 metres.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>No smoking, mobile phones, or ignition sources within 20 metres.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Wash hands and change contaminated clothing immediately if splashed.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Wash hands and change contaminated clothing immediately if splashed.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.4 Topic 4 — Hand Tools</p>
+            <SubHeading>8.4 Topic 4 — Hand Tools</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use the exact right tool for the job. Never improvise.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use the exact right tool for the job. Never improvise.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-use inspection: check for mushroomed chisel heads, loose or splintered handles, dull cutting edges.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-use inspection: check for mushroomed chisel heads, loose or splintered handles, dull cutting edges.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Never use files as punches or chisels with damaged strike faces.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Never use files as punches or chisels with damaged strike faces.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Keep hands and body parts behind the cutting edge. Report and tag out damaged tools immediately.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Keep hands and body parts behind the cutting edge. Report and tag out damaged tools immediately.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.5 Topic 5 — Teamwork and Safety Culture</p>
+            <SubHeading>8.5 Topic 5 — Teamwork and Safety Culture</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safety is everyone's shared responsibility. Look out for your crewmates.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safety is everyone's shared responsibility. Look out for your crewmates.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report hazards and near misses immediately. TEMC operates a strict &quot;No Blame&quot; culture for proactive reporting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report hazards and near misses immediately. TEMC operates a strict &quot;No Blame&quot; culture for proactive reporting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Actively discourage horseplay. Communicate clearly and concisely.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Actively discourage horseplay. Communicate clearly and concisely.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• A strong team talks openly about safety concerns and celebrates safe behaviours.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>A strong team talks openly about safety concerns and celebrates safe behaviours.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.6 Topic 6 — Housekeeping</p>
+            <SubHeading>8.6 Topic 6 — Housekeeping</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• A tidy site is a safe site.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>A tidy site is a safe site.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Clear waste, rubble, and tripping hazards immediately. Return tools to designated storage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Clear waste, rubble, and tripping hazards immediately. Return tools to designated storage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Keep all access routes, walkways, and emergency exits 100% clear.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Keep all access routes, walkways, and emergency exits 100% clear.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report slippery floors, protruding nails, and unsecured materials. Good housekeeping prevents trips, fires, and operational delays.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report slippery floors, protruding nails, and unsecured materials. Good housekeeping prevents trips, fires, and operational delays.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.7 Topic 7 — Skin Care and Dermatitis Prevention</p>
+            <SubHeading>8.7 Topic 7 — Skin Care and Dermatitis Prevention</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drilling mud, diesel, and harsh chemicals strip skin oils and cause severe dermatitis.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drilling mud, diesel, and harsh chemicals strip skin oils and cause severe dermatitis.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Avoid direct skin contact wherever physically possible.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Avoid direct skin contact wherever physically possible.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Apply industrial barrier cream before the shift and conditioning cream after washing.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Apply industrial barrier cream before the shift and conditioning cream after washing.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Wear appropriate gloves and change soaked or contaminated clothing immediately. Report rashes without delay.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Wear appropriate gloves and change soaked or contaminated clothing immediately. Report rashes without delay.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.8 Topic 8 — Noise at Work</p>
+            <SubHeading>8.8 Topic 8 — Noise at Work</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Prolonged exposure to rig, compressor, and generator noise causes permanent, irreversible hearing loss.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Prolonged exposure to rig, compressor, and generator noise causes permanent, irreversible hearing loss.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rule of thumb: if you must raise your voice to be heard by someone 1 metre away, you must wear hearing protection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rule of thumb: if you must raise your voice to be heard by someone 1 metre away, you must wear hearing protection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use ear plugs or earmuffs correctly. Never remove them while inside designated noisy zones.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use ear plugs or earmuffs correctly. Never remove them while inside designated noisy zones.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.9 Topic 9 — Use of Fire Extinguishers (PASS Method)</p>
+            <SubHeading>8.9 Topic 9 — Use of Fire Extinguishers (PASS Method)</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pull the pin to break the tamper seal.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pull the pin to break the tamper seal.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Aim the nozzle strictly at the base of the fire.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Aim the nozzle strictly at the base of the fire.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Squeeze the handle to release the extinguishing agent.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Squeeze the handle to release the extinguishing agent.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Sweep the nozzle from side to side until the fire is completely out.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Sweep the nozzle from side to side until the fire is completely out.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ensure you are using the correct extinguisher type (Water, Foam, Dry Powder, CO₂) for the specific fire class.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ensure you are using the correct extinguisher type (Water, Foam, Dry Powder, CO₂) for the specific fire class.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.10 Topic 10 — Working at Height</p>
+            <SubHeading>8.10 Topic 10 — Working at Height</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Any work above 1.8 metres strictly requires formal fall protection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Any work above 1.8 metres strictly requires formal fall protection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Inspect harness, lanyard, trauma straps, and anchor points before every single use.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Inspect harness, lanyard, trauma straps, and anchor points before every single use.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Never work alone at height.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Never work alone at height.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Use a full-body harness with a double lanyard when moving to maintain 100% tie-off. Always maintain 3 points of contact on ladders.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Use a full-body harness with a double lanyard when moving to maintain 100% tie-off. Always maintain 3 points of contact on ladders.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.11 Topic 11 — Daily Drilling Pre-Start Checklist</p>
+            <SubHeading>8.11 Topic 11 — Daily Drilling Pre-Start Checklist</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The pre-start checklist must be completed in full before starting the rig engine.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The pre-start checklist must be completed in full before starting the rig engine.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Red items = immediate stop. Do not operate the rig if a red item fails.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Red items = immediate stop. Do not operate the rig if a red item fails.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical checks include emergency stops, high-pressure hydraulic leaks, wireline condition, fire extinguisher presence, first aid kit stock, and PPE readiness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical checks include emergency stops, high-pressure hydraulic leaks, wireline condition, fire extinguisher presence, first aid kit stock, and PPE readiness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8.12 Topic 12 — Site Rehabilitation</p>
+            <SubHeading>8.12 Topic 12 — Site Rehabilitation</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• After drilling operations conclude, the site must be restored as close as possible to its original environmental condition.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>After drilling operations conclude, the site must be restored as close as possible to its original environmental condition.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rip compacted soil along natural contours, respread topsoil and vegetation, backfill sumps and boreholes securely, remove 100% of generated waste, and install permanent survey markers only where required by the client.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rip compacted soil along natural contours, respread topsoil and vegetation, backfill sumps and boreholes securely, remove 100% of generated waste, and install permanent survey markers only where required by the client.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Performance Indicators</p>
+            <SectionHeading id="s9">9. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -403,17 +544,25 @@ export default function TE_IMS_PROC_HSE_007() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. References</p>
+            <SectionHeading id="s10">10. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 5.4 Consultation and Participation of Workers, 7.2 Competence, 7.3 Awareness, 8.1.2 Eliminating Hazards and Reducing OH&amp;S Risks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 5.4 Consultation and Participation of Workers, 7.2 Competence, 7.3 Awareness, 8.1.2 Eliminating Hazards and Reducing OH&amp;S Risks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Management Regulation (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Management Regulation (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — National Center for Environmental Compliance guidelines on chemical handling and spill prevention.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — National Center for Environmental Compliance guidelines on chemical handling and spill prevention.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC FRM-HSE-008 Toolbox Talk Attendance Register; PROC-HSE-003 Hazard Identification and Risk Assessment; PROC-HSE-006 Incident and Accident Investigation; PROC-SYS-002 Management Review.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC FRM-HSE-008 Toolbox Talk Attendance Register; PROC-HSE-003 Hazard Identification and Risk Assessment; PROC-HSE-006 Incident and Accident Investigation; PROC-SYS-002 Management Review.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Records Retention</p>
+            <SectionHeading id="s11">11. Records Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

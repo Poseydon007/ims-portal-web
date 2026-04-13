@@ -8,6 +8,15 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Process" },
+  { id: "s6", label: "6. Classification and Timeframes" },
+  { id: "s7", label: "7. Interface with Other Procedures" },
+  { id: "s8", label: "8. Records and Monitoring" },
+  { id: "s9", label: "9. Performance Indicators" },
+  { id: "s10", label: "10. References" },
+  { id: "s11", label: "11. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,43 +162,69 @@ export default function TE_IMS_PROC_SYS_008() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes the True East Mining Company (TEMC) system for identifying, recording, investigating, correcting, and preventing recurrence of non-conformities across the Integrated Management System. It covers customer complaints, supplier and vendor issues, internal process failures, audit findings, and safety / environmental incidents. It ensures compliance with ISO 9001:2015 (Clause 10.2), ISO 14001:2015 (Clause 10.2), and ISO 45001:2018 (Clause 10.2) and supports TEMC's continual improvement commitment.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to the handling of non-conformities from any source within the TEMC IMS:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Customer / client complaints.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Customer / client complaints.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-conforming materials, products, or services from suppliers or sub-contractors.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-conforming materials, products, or services from suppliers or sub-contractors.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Internal process failures, deviations, and missed KPIs.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Internal process failures, deviations, and missed KPIs.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Internal and external audit findings (ISO 9001 / 14001 / 45001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Internal and external audit findings (ISO 9001 / 14001 / 45001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safety incidents, environmental events, and near-misses (interfacing with PROC-HSE-006 Incident Investigation).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safety incidents, environmental events, and near-misses (interfacing with PROC-HSE-006 Incident Investigation).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Regulatory findings from MHRSD, MEWA, NCEC, or client authorities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Regulatory findings from MHRSD, MEWA, NCEC, or client authorities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-Conformity (NC) — non-fulfilment of a specified requirement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-Conformity (NC) — non-fulfilment of a specified requirement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Correction — immediate action to address a detected non-conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Correction — immediate action to address a detected non-conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrective Action (CA) — action taken to eliminate the cause of a non-conformity to prevent recurrence.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrective Action (CA) — action taken to eliminate the cause of a non-conformity to prevent recurrence.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Preventive Action — action taken to eliminate the cause of a potential non-conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Preventive Action — action taken to eliminate the cause of a potential non-conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Root Cause Analysis (RCA) — a structured investigation technique (5 Why, Fishbone, or equivalent) to identify the underlying cause of a non-conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Root Cause Analysis (RCA) — a structured investigation technique (5 Why, Fishbone, or equivalent) to identify the underlying cause of a non-conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCR — Non-Conformance Report — the formal document raising, tracking, and closing a non-conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCR — Non-Conformance Report — the formal document raising, tracking, and closing a non-conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• CAR — Corrective Action Request — the action plan arising from an NCR, assigned to an owner with a target date.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>CAR — Corrective Action Request — the action plan arising from an NCR, assigned to an owner with a target date.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -228,27 +263,45 @@ export default function TE_IMS_PROC_SYS_008() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Process</p>
+            <SectionHeading id="s5">5. Process</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.1 Identification — any employee who detects a non-conformity reports it through their supervisor, or directly to the Management Representative for serious or cross-functional issues.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.1 Identification — any employee who detects a non-conformity reports it through their supervisor, or directly to the Management Representative for serious or cross-functional issues.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.2 Initiation — the MR or authorised employee initiates the NCR on form FRM-SYS-001 describing the problem, source, date, evidence, and immediate containment taken.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.2 Initiation — the MR or authorised employee initiates the NCR on form FRM-SYS-001 describing the problem, source, date, evidence, and immediate containment taken.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.3 Logging — the MR assigns a unique NCR number (e.g. NCR-2026-001), records it in the NCR Log (REG-SYS-002), and classifies severity (Minor / Major / Critical).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.3 Logging — the MR assigns a unique NCR number (e.g. NCR-2026-001), records it in the NCR Log (REG-SYS-002), and classifies severity (Minor / Major / Critical).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.4 Review and Root Cause Analysis — the MR and the function owner review the NCR. Root cause analysis is performed using 5 Why, Fishbone, or equivalent. External specialist support is used for complex issues.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.4 Review and Root Cause Analysis — the MR and the function owner review the NCR. Root cause analysis is performed using 5 Why, Fishbone, or equivalent. External specialist support is used for complex issues.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.5 Action Planning — suitable corrective action is defined with a responsible owner and target date. Preventive actions are identified where the same cause could drive other non-conformities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.5 Action Planning — suitable corrective action is defined with a responsible owner and target date. Preventive actions are identified where the same cause could drive other non-conformities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.6 Implementation — the assigned owner implements the agreed action within the target date. Progress is tracked in the NCR Log.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.6 Implementation — the assigned owner implements the agreed action within the target date. Progress is tracked in the NCR Log.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.7 Verification of Effectiveness — the MR verifies the action was implemented and — critically — that the non-conformity has not recurred. Verification method and evidence are recorded.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.7 Verification of Effectiveness — the MR verifies the action was implemented and — critically — that the non-conformity has not recurred. Verification method and evidence are recorded.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.8 Closure — once verified effective, the MR signs off and closes the NCR. Unresolved or ineffective actions are re-opened and escalated.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.8 Closure — once verified effective, the MR signs off and closes the NCR. Unresolved or ineffective actions are re-opened and escalated.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.9 Escalation — overdue or ineffective corrective actions are escalated to the MD and reviewed at management review.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.9 Escalation — overdue or ineffective corrective actions are escalated to the MD and reviewed at management review.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Classification and Timeframes</p>
+            <SectionHeading id="s6">6. Classification and Timeframes</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -279,25 +332,39 @@ export default function TE_IMS_PROC_SYS_008() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Interface with Other Procedures</p>
+            <SectionHeading id="s7">7. Interface with Other Procedures</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safety and environmental incidents are investigated per PROC-HSE-006 Incident Investigation; an NCR is raised for each to close the loop in this procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safety and environmental incidents are investigated per PROC-HSE-006 Incident Investigation; an NCR is raised for each to close the loop in this procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit findings (internal and external) are logged as NCRs and tracked to closure under this procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit findings (internal and external) are logged as NCRs and tracked to closure under this procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Customer complaints are logged and escalated via the MR and the relevant Department Head.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Customer complaints are logged and escalated via the MR and the relevant Department Head.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Trends and recurring non-conformities are reported to the Management Review (per PROC-SYS-003).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Trends and recurring non-conformities are reported to the Management Review (per PROC-SYS-003).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Records and Monitoring</p>
+            <SectionHeading id="s8">8. Records and Monitoring</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All NCRs, CARs, and supporting evidence are retained by the MR for a minimum of three (3) years or longer if client / regulatory requirements apply.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All NCRs, CARs, and supporting evidence are retained by the MR for a minimum of three (3) years or longer if client / regulatory requirements apply.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Trend analysis by category, source, and department is prepared monthly and reviewed at management review.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Trend analysis by category, source, and department is prepared monthly and reviewed at management review.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Overdue NCRs are highlighted in the monthly QHSE report.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Overdue NCRs are highlighted in the monthly QHSE report.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Performance Indicators</p>
+            <SectionHeading id="s9">9. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -345,17 +412,25 @@ export default function TE_IMS_PROC_SYS_008() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. References</p>
+            <SectionHeading id="s10">10. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 10.2 Non-conformity and Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 10.2 Non-conformity and Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clause 10.2 Non-conformity and Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clause 10.2 Non-conformity and Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 10.2 Incident, Non-conformity and Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 10.2 Incident, Non-conformity and Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-HSE-006 Incident Investigation; PROC-SYS-001 Internal Audit; PROC-SYS-003 Management Review; PROC-SCM-001 Site Supply.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-HSE-006 Incident Investigation; PROC-SYS-001 Internal Audit; PROC-SYS-003 Management Review; PROC-SCM-001 Site Supply.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Related Documents and Records</p>
+            <SectionHeading id="s11">11. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

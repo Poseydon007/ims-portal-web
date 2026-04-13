@@ -8,6 +8,21 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Key Principles" },
+  { id: "s6", label: "6. Supplier Qualification (ISO 9001 Clause 8.4)" },
+  { id: "s7", label: "7. Diesel Refueling via Mobile Unit" },
+  { id: "s8", label: "8. Oil Change and Fluid Maintenance" },
+  { id: "s9", label: "9. Used Oil Disposal and Recycling" },
+  { id: "s10", label: "10. Drilling Chemicals" },
+  { id: "s11", label: "11. Spare Parts and Consumables" },
+  { id: "s12", label: "12. HSE Controls (All Supply Activities)" },
+  { id: "s13", label: "13. Emergency Response" },
+  { id: "s14", label: "14. Training" },
+  { id: "s15", label: "15. Performance Indicators" },
+  { id: "s16", label: "16. References" },
+  { id: "s17", label: "17. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,27 +168,37 @@ export default function TE_IMS_PROC_SCM_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes standardised, safe, and environmentally responsible controls for delivery, handling, and supply of critical site consumables at True East Mining Company (TEMC) remote drilling and exploration operations — diesel fuel, lubricating oils, drilling fluid chemicals, spare parts, and general site consumables. It governs supplier qualification, mobile delivery, on-site transfer, waste return, and record-keeping. It is aligned with ISO 9001:2015 (Clause 8.4 Externally Provided Processes, Products and Services), ISO 14001:2015, ISO 45001:2018, and KSA regulations (NCEC, MEWA, MHRSD).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all on-site supply operations at TEMC drilling sites — mobile diesel refueling, oil delivery and used-oil collection, drilling fluid chemical delivery, consumables and spare parts. All deliveries occur via approved mobile units; no on-site bulk storage unless specifically engineered, permitted, and bunded. It applies to rig crews, shift supervisors, logistics, maintenance, mud engineers, HSE, and all third-party suppliers operating on TEMC premises.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mobile Delivery — fuel, oil, or chemical delivery by licensed road tanker or bowser directly to the point of use.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mobile Delivery — fuel, oil, or chemical delivery by licensed road tanker or bowser directly to the point of use.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Approved Supplier — a supplier formally qualified and on the TEMC Approved Supplier List, with valid commercial registration, HSE records, and certifications.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Approved Supplier — a supplier formally qualified and on the TEMC Approved Supplier List, with valid commercial registration, HSE records, and certifications.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Waste Manifest — the official NCEC / MEWA document tracking transfer of hazardous waste (used oil, chemicals) to a licensed contractor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Waste Manifest — the official NCEC / MEWA document tracking transfer of hazardous waste (used oil, chemicals) to a licensed contractor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Handover Window — the shift changeover slot during which planned refueling, oil change, and major chemical additions occur with operations suspended.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Handover Window — the shift changeover slot during which planned refueling, oil change, and major chemical additions occur with operations suspended.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• SDS — Safety Data Sheet — hazard, handling, and emergency information for every chemical on site.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>SDS — Safety Data Sheet — hazard, handling, and emergency information for every chemical on site.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -220,139 +245,247 @@ export default function TE_IMS_PROC_SCM_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Key Principles</p>
+            <SectionHeading id="s5">5. Key Principles</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Planned refueling, oil change, and major fluid / chemical transfers occur during the shift handover window.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Planned refueling, oil change, and major fluid / chemical transfers occur during the shift handover window.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• If fuel or fluid levels fall critically mid-shift, operations are fully suspended and the pre-refueling procedure (safety meeting, 10 m zone, grounding) is followed exactly as for a scheduled event.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>If fuel or fluid levels fall critically mid-shift, operations are fully suspended and the pre-refueling procedure (safety meeting, 10 m zone, grounding) is followed exactly as for a scheduled event.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All operations with ignition or spill risk are stopped during transfers.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All operations with ignition or spill risk are stopped during transfers.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Only environmentally friendly, low-toxicity, biodegradable drilling chemicals are permitted.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Only environmentally friendly, low-toxicity, biodegradable drilling chemicals are permitted.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Used oil is recycled exclusively via NCEC / MEWA licensed third-party contractors.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Used oil is recycled exclusively via NCEC / MEWA licensed third-party contractors.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Full HSE controls apply: PPE, spill kits, grounding, bunded containment, emergency response.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Full HSE controls apply: PPE, spill kits, grounding, bunded containment, emergency response.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Supplier Qualification (ISO 9001 Clause 8.4)</p>
+            <SectionHeading id="s6">6. Supplier Qualification (ISO 9001 Clause 8.4)</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Suppliers must be formally approved before first delivery — commercial registration, KSA operating licence, insurance, HSE record, driver training, vehicle inspection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Suppliers must be formally approved before first delivery — commercial registration, KSA operating licence, insurance, HSE record, driver training, vehicle inspection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fuel and chemical suppliers additionally provide SDS (Arabic and English) and NCEC / MEWA licences where applicable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fuel and chemical suppliers additionally provide SDS (Arabic and English) and NCEC / MEWA licences where applicable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Approved Supplier List reviewed annually or after any major non-conformance.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Approved Supplier List reviewed annually or after any major non-conformance.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-conformances logged in the Supplier Performance Register and escalated under PROC-SYS-008 Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-conformances logged in the Supplier Performance Register and escalated under PROC-SYS-008 Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Diesel Refueling via Mobile Unit</p>
+            <SectionHeading id="s7">7. Diesel Refueling via Mobile Unit</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Refueling is performed per SOP-MAINT-002 Refueling and Fuel Handling. Key controls:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Outgoing supervisor notifies Logistics ≥1 hour ahead.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Outgoing supervisor notifies Logistics ≥1 hour ahead.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rig operations stop 10 minutes prior.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rig operations stop 10 minutes prior.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-essential personnel cleared (10 m radius); signs and barriers posted.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-essential personnel cleared (10 m radius); signs and barriers posted.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mandatory 5-minute safety meeting — hazards, procedure, emergency response.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mandatory 5-minute safety meeting — hazards, procedure, emergency response.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Logistics inspects the mobile truck (leaks, fittings, spill kit, fire extinguishers, certification).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Logistics inspects the mobile truck (leaks, fittings, spill kit, fire extinguishers, certification).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Truck positioned ≥5 m from rig; wheel chocks applied; brake engaged.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Truck positioned ≥5 m from rig; wheel chocks applied; brake engaged.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Bonding and grounding applied between truck and rig / earth.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Bonding and grounding applied between truck and rig / earth.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drip trays, absorbent pads, and secondary containment placed under all connections.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drip trays, absorbent pads, and secondary containment placed under all connections.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Slow transfer using drip-free nozzles and overfill protection; continuous monitoring.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Slow transfer using drip-free nozzles and overfill protection; continuous monitoring.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• No smoking, open flames, or mobile phones within 20 m.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>No smoking, open flames, or mobile phones within 20 m.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-refueling inspection; Logistics records volume, time, personnel, issues.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-refueling inspection; Logistics records volume, time, personnel, issues.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Operations resume only after final clearance by incoming supervisor and Logistics.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Operations resume only after final clearance by incoming supervisor and Logistics.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Oil Change and Fluid Maintenance</p>
+            <SectionHeading id="s8">8. Oil Change and Fluid Maintenance</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Engine, water pump (crankcase / gearbox), and hydraulic oil changes follow OEM intervals, runtime hours, or condition-based triggers.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pre-change — schedule per hours meter / planned maintenance; notify Logistics for oil delivery or waste collection; LOTO the equipment ≥15–30 minutes prior (cooling); set up contained work area with impermeable mats, bunds, spill kits; toolbox talk.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pre-change — schedule per hours meter / planned maintenance; notify Logistics for oil delivery or waste collection; LOTO the equipment ≥15–30 minutes prior (cooling); set up contained work area with impermeable mats, bunds, spill kits; toolbox talk.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Change — chemical-resistant PPE; collection containers under drain points; drain completely; replace filters; clean breathers, strainers, fill points; refill slowly with OEM-approved fluid; monitor for leaks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Change — chemical-resistant PPE; collection containers under drain points; drain completely; replace filters; clean breathers, strainers, fill points; refill slowly with OEM-approved fluid; monitor for leaks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-change — brief test run to circulate fluid and check for leaks; label and seal waste drums; record volumes, oil types, condition notes, runtime.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-change — brief test run to circulate fluid and check for leaks; label and seal waste drums; record volumes, oil types, condition notes, runtime.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Used Oil Disposal and Recycling</p>
+            <SectionHeading id="s9">9. Used Oil Disposal and Recycling</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All used lubricating oils are classified as hazardous waste.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All used lubricating oils are classified as hazardous waste.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• On-site storage — transfer to labelled, closed drums immediately; store in a bunded area (110% capacity) away from drains and ignition sources; daily visual inspection; maximum 90 days storage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>On-site storage — transfer to labelled, closed drums immediately; store in a bunded area (110% capacity) away from drains and ignition sources; daily visual inspection; maximum 90 days storage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Collection — Maintenance Lead notifies Logistics when drums reach ~80% or monthly. Logistics schedules an NCEC / MEWA licensed contractor. Supervised transfer using drip trays.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Collection — Maintenance Lead notifies Logistics when drums reach ~80% or monthly. Logistics schedules an NCEC / MEWA licensed contractor. Supervised transfer using drip trays.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Manifest — both parties sign the official waste manifest — waste type, volume, date, signatures.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Manifest — both parties sign the official waste manifest — waste type, volume, date, signatures.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Recycling — contractor transports to a licensed facility for dewatering, filtering, and re-refining. Certificate of recycling provided.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Recycling — contractor transports to a licensed facility for dewatering, filtering, and re-refining. Certificate of recycling provided.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Records — Logistics retains manifests and certificates for ≥5 years.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Records — Logistics retains manifests and certificates for ≥5 years.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Drilling Chemicals</p>
+            <SectionHeading id="s10">10. Drilling Chemicals</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Selection — HSE-approved list only — xanthan gum, PAC/CMC, bentonite, barite (where allowed), vegetable-based lubricants, glycerin shale inhibitors, biopolymers.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Selection — HSE-approved list only — xanthan gum, PAC/CMC, bentonite, barite (where allowed), vegetable-based lubricants, glycerin shale inhibitors, biopolymers.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Documentation — full SDS/MSDS (Arabic and English) on site for every chemical.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Documentation — full SDS/MSDS (Arabic and English) on site for every chemical.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Delivery — same mobile delivery controls as diesel — inspection, ground/bond, drip trays, containment, slow supervised transfer, 20 m no-ignition zone.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Delivery — same mobile delivery controls as diesel — inspection, ground/bond, drip trays, containment, slow supervised transfer, 20 m no-ignition zone.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• On-site handling — designated bunded mixing area with liner, eyewash, spill kits; PPE; gradual addition to mud pit / hopper; continuous mud property monitoring; toolbox talks before major additions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>On-site handling — designated bunded mixing area with liner, eyewash, spill kits; PPE; gradual addition to mud pit / hopper; continuous mud property monitoring; toolbox talks before major additions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Empty containers — sacks, totes, and IBCs returned to Logistics for proper disposal / recycling — no on-site burning or burial.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Empty containers — sacks, totes, and IBCs returned to Logistics for proper disposal / recycling — no on-site burning or burial.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Spare Parts and Consumables</p>
+            <SectionHeading id="s11">11. Spare Parts and Consumables</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All spare parts purchased through Approved Suppliers, with PO and material certificate where applicable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All spare parts purchased through Approved Suppliers, with PO and material certificate where applicable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Goods received checked for quantity, damage, and conformity against the PO and delivery note by Logistics.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Goods received checked for quantity, damage, and conformity against the PO and delivery note by Logistics.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Non-conforming goods rejected, tagged, and returned — logged under PROC-SYS-008 Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Non-conforming goods rejected, tagged, and returned — logged under PROC-SYS-008 Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical spare parts (rig down items) held at agreed minimum stock level with Procurement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical spare parts (rig down items) held at agreed minimum stock level with Procurement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. HSE Controls (All Supply Activities)</p>
+            <SectionHeading id="s12">12. HSE Controls (All Supply Activities)</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Job Safety Analysis (JSA) before each critical task.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Job Safety Analysis (JSA) before each critical task.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mandatory PPE: flame-resistant clothing, nitrile gloves, safety goggles, steel-toe boots, respiratory protection when required.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mandatory PPE: flame-resistant clothing, nitrile gloves, safety goggles, steel-toe boots, respiratory protection when required.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Spill prevention: absorbent pads, drip trays, secondary containment, overfill protection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Spill prevention: absorbent pads, drip trays, secondary containment, overfill protection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fire safety: ABC extinguishers available at every transfer point.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fire safety: ABC extinguishers available at every transfer point.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Emergency equipment: eyewash stations, spill kits on site.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Emergency equipment: eyewash stations, spill kits on site.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ignition source prohibition within 20 m during handling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ignition source prohibition within 20 m during handling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Environmental controls: prevent soil and groundwater contamination; track waste and usage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Environmental controls: prevent soil and groundwater contamination; track waste and usage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Incident reporting: all spills (&gt;1 L chemicals / &gt;5 L diesel), leaks, or injuries reported within 1 hour via Flash Notification (FRM-HSE-005).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Incident reporting: all spills (&gt;1 L chemicals / &gt;5 L diesel), leaks, or injuries reported within 1 hour via Flash Notification (FRM-HSE-005).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Emergency Response</p>
+            <SectionHeading id="s13">13. Emergency Response</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Spill / leak: stop source, contain with absorbents and booms, notify HSE and Logistics immediately.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Spill / leak: stop source, contain with absorbents and booms, notify HSE and Logistics immediately.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fire: activate alarm, use extinguishers, evacuate, call Saudi Civil Defense 998.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fire: activate alarm, use extinguishers, evacuate, call Saudi Civil Defense 998.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Exposure / injury: decontaminate, first aid, transfer to medical facility; call Saudi Red Crescent 997 as required.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Exposure / injury: decontaminate, first aid, transfer to medical facility; call Saudi Red Crescent 997 as required.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Major event: activate PLN-HSE-001 Major Emergency Preparedness Plan.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Major event: activate PLN-HSE-001 Major Emergency Preparedness Plan.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Training</p>
+            <SectionHeading id="s14">14. Training</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Initial induction plus annual refresher for all relevant personnel covering: this procedure, hazard recognition, PPE, spill response, waste handling, SDS interpretation, regulatory compliance (manifests).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Initial induction plus annual refresher for all relevant personnel covering: this procedure, hazard recognition, PPE, spill response, waste handling, SDS interpretation, regulatory compliance (manifests).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Records held in the Training and Competence Matrix (REG-TRN-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Records held in the Training and Competence Matrix (REG-TRN-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>15. Performance Indicators</p>
+            <SectionHeading id="s15">15. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -400,23 +533,37 @@ export default function TE_IMS_PROC_SCM_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>16. References</p>
+            <SectionHeading id="s16">16. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 8.4 Externally Provided Processes, Products and Services.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 8.4 Externally Provided Processes, Products and Services.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clauses 6.1.2, 8.1, 8.2 Environmental Aspects and Operational Control.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clauses 6.1.2, 8.1, 8.2 Environmental Aspects and Operational Control.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 8.1.2 Eliminating Hazards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 8.1.2 Eliminating Hazards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — Hazardous Waste and Spill Management Regulations (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — Hazardous Waste and Spill Management Regulations (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MEWA — Environmental Regulations (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MEWA — Environmental Regulations (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety Requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety Requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC SOP-MAINT-002 Refueling and Fuel Handling; PROC-ENV-001 Waste Management; PROC-MAINT-001 Maintenance Management; PROC-HSE-004 Site Emergency Preparedness; PROC-SYS-008 Corrective Action; PLN-HSE-001 Major Emergency Preparedness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC SOP-MAINT-002 Refueling and Fuel Handling; PROC-ENV-001 Waste Management; PROC-MAINT-001 Maintenance Management; PROC-HSE-004 Site Emergency Preparedness; PROC-SYS-008 Corrective Action; PLN-HSE-001 Major Emergency Preparedness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>17. Related Documents and Records</p>
+            <SectionHeading id="s17">17. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

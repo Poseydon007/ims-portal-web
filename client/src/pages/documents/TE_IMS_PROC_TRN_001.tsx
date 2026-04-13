@@ -8,6 +8,18 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Job Profiling and Competency Requirements" },
+  { id: "s6", label: "6. Induction and Onboarding" },
+  { id: "s7", label: "7. Training Needs Analysis (TNA)" },
+  { id: "s8", label: "8. Approval and Execution of Training" },
+  { id: "s9", label: "9. Trainee Evaluation, Certification, and Competence Verification" },
+  { id: "s10", label: "10. Resources and Infrastructure (ISO 7.1)" },
+  { id: "s11", label: "11. Monitoring and Continual Improvement" },
+  { id: "s12", label: "12. Performance Indicators" },
+  { id: "s13", label: "13. References" },
+  { id: "s14", label: "14. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,43 +165,69 @@ export default function TE_IMS_PROC_TRN_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes a systematic process at True East Mining Company (TEMC) for defining job requirement profiles, setting competency levels, identifying training needs, delivering and verifying training, and providing the infrastructure and resources needed for operational excellence and safety. It supports ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 (Clauses 7.1 Resources, 7.2 Competence, 7.3 Awareness) and contributes to TEMC's Saudization objectives under MHRSD requirements.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC employees and long-term contractors across drilling, maintenance, HSE, logistics, procurement, HR, finance, and administration functions. It covers:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Job profiling and competency requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Job profiling and competency requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Induction and onboarding.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Induction and onboarding.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Identification of training needs (TNA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Identification of training needs (TNA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Planning, approval, and execution of training.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Planning, approval, and execution of training.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Trainee evaluation and certification.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Trainee evaluation and certification.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Resource and infrastructure provision.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Resource and infrastructure provision.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review, monitoring, and continual improvement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review, monitoring, and continual improvement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Training Needs Analysis (TNA) — a systematic process to identify gaps between current and required competencies for each role.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Training Needs Analysis (TNA) — a systematic process to identify gaps between current and required competencies for each role.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Competence — the demonstrated ability to apply knowledge and skills to achieve intended results safely and effectively.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Competence — the demonstrated ability to apply knowledge and skills to achieve intended results safely and effectively.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• OJT (On-the-Job Training) — practical hands-on training conducted in the actual work environment under a competent person.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>OJT (On-the-Job Training) — practical hands-on training conducted in the actual work environment under a competent person.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Job Requirement Profile (JRP) — a controlled document defining job title, reporting line, responsibilities, minimum qualifications, experience, and required competencies.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Job Requirement Profile (JRP) — a controlled document defining job title, reporting line, responsibilities, minimum qualifications, experience, and required competencies.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudization — KSA Nitaqat / MHRSD programme requiring nationalisation of the workforce.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudization — KSA Nitaqat / MHRSD programme requiring nationalisation of the workforce.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Certification — formal evidence that a trainee has completed training and been verified competent.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Certification — formal evidence that a trainee has completed training and been verified competent.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -228,87 +266,151 @@ export default function TE_IMS_PROC_TRN_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Job Profiling and Competency Requirements</p>
+            <SectionHeading id="s5">5. Job Profiling and Competency Requirements</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Process Owners document a formal Job Requirement Profile (FRM-HR-001) for every position.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Process Owners document a formal Job Requirement Profile (FRM-HR-001) for every position.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Each JRP includes: job title, reporting line, primary responsibilities, minimum qualifications, minimum experience, required certifications (technical and HSE), language requirements, and required competency levels.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Each JRP includes: job title, reporting line, primary responsibilities, minimum qualifications, minimum experience, required certifications (technical and HSE), language requirements, and required competency levels.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The HR Manager consolidates JRPs; the MD reviews and approves them annually.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The HR Manager consolidates JRPs; the MD reviews and approves them annually.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HR matches all new hires to the approved JRP for the position; CVs and certificates are retained in the employee file.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HR matches all new hires to the approved JRP for the position; CVs and certificates are retained in the employee file.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Induction and Onboarding</p>
+            <SectionHeading id="s6">6. Induction and Onboarding</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Every new employee attends the TEMC Induction and Orientation Programme on or before the first day of work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Every new employee attends the TEMC Induction and Orientation Programme on or before the first day of work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The induction covers: company overview, IMS policy and objectives, HSE rules, emergency procedures, site rules, code of conduct, HR policies, and role-specific orientation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The induction covers: company overview, IMS policy and objectives, HSE rules, emergency procedures, site rules, code of conduct, HR policies, and role-specific orientation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Site-based personnel additionally receive site induction (rig, camp, or yard specific) by the Site HSE Officer before starting work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Site-based personnel additionally receive site induction (rig, camp, or yard specific) by the Site HSE Officer before starting work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• On completion of induction, the Process Owner evaluates the new employee on the Trainee Evaluation Report (FRM-HR-003) and sends a copy to HR for the employee file.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>On completion of induction, the Process Owner evaluates the new employee on the Trainee Evaluation Report (FRM-HR-003) and sends a copy to HR for the employee file.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Training Needs Analysis (TNA)</p>
+            <SectionHeading id="s7">7. Training Needs Analysis (TNA)</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The HR Manager, with Department Heads, conducts TNA annually and when triggered by new equipment, new methods, changed roles, incidents, or audit findings. Training is classified as:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Strategic Training — leadership, project management, commercial, and ISO awareness — supports company-level capability.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Strategic Training — leadership, project management, commercial, and ISO awareness — supports company-level capability.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Functional Training — role-specific technical training (drilling, geology, mud engineering, maintenance, HSE, logistics) — supports operational performance.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Functional Training — role-specific technical training (drilling, geology, mud engineering, maintenance, HSE, logistics) — supports operational performance.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Vocational Training — skills training that supports technology change or career progression — supports Saudization objectives.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Vocational Training — skills training that supports technology change or career progression — supports Saudization objectives.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• On-the-Job Training (OJT) — supervised hands-on training on new machinery, methods, or procedures — supports safe execution.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>On-the-Job Training (OJT) — supervised hands-on training on new machinery, methods, or procedures — supports safe execution.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mandatory Compliance Training — HSE and regulatory: LOTO, working at height, confined space, first aid, fire warden, hazardous materials, emergency response, defensive driving — tracked with expiry dates.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mandatory Compliance Training — HSE and regulatory: LOTO, working at height, confined space, first aid, fire warden, hazardous materials, emergency response, defensive driving — tracked with expiry dates.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Approval and Execution of Training</p>
+            <SectionHeading id="s8">8. Approval and Execution of Training</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 8.1 Request — HR or a Department Head raises a Training Request (FRM-HR-002) defining the training, target audience, objective, provider, cost, and date.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>8.1 Request — HR or a Department Head raises a Training Request (FRM-HR-002) defining the training, target audience, objective, provider, cost, and date.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 8.2 Planning — HR consolidates requests into the Annual Training Plan, balancing schedule, budget, operational release, and Saudization priorities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>8.2 Planning — HR consolidates requests into the Annual Training Plan, balancing schedule, budget, operational release, and Saudization priorities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 8.3 Approval — the MD approves the Annual Training Plan. Unplanned training during the year requires MD approval on the Training Request.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>8.3 Approval — the MD approves the Annual Training Plan. Unplanned training during the year requires MD approval on the Training Request.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 8.4 Execution — HR books the provider, notifies the department, posts the schedule on the department noticeboard, provides training materials, tracks attendance in the Training Attendance Register (FRM-TRN-001), and files all records.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>8.4 Execution — HR books the provider, notifies the department, posts the schedule on the department noticeboard, provides training materials, tracks attendance in the Training Attendance Register (FRM-TRN-001), and files all records.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 8.5 OJT — is executed by a nominated competent mentor, documented on the OJT record, and signed off when the trainee has demonstrated the required competency.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>8.5 OJT — is executed by a nominated competent mentor, documented on the OJT record, and signed off when the trainee has demonstrated the required competency.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Trainee Evaluation, Certification, and Competence Verification</p>
+            <SectionHeading id="s9">9. Trainee Evaluation, Certification, and Competence Verification</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At the end of each training event, the trainee is assessed by the trainer (written test, practical, or both).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At the end of each training event, the trainee is assessed by the trainer (written test, practical, or both).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Passing trainees receive a Training Certificate; failing trainees are re-trained and re-assessed.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Passing trainees receive a Training Certificate; failing trainees are re-trained and re-assessed.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The Process Owner verifies on-the-job application of the new skills over a defined period and records the verification in the Training and Competence Matrix (REG-TRN-001).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The Process Owner verifies on-the-job application of the new skills over a defined period and records the verification in the Training and Competence Matrix (REG-TRN-001).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HSE-critical certifications (first aid, LOTO, working at height, confined space, defensive driving) are tracked with expiry dates; refresher training is booked before expiry.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HSE-critical certifications (first aid, LOTO, working at height, confined space, defensive driving) are tracked with expiry dates; refresher training is booked before expiry.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Training records are retained for the duration of employment plus five (5) years.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Training records are retained for the duration of employment plus five (5) years.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Resources and Infrastructure (ISO 7.1)</p>
+            <SectionHeading id="s10">10. Resources and Infrastructure (ISO 7.1)</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At the start of each year, Process Owners identify and justify the resources needed to achieve quality, HSE, and operational objectives.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At the start of each year, Process Owners identify and justify the resources needed to achieve quality, HSE, and operational objectives.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Requirements include: manpower, equipment and tools, IT infrastructure (computers, software, communications), workspace, PPE, training facilities, and welfare.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Requirements include: manpower, equipment and tools, IT infrastructure (computers, software, communications), workspace, PPE, training facilities, and welfare.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Process Owners submit a Resource Matrix (FRM-HR-004) to the MD; the MD allocates resources through the annual budget and CAPEX plan.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Process Owners submit a Resource Matrix (FRM-HR-004) to the MD; the MD allocates resources through the annual budget and CAPEX plan.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mid-year requests are raised through the Procurement and CAPEX approval route under PROC-SCM-001.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mid-year requests are raised through the Procurement and CAPEX approval route under PROC-SCM-001.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Monitoring and Continual Improvement</p>
+            <SectionHeading id="s11">11. Monitoring and Continual Improvement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The HR Manager tracks KPIs (section 12) monthly and reports at the Management Review.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The HR Manager tracks KPIs (section 12) monthly and reports at the Management Review.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Post-training effectiveness is measured through: trainer evaluation, trainee feedback, Process Owner verification on the job, and incident/audit data.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Post-training effectiveness is measured through: trainer evaluation, trainee feedback, Process Owner verification on the job, and incident/audit data.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The annual training plan is reviewed and updated based on effectiveness data and any changes in strategy, risk, or regulation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The annual training plan is reviewed and updated based on effectiveness data and any changes in strategy, risk, or regulation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ineffective training is flagged as a non-conformity and processed under PROC-SYS-008 Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ineffective training is flagged as a non-conformity and processed under PROC-SYS-008 Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudization progress is reported quarterly to the MD and aligned to MHRSD Nitaqat requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudization progress is reported quarterly to the MD and aligned to MHRSD Nitaqat requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Performance Indicators</p>
+            <SectionHeading id="s12">12. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -361,19 +463,29 @@ export default function TE_IMS_PROC_TRN_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. References</p>
+            <SectionHeading id="s13">13. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clauses 7.1 Resources, 7.2 Competence, 7.3 Awareness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clauses 7.1 Resources, 7.2 Competence, 7.3 Awareness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clauses 7.1, 7.2, 7.3.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clauses 7.1, 7.2, 7.3.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 7.1, 7.2, 7.3.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 7.1, 7.2, 7.3.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• KSA MHRSD — Saudi Labour Law and Nitaqat Saudization Programme.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>KSA MHRSD — Saudi Labour Law and Nitaqat Saudization Programme.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC IMS Manual; PROC-SYS-003 Management Review; PROC-SYS-008 Corrective Action; PROC-SCM-001 Site Supply.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC IMS Manual; PROC-SYS-003 Management Review; PROC-SYS-008 Corrective Action; PROC-SCM-001 Site Supply.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Related Documents and Records</p>
+            <SectionHeading id="s14">14. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

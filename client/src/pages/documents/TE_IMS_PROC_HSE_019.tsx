@@ -8,6 +8,18 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Critical HSE Appointments Covered" },
+  { id: "s6", label: "6. Planning and Coverage Requirements" },
+  { id: "s7", label: "7. Appointment Process" },
+  { id: "s8", label: "8. Equipment and Authority" },
+  { id: "s9", label: "9. Training, Refresher, and Expiry Management" },
+  { id: "s10", label: "10. Record Keeping" },
+  { id: "s11", label: "11. Termination or Withdrawal of Appointment" },
+  { id: "s12", label: "12. Performance Indicators" },
+  { id: "s13", label: "13. References" },
+  { id: "s14", label: "14. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,27 +165,37 @@ export default function TE_IMS_PROC_HSE_019() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure defines how True East Mining Company (TEMC) selects, trains, appoints, records, and maintains competent personnel in critical Health, Safety, and Environment (HSE) roles across all sites. The objective is to ensure every site has documented, competent, and legally defensible appointments to manage high-risk activities — firefighting, first aid, lockout/tagout, confined space, hot work, and incident command — in compliance with ISO 45001:2018, MHRSD requirements, Saudi Civil Defense code, and internal TEMC standards.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC owned and contracted sites in the Kingdom of Saudi Arabia. It covers employees, supervisors, and contractors nominated for any critical HSE role. It does not cover routine job appointments unrelated to HSE duties (those are managed by HR through the Job Description process).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safety Appointment — a formal, written assignment of a specific HSE responsibility to a named, competent person.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safety Appointment — a formal, written assignment of a specific HSE responsibility to a named, competent person.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Appointment Letter — the signed document (FRM-HSE-035/036/037 or equivalent) that creates the legal record of the appointment.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Appointment Letter — the signed document (FRM-HSE-035/036/037 or equivalent) that creates the legal record of the appointment.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Competent Person — an individual who has the required training, experience, medical fitness, and authorisation to perform a defined HSE task safely.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Competent Person — an individual who has the required training, experience, medical fitness, and authorisation to perform a defined HSE task safely.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Critical HSE Role — a role where failure to act correctly can result in serious harm, environmental damage, or legal non-compliance.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Critical HSE Role — a role where failure to act correctly can result in serious harm, environmental damage, or legal non-compliance.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Certification Authority — a recognised training provider or competent body authorised to issue the certification (Saudi Civil Defense, Saudi Red Crescent, internationally accredited training providers).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Certification Authority — a recognised training provider or competent body authorised to issue the certification (Saudi Civil Defense, Saudi Red Crescent, internationally accredited training providers).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -216,7 +238,7 @@ export default function TE_IMS_PROC_HSE_019() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Critical HSE Appointments Covered</p>
+            <SectionHeading id="s5">5. Critical HSE Appointments Covered</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -277,45 +299,77 @@ export default function TE_IMS_PROC_HSE_019() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Planning and Coverage Requirements</p>
+            <SectionHeading id="s6">6. Planning and Coverage Requirements</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Coverage shall be sized to site risk and workforce. As a minimum, every active TEMC site must have: 1 Incident Commander, 2 First Aiders, 2 Fire Wardens, and 1 LOTO Officer per shift.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Coverage shall be sized to site risk and workforce. As a minimum, every active TEMC site must have: 1 Incident Commander, 2 First Aiders, 2 Fire Wardens, and 1 LOTO Officer per shift.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• For sites with confined space entries: at least 1 competent Confined Space Supervisor and 1 Authorised Gas Tester per shift.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>For sites with confined space entries: at least 1 competent Confined Space Supervisor and 1 Authorised Gas Tester per shift.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• For sites with hot work: at least 1 Permit Issuer per shift and fire watch coverage during and after hot work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>For sites with hot work: at least 1 Permit Issuer per shift and fire watch coverage during and after hot work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Redundancy: at least 20% spare capacity for leave, sickness, and rotation, rounded up.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Redundancy: at least 20% spare capacity for leave, sickness, and rotation, rounded up.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Site-specific appointment matrix is prepared at mobilisation and updated whenever personnel change.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Site-specific appointment matrix is prepared at mobilisation and updated whenever personnel change.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Appointment Process</p>
+            <SectionHeading id="s7">7. Appointment Process</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 1 — Nomination — site supervisor nominates candidate to HSE Manager with justification and training background.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 1 — Nomination — site supervisor nominates candidate to HSE Manager with justification and training background.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 2 — Pre-qualification check — HSE Manager verifies age, experience, medical fitness, and relevant certification.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 2 — Pre-qualification check — HSE Manager verifies age, experience, medical fitness, and relevant certification.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 3 — Training — if training is required, it is delivered and passed before appointment.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 3 — Training — if training is required, it is delivered and passed before appointment.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 4 — Practical assessment — role-specific practical test where applicable (LOTO application, fire extinguisher use, first aid scenario).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 4 — Practical assessment — role-specific practical test where applicable (LOTO application, fire extinguisher use, first aid scenario).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 5 — Appointment letter — drafted using the correct form (FRM-HSE-035/036/037 or site letter). Signed by HSE Manager, countersigned by SSE, approved by MD.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 5 — Appointment letter — drafted using the correct form (FRM-HSE-035/036/037 or site letter). Signed by HSE Manager, countersigned by SSE, approved by MD.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 6 — Acknowledgement — appointed person signs acceptance, confirming understanding of duties, authority, and accountability.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 6 — Acknowledgement — appointed person signs acceptance, confirming understanding of duties, authority, and accountability.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 7 — Publication — appointment announced on site, ID badge or armband issued where applicable, appointment posted on HSE board and muster station display.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 7 — Publication — appointment announced on site, ID badge or armband issued where applicable, appointment posted on HSE board and muster station display.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Step 8 — Register update — Site Appointments Register updated by HSE Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Step 8 — Register update — Site Appointments Register updated by HSE Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Equipment and Authority</p>
+            <SectionHeading id="s8">8. Equipment and Authority</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Appointed persons must have access to the correct equipment — PPE, fire extinguishers, first aid kits and AED, LOTO locks and tags, gas detectors, permit books, radios.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Appointed persons must have access to the correct equipment — PPE, fire extinguishers, first aid kits and AED, LOTO locks and tags, gas detectors, permit books, radios.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• They have Stop Work Authority within the scope of their role — written in the appointment letter — and shall never be disciplined for exercising it in good faith.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>They have Stop Work Authority within the scope of their role — written in the appointment letter — and shall never be disciplined for exercising it in good faith.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• They are protected from reprisal for reporting hazards or stopping unsafe work (ISO 45001 Clause 5.4).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>They are protected from reprisal for reporting hazards or stopping unsafe work (ISO 45001 Clause 5.4).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Training, Refresher, and Expiry Management</p>
+            <SectionHeading id="s9">9. Training, Refresher, and Expiry Management</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -366,29 +420,47 @@ export default function TE_IMS_PROC_HSE_019() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HSE Manager runs an expiry report every month and issues refresher training before the certificate expires.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HSE Manager runs an expiry report every month and issues refresher training before the certificate expires.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Appointment is suspended automatically on the day of expiry if not renewed. The person may not perform the role until re-certified.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Appointment is suspended automatically on the day of expiry if not renewed. The person may not perform the role until re-certified.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Record Keeping</p>
+            <SectionHeading id="s10">10. Record Keeping</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Original signed appointment letters filed with HR and copy in the HSE Manager's file.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Original signed appointment letters filed with HR and copy in the HSE Manager's file.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Site Appointments Register kept live on site and in the IMS master.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Site Appointments Register kept live on site and in the IMS master.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Training certificates scanned and saved against the person's personnel record.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Training certificates scanned and saved against the person's personnel record.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Retention: life of employment + 3 years (minimum).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Retention: life of employment + 3 years (minimum).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Termination or Withdrawal of Appointment</p>
+            <SectionHeading id="s11">11. Termination or Withdrawal of Appointment</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The MD or HSE Manager may withdraw an appointment at any time for cause — loss of competence, medical change, misconduct, unsafe behaviour.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The MD or HSE Manager may withdraw an appointment at any time for cause — loss of competence, medical change, misconduct, unsafe behaviour.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Withdrawal is documented with reason and date. Replacement appointment is initiated immediately if role is critical.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Withdrawal is documented with reason and date. Replacement appointment is initiated immediately if role is critical.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Appointment automatically lapses on change of role or site transfer unless re-issued.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Appointment automatically lapses on change of role or site transfer unless re-issued.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Performance Indicators</p>
+            <SectionHeading id="s12">12. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -431,23 +503,37 @@ export default function TE_IMS_PROC_HSE_019() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. References</p>
+            <SectionHeading id="s13">13. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Occupational Health and Safety Management — Clauses 5.4, 7.2, 7.3, 8.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Occupational Health and Safety Management — Clauses 5.4, 7.2, 7.3, 8.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Regulation (Kingdom of Saudi Arabia).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Regulation (Kingdom of Saudi Arabia).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Civil Defense — Fire Safety and Rescue Training Requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Civil Defense — Fire Safety and Rescue Training Requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Red Crescent Authority — First Aid Certification Standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Red Crescent Authority — First Aid Certification Standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-HSE-004 Site Emergency Preparedness Procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-HSE-004 Site Emergency Preparedness Procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-TRN-001 Staff Training Procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-TRN-001 Staff Training Procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC SOP-HSE-002 Confined Space Entry; SOP-HSE-003 LOTO; SOP-HSE-004 Hot Work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC SOP-HSE-002 Confined Space Entry; SOP-HSE-003 LOTO; SOP-HSE-004 Hot Work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Related Documents and Records</p>
+            <SectionHeading id="s14">14. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

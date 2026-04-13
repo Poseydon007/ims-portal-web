@@ -8,6 +8,15 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Risk Assessment Procedure" },
+  { id: "s6", label: "6. Hazard Register and Reporting" },
+  { id: "s7", label: "7. Performance Indicators" },
+  { id: "s8", label: "8. References" },
+  { id: "s9", label: "9. Records Retention" },
+  { id: "s10", label: "10. Appendix A — Activities Requiring a Risk Assessment" },
+  { id: "s11", label: "11. Appendix B — Hazard Identification Prompt Checklist" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,39 +162,59 @@ export default function TE_IMS_PROC_HSE_003() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes and maintains a systematic process to proactively identify hazards across all True East Mining Company (TEMC) activities, assess the associated occupational health, safety, and environmental risks, and implement controls to reduce those risks to a tolerable or acceptable level.</p>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>It satisfies the requirements of ISO 45001:2018 Clauses 6.1.2 (Hazard Identification and Assessment of OH&amp;S Risks) and 8.1.2 (Eliminating Hazards and Reducing OH&amp;S Risks), ISO 14001:2015 Clause 6.1.2 (Environmental Aspects), and ISO 9001:2015 Clause 6.1 (Actions to Address Risks and Opportunities). It also supports TEMC's compliance with the KSA Ministry of Human Resources and Social Development (MHRSD) occupational safety regulations, the Saudi Labour Law (Royal Decree M/51), Ma'aden contractor HSE standards, and applicable National Center for Environmental Compliance (NCEC) requirements.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC activities, personnel, contractors, visitors, and third parties working on TEMC-controlled sites or on TEMC's behalf at client-controlled sites. It covers:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drilling operations — RC, DTH, diamond core, and water well drilling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drilling operations — RC, DTH, diamond core, and water well drilling.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Exploration camps, core yards, workshops, logistics yards, fuel storage, and offices.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Exploration camps, core yards, workshops, logistics yards, fuel storage, and offices.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mobilisation and demobilisation activities, site preparation, and road works.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mobilisation and demobilisation activities, site preparation, and road works.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Routine and non-routine maintenance, including hot work and confined space.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Routine and non-routine maintenance, including hot work and confined space.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Client-controlled areas where TEMC personnel are deployed (e.g. Ma'aden sites).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Client-controlled areas where TEMC personnel are deployed (e.g. Ma'aden sites).</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Risk assessments are carried out:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At the planning stage of any new project, programme, campaign, or mobilisation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At the planning stage of any new project, programme, campaign, or mobilisation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Before commencement of any non-routine activity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Before commencement of any non-routine activity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Whenever there is a significant change in scope, equipment, material, method, site, personnel, or regulation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Whenever there is a significant change in scope, equipment, material, method, site, personnel, or regulation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Following any incident, near miss, or significant finding from an inspection or audit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Following any incident, near miss, or significant finding from an inspection or audit.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At planned review intervals (minimum annually for active risk assessments).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At planned review intervals (minimum annually for active risk assessments).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -276,7 +305,7 @@ export default function TE_IMS_PROC_HSE_003() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -323,29 +352,41 @@ export default function TE_IMS_PROC_HSE_003() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Risk Assessment Procedure</p>
+            <SectionHeading id="s5">5. Risk Assessment Procedure</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>A workplace risk assessment is conducted whenever there is a significant change in the work programme, an obvious work hazard that needs to be managed, a new activity being planned, or a trigger as defined in Section 2. The assessment is conducted by a multi-disciplinary RA Team and recorded on FRM-HSE-001 Risk Assessment Form. The results are approved by the Operations Manager and HSE Manager before the activity proceeds. High and Critical rated residual risks require additional approvals as set out in Section 5.4.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.1  Step 1 — Identify the Hazards and Existing Controls</p>
+            <SubHeading>5.1 Step 1 — Identify the Hazards and Existing Controls</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Hazards are identified through a systematic approach combining the following sources:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Workplace inspections (&quot;Walk the Job&quot;) covering every step of the activity from start to finish.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Workplace inspections (&quot;Walk the Job&quot;) covering every step of the activity from start to finish.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review of the task schedule, method statement, equipment list, and material safety data sheets.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review of the task schedule, method statement, equipment list, and material safety data sheets.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review of incident reports, near-miss logs, audit findings, and previous risk assessments for similar activities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review of incident reports, near-miss logs, audit findings, and previous risk assessments for similar activities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Review of applicable KSA regulations, ISO standards, and client HSE requirements (e.g. Ma'aden Code of Practice).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Review of applicable KSA regulations, ISO standards, and client HSE requirements (e.g. Ma'aden Code of Practice).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Consultation with the workers who perform the task — they know where it actually goes wrong.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Consultation with the workers who perform the task — they know where it actually goes wrong.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The Hazard Identification Prompt Checklist (Appendix B, issued separately as FRM-HSE-010).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The Hazard Identification Prompt Checklist (Appendix B, issued separately as FRM-HSE-010).</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Consideration is given to reasonably foreseeable changes in circumstances, abnormal conditions, emergencies, and degraded modes of operation. Both routine and non-routine activities are assessed.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.2  Step 2 — Assess the Severity of Consequences</p>
+            <SubHeading>5.2 Step 2 — Assess the Severity of Consequences</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Severity is the worst credible outcome of the hazardous event, considering harm to personnel (employee, contractor, public), damage to property and assets, damage to the environment, and business impact. Severity is scored from 1 to 5 using the following scale:</p>
 
@@ -382,7 +423,7 @@ export default function TE_IMS_PROC_HSE_003() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.3  Step 3 — Assess the Likelihood of Occurrence</p>
+            <SubHeading>5.3 Step 3 — Assess the Likelihood of Occurrence</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Likelihood is the probability that the hazardous event will occur and cause harm, taking into account frequency of exposure, effectiveness of existing controls, number of people exposed, and environmental conditions. Likelihood is scored from 1 to 5 using the following scale:</p>
 
@@ -421,7 +462,7 @@ export default function TE_IMS_PROC_HSE_003() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Note: Assessors must not rely on &quot;common sense&quot; alone — if a task can be done unsafely, sooner or later it will be. Likelihood is assessed with honest regard to actual field conditions, not idealised ones.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.4  Step 4 — Calculate the Risk Rating</p>
+            <SubHeading>5.4 Step 4 — Calculate the Risk Rating</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The risk rating is the product of severity and likelihood:</p>
 
@@ -524,15 +565,23 @@ export default function TE_IMS_PROC_HSE_003() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Approval thresholds:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LOW (1–4): approved by the Line Supervisor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LOW (1–4): approved by the Line Supervisor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MEDIUM (5–9): approved by the HSE Officer and Operations Supervisor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MEDIUM (5–9): approved by the HSE Officer and Operations Supervisor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HIGH (10–16): approved by the HSE Manager and Operations Manager. Work does not start until the residual risk is reduced to Medium or Low.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HIGH (10–16): approved by the HSE Manager and Operations Manager. Work does not start until the residual risk is reduced to Medium or Low.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• CRITICAL (17–25): requires written authorisation of the Managing Director. Activity must not proceed until the residual risk is reduced out of the Critical band.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>CRITICAL (17–25): requires written authorisation of the Managing Director. Activity must not proceed until the residual risk is reduced out of the Critical band.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.5  Step 5 — Select Additional Controls Using the Hierarchy of Controls</p>
+            <SubHeading>5.5 Step 5 — Select Additional Controls Using the Hierarchy of Controls</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>If the inherent risk rating requires additional controls, they are selected using the Hierarchy of Controls. The most effective methods must be considered first. Lower-level controls (Administrative, PPE) are only relied on when higher-level controls are not reasonably practicable, and should be combined wherever possible.</p>
 
@@ -583,51 +632,79 @@ export default function TE_IMS_PROC_HSE_003() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Important: Ensure that any new control measure does not introduce another hazard. Controls must be verifiable, implementable, and clearly assigned to an owner with a target date.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.6  Step 6 — Determine Residual Risk and Action Plan</p>
+            <SubHeading>5.6 Step 6 — Determine Residual Risk and Action Plan</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The selected additional controls are recorded on FRM-HSE-001 and the residual risk rating is calculated using the same matrix as Step 4. The residual risk must be reduced to LOW or, at worst, MEDIUM with contingency in place before the activity proceeds. Each additional control measure is assigned an owner, target closure date, and verification method.</p>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The principle of ALARP applies: risks must be reduced as low as reasonably practicable. Further reduction is pursued unless the cost, time, and effort required are grossly disproportionate to the benefit gained.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.7  Step 7 — Implementation, Monitoring, and Review</p>
+            <SubHeading>5.7 Step 7 — Implementation, Monitoring, and Review</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Controls are implemented through one or more of the following mechanisms, as appropriate:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• New or revised procedures, codes of practice, or safe systems of work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>New or revised procedures, codes of practice, or safe systems of work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Changes to the workplace layout, equipment, or guarding.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Changes to the workplace layout, equipment, or guarding.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• New equipment selection or modification.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>New equipment selection or modification.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Targeted training, toolbox talks, or competency assessment.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Targeted training, toolbox talks, or competency assessment.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Increased supervision, permits, or monitoring.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Increased supervision, permits, or monitoring.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Every risk assessment is reviewed:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• At least annually for all active risk assessments.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>At least annually for all active risk assessments.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• After any incident or near-miss related to the activity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>After any incident or near-miss related to the activity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• After a significant process, equipment, personnel, site, or regulatory change.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>After a significant process, equipment, personnel, site, or regulatory change.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• When the closure date of a control measure is reached, to verify effectiveness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>When the closure date of a control measure is reached, to verify effectiveness.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The outcome of each review is recorded on FRM-HSE-001 and reflected in the HIRA Register (REG-HSE-007). Closed items are retained in the register as the historical record.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Hazard Register and Reporting</p>
+            <SectionHeading id="s6">6. Hazard Register and Reporting</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All identified hazards, their assessments, controls, and status are captured in REG-HSE-007 HIRA Register, maintained by the HSE Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All identified hazards, their assessments, controls, and status are captured in REG-HSE-007 HIRA Register, maintained by the HSE Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Management-system level risks and opportunities (quality, commercial, HR, IT, procurement, etc.) are captured in REG-SYS-007 Risk and Opportunity Register — this procedure covers only occupational and environmental hazards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Management-system level risks and opportunities (quality, commercial, HR, IT, procurement, etc.) are captured in REG-SYS-007 Risk and Opportunity Register — this procedure covers only occupational and environmental hazards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• HIGH and CRITICAL residual risks are reported monthly to the Managing Director and at Management Review (PROC-SYS-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>HIGH and CRITICAL residual risks are reported monthly to the Managing Director and at Management Review (PROC-SYS-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Medium / High / Critical controls not closed within their target date are treated as non-conformances under PROC-SYS-008 Corrective Action, logged in REG-SYS-004 CAR Log.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Medium / High / Critical controls not closed within their target date are treated as non-conformances under PROC-SYS-008 Corrective Action, logged in REG-SYS-004 CAR Log.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All near-misses are reviewed against the relevant risk assessment to confirm whether existing controls remain adequate.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All near-misses are reviewed against the relevant risk assessment to confirm whether existing controls remain adequate.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Performance Indicators</p>
+            <SectionHeading id="s7">7. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS MELO REVIEW — targets indicative, to be confirmed by CEO]</p>
 
@@ -680,51 +757,89 @@ export default function TE_IMS_PROC_HSE_003() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. References</p>
+            <SectionHeading id="s8">8. References</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>External standards and regulations:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 6.1.2 Hazard Identification and Assessment of OH&amp;S Risks, Clause 8.1.2 Eliminating Hazards and Reducing OH&amp;S Risks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 6.1.2 Hazard Identification and Assessment of OH&amp;S Risks, Clause 8.1.2 Eliminating Hazards and Reducing OH&amp;S Risks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clause 6.1.2 Environmental Aspects.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clause 6.1.2 Environmental Aspects.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 9001:2015 — Clause 6.1 Actions to Address Risks and Opportunities.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 9001:2015 — Clause 6.1 Actions to Address Risks and Opportunities.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 31000:2018 — Risk Management Guidelines.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 31000:2018 — Risk Management Guidelines.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• KSA MHRSD — Occupational Safety and Health Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>KSA MHRSD — Occupational Safety and Health Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Labour Law — Royal Decree M/51, in particular Article 142 on occupational injuries and reporting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Labour Law — Royal Decree M/51, in particular Article 142 on occupational injuries and reporting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Ma'aden Contractor HSE Code of Practice and site-specific HSE requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Ma'aden Contractor HSE Code of Practice and site-specific HSE requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — National Center for Environmental Compliance reporting requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — National Center for Environmental Compliance reporting requirements.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Internal IMS document linkages:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-POL-HSE-001 HSE Policy.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-POL-HSE-001 HSE Policy.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-002 Management Review.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-002 Management Review.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-PROC-SYS-008 Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-PROC-SYS-008 Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-HSE-001 HSE Risk Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-HSE-001 HSE Risk Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-HSE-007 HIRA Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-HSE-007 HIRA Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-HSE-010 Environmental Aspect and Impact Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-HSE-010 Environmental Aspect and Impact Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-REG-SYS-007 Risk and Opportunity Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-REG-SYS-007 Risk and Opportunity Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-001 Risk Assessment Form.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-001 Risk Assessment Form.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-009 Take-5 / JSA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-009 Take-5 / JSA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-010 Hazard Identification Prompt Checklist.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-010 Hazard Identification Prompt Checklist.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TE-IMS-FRM-HSE-026 Incident Witness Statement Form.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TE-IMS-FRM-HSE-026 Incident Witness Statement Form.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Records Retention</p>
+            <SectionHeading id="s9">9. Records Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -770,57 +885,95 @@ export default function TE_IMS_PROC_HSE_003() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Appendix A — Activities Requiring a Risk Assessment</p>
+            <SectionHeading id="s10">10. Appendix A — Activities Requiring a Risk Assessment</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following activities must always be covered by a documented risk assessment (FRM-HSE-001). This list is non-exhaustive — any activity with credible potential for harm shall be assessed.</p>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Drilling and core operations:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• RC, DTH, diamond core, and water well drilling — rig-up, drilling, tripping, rig-down.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>RC, DTH, diamond core, and water well drilling — rig-up, drilling, tripping, rig-down.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rod handling, core tray handling, sample bagging and transport.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rod handling, core tray handling, sample bagging and transport.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Drill pad preparation, track building, and site restoration.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Drill pad preparation, track building, and site restoration.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mud mixing, sump construction, and handling of drilling additives.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mud mixing, sump construction, and handling of drilling additives.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Wireline operations and downhole tool handling.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Wireline operations and downhole tool handling.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Maintenance and workshop:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Planned and breakdown maintenance on rigs, support vehicles, compressors, and generators.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Planned and breakdown maintenance on rigs, support vehicles, compressors, and generators.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Welding, grinding, cutting, and other hot work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Welding, grinding, cutting, and other hot work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• LOTO, isolation of energy sources, and working on pressurised systems.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>LOTO, isolation of energy sources, and working on pressurised systems.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Tyre handling, jacking, and heavy lifting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Tyre handling, jacking, and heavy lifting.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Logistics and camp:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fuel storage, fuel transfer, and refuelling operations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fuel storage, fuel transfer, and refuelling operations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Loading and unloading of transport; long-haul movements; desert driving.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Loading and unloading of transport; long-haul movements; desert driving.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Camp set-up, kitchen operations, water storage, and waste management.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Camp set-up, kitchen operations, water storage, and waste management.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Remote desert work and lone working.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Remote desert work and lone working.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Night shift and fatigue-sensitive operations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Night shift and fatigue-sensitive operations.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Cross-cutting activities:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Working at height and confined space entry.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Working at height and confined space entry.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Handling hazardous substances, chemicals, and compressed gases.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Handling hazardous substances, chemicals, and compressed gases.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mobilisation and demobilisation — equipment movement, permits, interfaces.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mobilisation and demobilisation — equipment movement, permits, interfaces.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Change of scope, new equipment, new site, or new client standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Change of scope, new equipment, new site, or new client standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Emergency response drills and actual emergencies.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Emergency response drills and actual emergencies.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Appendix B — Hazard Identification Prompt Checklist</p>
+            <SectionHeading id="s11">11. Appendix B — Hazard Identification Prompt Checklist</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This checklist supports the &quot;Walk the Job&quot; inspection during Step 1 of the risk assessment. The objective is to identify everything which can cause harm to people, property, or the environment. Issued separately as FRM-HSE-010.</p>
 

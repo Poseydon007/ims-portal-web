@@ -8,6 +8,17 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions and Abbreviations" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Incident Reporting" },
+  { id: "s6", label: "6. Incident / Accident Investigation" },
+  { id: "s7", label: "7. Corrective and Preventive Actions (CAPA)" },
+  { id: "s8", label: "8. Safety Culture Monitoring" },
+  { id: "s9", label: "9. Training and Competency" },
+  { id: "s10", label: "10. Monitoring, Audit, and Continual Improvement" },
+  { id: "s11", label: "11. Performance Indicators" },
+  { id: "s12", label: "12. References" },
+  { id: "s13", label: "13. Records Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +164,15 @@ export default function TE_IMS_PROC_HSE_006() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>To establish a systematic process for reporting, investigating, analysing root causes, and implementing corrective and preventive actions (CAPA) for all incidents, accidents, near misses, and non-conformities at True East Mining Company (TEMC) sites. This procedure ensures staff awareness of safety procedures, reduces the probability of recurrence, and promotes continual improvement in strict alignment with ISO 45001:2018 (Clauses 10.2 Incident, Nonconformity and Corrective Action, 9.3 Management Review, 10.3 Continual Improvement) and KSA MHRSD occupational safety regulations.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all incidents and accidents — fatalities, lost time injuries (LTI), medical treatment cases, first aid cases, near misses, property damage, environmental releases, fires, explosions, gas leakages, and chemical spills. It covers all TEMC employees, contractors, visitors, subcontractors, and third parties working on behalf of the Company at drill rigs, exploration camps, workshops, core yards, offices, and client sites.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions and Abbreviations</p>
+            <SectionHeading id="s3">3. Definitions and Abbreviations</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -208,7 +219,7 @@ export default function TE_IMS_PROC_HSE_006() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -251,69 +262,117 @@ export default function TE_IMS_PROC_HSE_006() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Incident Reporting</p>
+            <SectionHeading id="s5">5. Incident Reporting</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.1 Immediate Notification — any incident or accident with the potential to escalate (fire, serious injury, gas leak, chemical release) is reported immediately via radio or phone to the Operations Manager, Site In-Charge, and Safety Officer.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.1 Immediate Notification — any incident or accident with the potential to escalate (fire, serious injury, gas leak, chemical release) is reported immediately via radio or phone to the Operations Manager, Site In-Charge, and Safety Officer.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.2 Flash Notification — for any deviation, non-conformity, or incident, the Safety Officer completes the Incident Flash Notification Form (FRM-HSE-002) immediately and distributes it to management.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.2 Flash Notification — for any deviation, non-conformity, or incident, the Safety Officer completes the Incident Flash Notification Form (FRM-HSE-002) immediately and distributes it to management.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.3 Executive Alert — the Safety Officer informs the Managing Director verbally / by telephone immediately for any Fatality, Lost Time Injury, or major environmental release.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.3 Executive Alert — the Safety Officer informs the Managing Director verbally / by telephone immediately for any Fatality, Lost Time Injury, or major environmental release.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.4 Regulatory Reporting — the HSE Manager notifies relevant KSA authorities (MHRSD and, where applicable, MOI / NCEC / Civil Defense) within 24 hours for all reportable incidents in accordance with Saudi Labor Law and environmental regulation. Client notification is made in parallel where contractually required.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.4 Regulatory Reporting — the HSE Manager notifies relevant KSA authorities (MHRSD and, where applicable, MOI / NCEC / Civil Defense) within 24 hours for all reportable incidents in accordance with Saudi Labor Law and environmental regulation. Client notification is made in parallel where contractually required.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 5.5 Dangerous Occurrence — events that could have caused serious harm but did not (e.g. rig collapse, uncontrolled release, crane load drop) are reported on the Dangerous Occurrence Report Form (FRM-HSE-024).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>5.5 Dangerous Occurrence — events that could have caused serious harm but did not (e.g. rig collapse, uncontrolled release, crane load drop) are reported on the Dangerous Occurrence Report Form (FRM-HSE-024).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Incident / Accident Investigation</p>
+            <SectionHeading id="s6">6. Incident / Accident Investigation</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.1 Scene Preservation — the Operations Manager and Safety Officer secure and preserve the incident scene until initial evidence is gathered. Work is suspended in the affected area.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.1 Scene Preservation — the Operations Manager and Safety Officer secure and preserve the incident scene until initial evidence is gathered. Work is suspended in the affected area.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.2 Fact Gathering — the Safety Officer and Operations Manager interview involved workers, eyewitnesses, and supervisors as soon as possible while memories are fresh. Photographs, sketches, equipment logs, and permits are collected.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.2 Fact Gathering — the Safety Officer and Operations Manager interview involved workers, eyewitnesses, and supervisors as soon as possible while memories are fresh. Photographs, sketches, equipment logs, and permits are collected.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.3 Root Cause Analysis — the Safety Officer leads a formal investigation to determine the root cause using established methodologies — 5 Whys, Fishbone (Ishikawa) diagram, or Bow-Tie analysis, selected by the complexity of the event.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.3 Root Cause Analysis — the Safety Officer leads a formal investigation to determine the root cause using established methodologies — 5 Whys, Fishbone (Ishikawa) diagram, or Bow-Tie analysis, selected by the complexity of the event.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.4 Classification — the incident is classified by severity (Minor / Serious / Major / Catastrophic) and type (injury, environmental, property, process, security). Classification drives the investigation depth and reporting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.4 Classification — the incident is classified by severity (Minor / Serious / Major / Catastrophic) and type (injury, environmental, property, process, security). Classification drives the investigation depth and reporting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.5 Report Preparation — the Safety Officer prepares the formal Investigation Report (FRM-HSE-022) and submits it to the MD for discussion in the executive management meeting within 7 days (14 days for Major events requiring specialist input).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.5 Report Preparation — the Safety Officer prepares the formal Investigation Report (FRM-HSE-022) and submits it to the MD for discussion in the executive management meeting within 7 days (14 days for Major events requiring specialist input).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.6 Communication — identified root causes and required corrective actions are communicated to all relevant departments through Toolbox Talks (PROC-HSE-007) and Safety Bulletins.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.6 Communication — identified root causes and required corrective actions are communicated to all relevant departments through Toolbox Talks (PROC-HSE-007) and Safety Bulletins.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 6.7 Cross-Site Monitoring — the Safety Officer ensures similar risks are monitored across all Company sites to prevent recurrence elsewhere. Lessons-learned notes are circulated to all HSE Officers.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>6.7 Cross-Site Monitoring — the Safety Officer ensures similar risks are monitored across all Company sites to prevent recurrence elsewhere. Lessons-learned notes are circulated to all HSE Officers.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Corrective and Preventive Actions (CAPA)</p>
+            <SectionHeading id="s7">7. Corrective and Preventive Actions (CAPA)</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All corrective and preventive actions are assigned to a specific responsible person, given a hard deadline, and require a formal verification method.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All corrective and preventive actions are assigned to a specific responsible person, given a hard deadline, and require a formal verification method.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All actions are tracked continuously in the master IMS Action Register maintained by the MR.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All actions are tracked continuously in the master IMS Action Register maintained by the MR.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All incidents from the previous financial year are discussed in the annual Management Review Meeting (PROC-SYS-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All incidents from the previous financial year are discussed in the annual Management Review Meeting (PROC-SYS-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The MD reviews the status of open investigations and the effectiveness of closed CAPAs.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The MD reviews the status of open investigations and the effectiveness of closed CAPAs.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The MR circulates the finalised Management Review report to department heads to reduce systemic violations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The MR circulates the finalised Management Review report to department heads to reduce systemic violations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Repeat incidents of the same root cause are treated as Major non-conformances under PROC-SYS-008 Corrective Action.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Repeat incidents of the same root cause are treated as Major non-conformances under PROC-SYS-008 Corrective Action.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Safety Culture Monitoring</p>
+            <SectionHeading id="s8">8. Safety Culture Monitoring</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Periodic Employee Safety Culture Surveys (FRM-HSE-023) are administered by the MR or Site Safety Supervisor to gather direct workforce feedback on current procedures and policies. The MD reviews staff awareness levels and authorises necessary safety campaigns based on the results.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Training and Competency</p>
+            <SectionHeading id="s9">9. Training and Competency</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All personnel receive induction and annual refresher training on incident reporting and the critical importance of reporting near misses.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All personnel receive induction and annual refresher training on incident reporting and the critical importance of reporting near misses.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Safety Officers and Investigators hold advanced competency and training in Root Cause Analysis techniques (5 Whys, Fishbone, ICAM, Bow-Tie).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Safety Officers and Investigators hold advanced competency and training in Root Cause Analysis techniques (5 Whys, Fishbone, ICAM, Bow-Tie).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All training records and competency sign-offs are retained in the IMS for a minimum of 3 years (REG-TRN-001 Training and Competence Matrix).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All training records and competency sign-offs are retained in the IMS for a minimum of 3 years (REG-TRN-001 Training and Competence Matrix).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Monitoring, Audit, and Continual Improvement</p>
+            <SectionHeading id="s10">10. Monitoring, Audit, and Continual Improvement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Monthly audits verify Flash Notification completion times, investigation turnaround timelines, and CAPA closure rates.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Monthly audits verify Flash Notification completion times, investigation turnaround timelines, and CAPA closure rates.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• This procedure is reviewed annually, immediately following any serious incident, or on changes to KSA regulatory standards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>This procedure is reviewed annually, immediately following any serious incident, or on changes to KSA regulatory standards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• The procedure is directly linked to the Site Emergency Response Plan (PLN-HSE-001), the Monthly HSE Report, and the Management Review process (PROC-SYS-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>The procedure is directly linked to the Site Emergency Response Plan (PLN-HSE-001), the Monthly HSE Report, and the Management Review process (PROC-SYS-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Performance Indicators</p>
+            <SectionHeading id="s11">11. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -361,19 +420,29 @@ export default function TE_IMS_PROC_HSE_006() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. References</p>
+            <SectionHeading id="s12">12. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 5.1.5 / 5.4 Consultation and Participation of Workers, 9.3 Management Review, 10.2 Incident, Nonconformity and Corrective Action, 10.3 Continual Improvement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 5.1.5 / 5.4 Consultation and Participation of Workers, 9.3 Management Review, 10.2 Incident, Nonconformity and Corrective Action, 10.3 Continual Improvement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Management Regulation (KSA), mandatory reporting of fatality / LTI within 24 hours.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Management Regulation (KSA), mandatory reporting of fatality / LTI within 24 hours.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Labor Law — Occupational safety provisions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Labor Law — Occupational safety provisions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — Environmental incident reporting requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — Environmental incident reporting requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PLN-HSE-001 Site Emergency Response Plan; PROC-HSE-007 Toolbox Talks; PROC-SYS-002 Management Review; PROC-SYS-008 Corrective Action; FRM-HSE-002 Incident Flash Notification; FRM-HSE-022 Incident and Accident Investigation Report; FRM-HSE-023 Employee Safety Culture Survey; FRM-HSE-024 Dangerous Occurrence Report.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PLN-HSE-001 Site Emergency Response Plan; PROC-HSE-007 Toolbox Talks; PROC-SYS-002 Management Review; PROC-SYS-008 Corrective Action; FRM-HSE-002 Incident Flash Notification; FRM-HSE-022 Incident and Accident Investigation Report; FRM-HSE-023 Employee Safety Culture Survey; FRM-HSE-024 Dangerous Occurrence Report.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Records Retention</p>
+            <SectionHeading id="s13">13. Records Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

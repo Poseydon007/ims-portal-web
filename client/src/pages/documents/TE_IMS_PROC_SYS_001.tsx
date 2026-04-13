@@ -6,8 +6,19 @@ import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
 import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 
 const sections = [
-  { id: "s1", label: "1. Purpose" },
-  { id: "s2", label: "2. Scope" },
+  { id: "s1", label: "1. PURPOSE" },
+  { id: "s2", label: "2. SCOPE" },
+  { id: "s3", label: "3. DEFINITIONS" },
+  { id: "s4", label: "4. RESPONSIBILITIES" },
+  { id: "s5", label: "5. DOCUMENT IDENTIFICATION &amp; NUMBERING" },
+  { id: "s6", label: "6. CREATION &amp; APPROVAL" },
+  { id: "s7", label: "7. DISTRIBUTION &amp; ACCESS" },
+  { id: "s8", label: "8. REVISION &amp; CHANGE CONTROL" },
+  { id: "s9", label: "9. STORAGE &amp; RETRIEVAL" },
+  { id: "s10", label: "10. MONITORING &amp; REVIEW" },
+  { id: "s11", label: "11. RELATED DOCUMENTS" },
+  { id: "s12", label: "12. APPROVAL &amp; SIGN-OFF" },
+  { id: "s13", label: "13. REVISION HISTORY" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,7 +164,7 @@ export default function TE_IMS_PROC_SYS_001() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. PURPOSE</p>
+            <SectionHeading id="s1">1. PURPOSE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes the mandatory, standardized process for the creation, review, approval, distribution, revision, storage, retrieval, and disposal of all controlled documents and records within True East Mining Company's Integrated Management System (IMS). It ensures:</p>
 
@@ -184,7 +195,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. SCOPE</p>
+            <SectionHeading id="s2">2. SCOPE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all controlled documents and records within the True East Mining IMS, including:</p>
 
@@ -220,7 +231,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. DEFINITIONS</p>
+            <SectionHeading id="s3">3. DEFINITIONS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -241,7 +252,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. RESPONSIBILITIES</p>
+            <SectionHeading id="s4">4. RESPONSIBILITIES</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -262,7 +273,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. DOCUMENT IDENTIFICATION &amp; NUMBERING</p>
+            <SectionHeading id="s5">5. DOCUMENT IDENTIFICATION &amp; NUMBERING</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>All controlled documents follow this standard format:</p>
 
@@ -366,19 +377,19 @@ export default function TE_IMS_PROC_SYS_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. CREATION &amp; APPROVAL</p>
+            <SectionHeading id="s6">6. CREATION &amp; APPROVAL</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>All new controlled documents shall follow the four-step creation and approval workflow:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Draft — Author creates the document using the approved template (TE-IMS-FRM-SYS-001).</p>
+            <SectionHeading id="s1">1. Draft — Author creates the document using the approved template (TE-IMS-FRM-SYS-001).</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Review — Draft is sent to the relevant Department Head / Process Owner for technical and operational review.</p>
+            <SectionHeading id="s2">2. Review — Draft is sent to the relevant Department Head / Process Owner for technical and operational review.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Approval — Document is sent to the IMS Project Lead for code assignment, then final approval by the authorised manager (e.g., HSE Manager for HSE documents, CEO for Policies).</p>
+            <SectionHeading id="s3">3. Approval — Document is sent to the IMS Project Lead for code assignment, then final approval by the authorised manager (e.g., HSE Manager for HSE documents, CEO for Policies).</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Issuance — Document Controller adds the document to the Master Register and distributes it via email, shared drive, and printed copies where required.</p>
+            <SectionHeading id="s4">4. Issuance — Document Controller adds the document to the Master Register and distributes it via email, shared drive, and printed copies where required.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. DISTRIBUTION &amp; ACCESS</p>
+            <SectionHeading id="s7">7. DISTRIBUTION &amp; ACCESS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -399,7 +410,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. REVISION &amp; CHANGE CONTROL</p>
+            <SectionHeading id="s8">8. REVISION &amp; CHANGE CONTROL</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -420,7 +431,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. STORAGE &amp; RETRIEVAL</p>
+            <SectionHeading id="s9">9. STORAGE &amp; RETRIEVAL</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -437,7 +448,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. MONITORING &amp; REVIEW</p>
+            <SectionHeading id="s10">10. MONITORING &amp; REVIEW</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -454,7 +465,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. RELATED DOCUMENTS</p>
+            <SectionHeading id="s11">11. RELATED DOCUMENTS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -475,7 +486,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. APPROVAL &amp; SIGN-OFF</p>
+            <SectionHeading id="s12">12. APPROVAL &amp; SIGN-OFF</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure is approved for implementation across True East Mining Company's Integrated Management System.</p>
 
@@ -512,7 +523,7 @@ export default function TE_IMS_PROC_SYS_001() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. REVISION HISTORY</p>
+            <SectionHeading id="s13">13. REVISION HISTORY</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

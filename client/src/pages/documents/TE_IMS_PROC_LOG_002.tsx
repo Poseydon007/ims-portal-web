@@ -8,6 +8,18 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Pre-Trip Planning — Stop and Think" },
+  { id: "s6", label: "6. Driver and Vehicle Readiness" },
+  { id: "s7", label: "7. Communication and Monitoring" },
+  { id: "s8", label: "8. Safe Execution — Proceed Safely" },
+  { id: "s9", label: "9. Emergency Response — Breakdown or Incident" },
+  { id: "s10", label: "10. Training and Awareness" },
+  { id: "s11", label: "11. Monitoring and Continual Improvement" },
+  { id: "s12", label: "12. Performance Indicators" },
+  { id: "s13", label: "13. References" },
+  { id: "s14", label: "14. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,29 +165,41 @@ export default function TE_IMS_PROC_LOG_002() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure ensures the safe, efficient, and compliant management of all vehicle journeys undertaken on behalf of True East Mining Company (TEMC) by proactively identifying, assessing, and mitigating road-related risks — driver fatigue, adverse weather, remote terrain, wildlife, and vehicle breakdown. It aligns with ISO 45001:2018, MHRSD traffic and occupational safety regulations, and client fleet standards in the Kingdom of Saudi Arabia.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all journeys involving company or contractor vehicles that meet any of the following triggers: distance greater than 50 km, off-road travel, travel to a remote desert site, travel under high-risk weather conditions, travel outside daylight hours, or any journey classified as high-risk by the Journey Coordinator. It covers personnel transport, equipment delivery, sample transport, and general site access in desert and mining environments.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Journey Management Plan (JMP) — a formal plan on TE-IMS-FRM-LOG-003 that records the route, driver, vehicle, timings, hazards, check-in points, and approvals for a specific journey.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Journey Management Plan (JMP) — a formal plan on TE-IMS-FRM-LOG-003 that records the route, driver, vehicle, timings, hazards, check-in points, and approvals for a specific journey.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Journey Coordinator — the site role that reviews, approves, and monitors JMPs and tracks drivers through the journey.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Journey Coordinator — the site role that reviews, approves, and monitors JMPs and tracks drivers through the journey.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Check-In Milestone — a pre-defined point at which the driver contacts the Journey Coordinator to confirm progress and safety.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Check-In Milestone — a pre-defined point at which the driver contacts the Journey Coordinator to confirm progress and safety.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Remote Area — any location more than 30 km from a permanent base, or without reliable mobile phone coverage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Remote Area — any location more than 30 km from a permanent base, or without reliable mobile phone coverage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fatigue — a state of physical or mental tiredness that reduces alertness and judgment — treated as an impairment.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fatigue — a state of physical or mental tiredness that reduces alertness and judgment — treated as an impairment.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Convoy — two or more vehicles travelling together for safety on remote or high-risk routes.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Convoy — two or more vehicles travelling together for safety on remote or high-risk routes.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -218,91 +242,161 @@ export default function TE_IMS_PROC_LOG_002() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Pre-Trip Planning — Stop and Think</p>
+            <SectionHeading id="s5">5. Pre-Trip Planning — Stop and Think</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Necessity — confirm the journey is essential. Can the task be done remotely, combined with another, or deferred?</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Necessity — confirm the journey is essential. Can the task be done remotely, combined with another, or deferred?</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Route selection — choose the safest, most direct route. Avoid fatigue hotspots, wadis, sand drifts, and known high-risk zones.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Route selection — choose the safest, most direct route. Avoid fatigue hotspots, wadis, sand drifts, and known high-risk zones.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Weather check — confirm official forecast — no sandstorm, flash flood, or extreme heat warning. Cancel or reschedule if forecast is adverse.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Weather check — confirm official forecast — no sandstorm, flash flood, or extreme heat warning. Cancel or reschedule if forecast is adverse.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Risk evaluation — complete and submit the JMP Form (TE-IMS-FRM-LOG-003) for every journey &gt;50 km or any off-road travel. Formal approval required before departure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Risk evaluation — complete and submit the JMP Form (TE-IMS-FRM-LOG-003) for every journey &gt;50 km or any off-road travel. Formal approval required before departure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Convoy decision — high-risk routes, long remote travel, or new-to-area drivers travel in convoy of 2 or more vehicles.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Convoy decision — high-risk routes, long remote travel, or new-to-area drivers travel in convoy of 2 or more vehicles.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Driver and Vehicle Readiness</p>
+            <SectionHeading id="s6">6. Driver and Vehicle Readiness</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Supervisor confirms driver is well-rested, competent, licensed, and free from alcohol, drugs, or impairing medication.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Supervisor confirms driver is well-rested, competent, licensed, and free from alcohol, drugs, or impairing medication.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Driver completes the Daily Vehicle Checklist (TE-IMS-FRM-LOG-002) before departure — tyres, brakes, lights, fluids, fuel, comms, emergency kit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Driver completes the Daily Vehicle Checklist (TE-IMS-FRM-LOG-002) before departure — tyres, brakes, lights, fluids, fuel, comms, emergency kit.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Minimum provisions on board: 10 litres drinking water per person, shade/tarp, non-perishable food for long journeys, first aid kit, recovery tools.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Minimum provisions on board: 10 litres drinking water per person, shade/tarp, non-perishable food for long journeys, first aid kit, recovery tools.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Vehicle fuel at minimum 3/4 tank at departure for remote travel.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Vehicle fuel at minimum 3/4 tank at departure for remote travel.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Driver briefed on JMP, check-in schedule, emergency contacts, and alternate route.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Driver briefed on JMP, check-in schedule, emergency contacts, and alternate route.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Communication and Monitoring</p>
+            <SectionHeading id="s7">7. Communication and Monitoring</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Equipment — GPS tracker mandatory; satellite phone mandatory for remote / no-coverage routes; mobile phone and/or two-way radio as backup.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Equipment — GPS tracker mandatory; satellite phone mandatory for remote / no-coverage routes; mobile phone and/or two-way radio as backup.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Check-in protocol — driver reports to Journey Coordinator at departure, pre-defined milestones, and arrival.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Check-in protocol — driver reports to Journey Coordinator at departure, pre-defined milestones, and arrival.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Active tracking — Journey Coordinator uses GPS telemetry to monitor route adherence, speed, and rest stops in real time.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Active tracking — Journey Coordinator uses GPS telemetry to monitor route adherence, speed, and rest stops in real time.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Overdue trigger — failure to check in within 30 minutes of scheduled milestone activates the site Emergency Response Plan — Journey Coordinator contacts driver, HSE Manager, and if required Civil Defense 998.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Overdue trigger — failure to check in within 30 minutes of scheduled milestone activates the site Emergency Response Plan — Journey Coordinator contacts driver, HSE Manager, and if required Civil Defense 998.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Safe Execution — Proceed Safely</p>
+            <SectionHeading id="s8">8. Safe Execution — Proceed Safely</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Rest breaks — mandatory 15-minute rest every 2 hours of continuous driving.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Rest breaks — mandatory 15-minute rest every 2 hours of continuous driving.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Maximum driving hours — 10 hours in any 24-hour period; maximum 4 hours after a rest break; no driving on ≤ 6 hours sleep.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Maximum driving hours — 10 hours in any 24-hour period; maximum 4 hours after a rest break; no driving on ≤ 6 hours sleep.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Night driving — strictly prohibited between sunset and sunrise (19:00–05:00) unless specifically authorised in writing by the HSE Manager — documented approval required with additional controls (convoy, route, comms, rest).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Night driving — strictly prohibited between sunset and sunrise (19:00–05:00) unless specifically authorised in writing by the HSE Manager — documented approval required with additional controls (convoy, route, comms, rest).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Camels and livestock — major hazard on KSA roads. Reduce speed in known crossing zones, scan verges, avoid swerving.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Camels and livestock — major hazard on KSA roads. Reduce speed in known crossing zones, scan verges, avoid swerving.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Dust storms — if visibility drops below 100 m, pull fully off the road to a safe shoulder, engage hazards, wait until visibility returns.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Dust storms — if visibility drops below 100 m, pull fully off the road to a safe shoulder, engage hazards, wait until visibility returns.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Flash flood — never drive through flowing water or a wadi. Turn around. Wait for water to recede.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Flash flood — never drive through flowing water or a wadi. Turn around. Wait for water to recede.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Emergency Response — Breakdown or Incident</p>
+            <SectionHeading id="s9">9. Emergency Response — Breakdown or Incident</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pull over to a safe location; deploy hazard lights and reflective warning triangles behind the vehicle.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pull over to a safe location; deploy hazard lights and reflective warning triangles behind the vehicle.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Secure the scene — high-visibility vests on, keep passengers away from moving traffic.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Secure the scene — high-visibility vests on, keep passengers away from moving traffic.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Contact the Journey Coordinator, Supervisor, or HSE — provide location (GPS), nature of issue, and injuries.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Contact the Journey Coordinator, Supervisor, or HSE — provide location (GPS), nature of issue, and injuries.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Medical emergency: call 997 (Saudi Red Crescent Ambulance) or 911 (Unified Emergency) immediately.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Medical emergency: call 997 (Saudi Red Crescent Ambulance) or 911 (Unified Emergency) immediately.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Desert Survival Rule — stay with the vehicle in remote/desert areas. Do not wander. Shelter in shade. Ration water. Wait for rescue.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Desert Survival Rule — stay with the vehicle in remote/desert areas. Do not wander. Shelter in shade. Ration water. Wait for rescue.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fire: evacuate upwind 50 m; use on-board extinguisher only on small fires that are safe to approach.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fire: evacuate upwind 50 m; use on-board extinguisher only on small fires that are safe to approach.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report the event via Flash Notification (TE-IMS-FRM-HSE-005) immediately after safety is established.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report the event via Flash Notification (TE-IMS-FRM-HSE-005) immediately after safety is established.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Training and Awareness</p>
+            <SectionHeading id="s10">10. Training and Awareness</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mandatory Journey Management training at induction + annual refresher for all authorised drivers and dispatch supervisors.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mandatory Journey Management training at induction + annual refresher for all authorised drivers and dispatch supervisors.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Supervisors include journey hazards, fatigue, and desert survival in daily toolbox talks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Supervisors include journey hazards, fatigue, and desert survival in daily toolbox talks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Route-specific briefings before first journey on a new route.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Route-specific briefings before first journey on a new route.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All training documented and retained in the IMS.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All training documented and retained in the IMS.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Monitoring and Continual Improvement</p>
+            <SectionHeading id="s11">11. Monitoring and Continual Improvement</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Active monitoring by Journey Coordinator through GPS telemetry.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Active monitoring by Journey Coordinator through GPS telemetry.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Monthly review of completed JMPs, logged deviations, and incidents by HSE Manager.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Monthly review of completed JMPs, logged deviations, and incidents by HSE Manager.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual review of the procedure for alignment with client standards and regulatory changes.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual review of the procedure for alignment with client standards and regulatory changes.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lessons learned shared via driver bulletins and toolbox talks.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lessons learned shared via driver bulletins and toolbox talks.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Performance Indicators</p>
+            <SectionHeading id="s12">12. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -350,19 +444,29 @@ export default function TE_IMS_PROC_LOG_002() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. References</p>
+            <SectionHeading id="s13">13. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clause 8.1.2 Operational Controls; Clause 8.2 Emergency Preparedness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clause 8.1.2 Operational Controls; Clause 8.2 Emergency Preparedness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Traffic and Occupational Safety Regulations (KSA).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Traffic and Occupational Safety Regulations (KSA).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Traffic Department — General Traffic Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Traffic Department — General Traffic Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Client journey-management standards (e.g. Ma'aden).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Client journey-management standards (e.g. Ma'aden).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-LOG-001 Vehicle Usage; SOP-LOG-001 Driving Safety SOP; PLN-HSE-001 Major Emergency Preparedness; PROC-HSE-006 Incident Investigation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-LOG-001 Vehicle Usage; SOP-LOG-001 Driving Safety SOP; PLN-HSE-001 Major Emergency Preparedness; PROC-HSE-006 Incident Investigation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Related Documents and Records</p>
+            <SectionHeading id="s14">14. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

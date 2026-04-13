@@ -8,6 +8,20 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Responsibilities" },
+  { id: "s4", label: "4. Identification of Fire Hazards" },
+  { id: "s5", label: "5. Control and Prevention" },
+  { id: "s6", label: "6. Fire Extinguishers" },
+  { id: "s7", label: "7. Fire Safety Inspections and Housekeeping" },
+  { id: "s8", label: "8. Emergency Exits" },
+  { id: "s9", label: "9. Emergencies Involving Fire" },
+  { id: "s10", label: "10. Firefighting and Emergency Response" },
+  { id: "s11", label: "11. Evacuation Routes" },
+  { id: "s12", label: "12. Fire, Emergency and Safety Signs" },
+  { id: "s13", label: "13. Fire Emergency Training" },
+  { id: "s14", label: "14. Performance Indicators" },
+  { id: "s15", label: "15. References" },
+  { id: "s16", label: "16. Records Retention" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +167,15 @@ export default function TE_IMS_PROC_HSE_009() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The purpose of this procedure is to eliminate the causes of fire and prevent loss of life and property at all True East Mining Company (TEMC) facilities and worksites. It provides employees, contractors, and visitors with information and guidelines that will assist them in recognising, reporting, and controlling fire hazards, and responding effectively to fire emergencies. This procedure supports ISO 45001:2018 (Clauses 6.1.2, 8.1.2, 8.2 Emergency Preparedness) and aligns with Saudi Civil Defense and MHRSD requirements.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC employees, contractors, visitors, facilities, and properties — including offices, camps, workshops, fuel storage areas, core yards, and drill sites.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Responsibilities</p>
+            <SectionHeading id="s3">3. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -192,153 +206,239 @@ export default function TE_IMS_PROC_HSE_009() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Identification of Fire Hazards</p>
+            <SectionHeading id="s4">4. Identification of Fire Hazards</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Fire and explosion hazards can exist in almost any work area. Potential hazards include:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Improper operation or maintenance of gas-fired equipment.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Improper operation or maintenance of gas-fired equipment.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Improper storage or use of flammable liquids (diesel, petrol, solvents, paints).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Improper storage or use of flammable liquids (diesel, petrol, solvents, paints).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Smoking in prohibited areas.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Smoking in prohibited areas.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Accumulation of trash, oily rags, and combustible waste.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Accumulation of trash, oily rags, and combustible waste.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Unauthorised hot work operations (welding, grinding, cutting).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Unauthorised hot work operations (welding, grinding, cutting).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Electrical faults, overloaded circuits, damaged cables.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Electrical faults, overloaded circuits, damaged cables.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Hot surfaces near flammable materials.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Hot surfaces near flammable materials.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Control and Prevention</p>
+            <SectionHeading id="s5">5. Control and Prevention</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.1 Elimination of Ignition and Explosion Sources</p>
+            <SubHeading>5.1 Elimination of Ignition and Explosion Sources</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>All non-essential ignition and explosion sources must be eliminated where flammable liquids are used or stored. Common potential sources include:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Open flames — cutting and welding torches, furnaces, matches, and heaters kept away from flammable liquids. Cutting or welding on flammable liquid equipment is not performed unless the equipment has been properly emptied and purged with a neutral gas such as nitrogen, under permit.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Open flames — cutting and welding torches, furnaces, matches, and heaters kept away from flammable liquids. Cutting or welding on flammable liquid equipment is not performed unless the equipment has been properly emptied and purged with a neutral gas such as nitrogen, under permit.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Electrical sources — DC motors, switches, and circuit breakers are eliminated where flammable liquids are handled or stored. Only approved explosion-proof devices are used in these areas.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Electrical sources — DC motors, switches, and circuit breakers are eliminated where flammable liquids are handled or stored. Only approved explosion-proof devices are used in these areas.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Static sparks — can generate from electron transfer between contacting surfaces. Proper bonding and grounding procedures are followed when flammable liquids are transferred or transported.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Static sparks — can generate from electron transfer between contacting surfaces. Proper bonding and grounding procedures are followed when flammable liquids are transferred or transported.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.2 Removal of Incompatibles</p>
+            <SubHeading>5.2 Removal of Incompatibles</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Materials that can contribute to a flammable liquid fire (e.g. oxidisers and organic peroxides) are not stored with flammable liquids.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.3 Smoking</p>
+            <SubHeading>5.3 Smoking</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Smoking and other sources of ignition are prohibited near flammable or explosive materials or operations that constitute a fire hazard. &quot;NO SMOKING OR OPEN FLAMES&quot; signs are posted conspicuously in all such areas.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5.4 Control of Flammable Gases</p>
+            <SubHeading>5.4 Control of Flammable Gases</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Flammable gases pose the same type of fire hazards as flammable liquids and their vapours. Safeguards for flammable liquids apply, but toxicity, reactivity, corrosiveness, and toxic combustion products are also taken into account.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Fire Extinguishers</p>
+            <SectionHeading id="s6">6. Fire Extinguishers</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>A portable fire extinguisher is a &quot;first aid&quot; device highly effective when used while a fire is small. Using the correct class of extinguisher by a trained person can save lives and property. Extinguishers are installed regardless of other firefighting measures.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.1 Classification of Fires and Selection of Extinguishers</p>
+            <SubHeading>6.1 Classification of Fires and Selection of Extinguishers</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Class A — fires involving materials such as wood, paper, and cloth which produce glowing embers or char.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Class A — fires involving materials such as wood, paper, and cloth which produce glowing embers or char.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Class B — fires involving flammable gases, liquids, and greases, including gasoline and most hydrocarbon liquids.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Class B — fires involving flammable gases, liquids, and greases, including gasoline and most hydrocarbon liquids.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Class C — fires involving live electrical equipment or materials near electrically powered equipment.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Class C — fires involving live electrical equipment or materials near electrically powered equipment.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Class D — fires involving combustible metals, such as magnesium, zirconium, potassium, and sodium.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Class D — fires involving combustible metals, such as magnesium, zirconium, potassium, and sodium.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Extinguishers are selected according to the potential fire hazard, construction and occupancy of facilities, and the specific hazard to be protected.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.2 Location and Marking of Extinguishers</p>
+            <SubHeading>6.2 Location and Marking of Extinguishers</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Conspicuously located and readily accessible along normal paths of travel and egress.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Conspicuously located and readily accessible along normal paths of travel and egress.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Wall recesses or flush-mounted cabinets used where possible.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Wall recesses or flush-mounted cabinets used where possible.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Directional arrows marked with the extinguisher classification where visual obstruction cannot be avoided.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Directional arrows marked with the extinguisher classification where visual obstruction cannot be avoided.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Grouped extinguishers of different classes marked conspicuously (legible from 3 feet) to ensure proper selection during a fire.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Grouped extinguishers of different classes marked conspicuously (legible from 3 feet) to ensure proper selection during a fire.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.3 Condition and Maintenance</p>
+            <SubHeading>6.3 Condition and Maintenance</SubHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Portable extinguishers are maintained in a fully charged and operable condition, kept in designated locations when not in use, and replaced with a fully charged and operable unit whenever removed for maintenance. Monthly visual inspections and annual servicing are recorded on the Fire Extinguisher Inspection Log (FRM-HSE-020).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.4 Mounting and Distribution</p>
+            <SubHeading>6.4 Mounting and Distribution</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Installed on hangers, brackets, shelves, or in cabinets.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Installed on hangers, brackets, shelves, or in cabinets.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Units weighing 40 lb (18 kg) or less are installed so the top is no more than 3.5 ft (1.07 m) above the floor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Units weighing 40 lb (18 kg) or less are installed so the top is no more than 3.5 ft (1.07 m) above the floor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Operating instructions face outward. Cabinets and recesses are marked in contrasting colours to the normal décor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Operating instructions face outward. Cabinets and recesses are marked in contrasting colours to the normal décor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Travel distance limits: Class A and D — 75 ft (23 m) maximum; Class B — 50 ft (15 m) maximum. Class C distribution follows patterns appropriate for Class A and B hazards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Travel distance limits: Class A and D — 75 ft (23 m) maximum; Class B — 50 ft (15 m) maximum. Class C distribution follows patterns appropriate for Class A and B hazards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6.5 PASS Method of Use</p>
+            <SubHeading>6.5 PASS Method of Use</SubHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Pull the pin to break the tamper seal.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Pull the pin to break the tamper seal.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Aim the nozzle at the base of the fire.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Aim the nozzle at the base of the fire.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Squeeze the handle to release the extinguishing agent.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Squeeze the handle to release the extinguishing agent.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Sweep the nozzle from side to side until the fire is completely out.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Sweep the nozzle from side to side until the fire is completely out.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Fire Safety Inspections and Housekeeping</p>
+            <SectionHeading id="s7">7. Fire Safety Inspections and Housekeeping</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>First-line supervisors and the Safety Inspector conduct worksite surveys to observe compliance, proper storage of chemicals and supplies, unobstructed extinguisher access, and clear emergency evacuation routes. Findings are recorded on the Fire Prevention Checklist (FRM-HSE-021).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Emergency Exits</p>
+            <SectionHeading id="s8">8. Emergency Exits</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Every exit must be clearly visible or the route to it conspicuously identified. AT NO TIME SHALL EXITS BE BLOCKED. Exits are checked daily by site supervision.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Emergencies Involving Fire</p>
+            <SectionHeading id="s9">9. Emergencies Involving Fire</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 9.1 Fire Alarms — a fire alarm sounds for the building or surroundings in an emergency.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>9.1 Fire Alarms — a fire alarm sounds for the building or surroundings in an emergency.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 9.2 Evacuation Plan — each facility has an emergency evacuation plan developed by the Safety Officer leading to a designated Assembly Point. The colour-coded plan includes evacuation routes, emergency exits, fire extinguisher locations, heat and smoke detectors, fire alarm switches, fire protection equipment, and the Assembly Point.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>9.2 Evacuation Plan — each facility has an emergency evacuation plan developed by the Safety Officer leading to a designated Assembly Point. The colour-coded plan includes evacuation routes, emergency exits, fire extinguisher locations, heat and smoke detectors, fire alarm switches, fire protection equipment, and the Assembly Point.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 9.3 Elevators — the use of elevators during a fire is strictly prohibited due to the risk of power cuts and the shaft acting as a flue for hot gases and smoke.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>9.3 Elevators — the use of elevators during a fire is strictly prohibited due to the risk of power cuts and the shaft acting as a flue for hot gases and smoke.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• 9.4 Accountability — Department Heads, the Safety Officer, and Supervisors are responsible for verifying personnel have evacuated assigned areas and for conducting a headcount at the Assembly Point.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>9.4 Accountability — Department Heads, the Safety Officer, and Supervisors are responsible for verifying personnel have evacuated assigned areas and for conducting a headcount at the Assembly Point.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Firefighting and Emergency Response</p>
+            <SectionHeading id="s10">10. Firefighting and Emergency Response</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>If you discover a fire:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Activate the nearest fire alarm.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Activate the nearest fire alarm.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Notify other occupants and the Department Head / Safety Inspector / Supervisor.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Notify other occupants and the Department Head / Safety Inspector / Supervisor.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Call Saudi Civil Defense (998) for any fire beyond incipient stage.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Call Saudi Civil Defense (998) for any fire beyond incipient stage.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fight the fire ONLY if: you have a clear way out and can fight the fire with your back to the exit; the fire is small and limited to its area of origin; the fire department has been notified; you have the proper extinguisher in good working order and know how to use it.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fight the fire ONLY if: you have a clear way out and can fight the fire with your back to the exit; the fire is small and limited to its area of origin; the fire department has been notified; you have the proper extinguisher in good working order and know how to use it.</Bullet>
+            </ul>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>If you are not sure of your ability or the extinguisher's capacity, leave the area immediately.</p>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>If you hear a fire alarm:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Evacuate the area. Close windows, turn off gas jets, and close doors as you leave.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Evacuate the area. Close windows, turn off gas jets, and close doors as you leave.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Leave the building and move out of the way of emergency operations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Leave the building and move out of the way of emergency operations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Proceed to the designated Assembly Point.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Proceed to the designated Assembly Point.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report to the Safety Inspector to confirm your evacuation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report to the Safety Inspector to confirm your evacuation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Remain outside until a competent authority states it is safe to re-enter.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Remain outside until a competent authority states it is safe to re-enter.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Evacuation Routes</p>
+            <SectionHeading id="s11">11. Evacuation Routes</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Learn at least two escape routes and emergency exits from your area.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Learn at least two escape routes and emergency exits from your area.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Never use an elevator as part of your escape route.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Never use an elevator as part of your escape route.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Learn to activate a fire alarm and recognise alarm sounds.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Learn to activate a fire alarm and recognise alarm sounds.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Take an active part in fire evacuation drills (recorded on FRM-HSE-018 Emergency Evacuation Drill Record and FRM-HSE-019 Fire Drill Report).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Take an active part in fire evacuation drills (recorded on FRM-HSE-018 Emergency Evacuation Drill Record and FRM-HSE-019 Fire Drill Report).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Fire, Emergency and Safety Signs</p>
+            <SectionHeading id="s12">12. Fire, Emergency and Safety Signs</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The Safety Inspector installs safety signs and symbols to alert workers of hazards. Specific words &quot;danger&quot;, &quot;warning&quot;, &quot;caution&quot;, and &quot;notice&quot; are used along with the standard colour codes.</p>
 
@@ -377,23 +477,35 @@ export default function TE_IMS_PROC_HSE_009() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Signs must be appropriately sized for the maximum viewing distance, use standard widely-recognised symbols, and include supplementary text in lower case to strengthen the meaning of the pictorial symbol.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Fire Emergency Training</p>
+            <SectionHeading id="s13">13. Fire Emergency Training</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The HSE Manager ensures all employees are trained in:</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fire hazards in their work area.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fire hazards in their work area.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Protection measures specific to them.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Protection measures specific to them.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fire Prevention Plan requirements.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fire Prevention Plan requirements.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Fire extinguisher use (PASS method) with annual hands-on practice.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Fire extinguisher use (PASS method) with annual hands-on practice.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Mock drills — at least one evacuation drill per site per quarter.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Mock drills — at least one evacuation drill per site per quarter.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Civil Defense emergency number (998) and the escalation chain.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Civil Defense emergency number (998) and the escalation chain.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Performance Indicators</p>
+            <SectionHeading id="s14">14. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -441,19 +553,29 @@ export default function TE_IMS_PROC_HSE_009() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>15. References</p>
+            <SectionHeading id="s15">15. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 6.1.2 Hazard Identification, 8.1.2 Eliminating Hazards, 8.2 Emergency Preparedness and Response.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 6.1.2 Hazard Identification, 8.1.2 Eliminating Hazards, 8.2 Emergency Preparedness and Response.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Civil Defense regulations and emergency number 998.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Civil Defense regulations and emergency number 998.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NFPA 10 — Portable Fire Extinguishers (reference standard).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NFPA 10 — Portable Fire Extinguishers (reference standard).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-SYS-006 Document and Data Control; PROC-SYS-002 Management Review; PLN-HSE-001 Site Emergency Response Plan; FRM-HSE-018 Emergency Evacuation Drill Record; FRM-HSE-019 Fire Drill Report; FRM-HSE-020 Fire Extinguisher Inspection Log; FRM-HSE-021 Fire Prevention Checklist.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-SYS-006 Document and Data Control; PROC-SYS-002 Management Review; PLN-HSE-001 Site Emergency Response Plan; FRM-HSE-018 Emergency Evacuation Drill Record; FRM-HSE-019 Fire Drill Report; FRM-HSE-020 Fire Extinguisher Inspection Log; FRM-HSE-021 Fire Prevention Checklist.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>16. Records Retention</p>
+            <SectionHeading id="s16">16. Records Retention</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

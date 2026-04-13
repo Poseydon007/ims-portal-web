@@ -8,6 +8,19 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Audit Programme and Frequency" },
+  { id: "s6", label: "6. Auditor Competence" },
+  { id: "s7", label: "7. Audit Preparation" },
+  { id: "s8", label: "8. Conducting the Audit" },
+  { id: "s9", label: "9. Finding Classification" },
+  { id: "s10", label: "10. Reporting" },
+  { id: "s11", label: "11. Corrective Action and Follow-Up" },
+  { id: "s12", label: "12. Communication and Management Review" },
+  { id: "s13", label: "13. Performance Indicators" },
+  { id: "s14", label: "14. References" },
+  { id: "s15", label: "15. Related Forms and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,33 +166,49 @@ export default function TE_IMS_PROC_HSE_012() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure defines how True East Mining Company (TEMC) plans, conducts, reports, and follows up HSE site audits. The objective is to independently verify conformity with ISO 45001:2018, ISO 14001:2015, Saudi regulatory requirements (MHRSD, MEWA, NCEC, Saudi Civil Defense), and internal IMS documentation — and to drive continual improvement. Site audits complement the periodic inspections (PROC-HSE-011) and internal system audits (PROC-SYS-004).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC drilling, exploration, and support sites in the Kingdom of Saudi Arabia. It covers employees, contractors, processes, equipment, and documentation present at the audited site. Audits may be internal (TEMC HSE team or corporate) or external (client / regulator / certification body).</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit — a systematic, independent, and documented process to obtain objective evidence and evaluate it against audit criteria (ISO 19011).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit — a systematic, independent, and documented process to obtain objective evidence and evaluate it against audit criteria (ISO 19011).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit Criteria — the set of policies, procedures, standards, and regulations used as a reference for comparison.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit Criteria — the set of policies, procedures, standards, and regulations used as a reference for comparison.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit Evidence — records, statements of fact, or other information relevant to the audit criteria that is verifiable.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit Evidence — records, statements of fact, or other information relevant to the audit criteria that is verifiable.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit Finding — result of the evaluation of audit evidence against audit criteria. May be a Non-Conformity, Observation, or Opportunity for Improvement.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit Finding — result of the evaluation of audit evidence against audit criteria. May be a Non-Conformity, Observation, or Opportunity for Improvement.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Major Non-Conformity — absence or total breakdown of a system to meet a requirement, or a situation that would, on the basis of objective evidence, raise doubts about conformity — serious effect on safety, environment, or the IMS.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Major Non-Conformity — absence or total breakdown of a system to meet a requirement, or a situation that would, on the basis of objective evidence, raise doubts about conformity — serious effect on safety, environment, or the IMS.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Minor Non-Conformity — isolated, non-systemic lapse in conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Minor Non-Conformity — isolated, non-systemic lapse in conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Observation / OFI — improvement opportunity; not a non-conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Observation / OFI — improvement opportunity; not a non-conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lead Auditor — competent person leading the audit team, responsible for planning, conduct, and report.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lead Auditor — competent person leading the audit team, responsible for planning, conduct, and report.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -222,51 +251,87 @@ export default function TE_IMS_PROC_HSE_012() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Audit Programme and Frequency</p>
+            <SectionHeading id="s5">5. Audit Programme and Frequency</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Annual HSE Audit Programme approved by MD, covering all active sites and key contractors.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Annual HSE Audit Programme approved by MD, covering all active sites and key contractors.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Minimum frequency: each active TEMC site audited at least once per year; high-risk sites or sites with repeat findings audited more often.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Minimum frequency: each active TEMC site audited at least once per year; high-risk sites or sites with repeat findings audited more often.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Client-driven or regulator-driven audits are scheduled as required and added to the programme.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Client-driven or regulator-driven audits are scheduled as required and added to the programme.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Risk-based selection — prior incidents, findings, contractor changes, or new scope trigger additional audits.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Risk-based selection — prior incidents, findings, contractor changes, or new scope trigger additional audits.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Auditor independence — auditors must not audit their own area of responsibility (ISO 45001 Clause 9.2.2 and ISO 14001 Clause 9.2).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Auditor independence — auditors must not audit their own area of responsibility (ISO 45001 Clause 9.2.2 and ISO 14001 Clause 9.2).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Auditor Competence</p>
+            <SectionHeading id="s6">6. Auditor Competence</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lead Auditor requirements: ISO 45001 / 14001 internal auditor qualification (or equivalent), minimum 2 prior audits, site HSE experience.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lead Auditor requirements: ISO 45001 / 14001 internal auditor qualification (or equivalent), minimum 2 prior audits, site HSE experience.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Team members: ISO awareness training or subject matter expertise in the audited discipline.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Team members: ISO awareness training or subject matter expertise in the audited discipline.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Auditor competence is recorded in the auditor register and refreshed every 3 years.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Auditor competence is recorded in the auditor register and refreshed every 3 years.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Audit Preparation</p>
+            <SectionHeading id="s7">7. Audit Preparation</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit plan — scope, criteria, objectives, team, schedule, area coverage. Issued to auditee at least 7 days in advance (except for unannounced audits).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit plan — scope, criteria, objectives, team, schedule, area coverage. Issued to auditee at least 7 days in advance (except for unannounced audits).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Checklist — developed from IMS documents and ISO clauses. Covers policies, procedures, risk registers, CARs, training, inspections, permits, equipment, environmental controls, emergency preparedness.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Checklist — developed from IMS documents and ISO clauses. Covers policies, procedures, risk registers, CARs, training, inspections, permits, equipment, environmental controls, emergency preparedness.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Document review — prior to site visit — IMS documents, previous audit reports, inspection records, incident log, training register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Document review — prior to site visit — IMS documents, previous audit reports, inspection records, incident log, training register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Opening meeting — introduce team, confirm scope, agree logistics, confirm confidentiality, agree reporting channels.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Opening meeting — introduce team, confirm scope, agree logistics, confirm confidentiality, agree reporting channels.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Conducting the Audit</p>
+            <SectionHeading id="s8">8. Conducting the Audit</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Site walk-through, observation of work in progress, equipment condition, PPE compliance, housekeeping.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Site walk-through, observation of work in progress, equipment condition, PPE compliance, housekeeping.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Document sampling — permits, inspections, training records, toolbox talks, first aid log, waste manifests.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Document sampling — permits, inspections, training records, toolbox talks, first aid log, waste manifests.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Interviews — workers, supervisors, HSE, contractors — to verify awareness of procedures, hazards, emergency response.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Interviews — workers, supervisors, HSE, contractors — to verify awareness of procedures, hazards, emergency response.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Cross-check evidence — claims must be corroborated with documents and observation.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Cross-check evidence — claims must be corroborated with documents and observation.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Each potential finding is discussed with the auditee for clarification before it is finalised.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Each potential finding is discussed with the auditee for clarification before it is finalised.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Stop-work action — if the audit reveals an imminent danger, the Lead Auditor notifies the SSE immediately for Stop Work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Stop-work action — if the audit reveals an imminent danger, the Lead Auditor notifies the SSE immediately for Stop Work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Finding Classification</p>
+            <SectionHeading id="s9">9. Finding Classification</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -302,37 +367,61 @@ export default function TE_IMS_PROC_HSE_012() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Reporting</p>
+            <SectionHeading id="s10">10. Reporting</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit Report issued within 5 working days of the closing meeting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit Report issued within 5 working days of the closing meeting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Report content: scope, criteria, team, dates, areas audited, findings with evidence, classification, positive practices, conclusions.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Report content: scope, criteria, team, dates, areas audited, findings with evidence, classification, positive practices, conclusions.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Distribution: SSE, HSE Manager, MR, MD, and auditee management. Filed in IMS.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Distribution: SSE, HSE Manager, MR, MD, and auditee management. Filed in IMS.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Findings raised as CARs per FRM-SYS-003 with owners and due dates.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Findings raised as CARs per FRM-SYS-003 with owners and due dates.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Corrective Action and Follow-Up</p>
+            <SectionHeading id="s11">11. Corrective Action and Follow-Up</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Auditee develops the corrective action plan within 10 working days of receiving the report.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Auditee develops the corrective action plan within 10 working days of receiving the report.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Root cause analysis applied per PROC-SYS-005 for each non-conformity.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Root cause analysis applied per PROC-SYS-005 for each non-conformity.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Actions implemented and evidence uploaded to the CAR register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Actions implemented and evidence uploaded to the CAR register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Lead Auditor (or MR) verifies closure and effectiveness — desktop review for minor, physical re-verification for major.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Lead Auditor (or MR) verifies closure and effectiveness — desktop review for minor, physical re-verification for major.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Closed finding is signed off in the CAR register and audit report annex.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Closed finding is signed off in the CAR register and audit report annex.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Communication and Management Review</p>
+            <SectionHeading id="s12">12. Communication and Management Review</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Sanitised audit findings shared with workforce via toolbox talks and HSE noticeboards.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Sanitised audit findings shared with workforce via toolbox talks and HSE noticeboards.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Audit trend analysis is a standing item at the monthly management review (PROC-SYS-002).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Audit trend analysis is a standing item at the monthly management review (PROC-SYS-002).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Systemic issues — patterns across sites — are escalated to MD for strategic decision.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Systemic issues — patterns across sites — are escalated to MD for strategic decision.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. Performance Indicators</p>
+            <SectionHeading id="s13">13. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -380,19 +469,29 @@ export default function TE_IMS_PROC_HSE_012() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. References</p>
+            <SectionHeading id="s14">14. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 19011:2018 — Guidelines for Auditing Management Systems.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 19011:2018 — Guidelines for Auditing Management Systems.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Clauses 9.2 (Internal Audit), 9.3 (Management Review), 10.2 (Non-conformity and Corrective Action).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Clauses 9.2 (Internal Audit), 9.3 (Management Review), 10.2 (Non-conformity and Corrective Action).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Clauses 9.2, 9.3, 10.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Clauses 9.2, 9.3, 10.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD, MEWA, NCEC, Saudi Civil Defense — applicable KSA regulations.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD, MEWA, NCEC, Saudi Civil Defense — applicable KSA regulations.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-SYS-004 Internal Audit; PROC-SYS-005 CAPA; PROC-HSE-011 Periodic Inspection.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-SYS-004 Internal Audit; PROC-SYS-005 CAPA; PROC-HSE-011 Periodic Inspection.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>15. Related Forms and Records</p>
+            <SectionHeading id="s15">15. Related Forms and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

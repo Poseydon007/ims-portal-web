@@ -8,6 +8,18 @@ import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 const sections = [
   { id: "s1", label: "1. Purpose" },
   { id: "s2", label: "2. Scope" },
+  { id: "s3", label: "3. Definitions" },
+  { id: "s4", label: "4. Responsibilities" },
+  { id: "s5", label: "5. Credible Emergency Scenarios" },
+  { id: "s6", label: "6. Planning and Development" },
+  { id: "s7", label: "7. Emergency Response Team Structure" },
+  { id: "s8", label: "8. Training and Competence" },
+  { id: "s9", label: "9. Drills and Exercises" },
+  { id: "s10", label: "10. Emergency Response Execution" },
+  { id: "s11", label: "11. Post-Incident Actions" },
+  { id: "s12", label: "12. Performance Indicators" },
+  { id: "s13", label: "13. References" },
+  { id: "s14", label: "14. Related Documents and Records" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,15 +165,15 @@ export default function TE_IMS_PROC_HSE_004() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Purpose</p>
+            <SectionHeading id="s1">1. Purpose</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure establishes the framework for developing, implementing, maintaining, testing, and continually improving a Site Emergency Preparedness and Response Plan (SEPRP) for all True East Mining Company (TEMC) drilling, exploration, and associated activities in the Kingdom of Saudi Arabia. The objective is to protect life, safeguard the environment, preserve critical assets, and ensure compliance with ISO 45001:2018, ISO 14001:2015, MHRSD Occupational Safety and Health Regulations, Saudi Civil Defense requirements, and NCEC environmental incident-response guidelines.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Scope</p>
+            <SectionHeading id="s2">2. Scope</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all TEMC owned and contracted sites, including drilling rigs, camps, core yards, fuel and chemical storage areas, workshops, and remote exploration locations. It covers fires, explosions, chemical and fuel spills, medical emergencies (including heat stress and trauma), vehicle incidents, loss of well control, stuck rod / drill string incidents, natural events (dust storms, flash floods, sandstorms, lightning), and security-related incidents. All personnel — employees, contractors, visitors — are covered and must comply with the SEPRP activated for the site they are working on.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Definitions</p>
+            <SectionHeading id="s3">3. Definitions</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -198,7 +210,7 @@ export default function TE_IMS_PROC_HSE_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Responsibilities</p>
+            <SectionHeading id="s4">4. Responsibilities</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -241,7 +253,7 @@ export default function TE_IMS_PROC_HSE_004() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Credible Emergency Scenarios</p>
+            <SectionHeading id="s5">5. Credible Emergency Scenarios</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The following scenarios shall be addressed in every site SEPRP. Additional site-specific scenarios should be added following the site risk assessment.</p>
 
@@ -309,7 +321,7 @@ export default function TE_IMS_PROC_HSE_004() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Planning and Development</p>
+            <SectionHeading id="s6">6. Planning and Development</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Every TEMC site shall have a SEPRP completed before mobilization and before any drilling activity commences.</p>
 
@@ -340,7 +352,7 @@ export default function TE_IMS_PROC_HSE_004() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. Emergency Response Team Structure</p>
+            <SectionHeading id="s7">7. Emergency Response Team Structure</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
@@ -383,17 +395,25 @@ export default function TE_IMS_PROC_HSE_004() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. Training and Competence</p>
+            <SectionHeading id="s8">8. Training and Competence</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• All personnel receive emergency awareness during site induction — evacuation routes, muster points, alarm recognition, reporting.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>All personnel receive emergency awareness during site induction — evacuation routes, muster points, alarm recognition, reporting.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ERT members receive role-specific training before appointment — firefighting (Civil Defense approved), first aid and CPR / AED (internationally recognised provider), spill response, rescue.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ERT members receive role-specific training before appointment — firefighting (Civil Defense approved), first aid and CPR / AED (internationally recognised provider), spill response, rescue.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Refresher training annually for ERT and every 2 years for all personnel.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Refresher training annually for ERT and every 2 years for all personnel.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Records kept per ISO 45001 Clause 7.2 using TE-IMS-FRM-TRN-003 Training Attendance Register.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Records kept per ISO 45001 Clause 7.2 using TE-IMS-FRM-TRN-003 Training Attendance Register.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. Drills and Exercises</p>
+            <SectionHeading id="s9">9. Drills and Exercises</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Drills test the SEPRP and build muscle memory. TEMC shall conduct at a minimum:</p>
 
@@ -433,35 +453,59 @@ export default function TE_IMS_PROC_HSE_004() {
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>Each drill is evaluated against defined objectives. A drill report is completed and kept on file. Findings are converted into corrective actions per PROC-SYS-005.</p>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. Emergency Response Execution</p>
+            <SectionHeading id="s10">10. Emergency Response Execution</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Activation — any worker detecting an emergency raises the alarm immediately by radio, siren, or voice. IC is notified without delay.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Activation — any worker detecting an emergency raises the alarm immediately by radio, siren, or voice. IC is notified without delay.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Immediate actions — stop work in the affected area, isolate energy sources where safe, apply first response resources, evacuate personnel.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Immediate actions — stop work in the affected area, isolate energy sources where safe, apply first response resources, evacuate personnel.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Response priorities (in order) — 1) Life and health; 2) Environment; 3) Property and equipment; 4) Production.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Response priorities (in order) — 1) Life and health; 2) Environment; 3) Property and equipment; 4) Production.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• External services — contacted via Radio Operator — Civil Defense 998, Ambulance 997, Police 999, Unified Emergency 911.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>External services — contacted via Radio Operator — Civil Defense 998, Ambulance 997, Police 999, Unified Emergency 911.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Head count — every site personnel file shall be checked against muster sheet. Missing persons reported to IC for search-and-rescue decision.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Head count — every site personnel file shall be checked against muster sheet. Missing persons reported to IC for search-and-rescue decision.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Stand-down — only the IC can declare the emergency over. All personnel re-briefed before returning to work.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Stand-down — only the IC can declare the emergency over. All personnel re-briefed before returning to work.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. Post-Incident Actions</p>
+            <SectionHeading id="s11">11. Post-Incident Actions</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Flash Report issued within 2 hours of any serious incident using TE-IMS-FRM-HSE-022.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Flash Report issued within 2 hours of any serious incident using TE-IMS-FRM-HSE-022.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Incident scene secured for investigation — photos, witness statements, equipment preserved.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Incident scene secured for investigation — photos, witness statements, equipment preserved.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Formal investigation initiated per PROC-HSE-010 Incident Investigation (within 24 hours).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Formal investigation initiated per PROC-HSE-010 Incident Investigation (within 24 hours).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Debrief with ERT within 48 hours to capture lessons learned.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Debrief with ERT within 48 hours to capture lessons learned.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Corrective and preventive actions raised per PROC-SYS-005 CAPA.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Corrective and preventive actions raised per PROC-SYS-005 CAPA.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• External reporting to MHRSD, MEWA, or NCEC where thresholds met — see PROC-HSE-010 reporting matrix.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>External reporting to MHRSD, MEWA, or NCEC where thresholds met — see PROC-HSE-010 reporting matrix.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. Performance Indicators</p>
+            <SectionHeading id="s12">12. Performance Indicators</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>[NEEDS CEO REVIEW — targets indicative]</p>
 
@@ -509,23 +553,37 @@ export default function TE_IMS_PROC_HSE_004() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>13. References</p>
+            <SectionHeading id="s13">13. References</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 45001:2018 — Occupational Health and Safety Management — Clauses 6.1.2, 7.2, 8.2, 10.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 45001:2018 — Occupational Health and Safety Management — Clauses 6.1.2, 7.2, 8.2, 10.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• ISO 14001:2015 — Environmental Management — Clauses 6.1.2, 8.2.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>ISO 14001:2015 — Environmental Management — Clauses 6.1.2, 8.2.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• MHRSD — Occupational Safety and Health Regulation (Kingdom of Saudi Arabia).</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>MHRSD — Occupational Safety and Health Regulation (Kingdom of Saudi Arabia).</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• Saudi Civil Defense — Fire Safety and Emergency Response Code.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>Saudi Civil Defense — Fire Safety and Emergency Response Code.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• NCEC — Environmental Incident Response Guidelines.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>NCEC — Environmental Incident Response Guidelines.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-HSE-010 Incident Investigation Procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-HSE-010 Incident Investigation Procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>• TEMC PROC-SYS-005 Continual Improvement and CAPA Procedure.</p>
+            <ul className="space-y-1 mb-4 list-none pl-0">
+              <Bullet>TEMC PROC-SYS-005 Continual Improvement and CAPA Procedure.</Bullet>
+            </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>14. Related Documents and Records</p>
+            <SectionHeading id="s14">14. Related Documents and Records</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">

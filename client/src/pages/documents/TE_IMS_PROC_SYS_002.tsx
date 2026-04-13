@@ -6,8 +6,18 @@ import { TopNav, Footer, Breadcrumb } from "@/components/Layout";
 import { LOGO_GRAY, LOGO_WHITE } from "@/lib/imsData";
 
 const sections = [
-  { id: "s1", label: "1. Purpose" },
-  { id: "s2", label: "2. Scope" },
+  { id: "s1", label: "1. PURPOSE" },
+  { id: "s2", label: "2. SCOPE" },
+  { id: "s3", label: "3. RESPONSIBILITIES" },
+  { id: "s4", label: "4. FREQUENCY" },
+  { id: "s5", label: "5. INPUTS TO MANAGEMENT REVIEW (MANDATORY)" },
+  { id: "s6", label: "6. OUTPUTS FROM MANAGEMENT REVIEW (MANDATORY)" },
+  { id: "s7", label: "7. PROCEDURE STEPS" },
+  { id: "s8", label: "8. RECORDS &amp; RETENTION" },
+  { id: "s9", label: "9. MONITORING &amp; CONTINUAL IMPROVEMENT" },
+  { id: "s10", label: "10. RELATED DOCUMENTS" },
+  { id: "s11", label: "11. APPROVAL &amp; SIGN-OFF" },
+  { id: "s12", label: "12. REVISION HISTORY" },
 ];
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
@@ -153,7 +163,7 @@ export default function TE_IMS_PROC_SYS_002() {
               {/* Document body content */}
 
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. PURPOSE</p>
+            <SectionHeading id="s1">1. PURPOSE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure defines the mandatory, systematic process for top management to review the Integrated Management System (IMS) at planned intervals, ensuring its continuing suitability, adequacy, effectiveness, and alignment with the strategic direction of True East Mining Company.</p>
 
@@ -174,7 +184,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. SCOPE</p>
+            <SectionHeading id="s2">2. SCOPE</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure applies to all top management reviews of the IMS at True East Mining Company, including:</p>
 
@@ -193,7 +203,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. RESPONSIBILITIES</p>
+            <SectionHeading id="s3">3. RESPONSIBILITIES</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -214,7 +224,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. FREQUENCY</p>
+            <SectionHeading id="s4">4. FREQUENCY</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -231,7 +241,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. INPUTS TO MANAGEMENT REVIEW (MANDATORY)</p>
+            <SectionHeading id="s5">5. INPUTS TO MANAGEMENT REVIEW (MANDATORY)</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The Management Review Meeting must consider, at minimum, the following inputs:</p>
 
@@ -289,7 +299,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. OUTPUTS FROM MANAGEMENT REVIEW (MANDATORY)</p>
+            <SectionHeading id="s6">6. OUTPUTS FROM MANAGEMENT REVIEW (MANDATORY)</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>The meeting must produce documented outputs, including:</p>
 
@@ -323,21 +333,21 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>7. PROCEDURE STEPS</p>
+            <SectionHeading id="s7">7. PROCEDURE STEPS</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>1. Planning — IMS Project Lead schedules the meeting at least 4 weeks in advance and sends the agenda and input request to all participants.</p>
+            <SectionHeading id="s1">1. Planning — IMS Project Lead schedules the meeting at least 4 weeks in advance and sends the agenda and input request to all participants.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>2. Preparation — Participants submit required inputs to the IMS Project Lead no later than 1 week before the meeting.</p>
+            <SectionHeading id="s2">2. Preparation — Participants submit required inputs to the IMS Project Lead no later than 1 week before the meeting.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>3. Conduct the Review — CEO chairs the meeting; all required inputs are discussed; decisions and actions are recorded in real time.</p>
+            <SectionHeading id="s3">3. Conduct the Review — CEO chairs the meeting; all required inputs are discussed; decisions and actions are recorded in real time.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>4. Document Outputs — IMS Project Lead prepares the minutes within 7 days of the meeting and distributes them to all participants.</p>
+            <SectionHeading id="s4">4. Document Outputs — IMS Project Lead prepares the minutes within 7 days of the meeting and distributes them to all participants.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>5. Implement Actions — Assigned owners execute actions by agreed deadlines; IMS Project Lead tracks closure and evidence of completion.</p>
+            <SectionHeading id="s5">5. Implement Actions — Assigned owners execute actions by agreed deadlines; IMS Project Lead tracks closure and evidence of completion.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>6. Verify Effectiveness — Effectiveness of closed actions is reviewed in the next Management Review.</p>
+            <SectionHeading id="s6">6. Verify Effectiveness — Effectiveness of closed actions is reviewed in the next Management Review.</SectionHeading>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>8. RECORDS &amp; RETENTION</p>
+            <SectionHeading id="s8">8. RECORDS &amp; RETENTION</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -354,7 +364,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>9. MONITORING &amp; CONTINUAL IMPROVEMENT</p>
+            <SectionHeading id="s9">9. MONITORING &amp; CONTINUAL IMPROVEMENT</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -367,7 +377,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>10. RELATED DOCUMENTS</p>
+            <SectionHeading id="s10">10. RELATED DOCUMENTS</SectionHeading>
 
             <ul className="list-none mb-3 space-y-1">
               <li className="text-sm leading-relaxed flex gap-2" style={{ color: "#081C2E" }}>
@@ -396,7 +406,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </li>
             </ul>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>11. APPROVAL &amp; SIGN-OFF</p>
+            <SectionHeading id="s11">11. APPROVAL &amp; SIGN-OFF</SectionHeading>
 
             <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>This procedure is approved for implementation across True East Mining Company's Integrated Management System.</p>
 
@@ -433,7 +443,7 @@ export default function TE_IMS_PROC_SYS_002() {
               </table>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "#081C2E" }}>12. REVISION HISTORY</p>
+            <SectionHeading id="s12">12. REVISION HISTORY</SectionHeading>
 
             <div className="overflow-x-auto mb-6 rounded border" style={{ borderColor: "#dde3ec" }}>
               <table className="w-full text-sm border-collapse">
