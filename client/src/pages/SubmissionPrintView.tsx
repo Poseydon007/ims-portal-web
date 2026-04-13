@@ -330,23 +330,78 @@ export default function SubmissionPrintView() {
           </div>
         )}
 
-        {/* Signature block */}
+        {/* Digital Signature block */}
         <div className="px-8 pb-8">
           <div style={{ borderTop: "1px solid #dde3ec" }} className="pt-5">
             <h2
               className="text-xs font-bold tracking-[0.15em] uppercase mb-4"
               style={{ color: "#081C2E" }}
             >
-              Signatures
+              Digital Signatures
             </h2>
-            <div className="grid grid-cols-3 gap-6">
-              {["Submitted By", "Supervisor", "HSE Officer"].map((role) => (
-                <div key={role} className="text-center">
-                  <div style={{ borderBottom: "1px solid #081C2E", height: "40px", marginBottom: "6px" }} />
-                  <div className="text-xs font-semibold" style={{ color: "#4a5568" }}>{role}</div>
-                  <div className="text-xs text-gray-400 mt-0.5">Name / Date</div>
-                </div>
-              ))}
+<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {/* Submitted By */}
+              {(() => {
+                const submittedAt = data.submittedAt
+                  ? new Date(data.submittedAt).toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })
+                  : null;
+                return (
+                  <div className="rounded border p-3" style={{ borderColor: "#dde3ec", backgroundColor: "#f9fafb" }}>
+                    <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#8a9ab0" }}>Submitted By</div>
+                    <div className="font-semibold text-sm" style={{ color: "#081C2E" }}>{data.submittedByName ?? "—"}</div>
+                    {submittedAt && <div className="text-xs mt-1" style={{ color: "#6b7a8d" }}>{submittedAt}</div>}
+                    <div className="mt-2 text-xs px-2 py-0.5 rounded inline-block" style={{ backgroundColor: "#dcfce7", color: "#16a34a" }}>✓ Digitally Signed</div>
+                  </div>
+                );
+              })()}
+              {/* Supervisor — step 1 */}
+              {(() => {
+                const s = data.approvalHistory?.find(h => h.step === 1 && h.action === "approved");
+                return (
+                  <div className="rounded border p-3" style={{ borderColor: s ? "#dde3ec" : "#e5e7eb", backgroundColor: s ? "#f9fafb" : "#f3f4f6" }}>
+                    <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#8a9ab0" }}>Supervisor</div>
+                    {s ? (
+                      <>
+                        <div className="font-semibold text-sm" style={{ color: "#081C2E" }}>{s.actorName}</div>
+                        <div className="text-xs mt-1" style={{ color: "#6b7a8d" }}>{new Date(s.actionAt).toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</div>
+                        <div className="mt-2 text-xs px-2 py-0.5 rounded inline-block" style={{ backgroundColor: "#dcfce7", color: "#16a34a" }}>✓ Digitally Signed</div>
+                      </>
+                    ) : <div className="text-xs italic" style={{ color: "#9ca3af" }}>Pending approval</div>}
+                  </div>
+                );
+              })()}
+              {/* HSE Manager — step 2 */}
+              {(() => {
+                const s = data.approvalHistory?.find(h => h.step === 2 && h.action === "approved");
+                return (
+                  <div className="rounded border p-3" style={{ borderColor: s ? "#dde3ec" : "#e5e7eb", backgroundColor: s ? "#f9fafb" : "#f3f4f6" }}>
+                    <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#8a9ab0" }}>HSE Manager</div>
+                    {s ? (
+                      <>
+                        <div className="font-semibold text-sm" style={{ color: "#081C2E" }}>{s.actorName}</div>
+                        <div className="text-xs mt-1" style={{ color: "#6b7a8d" }}>{new Date(s.actionAt).toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</div>
+                        <div className="mt-2 text-xs px-2 py-0.5 rounded inline-block" style={{ backgroundColor: "#dcfce7", color: "#16a34a" }}>✓ Digitally Signed</div>
+                      </>
+                    ) : <div className="text-xs italic" style={{ color: "#9ca3af" }}>Pending approval</div>}
+                  </div>
+                );
+              })()}
+              {/* HSE Officer — step 3 */}
+              {(() => {
+                const s = data.approvalHistory?.find(h => h.step === 3 && h.action === "approved");
+                return (
+                  <div className="rounded border p-3" style={{ borderColor: s ? "#dde3ec" : "#e5e7eb", backgroundColor: s ? "#f9fafb" : "#f3f4f6" }}>
+                    <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#8a9ab0" }}>HSE Officer</div>
+                    {s ? (
+                      <>
+                        <div className="font-semibold text-sm" style={{ color: "#081C2E" }}>{s.actorName}</div>
+                        <div className="text-xs mt-1" style={{ color: "#6b7a8d" }}>{new Date(s.actionAt).toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</div>
+                        <div className="mt-2 text-xs px-2 py-0.5 rounded inline-block" style={{ backgroundColor: "#dcfce7", color: "#16a34a" }}>✓ Digitally Signed</div>
+                      </>
+                    ) : <div className="text-xs italic" style={{ color: "#9ca3af" }}>Pending approval</div>}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>

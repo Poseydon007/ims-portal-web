@@ -202,6 +202,14 @@
 - [ ] Fix email notifications not being received — diagnose SendPulse API call and sender issue
 
 ## Bug Fixes (Apr 13 — v2)
-- [ ] Fix React setState-in-render error in Login component (navigate in render phase)
-- [ ] Add Approve/Return buttons for admin on All Submissions page
-- [ ] Fix email notifications not being received (SendPulse sender verification)
+- [x] Fix React setState-in-render error in Login component (navigate in render phase)
+- [x] Add Approve/Return buttons for admin on All Submissions page
+- [x] Fix email notifications not being received (SendPulse sender verification)
+
+## Digital Signatures & Auto Date (Apr 13)
+- [x] Submission date+time: auto-set server-side at moment of submit, show read-only on form (not editable by user)
+- [x] Remove supervisorName/supervisorDate/hseOfficerName/hseOfficerDate from form input fields entirely
+- [x] SubmissionPrintView signatures block: show submitter name + submission timestamp from DB
+- [x] SubmissionPrintView signatures block: show supervisor name + approval timestamp from approvalHistory step 1
+- [x] SubmissionPrintView signatures block: show HSE officer name + approval timestamp from approvalHistory step 2
+- [x] ApprovalQueue detail panel: same digital signature data as print view

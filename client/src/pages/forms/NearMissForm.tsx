@@ -55,10 +55,6 @@ type FormData = {
   potentialSeverity: string;
   potentialLikelihood: string;
   correctiveActions: CorrectiveAction[];
-  supervisorName: string;
-  supervisorDate: string;
-  hseOfficerName: string;
-  hseOfficerDate: string;
 };
 
 export default function NearMissForm() {
@@ -114,10 +110,6 @@ export default function NearMissForm() {
       potentialSeverity: data.potentialSeverity,
       potentialLikelihood: data.potentialLikelihood,
       correctiveActions: data.correctiveActions.filter(a => a.action.trim()),
-      supervisorName: data.supervisorName,
-      supervisorDate: data.supervisorDate,
-      hseOfficerName: data.hseOfficerName,
-      hseOfficerDate: data.hseOfficerDate,
     });
   };
 
@@ -367,42 +359,42 @@ export default function NearMissForm() {
 
         {/* Sign-off */}
         <div style={sectionHeaderStyle}>Sign-Off</div>
-        <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label style={labelStyle} className="block mb-1">Reported By (Signature / Name)</label>
-            <input type="text" {...register("reportedBy")} readOnly
-              className="w-full border rounded px-3 py-2 bg-gray-50"
-              style={inputStyle} />
+        <div className="p-6">
+          {/* Digital sign-off notice */}
+          <div className="rounded border p-4 mb-4 text-xs" style={{ backgroundColor: "#f0f4ff", borderColor: "#c7d2fe", color: "#3730a3" }}>
+            <strong>Digital Signature Notice:</strong> By submitting this form, you are digitally signing as the reporting party.
+            The submission is time-stamped automatically by the system. Supervisor and HSE Officer signatures are recorded
+            at the time of their approval in the IMS workflow.
           </div>
-          <div>
-            <label style={labelStyle} className="block mb-1">Date Submitted</label>
-            <input type="text" value={new Date().toLocaleDateString("en-GB")} readOnly
-              className="w-full border rounded px-3 py-2 bg-gray-50"
-              style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle} className="block mb-1">Supervisor Name</label>
-            <input type="text" {...register("supervisorName")}
-              className="w-full border rounded px-3 py-2 focus:outline-none"
-              style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle} className="block mb-1">Supervisor Date</label>
-            <input type="date" {...register("supervisorDate")}
-              className="w-full border rounded px-3 py-2 focus:outline-none"
-              style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle} className="block mb-1">HSE Officer Name</label>
-            <input type="text" {...register("hseOfficerName")}
-              className="w-full border rounded px-3 py-2 focus:outline-none"
-              style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle} className="block mb-1">HSE Officer Date</label>
-            <input type="date" {...register("hseOfficerDate")}
-              className="w-full border rounded px-3 py-2 focus:outline-none"
-              style={inputStyle} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label style={labelStyle} className="block mb-1">Submitted By</label>
+              <input type="text" {...register("reportedBy")} readOnly
+                className="w-full border rounded px-3 py-2 bg-gray-50"
+                style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle} className="block mb-1">Submission Date &amp; Time</label>
+              <input
+                type="text"
+                value={new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                readOnly
+                className="w-full border rounded px-3 py-2 bg-gray-50"
+                style={inputStyle}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-1 p-4 rounded border" style={{ borderColor: "#dde3ec", backgroundColor: "#f9fafb" }}>
+                <div>
+                  <div className="text-xs font-semibold mb-1" style={{ color: "#8a9ab0" }}>SUPERVISOR SIGN-OFF</div>
+                  <div className="text-xs italic" style={{ color: "#6b7a8d" }}>Recorded automatically upon approval in the IMS portal</div>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold mb-1" style={{ color: "#8a9ab0" }}>HSE OFFICER SIGN-OFF</div>
+                  <div className="text-xs italic" style={{ color: "#6b7a8d" }}>Recorded automatically upon final approval in the IMS portal</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
