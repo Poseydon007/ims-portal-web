@@ -1401,6 +1401,114 @@ body {
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     CHAPTER 6 — CLOSING
-     ═════════════════════════════════════════
+<\!-- CHAPTER 6 — CLOSING -->
+<section class="closing" id="ch6">
+  <div class="chapter-number reveal" style="justify-content: center;">The Takeaway</div>
+  <h2 class="reveal">Document control isn't<br>paperwork. It's protection.</h2>
+  <p class="reveal">It protects your people, your compliance, your reputation, and your ability to prove — at any point in time — that you were doing the right thing, the right way.</p>
+  <div class="reveal">
+    <div class="closing-badge">
+      <span>✦</span>
+      <span>True East Mining — Integrated Management System</span>
+    </div>
+  </div>
+</section>
+
+<\!-- FOOTER -->
+<div class="footer">
+  <span>True East Mining Company</span> — الشرق الحقيقي للتعدين<br>
+  Document Control Guide · IMS Reference · ISO 9001 · 14001 · 45001
+</div>
+
+<script>
+// Scroll-driven reveal animations
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -60px 0px' };
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+
+// Floating nav
+const floatNav = document.getElementById('floatNav');
+const navLinks = floatNav.querySelectorAll('a');
+const sections = ['hero', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6'].map(id => document.getElementById(id));
+
+window.addEventListener('scroll', () => {
+  floatNav.classList.toggle('show', window.scrollY > window.innerHeight * 0.5);
+  let current = 0;
+  sections.forEach((sec, i) => {
+    if (sec && window.scrollY >= sec.offsetTop - window.innerHeight * 0.4) {
+      current = i;
+    }
+  });
+  navLinks.forEach((link, i) => {
+    link.classList.toggle('active', i === current);
+  });
+});
+
+// Organize button (chaos desk)
+const organizeBtn = document.getElementById('organizeBtn');
+const chaosDeck = document.getElementById('chaosDeck');
+let isOrganized = false;
+
+organizeBtn.addEventListener('click', () => {
+  isOrganized = \!isOrganized;
+  chaosDeck.classList.toggle('organized', isOrganized);
+  organizeBtn.textContent = isOrganized ? '\u2726 Release the chaos' : '\u2726 Click to bring order';
+});
+
+// Lifecycle stepper auto-advance
+const lifecycleTrack = document.getElementById('lifecycleTrack');
+const steps = lifecycleTrack.querySelectorAll('.lifecycle-step');
+let currentStep = -1;
+let lifecycleInterval = null;
+
+const lifecycleObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && \!lifecycleInterval) {
+      advanceLifecycle();
+      lifecycleInterval = setInterval(advanceLifecycle, 1200);
+    }
+  });
+}, { threshold: 0.4 });
+
+lifecycleObserver.observe(lifecycleTrack);
+
+function advanceLifecycle() {
+  currentStep++;
+  if (currentStep >= steps.length) {
+    clearInterval(lifecycleInterval);
+    return;
+  }
+  steps[currentStep].classList.add('active');
+}
+
+// Smooth scroll for nav dots
+document.querySelectorAll('.float-nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
