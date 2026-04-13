@@ -169,7 +169,7 @@ export function TopNav() {
           {/* User info + sign out — below portal label */}
           {!loading && isAuthenticated && user ? (
             <div className="flex items-center gap-2 mt-1.5">
-              <div className="text-right">
+              <div className="text-left">
                 <div className="text-white text-xs font-semibold leading-tight">
                   {user.fullName}
                 </div>
