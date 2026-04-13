@@ -108,16 +108,15 @@ export default function ImsForm({
 }: ImsFormProps) {
   const { user, loading } = useImsAuth();
   const [submitted, setSubmitted] = useState(false);
-  const [sheetUrl, setSheetUrl] = useState("");
+
   const [submitError, setSubmitError] = useState<string | null>(null);
   const surveyRef = useRef<Model | null>(null);
 
   const readOnly = !canSubmit(user?.role, minRole);
 
   const mutation = trpc.formSubmissions.submit.useMutation({
-    onSuccess: (data) => {
+    onSuccess: () => {
       setSubmitted(true);
-      setSheetUrl(data.sheetUrl ?? "");
     },
     onError: (err) => {
       setSubmitError(err.message || "Submission failed. Please try again.");
@@ -167,8 +166,8 @@ export default function ImsForm({
       const data = sender.data;
       mutation.mutate({
         formCode,
-        formTitle: survey.title,
-        data: { ...data, _formCode: formCode },
+        formTitle: title,
+        data: JSON.stringify({ ...data, _formCode: formCode }),
       });
     });
   }, []);
@@ -182,17 +181,7 @@ export default function ImsForm({
           <p className="mb-4 text-sm">
             The {title} has been recorded and the register updated.
           </p>
-          {sheetUrl && (
-            <a
-              href={sheetUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-sm font-semibold px-5 py-2 rounded text-white mr-3"
-              style={{ backgroundColor: "#C49A28" }}
-            >
-              View Register
-            </a>
-          )}
+
           <Link href="/" className="text-sm text-[#081C2E] hover:underline">
             ← Back to Portal Home
           </Link>

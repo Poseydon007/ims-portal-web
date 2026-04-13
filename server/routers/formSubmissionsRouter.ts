@@ -9,7 +9,7 @@ import { eq, desc } from "drizzle-orm";
 const submitFormSchema = z.object({
   formCode: z.string(), // e.g. "TE-IMS-FRM-HSE-003"
   formTitle: z.string().optional(),
-  data: z.record(z.unknown()), // full SurveyJS result data as JSON object
+  data: z.string(), // JSON-serialized SurveyJS result data
 });
 
 export const formSubmissionsRouter = router({
@@ -26,7 +26,7 @@ export const formSubmissionsRouter = router({
           submissionId,
           formCode: input.formCode,
           formTitle: input.formTitle ?? input.formCode,
-          responseData: JSON.stringify(input.data),
+          responseData: input.data, // already JSON-stringified by client
           submittedByUserId: ctx.user.id,
           submittedByName: ctx.user.name ?? ctx.user.email ?? ctx.user.openId,
           status: "submitted",
