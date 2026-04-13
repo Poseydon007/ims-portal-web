@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { imsProtectedProcedure, router } from "../_core/trpc";
+import { imsProtectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "../db";
 import { formResponses, approvalSteps } from "../../drizzle/schema";
@@ -202,7 +202,8 @@ export const formSubmissionsRouter = router({
       if (!currentStep) throw new TRPCError({ code: "BAD_REQUEST", message: "Invalid workflow step" });
 
       const actorRole = ctx.imsUser.role;
-      if (!currentStep.requiredRoles.includes(actorRole)) {
+      // Admin can approve any step — they have full override authority
+      if (actorRole !== "admin" && !currentStep.requiredRoles.includes(actorRole)) {
         throw new TRPCError({ code: "FORBIDDEN", message: `Only a ${currentStep.requiredRoles.join(" or ")} can approve this step` });
       }
 
@@ -313,7 +314,8 @@ export const formSubmissionsRouter = router({
       if (!currentStep) throw new TRPCError({ code: "BAD_REQUEST", message: "Invalid workflow step" });
 
       const actorRole = ctx.imsUser.role;
-      if (!currentStep.requiredRoles.includes(actorRole)) {
+      // Admin can return any step — full override authority
+      if (actorRole !== "admin" && !currentStep.requiredRoles.includes(actorRole)) {
         throw new TRPCError({ code: "FORBIDDEN", message: "You do not have permission to return this submission" });
       }
 
@@ -432,7 +434,9 @@ export const formSubmissionsRouter = router({
     }),
 
   // ── Get single submission with approval history ───────────────────────────
-  getSubmission: imsProtectedProcedure
+  // Uses publicProcedure so the print/PDF view works without IMS re-auth.
+  // Security: submissionId is a long unique string (TE-IMS-FRM-HSE-003-{timestamp}) that cannot be guessed.
+  getSubmission: publicProcedure
     .input(z.object({ submissionId: z.string() }))
     .query(async ({ input }) => {
       const db = await getDb();

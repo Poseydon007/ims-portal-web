@@ -196,3 +196,12 @@
 - [ ] Update User Management role dropdown to include HSE Manager
 - [ ] Update all frontend role display labels to show "HSE Manager" correctly
 - [ ] Update email notifications to notify HSE Manager at correct step
+
+## Bug Fixes (Apr 13)
+- [ ] Fix print view redirecting to login — make accessible to logged-in IMS users without re-auth
+- [ ] Fix email notifications not being received — diagnose SendPulse API call and sender issue
+
+## Bug Fixes (Apr 13 — v2)
+- [ ] Fix React setState-in-render error in Login component (navigate in render phase)
+- [ ] Add Approve/Return buttons for admin on All Submissions page
+- [ ] Fix email notifications not being received (SendPulse sender verification)

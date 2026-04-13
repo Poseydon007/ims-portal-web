@@ -1,5 +1,5 @@
 // IMS Portal Login Page — branded True East navy/gold
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useImsAuth } from "@/hooks/useImsAuth";
@@ -18,11 +18,14 @@ export default function Login() {
   const loginMutation = trpc.imsAuth.login.useMutation();
   const utils = trpc.useUtils();
 
-  // If already authenticated, redirect to home
-  if (!loading && isAuthenticated) {
-    navigate("/", { replace: true });
-    return null;
-  }
+  // If already authenticated, redirect to home — must be in useEffect to avoid setState-in-render
+  useEffect(() => {
+    if (!loading && isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+  }, [loading, isAuthenticated, navigate]);
+
+  if (!loading && isAuthenticated) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
