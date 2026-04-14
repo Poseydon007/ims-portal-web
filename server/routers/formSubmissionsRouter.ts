@@ -31,10 +31,10 @@ const WORKFLOW_STEPS = [
 // e.g. TE-IMS-FRM-HSE-003 → NM (Near Miss)
 const FORM_CODE_PREFIX: Record<string, string> = {
   "TE-IMS-FRM-HSE-001": "JHA",
-  "TE-IMS-FRM-HSE-002": "PTW",
+  "TE-IMS-FRM-HSE-002": "IFN",   // Incident Flash Notification
   "TE-IMS-FRM-HSE-003": "NM",
-  "TE-IMS-FRM-HSE-004": "INC",
-  "TE-IMS-FRM-HSE-006": "INSP",
+  "TE-IMS-FRM-HSE-004": "FAK",   // First Aid Kit Inspection
+  "TE-IMS-FRM-HSE-006": "MTG",   // HSE Meeting Minutes
   "TE-IMS-FRM-HSE-007": "AUDIT",
   "TE-IMS-FRM-HSE-009": "T5",
   "TE-IMS-FRM-HSE-010": "CAPA",
