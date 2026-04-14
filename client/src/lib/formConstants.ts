@@ -79,8 +79,8 @@ export const CONDITION_OPTIONS = ["Good", "Fair", "Poor", "N/A"];
 export const YES_NO_OPTIONS = ["Yes", "No", "N/A"];
 
 // Form minimum role requirements
-// field_worker < supervisor < admin
-export type ImsRole = "field_worker" | "supervisor" | "admin";
+// field_worker < supervisor < hse_manager < admin
+export type ImsRole = "field_worker" | "supervisor" | "hse_manager" | "admin";
 
 export const FORM_MIN_ROLES: Record<string, ImsRole> = {
   // HSE Forms
@@ -148,6 +148,6 @@ export const FORM_MIN_ROLES: Record<string, ImsRole> = {
 export function canSubmitForm(userRole: ImsRole | undefined, formCode: string): boolean {
   if (!userRole) return false;
   const minRole = FORM_MIN_ROLES[formCode] ?? "field_worker";
-  const hierarchy: ImsRole[] = ["field_worker", "supervisor", "admin"];
+  const hierarchy: ImsRole[] = ["field_worker", "supervisor", "hse_manager", "admin"];
   return hierarchy.indexOf(userRole) >= hierarchy.indexOf(minRole);
 }

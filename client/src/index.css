@@ -149,3 +149,46 @@
     margin-top: 1.5rem;
   }
 }
+
+/* ── IMS Form: SurveyJS matrix table horizontal scroll ──────────────────────
+   Ensures wide matrixdynamic tables scroll horizontally instead of clipping.
+   The .ims-survey-wrapper has overflow-x:auto set inline in ImsForm.tsx.
+   These rules make the inner SurveyJS table respect that scroll container.
+*/
+
+/* Force the table to be at least as wide as its content */
+.ims-survey-wrapper .sd-table {
+  min-width: 640px;
+  width: 100%;
+  table-layout: auto;
+}
+
+/* Keep column headers on a single line — no wrapping */
+.ims-survey-wrapper .sd-table__cell--header {
+  white-space: nowrap;
+  min-width: 130px;
+  padding: 8px 10px;
+}
+
+/* Give data cells a reasonable minimum width */
+.ims-survey-wrapper .sd-table__cell:not(.sd-table__cell--header) {
+  min-width: 130px;
+  vertical-align: top;
+}
+
+/* Dropdown cells — slightly wider */
+.ims-survey-wrapper .sd-table__cell .sd-dropdown,
+.ims-survey-wrapper .sd-table__cell .sd-dropdown__value {
+  min-width: 140px;
+}
+
+/* Text input cells */
+.ims-survey-wrapper .sd-table__cell .sd-input {
+  min-width: 120px;
+}
+
+/* Remove any max-width constraints SurveyJS may apply to the matrix container */
+.ims-survey-wrapper .sd-matrixdynamic,
+.ims-survey-wrapper .sd-matrix {
+  overflow: visible;
+}

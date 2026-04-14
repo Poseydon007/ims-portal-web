@@ -35,15 +35,15 @@ const FORM_CODE_PREFIX: Record<string, string> = {
   "TE-IMS-FRM-HSE-003": "NM",
   "TE-IMS-FRM-HSE-004": "FAK",   // First Aid Kit Inspection
   "TE-IMS-FRM-HSE-006": "MTG",   // HSE Meeting Minutes
-  "TE-IMS-FRM-HSE-007": "AUDIT",
-  "TE-IMS-FRM-HSE-009": "T5",
-  "TE-IMS-FRM-HSE-010": "CAPA",
-  "TE-IMS-FRM-HSE-011": "PTW",
-  "TE-IMS-FRM-HSE-012": "TOOL",
-  "TE-IMS-FRM-HSE-013": "HIRA",
-  "TE-IMS-FRM-HSE-014": "EMRG",
-  "TE-IMS-FRM-HSE-015": "RISK",
-  "TE-IMS-FRM-HSE-016": "PPE",
+  "TE-IMS-FRM-HSE-007": "PTO",    // Planned Task Observation
+  "TE-IMS-FRM-HSE-009": "T5",     // Take 5 Hazard Assessment
+  "TE-IMS-FRM-HSE-010": "HID",    // Hazard Identification Prompt Checklist
+  "TE-IMS-FRM-HSE-011": "PTW",    // Permit to Work
+  "TE-IMS-FRM-HSE-012": "PPEI",   // PPE Issue and Inspection
+  "TE-IMS-FRM-HSE-013": "PPEK",   // PPE Kit Issuance
+  "TE-IMS-FRM-HSE-014": "PPSC",   // PPE Spot-Check
+  "TE-IMS-FRM-HSE-015": "PPRR",   // PPE Replacement Request
+  "TE-IMS-FRM-HSE-016": "PPCM",   // PPE Kit Contents Matrix
   "TE-IMS-FRM-HSE-017": "MHND",
   "TE-IMS-FRM-HSE-018": "ENV",
   "TE-IMS-FRM-HSE-019": "APPT",
@@ -284,7 +284,7 @@ export const formSubmissionsRouter = router({
               submitterName:  submitter.fullName,
               submitterEmail: submitter.email,
               reportNumber:   rptNo,
-              formTitle:      submission.formTitle,
+              formTitle:      submission.formTitle ?? "",
               closedByName:   ctx.imsUser.fullName ?? ctx.imsUser.email,
               closedAt:       approvedAt,
               portalUrl: portalUrl2,
@@ -352,7 +352,7 @@ export const formSubmissionsRouter = router({
             submitterName:  submitter.fullName,
             submitterEmail: submitter.email,
             reportNumber:   submission.reportNumber ?? input.submissionId,
-            formTitle:      submission.formTitle,
+            formTitle:      submission.formTitle ?? "",
             returnedByName: ctx.imsUser.fullName ?? ctx.imsUser.email,
             returnedByRole: ctx.imsUser.role,
             comment:        input.comment,

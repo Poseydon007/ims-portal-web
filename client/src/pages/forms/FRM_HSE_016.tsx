@@ -1,423 +1,284 @@
-import { useState } from "react";
-import { Link } from "wouter";
-import { trpc } from "@/lib/trpc";
 import Layout from "@/components/Layout";
+import { Check, Minus } from "lucide-react";
+
+const BRAND_NAVY = "#081C2E";
+const BRAND_GOLD = "#C49A28";
+
+const StatusBadge = () => (
+  <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200 uppercase tracking-wider">
+    Approved Reference
+  </span>
+);
+
+const TableHeader = ({ children }: { children: React.ReactNode }) => (
+  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider border-b border-gray-200 sticky top-0 bg-gray-50 z-10 whitespace-nowrap">
+    {children}
+  </th>
+);
+
+const TableCell = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <td className={`px-4 py-3 text-sm border-b border-gray-100 whitespace-nowrap ${className}`}>
+    {children}
+  </td>
+);
+
+const StickyCell = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <td className={`px-4 py-3 text-sm font-medium border-b border-gray-100 sticky left-0 bg-white z-20 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] whitespace-nowrap ${className}`}>
+    {children}
+  </td>
+);
+
+const IconCheck = () => <Check className="w-5 h-5 text-green-600 mx-auto" />;
+const IconDash = () => <Minus className="w-5 h-5 text-gray-300 mx-auto" />;
 
 export default function FRM_HSE_016() {
-  const [submitted, setSubmitted] = useState(false);
-  const [sheetUrl, setSheetUrl] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [formData, setFormData] = useState({
-    inspectionDate: "",
-    inspectorName: "",
-    siteLocation: "",
-    roleBasedRows: [
-      { role: "Driller – Day Shift", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: false, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "FFP2", harness: false, headlamp: false, other: "", notes: "Standard drilling PPE" },
-      { role: "Driller – Night Shift", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: false, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "FFP2", harness: false, headlamp: true, other: "", notes: "Headlamp mandatory" },
-      { role: "Rig Mechanic / Workshop", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: true, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "FFP3", harness: false, headlamp: false, other: "", notes: "Respirator if required" },
-      { role: "Supervisor / HSE Personnel", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: false, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "FFP2", harness: false, headlamp: false, other: "", notes: "Field standard" },
-    ],
-    activityBasedRows: [
-      { activity: "Working at Height (>1.8 m)", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: false, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "", harness: true, specialItems: "", notes: "Harness mandatory" },
-      { activity: "Confined Space Entry", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: true, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "As per permit", harness: true, specialItems: "Gas Detector", notes: "As per permit" },
-      { activity: "Hot Work / Welding", hardHat: true, safetyGlasses: true, cutGloves: true, chemicalGloves: false, frHighVis: true, steelToeBoots: true, earProtection: true, respirator: "Welding Fume", harness: false, specialItems: "Welding Helmet", notes: "FR mandatory" },
-      { activity: "General Site Visitor", hardHat: true, safetyGlasses: true, cutGloves: false, chemicalGloves: false, frHighVis: true, steelToeBoots: true, earProtection: false, respirator: "", harness: false, specialItems: "Visitor Kit", notes: "Restricted access" },
-    ],
-    comments: "",
-    approvalDate: "",
-    approverName: "Joao Melo",
-  });
-
-  const mutation = trpc.formSubmissions.submit.useMutation();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleRowChange = (type: "role" | "activity", index: number, field: string, value: any) => {
-    const rowsField = type === "role" ? "roleBasedRows" : "activityBasedRows";
-    const newRows = [...formData[rowsField]];
-    newRows[index] = { ...newRows[index], [field]: value };
-    setFormData((prev) => ({ ...prev, [rowsField]: newRows }));
-  };
-
-  const addRow = (type: "role" | "activity") => {
-    if (type === "role") {
-      setFormData((prev) => ({
-        ...prev,
-        roleBasedRows: [...prev.roleBasedRows, { role: "", hardHat: false, safetyGlasses: false, cutGloves: false, chemicalGloves: false, frHighVis: false, steelToeBoots: false, earProtection: false, respirator: "", harness: false, headlamp: false, other: "", notes: "" }],
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        activityBasedRows: [...prev.activityBasedRows, { activity: "", hardHat: false, safetyGlasses: false, cutGloves: false, chemicalGloves: false, frHighVis: false, steelToeBoots: false, earProtection: false, respirator: "", harness: false, specialItems: "", notes: "" }],
-      }));
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    const headers = [
-      "Inspection Date", "Inspector Name", "Site Location",
-      "Role-Based Data (JSON)", "Activity-Based Data (JSON)",
-      "Comments", "Approval Date", "Approver Name"
-    ];
-
-    const values = [
-      formData.inspectionDate, formData.inspectorName, formData.siteLocation,
-      JSON.stringify(formData.roleBasedRows), JSON.stringify(formData.activityBasedRows),
-      formData.comments, formData.approvalDate, formData.approverName
-    ];
-
-    try {
-      const result = await mutation.mutateAsync({
-        formCode: "TE-IMS-FRM-HSE-016",
-        headers,
-        values,
-      });
-      setSheetUrl(result.sheetUrl);
-      setSubmitted(true);
-    } catch (err: any) {
-      setError(err.message || "An error occurred during submission.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  if (submitted) {
-    return (
-      <Layout>
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10 text-center">
-          <h1 className="text-2xl font-bold text-[#081C2E] mb-4">Form Submitted Successfully</h1>
-          <p className="text-gray-600 mb-6">Your PPE Kit Contents Matrix update has been recorded.</p>
-          <a
-            href={sheetUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#C49A28] text-white px-6 py-2 rounded hover:bg-[#a38021] transition-colors"
-          >
-            View Register (Google Sheet)
-          </a>
-          <div className="mt-8">
-            <Link href="/" className="text-[#081C2E] hover:underline">← Return to Portal Home</Link>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
-
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 bg-[#f4f6f9] min-h-screen">
-        {/* Breadcrumb */}
-        <nav className="mb-6">
-          <Link href="/" className="text-[#081C2E] hover:underline font-semibold">← Portal Home</Link>
-          <span className="mx-2 text-gray-400">/</span>
-          <Link href="/docs/frm" className="text-gray-600 hover:text-[#C49A28] transition-colors cursor-pointer">FRM</Link>
-          <span className="mx-2 text-gray-400">/</span>
-          <span className="text-gray-600">PPE Kit Contents Matrix</span>
-        </nav>
-
-        <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg overflow-hidden border border-[#dde3ec]">
-          {/* Header Section */}
-          <div className="bg-[#081C2E] p-4 text-white">
-            <h1 className="text-xl font-bold uppercase tracking-wider">PPE Kit Contents Matrix</h1>
+      <div className="container mx-auto py-8 px-4 max-w-7xl">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b-4 pb-4" style={{ borderColor: BRAND_GOLD }}>
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <h1 className="text-3xl font-bold tracking-tight" style={{ color: BRAND_NAVY }}>PPE Kit Contents Matrix</h1>
+              <StatusBadge />
+            </div>
+            <p className="text-gray-500 font-medium">True East Mining Company — Integrated Management System</p>
           </div>
+          <div className="mt-4 md:mt-0 text-right text-sm text-gray-600 font-mono bg-gray-50 p-3 rounded border border-gray-200">
+            <div>Code: <span className="font-bold">TE-IMS-FRM-HSE-016</span></div>
+            <div>Revision: <span className="font-bold">00</span></div>
+            <div>Date: <span className="font-bold">01 March 2026</span></div>
+          </div>
+        </div>
 
-          {/* Document Control Table */}
-          <div className="p-4 bg-gray-50 border-b border-[#dde3ec]">
-            <table className="w-full text-sm border-collapse border border-[#dde3ec]">
+        {/* Intro Section */}
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-10 rounded-r shadow-sm">
+          <p className="text-blue-900 leading-relaxed">
+            This matrix defines the standard contents of each PPE Kit issued to personnel based on their role, activity, and site-specific hazards.
+          </p>
+        </div>
+
+        {/* Section 1: Role-Based Requirements */}
+        <section className="mb-12">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold" style={{ backgroundColor: BRAND_NAVY }}>1</div>
+            <h2 className="text-xl font-bold uppercase tracking-tight" style={{ color: BRAND_NAVY }}>Role-Based PPE Requirements</h2>
+          </div>
+          <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <table className="w-full border-collapse bg-white">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider border-b border-gray-200 sticky left-0 bg-gray-50 z-30 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">Kit Type / Role</th>
+                  <TableHeader>Hard Hat</TableHeader>
+                  <TableHeader>Safety Glasses</TableHeader>
+                  <TableHeader>Cut Gloves</TableHeader>
+                  <TableHeader>Chem Gloves</TableHeader>
+                  <TableHeader>FR / High-Vis</TableHeader>
+                  <TableHeader>Steel-Toe Boots</TableHeader>
+                  <TableHeader>Ear Protection</TableHeader>
+                  <TableHeader>Dust/Resp</TableHeader>
+                  <TableHeader>Harness</TableHeader>
+                  <TableHeader>Headlamp</TableHeader>
+                  <TableHeader>Notes</TableHeader>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
-                  <td className="border border-[#dde3ec] p-2 font-bold bg-gray-100 w-1/4">Document Code</td>
-                  <td className="border border-[#dde3ec] p-2 w-1/4">TE-IMS-FRM-HSE-016</td>
-                  <td className="border border-[#dde3ec] p-2 font-bold bg-gray-100 w-1/4">Revision</td>
-                  <td className="border border-[#dde3ec] p-2 w-1/4">00</td>
+                  <StickyCell>Driller – Day Shift</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">✔ (Clear/Dark)</TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">FFP2</TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="italic text-gray-500">Standard drilling PPE</TableCell>
                 </tr>
                 <tr>
-                  <td className="border border-[#dde3ec] p-2 font-bold bg-gray-100">Date</td>
-                  <td className="border border-[#dde3ec] p-2">01 March 2026</td>
-                  <td className="border border-[#dde3ec] p-2 font-bold bg-gray-100">Status</td>
-                  <td className="border border-[#dde3ec] p-2 text-green-700 font-semibold">Approved</td>
+                  <StickyCell>Driller – Night Shift</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">✔ (Clear/Dark)</TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">FFP2</TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="italic text-gray-500">Headlamp mandatory</TableCell>
+                </tr>
+                <tr>
+                  <StickyCell>Rig Mechanic / Workshop</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">FFP3 (if dusty/chem)</TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="italic text-gray-500">Respirator if required</TableCell>
+                </tr>
+                <tr>
+                  <StickyCell>Supervisor / HSE Personnel</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">FFP2</TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="italic text-gray-500">Field standard</TableCell>
                 </tr>
               </tbody>
             </table>
           </div>
+        </section>
 
-          <div className="p-6 space-y-8">
-            {/* General Information */}
-            <section>
-              <div className="bg-[#081C2E] text-white px-4 py-2 mb-4 font-bold">GENERAL INFORMATION</div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Inspection/Verification Date *</label>
-                  <input
-                    type="date"
-                    name="inspectionDate"
-                    required
-                    value={formData.inspectionDate}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-[#dde3ec] rounded focus:ring-2 focus:ring-[#C49A28] outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Inspector/Issuer Name *</label>
-                  <input
-                    type="text"
-                    name="inspectorName"
-                    required
-                    placeholder="Full Name"
-                    value={formData.inspectorName}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-[#dde3ec] rounded focus:ring-2 focus:ring-[#C49A28] outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Site/Location *</label>
-                  <input
-                    type="text"
-                    name="siteLocation"
-                    required
-                    placeholder="e.g., Ma'aden Site"
-                    value={formData.siteLocation}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-[#dde3ec] rounded focus:ring-2 focus:ring-[#C49A28] outline-none"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Role-Based PPE Requirements */}
-            <section>
-              <div className="bg-[#081C2E] text-white px-4 py-2 mb-4 font-bold flex justify-between items-center">
-                <span>ROLE-BASED PPE REQUIREMENTS</span>
-                <button type="button" onClick={() => addRow("role")} className="bg-[#C49A28] text-xs px-2 py-1 rounded hover:bg-[#a38021]">Add Role</button>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse border border-[#dde3ec]">
-                  <thead>
-                    <tr className="bg-[#081C2E] text-white">
-                      <th className="border border-[#dde3ec] p-2 min-w-[150px]">Kit Type / Role</th>
-                      <th className="border border-[#dde3ec] p-2">Hard Hat</th>
-                      <th className="border border-[#dde3ec] p-2">Safety Glasses</th>
-                      <th className="border border-[#dde3ec] p-2">Cut Gloves</th>
-                      <th className="border border-[#dde3ec] p-2">Chem Gloves</th>
-                      <th className="border border-[#dde3ec] p-2">FR / High-Vis</th>
-                      <th className="border border-[#dde3ec] p-2">Steel-Toe Boots</th>
-                      <th className="border border-[#dde3ec] p-2">Ear Prot.</th>
-                      <th className="border border-[#dde3ec] p-2">Respirator</th>
-                      <th className="border border-[#dde3ec] p-2">Harness</th>
-                      <th className="border border-[#dde3ec] p-2">Headlamp</th>
-                      <th className="border border-[#dde3ec] p-2">Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {formData.roleBasedRows.map((row, idx) => (
-                      <tr key={idx} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.role} onChange={(e) => handleRowChange("role", idx, "role", e.target.value)} className="w-full p-1 border-none bg-transparent" />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.hardHat} onChange={(e) => handleRowChange("role", idx, "hardHat", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.safetyGlasses} onChange={(e) => handleRowChange("role", idx, "safetyGlasses", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.cutGloves} onChange={(e) => handleRowChange("role", idx, "cutGloves", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.chemicalGloves} onChange={(e) => handleRowChange("role", idx, "chemicalGloves", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.frHighVis} onChange={(e) => handleRowChange("role", idx, "frHighVis", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.steelToeBoots} onChange={(e) => handleRowChange("role", idx, "steelToeBoots", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.earProtection} onChange={(e) => handleRowChange("role", idx, "earProtection", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.respirator} onChange={(e) => handleRowChange("role", idx, "respirator", e.target.value)} className="w-full p-1 border-none bg-transparent" placeholder="Type" />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.harness} onChange={(e) => handleRowChange("role", idx, "harness", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.headlamp} onChange={(e) => handleRowChange("role", idx, "headlamp", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.notes} onChange={(e) => handleRowChange("role", idx, "notes", e.target.value)} className="w-full p-1 border-none bg-transparent" />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            {/* Activity-Based PPE Requirements */}
-            <section>
-              <div className="bg-[#081C2E] text-white px-4 py-2 mb-4 font-bold flex justify-between items-center">
-                <span>ACTIVITY-BASED PPE REQUIREMENTS</span>
-                <button type="button" onClick={() => addRow("activity")} className="bg-[#C49A28] text-xs px-2 py-1 rounded hover:bg-[#a38021]">Add Activity</button>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse border border-[#dde3ec]">
-                  <thead>
-                    <tr className="bg-[#081C2E] text-white">
-                      <th className="border border-[#dde3ec] p-2 min-w-[150px]">Activity</th>
-                      <th className="border border-[#dde3ec] p-2">Hard Hat</th>
-                      <th className="border border-[#dde3ec] p-2">Safety Glasses</th>
-                      <th className="border border-[#dde3ec] p-2">Cut Gloves</th>
-                      <th className="border border-[#dde3ec] p-2">Chem Gloves</th>
-                      <th className="border border-[#dde3ec] p-2">FR / High-Vis</th>
-                      <th className="border border-[#dde3ec] p-2">Steel-Toe Boots</th>
-                      <th className="border border-[#dde3ec] p-2">Ear Prot.</th>
-                      <th className="border border-[#dde3ec] p-2">Respirator</th>
-                      <th className="border border-[#dde3ec] p-2">Harness</th>
-                      <th className="border border-[#dde3ec] p-2">Special Items</th>
-                      <th className="border border-[#dde3ec] p-2">Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {formData.activityBasedRows.map((row, idx) => (
-                      <tr key={idx} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.activity} onChange={(e) => handleRowChange("activity", idx, "activity", e.target.value)} className="w-full p-1 border-none bg-transparent" />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.hardHat} onChange={(e) => handleRowChange("activity", idx, "hardHat", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.safetyGlasses} onChange={(e) => handleRowChange("activity", idx, "safetyGlasses", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.cutGloves} onChange={(e) => handleRowChange("activity", idx, "cutGloves", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.chemicalGloves} onChange={(e) => handleRowChange("activity", idx, "chemicalGloves", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.frHighVis} onChange={(e) => handleRowChange("activity", idx, "frHighVis", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.steelToeBoots} onChange={(e) => handleRowChange("activity", idx, "steelToeBoots", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.earProtection} onChange={(e) => handleRowChange("activity", idx, "earProtection", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.respirator} onChange={(e) => handleRowChange("activity", idx, "respirator", e.target.value)} className="w-full p-1 border-none bg-transparent" placeholder="Type" />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1 text-center">
-                          <input type="checkbox" checked={row.harness} onChange={(e) => handleRowChange("activity", idx, "harness", e.target.checked)} />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.specialItems} onChange={(e) => handleRowChange("activity", idx, "specialItems", e.target.value)} className="w-full p-1 border-none bg-transparent" />
-                        </td>
-                        <td className="border border-[#dde3ec] p-1">
-                          <input type="text" value={row.notes} onChange={(e) => handleRowChange("activity", idx, "notes", e.target.value)} className="w-full p-1 border-none bg-transparent" />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            {/* Additional Notes */}
-            <section>
-              <div className="bg-[#081C2E] text-white px-4 py-2 mb-4 font-bold">ADDITIONAL NOTES / CUSTOMIZATION</div>
-              <textarea
-                name="comments"
-                rows={4}
-                value={formData.comments}
-                onChange={handleInputChange}
-                placeholder="Enter any site-specific risk assessments or additional PPE requirements..."
-                className="w-full p-3 border border-[#dde3ec] rounded focus:ring-2 focus:ring-[#C49A28] outline-none"
-              ></textarea>
-            </section>
-
-            {/* Footer / Approval */}
-            <section className="bg-gray-50 p-6 rounded-lg border border-[#dde3ec]">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="font-bold text-[#081C2E] mb-4">Matrix Approval</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Approved By (CEO / MD Name) *</label>
-                      <input
-                        type="text"
-                        name="approverName"
-                        required
-                        value={formData.approverName}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-[#dde3ec] rounded"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Approval Date *</label>
-                      <input
-                        type="date"
-                        name="approvalDate"
-                        required
-                        value={formData.approvalDate}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-[#dde3ec] rounded"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="text-sm text-gray-600 space-y-2">
-                  <p className="font-bold text-[#081C2E]">Compliance Standards:</p>
-                  <ul className="list-disc pl-5">
-                    <li>TE-IMS-PROC-HSE-003 (Risk Assessment)</li>
-                    <li>TE-IMS-PROC-HSE-004 (PPE Procedure)</li>
-                    <li>ISO 45001:2018 (Clause 8.1.2)</li>
-                    <li>SASO / CE / ANSI standards where applicable</li>
-                  </ul>
-                  <p className="mt-4 italic">Update the matrix only with HSE Manager approval (new revision).</p>
-                </div>
-              </div>
-            </section>
-
-            {/* Error Message */}
-            {error && (
-              <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded">
-                {error}
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <div className="flex justify-end pt-6">
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`bg-[#081C2E] text-white px-10 py-3 rounded-lg font-bold shadow-lg hover:bg-[#1a3a5a] transition-all flex items-center ${isLoading ? "opacity-70 cursor-not-allowed" : ""}`}
-              >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Processing...
-                  </>
-                ) : (
-                  "Submit Matrix Update"
-                )}
-              </button>
-            </div>
+        {/* Section 2: Activity-Based Requirements */}
+        <section className="mb-12">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold" style={{ backgroundColor: BRAND_NAVY }}>2</div>
+            <h2 className="text-xl font-bold uppercase tracking-tight" style={{ color: BRAND_NAVY }}>Activity-Based PPE Requirements</h2>
           </div>
-        </form>
+          <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <table className="w-full border-collapse bg-white">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider border-b border-gray-200 sticky left-0 bg-gray-50 z-30 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">Activity</th>
+                  <TableHeader>Hard Hat</TableHeader>
+                  <TableHeader>Safety Glasses</TableHeader>
+                  <TableHeader>Cut Gloves</TableHeader>
+                  <TableHeader>Chem Gloves</TableHeader>
+                  <TableHeader>FR / High-Vis</TableHeader>
+                  <TableHeader>Steel-Toe Boots</TableHeader>
+                  <TableHeader>Ear Protection</TableHeader>
+                  <TableHeader>Respirator</TableHeader>
+                  <TableHeader>Harness</TableHeader>
+                  <TableHeader>Special Items</TableHeader>
+                  <TableHeader>Notes</TableHeader>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <StickyCell>Working at Height (&gt;1.8 m)</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="italic text-gray-500 font-medium">Harness mandatory</TableCell>
+                </tr>
+                <tr>
+                  <StickyCell>Confined Space Entry</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">As per risk assessment</TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">Personal gas detector</TableCell>
+                  <TableCell className="italic text-gray-500 font-medium">As per permit</TableCell>
+                </tr>
+                <tr>
+                  <StickyCell>Hot Work / Welding</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">✔ (Face Shield)</TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">✔ (FR mandatory)</TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">Welding helmet, gauntlets</TableCell>
+                  <TableCell className="italic text-gray-500 font-medium">As per permit</TableCell>
+                </tr>
+                <tr>
+                  <StickyCell>General Site Visitor</StickyCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">✔ (High-Vis Vest)</TableCell>
+                  <TableCell><IconCheck /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell><IconDash /></TableCell>
+                  <TableCell className="text-center text-xs font-medium text-gray-700">Visitor PPE kit</TableCell>
+                  <TableCell className="italic text-gray-500 font-medium">Restricted access</TableCell>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Section 3: Classification Key */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold" style={{ backgroundColor: BRAND_NAVY }}>3</div>
+              <h2 className="text-xl font-bold uppercase tracking-tight" style={{ color: BRAND_NAVY }}>PPE Classification Key</h2>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm space-y-3">
+              <div className="flex items-center gap-3 pb-2 border-b border-gray-100">
+                <div className="w-6 h-6 flex items-center justify-center"><Check className="w-5 h-5 text-green-600" /></div>
+                <span className="text-sm font-medium text-gray-700"><span className="font-bold text-gray-900">Mandatory</span> — Required for the role/activity</span>
+              </div>
+              <div className="flex items-center gap-3 pb-2 border-b border-gray-100">
+                <div className="w-6 h-6 flex items-center justify-center"><Minus className="w-5 h-5 text-gray-300" /></div>
+                <span className="text-sm font-medium text-gray-700"><span className="font-bold text-gray-900">Not required</span> — Under normal conditions</span>
+              </div>
+              <div className="flex items-center gap-3 pb-2 border-b border-gray-100">
+                <div className="w-6 h-6 flex items-center justify-center text-xs font-bold text-blue-600 italic">PTW</div>
+                <span className="text-sm font-medium text-gray-700"><span className="font-bold text-gray-900">As per permit</span> — Defined in Permit to Work</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 flex items-center justify-center text-xs font-bold text-blue-600 italic">FFP</div>
+                <span className="text-sm font-medium text-gray-700"><span className="font-bold text-gray-900">Respirator type</span> — Based on exposure assessment</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 4: Additional Notes */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold" style={{ backgroundColor: BRAND_NAVY }}>4</div>
+              <h2 className="text-xl font-bold uppercase tracking-tight" style={{ color: BRAND_NAVY }}>Additional Notes</h2>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+              <ul className="space-y-3 list-disc pl-5 text-sm text-gray-700 leading-relaxed">
+                <li>Site-specific risk assessments (JHA / HIRA) may increase PPE requirements</li>
+                <li>Respiratory protection must comply with fit-testing requirements</li>
+                <li>All PPE must meet SASO / CE / ANSI standards where applicable</li>
+                <li>Damaged or defective PPE must be replaced immediately</li>
+                <li>PPE issuance and tracking must be recorded in <span className="font-mono font-semibold text-blue-700">TE-IMS-REG-HSE-002</span></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-12 pt-6 border-t border-gray-200 text-center text-xs text-gray-400 uppercase tracking-widest">
+          True East Mining Company — Confidential Reference Material
+        </div>
       </div>
     </Layout>
   );

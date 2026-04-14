@@ -82,8 +82,6 @@ import TE_IMS_PROC_SYS_009 from "./pages/documents/TE_IMS_PROC_SYS_009";
 import TE_IMS_PROC_TRN_001 from "./pages/documents/TE_IMS_PROC_TRN_001";
 
 // Forms
-import NearMissForm from "./pages/forms/NearMissForm";
-import JHAForm from "./pages/forms/JHAForm";
 import FRM_HSE_001 from "@/pages/forms/FRM_HSE_001";
 import FRM_HSE_002 from "@/pages/forms/FRM_HSE_002";
 import FRM_HSE_003 from "@/pages/forms/FRM_HSE_003";
@@ -240,8 +238,6 @@ function Router() {
       <Route path="/docs/proc/TE-IMS-PROC-TRN-001" component={TE_IMS_PROC_TRN_001} />
 
       {/* Active Forms */}
-      <Route path="/forms/near-miss" component={NearMissForm} />
-      <Route path="/forms/jha" component={JHAForm} />
       <Route path="/forms/frm-hse-001" component={FRM_HSE_001} />
       <Route path="/forms/frm-hse-002" component={FRM_HSE_002} />
       <Route path="/forms/frm-hse-003" component={FRM_HSE_003} />

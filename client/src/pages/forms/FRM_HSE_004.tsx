@@ -1,167 +1,482 @@
-/**
- * TE-IMS-FRM-HSE-004 — First Aid Kit Inspection
- * Rebuilt using SurveyJS + ImsForm wrapper.
- */
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
 
-const DEPARTMENT_LIST = [
-  "HSE", "Operations – Drilling", "Operations – Geology", "Operations – Survey",
-  "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security",
-  "Administration", "Finance & Accounting", "Human Resources", "IT & Communications",
-  "Management", "Quality Assurance", "Environmental", "Training & Competency",
-  "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other",
-];
-
 const SCHEMA = {
-  title: "",
+  title: "First Aid Kit Register and Checklist",
   showTitle: false,
   pages: [
     {
       name: "page1",
       elements: [
-        // ── Section 1: Inspection Identity ──
         {
           type: "panel",
-          name: "section_identity",
-          title: "1. Inspection Identity",
+          name: "section1",
+          title: "1. Kit Identification",
           elements: [
-            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned" },
-            { type: "text", name: "inspectedBy", title: "Inspected By (Full Name)", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "employeeId", title: "Employee ID", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "position", title: "Position / Job Title", readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "dropdown", name: "department", title: "Department", isRequired: true, choices: DEPARTMENT_LIST },
-            { type: "text", name: "site", title: "Site / Location", isRequired: true },
-            { type: "text", name: "kitId", title: "First Aid Kit ID / Reference No.", isRequired: true },
-            { type: "text", name: "kitLocation", title: "Kit Location (exact area)", isRequired: true },
-            { type: "text", name: "signoffReportedByDate", title: "Inspection Date", inputType: "date", isRequired: true, readOnly: true, description: "Auto-filled with today's date" },
-            { type: "text", name: "nextInspectionDate", title: "Next Scheduled Inspection Date", inputType: "date", isRequired: true },
+            {
+              type: "text",
+              name: "kitId",
+              title: "Kit ID / Reference No.",
+              isRequired: true,
+            },
+            {
+              type: "text",
+              name: "location",
+              title: "Location / Site",
+              isRequired: true,
+            },
+            {
+              type: "text",
+              name: "inspectionDate",
+              title: "Inspection Date",
+              inputType: "date",
+              isRequired: true,
+              readOnly: true,
+              defaultValueExpression: "today()",
+              description: "Auto-filled with today's date",
+            },
+            {
+              type: "text",
+              name: "nextInspectionDue",
+              title: "Next Inspection Due",
+              inputType: "date",
+              isRequired: true,
+            },
+            {
+              type: "text",
+              name: "inspectorName",
+              title: "Inspector Full Name",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "employeeId",
+              title: "Employee ID",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "position",
+              title: "Position",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "dropdown",
+              name: "department",
+              title: "Department",
+              isRequired: true,
+              choices: [
+                "HSE",
+                "Operations – Drilling",
+                "Operations – Geology",
+                "Operations – Survey",
+                "Maintenance",
+                "Logistics & Transport",
+                "Warehouse & Supply",
+                "Security",
+                "Administration",
+                "Finance & Accounting",
+                "Human Resources",
+                "IT & Communications",
+                "Management",
+                "Quality Assurance",
+                "Environmental",
+                "Training & Competency",
+                "Contracts & Procurement",
+                "Camp & Catering",
+                "Medical & First Aid",
+                "Other",
+              ],
+            },
           ],
         },
-
-        // ── Section 2: Kit Condition ──
         {
           type: "panel",
-          name: "section_kit_condition",
-          title: "2. Kit Condition",
+          name: "section2",
+          title: "2. Kit Contents Checklist",
+          elements: [
+            {
+              type: "matrixdynamic",
+              name: "kitContents",
+              title: "Kit Contents — verify each item against required quantity",
+              columns: [
+                {
+                  name: "itemNo",
+                  title: "Item No.",
+                  cellType: "text",
+                  readOnly: true,
+                },
+                {
+                  name: "category",
+                  title: "Category",
+                  cellType: "text",
+                  readOnly: true,
+                },
+                {
+                  name: "description",
+                  title: "Item Description",
+                  cellType: "text",
+                  readOnly: true,
+                },
+                {
+                  name: "requiredQty",
+                  title: "Required Qty",
+                  cellType: "text",
+                  readOnly: true,
+                },
+                {
+                  name: "actualQty",
+                  title: "Actual Qty",
+                  cellType: "text",
+                  isRequired: true,
+                },
+                {
+                  name: "condition",
+                  title: "Condition",
+                  cellType: "dropdown",
+                  isRequired: true,
+                  choices: [
+                    "Good",
+                    "Expiring Soon",
+                    "Expired",
+                    "Missing",
+                    "Damaged",
+                  ],
+                },
+                {
+                  name: "remarks",
+                  title: "Remarks",
+                  cellType: "text",
+                },
+              ],
+              rowCount: 33,
+              allowAddRows: false,
+              allowRemoveRows: false,
+              defaultValue: [
+                {
+                  itemNo: "1",
+                  category: "A. Wound Care",
+                  description: "Wound cleaner / antiseptic solution (100 ml)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "2",
+                  category: "A. Wound Care",
+                  description: "Swabs for cleaning wounds",
+                  requiredQty: "10",
+                },
+                {
+                  itemNo: "3",
+                  category: "A. Wound Care",
+                  description: "Cotton wool for padding (100 g)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "4",
+                  category: "A. Wound Care",
+                  description: "Sterile gauze pads (assorted sizes)",
+                  requiredQty: "10",
+                },
+                {
+                  itemNo: "5",
+                  category: "A. Wound Care",
+                  description: "Adhesive dressing strips (assorted, packet)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "6",
+                  category: "A. Wound Care",
+                  description: "Non-allergic adhesive strip (25 mm x 3 m)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "7",
+                  category: "A. Wound Care",
+                  description: "Elastic adhesive roll (25 mm x 3 m)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "8",
+                  category: "A. Wound Care",
+                  description: "First aid dressing No. 3 (medium)",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "9",
+                  category: "A. Wound Care",
+                  description: "First aid dressing No. 5 (large)",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "10",
+                  category: "A. Wound Care",
+                  description: "Roller bandage 75 mm x 5 m",
+                  requiredQty: "4",
+                },
+                {
+                  itemNo: "11",
+                  category: "A. Wound Care",
+                  description: "Roller bandage 100 mm x 5 m",
+                  requiredQty: "4",
+                },
+                {
+                  itemNo: "12",
+                  category: "A. Wound Care",
+                  description: "Triangular bandages",
+                  requiredQty: "4",
+                },
+                {
+                  itemNo: "13",
+                  category: "B. Burn & Eye",
+                  description: "Burn gel / hydrogel dressing",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "14",
+                  category: "B. Burn & Eye",
+                  description: "Sterile burn sheet (10 x 10 cm)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "15",
+                  category: "B. Burn & Eye",
+                  description: "Eye pad with shield or tape",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "16",
+                  category: "B. Burn & Eye",
+                  description: "Saline eye wash bottle (500 ml)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "17",
+                  category: "C. Instruments",
+                  description: "Scissors (minimum 100 mm, blunt/sharp)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "18",
+                  category: "C. Instruments",
+                  description: "Forceps / tweezers (for splinters)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "19",
+                  category: "C. Instruments",
+                  description: "Safety pins (set)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "20",
+                  category: "C. Instruments",
+                  description: "Adhesive tape roll (25 mm)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "21",
+                  category: "C. Instruments",
+                  description: "SAM splint (or equivalent flexible splint)",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "22",
+                  category: "C. Instruments",
+                  description: "Biohazard disposal bag",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "23",
+                  category: "D. Protection",
+                  description: "Disposable nitrile gloves (pairs, L & M)",
+                  requiredQty: "4",
+                },
+                {
+                  itemNo: "24",
+                  category: "D. Protection",
+                  description: "CPR pocket mask / face shield",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "25",
+                  category: "D. Protection",
+                  description: "Rescue / emergency blanket (foil)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "26",
+                  category: "D. Protection",
+                  description: "Emergency contact card / first aid guide",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "27",
+                  category: "E. KSA/Site",
+                  description: "Oral Rehydration Salts (ORS) sachets",
+                  requiredQty: "6",
+                },
+                {
+                  itemNo: "28",
+                  category: "E. KSA/Site",
+                  description: "Instant cold / cooling packs",
+                  requiredQty: "4",
+                },
+                {
+                  itemNo: "29",
+                  category: "E. KSA/Site",
+                  description: "Thermal blanket (for heat casualty cooling)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "30",
+                  category: "E. KSA/Site",
+                  description: "Tourniquet (CAT or equivalent)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "31",
+                  category: "E. KSA/Site",
+                  description: "Pressure / Israeli bandage (emergency)",
+                  requiredQty: "1",
+                },
+                {
+                  itemNo: "32",
+                  category: "E. KSA/Site",
+                  description: "Straight splints (rigid)",
+                  requiredQty: "2",
+                },
+                {
+                  itemNo: "33",
+                  category: "E. KSA/Site",
+                  description: "Sunscreen SPF 50+ (individual sachets)",
+                  requiredQty: "4",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "panel",
+          name: "section3",
+          title: "3. Tamper-Evident Seal Check",
           elements: [
             {
               type: "radiogroup",
-              name: "kitCondition",
-              title: "Overall Kit Condition",
-              isRequired: true,
-              choices: ["Good — Clean, intact, accessible", "Fair — Minor issues noted", "Poor — Requires immediate attention"],
-            },
-            {
-              type: "radiogroup",
-              name: "kitAccessible",
-              title: "Is the kit clearly marked and accessible?",
-              isRequired: true,
-              choices: ["Yes", "No"],
-            },
-            {
-              type: "radiogroup",
-              name: "kitSealed",
-              title: "Is the kit sealed / tamper-evident seal intact?",
+              name: "sealIntact",
+              title: "Tamper-evident seal intact?",
               isRequired: true,
               choices: ["Yes", "No", "N/A"],
             },
           ],
         },
-
-        // ── Section 3: Contents Checklist ──
         {
           type: "panel",
-          name: "section_contents",
-          title: "3. Contents Checklist",
-          description: "For each item, record the quantity present and whether it is adequate (Yes/No). Note expiry dates where applicable.",
+          name: "section4",
+          title: "4. Incident Log — Items Used Since Last Inspection",
           elements: [
             {
               type: "matrixdynamic",
-              name: "contentsChecklist",
-              title: "First Aid Kit Contents",
-              addRowText: "+ Add Item",
-              rowCount: 20,
-              minRowCount: 1,
-              defaultValue: [
-                { item: "Adhesive bandages (assorted sizes)", required: "10", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Sterile gauze pads (5×5 cm)", required: "5", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Sterile gauze pads (10×10 cm)", required: "5", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Roller bandage (5 cm)", required: "2", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Roller bandage (10 cm)", required: "2", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Triangular bandage", required: "2", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Sterile eye pad", required: "2", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Eye wash solution (500 ml)", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Antiseptic wipes / swabs", required: "10", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Antiseptic cream / ointment", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Burn gel / dressing", required: "2", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Disposable gloves (pairs)", required: "5", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "CPR face shield / mask", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Scissors (blunt-end)", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Tweezers / forceps", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Safety pins (assorted)", required: "6", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Thermometer", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Instant cold pack", required: "2", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "Emergency blanket / foil blanket", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-                { item: "First aid manual / instruction card", required: "1", present: "", adequate: "Yes", expiryDate: "", notes: "" },
-              ],
+              name: "incidentLog",
+              title: "Incident Log — Items Used Since Last Inspection",
               columns: [
-                { name: "item", title: "Item Description", cellType: "text", isRequired: true },
-                { name: "required", title: "Required Qty", cellType: "text" },
-                { name: "present", title: "Qty Present", cellType: "text", isRequired: true },
-                { name: "adequate", title: "Adequate?", cellType: "dropdown", choices: ["Yes", "No", "N/A"] },
-                { name: "expiryDate", title: "Expiry Date", cellType: "text" },
-                { name: "notes", title: "Notes / Action Required", cellType: "text" },
+                {
+                  name: "date",
+                  title: "Date",
+                  cellType: "text",
+                  inputType: "date",
+                },
+                {
+                  name: "injuryType",
+                  title: "Injury Type",
+                  cellType: "text",
+                },
+                {
+                  name: "firstAidGiven",
+                  title: "First Aid Given",
+                  cellType: "text",
+                },
+                {
+                  name: "itemsUsed",
+                  title: "Items Used",
+                  cellType: "text",
+                },
+                {
+                  name: "injuredPerson",
+                  title: "Injured Person",
+                  cellType: "text",
+                },
+                {
+                  name: "firstAider",
+                  title: "First Aider",
+                  cellType: "text",
+                },
+                {
+                  name: "investigationRequired",
+                  title: "Investigation Required",
+                  cellType: "radiogroup",
+                  choices: ["Yes", "No"],
+                },
+                {
+                  name: "referenceNo",
+                  title: "Reference No.",
+                  cellType: "text",
+                },
               ],
+              rowCount: 0,
+              minRowCount: 0,
+              addRowText: "+ Add Incident Entry",
             },
           ],
         },
-
-        // ── Section 4: Deficiencies ──
         {
           type: "panel",
-          name: "section_deficiencies",
-          title: "4. Deficiencies & Actions",
+          name: "section5",
+          title: "5. Inspector Remarks",
           elements: [
-            {
-              type: "radiogroup",
-              name: "deficienciesFound",
-              title: "Were any deficiencies found?",
-              isRequired: true,
-              choices: ["No — Kit is complete and compliant", "Yes — See details below"],
-            },
             {
               type: "comment",
-              name: "deficiencyDetails",
-              title: "Deficiency Details",
-              rows: 4,
-              visibleIf: "{deficienciesFound} = 'Yes — See details below'",
-              placeholder: "Describe each deficiency, missing item, or expired item...",
+              name: "remarks",
+              title: "Remarks / Observations",
+              rows: 3,
             },
             {
-              type: "matrixdynamic",
-              name: "correctiveActions",
-              title: "Corrective Actions Required",
-              addRowText: "+ Add Action",
-              rowCount: 1,
-              visibleIf: "{deficienciesFound} = 'Yes — See details below'",
-              columns: [
-                { name: "action", title: "Action", cellType: "text", isRequired: true },
-                { name: "responsible", title: "Responsible Person", cellType: "text", isRequired: true },
-                { name: "targetDate", title: "Target Date", cellType: "text" },
-                { name: "status", title: "Status", cellType: "dropdown", choices: ["Open", "In Progress", "Closed"] },
+              type: "dropdown",
+              name: "overallStatus",
+              title: "Overall Kit Status",
+              isRequired: true,
+              choices: [
+                "Fully Stocked and Compliant",
+                "Minor Deficiencies — Action Required",
+                "Major Deficiencies — Restock Immediately",
+                "Kit Unusable — Replace",
               ],
             },
           ],
         },
-
-        // ── Section 5: Sign-Off ──
         {
           type: "panel",
-          name: "section_signoff",
-          title: "5. Sign-Off",
+          name: "section6",
+          title: "6. Submitted By",
           elements: [
-            { type: "text", name: "signoffReportedByName", title: "Inspected By — Full Name", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
+            {
+              type: "text",
+              name: "submittedByName",
+              title: "Submitted By Full Name",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "submissionDate",
+              title: "Submission Date",
+              inputType: "date",
+              readOnly: true,
+              defaultValueExpression: "today()",
+              description: "Auto-filled with today's date",
+            },
           ],
         },
       ],
@@ -176,16 +491,17 @@ export default function FRM_HSE_004() {
     <Layout>
       <ImsForm
         formCode="TE-IMS-FRM-HSE-004"
-        title="First Aid Kit Inspection"
+        title="First Aid Kit Register and Checklist"
         revision="01"
         approvalDate="01 March 2026"
         minRole="field_worker"
         schema={SCHEMA}
+        wideTable={true}
         identityFields={{
-          fullName: "inspectedBy",
+          fullName: "inspectorName",
           employeeId: "employeeId",
-          department: "department",
           position: "position",
+          department: "department",
         }}
       />
     </Layout>

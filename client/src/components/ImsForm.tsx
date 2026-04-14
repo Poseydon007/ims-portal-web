@@ -20,11 +20,12 @@ import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 
 // ── Role hierarchy ──────────────────────────────────────────────────────────
-type ImsRole = "field_worker" | "supervisor" | "admin";
+type ImsRole = "field_worker" | "supervisor" | "hse_manager" | "admin";
 const ROLE_RANK: Record<ImsRole, number> = {
   field_worker: 0,
   supervisor: 1,
-  admin: 2,
+  hse_manager: 2,
+  admin: 3,
 };
 
 function canSubmit(userRole: string | undefined, minRole: ImsRole): boolean {
@@ -57,6 +58,11 @@ interface ImsFormProps {
     department?: string;
     position?: string;
   };
+  /**
+   * Use wide (full-width) layout for forms with many-column matrixdynamic tables.
+   * Removes the max-width constraint and enables horizontal scrolling on tables.
+   */
+  wideTable?: boolean;
 }
 
 // ── Apply True East theme to SurveyJS ───────────────────────────────────────
@@ -161,6 +167,7 @@ export default function ImsForm({
   minRole = "field_worker",
   schema,
   identityFields = {},
+  wideTable = false,
 }: ImsFormProps) {
   const { user, loading } = useImsAuth();
   const [submitted, setSubmitted] = useState(false);
@@ -342,7 +349,10 @@ export default function ImsForm({
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-6" style={{ fontFamily: "'Nunito Sans', sans-serif", color: "#081C2E" }}>
+    <div
+      className={wideTable ? "w-full px-4 md:px-6 py-6" : "max-w-5xl mx-auto p-6"}
+      style={{ fontFamily: "'Nunito Sans', sans-serif", color: "#081C2E" }}
+    >
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm">
         <Link href="/" className="text-[#C49A28] hover:underline">← Portal Home</Link>
@@ -406,7 +416,8 @@ export default function ImsForm({
       )}
 
       {/* SurveyJS form */}
-      <div className="ims-survey-wrapper">
+      {/* overflow-x-auto allows wide matrixdynamic tables to scroll horizontally */}
+      <div className="ims-survey-wrapper" style={{ overflowX: "auto" }}>
         <Survey model={survey} />
       </div>
 

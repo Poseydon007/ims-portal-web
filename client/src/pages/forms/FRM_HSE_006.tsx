@@ -1,224 +1,276 @@
-/**
- * TE-IMS-FRM-HSE-006 — HSE Meeting Minutes
- * Rebuilt using SurveyJS + ImsForm wrapper.
- */
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
 
-const DEPARTMENT_LIST = [
-  "HSE", "Operations – Drilling", "Operations – Geology", "Operations – Survey",
-  "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security",
-  "Administration", "Finance & Accounting", "Human Resources", "IT & Communications",
-  "Management", "Quality Assurance", "Environmental", "Training & Competency",
-  "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other",
+const DEPARTMENTS = [
+  "HSE",
+  "Operations – Drilling",
+  "Operations – Geology",
+  "Operations – Survey",
+  "Maintenance",
+  "Logistics & Transport",
+  "Warehouse & Supply",
+  "Security",
+  "Administration",
+  "Finance & Accounting",
+  "Human Resources",
+  "IT & Communications",
+  "Management",
+  "Quality Assurance",
+  "Environmental",
+  "Training & Competency",
+  "Contracts & Procurement",
+  "Camp & Catering",
+  "Medical & First Aid",
+  "Other",
 ];
 
 const SCHEMA = {
-  title: "",
+  title: "HSE Committee Meeting Minutes",
   showTitle: false,
   pages: [
     {
       name: "page1",
       elements: [
-        // ── Section 1: Meeting Identity ──
         {
           type: "panel",
-          name: "section_identity",
-          title: "1. Meeting Identity",
+          name: "meetingDetails",
+          title: "1. Meeting Details",
           elements: [
-            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned" },
-            { type: "text", name: "recordedBy", title: "Recorded By (Full Name)", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "employeeId", title: "Employee ID", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "position", title: "Position / Job Title", readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "dropdown", name: "department", title: "Department", isRequired: true, choices: DEPARTMENT_LIST },
-            { type: "text", name: "signoffReportedByDate", title: "Submission Date", inputType: "date", isRequired: true, readOnly: true, description: "Auto-filled with today's date" },
-          ],
-        },
-
-        // ── Section 2: Meeting Details ──
-        {
-          type: "panel",
-          name: "section_meeting_details",
-          title: "2. Meeting Details",
-          elements: [
-            { type: "text", name: "meetingDate", title: "Meeting Date", inputType: "date", isRequired: true },
-            { type: "text", name: "meetingTime", title: "Meeting Start Time", inputType: "time", isRequired: true },
-            { type: "text", name: "meetingEndTime", title: "Meeting End Time", inputType: "time" },
-            { type: "text", name: "meetingLocation", title: "Meeting Location / Venue", isRequired: true },
             {
-              type: "radiogroup",
-              name: "meetingType",
-              title: "Meeting Type",
+              type: "text",
+              name: "meetingDate",
+              title: "Meeting Date",
               isRequired: true,
-              choices: [
-                "Weekly Toolbox Talk",
-                "Monthly HSE Meeting",
-                "Emergency / Incident Review",
-                "Quarterly HSE Review",
-                "Annual HSE Review",
-                "Special / Ad-hoc Meeting",
-              ],
+              inputType: "date",
             },
-            { type: "text", name: "chairperson", title: "Meeting Chairperson", isRequired: true },
-            { type: "text", name: "minutesRecordedBy", title: "Minutes Recorded By", isRequired: true },
+            {
+              type: "text",
+              name: "meetingTime",
+              title: "Time",
+              isRequired: true,
+              inputType: "time",
+            },
+            {
+              type: "text",
+              name: "location",
+              title: "Location",
+              isRequired: true,
+            },
+            {
+              type: "text",
+              name: "chairedByFullName",
+              title: "Chaired By Full Name",
+              isRequired: true,
+            },
+            {
+              type: "text",
+              name: "chairedByPosition",
+              title: "Chaired By Position",
+            },
+            {
+              type: "text",
+              name: "minutesTakenBy",
+              title: "Minutes Taken By Full Name",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "employeeId",
+              title: "Minutes Taken By Employee ID",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "position",
+              title: "Minutes Taken By Position",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "dropdown",
+              name: "department",
+              title: "Department",
+              isRequired: true,
+              choices: DEPARTMENTS,
+            },
+            {
+              type: "text",
+              name: "nextMeetingDate",
+              title: "Next Meeting Date",
+              inputType: "date",
+            },
           ],
         },
-
-        // ── Section 3: Attendees ──
         {
           type: "panel",
-          name: "section_attendees",
-          title: "3. Attendance Register",
+          name: "attendanceRegister",
+          title: "2. Attendance Register",
           elements: [
             {
               type: "matrixdynamic",
-              name: "attendees",
-              title: "List all attendees",
-              addRowText: "+ Add Attendee",
-              rowCount: 3,
-              minRowCount: 1,
+              name: "attendance",
+              title: "Attendance Register",
+              titleLocation: "hidden",
               columns: [
-                { name: "fullName", title: "Full Name", cellType: "text", isRequired: true },
-                { name: "employeeId", title: "Employee ID", cellType: "text" },
-                { name: "position", title: "Position / Role", cellType: "text" },
-                { name: "department", title: "Department / Company", cellType: "text" },
-                { name: "attended", title: "Attended?", cellType: "dropdown", choices: ["Present", "Absent – Excused", "Absent – Unexcused"] },
+                {
+                  name: "id",
+                  title: "#",
+                  cellType: "text",
+                  width: "50px",
+                },
+                {
+                  name: "fullName",
+                  title: "Full Name",
+                  cellType: "text",
+                  isRequired: true,
+                },
+                {
+                  name: "position",
+                  title: "Position",
+                  cellType: "text",
+                  isRequired: true,
+                },
+                {
+                  name: "department",
+                  title: "Department",
+                  cellType: "dropdown",
+                  choices: DEPARTMENTS,
+                },
+                {
+                  name: "present",
+                  title: "Present",
+                  cellType: "radiogroup",
+                  choices: ["Yes", "No", "Apologies"],
+                },
               ],
+              rowCount: 5,
+              minRowCount: 1,
+              addRowText: "+ Add Attendee",
             },
           ],
         },
-
-        // ── Section 4: Previous Minutes Review ──
         {
           type: "panel",
-          name: "section_prev_minutes",
-          title: "4. Review of Previous Minutes",
-          elements: [
-            {
-              type: "radiogroup",
-              name: "prevMinutesReviewed",
-              title: "Were previous meeting minutes reviewed?",
-              isRequired: true,
-              choices: ["Yes", "No", "N/A — First meeting"],
-            },
-            {
-              type: "comment",
-              name: "prevMinutesNotes",
-              title: "Notes on previous minutes (corrections, confirmations)",
-              rows: 3,
-              visibleIf: "{prevMinutesReviewed} = 'Yes'",
-              placeholder: "Note any amendments or confirmation of previous minutes...",
-            },
-          ],
-        },
-
-        // ── Section 5: Agenda Items ──
-        {
-          type: "panel",
-          name: "section_agenda",
-          title: "5. Agenda Items & Discussion",
+          name: "standingAgendaItems",
+          title: "3. Standing Agenda Items (per ISO 45001 Clause 5.4)",
           elements: [
             {
               type: "matrixdynamic",
               name: "agendaItems",
-              title: "Agenda Items Discussed",
-              addRowText: "+ Add Agenda Item",
-              rowCount: 3,
-              minRowCount: 1,
+              title: "Agenda Items — record discussion notes for each item",
               columns: [
-                { name: "itemNo", title: "No.", cellType: "text" },
-                { name: "topic", title: "Topic / Agenda Item", cellType: "text", isRequired: true },
-                { name: "presenter", title: "Presenter / Lead", cellType: "text" },
-                { name: "discussion", title: "Summary of Discussion", cellType: "text", isRequired: true },
-                { name: "outcome", title: "Outcome / Decision", cellType: "text" },
+                {
+                  name: "id",
+                  title: "#",
+                  cellType: "text",
+                  width: "50px",
+                },
+                {
+                  name: "item",
+                  title: "Agenda Item",
+                  cellType: "text",
+                  isRequired: true,
+                },
+                {
+                  name: "notes",
+                  title: "Discussion / Notes",
+                  cellType: "text",
+                  isRequired: true,
+                },
+              ],
+              rowCount: 9,
+              minRowCount: 9,
+              addRowText: "+ Add Agenda Item",
+              defaultValue: [
+                { id: "1", item: "Review of previous minutes and actions" },
+                { id: "2", item: "Incident / accident review" },
+                { id: "3", item: "Near miss and hazard reports" },
+                { id: "4", item: "HSE inspection findings" },
+                { id: "5", item: "Training and competency update" },
+                { id: "6", item: "Emergency preparedness" },
+                { id: "7", item: "Regulatory compliance update" },
+                { id: "8", item: "Worker consultation and feedback" },
+                { id: "9", item: "Any other business (AOB)" },
               ],
             },
           ],
         },
-
-        // ── Section 6: HSE Statistics ──
         {
           type: "panel",
-          name: "section_hse_stats",
-          title: "6. HSE Statistics (Period Covered)",
-          elements: [
-            { type: "text", name: "statsPeriodFrom", title: "Period From", inputType: "date" },
-            { type: "text", name: "statsPeriodTo", title: "Period To", inputType: "date" },
-            { type: "text", name: "ltiCount", title: "Lost Time Injuries (LTI)", inputType: "number", defaultValue: "0" },
-            { type: "text", name: "firstAidCount", title: "First Aid Cases", inputType: "number", defaultValue: "0" },
-            { type: "text", name: "nearMissCount", title: "Near Misses Reported", inputType: "number", defaultValue: "0" },
-            { type: "text", name: "propertyDamageCount", title: "Property Damage Incidents", inputType: "number", defaultValue: "0" },
-            { type: "text", name: "ltifr", title: "LTIFR (if calculated)", placeholder: "e.g. 0.00" },
-            {
-              type: "comment",
-              name: "statsComments",
-              title: "Comments on Statistics / Trends",
-              rows: 3,
-              placeholder: "Note any trends, improvements, or concerns...",
-            },
-          ],
-        },
-
-        // ── Section 7: Action Items ──
-        {
-          type: "panel",
-          name: "section_actions",
-          title: "7. Action Items",
+          name: "actionItems",
+          title: "4. Action Items",
           elements: [
             {
               type: "matrixdynamic",
-              name: "actionItems",
-              title: "Actions arising from this meeting",
-              addRowText: "+ Add Action",
-              rowCount: 2,
-              minRowCount: 1,
+              name: "actions",
+              title: "Action Items",
+              titleLocation: "hidden",
               columns: [
-                { name: "actionNo", title: "No.", cellType: "text" },
-                { name: "action", title: "Action Description", cellType: "text", isRequired: true },
-                { name: "responsible", title: "Responsible Person", cellType: "text", isRequired: true },
-                { name: "targetDate", title: "Target Date", cellType: "text" },
-                { name: "priority", title: "Priority", cellType: "dropdown", choices: ["High", "Medium", "Low"] },
-                { name: "status", title: "Status", cellType: "dropdown", choices: ["Open", "In Progress", "Closed", "Carried Forward"] },
+                {
+                  name: "id",
+                  title: "#",
+                  cellType: "text",
+                  width: "50px",
+                },
+                {
+                  name: "action",
+                  title: "Action",
+                  cellType: "text",
+                  isRequired: true,
+                },
+                {
+                  name: "responsible",
+                  title: "Responsible Person",
+                  cellType: "text",
+                  isRequired: true,
+                },
+                {
+                  name: "dueDate",
+                  title: "Due Date",
+                  cellType: "text",
+                  inputType: "date",
+                },
+                {
+                  name: "status",
+                  title: "Status",
+                  cellType: "dropdown",
+                  choices: ["Open", "In Progress", "Closed", "Overdue"],
+                  defaultValue: "Open",
+                },
+                {
+                  name: "remarks",
+                  title: "Remarks",
+                  cellType: "text",
+                },
               ],
+              rowCount: 3,
+              minRowCount: 1,
+              addRowText: "+ Add Action",
             },
           ],
         },
-
-        // ── Section 8: Any Other Business ──
         {
           type: "panel",
-          name: "section_aob",
-          title: "8. Any Other Business (AOB)",
+          name: "submittedBy",
+          title: "5. Submitted By",
           elements: [
             {
-              type: "comment",
-              name: "anyOtherBusiness",
-              title: "Any other matters raised",
-              rows: 4,
-              placeholder: "Record any additional matters raised during the meeting...",
+              type: "text",
+              name: "submittedBy",
+              title: "Submitted By Full Name",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
             },
-          ],
-        },
-
-        // ── Section 9: Next Meeting ──
-        {
-          type: "panel",
-          name: "section_next_meeting",
-          title: "9. Next Meeting",
-          elements: [
-            { type: "text", name: "nextMeetingDate", title: "Next Meeting Date", inputType: "date" },
-            { type: "text", name: "nextMeetingTime", title: "Next Meeting Time", inputType: "time" },
-            { type: "text", name: "nextMeetingLocation", title: "Next Meeting Location", placeholder: "e.g. Site Office / Camp Meeting Room" },
-          ],
-        },
-
-        // ── Section 10: Sign-Off ──
-        {
-          type: "panel",
-          name: "section_signoff",
-          title: "10. Sign-Off",
-          elements: [
-            { type: "text", name: "signoffReportedByName", title: "Recorded By — Full Name", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
+            {
+              type: "text",
+              name: "submissionDate",
+              title: "Submission Date",
+              inputType: "date",
+              readOnly: true,
+              description: "Auto-filled with today's date",
+            },
           ],
         },
       ],
@@ -233,16 +285,17 @@ export default function FRM_HSE_006() {
     <Layout>
       <ImsForm
         formCode="TE-IMS-FRM-HSE-006"
-        title="HSE Meeting Minutes"
+        title="HSE Committee Meeting Minutes"
         revision="01"
         approvalDate="01 March 2026"
         minRole="field_worker"
         schema={SCHEMA}
+        wideTable={true}
         identityFields={{
-          fullName: "recordedBy",
+          fullName: "minutesTakenBy",
           employeeId: "employeeId",
-          department: "department",
           position: "position",
+          department: "department",
         }}
       />
     </Layout>

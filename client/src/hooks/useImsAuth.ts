@@ -7,7 +7,7 @@ export type ImsUserInfo = {
   email: string;
   fullName: string;
   employeeId: string | null;
-  role: "admin" | "supervisor" | "field_worker";
+  role: "admin" | "hse_manager" | "supervisor" | "field_worker";
   department: string | null;
   position: string | null;
   status: string;

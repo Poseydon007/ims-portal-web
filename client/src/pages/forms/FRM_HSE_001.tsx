@@ -1,7 +1,3 @@
-/**
- * TE-IMS-FRM-HSE-001 — Job Hazard Analysis (JHA)
- * Rebuilt using SurveyJS + ImsForm wrapper.
- */
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
 
@@ -10,13 +6,13 @@ const DEPARTMENT_LIST = [
   "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security",
   "Administration", "Finance & Accounting", "Human Resources", "IT & Communications",
   "Management", "Quality Assurance", "Environmental", "Training & Competency",
-  "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other",
+  "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other"
 ];
 
-const RISK_LEVELS = ["Low (L)", "Medium (M)", "High (H)", "Extreme (E)"];
+const RISK_EXPRESSION = "iif({row.likelihood} == 'A' and {row.consequence} == '1', 'H', iif({row.likelihood} == 'A' and {row.consequence} == '2', 'H', iif({row.likelihood} == 'A' and {row.consequence} == '3', 'E', iif({row.likelihood} == 'A' and {row.consequence} == '4', 'E', iif({row.likelihood} == 'B' and {row.consequence} == '1', 'M', iif({row.likelihood} == 'B' and {row.consequence} == '2', 'H', iif({row.likelihood} == 'B' and {row.consequence} == '3', 'H', iif({row.likelihood} == 'B' and {row.consequence} == '4', 'E', iif({row.likelihood} == 'C' and {row.consequence} == '1', 'L', iif({row.likelihood} == 'C' and {row.consequence} == '2', 'M', iif({row.likelihood} == 'C' and {row.consequence} == '3', 'H', iif({row.likelihood} == 'C' and {row.consequence} == '4', 'H', iif({row.likelihood} == 'D' and {row.consequence} == '1', 'L', iif({row.likelihood} == 'D' and {row.consequence} == '2', 'L', iif({row.likelihood} == 'D' and {row.consequence} == '3', 'M', iif({row.likelihood} == 'D' and {row.consequence} == '4', 'H', iif({row.likelihood} == 'E' and {row.consequence} == '1', 'L', iif({row.likelihood} == 'E' and {row.consequence} == '2', 'L', iif({row.likelihood} == 'E' and {row.consequence} == '3', 'L', iif({row.likelihood} == 'E' and {row.consequence} == '4', 'M', ''))))))))))))))))))))";
 
 const SCHEMA = {
-  title: "",
+  title: "Job Hazard Analysis (JHA)",
   showTitle: false,
   pages: [
     {
@@ -24,109 +20,135 @@ const SCHEMA = {
       elements: [
         {
           type: "panel",
-          name: "section_job_info",
-          title: "1. Job Information",
+          name: "section_job_information",
+          title: "1. JOB INFORMATION",
           elements: [
-            { type: "text", name: "reportNo", title: "JHA Report No.", isRequired: true, readOnly: true, description: "Auto-assigned" },
-            { type: "text", name: "jobTask", title: "Job / Task Description", isRequired: true },
-            { type: "text", name: "dateOfAssessment", title: "Date of Assessment", inputType: "date", isRequired: true },
-            { type: "text", name: "location", title: "Location / Site Area", isRequired: true },
+            { type: "text", name: "jobTask", title: "Job/Task", isRequired: true },
+            { type: "text", name: "date", title: "Date", inputType: "date", isRequired: true, readOnly: true, description: "Auto-filled with today's date" },
             { type: "dropdown", name: "department", title: "Department", isRequired: true, choices: DEPARTMENT_LIST },
-            { type: "text", name: "site", title: "Site / Project Name", isRequired: true },
-            { type: "text", name: "reportedBy", title: "Prepared By (Full Name)", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "employeeId", title: "Employee ID", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "position", title: "Position / Job Title", readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "supervisor", title: "Supervisor / Site Manager", isRequired: true },
+            { type: "text", name: "site", title: "Site", isRequired: true },
+            { type: "text", name: "reportNo", title: "JHA Number", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
+            { type: "text", name: "supervisor", title: "Supervisor", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
             { type: "text", name: "reviewedBy", title: "Reviewed By" },
-          ],
+            { type: "text", name: "reportedBy", title: "Reported By / Full Name", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
+            { type: "text", name: "employeeId", title: "Employee ID", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
+            { type: "text", name: "position", title: "Position", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" }
+          ]
         },
         {
           type: "panel",
-          name: "section_risk_reference",
-          title: "2. Risk Rating Reference",
+          name: "section_risk_matrix_reference",
+          title: "2. RISK MATRIX REFERENCE",
           elements: [
             {
               type: "html",
-              name: "riskMatrixInfo",
-              html: `<div style="font-size:0.82rem;color:#4a5568;line-height:1.8;padding:8px 0;">
-                <strong>Likelihood:</strong> A = Almost Certain &nbsp;|&nbsp; B = Likely &nbsp;|&nbsp; C = Possible &nbsp;|&nbsp; D = Unlikely &nbsp;|&nbsp; E = Rare<br/>
-                <strong>Consequence:</strong> 1 = Minor &nbsp;|&nbsp; 2 = Moderate &nbsp;|&nbsp; 3 = Major &nbsp;|&nbsp; 4 = Catastrophic<br/>
-                <strong>Rating:</strong>
-                <span style="color:#16a34a;font-weight:600;">L = Low</span> &nbsp;|&nbsp;
-                <span style="color:#ca8a04;font-weight:600;">M = Medium</span> &nbsp;|&nbsp;
-                <span style="color:#dc2626;font-weight:600;">H = High</span> &nbsp;|&nbsp;
-                <span style="color:#7c3aed;font-weight:600;">E = Extreme — Stop work immediately</span>
-              </div>`,
-            },
-          ],
+              name: "risk_matrix_info",
+              html: `
+                <div style="font-family: sans-serif; font-size: 14px; line-height: 1.6;">
+                  <p><strong>Likelihood:</strong> A=Almost Certain, B=Likely, C=Possible, D=Unlikely, E=Rare</p>
+                  <p><strong>Consequence:</strong> 1=Minor, 2=Moderate, 3=Major, 4=Catastrophic</p>
+                  <table style="width: 100%; border-collapse: collapse; margin-top: 10px; text-align: center;">
+                    <thead>
+                      <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #ddd; padding: 8px;">Matrix</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">C1</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">C2</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">C3</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">C4</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">A</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ff0000; color: white;">E</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ff0000; color: white;">E</td></tr>
+                      <tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">B</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffffcc;">M</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ff0000; color: white;">E</td></tr>
+                      <tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">C</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ccffcc;">L</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffffcc;">M</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td></tr>
+                      <tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">D</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ccffcc;">L</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ccffcc;">L</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffffcc;">M</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffcccc;">H</td></tr>
+                      <tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">E</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ccffcc;">L</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ccffcc;">L</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ccffcc;">L</td><td style="border: 1px solid #ddd; padding: 8px; background-color: #ffffcc;">M</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              `
+            }
+          ]
         },
         {
           type: "panel",
-          name: "section_task_steps",
-          title: "3. Task Step Hazard Analysis",
+          name: "section_task_step_analysis",
+          title: "3. TASK STEP HAZARD ANALYSIS",
           elements: [
             {
               type: "matrixdynamic",
               name: "taskSteps",
-              title: "Task Steps — add one row per task step",
+              title: "Analysis Steps",
+              titleLocation: "hidden",
               addRowText: "+ Add Step",
-              rowCount: 1,
+              rowCount: 3,
               minRowCount: 1,
               columns: [
-                { name: "step", title: "Task Step Description", cellType: "text", isRequired: true },
+                { name: "stepNo", title: "#", cellType: "text", width: "50px" },
+                { name: "taskStep", title: "Task Step", cellType: "text", isRequired: true },
                 { name: "hazards", title: "Hazards Identified", cellType: "text", isRequired: true },
-                { name: "initialRisk", title: "Initial Risk", cellType: "dropdown", choices: RISK_LEVELS, isRequired: true },
-                { name: "controls", title: "Control Measures", cellType: "text", isRequired: true },
-                { name: "residualRisk", title: "Residual Risk", cellType: "dropdown", choices: RISK_LEVELS, isRequired: true },
-                { name: "responsible", title: "Responsible Person", cellType: "text" },
-              ],
-            },
-          ],
-        },
-        {
-          type: "panel",
-          name: "section_ppe",
-          title: "4. PPE Required for This Task",
-          elements: [
-            {
-              type: "checkbox",
-              name: "ppeRequired",
-              title: "Select all PPE required",
-              choices: [
-                "Hard Hat", "Safety Glasses", "Face Shield", "Hearing Protection",
-                "Dust Mask / Respirator", "High-Visibility Vest", "Safety Gloves",
-                "Chemical-Resistant Gloves", "Steel-Toed Boots", "Safety Harness / Lanyard",
-                "Coveralls", "Flame-Resistant Clothing",
-              ],
-              hasOther: true,
-              otherText: "Other (specify)",
-            },
-          ],
-        },
-        {
-          type: "panel",
-          name: "section_emergency",
-          title: "5. Emergency Arrangements",
-          elements: [
-            { type: "text", name: "emergencyContact", title: "Emergency Contact / Muster Point", isRequired: true },
-            { type: "text", name: "firstAidLocation", title: "First Aid Kit Location" },
-            { type: "text", name: "nearestHospital", title: "Nearest Medical Facility" },
-          ],
+                {
+                  name: "likelihood",
+                  title: "Initial L",
+                  cellType: "dropdown",
+                  choices: ["A", "B", "C", "D", "E"],
+                  isRequired: true
+                },
+                {
+                  name: "consequence",
+                  title: "Initial C",
+                  cellType: "dropdown",
+                  choices: ["1", "2", "3", "4"],
+                  isRequired: true
+                },
+                {
+                  name: "initialRiskRating",
+                  title: "Initial Risk",
+                  cellType: "expression",
+                  expression: RISK_EXPRESSION.replace(/row\./g, ""),
+                  readOnly: true
+                },
+                { name: "controls", title: "Controls", cellType: "text", isRequired: true },
+                {
+                  name: "resLikelihood",
+                  title: "Res L",
+                  cellType: "dropdown",
+                  choices: ["A", "B", "C", "D", "E"],
+                  isRequired: true
+                },
+                {
+                  name: "resConsequence",
+                  title: "Res C",
+                  cellType: "dropdown",
+                  choices: ["1", "2", "3", "4"],
+                  isRequired: true
+                },
+                {
+                  name: "residualRiskRating",
+                  title: "Res Risk",
+                  cellType: "expression",
+                  expression: RISK_EXPRESSION.replace(/likelihood/g, "resLikelihood").replace(/consequence/g, "resConsequence").replace(/row\./g, ""),
+                  readOnly: true
+                },
+                { name: "responsible", title: "Responsible", cellType: "text", isRequired: true }
+              ]
+            }
+          ]
         },
         {
           type: "panel",
           name: "section_signoff",
-          title: "6. Submitted By",
+          title: "4. SUBMITTED BY",
           elements: [
             { type: "text", name: "signoffReportedByName", title: "Submitted By — Full Name", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
-            { type: "text", name: "signoffReportedByDate", title: "Submission Date", inputType: "date", isRequired: true, readOnly: true, description: "Auto-filled with today's date" },
-          ],
-        },
-      ],
-    },
+            { type: "text", name: "signoffReportedByDate", title: "Submission Date", inputType: "date", isRequired: true, readOnly: true, description: "Auto-filled with today's date" }
+          ]
+        }
+      ]
+    }
   ],
   checkErrorsMode: "onComplete",
-  showPrevButton: false,
+  showPrevButton: false
 };
 
 export default function FRM_HSE_001() {
@@ -139,11 +161,12 @@ export default function FRM_HSE_001() {
         approvalDate="01 March 2026"
         minRole="field_worker"
         schema={SCHEMA}
+        wideTable={true}
         identityFields={{
           fullName: "reportedBy",
           employeeId: "employeeId",
           department: "department",
-          position: "position",
+          position: "position"
         }}
       />
     </Layout>
