@@ -163,6 +163,7 @@
   width: 100% !important;
   min-width: 100% !important;
   display: block !important;
+  margin-top: 16px !important;
 }
 
 /* Override SurveyJS sd-table--columnsautowidth which sets width:10000px on every cell.
@@ -176,6 +177,44 @@
   min-width: 600px;
   width: max-content;
   table-layout: auto;
+}
+
+/* Add vertical breathing room between panel title and table header row */
+.ims-survey-wrapper .sd-panel__content {
+  padding-top: 12px !important;
+}
+
+.ims-survey-wrapper .sd-matrixdynamic__content,
+.ims-survey-wrapper .sd-matrixdropdown__content {
+  margin-top: 12px !important;
+}
+
+/* matrixdropdown (fixed-row summary tables like sections 4, 5) —
+   give the row-header (category/severity label) a wide fixed width,
+   and let the data columns be compact */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown {
+  width: 100% !important;
+  min-width: 400px !important;
+  table-layout: fixed !important;
+}
+
+/* First column (row header / label) — wide */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell:first-child {
+  width: 45% !important;
+  min-width: 200px !important;
+  white-space: normal !important;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 8px 12px !important;
+  vertical-align: middle;
+}
+
+/* Data columns (Count, Date etc.) — compact equal width */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell:not(:first-child) {
+  width: auto !important;
+  min-width: 120px !important;
+  padding: 6px 8px !important;
+  vertical-align: middle;
 }
 
 /* Keep column headers on a single line — no wrapping */
@@ -258,16 +297,30 @@
   vertical-align: middle;
 }
 
-/* ── matrixdynamic column header row: add vertical spacing so headers breathe ── */
-.ims-survey-wrapper .sd-table__cell--header {
-  padding-top: 14px !important;
-  padding-bottom: 10px !important;
+/* ── matrixdynamic/matrixdropdown column header row: styled navy header band ── */
+/* Note: these rules must override .sd-table.sd-matrixdropdown .sd-table__cell:not(:first-child)
+   which has specificity 0,5,0. We match by adding .sd-table__cell--column-title as extra class. */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell--header.sd-table__cell--column-title,
+.ims-survey-wrapper .sd-table.sd-matrixdynamic .sd-table__cell--header.sd-table__cell--column-title {
+  padding: 10px 12px !important;
   font-size: 12px !important;
   font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
-  color: #081C2E !important;
-  border-bottom: 2px solid #081C2E !important;
-  vertical-align: bottom !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  background-color: #132d47 !important;
+  border-bottom: 2px solid #C49A28 !important;
+  border-top: 1px solid rgba(255,255,255,0.15) !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+
+/* Empty corner cell (above row labels in matrixdropdown) — same header background */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell--empty.sd-table__cell--header {
+  background-color: #132d47 !important;
+  border-bottom: 2px solid #C49A28 !important;
+  border-top: 1px solid rgba(255,255,255,0.15) !important;
+  padding: 10px 12px !important;
 }
 
 /* ── Panel header: force white text on all text elements inside navy header ── */
