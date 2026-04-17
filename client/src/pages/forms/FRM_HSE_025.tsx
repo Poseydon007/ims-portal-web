@@ -8,16 +8,23 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+        // ── Section 1: Investigation Details ──────────────────────────────
         {
           type: "panel",
-          name: "investigationDetails",
+          name: "panel1",
           title: "1. Investigation Details",
           elements: [
             {
               type: "text",
+              name: "reportNo",
+              title: "Investigation Report No.",
+              description: "Auto-assigned on submission",
+            },
+            {
+              type: "text",
               name: "occurrenceReference",
               title: "Occurrence Reference (FRM-HSE-024 No.)",
-              placeholder: "Enter reference from initial report",
+              placeholder: "Enter reference number from initial report",
               isRequired: true,
             },
             {
@@ -25,46 +32,41 @@ const SCHEMA = {
               name: "investigationStartDate",
               title: "Investigation Start Date",
               inputType: "date",
-              defaultValueExpression: "today()",
-              readOnly: true,
-              description: "Auto-filled with today's date",
+              isRequired: true,
             },
             {
               type: "text",
               name: "investigationLead",
-              title: "Investigation Lead Full Name",
-              readOnly: true,
+              title: "Investigation Lead — Full Name",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
               name: "investigationLeadId",
-              title: "Investigation Lead Employee ID",
-              readOnly: true,
+              title: "Investigation Lead — Employee ID",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
               name: "investigationLeadPosition",
-              title: "Investigation Lead Position",
-              readOnly: true,
+              title: "Investigation Lead — Position",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
               name: "teamMembers",
               title: "Investigation Team Members",
-              placeholder: "Names and roles of team members",
+              placeholder: "Names and roles of all team members",
             },
             {
               type: "text",
-              name: "location",
+              name: "locationSite",
               title: "Location / Site",
               isRequired: true,
             },
             {
               type: "text",
-              name: "originalDate",
+              name: "originalOccurrenceDate",
               title: "Original Occurrence Date",
               inputType: "date",
               isRequired: true,
@@ -73,7 +75,7 @@ const SCHEMA = {
               type: "text",
               name: "originalClassification",
               title: "Original Classification",
-              placeholder: "From initial report",
+              placeholder: "From initial FRM-HSE-024 report",
             },
             {
               type: "dropdown",
@@ -105,29 +107,34 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 2: Occurrence Summary ─────────────────────────────────
         {
           type: "panel",
-          name: "occurrenceSummary",
+          name: "panel2",
           title: "2. Occurrence Summary",
           elements: [
             {
               type: "comment",
               name: "briefDescription",
-              title: "Brief description from initial report",
-              rows: 4,
+              title: "Brief Description of the Dangerous Occurrence",
+              description: "Summarise from the initial FRM-HSE-024 report",
+              rows: 5,
               isRequired: true,
             },
           ],
         },
+
+        // ── Section 3: Sequence of Events ─────────────────────────────────
         {
           type: "panel",
-          name: "sequenceOfEvents",
+          name: "panel3",
           title: "3. Sequence of Events",
           elements: [
             {
               type: "matrixdynamic",
-              name: "events",
-              title: "Sequence of Events",
+              name: "sequenceOfEvents",
+              title: "Timeline",
               titleLocation: "hidden",
               columns: [
                 {
@@ -135,6 +142,7 @@ const SCHEMA = {
                   title: "Time",
                   cellType: "text",
                   inputType: "time",
+                  width: "120px",
                 },
                 {
                   name: "event",
@@ -143,33 +151,38 @@ const SCHEMA = {
                   isRequired: true,
                 },
                 {
-                  name: "source",
+                  name: "sourceOfInfo",
                   title: "Source of Info",
                   cellType: "text",
-                  isRequired: true,
+                  width: "180px",
                 },
               ],
-              minRowCount: 1,
-              rowCount: 5,
+              minRowCount: 3,
+              rowCount: 6,
               addRowText: "+ Add Event",
             },
           ],
         },
+
+        // ── Section 4: Root Cause Analysis ────────────────────────────────
         {
           type: "panel",
-          name: "rootCauseAnalysis",
+          name: "panel4",
           title: "4. Root Cause Analysis",
           elements: [
             {
-              type: "text",
+              type: "comment",
               name: "directCause",
               title: "Direct Cause",
+              description: "The immediate physical cause of the occurrence",
+              rows: 3,
               isRequired: true,
             },
             {
               type: "comment",
               name: "contributingFactors",
               title: "Contributing Factors",
+              description: "Conditions or actions that contributed to the occurrence",
               rows: 3,
               isRequired: true,
             },
@@ -177,19 +190,22 @@ const SCHEMA = {
               type: "comment",
               name: "rootCause",
               title: "Root Cause",
+              description: "The fundamental systemic cause",
               rows: 3,
               isRequired: true,
             },
           ],
         },
+
+        // ── Section 5: Findings ───────────────────────────────────────────
         {
           type: "panel",
-          name: "findings",
+          name: "panel5",
           title: "5. Findings",
           elements: [
             {
               type: "matrixdynamic",
-              name: "findingsList",
+              name: "findings",
               title: "Findings",
               titleLocation: "hidden",
               columns: [
@@ -197,6 +213,7 @@ const SCHEMA = {
                   name: "no",
                   title: "No.",
                   cellType: "text",
+                  width: "60px",
                 },
                 {
                   name: "finding",
@@ -209,11 +226,13 @@ const SCHEMA = {
                   title: "Severity",
                   cellType: "dropdown",
                   choices: ["Critical", "High", "Medium", "Low"],
+                  width: "130px",
                 },
                 {
                   name: "reference",
                   title: "Reference",
                   cellType: "text",
+                  width: "160px",
                 },
               ],
               minRowCount: 1,
@@ -222,24 +241,27 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 6: Corrective and Preventive Actions ──────────────────
         {
           type: "panel",
-          name: "capa",
+          name: "panel6",
           title: "6. Corrective and Preventive Actions",
           elements: [
             {
               type: "matrixdynamic",
-              name: "actions",
-              title: "Corrective and Preventive Actions",
+              name: "capaActions",
+              title: "CAPA Log",
               titleLocation: "hidden",
               columns: [
                 {
                   name: "no",
                   title: "No.",
                   cellType: "text",
+                  width: "50px",
                 },
                 {
-                  name: "action",
+                  name: "actionRequired",
                   title: "Action Required",
                   cellType: "text",
                   isRequired: true,
@@ -249,12 +271,14 @@ const SCHEMA = {
                   title: "Responsible",
                   cellType: "text",
                   isRequired: true,
+                  width: "150px",
                 },
                 {
                   name: "targetDate",
                   title: "Target Date",
                   cellType: "text",
                   inputType: "date",
+                  width: "130px",
                 },
                 {
                   name: "controlType",
@@ -267,6 +291,7 @@ const SCHEMA = {
                     "Administrative Control",
                     "PPE",
                   ],
+                  width: "160px",
                 },
                 {
                   name: "status",
@@ -274,6 +299,7 @@ const SCHEMA = {
                   cellType: "dropdown",
                   defaultValue: "Open",
                   choices: ["Open", "In Progress", "Closed", "Overdue"],
+                  width: "120px",
                 },
               ],
               minRowCount: 1,
@@ -282,9 +308,11 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 7: Regulatory Follow-Up (KSA) ────────────────────────
         {
           type: "panel",
-          name: "regulatory",
+          name: "panel7",
           title: "7. Regulatory Follow-Up (KSA)",
           elements: [
             {
@@ -300,63 +328,81 @@ const SCHEMA = {
               ],
             },
             {
-              type: "text",
-              name: "complianceActions",
+              type: "comment",
+              name: "complianceActionsRequired",
               title: "Compliance Actions Required",
+              rows: 3,
             },
             {
               type: "text",
               name: "notificationReference",
-              title: "Notification Reference",
+              title: "Notification Reference No.",
             },
           ],
         },
+
+        // ── Section 8: Photos / Evidence ──────────────────────────────────
         {
           type: "panel",
-          name: "evidence",
-          title: "8. Evidence Notes",
+          name: "panel8",
+          title: "8. Photos / Evidence",
           elements: [
             {
               type: "comment",
-              name: "evidenceNotes",
-              title: "Evidence collected / photos description",
-              rows: 3,
+              name: "evidenceDescription",
+              title: "Evidence Collected / Photos Description",
+              description: "List all physical evidence, photos, and documents collected",
+              rows: 4,
+            },
+            {
+              type: "text",
+              name: "evidenceStorageRef",
+              title: "Evidence Storage Reference / Location",
+              placeholder: "e.g., HSE folder, site safe, digital drive path",
             },
           ],
         },
+
+        // ── Section 9: Remarks / Additional Information ───────────────────
         {
           type: "panel",
-          name: "remarks",
-          title: "9. Additional Remarks",
+          name: "panel9",
+          title: "9. Remarks / Additional Information",
           elements: [
             {
               type: "comment",
               name: "additionalRemarks",
               title: "Remarks",
-              rows: 3,
+              rows: 4,
             },
           ],
         },
+
+        // ── Section 10: Submitted By ──────────────────────────────────────
         {
           type: "panel",
-          name: "submission",
+          name: "panel10",
           title: "10. Submitted By",
           elements: [
             {
               type: "text",
-              name: "submittedBy",
-              title: "Submitted By Full Name",
-              readOnly: true,
+              name: "signoffReportedByName",
+              title: "Submitted By — Full Name",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
-              name: "submissionDate",
+              name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
-              defaultValueExpression: "today()",
-              readOnly: true,
               description: "Auto-filled with today's date",
+            },
+            {
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              inputType: "time",
+              description: "Auto-filled with current time",
             },
           ],
         },
@@ -375,7 +421,7 @@ export default function FRM_HSE_025() {
         title="Dangerous Occurrence Investigation Report"
         revision="02"
         approvalDate="April 2026"
-        minRole="field_worker"
+        minRole="hse_manager"
         wideTable={true}
         schema={SCHEMA}
         identityFields={{
