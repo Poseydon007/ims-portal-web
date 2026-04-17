@@ -179,7 +179,7 @@ const SCHEMA = {
           title: "3. Witness Position and Role at Time of Incident",
           elements: [
             {
-              type: "radiogroup",
+              type: "checkbox",
               name: "witnessRelationship",
               title: "Relationship to the Incident",
               isRequired: true,
@@ -204,13 +204,13 @@ const SCHEMA = {
               placeholder: "e.g., 5 metres",
             },
             {
-              type: "radiogroup",
+              type: "checkbox",
               name: "witnessLineOfSight",
               title: "Line of Sight to Incident",
               choices: ["Clear", "Partial", "Obstructed"],
             },
             {
-              type: "radiogroup",
+              type: "checkbox",
               name: "lightingConditions",
               title: "Lighting Conditions",
               choices: ["Daylight", "Dusk / Dawn", "Artificial", "Dark"],
@@ -222,7 +222,7 @@ const SCHEMA = {
               placeholder: "e.g., clear, dusty, windy, hot",
             },
             {
-              type: "radiogroup",
+              type: "checkbox",
               name: "noiseLevel",
               title: "Noise Level",
               choices: ["Quiet", "Normal", "Loud (PPE required)"],
@@ -584,7 +584,7 @@ export default function FRM_HSE_026() {
           position: "statementTakerPosition",
           date: "dateStatementTaken",
         }}
-        hseOnlyPanels={["section9"]}
+        hseReadOnlyPanels={["section9"]}
       />
     </Layout>
   );

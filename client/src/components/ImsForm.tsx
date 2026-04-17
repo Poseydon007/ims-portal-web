@@ -77,6 +77,11 @@ interface ImsFormProps {
    * Field workers and supervisors will not see these panels at all.
    */
   hseOnlyPanels?: string[];
+  /**
+   * Names of SurveyJS panels that are visible to all roles but read-only (locked)
+   * for users below hse_manager. HSE Manager and Admin can edit them.
+   */
+  hseReadOnlyPanels?: string[];
 }
 
 // ── Apply True East theme to SurveyJS ───────────────────────────────────────
@@ -245,6 +250,7 @@ export default function ImsForm({
   wideTable = false,
   extraSections = [],
   hseOnlyPanels = [],
+  hseReadOnlyPanels = [],
 }: ImsFormProps) {
   const { user, loading } = useImsAuth();
   const [submitted, setSubmitted] = useState(false);
@@ -320,6 +326,20 @@ export default function ImsForm({
       }
     });
   }, [user, hseOnlyPanels]);
+
+  // Lock HSE read-only panels for users below hse_manager (visible but not editable)
+  useEffect(() => {
+    if (!user || hseReadOnlyPanels.length === 0) return;
+    const userRank = ROLE_RANK[user.role as ImsRole] ?? -1;
+    const hseRank = ROLE_RANK["hse_manager"];
+    const canEdit = userRank >= hseRank;
+    hseReadOnlyPanels.forEach((panelName) => {
+      const panel = survey.getPanelByName(panelName);
+      if (panel) {
+        panel.readOnly = !canEdit;
+      }
+    });
+  }, [user, hseReadOnlyPanels]);
 
   // Inject pre-generated report number into the reportNo field (read-only)
   useEffect(() => {
