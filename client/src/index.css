@@ -181,12 +181,24 @@
 
 /* Add vertical breathing room between panel title and table header row */
 .ims-survey-wrapper .sd-panel__content {
-  padding-top: 12px !important;
+  padding-top: 16px !important;
 }
 
 .ims-survey-wrapper .sd-matrixdynamic__content,
 .ims-survey-wrapper .sd-matrixdropdown__content {
+  margin-top: 20px !important;
+}
+
+/* Gap between panel header and table wrapper (matrixdropdown/matrixdynamic) */
+.ims-survey-wrapper .sd-element__content .sd-table-wrapper {
   margin-top: 12px !important;
+}
+
+/* SurveyJS applies margin-top: -24px to pull the table header up into the panel header.
+   Override this so the column header band sits below the panel title with proper spacing. */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown,
+.ims-survey-wrapper .sd-table.sd-matrixdynamic {
+  margin-top: 0 !important;
 }
 
 /* matrixdropdown (fixed-row summary tables like sections 4, 5) —
@@ -302,7 +314,7 @@
    which has specificity 0,5,0. We match by adding .sd-table__cell--column-title as extra class. */
 .ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell--header.sd-table__cell--column-title,
 .ims-survey-wrapper .sd-table.sd-matrixdynamic .sd-table__cell--header.sd-table__cell--column-title {
-  padding: 10px 12px !important;
+  padding: 14px 12px !important;
   font-size: 12px !important;
   font-weight: 700 !important;
   letter-spacing: 0.06em !important;
@@ -320,7 +332,7 @@
   background-color: #132d47 !important;
   border-bottom: 2px solid #C49A28 !important;
   border-top: 1px solid rgba(255,255,255,0.15) !important;
-  padding: 10px 12px !important;
+  padding: 14px 12px !important;
 }
 
 /* ── Panel header: force white text on all text elements inside navy header ── */
