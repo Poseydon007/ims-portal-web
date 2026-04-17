@@ -156,10 +156,24 @@
    These rules make the inner SurveyJS table respect that scroll container.
 */
 
-/* Force the table to be at least as wide as its content */
-/* Wide forms like HSE-001 JHA have 11 columns — use max-content so nothing clips */
+/* Override SurveyJS sd-table-wrapper: SurveyJS sets width:fit-content which causes
+   the wrapper to shrink and clip wide tables. Force it to be a proper scroll container. */
+.ims-survey-wrapper .sd-table-wrapper {
+  overflow-x: auto !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  display: block !important;
+}
+
+/* Override SurveyJS sd-table--columnsautowidth which sets width:10000px on every cell.
+   This makes the table 110,000px wide. Reset to auto so table-layout can control widths. */
+.ims-survey-wrapper .sd-table.sd-table--columnsautowidth .sd-table__cell:not(.sd-table__cell--actions):not(.sd-table__cell--action):not(.sd-table__cell--empty.sd-table__cell--error) {
+  width: auto !important;
+}
+
+/* Force the table to use auto layout so columns size to their content */
 .ims-survey-wrapper .sd-table {
-  min-width: max-content;
+  min-width: 1400px;
   width: max-content;
   table-layout: auto;
 }
@@ -167,15 +181,17 @@
 /* Keep column headers on a single line — no wrapping */
 .ims-survey-wrapper .sd-table__cell--header {
   white-space: nowrap;
-  min-width: 120px;
+  min-width: 80px;
   padding: 8px 10px;
   font-size: 12px;
+  font-weight: 600;
 }
 
 /* Give data cells a reasonable minimum width */
 .ims-survey-wrapper .sd-table__cell:not(.sd-table__cell--header) {
-  min-width: 130px;
-  vertical-align: top;
+  min-width: 100px;
+  vertical-align: middle;
+  padding: 6px 8px;
 }
 
 /* Dropdown cells — slightly wider */

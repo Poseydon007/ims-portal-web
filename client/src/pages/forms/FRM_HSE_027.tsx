@@ -89,30 +89,31 @@ const SCHEMA = {
               name: "injuryLog",
               title: "Record all injuries and incidents for the month. Complete one row per case.",
               columns: [
-                { name: "no", title: "#", cellType: "text" },
-                { name: "date", title: "Date", cellType: "text", inputType: "date" },
-                { name: "employeeNo", title: "Employee No.", cellType: "text" },
-                { name: "incidentRefNo", title: "Incident Ref No.", cellType: "text" },
-                { name: "nameDept", title: "Name / Department", cellType: "text", isRequired: true },
-                { name: "natureOfInjury", title: "Nature of Injury", cellType: "text", isRequired: true },
-                { name: "bodyPart", title: "Body Part", cellType: "text" },
+                { name: "no", title: "#", cellType: "text", width: "40px" },
+                { name: "date", title: "Date", cellType: "text", inputType: "date", width: "120px" },
+                { name: "employeeNo", title: "Emp. No.", cellType: "text", width: "90px" },
+                { name: "incidentRefNo", title: "Incident Ref No.", cellType: "text", width: "120px" },
+                { name: "nameDept", title: "Name / Department", cellType: "text", isRequired: true, width: "160px" },
+                { name: "natureOfInjury", title: "Nature of Injury", cellType: "text", isRequired: true, width: "140px" },
+                { name: "bodyPart", title: "Body Part", cellType: "text", width: "100px" },
                 {
                   name: "treatmentType",
                   title: "Treatment Type",
                   cellType: "dropdown",
+                  width: "140px",
                   choices: ["First Aid", "Medical Treatment", "Restricted Work", "Lost Time Injury", "Fatality"]
                 },
-                {
-                  name: "onOffSite",
+                { name: "onOffSite",
                   title: "On-Site / Off-Site",
-                  cellType: "radiogroup",
+                  cellType: "dropdown",
+                  width: "110px",
                   choices: ["On-Site", "Off-Site"]
                 },
-                { name: "restDays", title: "Rest Days", cellType: "text", inputType: "number", min: 0 },
-                { name: "hospitalFollowUp", title: "Hospital / Follow-Up", cellType: "text" }
+                { name: "restDays", title: "Rest Days", cellType: "text", inputType: "number", min: 0, width: "80px" },
+                { name: "hospitalFollowUp", title: "Hospital / Follow-Up", cellType: "text", width: "130px" }
               ],
               minRowCount: 0,
-              rowCount: 5,
+              rowCount: 20,
               addRowText: "+ Add Case"
             }
           ]
