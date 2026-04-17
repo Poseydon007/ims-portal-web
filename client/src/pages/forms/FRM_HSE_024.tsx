@@ -417,25 +417,22 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "submittedByFullName",
-              title: "Submitted By Full Name",
-              readOnly: true,
+              name: "signoffReportedByName",
+              title: "Submitted By — Full Name",
               description: "Auto-filled from your login profile"
             },
             {
               type: "text",
-              name: "submissionDate",
+              name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
-              readOnly: true,
               description: "Auto-filled with today's date"
             },
             {
               type: "text",
-              name: "submissionTime",
+              name: "signoffSubmissionTime",
               title: "Submission Time",
               inputType: "time",
-              readOnly: true,
               description: "Auto-filled with current time"
             }
           ]
@@ -462,8 +459,7 @@ export default function FRM_HSE_024() {
           fullName: "reportedBy",
           employeeId: "employeeId",
           department: "department",
-          position: "position",
-          time: "submissionTime"
+          position: "position"
         }}
       />
     </Layout>

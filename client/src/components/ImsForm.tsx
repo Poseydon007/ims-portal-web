@@ -356,12 +356,19 @@ export default function ImsForm({
     if (identityFields.time) {
       fieldMap[identityFields.time] = currentTime;
     }
+    // Use mergeData to bypass readOnly schema restriction, then enforce readOnly programmatically
+    const existingData = survey.data ?? {};
+    const mergePayload: Record<string, string> = {};
     Object.entries(fieldMap).forEach(([name, value]) => {
       if (survey.getQuestionByName(name)) {
-        survey.setValue(name, value);
-        const q = survey.getQuestionByName(name);
-        if (q) q.readOnly = true;
+        mergePayload[name] = value;
       }
+    });
+    survey.data = { ...existingData, ...mergePayload };
+    // Now lock all auto-filled fields as read-only
+    Object.keys(mergePayload).forEach((name) => {
+      const q = survey.getQuestionByName(name);
+      if (q) q.readOnly = true;
     });
   }, [user]);
 
