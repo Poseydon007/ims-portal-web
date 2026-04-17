@@ -355,6 +355,15 @@ const SCHEMA = {
               rows: 4,
             },
             {
+              type: "file",
+              name: "evidenceFiles",
+              title: "Upload Photos / Evidence Files",
+              description: "Attach photos, documents, or any supporting evidence (max 10 files)",
+              allowMultiple: true,
+              maxSize: 10240,
+              acceptedTypes: "image/*,.pdf,.doc,.docx,.xls,.xlsx",
+            },
+            {
               type: "text",
               name: "evidenceStorageRef",
               title: "Evidence Storage Reference / Location",
