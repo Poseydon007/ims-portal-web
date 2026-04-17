@@ -35,14 +35,12 @@ const SCHEMA = {
               type: "text",
               name: "reportedBy",
               title: "Prepared By Full Name",
-              readOnly: true,
               description: "Auto-filled from your login profile"
             },
             {
               type: "text",
               name: "employeeId",
               title: "Prepared By Employee ID",
-              readOnly: true,
               description: "Auto-filled from your login profile"
             },
             {
@@ -221,18 +219,23 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "submittedBy",
-              title: "Submitted By Full Name",
-              readOnly: true,
+              name: "signoffReportedByName",
+              title: "Submitted By \u2014 Full Name",
               description: "Auto-filled from your login profile"
             },
             {
               type: "text",
-              name: "submissionDate",
+              name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
-              readOnly: true,
               description: "Auto-filled with today's date"
+            },
+            {
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              inputType: "time",
+              description: "Auto-filled with current time"
             }
           ]
         }
@@ -251,14 +254,11 @@ export default function FRM_HSE_027() {
         title="Monthly Injury Summary"
         revision="02"
         approvalDate="April 2026"
-        minRole="field_worker"
+        minRole="hse_manager"
         wideTable={true}
         schema={SCHEMA}
         identityFields={{ 
-          fullName: "reportedBy", 
-          employeeId: "employeeId", 
-          department: "department", 
-          position: "position" 
+          fullName: "signoffReportedByName",
         }}
       />
     </Layout>
