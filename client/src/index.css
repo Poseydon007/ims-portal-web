@@ -157,17 +157,19 @@
 */
 
 /* Force the table to be at least as wide as its content */
+/* Wide forms like HSE-001 JHA have 11 columns — use max-content so nothing clips */
 .ims-survey-wrapper .sd-table {
-  min-width: 640px;
-  width: 100%;
+  min-width: max-content;
+  width: max-content;
   table-layout: auto;
 }
 
 /* Keep column headers on a single line — no wrapping */
 .ims-survey-wrapper .sd-table__cell--header {
   white-space: nowrap;
-  min-width: 130px;
+  min-width: 120px;
   padding: 8px 10px;
+  font-size: 12px;
 }
 
 /* Give data cells a reasonable minimum width */
@@ -191,4 +193,94 @@
 .ims-survey-wrapper .sd-matrixdynamic,
 .ims-survey-wrapper .sd-matrix {
   overflow: visible;
+}
+
+/* Fix: matrix (Likert) tables must NOT use width:max-content — override for .sd-matrix specifically */
+/* The matrixdynamic (wide tables) still need max-content; matrix (Likert) does not */
+/* The matrix renders as: .sd-matrix > fieldset > table.sd-table */
+/* The fieldset has no class, so we target it via the parent .sd-matrix */
+.ims-survey-wrapper .sd-matrix {
+  overflow: visible;
+  display: block !important;  /* override flex so fieldset fills the container */
+  width: 100% !important;
+}
+
+.ims-survey-wrapper .sd-matrix > fieldset {
+  width: 100% !important;
+  min-width: unset !important;
+  max-width: 100% !important;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ims-survey-wrapper .sd-matrix table {
+  width: 100% !important;
+  min-width: unset !important;
+  table-layout: auto !important;
+}
+
+/* Matrix row label cell (first td in each tbody row) */
+.ims-survey-wrapper .sd-table__cell--row-text {
+  width: 40% !important;
+  min-width: 200px !important;
+  max-width: 400px !important;
+  white-space: normal !important;
+  word-break: break-word;
+  padding: 8px 12px 8px 4px;
+  vertical-align: middle;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Matrix radio button cells — equal width distribution */
+.ims-survey-wrapper .sd-matrix .sd-table__cell:not(.sd-table__cell--row-text):not(.sd-table__cell--header) {
+  width: auto !important;
+  min-width: 60px !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ── matrixdynamic column header row: add vertical spacing so headers breathe ── */
+.ims-survey-wrapper .sd-table__cell--header {
+  padding-top: 14px !important;
+  padding-bottom: 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  color: #081C2E !important;
+  border-bottom: 2px solid #081C2E !important;
+  vertical-align: bottom !important;
+}
+
+/* ── Panel header: force white text on all text elements inside navy header ── */
+/* The header background is set to #081C2E via onAfterRenderPanel in ImsForm.tsx */
+/* SurveyJS sets panel title/description colors via CSS variables — override them here */
+.ims-survey-wrapper .sd-panel__header .sd-panel__title,
+.ims-survey-wrapper .sd-panel__header .sd-panel__title span,
+.ims-survey-wrapper .sd-panel__header .sd-element__title,
+.ims-survey-wrapper .sd-panel__header .sd-element__title span {
+  color: #ffffff !important;
+}
+.ims-survey-wrapper .sd-panel__header .sd-panel__description,
+.ims-survey-wrapper .sd-panel__header .sd-element__description {
+  color: rgba(255,255,255,0.75) !important;
+}
+/* Panel description sits just below the header — also needs white when on dark bg */
+.ims-survey-wrapper .sd-panel > .sd-panel__content > .sd-panel__description {
+  color: #ffffff !important;
+  background: #081C2E;
+  padding: 4px 16px 8px;
+  margin: 0;
+  font-size: 12px;
+}
+
+/* ── Override SurveyJS sd-body--static 720px max-width so wideTable forms use full viewport ── */
+/* SurveyJS default: .sd-body--static { max-width: calc(8px * 90) = 720px } */
+.ims-survey-wrapper .sd-body--static,
+.ims-survey-wrapper .sd-root-modern,
+.ims-survey-wrapper .sd-page {
+  max-width: none !important;
+  width: 100% !important;
 }

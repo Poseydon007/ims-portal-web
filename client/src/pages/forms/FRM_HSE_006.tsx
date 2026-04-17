@@ -1,27 +1,18 @@
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
+import { DEPARTMENTS } from "@/lib/formConstants";
 
-const DEPARTMENTS = [
-  "HSE",
-  "Operations – Drilling",
-  "Operations – Geology",
-  "Operations – Survey",
-  "Maintenance",
-  "Logistics & Transport",
-  "Warehouse & Supply",
-  "Security",
-  "Administration",
-  "Finance & Accounting",
-  "Human Resources",
-  "IT & Communications",
-  "Management",
-  "Quality Assurance",
-  "Environmental",
-  "Training & Competency",
-  "Contracts & Procurement",
-  "Camp & Catering",
-  "Medical & First Aid",
-  "Other",
+// ── Agenda items from DOCX (per ISO 45001 Clause 5.4) ──────────────────────
+const STANDING_AGENDA = [
+  "Review of previous minutes and actions",
+  "Incident / accident review",
+  "Near miss and hazard reports",
+  "HSE inspection findings",
+  "Training and competency update",
+  "Emergency preparedness",
+  "Regulatory compliance update",
+  "Worker consultation and feedback",
+  "Any other business (AOB)",
 ];
 
 const SCHEMA = {
@@ -31,60 +22,40 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+        // ── Section 1: Meeting Details ────────────────────────────────────
         {
           type: "panel",
-          name: "meetingDetails",
+          name: "section_meetingDetails",
           title: "1. Meeting Details",
           elements: [
             {
               type: "text",
-              name: "meetingDate",
-              title: "Meeting Date",
+              name: "reportNo",
+              title: "Meeting Minutes No.",
               isRequired: true,
-              inputType: "date",
+              readOnly: true,
+              description: "Auto-assigned",
             },
             {
               type: "text",
-              name: "meetingTime",
-              title: "Time",
+              name: "reportedBy",
+              title: "Minutes Taken By (Full Name)",
               isRequired: true,
-              inputType: "time",
-            },
-            {
-              type: "text",
-              name: "location",
-              title: "Location",
-              isRequired: true,
-            },
-            {
-              type: "text",
-              name: "chairedByFullName",
-              title: "Chaired By Full Name",
-              isRequired: true,
-            },
-            {
-              type: "text",
-              name: "chairedByPosition",
-              title: "Chaired By Position",
-            },
-            {
-              type: "text",
-              name: "minutesTakenBy",
-              title: "Minutes Taken By Full Name",
               readOnly: true,
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
               name: "employeeId",
-              title: "Minutes Taken By Employee ID",
+              title: "Employee ID",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
               name: "position",
-              title: "Minutes Taken By Position",
+              title: "Position / Job Title",
               readOnly: true,
               description: "Auto-filled from your login profile",
             },
@@ -97,16 +68,46 @@ const SCHEMA = {
             },
             {
               type: "text",
+              name: "meetingDate",
+              title: "Meeting Date",
+              isRequired: true,
+              inputType: "date",
+            },
+            {
+              type: "text",
+              name: "meetingTime",
+              title: "Meeting Time",
+              isRequired: true,
+              inputType: "time",
+            },
+            {
+              type: "text",
+              name: "location",
+              title: "Location",
+              isRequired: true,
+            },
+            {
+              type: "text",
+              name: "chairedBy",
+              title: "Chaired By",
+              isRequired: true,
+            },
+            {
+              type: "text",
               name: "nextMeetingDate",
               title: "Next Meeting Date",
               inputType: "date",
             },
           ],
         },
+
+        // ── Section 2: Attendance Register ───────────────────────────────
         {
           type: "panel",
-          name: "attendanceRegister",
+          name: "section_attendance",
           title: "2. Attendance Register",
+          description:
+            "Record all committee members and attendees present at this meeting.",
           elements: [
             {
               type: "matrixdynamic",
@@ -115,14 +116,15 @@ const SCHEMA = {
               titleLocation: "hidden",
               columns: [
                 {
-                  name: "id",
+                  name: "no",
                   title: "#",
                   cellType: "text",
                   width: "50px",
+                  readOnly: true,
                 },
                 {
                   name: "fullName",
-                  title: "Full Name",
+                  title: "Name",
                   cellType: "text",
                   isRequired: true,
                 },
@@ -133,16 +135,17 @@ const SCHEMA = {
                   isRequired: true,
                 },
                 {
-                  name: "department",
+                  name: "dept",
                   title: "Department",
                   cellType: "dropdown",
                   choices: DEPARTMENTS,
                 },
                 {
                   name: "present",
-                  title: "Present",
-                  cellType: "radiogroup",
-                  choices: ["Yes", "No", "Apologies"],
+                  title: "Present / Apologies",
+                  cellType: "dropdown",
+                  choices: ["Present", "Apologies", "Absent"],
+                  defaultValue: "Present",
                 },
               ],
               rowCount: 5,
@@ -151,21 +154,27 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 3: Standing Agenda Items ─────────────────────────────
         {
           type: "panel",
-          name: "standingAgendaItems",
+          name: "section_agenda",
           title: "3. Standing Agenda Items (per ISO 45001 Clause 5.4)",
+          description:
+            "Record discussion notes for each standing agenda item. Add additional items as required.",
           elements: [
             {
               type: "matrixdynamic",
               name: "agendaItems",
-              title: "Agenda Items — record discussion notes for each item",
+              title: "Agenda Items",
+              titleLocation: "hidden",
               columns: [
                 {
-                  name: "id",
+                  name: "no",
                   title: "#",
                   cellType: "text",
                   width: "50px",
+                  readOnly: true,
                 },
                 {
                   name: "item",
@@ -176,43 +185,43 @@ const SCHEMA = {
                 {
                   name: "notes",
                   title: "Discussion / Notes",
-                  cellType: "text",
+                  cellType: "comment",
+                  rows: 2,
                   isRequired: true,
                 },
               ],
               rowCount: 9,
               minRowCount: 9,
               addRowText: "+ Add Agenda Item",
-              defaultValue: [
-                { id: "1", item: "Review of previous minutes and actions" },
-                { id: "2", item: "Incident / accident review" },
-                { id: "3", item: "Near miss and hazard reports" },
-                { id: "4", item: "HSE inspection findings" },
-                { id: "5", item: "Training and competency update" },
-                { id: "6", item: "Emergency preparedness" },
-                { id: "7", item: "Regulatory compliance update" },
-                { id: "8", item: "Worker consultation and feedback" },
-                { id: "9", item: "Any other business (AOB)" },
-              ],
+              defaultValue: STANDING_AGENDA.map((item, i) => ({
+                no: String(i + 1),
+                item,
+                notes: "",
+              })),
             },
           ],
         },
+
+        // ── Section 4: Action Items ───────────────────────────────────────
         {
           type: "panel",
-          name: "actionItems",
+          name: "section_actions",
           title: "4. Action Items",
+          description:
+            "Record all actions arising from this meeting. Reference the corresponding investigation or report number where applicable.",
           elements: [
             {
               type: "matrixdynamic",
-              name: "actions",
+              name: "actionItems",
               title: "Action Items",
               titleLocation: "hidden",
               columns: [
                 {
-                  name: "id",
+                  name: "no",
                   title: "#",
                   cellType: "text",
                   width: "50px",
+                  readOnly: true,
                 },
                 {
                   name: "action",
@@ -222,7 +231,7 @@ const SCHEMA = {
                 },
                 {
                   name: "responsible",
-                  title: "Responsible Person",
+                  title: "Responsible",
                   cellType: "text",
                   isRequired: true,
                 },
@@ -251,25 +260,37 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 5: Submitted By ───────────────────────────────────────
         {
           type: "panel",
-          name: "submittedBy",
+          name: "section_signoff",
           title: "5. Submitted By",
           elements: [
             {
               type: "text",
-              name: "submittedBy",
-              title: "Submitted By Full Name",
+              name: "signoffReportedByName",
+              title: "Submitted By — Full Name",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
-              name: "submissionDate",
+              name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled with today's date",
+            },
+            {
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled with current time",
             },
           ],
         },
@@ -290,9 +311,9 @@ export default function FRM_HSE_006() {
         approvalDate="01 March 2026"
         minRole="field_worker"
         schema={SCHEMA}
-        wideTable={true}
+        wideTable
         identityFields={{
-          fullName: "minutesTakenBy",
+          fullName: "reportedBy",
           employeeId: "employeeId",
           position: "position",
           department: "department",

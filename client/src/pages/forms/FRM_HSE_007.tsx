@@ -1,28 +1,6 @@
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
-
-const DEPARTMENT_LIST = [
-  "HSE",
-  "Operations – Drilling",
-  "Operations – Geology",
-  "Operations – Survey",
-  "Maintenance",
-  "Logistics & Transport",
-  "Warehouse & Supply",
-  "Security",
-  "Administration",
-  "Finance & Accounting",
-  "Human Resources",
-  "IT & Communications",
-  "Management",
-  "Quality Assurance",
-  "Environmental",
-  "Training & Competency",
-  "Contracts & Procurement",
-  "Camp & Catering",
-  "Medical & First Aid",
-  "Other"
-];
+import { DEPARTMENTS } from "@/lib/formConstants";
 
 const SCHEMA = {
   title: "Planned Task Observation (PTO) Form",
@@ -31,11 +9,20 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+        // ── Section 1: Observation Details ──────────────────────────────────
         {
           type: "panel",
           name: "section_observation_details",
           title: "1. Observation Details",
           elements: [
+            {
+              type: "text",
+              name: "reportNo",
+              title: "PTO Number",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-assigned on submission"
+            },
             {
               type: "text",
               name: "reportedBy",
@@ -56,7 +43,6 @@ const SCHEMA = {
               type: "text",
               name: "position",
               title: "Position",
-              isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile"
             },
@@ -65,7 +51,7 @@ const SCHEMA = {
               name: "department",
               title: "Department",
               isRequired: true,
-              choices: DEPARTMENT_LIST
+              choices: DEPARTMENTS
             },
             {
               type: "text",
@@ -112,22 +98,26 @@ const SCHEMA = {
             {
               type: "text",
               name: "taskDuration",
-              title: "Task Duration in minutes",
+              title: "Task Duration (minutes)",
               inputType: "number"
             },
             {
               type: "text",
               name: "lightingConditions",
               title: "Lighting Conditions",
+              description: "e.g., 540 lux at rig, 215 lux walkways — required for night shift",
               visibleIf: "{shift} = 'Night Shift'",
               isRequired: true
             }
           ]
         },
+
+        // ── Section 2: Observation Checklist — Safe Acts ─────────────────────
         {
           type: "panel",
-          name: "section_observation_checklist",
+          name: "section_safe_acts",
           title: "2. Observation Checklist — Safe Acts",
+          description: "Tick all safe behaviours observed",
           elements: [
             {
               type: "checkbox",
@@ -141,140 +131,140 @@ const SCHEMA = {
                 "Housekeeping maintained (no trip hazards)",
                 "Equipment used correctly (no shortcuts)",
                 "Fatigue / heat stress managed (breaks, hydration)",
-                {
-                  value: "Adequate lighting for task",
-                  text: "Adequate lighting for task (night shift only)",
-                  visibleIf: "{shift} = 'Night Shift'"
-                },
-                {
-                  value: "Visibility aids in use",
-                  text: "Visibility aids in use — reflective vests etc. (night shift only)",
-                  visibleIf: "{shift} = 'Night Shift'"
-                }
+                "Adequate lighting for task (night shift)",
+                "Visibility aids in use — reflective vests, task lights (night shift)"
               ]
+            },
+            {
+              type: "text",
+              name: "safeActsOther",
+              title: "Other positive observation",
+              placeholder: "Describe any other safe act observed"
             }
           ]
         },
+
+        // ── Section 3: Unsafe Acts / Conditions Identified ───────────────────
         {
           type: "panel",
           name: "section_unsafe_acts",
           title: "3. Unsafe Acts / Conditions Identified",
+          description: "Tick all unsafe acts or conditions observed",
+          elements: [
+            {
+              type: "checkbox",
+              name: "unsafeActs",
+              title: "Select all that apply",
+              choices: [
+                "PPE missing / incorrect",
+                "Unsafe lifting / body positioning",
+                "Line-of-fire exposure",
+                "Poor communication",
+                "Trip / slip hazards",
+                "Improper tool / equipment use",
+                "Fatigue / heat signs",
+                "Inadequate lighting (night shift)"
+              ]
+            },
+            {
+              type: "text",
+              name: "unsafeActsOther",
+              title: "Other unsafe act / condition",
+              placeholder: "Describe any other unsafe act or condition"
+            }
+          ]
+        },
+
+        // ── Section 4: Immediate Feedback Given ──────────────────────────────
+        {
+          type: "panel",
+          name: "section_feedback",
+          title: "4. Immediate Feedback Given",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "positiveFeedbackGiven",
+              title: "Positive feedback provided",
+              isRequired: true,
+              choices: ["Yes", "No"]
+            },
+            {
+              type: "radiogroup",
+              name: "unsafeActsDiscussed",
+              title: "Unsafe acts / conditions discussed with employee",
+              isRequired: true,
+              choices: ["Yes", "No"]
+            },
+            {
+              type: "comment",
+              name: "employeeResponse",
+              title: "Employee response / commitment",
+              rows: 3,
+              placeholder: "Record the employee's response and any commitment made"
+            }
+          ]
+        },
+
+        // ── Section 5: Recommendations / Action Items ────────────────────────
+        {
+          type: "panel",
+          name: "section_recommendations",
+          title: "5. Recommendations / Action Items",
           elements: [
             {
               type: "matrixdynamic",
-              name: "unsafeItems",
-              title: "Unsafe Acts / Conditions",
-              addRowText: "+ Add Item",
-              rowCount: 0,
-              minRowCount: 0,
+              name: "recommendations",
+              title: "Action Items",
+              addRowText: "+ Add Action",
+              rowCount: 4,
+              minRowCount: 1,
               columns: [
                 {
                   name: "itemNo",
-                  title: "Item No.",
-                  cellType: "text"
+                  title: "#",
+                  cellType: "text",
+                  readOnly: true
                 },
                 {
-                  name: "description",
-                  title: "Description of Unsafe Act/Condition",
+                  name: "recommendation",
+                  title: "Recommendation / Action",
                   cellType: "text",
                   isRequired: true
                 },
                 {
-                  name: "riskLevel",
-                  title: "Risk Level",
-                  cellType: "dropdown",
-                  isRequired: true,
-                  choices: ["Low", "Medium", "High", "Extreme"]
+                  name: "responsible",
+                  title: "Responsible",
+                  cellType: "text",
+                  isRequired: true
                 },
                 {
-                  name: "immediateAction",
-                  title: "Immediate Action Taken",
-                  cellType: "text"
+                  name: "dueDate",
+                  title: "Due Date",
+                  cellType: "text",
+                  inputType: "date",
+                  isRequired: true
                 }
+              ],
+              defaultValue: [
+                { itemNo: "01", recommendation: "", responsible: "", dueDate: "" },
+                { itemNo: "02", recommendation: "", responsible: "", dueDate: "" },
+                { itemNo: "03", recommendation: "", responsible: "", dueDate: "" },
+                { itemNo: "04", recommendation: "", responsible: "", dueDate: "" }
               ]
             }
           ]
         },
+
+        // ── Section 6: Submitted By ───────────────────────────────────────────
         {
           type: "panel",
-          name: "section_feedback",
-          title: "4. Feedback Given to Worker",
-          elements: [
-            {
-              type: "radiogroup",
-              name: "feedbackGiven",
-              title: "Was feedback given?",
-              isRequired: true,
-              choices: ["Yes", "No"]
-            },
-            {
-              type: "dropdown",
-              name: "feedbackType",
-              title: "Type of Feedback",
-              visibleIf: "{feedbackGiven} = 'Yes'",
-              isRequired: true,
-              choices: ["Positive", "Corrective", "Both"]
-            },
-            {
-              type: "comment",
-              name: "feedbackSummary",
-              title: "Summary of Feedback",
-              visibleIf: "{feedbackGiven} = 'Yes'",
-              isRequired: true,
-              rows: 3
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "section_overall_assessment",
-          title: "5. Overall Safety Assessment",
-          elements: [
-            {
-              type: "dropdown",
-              name: "overallRating",
-              title: "Overall Rating",
-              isRequired: true,
-              choices: [
-                "Excellent",
-                "Good",
-                "Satisfactory",
-                "Needs Improvement",
-                "Unsafe — Stop Work"
-              ]
-            },
-            {
-              type: "comment",
-              name: "comments",
-              title: "Comments / Recommendations",
-              rows: 4
-            },
-            {
-              type: "radiogroup",
-              name: "followUpRequired",
-              title: "Follow-up action required?",
-              isRequired: true,
-              choices: ["Yes", "No"]
-            },
-            {
-              type: "text",
-              name: "followUpDueDate",
-              title: "Follow-up Due Date",
-              inputType: "date",
-              visibleIf: "{followUpRequired} = 'Yes'",
-              isRequired: true
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "section_submitted_by",
+          name: "section_signoff",
           title: "6. Submitted By",
           elements: [
             {
               type: "text",
               name: "signoffReportedByName",
-              title: "Submitted By Full Name",
+              title: "Submitted By — Full Name",
               isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile"
@@ -287,6 +277,14 @@ const SCHEMA = {
               isRequired: true,
               readOnly: true,
               description: "Auto-filled with today's date"
+            },
+            {
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled with current time"
             }
           ]
         }

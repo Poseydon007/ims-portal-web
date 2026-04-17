@@ -11,7 +11,7 @@
  * - Shows digital approval workflow status and auto-generated report number after submission.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactNode } from "react";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import "survey-core/survey-core.min.css";
@@ -57,12 +57,24 @@ interface ImsFormProps {
     employeeId?: string;
     department?: string;
     position?: string;
+    /** Name of a date field to auto-fill with today's date */
+    date?: string;
   };
   /**
    * Use wide (full-width) layout for forms with many-column matrixdynamic tables.
    * Removes the max-width constraint and enables horizontal scrolling on tables.
    */
   wideTable?: boolean;
+  /**
+   * Inject custom React content after specific SurveyJS panels.
+   * Each entry specifies which panel name to follow and what content to render.
+   */
+  extraSections?: Array<{ afterPanel: string; content: ReactNode }>;
+  /**
+   * Names of SurveyJS panels that should only be visible to hse_manager and admin roles.
+   * Field workers and supervisors will not see these panels at all.
+   */
+  hseOnlyPanels?: string[];
 }
 
 // ── Apply True East theme to SurveyJS ───────────────────────────────────────
@@ -84,6 +96,16 @@ function applyImsTheme(survey: Model, readOnly: boolean) {
       "--sjs-font-questiontitle-size": "14px",
       "--sjs-font-size": "14px",
     },
+  });
+
+  // Execute inline <script> tags inside HTML questions after they render in the DOM
+  survey.onAfterRenderQuestion.add((_sender, options) => {
+    const el = options.htmlElement as HTMLElement;
+    el.querySelectorAll("script").forEach((oldScript) => {
+      const newScript = document.createElement("script");
+      newScript.textContent = oldScript.textContent || "";
+      oldScript.parentNode?.replaceChild(newScript, oldScript);
+    });
   });
 
   // Panel title styling
@@ -158,6 +180,57 @@ function WorkflowSteps({ currentStatus }: { currentStatus: string }) {
   );
 }
 
+// ── SurveyWithExtras: renders Survey + injects React nodes after named panels ─
+function SurveyWithExtras({
+  survey,
+  extraSections,
+}: {
+  survey: Model;
+  extraSections: Array<{ afterPanel: string; content: ReactNode }>;
+}) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [panelPositions, setPanelPositions] = useState<Record<string, number>>({});
+
+  // After Survey renders, find each panel's DOM position
+  useEffect(() => {
+    if (!wrapperRef.current || extraSections.length === 0) return;
+    const updatePositions = () => {
+      const wrapper = wrapperRef.current;
+      if (!wrapper) return;
+      const positions: Record<string, number> = {};
+      extraSections.forEach(({ afterPanel }) => {
+        // SurveyJS renders panels with data-name attribute
+        const el = wrapper.querySelector(`[data-name="${afterPanel}"]`) as HTMLElement | null;
+        if (el) {
+          positions[afterPanel] = el.offsetTop + el.offsetHeight;
+        }
+      });
+      setPanelPositions(positions);
+    };
+    // Use MutationObserver to detect when SurveyJS finishes rendering
+    const observer = new MutationObserver(updatePositions);
+    observer.observe(wrapperRef.current, { childList: true, subtree: true });
+    updatePositions();
+    return () => observer.disconnect();
+  }, [extraSections]);
+
+  return (
+    <div className="ims-survey-wrapper" style={{ overflowX: "auto" }}>
+      <div ref={wrapperRef} style={{ position: "relative" }}>
+        <Survey model={survey} />
+      </div>
+      {/* Extra sections rendered below the survey, in document order */}
+      {extraSections.length > 0 && (
+        <div style={{ marginTop: "0" }}>
+          {extraSections.map(({ afterPanel, content }) => (
+            <div key={afterPanel}>{content}</div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Component ────────────────────────────────────────────────────────────────
 export default function ImsForm({
   formCode,
@@ -168,6 +241,8 @@ export default function ImsForm({
   schema,
   identityFields = {},
   wideTable = false,
+  extraSections = [],
+  hseOnlyPanels = [],
 }: ImsFormProps) {
   const { user, loading } = useImsAuth();
   const [submitted, setSubmitted] = useState(false);
@@ -215,10 +290,34 @@ export default function ImsForm({
 
   const survey = surveyRef.current;
 
+  // Expose survey instance globally for HTML-table input bridges
+  useEffect(() => {
+    (window as any).__imsCurrentSurvey = survey;
+    (window as any).__imsSurvey = survey;
+    return () => {
+      (window as any).__imsCurrentSurvey = null;
+      (window as any).__imsSurvey = null;
+    };
+  }, [survey]);
+
   // Apply theme once
   useEffect(() => {
     applyImsTheme(survey, readOnly);
   }, [readOnly]);
+
+  // Hide HSE-only panels from field workers and supervisors
+  useEffect(() => {
+    if (!user || hseOnlyPanels.length === 0) return;
+    const userRank = ROLE_RANK[user.role as ImsRole] ?? -1;
+    const hseRank = ROLE_RANK["hse_manager"];
+    const canSeeHseOnly = userRank >= hseRank;
+    hseOnlyPanels.forEach((panelName) => {
+      const panel = survey.getPanelByName(panelName);
+      if (panel) {
+        panel.visible = canSeeHseOnly;
+      }
+    });
+  }, [user, hseOnlyPanels]);
 
   // Inject pre-generated report number into the reportNo field (read-only)
   useEffect(() => {
@@ -235,6 +334,9 @@ export default function ImsForm({
     if (!user) return;
     // Today's date in YYYY-MM-DD for date input fields
     const today = new Date().toISOString().split("T")[0];
+    // Current time in HH:MM (24h) format
+    const now = new Date();
+    const currentTime = now.toTimeString().slice(0, 5);
     const fieldMap: Record<string, string> = {
       [identityFields.fullName ?? "reportedBy"]: user.fullName ?? "",
       [identityFields.employeeId ?? "employeeId"]: user.employeeId ?? "",
@@ -242,7 +344,12 @@ export default function ImsForm({
       [identityFields.position ?? "position"]: user.position ?? "",
       signoffReportedByName: user.fullName ?? "",
       signoffReportedByDate: today,
+      signoffSubmissionTime: currentTime,
     };
+    // Auto-fill any additional date field specified
+    if (identityFields.date) {
+      fieldMap[identityFields.date] = today;
+    }
     Object.entries(fieldMap).forEach(([name, value]) => {
       if (survey.getQuestionByName(name)) {
         survey.setValue(name, value);
@@ -415,11 +522,8 @@ export default function ImsForm({
         </div>
       )}
 
-      {/* SurveyJS form */}
-      {/* overflow-x-auto allows wide matrixdynamic tables to scroll horizontally */}
-      <div className="ims-survey-wrapper" style={{ overflowX: "auto" }}>
-        <Survey model={survey} />
-      </div>
+      {/* SurveyJS form with optional extra sections injected after specific panels */}
+      <SurveyWithExtras survey={survey} extraSections={extraSections} />
 
       {/* Submit button — only shown when user has permission */}
       {!readOnly && (

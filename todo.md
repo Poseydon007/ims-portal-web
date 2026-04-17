@@ -228,3 +228,11 @@
 - [ ] Update EducationTopic page to listen for postMessage and call recordCompletion mutation
 - [ ] Show green checkmark badge on resource card when user has a completion record
 - [ ] Show completion count on Education main page IMS topic card
+
+## FRM-HSE-023 to FRM-HSE-028 Fixes (Apr 17)
+- [x] Fix FRM-HSE-023 matrix row label CSS (table-layout auto, row text cell min-width)
+- [x] Add hseOnlyPanels prop to ImsForm component for role-based panel visibility
+- [x] FRM-HSE-023: Hide Scoring Summary (section_scoring) from field workers and supervisors
+- [x] FRM-HSE-026: Hide Section 8 HSE Review from field workers and supervisors
+- [x] FRM-HSE-028: Build Monthly HSE Violation Report (10 sections, dynamic violation log, summary matrices)
+- [x] FRM-HSE-028: Register in App.tsx route, imsData.ts, and formSubmissionsRouter prefix map

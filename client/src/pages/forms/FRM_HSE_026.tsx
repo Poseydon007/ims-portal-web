@@ -511,6 +511,7 @@ export default function FRM_HSE_026() {
           department: "department",
           position: "position",
         }}
+        hseOnlyPanels={["section8"]}
       />
     </Layout>
   );

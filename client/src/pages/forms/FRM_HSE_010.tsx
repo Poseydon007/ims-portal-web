@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
+import { DEPARTMENTS } from "@/lib/formConstants";
 
 const SCHEMA = {
   title: "Hazard Identification Prompt Checklist",
@@ -8,11 +9,20 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+        // ── Section 1: Report Details ──
         {
           type: "panel",
           name: "section1",
-          title: "1. Task Details",
+          title: "1. Report Details",
           elements: [
+            {
+              type: "text",
+              name: "reportNo",
+              title: "HID Number",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-assigned on submission"
+            },
             {
               type: "text",
               name: "reportedBy",
@@ -39,13 +49,7 @@ const SCHEMA = {
               name: "department",
               title: "Department",
               isRequired: true,
-              choices: [
-                "HSE", "Operations – Drilling", "Operations – Geology", "Operations – Survey", 
-                "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security", 
-                "Administration", "Finance & Accounting", "Human Resources", "IT & Communications", 
-                "Management", "Quality Assurance", "Environmental", "Training & Competency", 
-                "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other"
-              ]
+              choices: DEPARTMENTS
             },
             {
               type: "text",
@@ -83,10 +87,13 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 2: People & Behaviour Hazards ──
         {
           type: "panel",
           name: "section2",
-          title: "2. A. People & Behaviour Hazards",
+          title: "2. People & Behaviour Hazards",
+          description: "Tick all that apply",
           elements: [
             {
               type: "checkbox",
@@ -102,10 +109,13 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 3: Equipment & Tools Hazards ──
         {
           type: "panel",
           name: "section3",
-          title: "3. B. Equipment & Tools Hazards",
+          title: "3. Equipment & Tools Hazards",
+          description: "Tick all that apply",
           elements: [
             {
               type: "checkbox",
@@ -121,10 +131,13 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 4: Environment & Site Conditions ──
         {
           type: "panel",
           name: "section4",
-          title: "4. C. Environment & Site Conditions",
+          title: "4. Environment & Site Conditions",
+          description: "Tick all that apply",
           elements: [
             {
               type: "checkbox",
@@ -140,10 +153,13 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 5: High-Risk Activities ──
         {
           type: "panel",
           name: "section5",
-          title: "5. D. High-Risk Activities",
+          title: "5. High-Risk Activities",
+          description: "Tick all that apply",
           elements: [
             {
               type: "checkbox",
@@ -160,10 +176,13 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 6: Other / Site-Specific Hazards ──
         {
           type: "panel",
           name: "section6",
-          title: "6. E. Other Hazards",
+          title: "6. Other / Site-Specific Hazards",
+          description: "Tick all that apply",
           elements: [
             {
               type: "checkbox",
@@ -179,77 +198,139 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 7: Controls Identified ──
         {
           type: "panel",
           name: "section7",
-          title: "7. Control Measures",
+          title: "7. Controls Identified",
+          description: "Complete for any hazard ticked above",
           elements: [
             {
               type: "matrixdynamic",
               name: "controlMeasures",
               title: "Control Measures Applied",
               columns: [
-                { name: "rowNumber", title: "#", cellType: "text" },
+                { name: "no", title: "#", cellType: "text", maxWidth: "50px" },
                 { name: "controlMeasure", title: "Control Measure Applied", cellType: "text", isRequired: true },
-                { name: "responsibleDate", title: "Responsible / Due Date", cellType: "text" }
+                { name: "responsible", title: "Responsible", cellType: "text" },
+                { name: "dueDate", title: "Due Date", cellType: "text" }
               ],
+              rowCount: 5,
               minRowCount: 1,
-              rowCount: 3,
-              addRowText: "+ Add Control"
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "section8",
-          title: "8. Residual Risk Assessment",
-          elements: [
-            {
-              type: "dropdown",
-              name: "residualRisk",
-              title: "Residual Risk Level",
-              isRequired: true,
-              choices: [
-                "Low — Proceed",
-                "Medium — Proceed with caution",
-                "High — Stop and consult supervisor"
+              addRowText: "+ Add Control",
+              defaultValue: [
+                { no: "01" },
+                { no: "02" },
+                { no: "03" },
+                { no: "04" },
+                { no: "05" }
               ]
             }
           ]
         },
+
+        // ── Section 8: Risk Level After Controls ──
+        {
+          type: "panel",
+          name: "section8",
+          title: "8. Risk Level After Controls",
+          description: "Tick one",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "residualRisk",
+              title: "Residual Risk Level",
+              isRequired: true,
+              choices: [
+                { value: "low", text: "LOW — Safe to proceed with normal controls" },
+                { value: "medium", text: "MEDIUM — Additional controls needed; supervisor approval required before proceeding" },
+                { value: "high", text: "HIGH — STOP WORK. Notify Supervisor and HSE Officer immediately. Do not proceed" }
+              ]
+            }
+          ]
+        },
+
+        // ── Section 9: Employee Declaration ──
         {
           type: "panel",
           name: "section9",
-          title: "9. Declaration",
+          title: "9. Employee Declaration",
           elements: [
             {
               type: "boolean",
               name: "declaration",
-              title: "I have identified the hazards listed, applied the controls listed, and I am competent and fit to proceed with this task.",
+              title: "I confirm that I have identified the hazards above to the best of my ability, applied the controls listed, and I am competent and fit to proceed with this task.",
               label: "I confirm the above declaration",
               isRequired: true
             }
           ]
         },
+
+        // ── Section 10: HSE / Supervisor Follow-Up ──
         {
           type: "panel",
           name: "section10",
-          title: "10. Submitted By",
+          title: "10. HSE / Supervisor Follow-Up",
           elements: [
             {
               type: "text",
-              name: "submittedBy",
-              title: "Submitted By Full Name",
+              name: "followUpReviewedBy",
+              title: "Reviewed by (Supervisor / HSE)",
+              isRequired: true
+            },
+            {
+              type: "radiogroup",
+              name: "highRiskEscalated",
+              title: "High-risk hazard escalated?",
+              isRequired: true,
+              choices: ["Yes", "No"]
+            },
+            {
+              type: "comment",
+              name: "followUpActionTaken",
+              title: "Action Taken",
+              rows: 3
+            },
+            {
+              type: "text",
+              name: "followUpDateTime",
+              title: "Date / Time",
+              inputType: "datetime-local"
+            }
+          ]
+        },
+
+        // ── Section 11: Submitted By ──
+        {
+          type: "panel",
+          name: "section11",
+          title: "11. Submitted By",
+          elements: [
+            {
+              type: "text",
+              name: "signoffReportedByName",
+              title: "Submitted By — Full Name",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile"
             },
             {
               type: "text",
-              name: "submissionDate",
+              name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled with today's date"
+            },
+            {
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled with current time"
             }
           ]
         }
@@ -269,7 +350,7 @@ export default function FRM_HSE_010() {
         revision="01"
         approvalDate="10 April 2026"
         minRole="field_worker"
-        wideTable={false}
+        wideTable={true}
         schema={SCHEMA}
         identityFields={{
           fullName: "reportedBy",

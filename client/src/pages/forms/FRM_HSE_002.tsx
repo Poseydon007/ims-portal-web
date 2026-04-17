@@ -1,3 +1,14 @@
+/**
+ * TE-IMS-FRM-HSE-002 — Incident Flash Notification
+ * Source: TE-IMS-FRM-HSE-002_Rev01-IncidentFlashNotification.docx
+ * Rules applied:
+ *   1. Report No. first, grouped with identity fields
+ *   2. IMS portal colors only
+ *   3. wideTable — Persons Involved (4 cols) + Escalation (5 cols)
+ *   4. Sign-off: name + date + time, all auto-filled
+ *   5. Digital-first: paper metadata removed, all real fields preserved
+ */
+
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
 
@@ -25,17 +36,64 @@ const DEPARTMENT_LIST = [
 ];
 
 const SCHEMA = {
-  title: "Incident Flash Notification",
+  title: "",
   showTitle: false,
   pages: [
     {
       name: "page1",
       elements: [
+
+        // ── Section 1: Incident Details ─────────────────────────────────────
+        // Rule 1: Report No. is first field
         {
           type: "panel",
           name: "section1_incident_details",
           title: "1. Incident Details",
           elements: [
+            {
+              type: "text",
+              name: "reportNo",
+              title: "Incident Number",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-assigned on submission",
+            },
+            {
+              type: "text",
+              name: "reportedBy",
+              title: "Reported By",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "employeeId",
+              title: "Employee ID",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "text",
+              name: "position",
+              title: "Position / Job Title",
+              readOnly: true,
+              description: "Auto-filled from your login profile",
+            },
+            {
+              type: "dropdown",
+              name: "department",
+              title: "Department",
+              isRequired: true,
+              choices: DEPARTMENT_LIST,
+            },
+            {
+              type: "text",
+              name: "site",
+              title: "Site / Project Name",
+              isRequired: true,
+            },
             {
               type: "text",
               name: "dateOfIncident",
@@ -53,52 +111,13 @@ const SCHEMA = {
             {
               type: "text",
               name: "location",
-              title: "Location",
+              title: "Location / Site Area",
               isRequired: true,
-            },
-            {
-              type: "dropdown",
-              name: "department",
-              title: "Department",
-              isRequired: true,
-              choices: DEPARTMENT_LIST,
-            },
-            {
-              type: "text",
-              name: "site",
-              title: "Site",
-              isRequired: true,
-            },
-            {
-              type: "text",
-              name: "reportNo",
-              title: "Incident Number",
-              readOnly: true,
-              description: "Auto-assigned on submission",
-            },
-            {
-              type: "text",
-              name: "reportedBy",
-              title: "Reported By Full Name",
-              readOnly: true,
-              description: "Auto-filled from your login profile",
-            },
-            {
-              type: "text",
-              name: "employeeId",
-              title: "Employee ID",
-              readOnly: true,
-              description: "Auto-filled from your login profile",
-            },
-            {
-              type: "text",
-              name: "position",
-              title: "Position",
-              readOnly: true,
-              description: "Auto-filled from your login profile",
             },
           ],
         },
+
+        // ── Section 2: Severity Classification ─────────────────────────────
         {
           type: "panel",
           name: "section2_severity",
@@ -107,7 +126,7 @@ const SCHEMA = {
             {
               type: "checkbox",
               name: "severityClassification",
-              title: "Select all that apply",
+              title: "Tick the applicable severity level (select all that apply)",
               isRequired: true,
               choices: [
                 "First Aid",
@@ -122,6 +141,8 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 3: Brief Description ────────────────────────────────────
         {
           type: "panel",
           name: "section3_description",
@@ -130,7 +151,7 @@ const SCHEMA = {
             {
               type: "comment",
               name: "incidentDescription",
-              title: "Description of incident",
+              title: "Description of Incident",
               isRequired: true,
               rows: 5,
               placeholder:
@@ -138,6 +159,9 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 4: Persons Involved ─────────────────────────────────────
+        // 4 columns → wideTable required
         {
           type: "panel",
           name: "section4_persons_involved",
@@ -164,7 +188,7 @@ const SCHEMA = {
                 },
                 {
                   name: "designation",
-                  title: "Designation/Position",
+                  title: "Designation / Position",
                   cellType: "text",
                   isRequired: true,
                 },
@@ -179,6 +203,8 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 5: Immediate Actions Taken ─────────────────────────────
         {
           type: "panel",
           name: "section5_immediate_actions",
@@ -187,12 +213,16 @@ const SCHEMA = {
             {
               type: "comment",
               name: "immediateActions",
-              title: "Actions taken",
+              title: "Actions taken immediately after the incident",
               isRequired: true,
               rows: 4,
+              placeholder: "Describe first aid given, area secured, equipment isolated, etc.",
             },
           ],
         },
+
+        // ── Section 6: Escalation — Notifications Made ──────────────────────
+        // 5 columns → wideTable required
         {
           type: "panel",
           name: "section6_escalation",
@@ -201,7 +231,7 @@ const SCHEMA = {
             {
               type: "matrixdynamic",
               name: "notificationsMade",
-              title: "Details of notifications",
+              title: "Record all notifications made",
               rowCount: 3,
               minRowCount: 1,
               columns: [
@@ -212,7 +242,7 @@ const SCHEMA = {
                   choices: [
                     "Site Manager",
                     "HSE Manager",
-                    "MHRSD",
+                    "MHRSD (if required)",
                     "Company Director",
                     "Other",
                   ],
@@ -244,11 +274,13 @@ const SCHEMA = {
               defaultValue: [
                 { notifiedTo: "Site Manager" },
                 { notifiedTo: "HSE Manager" },
-                { notifiedTo: "MHRSD" },
+                { notifiedTo: "MHRSD (if required)" },
               ],
             },
           ],
         },
+
+        // ── Section 7: Body Part Affected ───────────────────────────────────
         {
           type: "panel",
           name: "section7_body_parts",
@@ -257,7 +289,7 @@ const SCHEMA = {
             {
               type: "checkbox",
               name: "bodyPartsAffected",
-              title: "Select all that apply",
+              title: "Mark the affected area(s) — select all that apply",
               choices: [
                 "Head",
                 "Eyes",
@@ -278,6 +310,9 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 8: Submitted By ─────────────────────────────────────────
+        // Rule 4: name + date + time, all auto-filled, no manual signature
         {
           type: "panel",
           name: "section8_submitted_by",
@@ -286,7 +321,8 @@ const SCHEMA = {
             {
               type: "text",
               name: "signoffReportedByName",
-              title: "Submitted By Full Name",
+              title: "Submitted By — Full Name",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled from your login profile",
             },
@@ -295,11 +331,21 @@ const SCHEMA = {
               name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
+              isRequired: true,
               readOnly: true,
               description: "Auto-filled with today's date",
             },
+            {
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled with current time",
+            },
           ],
         },
+
       ],
     },
   ],
@@ -316,6 +362,7 @@ export default function FRM_HSE_002() {
         revision="01"
         approvalDate="01 March 2026"
         minRole="field_worker"
+        wideTable
         schema={SCHEMA}
         identityFields={{
           fullName: "reportedBy",

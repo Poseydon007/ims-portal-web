@@ -1,218 +1,53 @@
 import Layout from "@/components/Layout";
 import ImsForm from "@/components/ImsForm";
+import { DEPARTMENTS } from "@/lib/formConstants";
+
+const CHECKLIST_HTML = `<table style="width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px;"><colgroup><col style="width:5%"/><col style="width:47%"/><col style="width:8%"/><col style="width:8%"/><col style="width:8%"/><col style="width:24%"/></colgroup><thead><tr style="background:#081C2E;color:#fff;"><th style="padding:9px 6px;text-align:center;border:1px solid #2a3f55;">#</th><th style="padding:9px 10px;text-align:left;border:1px solid #2a3f55;">Description</th><th style="padding:9px 6px;text-align:center;border:1px solid #2a3f55;">Yes</th><th style="padding:9px 6px;text-align:center;border:1px solid #2a3f55;">No</th><th style="padding:9px 6px;text-align:center;border:1px solid #2a3f55;">N/A</th><th style="padding:9px 10px;text-align:left;border:1px solid #2a3f55;">Remarks</th></tr></thead><tbody><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">1</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Designated smoking area identified and signposted</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_0" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_0" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_0" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">2</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">No smoking signs and posters displayed in hazardous areas</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_1" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_1" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_1" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">3</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">All combustible materials removed from work site or properly stored</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_2" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_2" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_2" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">4</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">All electrical devices provided with protection systems</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_3" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_3" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_3" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">5</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Circuit breakers provided and functional</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_4" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_4" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_4" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">6</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Adequate fire extinguishers provided and accessible</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_5" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_5" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_5" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">7</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Smoke detectors provided and functional in offices and stores</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_6" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_6" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_6" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">8</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Fire alarm system tested and operational</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_7" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_7" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_7" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">9</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Emergency exits clearly marked and unobstructed</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_8" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_8" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_8" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">10</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Fire escape routes displayed and visible</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_9" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_9" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_9" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">11</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Hot work permits issued where required</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_10" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_10" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_10" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">12</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Flammable liquids stored in approved containers and cabinets</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_11" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_11" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_11" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">13</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Fuel storage areas properly ventilated and secured</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_12" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_12" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_12" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">14</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Electrical wiring inspected and in good condition</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_13" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_13" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_13" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">15</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Fire extinguisher inspection tags current</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_14" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_14" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_14" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">16</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Emergency lighting operational</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_15" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_15" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_15" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">17</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Fire fighting equipment register up to date</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_16" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_16" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_16" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">18</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Personnel trained in fire extinguisher use</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_17" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_17" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_17" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">19</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Assembly points clearly marked</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_18" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_18" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_18" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">20</td><td style="padding:8px 10px;border:1px solid #e0e4ea;color:#081C2E;font-size:12px;">Emergency contact numbers posted and visible</td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_19" value="Yes" style="width:15px;height:15px;accent-color:#081C2E;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_19" value="No" style="width:15px;height:15px;accent-color:#C49A28;cursor:pointer;"/></td><td style="padding:8px;text-align:center;border:1px solid #e0e4ea;"><input type="radio" name="chk_19" value="NA" style="width:15px;height:15px;accent-color:#6b7a8d;cursor:pointer;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Remarks..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:4px 7px;font-size:11px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td></tr></tbody></table>`;
+
+const CA_HTML = `<table style="width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px;"><colgroup><col style="width:5%"/><col style="width:10%"/><col style="width:30%"/><col style="width:20%"/><col style="width:15%"/><col style="width:20%"/></colgroup><thead><tr style="background:#081C2E;color:#fff;"><th style="padding:9px 6px;text-align:center;border:1px solid #2a3f55;">#</th><th style="padding:9px 8px;text-align:left;border:1px solid #2a3f55;">Item</th><th style="padding:9px 8px;text-align:left;border:1px solid #2a3f55;">Action Required</th><th style="padding:9px 8px;text-align:left;border:1px solid #2a3f55;">Responsible</th><th style="padding:9px 8px;text-align:left;border:1px solid #2a3f55;">Due Date</th><th style="padding:9px 8px;text-align:left;border:1px solid #2a3f55;">Status</th></tr></thead><tbody><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">1</td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Item ref..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Action required..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Name..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="date" style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><select style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"><option value="">--</option><option value="Open">Open</option><option value="In Progress">In Progress</option><option value="Closed">Closed</option></select></td></tr><tr style="background:#f8f9fb;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">2</td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Item ref..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Action required..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Name..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="date" style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><select style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"><option value="">--</option><option value="Open">Open</option><option value="In Progress">In Progress</option><option value="Closed">Closed</option></select></td></tr><tr style="background:#ffffff;"><td style="padding:8px 6px;text-align:center;border:1px solid #e0e4ea;color:#081C2E;font-weight:600;font-size:12px;">3</td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Item ref..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Action required..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="text" placeholder="Name..." style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><input type="date" style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"/></td><td style="padding:5px 6px;border:1px solid #e0e4ea;"><select style="width:100%;border:1px solid #c8d0db;border-radius:4px;padding:5px 7px;font-size:12px;background:#fff;color:#081C2E;box-sizing:border-box;"><option value="">--</option><option value="Open">Open</option><option value="In Progress">In Progress</option><option value="Closed">Closed</option></select></td></tr></tbody></table>`;
+
 
 const SCHEMA = {
-  title: "Fire Prevention Checklist",
+  title: "",
   showTitle: false,
-  pages: [
-    {
-      name: "page1",
-      elements: [
-        {
-          type: "panel",
-          name: "section1",
-          title: "1. Inspection Details",
-          elements: [
-            {
-              type: "text",
-              name: "location",
-              title: "Area / Location",
-              isRequired: true
-            },
-            {
-              type: "text",
-              name: "date",
-              title: "Date",
-              defaultValueExpression: "today()",
-              readOnly: true,
-              description: "Auto-filled with today's date"
-            },
-            {
-              type: "text",
-              name: "reportedBy",
-              title: "Inspected By Full Name",
-              readOnly: true,
-              description: "Auto-filled from your login profile"
-            },
-            {
-              type: "text",
-              name: "employeeId",
-              title: "Inspected By Employee ID",
-              readOnly: true,
-              description: "Auto-filled from your login profile"
-            },
-            {
-              type: "text",
-              name: "position",
-              title: "Inspected By Position",
-              readOnly: true,
-              description: "Auto-filled from your login profile"
-            },
-            {
-              type: "dropdown",
-              name: "department",
-              title: "Department",
-              isRequired: true,
-              choices: [
-                "HSE", "Operations – Drilling", "Operations – Geology", "Operations – Survey", 
-                "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security", 
-                "Administration", "Finance & Accounting", "Human Resources", "IT & Communications", 
-                "Management", "Quality Assurance", "Environmental", "Training & Competency", 
-                "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other"
-              ]
-            },
-            {
-              type: "dropdown",
-              name: "frequency",
-              title: "Frequency",
-              isRequired: true,
-              choices: ["Daily", "Weekly", "Monthly", "Quarterly", "Post-Incident"]
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "section2",
-          title: "2. Fire Prevention Checklist",
-          elements: [
-            {
-              type: "matrixdynamic",
-              name: "firePreventionChecklist",
-              title: "Inspect each item and record result",
-              rowCount: 20,
-              minRowCount: 20,
-              allowAddRows: false,
-              allowRemoveRows: false,
-              columns: [
-                {
-                  name: "id",
-                  title: "#",
-                  cellType: "text",
-                  readOnly: true
-                },
-                {
-                  name: "description",
-                  title: "Description",
-                  cellType: "text",
-                  readOnly: true
-                },
-                {
-                  name: "result",
-                  title: "Result",
-                  cellType: "dropdown",
-                  isRequired: true,
-                  choices: ["Yes", "No", "N/A"]
-                },
-                {
-                  name: "remarks",
-                  title: "Remarks",
-                  cellType: "text"
-                }
-              ],
-              defaultValue: [
-                { id: "1", description: "Designated smoking area identified and signposted" },
-                { id: "2", description: "No smoking signs and posters displayed in hazardous areas" },
-                { id: "3", description: "All combustible materials removed from work site or properly stored" },
-                { id: "4", description: "All electrical devices provided with protection systems" },
-                { id: "5", description: "Circuit breakers provided and functional" },
-                { id: "6", description: "Adequate fire extinguishers provided and accessible" },
-                { id: "7", description: "Smoke detectors provided and functional in offices and stores" },
-                { id: "8", description: "Fire alarm system tested and operational" },
-                { id: "9", description: "Emergency exits clearly marked and unobstructed" },
-                { id: "10", description: "Fire escape routes displayed and visible" },
-                { id: "11", description: "Hot work permits issued where required" },
-                { id: "12", description: "Flammable liquids stored in approved containers and cabinets" },
-                { id: "13", description: "Fuel storage areas properly ventilated and secured" },
-                { id: "14", description: "Electrical wiring inspected and in good condition" },
-                { id: "15", description: "Fire extinguisher inspection tags current" },
-                { id: "16", description: "Emergency lighting operational" },
-                { id: "17", description: "Fire fighting equipment register up to date" },
-                { id: "18", description: "Personnel trained in fire extinguisher use" },
-                { id: "19", description: "Assembly points clearly marked" },
-                { id: "20", description: "Emergency contact numbers posted and visible" }
-              ]
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "section3",
-          title: "3. Corrective Actions Required",
-          elements: [
-            {
-              type: "matrixdynamic",
-              name: "correctiveActions",
-              title: "Corrective Actions Required",
-              addRowText: "+ Add Action",
-              minRowCount: 0,
-              columns: [
-                {
-                  name: "id",
-                  title: "#",
-                  cellType: "text"
-                },
-                {
-                  name: "itemNo",
-                  title: "Item No.",
-                  cellType: "text",
-                  isRequired: true
-                },
-                {
-                  name: "actionRequired",
-                  title: "Action Required",
-                  cellType: "text",
-                  isRequired: true
-                },
-                {
-                  name: "responsible",
-                  title: "Responsible",
-                  cellType: "text",
-                  isRequired: true
-                },
-                {
-                  name: "dueDate",
-                  title: "Due Date",
-                  cellType: "text",
-                  inputType: "date"
-                },
-                {
-                  name: "status",
-                  title: "Status",
-                  cellType: "dropdown",
-                  choices: ["Open", "In Progress", "Closed"],
-                  defaultValue: "Open"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "section4",
-          title: "4. Submitted By",
-          elements: [
-            {
-              type: "text",
-              name: "submittedBy",
-              title: "Submitted By Full Name",
-              readOnly: true,
-              description: "Auto-filled from your login profile"
-            },
-            {
-              type: "text",
-              name: "submissionDate",
-              title: "Submission Date",
-              defaultValueExpression: "today()",
-              readOnly: true,
-              description: "Auto-filled with today's date"
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  pages: [{
+    name: "page1",
+    elements: [
+      {
+        type: "panel", name: "section_header", title: "Inspection Details",
+        elements: [
+          { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
+          { type: "dropdown", name: "areaLocation", title: "Area / Location", isRequired: true, choices: DEPARTMENTS },
+          { type: "text", name: "inspectionDate", title: "Date", inputType: "date", isRequired: true },
+          { type: "text", name: "inspectedBy", title: "Inspected By", isRequired: true },
+          { type: "text", name: "frequency", title: "Frequency", defaultValue: "Monthly", isRequired: true },
+        ],
+      },
+      {
+        type: "panel", name: "section_checklist", title: "Fire Prevention Checklist",
+        elements: [
+          { type: "html", name: "checklistTable", html: CHECKLIST_HTML },
+        ],
+      },
+      {
+        type: "panel", name: "section_ca", title: "Corrective Actions Required",
+        elements: [
+          { type: "html", name: "caTable", html: CA_HTML },
+        ],
+      },
+
+      {
+        type: "panel", name: "section_submitted", title: "Submitted By",
+        elements: [
+          { type: "text", name: "signoffReportedByName", title: "Submitted By — Full Name", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
+          { type: "text", name: "signoffReportedByDate", title: "Submission Date", inputType: "date", isRequired: true, readOnly: true, description: "Auto-filled with today's date" },
+          { type: "text", name: "signoffSubmissionTime", title: "Submission Time", isRequired: true, readOnly: true, description: "Auto-filled with current time" },
+        ],
+      },
+    ],
+  }],
   checkErrorsMode: "onComplete",
-  showPrevButton: false
+  showPrevButton: false,
 };
 
 export default function FRM_HSE_021() {
@@ -224,13 +59,13 @@ export default function FRM_HSE_021() {
         revision="01"
         approvalDate="01 March 2026"
         minRole="field_worker"
-        wideTable={false}
+        wideTable
         schema={SCHEMA}
         identityFields={{
-          fullName: "reportedBy",
+          fullName: "signoffReportedByName",
           employeeId: "employeeId",
-          department: "department",
-          position: "position"
+          department: "areaLocation",
+          position: "inspectedBy",
         }}
       />
     </Layout>
