@@ -8,6 +8,8 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+
+        // ── Section 1: Incident Reference ────────────────────────────────────
         {
           type: "panel",
           name: "section1",
@@ -15,9 +17,16 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
+              name: "reportNo",
+              title: "Statement Report No.",
+              description: "Auto-assigned on submission",
+            },
+            {
+              type: "text",
               name: "incidentFlashNo",
               title: "Incident Flash Report No. (FRM-HSE-002)",
               isRequired: true,
+              placeholder: "Enter reference number from initial flash report",
             },
             {
               type: "text",
@@ -29,7 +38,7 @@ const SCHEMA = {
             {
               type: "text",
               name: "incidentTime",
-              title: "Time of Incident",
+              title: "Time of Incident (24h)",
               inputType: "time",
               isRequired: true,
             },
@@ -70,15 +79,7 @@ const SCHEMA = {
             {
               type: "text",
               name: "statementTakenBy",
-              title: "Statement Taken By Full Name",
-              readOnly: true,
-              description: "Auto-filled from your login profile",
-            },
-            {
-              type: "text",
-              name: "statementTakenById",
-              title: "Statement Taken By Employee ID",
-              readOnly: true,
+              title: "Statement Taken By",
               description: "Auto-filled from your login profile",
             },
             {
@@ -86,11 +87,12 @@ const SCHEMA = {
               name: "dateStatementTaken",
               title: "Date Statement Taken",
               inputType: "date",
-              readOnly: true,
               description: "Auto-filled with today's date",
             },
           ],
         },
+
+        // ── Section 2: Witness Identity ──────────────────────────────────────
         {
           type: "panel",
           name: "section2",
@@ -111,8 +113,7 @@ const SCHEMA = {
             {
               type: "text",
               name: "witnessEmployer",
-              title: "Employer",
-              placeholder: "TEMC or Contractor name",
+              title: "Employer (TEMC / Contractor name)",
               isRequired: true,
             },
             {
@@ -134,6 +135,7 @@ const SCHEMA = {
               type: "text",
               name: "witnessMobile",
               title: "Mobile Number",
+              inputType: "tel",
             },
             {
               type: "text",
@@ -148,6 +150,13 @@ const SCHEMA = {
               choices: ["English", "Arabic", "Other"],
             },
             {
+              type: "text",
+              name: "statementLanguageOther",
+              title: "Other Language",
+              visibleIf: "{statementLanguage} = 'Other'",
+              placeholder: "Specify language",
+            },
+            {
               type: "radiogroup",
               name: "translatorRequired",
               title: "Translator Required",
@@ -158,13 +167,16 @@ const SCHEMA = {
               name: "translatorName",
               title: "Translator Name",
               visibleIf: "{translatorRequired} = 'Yes'",
+              placeholder: "Name of translator",
             },
           ],
         },
+
+        // ── Section 3: Witness Position and Role at Time of Incident ─────────
         {
           type: "panel",
           name: "section3",
-          title: "3. Witness Position at Time of Incident",
+          title: "3. Witness Position and Role at Time of Incident",
           elements: [
             {
               type: "radiogroup",
@@ -189,6 +201,7 @@ const SCHEMA = {
               type: "text",
               name: "witnessDistance",
               title: "Distance from Incident Point",
+              placeholder: "e.g., 5 metres",
             },
             {
               type: "radiogroup",
@@ -206,6 +219,7 @@ const SCHEMA = {
               type: "text",
               name: "weatherEnvironment",
               title: "Weather / Environment",
+              placeholder: "e.g., clear, dusty, windy, hot",
             },
             {
               type: "radiogroup",
@@ -217,33 +231,44 @@ const SCHEMA = {
               type: "text",
               name: "witnessPpe",
               title: "PPE You Were Wearing",
+              placeholder: "List all PPE items worn at the time",
             },
             {
               type: "text",
               name: "othersPresent",
               title: "Who Else Was Present",
+              placeholder: "Names and roles of others nearby",
             },
           ],
         },
+
+        // ── Section 4: Narrative Statement ───────────────────────────────────
         {
           type: "panel",
           name: "section4",
-          title: "4. Witness Narrative (free text)",
+          title: "4. Narrative Statement",
+          description:
+            "Describe in your own words exactly what you observed, in the order it happened. Cover the period before, during, and after the incident. Only state what you personally saw, heard, smelled, or did. Do not speculate. If you do not remember a detail, write \"do not recall\".",
           elements: [
             {
               type: "comment",
               name: "witnessNarrative",
-              title: "Describe in your own words what happened",
+              title: "Your Statement",
               isRequired: true,
-              rows: 8,
-              placeholder: "Write your full account here in your own words",
+              rows: 10,
+              placeholder:
+                "Write your full account here in your own words, in the order events happened.",
             },
           ],
         },
+
+        // ── Section 5: Structured Questions ─────────────────────────────────
         {
           type: "panel",
           name: "section5",
           title: "5. Structured Questions",
+          description:
+            "Answer only the questions relevant to what you personally experienced. Write \"do not recall\" or \"not applicable\" where appropriate.",
           elements: [
             {
               type: "comment",
@@ -256,7 +281,7 @@ const SCHEMA = {
               name: "q5_2",
               title: "5.2 What did you see happen?",
               isRequired: true,
-              rows: 2,
+              rows: 3,
             },
             {
               type: "comment",
@@ -297,7 +322,8 @@ const SCHEMA = {
             {
               type: "comment",
               name: "q5_9",
-              title: "5.9 Were all required permits, PPE, and controls in place (as far as you know)?",
+              title:
+                "5.9 Were all required permits, PPE, and controls in place (as far as you know)?",
               rows: 2,
             },
             {
@@ -309,7 +335,8 @@ const SCHEMA = {
             {
               type: "comment",
               name: "q5_11",
-              title: "5.11 Did you hear any pre-incident briefing, toolbox talk, or warning given?",
+              title:
+                "5.11 Did you hear any pre-incident briefing, toolbox talk, or warning given?",
               rows: 2,
             },
             {
@@ -320,16 +347,51 @@ const SCHEMA = {
             },
           ],
         },
+
+        // ── Section 6: Sketch / Diagram ──────────────────────────────────────
         {
           type: "panel",
           name: "section6",
-          title: "6. Witness Declaration",
+          title: "6. Sketch / Diagram",
+          description:
+            "Use the space below to draw a simple plan-view sketch of the incident location. Show: equipment, vehicles, people, direction of travel, distances, and your position relative to the incident point. Label all items clearly. If you cannot draw, describe the layout in text.",
+          elements: [
+            {
+              type: "comment",
+              name: "sketchDescription",
+              title: "Sketch Description / Layout",
+              rows: 8,
+              placeholder:
+                "Describe the layout: positions of people, equipment, vehicles, distances, and your location relative to the incident point.",
+            },
+            {
+              type: "file",
+              name: "sketchFiles",
+              title: "Upload Sketch or Diagram (optional)",
+              description: "Attach a hand-drawn sketch photo or digital diagram",
+              allowMultiple: true,
+              maxSize: 10240,
+              acceptedTypes: "image/*,.pdf",
+            },
+          ],
+        },
+
+        // ── Section 7: Witness Declaration ───────────────────────────────────
+        {
+          type: "panel",
+          name: "section7",
+          title: "7. Witness Declaration",
+          description:
+            "I confirm that the statement above is given voluntarily and is true and correct to the best of my knowledge and recollection.",
           elements: [
             {
               type: "boolean",
               name: "witnessDeclaration",
-              title: "I confirm that this statement is true and accurate to the best of my knowledge. I gave this statement freely and without coercion.",
+              title:
+                "I confirm this statement is true and accurate to the best of my knowledge. I gave this statement freely and without coercion.",
               isRequired: true,
+              labelTrue: "I Confirm",
+              labelFalse: "I Do Not Confirm",
             },
             {
               type: "text",
@@ -339,151 +401,162 @@ const SCHEMA = {
             },
             {
               type: "text",
-              name: "dateOfDeclaration",
-              title: "Date of Declaration",
+              name: "declarationDate",
+              title: "Date",
               inputType: "date",
-              readOnly: true,
               description: "Auto-filled with today's date",
+            },
+            {
+              type: "text",
+              name: "declarationTime",
+              title: "Time",
+              inputType: "time",
+              description: "Auto-filled with current time",
+            },
+            {
+              type: "text",
+              name: "declarationLocation",
+              title: "Location Where Statement Was Given",
+              placeholder: "e.g., Site office, HSE container, Camp",
             },
           ],
         },
+
+        // ── Section 8: Statement Taker / Investigator ────────────────────────
         {
           type: "panel",
-          name: "section7",
-          title: "7. Statement Taker Confirmation",
+          name: "section8",
+          title: "8. Statement Taker / Investigator",
+          description:
+            "The statement taker confirms that the witness gave this statement freely, without coercion, and that the record above reflects what the witness said.",
           elements: [
             {
               type: "text",
-              name: "statementTakerName",
-              title: "Statement Taker Name",
-              readOnly: true,
+              name: "statementTakerFullName",
+              title: "Name",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
               name: "statementTakerPosition",
-              title: "Statement Taker Position",
-              readOnly: true,
+              title: "Position",
               description: "Auto-filled from your login profile",
             },
             {
               type: "radiogroup",
               name: "statementTakerRole",
               title: "Role in Investigation",
-              choices: ["Lead Investigator", "HSE Officer", "Supervisor", "Other"],
+              choices: [
+                "Lead Investigator",
+                "HSE Officer",
+                "Supervisor",
+                "Other",
+              ],
             },
             {
               type: "text",
               name: "translatorUsed",
-              title: "Translator Used",
-              placeholder: "Name if applicable",
+              title: "Translator Used (if any)",
+              placeholder: "Name of translator if used",
             },
           ],
         },
+
+        // ── Section 9: HSE Review and Linking (HSE Manager only) ─────────────
         {
           type: "panel",
-          name: "section8",
-          title: "8. HSE Review and Linking",
+          name: "section9",
+          title: "9. HSE Review and Linking",
           elements: [
             {
               type: "text",
-              name: "reviewedBy",
-              title: "Reviewed By",
-              readOnly: true,
+              name: "hseReviewedBy",
+              title: "Reviewed By (HSE Manager)",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
-              name: "dateReviewed",
+              name: "hseReviewDate",
               title: "Date Reviewed",
               inputType: "date",
-              readOnly: true,
               description: "Auto-filled with today's date",
             },
             {
               type: "radiogroup",
               name: "consistencyWithOtherStatements",
-              title: "Consistency With Other Statements",
-              choices: ["Consistent", "Minor variance", "Material variance"],
+              title: "Consistency With Other Witness Statements",
+              choices: [
+                "Consistent",
+                "Minor variance",
+                "Material variance (explain below)",
+              ],
             },
             {
               type: "comment",
               name: "varianceExplanation",
               title: "Variance Explanation",
-              visibleIf: "{consistencyWithOtherStatements} = 'Material variance'",
-              rows: 2,
+              visibleIf:
+                "{consistencyWithOtherStatements} = 'Material variance (explain below)'",
+              rows: 3,
+              placeholder: "Explain the material variance in detail",
             },
             {
               type: "text",
               name: "linkedToNcrCar",
-              title: "Linked to NCR / CAR No.",
+              title: "Linked to NCR / CAR No. (REG-SYS-002)",
+              placeholder: "Enter NCR or CAR reference number",
             },
             {
               type: "text",
               name: "linkedToInvestigationReport",
               title: "Linked to Investigation Report",
+              placeholder: "Enter FRM-HSE-025 report number",
             },
             {
               type: "radiogroup",
               name: "addedToIncidentIndex",
-              title: "Added to Incident Index",
+              title: "Added to Incident Index (REG-HSE-005)",
               choices: ["Yes", "No"],
+            },
+            {
+              type: "html",
+              name: "retentionNote",
+              html: "<div style='padding:8px 12px;background:#f4f6f9;border-left:3px solid #C49A28;font-size:12px;color:#5a6a7e;'><strong>Retention:</strong> 5 years minimum, per PROC-SYS-003 Document Control</div>",
             },
             {
               type: "comment",
               name: "hseManagerComments",
               title: "HSE Manager Comments",
-              rows: 2,
+              rows: 3,
             },
           ],
         },
+
+        // ── Section 10: Submitted By ─────────────────────────────────────────
         {
           type: "panel",
-          name: "section9",
-          title: "9. Submitted By",
+          name: "section10",
+          title: "10. Submitted By",
           elements: [
             {
               type: "text",
-              name: "submittedBy",
-              title: "Submitted By Full Name",
-              readOnly: true,
+              name: "signoffReportedByName",
+              title: "Submitted By — Full Name",
               description: "Auto-filled from your login profile",
             },
             {
               type: "text",
-              name: "submissionDate",
+              name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
-              readOnly: true,
               description: "Auto-filled with today's date",
             },
             {
-              type: "dropdown",
-              name: "department",
-              title: "Department",
-              isRequired: true,
-              choices: [
-                "HSE",
-                "Operations – Drilling",
-                "Operations – Geology",
-                "Operations – Survey",
-                "Maintenance",
-                "Logistics & Transport",
-                "Warehouse & Supply",
-                "Security",
-                "Administration",
-                "Finance & Accounting",
-                "Human Resources",
-                "IT & Communications",
-                "Management",
-                "Quality Assurance",
-                "Environmental",
-                "Training & Competency",
-                "Contracts & Procurement",
-                "Camp & Catering",
-                "Medical & First Aid",
-                "Other",
-              ],
+              type: "text",
+              name: "signoffSubmissionTime",
+              title: "Submission Time",
+              inputType: "time",
+              description: "Auto-filled with current time",
             },
           ],
         },
@@ -506,12 +579,12 @@ export default function FRM_HSE_026() {
         wideTable={false}
         schema={SCHEMA}
         identityFields={{
-          fullName: "submittedBy",
-          employeeId: "employeeId",
-          department: "department",
-          position: "position",
+          fullName: "statementTakenBy",
+          employeeId: "statementTakenById",
+          position: "statementTakerPosition",
+          date: "dateStatementTaken",
         }}
-        hseOnlyPanels={["section8"]}
+        hseOnlyPanels={["section9"]}
       />
     </Layout>
   );
