@@ -221,8 +221,20 @@ const SCHEMA = {
               title: "Count of violations per category (this month vs previous month)",
               titleLocation: "hidden",
               columns: [
-                { name: "thisMonth", title: "This Month", cellType: "text", inputType: "number" },
-                { name: "previousMonth", title: "Previous Month", cellType: "text", inputType: "number" },
+                {
+                  name: "count",
+                  title: "Count",
+                  cellType: "text",
+                  inputType: "number",
+                },
+                {
+                  name: "reportDate",
+                  title: "Date",
+                  cellType: "text",
+                  inputType: "date",
+                  maxValueExpression: "today()",
+                  minValueExpression: "dateAdd(today(), -60, 'days')",
+                },
               ],
               rows: [
                 { value: "ua", text: "UA — Unsafe Act" },
@@ -254,8 +266,20 @@ const SCHEMA = {
               title: "Count of violations per severity level",
               titleLocation: "hidden",
               columns: [
-                { name: "thisMonth", title: "This Month", cellType: "text", inputType: "number" },
-                { name: "previousMonth", title: "Previous Month", cellType: "text", inputType: "number" },
+                {
+                  name: "count",
+                  title: "Count",
+                  cellType: "text",
+                  inputType: "number",
+                },
+                {
+                  name: "reportDate",
+                  title: "Date",
+                  cellType: "text",
+                  inputType: "date",
+                  maxValueExpression: "today()",
+                  minValueExpression: "dateAdd(today(), -60, 'days')",
+                },
               ],
               rows: [
                 { value: "minor", text: "1 — Minor" },

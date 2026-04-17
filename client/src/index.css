@@ -173,7 +173,7 @@
 
 /* Force the table to use auto layout so columns size to their content */
 .ims-survey-wrapper .sd-table {
-  min-width: 1400px;
+  min-width: 600px;
   width: max-content;
   table-layout: auto;
 }
@@ -290,6 +290,62 @@
   padding: 4px 16px 8px;
   margin: 0;
   font-size: 12px;
+}
+
+/* ── matrixdynamic remove row button: show as visible red trash icon ──────────────────────────
+   SurveyJS hides the remove button inside a three-dot overflow menu by default.
+   We override this to show the remove button directly as a compact red trash icon.
+*/
+
+/* Force the remove button to always be visible (not hidden in overflow menu) */
+.ims-survey-wrapper .sd-table__cell--actions .sd-action-bar {
+  overflow: visible !important;
+}
+.ims-survey-wrapper .sd-table__cell--actions .sd-action-bar__overflow-button {
+  display: none !important;
+}
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  padding: 4px !important;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn:hover {
+  background: rgba(220, 38, 38, 0.1) !important;
+}
+/* Hide the text label "Remove" — show only the icon */
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn::after {
+  display: none !important;
+  content: none !important;
+}
+/* Show the SVG icon inside the remove button */
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn .sd-action__icon {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: 1 !important;
+  fill: #dc2626 !important;
+  color: #dc2626 !important;
+}
+/* Fallback: if no icon renders, show a trash emoji via pseudo-element */
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn:not(:has(.sd-action__icon svg))::before {
+  content: "🗑";
+  font-size: 14px;
+  line-height: 1;
+}
+/* Keep the actions cell narrow */
+.ims-survey-wrapper .sd-table__cell--actions {
+  width: 36px !important;
+  min-width: 36px !important;
+  padding: 4px !important;
+  vertical-align: middle !important;
+  text-align: center !important;
 }
 
 /* ── Override SurveyJS sd-body--static 720px max-width so wideTable forms use full viewport ── */
