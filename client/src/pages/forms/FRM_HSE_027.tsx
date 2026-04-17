@@ -8,11 +8,55 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+        // ── Section 1: Report Details (always first, per Rule 1) ──
         {
           type: "panel",
           name: "section1",
-          title: "1. Project Information",
+          title: "1. Report Details",
           elements: [
+            {
+              type: "text",
+              name: "reportNo",
+              title: "Report No.",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-assigned on submission"
+            },
+            {
+              type: "text",
+              name: "reportedBy",
+              title: "Prepared By — Full Name",
+              isRequired: true,
+              readOnly: true,
+              description: "Auto-filled from your login profile"
+            },
+            {
+              type: "text",
+              name: "employeeId",
+              title: "Employee ID",
+              readOnly: true,
+              description: "Auto-filled from your login profile"
+            },
+            {
+              type: "text",
+              name: "position",
+              title: "Position / Job Title",
+              readOnly: true,
+              description: "Auto-filled from your login profile"
+            },
+            {
+              type: "dropdown",
+              name: "department",
+              title: "Department",
+              isRequired: true,
+              choices: [
+                "HSE", "Operations – Drilling", "Operations – Geology", "Operations – Survey",
+                "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security",
+                "Administration", "Finance & Accounting", "Human Resources", "IT & Communications",
+                "Management", "Quality Assurance", "Environmental", "Training & Competency",
+                "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other"
+              ]
+            },
             {
               type: "text",
               name: "projectSite",
@@ -30,34 +74,11 @@ const SCHEMA = {
               title: "Month / Year",
               isRequired: true,
               placeholder: "e.g., April 2026"
-            },
-            {
-              type: "text",
-              name: "reportedBy",
-              title: "Prepared By Full Name",
-              description: "Auto-filled from your login profile"
-            },
-            {
-              type: "text",
-              name: "employeeId",
-              title: "Prepared By Employee ID",
-              description: "Auto-filled from your login profile"
-            },
-            {
-              type: "dropdown",
-              name: "department",
-              title: "Department",
-              isRequired: true,
-              choices: [
-                "HSE", "Operations – Drilling", "Operations – Geology", "Operations – Survey", 
-                "Maintenance", "Logistics & Transport", "Warehouse & Supply", "Security", 
-                "Administration", "Finance & Accounting", "Human Resources", "IT & Communications", 
-                "Management", "Quality Assurance", "Environmental", "Training & Competency", 
-                "Contracts & Procurement", "Camp & Catering", "Medical & First Aid", "Other"
-              ]
             }
           ]
         },
+
+        // ── Section 2: Monthly Injury Log ──
         {
           type: "panel",
           name: "section2",
@@ -75,15 +96,15 @@ const SCHEMA = {
                 { name: "nameDept", title: "Name / Department", cellType: "text", isRequired: true },
                 { name: "natureOfInjury", title: "Nature of Injury", cellType: "text", isRequired: true },
                 { name: "bodyPart", title: "Body Part", cellType: "text" },
-                { 
-                  name: "treatmentType", 
-                  title: "Treatment Type", 
+                {
+                  name: "treatmentType",
+                  title: "Treatment Type",
                   cellType: "dropdown",
                   choices: ["First Aid", "Medical Treatment", "Restricted Work", "Lost Time Injury", "Fatality"]
                 },
-                { 
-                  name: "onOffSite", 
-                  title: "On-Site / Off-Site", 
+                {
+                  name: "onOffSite",
+                  title: "On-Site / Off-Site",
                   cellType: "radiogroup",
                   choices: ["On-Site", "Off-Site"]
                 },
@@ -96,6 +117,8 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 3: Monthly KPI Summary ──
         {
           type: "panel",
           name: "section3",
@@ -103,8 +126,8 @@ const SCHEMA = {
           elements: [
             {
               type: "html",
-              name: "kpiTitle",
-              html: "<b>Complete after all cases are recorded</b>"
+              name: "kpiNote",
+              html: "<b>Complete after all cases are recorded above.</b>"
             },
             {
               type: "text",
@@ -174,21 +197,21 @@ const SCHEMA = {
               name: "trir",
               title: "TRIR per 200,000 hrs",
               inputType: "number",
-              description: "Total Recordable Incident Rate = (Total Recordable Incidents x 200,000) / Man-Hours Worked"
+              description: "Total Recordable Incident Rate = (Total Recordable Incidents × 200,000) / Man-Hours Worked"
             },
             {
               type: "text",
               name: "ltir",
               title: "LTIR per 200,000 hrs",
               inputType: "number",
-              description: "Lost Time Injury Rate = (LTI x 200,000) / Man-Hours Worked"
+              description: "Lost Time Injury Rate = (LTI × 200,000) / Man-Hours Worked"
             },
             {
               type: "text",
               name: "severityRate",
               title: "Severity Rate",
               inputType: "number",
-              description: "Severity Rate = (Total Days Lost x 200,000) / Man-Hours Worked"
+              description: "Severity Rate = (Total Days Lost × 200,000) / Man-Hours Worked"
             },
             {
               type: "text",
@@ -199,6 +222,8 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 4: Remarks ──
         {
           type: "panel",
           name: "section4",
@@ -212,6 +237,8 @@ const SCHEMA = {
             }
           ]
         },
+
+        // ── Section 5: Submitted By (always last, per Rule 4) ──
         {
           type: "panel",
           name: "section5",
@@ -220,7 +247,9 @@ const SCHEMA = {
             {
               type: "text",
               name: "signoffReportedByName",
-              title: "Submitted By \u2014 Full Name",
+              title: "Submitted By — Full Name",
+              isRequired: true,
+              readOnly: true,
               description: "Auto-filled from your login profile"
             },
             {
@@ -228,6 +257,8 @@ const SCHEMA = {
               name: "signoffReportedByDate",
               title: "Submission Date",
               inputType: "date",
+              isRequired: true,
+              readOnly: true,
               description: "Auto-filled with today's date"
             },
             {
@@ -235,6 +266,8 @@ const SCHEMA = {
               name: "signoffSubmissionTime",
               title: "Submission Time",
               inputType: "time",
+              isRequired: true,
+              readOnly: true,
               description: "Auto-filled with current time"
             }
           ]
@@ -257,8 +290,11 @@ export default function FRM_HSE_027() {
         minRole="hse_manager"
         wideTable={true}
         schema={SCHEMA}
-        identityFields={{ 
-          fullName: "signoffReportedByName",
+        identityFields={{
+          fullName: "reportedBy",
+          employeeId: "employeeId",
+          department: "department",
+          position: "position"
         }}
       />
     </Layout>
