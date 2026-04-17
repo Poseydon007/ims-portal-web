@@ -429,6 +429,14 @@ const SCHEMA = {
               inputType: "date",
               readOnly: true,
               description: "Auto-filled with today's date"
+            },
+            {
+              type: "text",
+              name: "submissionTime",
+              title: "Submission Time",
+              inputType: "time",
+              readOnly: true,
+              description: "Auto-filled with current time"
             }
           ]
         }
@@ -454,7 +462,8 @@ export default function FRM_HSE_024() {
           fullName: "reportedBy",
           employeeId: "employeeId",
           department: "department",
-          position: "position"
+          position: "position",
+          time: "submissionTime"
         }}
       />
     </Layout>

@@ -59,6 +59,8 @@ interface ImsFormProps {
     position?: string;
     /** Name of a date field to auto-fill with today's date */
     date?: string;
+    /** Name of a time field to auto-fill with current time (HH:MM) */
+    time?: string;
   };
   /**
    * Use wide (full-width) layout for forms with many-column matrixdynamic tables.
@@ -349,6 +351,10 @@ export default function ImsForm({
     // Auto-fill any additional date field specified
     if (identityFields.date) {
       fieldMap[identityFields.date] = today;
+    }
+    // Auto-fill any additional time field specified
+    if (identityFields.time) {
+      fieldMap[identityFields.time] = currentTime;
     }
     Object.entries(fieldMap).forEach(([name, value]) => {
       if (survey.getQuestionByName(name)) {
