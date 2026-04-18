@@ -105,18 +105,6 @@ const SCHEMA = {
             },
             {
               type: "text",
-              name: "reviewedBy",
-              title: "Reviewed By (HSE Manager)",
-              description: "Name of HSE Manager who reviewed this report",
-            },
-            {
-              type: "text",
-              name: "approvedBy",
-              title: "Approved By (Site Manager / CEO)",
-              description: "Name of Site Manager or CEO who approved this report",
-            },
-            {
-              type: "text",
               name: "distribution",
               title: "Distribution",
               readOnly: true,

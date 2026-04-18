@@ -236,3 +236,5 @@
 - [x] FRM-HSE-026: Hide Section 8 HSE Review from field workers and supervisors
 - [x] FRM-HSE-028: Build Monthly HSE Violation Report (10 sections, dynamic violation log, summary matrices)
 - [x] FRM-HSE-028: Register in App.tsx route, imsData.ts, and formSubmissionsRouter prefix map
+- [x] FRM-HSE-028: Remove redundant "Reviewed By" and "Approved By" free-text fields (duplicated by workflow)
+- [x] ims-form-builder skill: Add Redundancy Check section to Design Rules
