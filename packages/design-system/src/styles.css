@@ -1,0 +1,423 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Google Fonts loaded in index.html ── */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ── TE Brand tokens ── */
+  --te-navy: oklch(0.16 0.055 240);
+  --te-navy-deep: oklch(0.16 0.055 240);
+  --te-gold: oklch(0.72 0.12 75);
+  --te-gold-light: oklch(0.88 0.08 75);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* TE Brand */
+  --te-navy-hex: #081C2E;
+  --te-gold-hex: #C49A28;
+
+  /* Light theme — clean white corporate */
+  --background: oklch(0.97 0.002 240);
+  --foreground: oklch(0.22 0.055 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.055 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.055 240);
+  --primary: oklch(0.22 0.055 240);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.94 0.005 240);
+  --secondary-foreground: oklch(0.35 0.04 240);
+  --muted: oklch(0.94 0.005 240);
+  --muted-foreground: oklch(0.52 0.02 240);
+  --accent: oklch(0.72 0.12 75);
+  --accent-foreground: oklch(0.22 0.055 240);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.88 0.008 240);
+  --input: oklch(0.88 0.008 240);
+  --ring: oklch(0.72 0.12 75);
+  --chart-1: oklch(0.72 0.12 75);
+  --chart-2: oklch(0.22 0.055 240);
+  --chart-3: oklch(0.52 0.04 240);
+  --chart-4: oklch(0.65 0.08 75);
+  --chart-5: oklch(0.35 0.04 240);
+  --sidebar: oklch(0.22 0.055 240);
+  --sidebar-foreground: oklch(0.95 0.005 240);
+  --sidebar-primary: oklch(0.72 0.12 75);
+  --sidebar-primary-foreground: oklch(0.22 0.055 240);
+  --sidebar-accent: oklch(0.28 0.055 240);
+  --sidebar-accent-foreground: oklch(0.95 0.005 240);
+  --sidebar-border: oklch(0.3 0.04 240);
+  --sidebar-ring: oklch(0.72 0.12 75);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito Sans', 'Segoe UI', Arial, sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; }
+  }
+
+  /* ── TE-specific utilities ── */
+  .te-code {
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .doc-section-heading {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--te-navy-hex);
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--te-gold-hex);
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* ── IMS Form: SurveyJS matrix table horizontal scroll ──────────────────────
+   Ensures wide matrixdynamic tables scroll horizontally instead of clipping.
+   The .ims-survey-wrapper has overflow-x:auto set inline in ImsForm.tsx.
+   These rules make the inner SurveyJS table respect that scroll container.
+*/
+
+/* Override SurveyJS sd-table-wrapper: SurveyJS sets width:fit-content which causes
+   the wrapper to shrink and clip wide tables. Force it to be a proper scroll container. */
+.ims-survey-wrapper .sd-table-wrapper {
+  overflow-x: auto !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  display: block !important;
+  margin-top: 16px !important;
+}
+
+/* Override SurveyJS sd-table--columnsautowidth which sets width:10000px on every cell.
+   This makes the table 110,000px wide. Reset to auto so table-layout can control widths. */
+.ims-survey-wrapper .sd-table.sd-table--columnsautowidth .sd-table__cell:not(.sd-table__cell--actions):not(.sd-table__cell--action):not(.sd-table__cell--empty.sd-table__cell--error) {
+  width: auto !important;
+}
+
+/* Force the table to use auto layout so columns size to their content */
+.ims-survey-wrapper .sd-table {
+  min-width: 600px;
+  width: max-content;
+  table-layout: auto;
+}
+
+/* Add vertical breathing room between panel title and table header row */
+.ims-survey-wrapper .sd-panel__content {
+  padding-top: 16px !important;
+}
+
+.ims-survey-wrapper .sd-matrixdynamic__content,
+.ims-survey-wrapper .sd-matrixdropdown__content {
+  margin-top: 20px !important;
+}
+
+/* Gap between panel header and table wrapper (matrixdropdown/matrixdynamic) */
+.ims-survey-wrapper .sd-element__content .sd-table-wrapper {
+  margin-top: 12px !important;
+}
+
+/* SurveyJS applies margin-top: -24px to pull the table header up into the panel header.
+   Override this so the column header band sits below the panel title with proper spacing. */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown,
+.ims-survey-wrapper .sd-table.sd-matrixdynamic {
+  margin-top: 0 !important;
+}
+
+/* matrixdropdown (fixed-row summary tables like sections 4, 5) —
+   give the row-header (category/severity label) a wide fixed width,
+   and let the data columns be compact */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown {
+  width: 100% !important;
+  min-width: 400px !important;
+  table-layout: fixed !important;
+}
+
+/* First column (row header / label) — wide */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell:first-child {
+  width: 45% !important;
+  min-width: 200px !important;
+  white-space: normal !important;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 8px 12px !important;
+  vertical-align: middle;
+}
+
+/* Data columns (Count, Date etc.) — compact equal width */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell:not(:first-child) {
+  width: auto !important;
+  min-width: 120px !important;
+  padding: 6px 8px !important;
+  vertical-align: middle;
+}
+
+/* Keep column headers on a single line — no wrapping */
+.ims-survey-wrapper .sd-table__cell--header {
+  white-space: nowrap;
+  min-width: 80px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Give data cells a reasonable minimum width */
+.ims-survey-wrapper .sd-table__cell:not(.sd-table__cell--header) {
+  min-width: 100px;
+  vertical-align: middle;
+  padding: 6px 8px;
+}
+
+/* Dropdown cells — slightly wider */
+.ims-survey-wrapper .sd-table__cell .sd-dropdown,
+.ims-survey-wrapper .sd-table__cell .sd-dropdown__value {
+  min-width: 140px;
+}
+
+/* Text input cells */
+.ims-survey-wrapper .sd-table__cell .sd-input {
+  min-width: 120px;
+}
+
+/* Remove any max-width constraints SurveyJS may apply to the matrix container */
+.ims-survey-wrapper .sd-matrixdynamic,
+.ims-survey-wrapper .sd-matrix {
+  overflow: visible;
+}
+
+/* Fix: matrix (Likert) tables must NOT use width:max-content — override for .sd-matrix specifically */
+/* The matrixdynamic (wide tables) still need max-content; matrix (Likert) does not */
+/* The matrix renders as: .sd-matrix > fieldset > table.sd-table */
+/* The fieldset has no class, so we target it via the parent .sd-matrix */
+.ims-survey-wrapper .sd-matrix {
+  overflow: visible;
+  display: block !important;  /* override flex so fieldset fills the container */
+  width: 100% !important;
+}
+
+.ims-survey-wrapper .sd-matrix > fieldset {
+  width: 100% !important;
+  min-width: unset !important;
+  max-width: 100% !important;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ims-survey-wrapper .sd-matrix table {
+  width: 100% !important;
+  min-width: unset !important;
+  table-layout: auto !important;
+}
+
+/* Matrix row label cell (first td in each tbody row) */
+.ims-survey-wrapper .sd-table__cell--row-text {
+  width: 40% !important;
+  min-width: 200px !important;
+  max-width: 400px !important;
+  white-space: normal !important;
+  word-break: break-word;
+  padding: 8px 12px 8px 4px;
+  vertical-align: middle;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Matrix radio button cells — equal width distribution */
+.ims-survey-wrapper .sd-matrix .sd-table__cell:not(.sd-table__cell--row-text):not(.sd-table__cell--header) {
+  width: auto !important;
+  min-width: 60px !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ── matrixdynamic/matrixdropdown column header row: styled navy header band ── */
+/* Note: these rules must override .sd-table.sd-matrixdropdown .sd-table__cell:not(:first-child)
+   which has specificity 0,5,0. We match by adding .sd-table__cell--column-title as extra class. */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell--header.sd-table__cell--column-title,
+.ims-survey-wrapper .sd-table.sd-matrixdynamic .sd-table__cell--header.sd-table__cell--column-title {
+  padding: 14px 12px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  background-color: #132d47 !important;
+  border-bottom: 2px solid #C49A28 !important;
+  border-top: 1px solid rgba(255,255,255,0.15) !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+
+/* Empty corner cell (above row labels in matrixdropdown) — same header background */
+.ims-survey-wrapper .sd-table.sd-matrixdropdown .sd-table__cell--empty.sd-table__cell--header {
+  background-color: #132d47 !important;
+  border-bottom: 2px solid #C49A28 !important;
+  border-top: 1px solid rgba(255,255,255,0.15) !important;
+  padding: 14px 12px !important;
+}
+
+/* ── Panel header: force white text on all text elements inside navy header ── */
+/* The header background is set to #081C2E via onAfterRenderPanel in ImsForm.tsx */
+/* SurveyJS sets panel title/description colors via CSS variables — override them here */
+.ims-survey-wrapper .sd-panel__header .sd-panel__title,
+.ims-survey-wrapper .sd-panel__header .sd-panel__title span,
+.ims-survey-wrapper .sd-panel__header .sd-element__title,
+.ims-survey-wrapper .sd-panel__header .sd-element__title span {
+  color: #ffffff !important;
+}
+.ims-survey-wrapper .sd-panel__header .sd-panel__description,
+.ims-survey-wrapper .sd-panel__header .sd-element__description {
+  color: rgba(255,255,255,0.75) !important;
+}
+/* Panel description sits just below the header — also needs white when on dark bg */
+.ims-survey-wrapper .sd-panel > .sd-panel__content > .sd-panel__description {
+  color: #ffffff !important;
+  background: #081C2E;
+  padding: 4px 16px 8px;
+  margin: 0;
+  font-size: 12px;
+}
+
+/* ── matrixdynamic remove row button: show as visible red trash icon ──────────────────────────
+   SurveyJS hides the remove button inside a three-dot overflow menu by default.
+   We override this to show the remove button directly as a compact red trash icon.
+*/
+
+/* Force the remove button to always be visible (not hidden in overflow menu) */
+.ims-survey-wrapper .sd-table__cell--actions .sd-action-bar {
+  overflow: visible !important;
+}
+.ims-survey-wrapper .sd-table__cell--actions .sd-action-bar__overflow-button {
+  display: none !important;
+}
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  padding: 4px !important;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn:hover {
+  background: rgba(220, 38, 38, 0.1) !important;
+}
+/* Hide the text label "Remove" — show only the icon */
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn::after {
+  display: none !important;
+  content: none !important;
+}
+/* Show the SVG icon inside the remove button */
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn .sd-action__icon {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: 1 !important;
+  fill: #dc2626 !important;
+  color: #dc2626 !important;
+}
+/* Fallback: if no icon renders, show a trash emoji via pseudo-element */
+.ims-survey-wrapper .sd-matrixdynamic__remove-btn:not(:has(.sd-action__icon svg))::before {
+  content: "🗑";
+  font-size: 14px;
+  line-height: 1;
+}
+/* Keep the actions cell narrow */
+.ims-survey-wrapper .sd-table__cell--actions {
+  width: 36px !important;
+  min-width: 36px !important;
+  padding: 4px !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+/* ── Override SurveyJS sd-body--static 720px max-width so wideTable forms use full viewport ── */
+/* SurveyJS default: .sd-body--static { max-width: calc(8px * 90) = 720px } */
+.ims-survey-wrapper .sd-body--static,
+.ims-survey-wrapper .sd-root-modern,
+.ims-survey-wrapper .sd-page {
+  max-width: none !important;
+  width: 100% !important;
+}
