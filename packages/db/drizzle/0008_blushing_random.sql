@@ -1,0 +1,1 @@
+ALTER TABLE `form_responses` ADD `reportNumber` varchar(32);

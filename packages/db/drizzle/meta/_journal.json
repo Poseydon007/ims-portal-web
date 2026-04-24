@@ -1,0 +1,90 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1775926694256,
+      "tag": "0000_naive_talisman",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1775926787408,
+      "tag": "0001_medical_monster_badoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1775927491281,
+      "tag": "0002_skinny_slapstick",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1775929164534,
+      "tag": "0003_faulty_gertrude_yorkes",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1775933436852,
+      "tag": "0004_unknown_white_tiger",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1776087659154,
+      "tag": "0005_dusty_giant_girl",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1776092947285,
+      "tag": "0006_slow_raza",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1776094332666,
+      "tag": "0007_black_moon_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1776095643705,
+      "tag": "0008_blushing_random",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1776098542220,
+      "tag": "0009_slow_lifeguard",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1776098593670,
+      "tag": "0010_tiresome_otto_octavius",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1776109696690,
+      "tag": "0011_yummy_stranger",
+      "breakpoints": true
+    }
+  ]
+}

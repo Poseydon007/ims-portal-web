@@ -2,5 +2,14 @@
   "name": "@ims-portal/trpc-client",
   "version": "0.0.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@trpc/react-query": "^11.6.0"
+  },
+  "peerDependencies": {
+    "react": "^19.2.1"
+  }
 }

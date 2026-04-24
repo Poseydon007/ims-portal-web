@@ -1,0 +1,23 @@
+CREATE TABLE `jha_submissions` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`submissionId` varchar(32) NOT NULL,
+	`status` enum('submitted','under_review','closed') NOT NULL DEFAULT 'submitted',
+	`jobTask` text NOT NULL,
+	`date` varchar(20) NOT NULL,
+	`departmentSite` text,
+	`jhaNumber` varchar(32),
+	`supervisor` text,
+	`reviewedBy` text,
+	`taskSteps` text NOT NULL,
+	`completedByName` text,
+	`completedByDate` varchar(20),
+	`reviewedByName` text,
+	`reviewedByDate` varchar(20),
+	`siteManagerName` text,
+	`siteManagerDate` varchar(20),
+	`submittedAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`sheetSynced` int DEFAULT 0,
+	CONSTRAINT `jha_submissions_id` PRIMARY KEY(`id`),
+	CONSTRAINT `jha_submissions_submissionId_unique` UNIQUE(`submissionId`)
+);
