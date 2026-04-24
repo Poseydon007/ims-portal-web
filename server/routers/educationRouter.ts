@@ -18,6 +18,7 @@ export const educationRouter = router({
     )
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
+      if (!db) throw new Error("Database not available");
       const userId = ctx.imsUser.id;
 
       // Check if already completed
@@ -63,6 +64,7 @@ export const educationRouter = router({
    */
   getMyCompletions: imsProtectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
+    if (!db) throw new Error("Database not available");
     const userId = ctx.imsUser.id;
 
     const completions = await db
@@ -88,6 +90,7 @@ export const educationRouter = router({
         throw new Error("Admin only");
       }
       const db = await getDb();
+      if (!db) throw new Error("Database not available");
       return db
         .select()
         .from(trainingCompletions)
