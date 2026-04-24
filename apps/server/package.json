@@ -2,5 +2,24 @@
   "name": "@ims-portal/server",
   "version": "0.0.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.693.0",
+    "@aws-sdk/s3-request-presigner": "^3.693.0",
+    "@trpc/server": "^11.6.0",
+    "axios": "^1.12.0",
+    "bcryptjs": "^3.0.3",
+    "cookie": "^1.0.2",
+    "dotenv": "^17.2.2",
+    "drizzle-orm": "^0.44.5",
+    "express": "^4.21.2",
+    "googleapis": "^171.4.0",
+    "jose": "6.1.0",
+    "mysql2": "^3.15.0",
+    "nanoid": "^5.1.5",
+    "nodemailer": "^8.0.5",
+    "superjson": "^1.13.3",
+    "xlsx": "^0.18.5",
+    "zod": "^4.1.12"
+  }
 }
