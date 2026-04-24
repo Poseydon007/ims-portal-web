@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: ims-portal-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: devroot
+      MYSQL_DATABASE: ims_portal
+      MYSQL_USER: ims_app
+      MYSQL_PASSWORD: devapp
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ims-portal-mysql-dev-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pdevroot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  ims-portal-mysql-dev-data:
