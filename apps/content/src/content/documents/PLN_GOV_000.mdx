@@ -1,0 +1,553 @@
+---
+code: TE-IMS-PLN-GOV-000
+title: IMS Playbook — Foundation Document
+rev: Rev01
+issueDate: 11 April 2026
+status: Approved
+category: Plan
+breadcrumbs:
+  - label: PLN — Plans
+    href: /docs/pln
+  - label: TE-IMS-PLN-GOV-000
+sidebarExtra:
+  - ["Level", "0 — Foundation Document · Pillar 0"]
+  - ["Scope", "All TEMC personnel, contractors, visitors, third parties"]
+toc:
+  - id: confidentiality
+    label: Confidentiality Note
+  - id: ceo-message
+    label: Message from the COO
+  - id: purpose
+    label: 1. Purpose of the IMS
+  - id: scope
+    label: 2. Scope &amp; Boundaries
+  - id: org-structure
+    label: 3. Organizational Structure
+  - id: objectives
+    label: 4. IMS Objectives &amp; Targets
+  - id: pillars
+    label: 5. The 8 Core Pillars
+  - id: doc-hierarchy
+    label: 6. Document Hierarchy
+  - id: doc-register
+    label: 7. Complete IMS Register
+  - id: retired-slots
+    label: 8. Retired &amp; Reserved Slots
+  - id: risk-classification
+    label: 9. Risk Classification
+  - id: cross-references
+    label: 10. Cross-References
+  - id: how-people-experience
+    label: 11. How People Experience the IMS
+  - id: final-commitment
+    label: 12. Final Commitment
+  - id: revision-history
+    label: Revision History
+---
+
+<div class="rounded px-5 py-4 mb-6" style="background-color: #081C2E;">
+  <div style="color: #C49A28;" class="text-xs font-bold tracking-widest uppercase mb-2 text-center">Level 0 — Foundation Document · Pillar 0</div>
+  <h1 class="text-white text-xl font-extrabold tracking-wide text-center uppercase">IMS Playbook — Foundation Document</h1>
+  <p class="text-white/50 text-xs text-center mt-2">True East Mining Company · Integrated Management System</p>
+</div>
+
+<section id="confidentiality" class="mb-8">
+  <div class="rounded border p-4 text-xs leading-relaxed" style="background-color: #fff8e1; border-color: #f0d98a; color: #5a4a1a;">
+    <span class="font-bold">CONFIDENTIALITY NOTE:</span> This document is confidential and is the strict property of True East Mining Company. Unauthorized distribution to external parties is strictly prohibited.
+  </div>
+</section>
+
+<section id="ceo-message" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">§</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Message from the COO</h2>
+  </div>
+  <div class="rounded border p-6" style="background-color: #fff; border-color: #dde3ec; border-left: 4px solid #C49A28;">
+    <p class="text-sm leading-relaxed mb-3" style="color: #2d3748;">At True East Mining, we drill in one of the harshest environments on Earth—remote Saudi deserts, 24/7 operations, extreme heat, heavy machinery, and a zero-tolerance margin for error.</p>
+    <p class="text-sm leading-relaxed mb-3" style="color: #2d3748;">Our people are our most valuable asset. Our clients demand zero harm and zero environmental incidents. Our regulators (MHRSD, NCEC) require absolute, uncompromising compliance. This Integrated Management System (IMS) exists for one single reason:</p>
+    <p class="text-sm leading-relaxed font-semibold mb-3" style="color: #081C2E;">To keep every person safe, protect the environment, deliver quality work on time, and build a company that lasts.</p>
+    <p class="text-sm leading-relaxed mb-3" style="color: #2d3748;">{"This Playbook is not a mere compliance exercise to sit on a shelf. It is our core operating system—simple, clear, and designed to be used every single day, on every rig, by every employee."}</p>
+    <p class="text-sm font-bold mb-4" style="color: #081C2E;">One Company. One System. Zero Harm.</p>
+    <div class="pt-3" style="border-top: 1px solid #dde3ec;">
+      <p class="text-sm font-bold" style="color: #081C2E;">Joao de Melo, COO</p>
+      <p class="text-xs" style="color: #6b7a8d;">Chief Operating Officer · True East Mining Company · April 2026</p>
+    </div>
+  </div>
+</section>
+
+<section id="purpose" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">1</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Purpose of the IMS</h2>
+  </div>
+  <div class="rounded border p-5" style="background-color: #fff; border-color: #dde3ec;">
+    <p class="text-sm leading-relaxed mb-4" style="color: #2d3748;">The True East Mining IMS seamlessly integrates Quality (ISO 9001:2015), Health &amp; Safety (ISO 45001:2018), and Environment (ISO 14001:2015) into one unified, powerful system that:</p>
+    <ul class="space-y-2 mb-4">
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Prevents harm to our people and the surrounding environment.</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Ensures consistent operational quality and on-time project delivery.</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Meets every legal, client, and international regulatory requirement.</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Enables the fast, safe, and sustainable scaling of our operations.</li>
+    </ul>
+    <p class="text-sm font-semibold" style="color: #081C2E;">We do not run three separate systems — we run one.</p>
+  </div>
+</section>
+
+<section id="scope" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">2</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Scope &amp; Boundaries</h2>
+  </div>
+  <div class="rounded border p-5" style="background-color: #fff; border-color: #dde3ec;">
+    <p class="text-sm leading-relaxed mb-3" style="color: #2d3748;"><span class="font-semibold" style="color: #081C2E;">Applies to:</span> All True East Mining personnel, contractors, visitors, and third parties working on behalf of the company across:</p>
+    <ul class="space-y-1.5 mb-4">
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Exploration &amp; drilling sites (remote desert)</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Processing plants &amp; workshops</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Offices (Riyadh and other administrative centers)</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>All transport &amp; logistics activities</li>
+    </ul>
+    <p class="text-sm mb-4" style="color: #2d3748;"><span class="font-semibold" style="color: #081C2E;">Exclusions:</span> None at this time. All activities that impact quality, safety, or the environment are included.</p>
+    <p class="text-sm font-semibold mb-2" style="color: #081C2E;">Standards Integrated:</p>
+    <ul class="space-y-1.5">
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>ISO 9001:2015 – Quality Management</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>ISO 45001:2018 – Occupational Health &amp; Safety</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>ISO 14001:2015 – Environmental Management</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>MHRSD – Occupational Safety Regulations (KSA)</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>NCEC – Environmental Compliance Requirements (KSA)</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>Saudi Mining Investment Law &amp; associated reclamation obligations</li>
+      <li class="flex items-start gap-2 text-sm" style="color: #2d3748;"><span style="color: #C49A28;" class="mt-0.5 flex-shrink-0">▸</span>{"Client-specific requirements (e.g., Ma'aden Contractor HSE Standards)"}</li>
+    </ul>
+  </div>
+</section>
+
+<section id="org-structure" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">3</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Our Organizational Structure</h2>
+  </div>
+  <div class="rounded border overflow-hidden" style="border-color: #dde3ec;">
+    <div class="px-4 py-2 text-xs font-semibold" style="background-color: #081C2E; color: #ffffff;">Key Leadership Roles &amp; IMS Accountability</div>
+    <table class="w-full text-xs">
+      <thead>
+        <tr style="background-color: #f4f6f9; border-bottom: 1px solid #dde3ec;">
+          <th class="text-left px-4 py-2.5 font-bold" style="color: #081C2E; width: 40%;">Role</th>
+          <th class="text-left px-4 py-2.5 font-bold" style="color: #081C2E;">IMS Accountability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold" style="color: #081C2E;">CEO / Managing Director</td><td class="px-4 py-2.5" style="color: #2d3748;">Overall IMS ownership, strategic direction, &amp; performance.</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold" style="color: #081C2E;">Operations Director</td><td class="px-4 py-2.5" style="color: #2d3748;">Safe drilling execution &amp; project delivery.</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold" style="color: #081C2E;">HSE Manager</td><td class="px-4 py-2.5" style="color: #2d3748;">Safety, environment, risk mitigation, &amp; emergency readiness.</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold" style="color: #081C2E;">HR &amp; Training Manager</td><td class="px-4 py-2.5" style="color: #2d3748;">People, competence, &amp; Saudization targets.</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold" style="color: #081C2E;">IMS / Quality Manager</td><td class="px-4 py-2.5" style="color: #2d3748;">System integrity, audits, &amp; continual improvement.</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold" style="color: #081C2E;">Finance &amp; Commercial</td><td class="px-4 py-2.5" style="color: #2d3748;">Resource allocation &amp; client contracts compliance.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="objectives" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">4</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">IMS Objectives &amp; Targets (2026)</h2>
+  </div>
+  <p class="text-sm leading-relaxed mb-4" style="color: #6b7a8d;">These overarching objectives form the baseline of our operational excellence and are reviewed quarterly in Management Review Meetings (MRM).</p>
+  <div class="rounded border overflow-x-auto" style="border-color: #dde3ec;">
+    <table class="w-full text-xs min-w-[600px]">
+      <thead>
+        <tr style="background-color: #081C2E;">
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Objective</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Target (2026)</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">KPI / Measure</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Responsible</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Zero fatalities &amp; serious injuries</td><td class="px-3 py-2.5" style="color: #2d3748;">0 LTI / Fatality</td><td class="px-3 py-2.5" style="color: #2d3748;">Lost Time Injury Frequency Rate</td><td class="px-3 py-2.5" style="color: #2d3748;">HSE Manager</td><td class="px-3 py-2.5" style="color: #2d3748;">Monthly</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">100% site rehabilitation compliance</td><td class="px-3 py-2.5" style="color: #2d3748;">100% sites rehabilitated on time</td><td class="px-3 py-2.5" style="color: #2d3748;">% sites with completion report</td><td class="px-3 py-2.5" style="color: #2d3748;">Site Mgr</td><td class="px-3 py-2.5" style="color: #2d3748;">Per project</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Saudization target</td><td class="px-3 py-2.5" style="color: #2d3748;">≥70% Saudi nationals in workforce</td><td class="px-3 py-2.5" style="color: #2d3748;">Saudization percentage</td><td class="px-3 py-2.5" style="color: #2d3748;">HR Manager</td><td class="px-3 py-2.5" style="color: #2d3748;">Quarterly</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Training completion</td><td class="px-3 py-2.5" style="color: #2d3748;">100% mandatory training</td><td class="px-3 py-2.5" style="color: #2d3748;">% employees trained on schedule</td><td class="px-3 py-2.5" style="color: #2d3748;">HR Manager</td><td class="px-3 py-2.5" style="color: #2d3748;">Monthly</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Incident reporting &amp; investigation</td><td class="px-3 py-2.5" style="color: #2d3748;">100% of incidents investigated &lt;7 days</td><td class="px-3 py-2.5" style="color: #2d3748;">% investigations closed on time</td><td class="px-3 py-2.5" style="color: #2d3748;">HSE Manager</td><td class="px-3 py-2.5" style="color: #2d3748;">Monthly</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Environmental incidents</td><td class="px-3 py-2.5" style="color: #2d3748;">Zero reportable spills</td><td class="px-3 py-2.5" style="color: #2d3748;">Number of NCEC-reportable incidents</td><td class="px-3 py-2.5" style="color: #2d3748;">HSE Manager</td><td class="px-3 py-2.5" style="color: #2d3748;">Monthly</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="pillars" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">5</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">How the IMS is Organized – 8 Core Pillars</h2>
+  </div>
+  <p class="text-sm leading-relaxed mb-4" style="color: #6b7a8d;">We do not organize by ISO clause or department. We organize by how real work happens on a rig.</p>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">1</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Leadership &amp; Direction</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">2</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">People &amp; Capability</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">3</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Risk &amp; Planning</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">4</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Drilling Execution</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">5</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Asset &amp; Maintenance</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">6</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Mobility &amp; Transport</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">7</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Emergency &amp; Resilience</p></div>
+    <div class="rounded border p-3 text-center" style="background-color: #fff; border-color: #dde3ec;"><div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-extrabold mx-auto mb-2" style="background-color: #081C2E; color: #C49A28;">8</div><p class="text-xs font-semibold leading-tight" style="color: #081C2E;">Performance &amp; Learning</p></div>
+  </div>
+</section>
+
+<section id="doc-hierarchy" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">6</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Document Hierarchy – Strict Rule</h2>
+  </div>
+  <div class="rounded border px-4 py-3 mb-4 text-sm font-semibold" style="background-color: #fffbf0; border-color: #f0d98a; color: #5a4a1a;">Golden Rule: A document exists on one level only. No duplication. No overlap.</div>
+  <div class="rounded border overflow-x-auto" style="border-color: #dde3ec;">
+    <table class="w-full text-xs min-w-[500px]">
+      <thead>
+        <tr style="background-color: #081C2E;">
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Level</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Name</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Purpose</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Ownership</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Example Documents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-extrabold text-center" style="color: #C49A28;">0</td><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Foundation</td><td class="px-3 py-2.5" style="color: #2d3748;">{"The \"why\" and \"big picture\""}</td><td class="px-3 py-2.5" style="color: #2d3748;">CEO / IMS Lead</td><td class="px-3 py-2.5" style="color: #2d3748;">This Playbook + IMS Policy</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-extrabold text-center" style="color: #C49A28;">1</td><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Policies</td><td class="px-3 py-2.5" style="color: #2d3748;">What we stand for</td><td class="px-3 py-2.5" style="color: #2d3748;">Senior Mgmt.</td><td class="px-3 py-2.5" style="color: #2d3748;">HSE Policy, Stop Work Authority</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-extrabold text-center" style="color: #C49A28;">2</td><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Procedures</td><td class="px-3 py-2.5" style="color: #2d3748;">Company-wide process controls</td><td class="px-3 py-2.5" style="color: #2d3748;">Dept Heads</td><td class="px-3 py-2.5" style="color: #2d3748;">Training, Incident Investigation</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-extrabold text-center" style="color: #C49A28;">3</td><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">SOPs</td><td class="px-3 py-2.5" style="color: #2d3748;">Task-level execution instructions</td><td class="px-3 py-2.5" style="color: #2d3748;">Supervisors / Crew</td><td class="px-3 py-2.5" style="color: #2d3748;">LOTO, Confined Space, Hot Work</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-3 py-2.5 font-extrabold text-center" style="color: #C49A28;">4</td><td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">Forms &amp; Records</td><td class="px-3 py-2.5" style="color: #2d3748;">Proof we did it</td><td class="px-3 py-2.5" style="color: #2d3748;">Everyone</td><td class="px-3 py-2.5" style="color: #2d3748;">Checklists, Registers, Reports</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="doc-register" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">7</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Complete IMS Document Register</h2>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-xs font-bold px-3 py-2 rounded-t" style="background-color: #081C2E; color: #ffffff;">Level 0 &amp; 1: Foundation, Policies &amp; Plans (GOV / POL / PLN) — 7 Documents</div>
+    <div class="rounded-b border border-t-0 p-4" style="border-color: #dde3ec; background-color: #fff;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PLN-GOV-000_Rev01 – IMS Playbook - Foundation Document"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-POL-GOV-001_Rev01 – Integrated HSE Policy Statement"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-POL-GOV-002_Rev01 – Ethics and Anti-Bribery Policy"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-POL-HSE-001_Rev01 – Stop Work Authority Policy"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-POL-LC-001_Rev01 – Local Content and Saudization Policy"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PLN-HSE-001_Rev01 – Major Emergency Preparedness Plan"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PLN-HSE-003_Rev01 – Working at Height Rescue Plan"}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-xs font-bold px-3 py-2 rounded-t" style="background-color: #1a3a5c; color: #ffffff;">Level 2: Core Procedures (PROC) — 33 Documents</div>
+    <div class="rounded-b border border-t-0 p-4" style="border-color: #dde3ec; background-color: #fff;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-001_Rev01 – Fatigue Management Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-002_Rev01 – Heat Stress Prevention Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-003_Rev01 – Hazard Identification and Risk Assessment Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-004_Rev01 – Site Emergency Preparedness Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-006_Rev01 – Incident and Accident Investigation Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-007_Rev01 – Toolbox Talks Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-008_Rev01 – Waste Management Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-009_Rev01 – Fire Prevention, Control and Fire Fighting Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-010_Rev01 – HSE Site Monthly Reporting Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-011_Rev01 – Periodic Inspection Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-012_Rev01 – HSE Site Audit Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-013_Rev01 – Spill Management Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-014_Rev01 – Site Rehabilitation Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-015_Rev01 – Risk and Opportunity Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-016_Rev01 – Personal Protective Equipment Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-017_Rev01 – Manual Handling Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-018_Rev01 – Environmental Aspects Identification Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-HSE-019_Rev01 – Site Safety Appointments Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-LOG-001_Rev01 – Company Vehicle Usage Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-LOG-002_Rev01 – Journey Management Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-MAINT-001_Rev01 – Maintenance Management Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-OPS-001_Rev01 – Drilling Operations Control Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SCM-001_Rev01 – Site Supply Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SEC-001_Rev01 – Security Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-001_Rev01 – Document Control Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-002_Rev01 – Management Review Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-003_Rev01 – Change Management Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-004_Rev01 – Internal Audit Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-005_Rev01 – Continual Improvement and CAPA Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-006_Rev01 – Checklist and Register Control Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-008_Rev01 – Corrective Action Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-SYS-009_Rev01 – QHSE Objectives Procedure"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-PROC-TRN-001_Rev01 – Staff Training and Competency Procedure"}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-xs font-bold px-3 py-2 rounded-t" style="background-color: #1a3a5c; color: #ffffff;">Level 3: Standard Operating Procedures (SOP) — 10 Documents</div>
+    <div class="rounded-b border border-t-0 p-4" style="border-color: #dde3ec; background-color: #fff;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-GEO-001_Rev01 – Core Cutting and Handling SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-HSE-001_Rev01 – Planned Task Observation SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-HSE-002_Rev01 – Confined Space Entry SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-HSE-003_Rev01 – Lock-Out Tag-Out SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-HSE-004_Rev01 – Hot Work SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-LOG-001_Rev01 – Driving Safety SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-MAINT-001_Rev01 – Machine Guarding Inspection SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-MAINT-002_Rev01 – Refueling and Fuel Handling SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-OPS-001_Rev01 – Diamond Drilling Operation SOP"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-SOP-OPS-002_Rev01 – Night Shift Drilling SOP"}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-xs font-bold px-3 py-2 rounded-t" style="background-color: #1a3a5c; color: #ffffff;">Level 4: Forms, Registers &amp; Checklists (FRM / REG) — 69 Documents</div>
+    <div class="rounded-b border border-t-0 p-4" style="border-color: #dde3ec; background-color: #fff;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-001_Rev01 – Job Hazard Analysis"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-002_Rev01 – Incident Flash Notification"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-003_Rev01 – Near Miss Report Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-004_Rev01 – First Aid Kit Register and Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-006_Rev01 – HSE Committee Meeting Minutes"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-007_Rev01 – Planned Task Observation (PTO) Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-009_Rev01 – Take 5 Hazard Assessment Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-010_Rev01 – Hazard Identification Prompt Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-011_Rev01 – Permit to Work (PTW)"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-012_Rev01 – PPE Issue and Inspection Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-013_Rev01 – PPE Kit Issuance and Acceptance Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-014_Rev01 – PPE Kit Spot-Check Verification Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-015_Rev01 – PPE Replacement Request Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-016_Rev00 – PPE Kit Contents Matrix"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-017_Rev01 – Emergency Drill Planning and Record"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-018_Rev01 – Emergency Evacuation Drill Record"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-019_Rev01 – Fire Drill Report"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-020_Rev02 – Fire Extinguisher Inspection Log"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-021_Rev01 – Fire Prevention Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-022_Rev01 – Incident and Accident Investigation Report"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-023_Rev01 – Employee Safety Culture Survey"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-024_Rev02 – Dangerous Occurrence Report Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-025_Rev02 – Dangerous Occurrence Investigation Report"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-026_Rev02 – Incident Witness Statement Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-027_Rev02 – Monthly Injury Summary"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-028_Rev02 – Monthly HSE Violation Report"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-029_Rev01 – PPE Weekly Inspection Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-030_Rev01 – Fire Fighting Equipment Register Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-031_Rev02 – Equipment Inspection and Deviation Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-032_Rev01 – Toolbox Talk Daily Attendance Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-033_Rev01 – Site HSE Monthly Report Template"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-034_Rev01 – Planned Task Observation Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-035_Rev01 – First Aider Appointment Letter"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-036_Rev01 – Fire Fighter Appointment Letter"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-037_Rev01 – Lockout Officer Appointment Letter"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-039_Rev01 – LOTO Logout Logbook"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-HSE-040_Rev01 – Waste Handling and Disposal Schedule"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-LOG-001_Rev01 – Journey Management Plan Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-LOG-002_Rev01 – Daily Vehicle Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-MAINT-001_Rev01 – Machine Guarding Inspection Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-MAINT-002_Rev01 – Fuel Refueling Log - Single Event"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-MAINT-003_Rev01 – Portable Electrical Equipment Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-OPS-001_Rev01 – Daily Drilling Report"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-OPS-002_Rev01 – Stuck Rod Recovery Report"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SEC-001_Rev01 – Visitor Access and Induction Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SEC-002_Rev01 – Visitor Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SYS-001_Rev01 – Audit Checklist Template"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SYS-002_Rev01 – Management Review Minutes Template"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SYS-003_Rev01 – Corrective Action Request Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SYS-005_Rev01 – Site Quarterly Audit Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-SYS-006_Rev01 – QA Task Follow-Up Checklist"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-TRN-002_Rev01 – Critical Training Adherence Form"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-FRM-TRN-003_Rev01 – Training Attendance Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-GOV-001_Rev00 – IMS Objectives & Targets Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-HSE-001_Rev01 – Risk Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-HSE-002_Rev00 – PPE Issue & Inspection Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-HSE-003_Rev01 – Emergency Contacts Directory"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-HSE-005_Rev01 – Incident and Accident Index Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-HSE-007_Rev01 – HIRA Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-HSE-010_Rev02 – Environmental Aspect and Impact Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-LOG-001_Rev01 – Vehicle Handover Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-MAINT-001_Rev01 – Maintenance Log and Service Record"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-MAINT-002_Rev01 – Fuel Refuelling Log"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-SYS-001_Rev04 – IMS Master Register and Migration Log"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-SYS-002_Rev00 – KPI Dashboard & Performance Log"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-SYS-003_Rev00 – Legal & Regulatory Compliance Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-SYS-004_Rev01 – Corrective Action Request Log"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-SYS-007_Rev01 – Risk and Opportunity Register"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REG-TRN-001_Rev01 – Training and Competence Matrix"}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-xs font-bold px-3 py-2 rounded-t" style="background-color: #1a3a5c; color: #ffffff;">Level 5: System References (REF) — 9 Documents</div>
+    <div class="rounded-b border border-t-0 p-4" style="border-color: #dde3ec; background-color: #fff;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-HSE-001_Rev00 – Emergency Preparedness Reference"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-HSE-002_Rev00 – Fire Fighting Procedure Reference"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-000_Rev00 – Executive Overview of the Integrated Management System"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-001_Rev01 – Document Identification and Numbering Rules"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-002_Rev00 – Treatment of Finance and Accounting Documents"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-003_Rev00 – ISO-14001_Certificate"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-004_Rev00 – ISO-45001_Certificate"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-005_Rev00 – ISO-9001_Certificate"}</div>
+        <div class="flex items-start gap-1.5 text-xs" style="color: #2d3748;"><span style="color: #C49A28;" class="flex-shrink-0 mt-0.5">▸</span>{"TE-IMS-REF-SYS-006_Rev01 – KPI Tables and Reference Data"}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-xs font-bold px-3 py-2 rounded-t" style="background-color: #1a3a5c; color: #ffffff;">Drawings (DWG) — 0 Released</div>
+    <div class="rounded-b border border-t-0 p-4" style="border-color: #dde3ec; background-color: #fff;">
+      <p class="text-xs" style="color: #6b7a8d;">Slot reserved. No drawings released in Rev01.</p>
+    </div>
+  </div>
+
+  <div class="rounded border px-4 py-3 text-xs" style="background-color: #f0f7ff; border-color: #bfdbfe; color: #1e3a5f;">
+    <span class="font-bold">Part B – Complete Sequential List (Audit &amp; Submission View):</span> The complete sequential list covering all 128 active controlled documents is maintained in the IMS Master Register (TE-IMS-REG-SYS-001_Rev04). The register above reflects the current active library as of Rev01.
+  </div>
+</section>
+
+<section id="retired-slots" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">8</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Retired &amp; Reserved Sequence Slots</h2>
+  </div>
+  <div class="rounded border p-5" style="background-color: #fff; border-color: #dde3ec;">
+    <p class="text-sm leading-relaxed mb-3" style="color: #2d3748;">The IMS uses stable document numbers. When a procedure, form, or register is retired, its sequence number is not reissued. The slot is held open so that all legacy references remain traceable and audit trails stay intact.</p>
+    <p class="text-sm leading-relaxed" style="color: #2d3748;">The current register reflects 128 active controlled documents. Sequence slots across PROC, SOP, FRM, REG, and DWG families are held reserved against prior drafts that were consolidated, moved, or deferred. The authoritative list of retired and reserved slots is maintained in the Master Register (currently Rev04) alongside this Playbook.</p>
+  </div>
+</section>
+
+<section id="risk-classification" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">9</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Risk Classification Standard</h2>
+  </div>
+  <div class="rounded border p-5" style="background-color: #fff; border-color: #dde3ec;">
+    <p class="text-sm leading-relaxed mb-3" style="color: #2d3748;">True East applies a single 5×5 likelihood-by-severity risk matrix across all IMS registers. Scores are banded into four tiers:</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+      <div class="rounded px-3 py-2 text-center text-xs font-bold" style="background-color: #d1fae5; color: #065f46;">Low<br /><span class="font-normal">1–4</span></div>
+      <div class="rounded px-3 py-2 text-center text-xs font-bold" style="background-color: #fef3c7; color: #92400e;">Medium<br /><span class="font-normal">5–9</span></div>
+      <div class="rounded px-3 py-2 text-center text-xs font-bold" style="background-color: #fee2e2; color: #991b1b;">High<br /><span class="font-normal">10–16</span></div>
+      <div class="rounded px-3 py-2 text-center text-xs font-bold" style="background-color: #fce7f3; color: #9d174d;">Critical<br /><span class="font-normal">17–25</span></div>
+    </div>
+    <p class="text-sm leading-relaxed" style="color: #2d3748;">The same classification is used by the Risk Register (REG-HSE-001), the HSE Hazard and Aspects Register, the Risk and Opportunity Procedure (PROC-HSE-015), and the Hazard Identification and Risk Assessment Procedure (PROC-HSE-003). Controls, review frequency, and escalation authority are mapped to the four tiers so that scoring drives action, not just paperwork.</p>
+  </div>
+</section>
+
+<section id="cross-references" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">10</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Cross-References</h2>
+  </div>
+  <div class="rounded border p-5" style="background-color: #fff; border-color: #dde3ec;">
+    <p class="text-sm leading-relaxed" style="color: #2d3748;">This Playbook is the foundation document for the IMS. It should be read alongside: <span class="font-semibold" style="color: #081C2E;">TE-IMS-REF-SYS-000</span> (IMS Executive Overview) for the narrative summary; <span class="font-semibold" style="color: #081C2E;">TE-IMS-REF-SYS-001</span> (IMS Numbering and Coding Rules) for the naming and classification logic; and <span class="font-semibold" style="color: #081C2E;">TE-IMS-PROC-SYS-001</span> (Document Control Procedure) for how documents are created, reviewed, approved, issued, revised, and retired.</p>
+  </div>
+</section>
+
+<section id="how-people-experience" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">11</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">How People Experience the IMS</h2>
+  </div>
+  <div class="rounded border p-5" style="background-color: #fff; border-color: #dde3ec;">
+    <p class="text-sm leading-relaxed mb-4" style="color: #2d3748;">This Integrated Management System is not a static binder sitting on an office shelf. It is our daily operating system—alive, updated regularly, and actively used by every level of the organization:</p>
+    <div class="space-y-3">
+      <div class="flex items-start gap-3 p-3 rounded" style="background-color: #f4f6f9; border: 1px solid #dde3ec;">
+        <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center" style="background-color: #fff; border: 1px solid #dde3ec; color: #C49A28; font-weight: bold;">▸</div>
+        <div>
+          <p class="text-xs font-bold mb-0.5" style="color: #081C2E;">On the rig at 2 a.m.</p>
+          <p class="text-xs leading-relaxed" style="color: #2d3748;">A driller identifies a high-risk task → opens the relevant Level 3 SOP → executes safely using the Level 4 checklist.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded" style="background-color: #f4f6f9; border: 1px solid #dde3ec;">
+        <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center" style="background-color: #fff; border: 1px solid #dde3ec; color: #C49A28; font-weight: bold;">▸</div>
+        <div>
+          <p class="text-xs font-bold mb-0.5" style="color: #081C2E;">A new employee</p>
+          <p class="text-xs leading-relaxed" style="color: #2d3748;">Reads this Foundation Playbook during their induction → understands the corporate culture → completes their mandatory Pillar 2 (People &amp; Capability) training.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded" style="background-color: #f4f6f9; border: 1px solid #dde3ec;">
+        <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center" style="background-color: #fff; border: 1px solid #dde3ec; color: #C49A28; font-weight: bold;">▸</div>
+        <div>
+          <p class="text-xs font-bold mb-0.5" style="color: #081C2E;">{"An Auditor / Ma'aden Inspector"}</p>
+          <p class="text-xs leading-relaxed" style="color: #2d3748;">Starts with this exact document → navigates the 8-pillar tree → experiences 100% full traceability and compliance.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded" style="background-color: #f4f6f9; border: 1px solid #dde3ec;">
+        <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center" style="background-color: #fff; border: 1px solid #dde3ec; color: #C49A28; font-weight: bold;">▸</div>
+        <div>
+          <p class="text-xs font-bold mb-0.5" style="color: #081C2E;">Executive Management</p>
+          <p class="text-xs leading-relaxed" style="color: #2d3748;">Opens Pillar 8 (Performance &amp; Learning) → reviews real-time KPIs → tracks audit findings → drives strategic, continual improvement actions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="final-commitment" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">12</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Our Final Commitment: Continual Improvement</h2>
+  </div>
+  <div class="rounded border p-6" style="background-color: #081C2E; border-color: #081C2E;">
+    <p class="text-sm leading-relaxed mb-3 text-white/80">As True East Mining scales, takes on more complex drilling programs, and expands its footprint across the Kingdom of Saudi Arabia, this system will scale with us.</p>
+    <p class="text-sm leading-relaxed mb-3 text-white/80">{"We recognize that safety and quality are never \"finished.\" Every hazard identified by a worker, every near-miss reported on site, and every audit finding is fuel for our continual improvement cycle. The IMS empowers every employee, from the boardroom to the drill pad, to use their Stop Work Authority and contribute to safer, more efficient operation."}</p>
+    <p class="text-sm font-bold mb-4" style="color: #C49A28;">We do not compromise on safety. We do not compromise on quality. We protect the environment.</p>
+    <div class="pt-4 text-center" style="border-top: 1px solid rgba(196,154,40,0.3);">
+      <p class="text-white font-extrabold text-base tracking-wide">TRUE EAST MINING COMPANY</p>
+      <p style="color: #C49A28;" class="text-sm font-semibold mt-1">One Company. One System. Zero Harm.</p>
+    </div>
+  </div>
+</section>
+
+<section id="revision-history" class="mb-10">
+  <div class="flex items-start gap-3 mb-4">
+    <div class="flex-shrink-0 w-8 h-8 rounded flex items-center justify-center text-xs font-extrabold" style="background-color: #081C2E; color: #C49A28;">§</div>
+    <h2 class="text-base font-extrabold leading-tight pt-1" style="color: #081C2E;">Revision History</h2>
+  </div>
+  <div class="rounded border overflow-x-auto mb-6" style="border-color: #dde3ec;">
+    <table class="w-full text-xs min-w-[500px]">
+      <thead>
+        <tr style="background-color: #081C2E;">
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Rev</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Date</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Description</th>
+          <th class="text-left px-3 py-2.5 font-bold" style="color: #ffffff;">Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;">
+          <td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">00</td>
+          <td class="px-3 py-2.5" style="color: #2d3748;">11 Apr 2026</td>
+          <td class="px-3 py-2.5" style="color: #2d3748;">Initial approved release – True East IMS Foundation Playbook established.</td>
+          <td class="px-3 py-2.5" style="color: #2d3748;">Joao Melo</td>
+        </tr>
+        <tr style="background-color: #fafbfc;">
+          <td class="px-3 py-2.5 font-semibold" style="color: #081C2E;">01</td>
+          <td class="px-3 py-2.5" style="color: #2d3748;">11 Apr 2026</td>
+          <td class="px-3 py-2.5" style="color: #2d3748;">Register rebuilt against the current active library (128 controlled documents). Metadata corrected, approval block updated (IMS Project Team / Joao de Melo, COO), retired slots policy, risk classification standard, and cross-references added. Drawings slot reserved (0 released).</td>
+          <td class="px-3 py-2.5" style="color: #2d3748;">IMS Project Team</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rounded border overflow-hidden" style="border-color: #dde3ec;">
+    <div class="px-4 py-2 text-xs font-bold" style="background-color: #081C2E; color: #ffffff;">Document Approval Block</div>
+    <table class="w-full text-xs">
+      <tbody>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Document Code</td><td class="px-4 py-2.5" style="color: #2d3748;">TE-IMS-PLN-GOV-000_Rev01</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Title</td><td class="px-4 py-2.5" style="color: #2d3748;">Integrated Management System (IMS) Playbook – Foundation Document (Pillar 0)</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Revision</td><td class="px-4 py-2.5" style="color: #2d3748;">Rev01</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Date</td><td class="px-4 py-2.5" style="color: #2d3748;">11 April 2026</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Prepared by</td><td class="px-4 py-2.5" style="color: #2d3748;">IMS Project Team</td></tr>
+        <tr style="background-color: #fafbfc; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Approved by</td><td class="px-4 py-2.5" style="color: #2d3748;">Joao de Melo, COO</td></tr>
+        <tr style="background-color: #fff; border-bottom: 1px solid #dde3ec;"><td class="px-4 py-2.5 font-semibold w-40" style="color: #081C2E;">Status</td><td class="px-4 py-2.5" style="color: #2d3748;">Approved for Implementation – Internal Use Only</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="rounded border p-4 text-xs leading-relaxed" style="background-color: #fffbf0; border-color: #f0d98a; color: #5a4a1a;">
+  <span class="font-bold">Document Control Notice:</span> All documents in this portal are controlled under the True East Mining Company Integrated Management System. Printed copies are uncontrolled. Always refer to this portal for the current approved version. For document requests or submissions, contact the Management Representative.
+</div>
