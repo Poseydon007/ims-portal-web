@@ -8,11 +8,6 @@ import {
   getNearMissSubmissionById,
   updateNearMissStatus,
   markSheetSynced,
-  createJhaSubmission,
-  getJhaSubmissions,
-  getJhaSubmissionById,
-  updateJhaStatus,
-  markJhaSheetSynced,
   getRegisterEntries,
   getRegisterEntryById,
   createRegisterEntry,
@@ -222,125 +217,6 @@ const _appRouterBase = router({
           hseOfficerName: input.hseOfficerName,
           hseOfficerDate: input.hseOfficerDate,
         });
-        return { success: true };
-      }),
-  }),
-
-  // ── JHA Form ──
-  jha: router({
-    submit: publicProcedure
-      .input(z.object({
-        jobTask: z.string().min(1),
-        date: z.string().min(1),
-        departmentSite: z.string().optional(),
-        jhaNumber: z.string().optional(),
-        supervisor: z.string().optional(),
-        reviewedBy: z.string().optional(),
-        taskSteps: z.array(z.object({
-          step: z.number(),
-          taskStep: z.string(),
-          hazards: z.string(),
-          initialRisk: z.string(),
-          controls: z.string(),
-          residualRisk: z.string(),
-          responsible: z.string(),
-        })).min(1),
-        completedByName: z.string().optional(),
-        completedByDate: z.string().optional(),
-        reviewedByName: z.string().optional(),
-        reviewedByDate: z.string().optional(),
-        siteManagerName: z.string().optional(),
-        siteManagerDate: z.string().optional(),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        const year = new Date().getFullYear();
-        const rand = Math.floor(1000 + Math.random() * 9000);
-        const submissionId = `JHA-${year}-${rand}`;
-
-        // Server-side identity: use IMS auth user if available
-        const imsUser = ctx.imsUser;
-        const completedByName = imsUser ? imsUser.fullName : (input.completedByName ?? null);
-
-        const submission = await createJhaSubmission({
-          submissionId,
-          status: "submitted",
-          jobTask: input.jobTask,
-          date: input.date,
-          departmentSite: input.departmentSite ?? null,
-          jhaNumber: submissionId,
-          supervisor: input.supervisor ?? null,
-          reviewedBy: input.reviewedBy ?? null,
-          taskSteps: JSON.stringify(input.taskSteps),
-          completedByName,
-          submittedByUserId: imsUser?.id ?? null,
-          completedByDate: input.completedByDate ?? null,
-          reviewedByName: input.reviewedByName ?? null,
-          reviewedByDate: input.reviewedByDate ?? null,
-          siteManagerName: input.siteManagerName ?? null,
-          siteManagerDate: input.siteManagerDate ?? null,
-          sheetSynced: 0,
-        });
-
-        // Sync to Google Sheets asynchronously
-        if (submission) {
-          try {
-            const steps = input.taskSteps
-              .map((s) => `${s.step}. ${s.taskStep} | Hazards: ${s.hazards} | Initial: ${s.initialRisk} | Controls: ${s.controls} | Residual: ${s.residualRisk} | Resp: ${s.responsible}`)
-              .join(" || ");
-            const row = [
-              submissionId,
-              submission.submittedAt.toISOString(),
-              "submitted",
-              input.jobTask,
-              input.date,
-              input.departmentSite ?? "",
-              input.supervisor ?? "",
-              input.reviewedBy ?? "",
-              steps,
-              input.completedByName ?? "",
-              input.siteManagerName ?? "",
-            ];
-            const jhaHeaders = [
-              "Submission ID", "Submitted At", "Status",
-              "Job / Task", "Date", "Department / Site",
-              "Supervisor", "Reviewed By", "Task Steps",
-              "Completed By", "Site Manager",
-            ];
-            await appendFormSubmission("TE-IMS-FRM-HSE-001", jhaHeaders, row);
-            await markJhaSheetSynced(submission.id);
-          } catch (err) {
-            console.error("[Sheets Sync JHA] Failed:", err);
-          }
-
-          await notifyOwner({
-            title: `New JHA Submitted: ${submissionId}`,
-            content: `Job/Task: ${input.jobTask}. Date: ${input.date}. Site: ${input.departmentSite ?? "N/A"}. Steps: ${input.taskSteps.length}.`,
-          });
-        }
-
-        return { success: true, submissionId };
-      }),
-
-    list: protectedProcedure.query(async ({ ctx }) => {
-      if (ctx.user.role !== "admin") throw new Error("Access denied");
-      return getJhaSubmissions();
-    }),
-
-    getById: protectedProcedure
-      .input(z.object({ id: z.number() }))
-      .query(async ({ input, ctx }) => {
-        if (ctx.user.role !== "admin") throw new Error("Access denied");
-        return getJhaSubmissionById(input.id);
-      }),
-
-    updateStatus: protectedProcedure
-      .input(z.object({
-        id: z.number(),
-        status: z.enum(["submitted", "under_review", "closed"]),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        if (ctx.user.role !== "admin") throw new Error("Access denied");
-        await updateJhaStatus(input.id, input.status);
         return { success: true };
       }),
   }),
