@@ -109,8 +109,8 @@ export const FORM_MIN_ROLES: Record<string, ImsRole> = {
   "TE-IMS-FRM-HSE-025": "field_worker",   // Incident Witness Statement
   "TE-IMS-FRM-HSE-026": "supervisor",      // Monthly Injury Summary
   "TE-IMS-FRM-HSE-027": "supervisor",      // Monthly HSE Violation Report
-  "TE-IMS-FRM-HSE-028": "field_worker",   // PPE Weekly Inspection Checklist
-  "TE-IMS-FRM-HSE-029": "field_worker",   // Fire Fighting Equipment Register Checklist
+  "TE-IMS-FRM-HSE-028": "field_worker",   // PPE Weekly Inspection Checklist (legacy label — actual form is "Monthly HSE Violation Report" with minRole="hse_manager"; FORM_MIN_ROLES is unused for the form's own rendering)
+  "TE-IMS-FRM-HSE-029": "field_worker",   // PPE Weekly Inspection Checklist
   "TE-IMS-FRM-HSE-030": "field_worker",   // Equipment Inspection and Deviation Register
   "TE-IMS-FRM-HSE-031": "field_worker",   // Toolbox Talk Daily Attendance Register
   "TE-IMS-FRM-HSE-032": "supervisor",      // Site HSE Monthly Report Template
