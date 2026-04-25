@@ -1,0 +1,1 @@
+DROP TABLE `near_miss_submissions`;

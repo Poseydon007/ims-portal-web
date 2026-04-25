@@ -1,8 +1,8 @@
 import { and, desc, eq, like, or } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
-  InsertNearMissSubmission, InsertUser,
-  nearMissSubmissions, users,
+  InsertUser,
+  users,
   imsUsers, imsSessions,
   InsertImsUser, InsertImsSession, ImsUser,
   imsRegister, InsertImsRegisterEntry, ImsRegisterEntry,
@@ -127,47 +127,6 @@ export async function deleteImsSessionsByUserId(userId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.delete(imsSessions).where(eq(imsSessions.userId, userId));
-}
-
-// ═══════════════════════════════════════════════════════════
-// Near Miss Submissions
-// ═══════════════════════════════════════════════════════════
-
-export async function createNearMissSubmission(data: InsertNearMissSubmission) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  await db.insert(nearMissSubmissions).values(data);
-  const result = await db.select().from(nearMissSubmissions)
-    .where(eq(nearMissSubmissions.submissionId, data.submissionId)).limit(1);
-  return result[0];
-}
-
-export async function getNearMissSubmissions() {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  return db.select().from(nearMissSubmissions).orderBy(desc(nearMissSubmissions.submittedAt));
-}
-
-export async function getNearMissSubmissionById(id: number) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  const result = await db.select().from(nearMissSubmissions)
-    .where(eq(nearMissSubmissions.id, id)).limit(1);
-  return result[0] ?? null;
-}
-
-export async function updateNearMissStatus(id: number, status: "submitted" | "under_review" | "closed", reviewData?: { supervisorName?: string; supervisorDate?: string; hseOfficerName?: string; hseOfficerDate?: string }) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  await db.update(nearMissSubmissions)
-    .set({ status, ...reviewData })
-    .where(eq(nearMissSubmissions.id, id));
-}
-
-export async function markSheetSynced(id: number) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  await db.update(nearMissSubmissions).set({ sheetSynced: 1 }).where(eq(nearMissSubmissions.id, id));
 }
 
 // ════════════════════════════════════════════════════════════

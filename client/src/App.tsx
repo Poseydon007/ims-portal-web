@@ -139,7 +139,6 @@ import FRM_TRN_003 from "@/pages/forms/FRM_TRN_003";
 import SubmissionPrintView from "./pages/SubmissionPrintView";
 
 // Admin
-import SubmissionsAdmin from "./pages/admin/SubmissionsAdmin";
 import AllSubmissionsAdmin from "./pages/admin/AllSubmissionsAdmin";
 import UserManagement from "./pages/admin/UserManagement";
 import ApprovalQueue from "./pages/ApprovalQueue";
@@ -296,7 +295,6 @@ function Router() {
       <Route path="/education/:slug" component={EducationTopic} />
 
       {/* Admin */}
-      <Route path="/admin/submissions" component={SubmissionsAdmin} />
       <Route path="/admin/all-submissions" component={AllSubmissionsAdmin} />
       <Route path="/admin/users" component={UserManagement} />
 

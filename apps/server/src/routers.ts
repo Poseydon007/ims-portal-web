@@ -1,13 +1,8 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, router } from "./_core/trpc";
 import {
-  createNearMissSubmission,
-  getNearMissSubmissions,
-  getNearMissSubmissionById,
-  updateNearMissStatus,
-  markSheetSynced,
   getRegisterEntries,
   getRegisterEntryById,
   createRegisterEntry,
@@ -15,86 +10,9 @@ import {
   bulkInsertRegisterEntries,
 } from "./db";
 import { z } from "zod";
-import { notifyOwner } from "./_core/notification";
 import { imsAuthRouter } from "./routers/imsAuthRouter";
 import { formSubmissionsRouter } from "./routers/formSubmissionsRouter";
 import { educationRouter } from "./routers/educationRouter";
-import { appendFormSubmission } from "./googleSheets";
-
-const correctiveActionSchema = z.object({
-  action: z.string(),
-  responsible: z.string(),
-  dueDate: z.string(),
-  status: z.string(),
-});
-
-// ── Google Sheets sync helper ──
-async function syncToGoogleSheet(submission: {
-  submissionId: string;
-  submittedAt: Date;
-  status: string;
-  dateOfOccurrence: string;
-  timeOfOccurrence?: string | null;
-  location?: string | null;
-  departmentSite?: string | null;
-  reportedBy: string;
-  employeeId?: string | null;
-  classification?: string | null;
-  classificationOther?: string | null;
-  description: string;
-  contributingFactors?: string | null;
-  contributingFactorsOther?: string | null;
-  potentialSeverity?: string | null;
-  potentialLikelihood?: string | null;
-  correctiveActions?: string | null;
-  supervisorName?: string | null;
-  hseOfficerName?: string | null;
-}) {
-  try {
-    const actions = submission.correctiveActions
-      ? JSON.parse(submission.correctiveActions)
-          .map((a: { action: string; responsible: string; dueDate: string; status: string }) =>
-            `${a.action} (${a.responsible}, ${a.dueDate}, ${a.status})`
-          )
-          .join(" | ")
-      : "";
-
-    const headers = [
-      "Submission ID", "Submitted At", "Status",
-      "Date of Occurrence", "Time of Occurrence", "Location", "Department / Site",
-      "Reported By", "Employee ID", "Classification", "Classification (Other)",
-      "Description", "Contributing Factors", "Contributing Factors (Other)",
-      "Potential Severity", "Potential Likelihood", "Corrective Actions",
-      "Supervisor Name", "HSE Officer Name",
-    ];
-    const values = [
-      submission.submissionId,
-      submission.submittedAt.toISOString(),
-      submission.status,
-      submission.dateOfOccurrence,
-      submission.timeOfOccurrence ?? "",
-      submission.location ?? "",
-      submission.departmentSite ?? "",
-      submission.reportedBy,
-      submission.employeeId ?? "",
-      submission.classification ?? "",
-      submission.classificationOther ?? "",
-      submission.description,
-      submission.contributingFactors ?? "",
-      submission.contributingFactorsOther ?? "",
-      submission.potentialSeverity ?? "",
-      submission.potentialLikelihood ?? "",
-      actions,
-      submission.supervisorName ?? "",
-      submission.hseOfficerName ?? "",
-    ];
-    await appendFormSubmission("TE-IMS-FRM-HSE-003", headers, values);
-    return true;
-  } catch (err) {
-    console.error("[Sheets Sync] Failed:", err);
-    return false;
-  }
-}
 
 const _appRouterBase = router({
   system: systemRouter,
@@ -107,118 +25,6 @@ const _appRouterBase = router({
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
       return { success: true } as const;
     }),
-  }),
-
-  // ── Near Miss Form ──
-  nearMiss: router({
-    submit: publicProcedure
-      .input(z.object({
-        dateOfOccurrence: z.string().min(1),
-        timeOfOccurrence: z.string().optional(),
-        location: z.string().optional(),
-        departmentSite: z.string().optional(),
-        reportedBy: z.string().min(1),
-        employeeId: z.string().optional(),
-        classification: z.string().optional(),
-        classificationOther: z.string().optional(),
-        description: z.string().min(1),
-        contributingFactors: z.string().optional(),
-        contributingFactorsOther: z.string().optional(),
-        potentialSeverity: z.string().optional(),
-        potentialLikelihood: z.string().optional(),
-        correctiveActions: z.array(correctiveActionSchema).optional(),
-        supervisorName: z.string().optional(),
-        supervisorDate: z.string().optional(),
-        hseOfficerName: z.string().optional(),
-        hseOfficerDate: z.string().optional(),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        // Generate submission ID: NM-YYYY-XXXX
-        const year = new Date().getFullYear();
-        const rand = Math.floor(1000 + Math.random() * 9000);
-        const submissionId = `NM-${year}-${rand}`;
-
-        // Server-side identity: use IMS auth user if available
-        const imsUser = ctx.imsUser;
-        const reportedBy = imsUser ? imsUser.fullName : input.reportedBy;
-        const employeeId = imsUser?.employeeId ?? input.employeeId ?? null;
-
-        const submission = await createNearMissSubmission({
-          submissionId,
-          status: "submitted",
-          dateOfOccurrence: input.dateOfOccurrence,
-          timeOfOccurrence: input.timeOfOccurrence ?? null,
-          location: input.location ?? null,
-          departmentSite: input.departmentSite ?? null,
-          reportedBy,
-          employeeId,
-          submittedByUserId: imsUser?.id ?? null,
-          classification: input.classification ?? null,
-          classificationOther: input.classificationOther ?? null,
-          description: input.description,
-          contributingFactors: input.contributingFactors ?? null,
-          contributingFactorsOther: input.contributingFactorsOther ?? null,
-          potentialSeverity: input.potentialSeverity ?? null,
-          potentialLikelihood: input.potentialLikelihood ?? null,
-          correctiveActions: input.correctiveActions
-            ? JSON.stringify(input.correctiveActions)
-            : null,
-          supervisorName: input.supervisorName ?? null,
-          supervisorDate: input.supervisorDate ?? null,
-          hseOfficerName: input.hseOfficerName ?? null,
-          hseOfficerDate: input.hseOfficerDate ?? null,
-          sheetSynced: 0,
-        });
-
-        // Sync to Google Sheets asynchronously
-        if (submission) {
-          syncToGoogleSheet(submission).then(synced => {
-            if (synced) markSheetSynced(submission.id);
-          });
-
-          // Notify owner
-          await notifyOwner({
-            title: `New Near Miss Report: ${submissionId}`,
-            content: `Submitted by ${input.reportedBy} on ${input.dateOfOccurrence}. Location: ${input.location ?? "N/A"}. Description: ${input.description.substring(0, 120)}...`,
-          });
-        }
-
-        return { success: true, submissionId };
-      }),
-
-    list: protectedProcedure.query(async ({ ctx }) => {
-      if (ctx.user.role !== "admin") {
-        throw new Error("Access denied");
-      }
-      return getNearMissSubmissions();
-    }),
-
-    getById: protectedProcedure
-      .input(z.object({ id: z.number() }))
-      .query(async ({ input, ctx }) => {
-        if (ctx.user.role !== "admin") throw new Error("Access denied");
-        return getNearMissSubmissionById(input.id);
-      }),
-
-    updateStatus: protectedProcedure
-      .input(z.object({
-        id: z.number(),
-        status: z.enum(["submitted", "under_review", "closed"]),
-        supervisorName: z.string().optional(),
-        supervisorDate: z.string().optional(),
-        hseOfficerName: z.string().optional(),
-        hseOfficerDate: z.string().optional(),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        if (ctx.user.role !== "admin") throw new Error("Access denied");
-        await updateNearMissStatus(input.id, input.status, {
-          supervisorName: input.supervisorName,
-          supervisorDate: input.supervisorDate,
-          hseOfficerName: input.hseOfficerName,
-          hseOfficerDate: input.hseOfficerDate,
-        });
-        return { success: true };
-      }),
   }),
 });
 
