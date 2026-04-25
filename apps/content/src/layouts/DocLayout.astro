@@ -1,0 +1,179 @@
+---
+import "../styles/global.css";
+import TopNav from "../components/TopNav.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+
+type Item = { label: string; href?: string };
+
+const {
+  code,
+  title,
+  rev,
+  issueDate,
+  expiryDate,
+  status = "Approved",
+  category,
+  breadcrumbs = [] as Item[],
+  sidebarExtra = [] as [string, string][],
+  toc = [] as { id: string; label: string }[],
+} = Astro.props as {
+  code: string;
+  title: string;
+  rev: string;
+  issueDate: string;
+  expiryDate?: string;
+  status?: string;
+  category: string;
+  breadcrumbs?: Item[];
+  sidebarExtra?: [string, string][];
+  toc?: { id: string; label: string }[];
+};
+
+const sidebarRows: [string, string][] = [
+  ["Document Code", code],
+  ["Revision", rev],
+  ["Issue Date", issueDate],
+  ...(expiryDate ? ([["Expiry Date", expiryDate]] as [string, string][]) : []),
+  ["Status", status === "Approved" ? "✓ Approved" : status],
+  ["Category", category],
+  ...sidebarExtra,
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — True East IMS Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col" style="background-color: #f4f6f9;">
+    <TopNav />
+    {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
+
+    <div class="border-b" style="background-color: #fff; border-color: #dde3ec;">
+      <div class="container flex items-center justify-between py-3 gap-4 flex-wrap">
+        <div>
+          <h1 class="font-bold text-base" style="color: #081C2E;">{title}</h1>
+          <div class="flex items-center gap-3 mt-0.5 flex-wrap">
+            <span class="te-code text-xs" style="color: #6b7a8d;">{code}_{rev}</span>
+            <span style="color: #c0c8d4;">·</span>
+            <span class="text-xs" style="color: #6b7a8d;">{issueDate}</span>
+            <span style="color: #c0c8d4;">·</span>
+            <span
+              class="text-xs font-bold px-2 py-0.5 rounded"
+              style="background-color: #d4edda; color: #155724;"
+            >
+              ✓ {status}
+            </span>
+          </div>
+        </div>
+        {breadcrumbs.length > 0 && breadcrumbs[0].href && (
+          <div class="flex items-center gap-2">
+            <a
+              href={breadcrumbs[0].href}
+              class="text-xs font-semibold px-3 py-1.5 rounded border hover:bg-gray-50 transition-colors"
+              style="border-color: #dde3ec; color: #081C2E;"
+            >
+              ← Back to {breadcrumbs[0].label.replace(/^[A-Z]+\s*—\s*/, "")}
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div class="container py-8 flex gap-8 items-start">
+      <aside
+        class="hidden lg:block w-52 shrink-0 sticky top-20 rounded border"
+        style="background-color: #fff; border-color: #dde3ec;"
+      >
+        <div class="p-4 border-b" style="border-color: #dde3ec;">
+          <div class="text-xs font-bold tracking-widest uppercase mb-3" style="color: #8a9ab0;">
+            Document Info
+          </div>
+          <dl class="space-y-2">
+            {sidebarRows.map(([k, v]) => (
+              <div>
+                <dt class="text-xs font-semibold" style="color: #8a9ab0;">{k}</dt>
+                <dd
+                  class="text-xs mt-0.5 font-medium"
+                  style={k === "Status" ? "color: #155724;" : "color: #081C2E;"}
+                >
+                  {k === "Document Code" || k === "Cert No." ? (
+                    <span class="te-code">{v}</span>
+                  ) : (
+                    v
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        {toc.length > 0 && (
+          <div class="p-4">
+            <div class="text-xs font-bold tracking-widest uppercase mb-3" style="color: #8a9ab0;">
+              Contents
+            </div>
+            <nav class="space-y-1">
+              {toc.map((entry) => (
+                <a
+                  href={`#${entry.id}`}
+                  class="block text-xs py-1 px-2 rounded hover:bg-blue-50 transition-colors"
+                  style="color: #081C2E;"
+                >
+                  {entry.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+      </aside>
+
+      <div class="flex-1 min-w-0">
+        <div class="rounded border bg-white overflow-hidden" style="border-color: #dde3ec;">
+          <div
+            class="flex items-center justify-between px-6 py-4 border-b"
+            style="border-color: #dde3ec; background-color: #fafbfc;"
+          >
+            <img
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogovectorgray_20d7a465.png"
+              alt="True East Mining Company"
+              style="width: 80px; height: 80px; object-fit: contain;"
+            />
+            <div class="text-right">
+              <div class="te-code text-xs" style="color: #8a9ab0;">{code}_{rev}</div>
+            </div>
+          </div>
+
+          <div class="px-8 py-6">
+            <slot />
+          </div>
+
+          <div
+            class="flex items-center justify-between px-6 py-3 border-t"
+            style="border-color: #dde3ec; background-color: #081C2E;"
+          >
+            <span class="text-xs" style="color: rgba(255,255,255,0.4);">
+              True East Mining Company &nbsp;·&nbsp; Integrated Management System
+              &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Page 1
+            </span>
+            <img
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png"
+              alt=""
+              class="h-5 w-auto opacity-30"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Footer />
+  </body>
+</html>

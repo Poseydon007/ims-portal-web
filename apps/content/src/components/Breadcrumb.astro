@@ -1,0 +1,27 @@
+---
+type Item = { label: string; href?: string };
+const { items } = Astro.props as { items: Item[] };
+---
+
+<nav class="py-2" style="background-color: #f4f6f9; border-bottom: 1px solid #dde3ec;">
+  <div class="container flex items-center gap-1.5 text-xs">
+    {items.map((item, i) => (
+      <span class="flex items-center gap-1.5">
+        {i > 0 && (
+          <span style="color: #8a9ab0;" class="select-none">/</span>
+        )}
+        {item.href ? (
+          <a
+            href={item.href}
+            class="font-medium no-underline hover:underline"
+            style="color: #C49A28;"
+          >
+            {item.label}
+          </a>
+        ) : (
+          <span class="font-semibold" style="color: #081C2E;">{item.label}</span>
+        )}
+      </span>
+    ))}
+  </div>
+</nav>

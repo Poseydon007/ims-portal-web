@@ -1,0 +1,32 @@
+---
+const LOGO_WHITE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/trueeastlogoWHITE_79ded02e.png";
+const year = new Date().getFullYear();
+---
+
+<footer style="background-color: #081C2E;" class="relative overflow-hidden">
+  <img
+    src={LOGO_WHITE}
+    alt=""
+    aria-hidden="true"
+    class="absolute pointer-events-none select-none"
+    style="width: 200px; opacity: 0.04; right: 20px; top: 50%; transform: translateY(-50%);"
+  />
+  <div class="container py-6 relative z-10">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div>
+        <div class="text-white text-xs font-bold tracking-widest uppercase">
+          True East Mining Company
+        </div>
+        <div class="text-white/30 text-xs mt-1">
+          Integrated Management System &middot; Document Portal
+        </div>
+      </div>
+      <div class="text-white/25 text-xs text-right">
+        <div>All documents are controlled. Printed copies are uncontrolled.</div>
+        <div class="mt-0.5">
+          &copy; {year} True East Mining Company. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

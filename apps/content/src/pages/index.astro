@@ -1,0 +1,53 @@
+---
+import "../styles/global.css";
+import { getCollection } from "astro:content";
+import TopNav from "../components/TopNav.astro";
+import Footer from "../components/Footer.astro";
+
+const docs = await getCollection("documents");
+
+function urlFor(code: string): string {
+  const category = code.includes("-REF-") ? "ref" : code.includes("-SOP-") ? "sop" : "doc";
+  return `/docs/${category}/${code}`;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>True East IMS — Document Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col" style="background-color: #f4f6f9;">
+    <TopNav />
+    <main class="container py-12 flex-1">
+      <h1 class="text-2xl font-bold mb-6" style="color: #081C2E;">
+        Document Portal — Astro pilot
+      </h1>
+      <p class="text-sm mb-6" style="color: #6b7a8d;">
+        Phase F MDX pilot. Static rendering of IMS documents from MDX collection.
+      </p>
+      <ul class="space-y-2">
+        {docs.map((doc) => (
+          <li>
+            <a
+              href={urlFor(doc.data.code)}
+              class="text-sm font-semibold no-underline hover:underline"
+              style="color: #C49A28;"
+            >
+              {doc.data.code} — {doc.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from "astro:content";
+import DocLayout from "../../layouts/DocLayout.astro";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("documents");
+  return docs.map((doc) => {
+    const code = doc.data.code;
+    const category = code.includes("-REF-") ? "ref" : code.includes("-SOP-") ? "sop" : "doc";
+    const slug = `${category}/${code}`;
+    return { params: { slug }, props: { doc } };
+  });
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+
+const sidebarExtra: [string, string][] = [
+  ["Standard", "ISO 14001:2015"],
+  ["Cert No.", "CN-EMS-15251159"],
+];
+
+const toc = [
+  { id: "certificate", label: "Certificate Image" },
+  { id: "details", label: "Certificate Details" },
+  { id: "verification", label: "Verification" },
+];
+---
+
+<DocLayout
+  code={doc.data.code}
+  title={doc.data.title}
+  rev={doc.data.rev}
+  issueDate={doc.data.issueDate}
+  expiryDate={doc.data.expiryDate}
+  status={doc.data.status}
+  category={doc.data.category}
+  breadcrumbs={doc.data.breadcrumbs}
+  sidebarExtra={sidebarExtra}
+  toc={toc}
+>
+  <Content />
+</DocLayout>
