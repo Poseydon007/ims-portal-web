@@ -9,7 +9,7 @@ services:
       MYSQL_USER: ims_app
       MYSQL_PASSWORD: devapp
     ports:
-      - "127.0.0.1:3306:3306"
+      - "3306:3306"
     volumes:
       - ims-portal-mysql-dev-data:/var/lib/mysql
     healthcheck:
