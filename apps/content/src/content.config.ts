@@ -14,6 +14,10 @@ const documents = defineCollection({
     breadcrumbs: z
       .array(z.object({ label: z.string(), href: z.string().optional() }))
       .default([]),
+    sidebarExtra: z.array(z.tuple([z.string(), z.string()])).default([]),
+    toc: z
+      .array(z.object({ id: z.string(), label: z.string() }))
+      .default([]),
   }),
 });
 
