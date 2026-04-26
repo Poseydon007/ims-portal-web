@@ -15,7 +15,7 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "refuelingEventCode",
+              name: "reportNo",
               title: "Refuelling Event Code",
               description: "Auto-assigned on submission, format: [Site]-YYMMDD-HHMM",
               readOnly: true

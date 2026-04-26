@@ -10,6 +10,7 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
+            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
         {
           type: "panel",
           name: "employee_details",

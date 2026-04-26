@@ -15,7 +15,7 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "journeyId",
+              name: "reportNo",
               title: "Journey ID / Reference",
               readOnly: true,
               description: "Auto-assigned on submission, format: JMP-YYYYMMDD-XXX"

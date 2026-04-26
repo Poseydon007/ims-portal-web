@@ -15,7 +15,7 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "occurrenceReferenceNo",
+              name: "reportNo",
               title: "Occurrence Reference No.",
               readOnly: true,
               description: "Auto-assigned on submission"

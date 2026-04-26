@@ -15,7 +15,7 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "meetingReferenceNo",
+              name: "reportNo",
               title: "Meeting Reference No.",
               readOnly: true,
               description: "Auto-assigned on submission, format: MR-YYYY-NN"

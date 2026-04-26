@@ -24,7 +24,7 @@ const SCHEMA = {
             },
             {
               type: "text",
-              name: "referenceNo",
+              name: "reportNo",
               title: "Reference No.",
               readOnly: true,
               description: "Auto-assigned on submission"

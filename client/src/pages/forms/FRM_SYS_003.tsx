@@ -15,7 +15,7 @@ const SCHEMA = {
           elements: [
             {
               type: "text",
-              name: "carNo",
+              name: "reportNo",
               title: "CAR No.",
               readOnly: true,
               description: "Auto-assigned on submission"
