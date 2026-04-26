@@ -13,43 +13,6 @@ import { Link } from "wouter";
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
 
-// ── Near Miss Log column definitions ─────────────────────────────────────────
-// Maps responseData field name → display label
-const NM_LOG_COLUMNS: { key: string; label: string }[] = [
-  { key: "reportNo",                label: "Report No." },
-  { key: "dateOfOccurrence",        label: "Date of Occurrence" },
-  { key: "timeOfOccurrence",        label: "Time of Occurrence" },
-  { key: "location",                label: "Location / Site Area" },
-  { key: "department",              label: "Department" },
-  { key: "site",                    label: "Site / Project" },
-  { key: "reportedBy",              label: "Reported By" },
-  { key: "employeeId",              label: "Employee ID" },
-  { key: "position",                label: "Position / Job Title" },
-  { key: "classification",          label: "Classification" },
-  { key: "classificationOther",     label: "Classification (Other)" },
-  { key: "description",             label: "Description" },
-  { key: "immediateAction",         label: "Immediate Action Taken" },
-  { key: "contributingFactors",     label: "Contributing Factors" },
-  { key: "contributingFactorsOther",label: "Contributing Factors (Other)" },
-  { key: "likelihood",              label: "Likelihood" },
-  { key: "consequence",             label: "Consequence" },
-  { key: "riskRating",              label: "Risk Rating" },
-  { key: "correctiveActions",       label: "Corrective Actions" },
-];
-
-function flattenValue(val: unknown): string {
-  if (val === null || val === undefined) return "";
-  if (typeof val === "string") return val;
-  if (typeof val === "number" || typeof val === "boolean") return String(val);
-  if (Array.isArray(val)) {
-    return val
-      .map(v => (typeof v === "object" && v !== null ? Object.values(v as Record<string, unknown>).join(" | ") : String(v)))
-      .join("; ");
-  }
-  if (typeof val === "object") return JSON.stringify(val);
-  return String(val);
-}
-
 function StatusBadge({ status }: { status: string }) {
   const config: Record<string, { label: string; bg: string; text: string }> = {
     pending_supervisor_review:  { label: "Pending Supervisor",       bg: "#fff3cd", text: "#856404" },
@@ -302,87 +265,6 @@ function ReturnModal({
   );
 }
 
-// ── Near Miss Log Section ─────────────────────────────────────────────────────
-function NearMissLog() {
-  const { data: allData, isLoading } = trpc.formSubmissions.listAllWithData.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-  });
-
-  // Filter to Near Miss submissions only
-  const nmRows = (allData ?? []).filter(r => r.formCode === "TE-IMS-FRM-HSE-003");
-
-  if (isLoading) {
-    return <div className="text-sm text-gray-500 py-8 text-center">Loading log data...</div>;
-  }
-
-  if (nmRows.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-sm text-gray-500">No Near Miss submissions found.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
-      <table className="text-xs min-w-max w-full border-collapse">
-        <thead>
-          <tr style={{ backgroundColor: NAVY }}>
-            {/* Fixed metadata columns */}
-            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap sticky left-0 z-10" style={{ backgroundColor: NAVY, minWidth: "110px" }}>
-              Report No.
-            </th>
-            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "100px" }}>
-              Submitted By
-            </th>
-            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "90px" }}>
-              Date Filed
-            </th>
-            <th className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "130px" }}>
-              Status
-            </th>
-            {/* Dynamic form field columns */}
-            {NM_LOG_COLUMNS.map(col => (
-              <th key={col.key} className="px-3 py-2.5 text-left font-semibold uppercase tracking-wide text-white whitespace-nowrap" style={{ minWidth: "140px" }}>
-                {col.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {nmRows.map((row, i) => {
-            const fields = (row.responseData ?? {}) as Record<string, unknown>;
-            return (
-              <tr
-                key={row.submissionId}
-                className={`border-b border-gray-100 last:border-0 hover:bg-blue-50/30 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}
-              >
-                <td className="px-3 py-2 font-mono font-bold sticky left-0 z-10 border-r border-gray-100" style={{ backgroundColor: i % 2 === 0 ? "white" : "#f9fafb", color: GOLD }}>
-                  {row.reportNumber ?? "—"}
-                </td>
-                <td className="px-3 py-2 text-gray-700 whitespace-nowrap">{row.submittedByName ?? "—"}</td>
-                <td className="px-3 py-2 text-gray-500 whitespace-nowrap">
-                  {row.submittedAt ? new Date(row.submittedAt).toLocaleDateString("en-SA") : "—"}
-                </td>
-                <td className="px-3 py-2 whitespace-nowrap">
-                  <StatusBadge status={row.status} />
-                </td>
-                {NM_LOG_COLUMNS.map(col => (
-                  <td key={col.key} className="px-3 py-2 text-gray-700 max-w-[220px]">
-                    <div className="truncate" title={flattenValue(fields[col.key])}>
-                      {flattenValue(fields[col.key]) || <span className="text-gray-300">—</span>}
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function AllSubmissionsAdmin() {
   const { user, loading: authLoading } = useImsAuth();
@@ -572,36 +454,6 @@ export default function AllSubmissionsAdmin() {
               </table>
             </div>
           )}
-        </div>
-
-        {/* ── SECTION 2: Near Miss Log ──────────────────────────────────────── */}
-        <div>
-          {/* Section header */}
-          <div className="mb-4 flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <div className="flex items-center gap-3 mb-1">
-                <div className="w-1 h-6 rounded" style={{ backgroundColor: GOLD }} />
-                <h2 className="text-lg font-bold uppercase tracking-tight" style={{ color: NAVY }}>
-                  Near Miss Occurrence Log
-                </h2>
-              </div>
-              <p className="text-xs text-gray-500 ml-4">
-                Cumulative register of all Near Miss submissions — all fields displayed horizontally. Scroll right to see all columns.
-              </p>
-            </div>
-            {/* Download Excel */}
-            <a
-              href="/api/export/near-miss"
-              download
-              className="inline-flex items-center gap-1.5 text-xs px-4 py-2 rounded font-bold transition-colors"
-              style={{ backgroundColor: "#16a34a", color: "white", textDecoration: "none" }}
-            >
-              ↓ Download Excel
-            </a>
-          </div>
-
-          {/* Log table */}
-          <NearMissLog />
         </div>
 
       </div>
