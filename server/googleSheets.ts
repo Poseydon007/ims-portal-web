@@ -1,6 +1,10 @@
 import { google } from "googleapis";
 
-const FOLDER_ID = process.env.GOOGLE_DRIVE_FOLDER_ID!;
+// Single master spreadsheet (owned by the user account, charged to their
+// 15GB free Drive quota). The service account adds one TAB per form code
+// — adding tabs to an existing sheet doesn't consume new file storage,
+// which sidesteps the service-account "quota exceeded" limitation.
+const SHEET_ID = process.env.GOOGLE_REGISTER_SHEET_ID!;
 
 function getAuth() {
   const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -8,76 +12,55 @@ function getAuth() {
   const key = JSON.parse(keyJson);
   return new google.auth.GoogleAuth({
     credentials: key,
-    scopes: [
-      "https://www.googleapis.com/auth/spreadsheets",
-      "https://www.googleapis.com/auth/drive",
-    ],
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 }
 
 /**
- * Find an existing spreadsheet by name in the IMS folder,
- * or create a new one with the given headers.
+ * Find the tab for a form code in the master register sheet, or create
+ * one with the given headers + frozen header row.
  *
- * Service accounts have no "My Drive" of their own, so we MUST create
- * the file via Drive API with the parent folder specified up front.
- * sheets.spreadsheets.create() fails with "caller does not have
- * permission" because it tries to create in the service account's
- * (non-existent) personal Drive.
+ * Tab name = the form code (e.g. "TE-IMS-FRM-HSE-003"). Hyphens are
+ * fine in tab names.
  */
-export async function getOrCreateSheet(
+async function getOrCreateTab(
   formCode: string,
   headers: string[]
 ): Promise<string> {
   const auth = getAuth();
-  const drive = google.drive({ version: "v3", auth });
   const sheets = google.sheets({ version: "v4", auth });
 
-  const sheetName = `${formCode} Register`;
-
-  // Search for existing sheet in the folder
-  const search = await drive.files.list({
-    q: `name='${sheetName}' and '${FOLDER_ID}' in parents and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false`,
-    fields: "files(id,name)",
-  });
-
-  if (search.data.files && search.data.files.length > 0) {
-    return search.data.files[0].id!;
-  }
-
-  // Create the file IN the folder via Drive API (works for service accounts).
-  const file = await drive.files.create({
-    requestBody: {
-      name: sheetName,
-      mimeType: "application/vnd.google-apps.spreadsheet",
-      parents: [FOLDER_ID],
-    },
-    fields: "id",
-  });
-  const spreadsheetId = file.data.id!;
-
-  // Drive API creates an empty spreadsheet with a default "Sheet1".
-  // Rename it to "Submissions" and set up the styled header row in one batchUpdate.
+  // Look for an existing tab with this form code
   const meta = await sheets.spreadsheets.get({
-    spreadsheetId,
+    spreadsheetId: SHEET_ID,
     fields: "sheets(properties(sheetId,title))",
   });
-  const defaultSheetId = meta.data.sheets?.[0]?.properties?.sheetId ?? 0;
+  const existing = meta.data.sheets?.find(
+    (s) => s.properties?.title === formCode
+  );
+  if (existing) return formCode;
 
+  // Add a new tab
+  const addRes = await sheets.spreadsheets.batchUpdate({
+    spreadsheetId: SHEET_ID,
+    requestBody: {
+      requests: [{ addSheet: { properties: { title: formCode } } }],
+    },
+  });
+  const newSheetId = addRes.data.replies?.[0]?.addSheet?.properties?.sheetId;
+  if (newSheetId === undefined || newSheetId === null) {
+    throw new Error("Failed to obtain sheetId for newly added tab");
+  }
+
+  // Write the styled header row + freeze it
   await sheets.spreadsheets.batchUpdate({
-    spreadsheetId,
+    spreadsheetId: SHEET_ID,
     requestBody: {
       requests: [
         {
-          updateSheetProperties: {
-            properties: { sheetId: defaultSheetId, title: "Submissions" },
-            fields: "title",
-          },
-        },
-        {
           updateCells: {
             range: {
-              sheetId: defaultSheetId,
+              sheetId: newSheetId,
               startRowIndex: 0,
               startColumnIndex: 0,
               endRowIndex: 1,
@@ -102,7 +85,10 @@ export async function getOrCreateSheet(
         },
         {
           updateSheetProperties: {
-            properties: { sheetId: defaultSheetId, gridProperties: { frozenRowCount: 1 } },
+            properties: {
+              sheetId: newSheetId,
+              gridProperties: { frozenRowCount: 1 },
+            },
             fields: "gridProperties.frozenRowCount",
           },
         },
@@ -110,26 +96,40 @@ export async function getOrCreateSheet(
     },
   });
 
-  return spreadsheetId;
+  return formCode;
 }
 
 /**
- * Append one row of data to the form's register sheet.
- * Creates the sheet with headers if it doesn't exist yet.
+ * Public alias preserved for backward compatibility — now returns the
+ * master spreadsheet ID rather than a per-form file ID.
+ */
+export async function getOrCreateSheet(
+  formCode: string,
+  headers: string[]
+): Promise<string> {
+  await getOrCreateTab(formCode, headers);
+  return SHEET_ID;
+}
+
+/**
+ * Append one row of data to the form's register tab.
+ * Creates the tab with headers if it doesn't exist yet.
  */
 export async function appendFormSubmission(
   formCode: string,
   headers: string[],
   values: (string | number | null)[]
-): Promise<{ spreadsheetId: string; updatedRange: string }> {
+): Promise<{ spreadsheetId: string; tabName: string; updatedRange: string }> {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
-  const spreadsheetId = await getOrCreateSheet(formCode, headers);
+  const tabName = await getOrCreateTab(formCode, headers);
 
+  // Single-quote the tab name in case the form code contains characters
+  // Sheets would otherwise interpret in a range expression.
   const result = await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: "Submissions!A:A",
+    spreadsheetId: SHEET_ID,
+    range: `'${tabName}'!A:A`,
     valueInputOption: "USER_ENTERED",
     insertDataOption: "INSERT_ROWS",
     requestBody: {
@@ -138,14 +138,16 @@ export async function appendFormSubmission(
   });
 
   return {
-    spreadsheetId,
+    spreadsheetId: SHEET_ID,
+    tabName,
     updatedRange: result.data.updates?.updatedRange ?? "",
   };
 }
 
 /**
- * Get the Google Sheets URL for a form's register
+ * Get the Google Sheets URL for the master register (deep-links to a
+ * specific form's tab if `formCode` is provided).
  */
-export function getSheetUrl(spreadsheetId: string): string {
-  return `https://docs.google.com/spreadsheets/d/${spreadsheetId}`;
+export function getSheetUrl(_formCode?: string): string {
+  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}`;
 }
