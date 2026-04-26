@@ -1,0 +1,77 @@
+# Production Docker Compose for ims-portal-web on the dedicated VPS
+# (ims-portal.site / 72.62.38.209).
+#
+# Assumes Traefik is already running on the VPS (provisioned 2026-04-24)
+# and provides:
+#   - external network reachable by container name
+#   - Let's Encrypt cert resolver
+#   - HTTPS termination on :443 with HTTP→HTTPS redirect on :80
+#
+# This file declares two services:
+#   - mysql : MySQL 8.4 container (single host, named volume for data)
+#   - app   : the IMS portal app (built from the repo Dockerfile)
+#
+# Adjust `traefik` network name if the VPS uses a different external network.
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: ims-portal-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ims-portal-mysql-data:/var/lib/mysql
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ims-portal-app:latest
+    container_name: ims-portal-app
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}
+      JWT_SECRET: ${JWT_SECRET}
+      PORTAL_URL: ${PORTAL_URL}
+    networks:
+      - internal
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.ims-portal.rule=Host(`${PORTAL_HOST}`)"
+      - "traefik.http.routers.ims-portal.entrypoints=websecure"
+      - "traefik.http.routers.ims-portal.tls=true"
+      - "traefik.http.routers.ims-portal.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ims-portal.loadbalancer.server.port=3000"
+      # HTTP → HTTPS redirect
+      - "traefik.http.routers.ims-portal-http.rule=Host(`${PORTAL_HOST}`)"
+      - "traefik.http.routers.ims-portal-http.entrypoints=web"
+      - "traefik.http.routers.ims-portal-http.middlewares=ims-portal-https-redirect"
+      - "traefik.http.middlewares.ims-portal-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.ims-portal-https-redirect.redirectscheme.permanent=true"
+
+networks:
+  internal:
+    driver: bridge
+  traefik:
+    external: true
+
+volumes:
+  ims-portal-mysql-data:
