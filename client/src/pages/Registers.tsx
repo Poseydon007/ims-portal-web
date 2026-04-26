@@ -14,8 +14,13 @@ import {
   Filter,
   Eye,
 } from "lucide-react";
-import formsManifest from "@/data/forms-manifest.json";
-import formsRegisters from "@/data/forms-registers.json";
+// Raw imports + JSON.parse to defeat Rollup field-level tree-shaking that
+// otherwise drops manifest fields (registerCode, registerName, fieldKeys)
+// when accessed via a type-cast iterator chain.
+import formsManifestRaw from "@/data/forms-manifest.json?raw";
+import formsRegistersRaw from "@/data/forms-registers.json?raw";
+const formsManifest = JSON.parse(formsManifestRaw);
+const formsRegisters = JSON.parse(formsRegistersRaw);
 
 interface RegisterEntry {
   code: string;
