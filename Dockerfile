@@ -48,6 +48,10 @@ COPY --from=builder /app/package.json   ./package.json
 COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder /app/seed-admin.mjs ./seed-admin.mjs
 
+# Per-form Google Sheet mapping consumed by server/googleSheets.ts at runtime.
+# Loaded relative to the bundled dist/index.js (__dirname=/app/dist).
+COPY --from=builder /app/server/forms-registers.json ./dist/forms-registers.json
+
 EXPOSE 3000
 
 # Health check — Express returns the SPA shell at /
