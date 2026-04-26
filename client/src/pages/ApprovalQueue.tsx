@@ -7,11 +7,13 @@
  * - Admins can also edit the report number or delete a submission
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { toast } from "sonner";
+import { can, type Role } from "@shared/permissions";
 
 // ── Smart field value renderer + Status badge ───────────────────────────────
 function formatKey(key: string): string {
@@ -525,6 +527,18 @@ export default function ApprovalQueue() {
     refetchOnWindowFocus: false,
   });
 
+  // Hooks must run unconditionally — keep useLocation + useEffect above any early return.
+  const [, navigate] = useLocation();
+  const role = (user?.role ?? "field_worker") as Role;
+
+  // Client → redirect home (no approval business at all). Effect is a no-op for other roles.
+  useEffect(() => {
+    if (user && role === "client") {
+      toast.error("Approvals not available in your view");
+      navigate("/", { replace: true });
+    }
+  }, [user, role, navigate]);
+
   const handleDone = (msg?: string) => {
     setActionModal(null);
     setEditModal(null);
@@ -553,18 +567,26 @@ export default function ApprovalQueue() {
     );
   }
 
-  if (user.role === "field_worker") {
+  // Field worker / client / (auditor allowed read-only) — gate non-approvers out
+  if (role === "field_worker" || role === "client") {
     return (
       <Layout>
         <div className="max-w-4xl mx-auto p-6 text-center py-20">
-          <p className="text-sm text-gray-600">The Approval Queue is only accessible to Supervisors and HSE Officers.</p>
+          <p className="text-sm text-gray-600">The Approval Queue is only accessible to Supervisors, HSE Officers, and Auditors (read-only).</p>
         </div>
       </Layout>
     );
   }
 
-  const isAdmin = user.role === "admin";
-  const roleLabel = isAdmin ? "HSE Officer / Admin" : user.role === "hse_manager" ? "HSE Manager" : "Supervisor";
+  const isAdmin       = role === "admin";
+  const isAuditorView = role === "auditor";  // read-only: hide all action buttons
+  const roleLabel = isAdmin
+    ? "HSE Officer / Admin"
+    : role === "hse_manager"
+    ? "HSE Manager"
+    : role === "auditor"
+    ? "Auditor (Read-Only)"
+    : "Supervisor";
 
   return (
     <Layout>
@@ -637,28 +659,44 @@ export default function ApprovalQueue() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1.5 justify-end flex-wrap">
-                        {/* View */}
+                        {/* View — always available */}
                         <button
                           onClick={() => setDetailId(item.submissionId)}
                           className="text-xs px-2.5 py-1 border border-[#dde3ec] rounded text-gray-600 hover:bg-gray-100 transition-colors"
                         >
                           View
                         </button>
-                        {/* Approve */}
-                        <button
-                          onClick={() => setActionModal({ submissionId: item.submissionId, formTitle: item.formTitle ?? null, action: "approve" })}
-                          className="text-xs px-2.5 py-1 rounded text-white font-semibold transition-opacity hover:opacity-90"
-                          style={{ backgroundColor: "#C49A28" }}
-                        >
-                          Approve
-                        </button>
-                        {/* Return */}
-                        <button
-                          onClick={() => setActionModal({ submissionId: item.submissionId, formTitle: item.formTitle ?? null, action: "return" })}
-                          className="text-xs px-2.5 py-1 rounded text-white font-semibold bg-red-600 transition-opacity hover:opacity-90"
-                        >
-                          Return
-                        </button>
+                        {/* Approve — gated by step. Auditor never sees any approve button. */}
+                        {!isAuditorView && (() => {
+                          const allowed =
+                            (item.status === "pending_supervisor_review"   && can.approveStep1(role)) ||
+                            (item.status === "pending_hse_manager_review"  && can.approveStep2(role)) ||
+                            (item.status === "pending_hse_approval"        && can.approveStep3(role));
+                          return allowed ? (
+                            <button
+                              onClick={() => setActionModal({ submissionId: item.submissionId, formTitle: item.formTitle ?? null, action: "approve" })}
+                              className="text-xs px-2.5 py-1 rounded text-white font-semibold transition-opacity hover:opacity-90"
+                              style={{ backgroundColor: "#C49A28" }}
+                            >
+                              Approve
+                            </button>
+                          ) : null;
+                        })()}
+                        {/* Return — same gating as approve (only step-eligible roles can return) */}
+                        {!isAuditorView && (() => {
+                          const allowed =
+                            (item.status === "pending_supervisor_review"   && can.approveStep1(role)) ||
+                            (item.status === "pending_hse_manager_review"  && can.approveStep2(role)) ||
+                            (item.status === "pending_hse_approval"        && can.approveStep3(role));
+                          return allowed ? (
+                            <button
+                              onClick={() => setActionModal({ submissionId: item.submissionId, formTitle: item.formTitle ?? null, action: "return" })}
+                              className="text-xs px-2.5 py-1 rounded text-white font-semibold bg-red-600 transition-opacity hover:opacity-90"
+                            >
+                              Return
+                            </button>
+                          ) : null;
+                        })()}
                         {/* Admin-only: Edit report number */}
                         {isAdmin && (
                           <button

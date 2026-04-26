@@ -6,6 +6,8 @@ import Layout from "@/components/Layout";
 import { educationTopics, EducationTopic } from "@/lib/educationData";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { getLoginUrl } from "@/const";
+import { toast } from "sonner";
+import { type Role } from "@shared/permissions";
 import {
   HardHat,
   ClipboardList,
@@ -44,7 +46,9 @@ function TopicIcon({ slug, color }: { slug: string; color: string }) {
 }
 
 export default function Education() {
-  const { isAuthenticated, loading } = useImsAuth();
+  const { isAuthenticated, loading, user } = useImsAuth();
+  const role = (user?.role ?? "field_worker") as Role;
+  const isClientTour = role === "client";  // tour-mode: tile click → CTA, no quiz
 
   if (loading) {
     return (
@@ -168,7 +172,15 @@ export default function Education() {
           {educationTopics.map((topic) => (
             <Link
               key={topic.slug}
-              href={`/education/${topic.slug}`}
+              href={isClientTour ? "#" : `/education/${topic.slug}`}
+              onClick={(e) => {
+                if (isClientTour) {
+                  e.preventDefault();
+                  toast.message("Sign in for full access", {
+                    description: "Education content beyond the tour is available with an internal staff account.",
+                  });
+                }
+              }}
               className="group block no-underline"
             >
               <div

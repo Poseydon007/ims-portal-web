@@ -17,6 +17,12 @@ export const educationRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
+      // External roles (auditor, client) cannot record training — quizzes
+      // and competency tracking are for internal staff only.
+      const role = ctx.imsUser.role;
+      if (role === "auditor" || role === "client") {
+        throw new Error("Training quizzes are for internal staff only");
+      }
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       const userId = ctx.imsUser.id;

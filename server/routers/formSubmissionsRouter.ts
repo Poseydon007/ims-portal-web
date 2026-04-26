@@ -581,9 +581,15 @@ export const formSubmissionsRouter = router({
       return { reportNumber };
     }),
 
+  // Submissions list — gated per role per the matrix:
+  //   admin / hse_manager / auditor → see all
+  //   supervisor                    → best-effort scoped to own department
+  //                                   (matches responseData.department literal)
+  //   anyone else                   → forbidden
   listAll: imsProtectedProcedure.query(async ({ ctx }) => {
-    if (ctx.imsUser.role !== "admin") {
-      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
+    const role = ctx.imsUser.role;
+    if (role !== "admin" && role !== "hse_manager" && role !== "auditor" && role !== "supervisor") {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Insufficient privileges." });
     }
     const db = await getDb();
     if (!db) return [];
@@ -591,7 +597,19 @@ export const formSubmissionsRouter = router({
       .select()
       .from(formResponses)
       .orderBy(desc(formResponses.submittedAt));
-    return rows.map(r => ({
+    // Supervisor scoping is best-effort (no department FK on form_responses).
+    let scoped = rows;
+    if (role === "supervisor" && ctx.imsUser.department) {
+      const myDept = ctx.imsUser.department.toLowerCase();
+      scoped = rows.filter(r => {
+        try {
+          const data = JSON.parse(r.responseData ?? "{}") as Record<string, unknown>;
+          const d = (data.department ?? data.departmentSite ?? "") as string;
+          return typeof d === "string" && d.toLowerCase().includes(myDept);
+        } catch { return false; }
+      });
+    }
+    return scoped.map(r => ({
       submissionId:    r.submissionId,
       reportNumber:    r.reportNumber,
       formCode:        r.formCode,
@@ -603,8 +621,9 @@ export const formSubmissionsRouter = router({
   }),
 
   listAllWithData: imsProtectedProcedure.query(async ({ ctx }) => {
-    if (ctx.imsUser.role !== "admin") {
-      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
+    const role = ctx.imsUser.role;
+    if (role !== "admin" && role !== "hse_manager" && role !== "auditor" && role !== "supervisor") {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Insufficient privileges." });
     }
     const db = await getDb();
     if (!db) return [];
@@ -612,7 +631,18 @@ export const formSubmissionsRouter = router({
       .select()
       .from(formResponses)
       .orderBy(desc(formResponses.submittedAt));
-    return rows.map(r => {
+    let scoped = rows;
+    if (role === "supervisor" && ctx.imsUser.department) {
+      const myDept = ctx.imsUser.department.toLowerCase();
+      scoped = rows.filter(r => {
+        try {
+          const data = JSON.parse(r.responseData ?? "{}") as Record<string, unknown>;
+          const d = (data.department ?? data.departmentSite ?? "") as string;
+          return typeof d === "string" && d.toLowerCase().includes(myDept);
+        } catch { return false; }
+      });
+    }
+    return scoped.map(r => {
       let parsed: Record<string, unknown> = {};
       try { parsed = JSON.parse(r.responseData ?? "{}"); } catch { /* ignore */ }
       return {

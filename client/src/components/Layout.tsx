@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { LOGO_WHITE } from "@/lib/imsData";
 import { useImsAuth } from "@/hooks/useImsAuth";
+import { can, ROLE_LABEL, type Role } from "@shared/permissions";
 
 interface BreadcrumbItem {
   label: string;
@@ -18,13 +19,6 @@ interface LayoutProps {
   title?: string;
   subtitle?: string;
 }
-
-const ROLE_LABELS: Record<string, string> = {
-  admin: "Admin",
-  hse_manager: "HSE Manager",
-  supervisor: "Supervisor",
-  field_worker: "Field Worker",
-};
 
 export function TopNav() {
   const { user, isAuthenticated, logout, loading } = useImsAuth();
@@ -81,7 +75,7 @@ export function TopNav() {
             </Link>
 
             {/* Approval Queue — supervisor + hse_manager + admin */}
-            {!loading && isAuthenticated && (user?.role === "supervisor" || user?.role === "hse_manager" || user?.role === "admin") && (
+            {!loading && isAuthenticated && user && can.seeApprovalsTab(user.role as Role) && (
               <Link href="/approvals">
                 <span
                   className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
@@ -95,32 +89,34 @@ export function TopNav() {
               </Link>
             )}
 
-            {/* Admin-only tabs */}
-            {!loading && isAuthenticated && user?.role === "admin" && (
-              <>
-                <Link href="/admin/all-submissions">
-                  <span
-                    className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
-                    style={{
-                      color: isActive("/admin/all-submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                      borderBottom: isActive("/admin/all-submissions") ? "2px solid #C49A28" : "2px solid transparent",
-                    }}
-                  >
-                    Submissions
-                  </span>
-                </Link>
-                <Link href="/admin/users">
-                  <span
-                    className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
-                    style={{
-                      color: isActive("/admin/users") ? "#C49A28" : "rgba(255,255,255,0.7)",
-                      borderBottom: isActive("/admin/users") ? "2px solid #C49A28" : "2px solid transparent",
-                    }}
-                  >
-                    Users
-                  </span>
-                </Link>
-              </>
+            {/* Submissions tab — admin / hse_manager / auditor (read-only) / supervisor (dept) */}
+            {!loading && isAuthenticated && user && can.seeSubmissionsTab(user.role as Role) && (
+              <Link href="/admin/all-submissions">
+                <span
+                  className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
+                  style={{
+                    color: isActive("/admin/all-submissions") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                    borderBottom: isActive("/admin/all-submissions") ? "2px solid #C49A28" : "2px solid transparent",
+                  }}
+                >
+                  Submissions
+                </span>
+              </Link>
+            )}
+
+            {/* Users tab — admin only */}
+            {!loading && isAuthenticated && user && can.manageUsers(user.role as Role) && (
+              <Link href="/admin/users">
+                <span
+                  className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
+                  style={{
+                    color: isActive("/admin/users") ? "#C49A28" : "rgba(255,255,255,0.7)",
+                    borderBottom: isActive("/admin/users") ? "2px solid #C49A28" : "2px solid transparent",
+                  }}
+                >
+                  Users
+                </span>
+              </Link>
             )}
           </div>
 
@@ -189,8 +185,15 @@ export function TopNav() {
                 <div className="text-white text-xs font-semibold leading-tight">
                   {user.fullName}
                 </div>
-                <div className="text-xs" style={{ color: "#C49A28", opacity: 0.8 }}>
-                  {ROLE_LABELS[user.role] ?? user.role}
+                {/* Role-tag pill — visible to user themselves; useful for QA */}
+                <div className="mt-0.5 flex justify-end">
+                  <span
+                    className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-[1px] rounded"
+                    style={{ backgroundColor: "rgba(196,154,40,0.18)", color: "#C49A28", border: "1px solid rgba(196,154,40,0.35)" }}
+                    title={`Role: ${ROLE_LABEL[user.role as Role] ?? user.role}`}
+                  >
+                    {ROLE_LABEL[user.role as Role] ?? user.role}
+                  </span>
                 </div>
               </div>
               <button

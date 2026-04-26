@@ -18,6 +18,7 @@ import "survey-core/survey-core.min.css";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
+import { can, type Role } from "@shared/permissions";
 
 // ── Role hierarchy ──────────────────────────────────────────────────────────
 type ImsRole = "field_worker" | "supervisor" | "hse_manager" | "admin";
@@ -274,6 +275,9 @@ export default function ImsForm({
   );
 
   const readOnly = !canSubmit(user?.role, minRole);
+  // Roles with no submit permission at all (auditor, client) — distinct from
+  // a field_worker hitting an admin-only form. Drives the banner copy below.
+  const noSubmitPermission = !!user && !can.submitForm(user.role as Role);
 
   const mutation = trpc.formSubmissions.submit.useMutation({
     onSuccess: (data) => {
@@ -537,8 +541,16 @@ export default function ImsForm({
         </table>
       </div>
 
-      {/* Read-only banner */}
-      {readOnly && (
+      {/* No-permission banner (auditor / client) takes precedence over plain read-only */}
+      {noSubmitPermission ? (
+        <div
+          className="mb-6 px-4 py-3 rounded border text-sm font-medium"
+          style={{ backgroundColor: "#fef2f2", borderColor: "#fca5a5", color: "#991b1b" }}
+        >
+          <strong>You don't have permission to submit forms.</strong>{" "}
+          Form contents are visible for reference only.
+        </div>
+      ) : readOnly ? (
         <div
           className="mb-6 px-4 py-3 rounded border text-sm font-medium"
           style={{ backgroundColor: "#fff8e1", borderColor: "#C49A28", color: "#5a4a1a" }}
@@ -546,7 +558,7 @@ export default function ImsForm({
           <strong>Read-Only Mode:</strong> Your access level does not permit submission of this form.
           You may view all fields but cannot submit. Contact your supervisor if you need to submit.
         </div>
-      )}
+      ) : null}
 
       {/* Error banner */}
       {submitError && (

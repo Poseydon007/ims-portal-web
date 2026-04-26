@@ -146,6 +146,7 @@ import ApprovalQueue from "./pages/ApprovalQueue";
 // Auth
 import Login from "./pages/Login";
 import MagicLinkRedeem from "./pages/MagicLinkRedeem";
+import Demo from "./pages/Demo";
 
 // Education
 import Education from "./pages/Education";
@@ -157,6 +158,9 @@ function Router() {
       {/* Auth */}
       <Route path="/login" component={Login} />
       <Route path="/auth/magic" component={MagicLinkRedeem} />
+
+      {/* Public tour mode (no login) */}
+      <Route path="/demo" component={Demo} />
 
       {/* Level 1 — Landing page */}
       <Route path="/" component={Home} />

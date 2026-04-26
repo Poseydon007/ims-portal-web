@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import { categories } from "@/lib/imsData";
 import { useImsAuth } from "@/hooks/useImsAuth";
+import { can, type Role } from "@shared/permissions";
 
 const totalDocs = categories.reduce((sum, c) => sum + c.count, 0);
 
@@ -78,8 +79,19 @@ function StatItem({ value, label, animate = false, delay = 0 }: StatProps) {
 }
 
 export default function Home() {
-  const { isAuthenticated, loading } = useImsAuth();
+  const { isAuthenticated, loading, user } = useImsAuth();
   const [, navigate] = useLocation();
+  const role = (user?.role ?? "field_worker") as Role;
+  // Client: hide FRM (no form catalog) and REG (no register access). Other roles
+  // see every tile. Auditor sees everything normally (read-only enforced inside).
+  const visibleCategories = categories.filter((c) => {
+    if (role === "client") {
+      if (c.slug === "frm") return false;            // FRM tile entirely hidden
+      if (c.slug === "reg") return false;            // REG hidden
+    }
+    return true;
+  });
+  const isClient = role === "client";
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -183,7 +195,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {categories.map((cat) => (
+          {visibleCategories.map((cat) => (
             <Link
               key={cat.code}
               href={`/docs/${cat.slug}`}
@@ -200,11 +212,23 @@ export default function Home() {
                 <div className="p-5">
                   {/* Code badge */}
                   <div className="flex items-start justify-between mb-3">
-                    <span
-                      className="te-code text-xs font-bold px-2 py-1 rounded"
-                      style={{ backgroundColor: "#e8edf4", color: "#081C2E" }}
-                    >
-                      {cat.code}
+                    <span className="flex items-center gap-1.5">
+                      <span
+                        className="te-code text-xs font-bold px-2 py-1 rounded"
+                        style={{ backgroundColor: "#e8edf4", color: "#081C2E" }}
+                      >
+                        {cat.code}
+                      </span>
+                      {/* Client tour-mode marker on document categories */}
+                      {isClient && (
+                        <span
+                          className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-[1px] rounded"
+                          style={{ backgroundColor: "rgba(196,154,40,0.15)", color: "#9a7a10", border: "1px solid rgba(196,154,40,0.3)" }}
+                          title="Preview only — full content available with internal access"
+                        >
+                          Preview
+                        </span>
+                      )}
                     </span>
                     <span
                       className="text-2xl font-extrabold"

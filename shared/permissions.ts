@@ -72,6 +72,14 @@ export const can = {
   // Admin
   manageUsers:    (r: Role) => r === "admin",
   manageSettings: (r: Role) => r === "admin",
+
+  // Composite UI helpers — derived from the primitives above.
+  // Use these for nav-tab gating; use the primitives for in-page action gating.
+  seeApprovalsTab:   (r: Role) => r === "supervisor" || r === "hse_manager" || r === "admin",
+  // Auditor needs read-only access to the all-submissions table; supervisor
+  // sees a department-scoped variant; admin + hse_manager see everything.
+  seeSubmissionsTab: (r: Role) =>
+    r === "admin" || r === "hse_manager" || r === "auditor" || r === "supervisor",
 };
 
 // ── Display helpers ─────────────────────────────────────────────────────────

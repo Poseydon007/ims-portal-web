@@ -1,13 +1,14 @@
 // IMS Custom Auth Hook — provides current user state from email/password login
 import { trpc } from "@/lib/trpc";
 import { useCallback, useMemo } from "react";
+import type { Role } from "@shared/permissions";
 
 export type ImsUserInfo = {
   id: number;
   email: string;
   fullName: string;
   employeeId: string | null;
-  role: "admin" | "hse_manager" | "supervisor" | "field_worker";
+  role: Role;
   department: string | null;
   position: string | null;
   status: string;

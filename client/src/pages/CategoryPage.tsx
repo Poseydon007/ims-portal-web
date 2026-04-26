@@ -2,13 +2,15 @@
 // Level 2: Document list table for a given category
 // REG category gets a rich view with CAT badge, FORMAT, OWNER, Preview, Open buttons
 
-import { Link, useParams } from "wouter";
+import { Link, useLocation, useParams } from "wouter";
 import Layout from "@/components/Layout";
 import { Breadcrumb } from "@/components/Layout";
 import { categories, documentsByCategory, ImsDocument } from "@/lib/imsData";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { ExternalLink, FileSpreadsheet, FileText } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { can, type Role } from "@shared/permissions";
 
 const statusBadge = (status: ImsDocument["status"]) => {
   if (status === "approved") {
@@ -244,7 +246,24 @@ export default function CategoryPage() {
   const cat = categories.find((c) => c.slug === slug);
   const docs = documentsByCategory[slug ?? ""] ?? [];
   const { user, isAuthenticated } = useImsAuth();
-  const canOpenDrive = isAuthenticated && (user?.role === "admin" || user?.role === "supervisor");
+  const role = (user?.role ?? "field_worker") as Role;
+  // "Open in Drive" / Edit register button: only admin + hse_manager get the
+  // editable Drive link. Everyone else sees the preview-only behavior.
+  const canOpenDrive = isAuthenticated && can.editRegister(role);
+
+  // Client redirect: FRM and REG are out of scope for clients. Bounce home with toast.
+  const [, navigate] = useLocation();
+  useEffect(() => {
+    if (!isAuthenticated || !user) return;
+    if (role !== "client") return;
+    if (slug === "frm") {
+      toast.error("Forms not available in your view");
+      navigate("/", { replace: true });
+    } else if (slug === "reg") {
+      toast.error("Registers not available in your view");
+      navigate("/", { replace: true });
+    }
+  }, [role, slug, isAuthenticated, user, navigate]);
 
   if (!cat) {
     return (

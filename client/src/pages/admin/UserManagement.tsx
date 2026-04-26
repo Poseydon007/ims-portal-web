@@ -4,6 +4,7 @@ import { useImsAuth } from "@/hooks/useImsAuth";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
+import { can, type Role } from "@shared/permissions";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
@@ -59,7 +60,7 @@ export default function UserManagement() {
   const [editForm, setEditForm] = useState<Partial<CreateForm> & { status?: "active" | "inactive" }>({});
 
   const { data: users, isLoading, refetch } = trpc.imsAuth.listUsers.useQuery(undefined, {
-    enabled: !!user && user.role === "admin",
+    enabled: !!user && can.manageUsers(user.role as Role),
   });
 
   const createUser = trpc.imsAuth.createUser.useMutation({
@@ -110,8 +111,8 @@ export default function UserManagement() {
     generateMagicLink.mutate({ userId: u.id });
   };
 
-  // Redirect if not admin
-  if (!loading && (!user || user.role !== "admin")) {
+  // Redirect if not admin (single source of truth: can.manageUsers)
+  if (!loading && (!user || !can.manageUsers(user.role as Role))) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#f4f6f9" }}>
         <div className="text-center">

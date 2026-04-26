@@ -9,6 +9,7 @@ import Layout from "@/components/Layout";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
+import { can, type Role } from "@shared/permissions";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
@@ -276,9 +277,19 @@ export default function AllSubmissionsAdmin() {
   const [toast, setToast]               = useState<string | null>(null);
   const [filter, setFilter]             = useState<string>("all");
 
+  const role = (user?.role ?? "field_worker") as Role;
+  // Page is open to: admin (full), hse_manager (full), auditor (read-only),
+  // supervisor (department-scoped). Everyone else gets the access-denied screen.
+  const hasPageAccess = !!user && (
+    can.viewAllSubmissions(role) || can.viewDeptSubmissions(role)
+  );
+  const isReadOnlyAuditView = role === "auditor";
+  const canMutate           = can.exportAll(role); // admin + hse_manager: edit/delete/approve
+  const canApproveAnyStep   = can.approveStep1(role) || can.approveStep2(role) || can.approveStep3(role);
+
   const { data: submissions, isLoading, refetch } = trpc.formSubmissions.listAll.useQuery(undefined, {
     refetchOnWindowFocus: false,
-    enabled: !!user && user.role === "admin",
+    enabled: hasPageAccess,
   });
 
   const handleDone = (msg: string) => {
@@ -295,11 +306,11 @@ export default function AllSubmissionsAdmin() {
     return <Layout><div className="max-w-5xl mx-auto p-6 py-20 text-center text-sm text-gray-500">Loading...</div></Layout>;
   }
 
-  if (!user || user.role !== "admin") {
+  if (!hasPageAccess) {
     return (
       <Layout>
         <div className="max-w-4xl mx-auto p-6 text-center py-20">
-          <p className="text-sm text-gray-600 mb-4">This page is for administrators only.</p>
+          <p className="text-sm text-gray-600 mb-4">You do not have access to the submissions table.</p>
           <Link href="/" className="text-sm font-semibold" style={{ color: GOLD }}>← Return to Portal</Link>
         </div>
       </Layout>
@@ -307,7 +318,23 @@ export default function AllSubmissionsAdmin() {
   }
 
   const PENDING_STATUSES = ["pending_supervisor_review", "pending_hse_manager_review", "pending_hse_approval"];
-  const filtered = submissions?.filter(s => filter === "all" || s.status === filter) ?? [];
+
+  // Supervisor sees only their own department. Best-effort match against
+  // submission.responseData.department (server-side scoping is the proper fix —
+  // this is the UI-side filter pending the backend route update).
+  const deptFiltered = (() => {
+    if (!submissions) return [];
+    if (role !== "supervisor") return submissions;
+    const myDept = (user?.department ?? "").trim().toLowerCase();
+    if (!myDept) return [];
+    return submissions.filter((s: any) => {
+      const rd = s.responseData;
+      const subDept = typeof rd === "object" && rd != null ? String(rd.department ?? "").trim().toLowerCase() : "";
+      return subDept === myDept;
+    });
+  })();
+
+  const filtered = deptFiltered.filter(s => filter === "all" || s.status === filter);
 
   return (
     <Layout>
@@ -355,6 +382,26 @@ export default function AllSubmissionsAdmin() {
               ))}
             </div>
           </div>
+
+          {/* Auditor read-only banner */}
+          {isReadOnlyAuditView && (
+            <div
+              className="mb-4 px-4 py-3 rounded text-sm font-medium"
+              style={{ backgroundColor: "#f3e8ff", border: "1px solid #c4b5fd", color: "#5b21b6" }}
+            >
+              <strong>Read-only audit view.</strong> You can view all submissions but cannot edit, delete, approve, or return them.
+            </div>
+          )}
+
+          {/* Supervisor dept-scope banner */}
+          {role === "supervisor" && (
+            <div
+              className="mb-4 px-4 py-3 rounded text-sm font-medium"
+              style={{ backgroundColor: "#e3f2fd", border: "1px solid #90caf9", color: "#0d47a1" }}
+            >
+              Showing submissions for your department only ({user?.department ?? "—"}).
+            </div>
+          )}
 
           {toast && (
             <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded text-sm text-green-800 font-medium">
@@ -407,7 +454,7 @@ export default function AllSubmissionsAdmin() {
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5 justify-end flex-wrap">
-                            {isPending && (
+                            {isPending && canApproveAnyStep && (
                               <>
                                 <button
                                   onClick={() => setApproveModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null, status: item.status })}
@@ -432,19 +479,25 @@ export default function AllSubmissionsAdmin() {
                             >
                               View
                             </Link>
-                            <button
-                              onClick={() => setEditModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null })}
-                              className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-amber-50 transition-colors"
-                              style={{ borderColor: GOLD, color: GOLD }}
-                            >
-                              Edit No.
-                            </button>
-                            <button
-                              onClick={() => setDeleteModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
-                              className="text-xs px-2.5 py-1 border border-red-300 rounded text-red-600 font-semibold hover:bg-red-50 transition-colors"
-                            >
-                              Delete
-                            </button>
+                            {/* Edit No. — admin/hse_manager only; auditor + supervisor cannot edit */}
+                            {canMutate && !isReadOnlyAuditView && (
+                              <button
+                                onClick={() => setEditModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null })}
+                                className="text-xs px-2.5 py-1 rounded border font-semibold hover:bg-amber-50 transition-colors"
+                                style={{ borderColor: GOLD, color: GOLD }}
+                              >
+                                Edit No.
+                              </button>
+                            )}
+                            {/* Delete — admin/hse_manager only (gated via can.exportAll) */}
+                            {canMutate && (
+                              <button
+                                onClick={() => setDeleteModal({ submissionId: item.submissionId, reportNumber: item.reportNumber ?? null, formTitle: item.formTitle ?? null })}
+                                className="text-xs px-2.5 py-1 border border-red-300 rounded text-red-600 font-semibold hover:bg-red-50 transition-colors"
+                              >
+                                Delete
+                              </button>
+                            )}
                           </div>
                         </td>
                       </tr>

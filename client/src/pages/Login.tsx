@@ -4,9 +4,18 @@ import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { LOGO_WHITE } from "@/lib/imsData";
+import type { Role } from "@shared/permissions";
 
 const NAVY = "#081C2E";
 const GOLD = "#C49A28";
+
+// Role-based post-login landing. Auditor → submissions table (their main view),
+// client → POL docs (a tour-friendly entry point), everyone else → portal home.
+function landingFor(role: Role | undefined): string {
+  if (role === "auditor") return "/admin/all-submissions";
+  if (role === "client")  return "/docs/pol";
+  return "/";
+}
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,17 +23,17 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [, navigate] = useLocation();
-  const { isAuthenticated, loading } = useImsAuth();
+  const { isAuthenticated, loading, user } = useImsAuth();
 
   const loginMutation = trpc.imsAuth.login.useMutation();
   const utils = trpc.useUtils();
 
-  // If already authenticated, redirect to home — must be in useEffect to avoid setState-in-render
+  // If already authenticated, redirect to the role-appropriate landing page.
   useEffect(() => {
     if (!loading && isAuthenticated) {
-      navigate("/", { replace: true });
+      navigate(landingFor(user?.role as Role | undefined), { replace: true });
     }
-  }, [loading, isAuthenticated, navigate]);
+  }, [loading, isAuthenticated, navigate, user]);
 
   if (!loading && isAuthenticated) return null;
 
@@ -45,7 +54,9 @@ export default function Login() {
 
       if (result.success) {
         await utils.imsAuth.me.invalidate();
-        navigate("/", { replace: true });
+        // Pull fresh user from cache to know which landing page to use.
+        const me = utils.imsAuth.me.getData();
+        navigate(landingFor((me as any)?.role as Role | undefined), { replace: true });
       } else {
         setError(result.error ?? "Login failed");
       }

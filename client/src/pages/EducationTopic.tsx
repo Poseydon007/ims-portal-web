@@ -14,6 +14,9 @@ import {
 import { useImsAuth } from "@/hooks/useImsAuth";
 import { trpc } from "@/lib/trpc";
 import { useEffect, useCallback } from "react";
+import { useLocation } from "wouter";
+import { toast } from "sonner";
+import { can, type Role } from "@shared/permissions";
 
 // ── Resource type icons ──
 const TYPE_ICONS: Record<string, string> = {
@@ -194,14 +197,29 @@ function ResourceCard({
 // ── Main Page ──
 export default function EducationTopic() {
   const [, params] = useRoute("/education/:slug");
-  const { isAuthenticated, loading } = useImsAuth();
+  const { isAuthenticated, loading, user } = useImsAuth();
+  const role = (user?.role ?? "field_worker") as Role;
+  const canTakeQuiz   = can.takeQuiz(role);                 // internal staff only
+  const canSeeTeamStats = can.viewTeamTraining(role);       // auditor/sup/mgr/admin
+  const isClientTour  = role === "client";
+  const [, navigate] = useLocation();
+
+  // Client → tour mode: redirect them back to /education with a CTA
+  useEffect(() => {
+    if (isClientTour) {
+      toast.message("Sign in for full access", {
+        description: "Topic content is available with an internal staff account.",
+      });
+      navigate("/education", { replace: true });
+    }
+  }, [isClientTour, navigate]);
 
   const topic = educationTopics.find(t => t.slug === params?.slug);
 
   // Fetch completions for the current user
   const { data: completions, refetch: refetchCompletions } = trpc.education.getMyCompletions.useQuery(
     undefined,
-    { enabled: isAuthenticated }
+    { enabled: isAuthenticated && canTakeQuiz }
   );
 
   // Mutation to record a completion
@@ -211,16 +229,17 @@ export default function EducationTopic() {
     },
   });
 
-  // Listen for postMessage from opened training windows
+  // Listen for postMessage from opened training windows — only for quiz-takers
   const handleMessage = useCallback(
     (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return;
+      if (!canTakeQuiz) return;  // auditor / client never record completions
       const data = event.data;
       if (data?.type === "IMS_TRAINING_COMPLETE" && data.resourceId && data.passed) {
         recordCompletion.mutate({ resourceId: data.resourceId, score: data.score });
       }
     },
-    [recordCompletion]
+    [recordCompletion, canTakeQuiz]
   );
 
   useEffect(() => {
@@ -368,6 +387,36 @@ export default function EducationTopic() {
           </div>
         )}
       </div>
+
+      {/* ── Team Stats (auditor + supervisor + hse_manager + admin) ── */}
+      {canSeeTeamStats && (
+        <div className="container pb-6">
+          <div
+            className="rounded border p-5"
+            style={{ backgroundColor: "#f8fafc", borderColor: "#dde3ec" }}
+          >
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <div>
+                <h3 className="text-sm font-bold" style={{ color: "#081C2E" }}>Team Training Stats</h3>
+                <p className="text-xs mt-0.5" style={{ color: "#6b7a8d" }}>
+                  Aggregate completion across all internal staff for resources in this topic.
+                </p>
+              </div>
+              <span
+                className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                style={{ backgroundColor: "#e8edf4", color: "#081C2E" }}
+              >
+                {role === "auditor" ? "Audit View" : "Manager View"}
+              </span>
+            </div>
+            <div className="text-xs italic" style={{ color: "#8a9ab0" }}>
+              Backend aggregate endpoint pending — UI shell in place. Once
+              <span className="font-mono"> education.getTeamCompletions </span>
+              ships, per-resource bars + dept breakdown will render here.
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Back link ── */}
       <div className="container pb-10">
