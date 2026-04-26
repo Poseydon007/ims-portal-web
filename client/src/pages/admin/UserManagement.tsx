@@ -12,14 +12,18 @@ const ROLE_LABELS: Record<string, string> = {
   admin: "Admin",
   hse_manager: "HSE Manager",
   supervisor: "Supervisor",
-  field_worker: "Field Worker",
+  field_worker: "User",
+  auditor: "Auditor",
+  client: "Client",
 };
 
 const ROLE_COLORS: Record<string, { backgroundColor: string; color: string }> = {
-  admin: { backgroundColor: "#fce4ec", color: "#c62828" },
-  hse_manager: { backgroundColor: "#fff3e0", color: "#e65100" },
-  supervisor: { backgroundColor: "#e3f2fd", color: "#1565c0" },
+  admin:        { backgroundColor: "#fce4ec", color: "#c62828" },
+  hse_manager:  { backgroundColor: "#fff3e0", color: "#e65100" },
+  supervisor:   { backgroundColor: "#e3f2fd", color: "#1565c0" },
   field_worker: { backgroundColor: "#e8f5e9", color: "#2e7d32" },
+  auditor:      { backgroundColor: "#f3e8ff", color: "#6b21a8" },
+  client:       { backgroundColor: "#e0f2fe", color: "#075985" },
 };
 
 const STATUS_COLORS: Record<string, { backgroundColor: string; color: string }> = {
@@ -32,7 +36,7 @@ type CreateForm = {
   password: string;
   fullName: string;
   employeeId: string;
-  role: "admin" | "hse_manager" | "supervisor" | "field_worker";
+  role: "admin" | "hse_manager" | "supervisor" | "field_worker" | "auditor" | "client";
   department: string;
 };
 
@@ -50,6 +54,7 @@ export default function UserManagement() {
   const [, navigate] = useLocation();
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState<CreateForm>(emptyForm);
+  const [showPassword, setShowPassword] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<Partial<CreateForm> & { status?: "active" | "inactive" }>({});
 
@@ -186,14 +191,26 @@ export default function UserManagement() {
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-1" style={{ color: "#6b7a8d" }}>Password *</label>
-                <input
-                  type="password"
-                  value={form.password}
-                  onChange={(e) => setForm({ ...form, password: e.target.value })}
-                  className="w-full px-3 py-2 rounded border text-sm"
-                  style={{ borderColor: "#dde3ec" }}
-                  placeholder="Min 6 characters"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={form.password}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    className="w-full px-3 py-2 pr-14 rounded border text-sm"
+                    style={{ borderColor: "#dde3ec" }}
+                    placeholder="Min 6 characters"
+                  />
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    onClick={() => setShowPassword((s) => !s)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-xs px-1.5 py-0.5 rounded hover:bg-gray-100"
+                    style={{ color: "#6b7a8d" }}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-1" style={{ color: "#6b7a8d" }}>Employee ID</label>
@@ -214,10 +231,12 @@ export default function UserManagement() {
                   className="w-full px-3 py-2 rounded border text-sm"
                   style={{ borderColor: "#dde3ec" }}
                 >
-                  <option value="field_worker">Field Worker</option>
+                  <option value="field_worker">User (basic)</option>
                   <option value="supervisor">Supervisor</option>
                   <option value="hse_manager">HSE Manager</option>
                   <option value="admin">Admin</option>
+                  <option value="auditor">Auditor (read-only)</option>
+                  <option value="client">Client (tour-only)</option>
                 </select>
               </div>
               <div>
@@ -305,10 +324,12 @@ export default function UserManagement() {
                             className="px-2 py-1 rounded border text-xs"
                             style={{ borderColor: "#dde3ec" }}
                           >
-                            <option value="field_worker">Field Worker</option>
+                            <option value="field_worker">User (basic)</option>
                             <option value="supervisor">Supervisor</option>
                             <option value="hse_manager">HSE Manager</option>
                             <option value="admin">Admin</option>
+                            <option value="auditor">Auditor</option>
+                            <option value="client">Client</option>
                           </select>
                         </td>
                         <td className="px-4 py-2">

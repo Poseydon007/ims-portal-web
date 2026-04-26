@@ -104,7 +104,7 @@ export const imsAuthRouter = router({
       password: z.string().min(6, "Password must be at least 6 characters"),
       fullName: z.string().min(1),
       employeeId: z.string().optional(),
-      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker"]),
+      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker", "auditor", "client"]),
       department: z.string().optional(),
       position: z.string().optional(),
     }))
@@ -161,7 +161,7 @@ export const imsAuthRouter = router({
       id: z.number(),
       fullName: z.string().min(1).optional(),
       employeeId: z.string().optional(),
-      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker"]).optional(),
+      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker", "auditor", "client"]).optional(),
       department: z.string().optional(),
       position: z.string().optional(),
       status: z.enum(["active", "inactive"]).optional(),
