@@ -82,7 +82,8 @@ function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenD
     return matchSearch && matchCat;
   });
 
-  const xlsxCount = docs.filter(d => d.format === "XLSX").length;
+  // Count spreadsheets = XLSX + SHEET (live Google Sheet registers).
+  const spreadsheetCount = docs.filter(d => d.format === "XLSX" || d.format === "SHEET").length;
   const docxCount = docs.filter(d => d.format === "DOCX").length;
 
   return (
@@ -101,7 +102,7 @@ function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenD
           <div className="text-xs tracking-widest uppercase font-semibold mt-0.5" style={{ color: "#8a9ab0" }}>Total Registers</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-extrabold" style={{ color: "#1e8449" }}>{xlsxCount}</div>
+          <div className="text-2xl font-extrabold" style={{ color: "#1e8449" }}>{spreadsheetCount}</div>
           <div className="text-xs tracking-widest uppercase font-semibold mt-0.5" style={{ color: "#8a9ab0" }}>Spreadsheets</div>
         </div>
         <div className="text-center">
