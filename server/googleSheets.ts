@@ -18,6 +18,12 @@ function getAuth() {
 /**
  * Find an existing spreadsheet by name in the IMS folder,
  * or create a new one with the given headers.
+ *
+ * Service accounts have no "My Drive" of their own, so we MUST create
+ * the file via Drive API with the parent folder specified up front.
+ * sheets.spreadsheets.create() fails with "caller does not have
+ * permission" because it tries to create in the service account's
+ * (non-existent) personal Drive.
  */
 export async function getOrCreateSheet(
   formCode: string,
@@ -39,46 +45,69 @@ export async function getOrCreateSheet(
     return search.data.files[0].id!;
   }
 
-  // Create new spreadsheet
-  const created = await sheets.spreadsheets.create({
+  // Create the file IN the folder via Drive API (works for service accounts).
+  const file = await drive.files.create({
     requestBody: {
-      properties: { title: sheetName },
-      sheets: [
+      name: sheetName,
+      mimeType: "application/vnd.google-apps.spreadsheet",
+      parents: [FOLDER_ID],
+    },
+    fields: "id",
+  });
+  const spreadsheetId = file.data.id!;
+
+  // Drive API creates an empty spreadsheet with a default "Sheet1".
+  // Rename it to "Submissions" and set up the styled header row in one batchUpdate.
+  const meta = await sheets.spreadsheets.get({
+    spreadsheetId,
+    fields: "sheets(properties(sheetId,title))",
+  });
+  const defaultSheetId = meta.data.sheets?.[0]?.properties?.sheetId ?? 0;
+
+  await sheets.spreadsheets.batchUpdate({
+    spreadsheetId,
+    requestBody: {
+      requests: [
         {
-          properties: { title: "Submissions" },
-          data: [
-            {
-              startRow: 0,
-              startColumn: 0,
-              rowData: [
-                {
-                  values: headers.map((h) => ({
-                    userEnteredValue: { stringValue: h },
-                    userEnteredFormat: {
-                      backgroundColor: { red: 0.03, green: 0.11, blue: 0.18 },
-                      textFormat: {
-                        foregroundColor: { red: 1, green: 1, blue: 1 },
-                        bold: true,
-                      },
-                    },
-                  })),
-                },
-              ],
+          updateSheetProperties: {
+            properties: { sheetId: defaultSheetId, title: "Submissions" },
+            fields: "title",
+          },
+        },
+        {
+          updateCells: {
+            range: {
+              sheetId: defaultSheetId,
+              startRowIndex: 0,
+              startColumnIndex: 0,
+              endRowIndex: 1,
+              endColumnIndex: headers.length,
             },
-          ],
+            rows: [
+              {
+                values: headers.map((h) => ({
+                  userEnteredValue: { stringValue: h },
+                  userEnteredFormat: {
+                    backgroundColor: { red: 0.03, green: 0.11, blue: 0.18 },
+                    textFormat: {
+                      foregroundColor: { red: 1, green: 1, blue: 1 },
+                      bold: true,
+                    },
+                  },
+                })),
+              },
+            ],
+            fields: "userEnteredValue,userEnteredFormat",
+          },
+        },
+        {
+          updateSheetProperties: {
+            properties: { sheetId: defaultSheetId, gridProperties: { frozenRowCount: 1 } },
+            fields: "gridProperties.frozenRowCount",
+          },
         },
       ],
     },
-  });
-
-  const spreadsheetId = created.data.spreadsheetId!;
-
-  // Move to the IMS folder
-  await drive.files.update({
-    fileId: spreadsheetId,
-    addParents: FOLDER_ID,
-    removeParents: "root",
-    fields: "id,parents",
   });
 
   return spreadsheetId;
