@@ -26,7 +26,7 @@ function getAuth() {
 async function getOrCreateTab(
   formCode: string,
   headers: string[]
-): Promise<string> {
+): Promise<{ tabName: string; sheetId: number }> {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
@@ -38,7 +38,9 @@ async function getOrCreateTab(
   const existing = meta.data.sheets?.find(
     (s) => s.properties?.title === formCode
   );
-  if (existing) return formCode;
+  if (existing && existing.properties?.sheetId !== undefined && existing.properties?.sheetId !== null) {
+    return { tabName: formCode, sheetId: existing.properties.sheetId };
+  }
 
   // Add a new tab
   const addRes = await sheets.spreadsheets.batchUpdate({
@@ -96,7 +98,7 @@ async function getOrCreateTab(
     },
   });
 
-  return formCode;
+  return { tabName: formCode, sheetId: newSheetId };
 }
 
 /**
@@ -114,6 +116,11 @@ export async function getOrCreateSheet(
 /**
  * Append one row of data to the form's register tab.
  * Creates the tab with headers if it doesn't exist yet.
+ *
+ * Uses appendCells with explicit "default" formatting (white bg, black
+ * non-bold text) to prevent the appended row from inheriting the
+ * header row's navy/white styling — which is the default behavior of
+ * spreadsheets.values.append.
  */
 export async function appendFormSubmission(
   formCode: string,
@@ -123,24 +130,42 @@ export async function appendFormSubmission(
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
-  const tabName = await getOrCreateTab(formCode, headers);
+  const { tabName, sheetId } = await getOrCreateTab(formCode, headers);
 
-  // Single-quote the tab name in case the form code contains characters
-  // Sheets would otherwise interpret in a range expression.
-  const result = await sheets.spreadsheets.values.append({
+  // Build a row of cells with explicit DEFAULT formatting so the appended
+  // row does NOT inherit the header row's navy/white styling.
+  const cellRow = {
+    values: values.map((v) => ({
+      userEnteredValue: { stringValue: v === null ? "" : String(v) },
+      userEnteredFormat: {
+        backgroundColor: { red: 1, green: 1, blue: 1 },
+        textFormat: {
+          foregroundColor: { red: 0, green: 0, blue: 0 },
+          bold: false,
+        },
+      },
+    })),
+  };
+
+  await sheets.spreadsheets.batchUpdate({
     spreadsheetId: SHEET_ID,
-    range: `'${tabName}'!A:A`,
-    valueInputOption: "USER_ENTERED",
-    insertDataOption: "INSERT_ROWS",
     requestBody: {
-      values: [values.map((v) => (v === null ? "" : String(v)))],
+      requests: [
+        {
+          appendCells: {
+            sheetId,
+            rows: [cellRow],
+            fields: "userEnteredValue,userEnteredFormat",
+          },
+        },
+      ],
     },
   });
 
   return {
     spreadsheetId: SHEET_ID,
     tabName,
-    updatedRange: result.data.updates?.updatedRange ?? "",
+    updatedRange: `'${tabName}'`,
   };
 }
 
