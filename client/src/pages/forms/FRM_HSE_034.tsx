@@ -8,7 +8,6 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
-            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
         {
           type: "html",
           name: "purpose",
@@ -19,6 +18,7 @@ const SCHEMA = {
           name: "section1",
           title: "1. Observation Details",
           elements: [
+            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
             {
               type: "text",
               name: "observationDate",

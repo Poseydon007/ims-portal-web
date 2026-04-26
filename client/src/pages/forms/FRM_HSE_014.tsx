@@ -87,12 +87,11 @@ const SCHEMA = {
   pages: [{
     name: "page1",
     elements: [
-            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
-
       // ── Section 1: Employee Information ──────────────────────────────────
       {
         type: "panel", name: "section_employee", title: "1. Employee Information",
         elements: [
+            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
           { type: "text", name: "reportedBy", title: "Employee Full Name", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
           { type: "text", name: "employeeId", title: "Employee ID / Badge No.", isRequired: true, readOnly: true, description: "Auto-filled from your login profile" },
           { type: "text", name: "position", title: "Position / Role", readOnly: true, description: "Auto-filled from your login profile" },

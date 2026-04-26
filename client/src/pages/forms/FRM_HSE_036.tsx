@@ -13,6 +13,7 @@ const SCHEMA = {
           name: "panel1",
           title: "1. Employee Details",
           elements: [
+            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
             {
               type: "text",
               name: "date",
@@ -21,13 +22,6 @@ const SCHEMA = {
               readOnly: true,
               defaultValueExpression: "today()",
               description: "Auto-filled with today's date"
-            },
-            {
-              type: "text",
-              name: "reportNo",
-              title: "Reference No.",
-              readOnly: true,
-              description: "Auto-assigned on submission"
             },
             {
               type: "text",

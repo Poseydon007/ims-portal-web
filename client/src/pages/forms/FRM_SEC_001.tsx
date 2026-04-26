@@ -8,12 +8,12 @@ const SCHEMA = {
     {
       name: "page1",
       elements: [
-            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
         {
           type: "panel",
           name: "visitorDetails",
           title: "1. Visitor Details",
           elements: [
+            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
             {
               type: "text",
               name: "visitorName",

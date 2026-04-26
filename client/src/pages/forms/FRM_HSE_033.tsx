@@ -13,6 +13,7 @@ const SCHEMA = {
           name: "section1",
           title: "1. Report Details",
           elements: [
+            { type: "text", name: "reportNo", title: "Report No.", isRequired: true, readOnly: true, description: "Auto-assigned on submission" },
             {
               type: "text",
               name: "siteProject",
@@ -55,13 +56,6 @@ const SCHEMA = {
               title: "Reporting Period",
               isRequired: true,
               placeholder: "e.g., April 2026"
-            },
-            {
-              type: "text",
-              name: "reportNo",
-              title: "Report No.",
-              readOnly: true,
-              description: "Auto-assigned on submission"
             },
             {
               type: "dropdown",
