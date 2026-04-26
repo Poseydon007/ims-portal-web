@@ -63,6 +63,12 @@ const SUBMISSION_REGISTERS: ImsDocument[] = FORMS_MANIFEST
   .filter((f) => !SUBMISSION_SKIP.has(f.formCode))
   .map((f) => {
     const url = FORMS_REGISTERS[f.formCode]?.fileUrl;
+    // Force read-only "preview" view even for editors. Google's /preview
+    // URL renders the sheet in viewer mode regardless of the visitor's
+    // Drive permission. HSE Manager / Admin can still click "Open in
+    // Sheets" inside the preview to switch to edit mode when they need
+    // to. This avoids accidental edits and keeps the audit trail clean.
+    const previewUrl = url ? url.replace(/\/edit(\?.*)?$/, "/preview") : undefined;
     return {
       code: f.registerCode,
       title: f.title + " — Submissions Register",
@@ -70,8 +76,8 @@ const SUBMISSION_REGISTERS: ImsDocument[] = FORMS_MANIFEST
       date: "Live",
       status: "approved" as const,
       slug: f.registerCode,
-      available: !!url,
-      driveUrl: url,
+      available: !!previewUrl,
+      driveUrl: previewUrl,
       format: "SHEET" as const,
       owner: FORM_REG_OWNER[f.category] ?? "COO",
     };
