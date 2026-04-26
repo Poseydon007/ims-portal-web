@@ -15,8 +15,8 @@ import {
 import { imsUsers } from "../../drizzle/schema";
 import { appendFormSubmission } from "../googleSheets";
 
-// Auto-append every submission to a per-form Google Sheet (the "register").
-// Sheet auto-created on first use under GOOGLE_DRIVE_FOLDER_ID.
+// Auto-append every submission to a per-form tab in the master register sheet.
+// Tab auto-created on first use; headers extend in place when new fields appear.
 // Non-blocking — Sheets failures don't break submission.
 async function syncToSheet(p: {
   formCode: string;
@@ -27,8 +27,8 @@ async function syncToSheet(p: {
   status: string;
   data: string;
 }): Promise<void> {
-  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_DRIVE_FOLDER_ID) {
-    console.warn("[Sheets] GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_DRIVE_FOLDER_ID not set — sheet sync disabled.");
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_REGISTER_SHEET_ID) {
+    console.warn("[Sheets] GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_REGISTER_SHEET_ID not set — sheet sync disabled.");
     return;
   }
   let fields: Record<string, unknown> = {};
@@ -211,7 +211,7 @@ export const formSubmissionsRouter = router({
         }).catch(err => console.error("[Sheets] sync failed:", err));
 
         // Email all supervisors and admins about the new submission
-        const portalUrl = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
+        const portalUrl = process.env.PORTAL_URL ?? "https://ims-portal.site";
         const reviewers = await db
           .select({ fullName: imsUsers.fullName, email: imsUsers.email })
           .from(imsUsers)
@@ -284,7 +284,7 @@ export const formSubmissionsRouter = router({
       }).catch(() => {});
 
       // Send email notifications based on the step
-      const portalUrl2 = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
+      const portalUrl2 = process.env.PORTAL_URL ?? "https://ims-portal.site";
       const approvedAt = new Date().toLocaleString("en-SA", { timeZone: "Asia/Riyadh" });
       const rptNo = submission.reportNumber ?? input.submissionId;
 
@@ -396,7 +396,7 @@ export const formSubmissionsRouter = router({
 
       // Email the original submitter about the return
       if (submission.submittedByUserId) {
-        const portalUrl3 = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
+        const portalUrl3 = process.env.PORTAL_URL ?? "https://ims-portal.site";
         const [submitter] = await db
           .select({ fullName: imsUsers.fullName, email: imsUsers.email })
           .from(imsUsers)
