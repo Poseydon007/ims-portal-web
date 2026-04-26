@@ -13,6 +13,49 @@ import {
   notifyClosed,
 } from "../sendpulseEmail";
 import { imsUsers } from "../../drizzle/schema";
+import { appendFormSubmission } from "../googleSheets";
+
+// Auto-append every submission to a per-form Google Sheet (the "register").
+// Sheet auto-created on first use under GOOGLE_DRIVE_FOLDER_ID.
+// Non-blocking — Sheets failures don't break submission.
+async function syncToSheet(p: {
+  formCode: string;
+  submissionId: string;
+  reportNumber: string;
+  submittedByName: string;
+  submittedAt: Date;
+  status: string;
+  data: string;
+}): Promise<void> {
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_DRIVE_FOLDER_ID) {
+    console.warn("[Sheets] GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_DRIVE_FOLDER_ID not set — sheet sync disabled.");
+    return;
+  }
+  let fields: Record<string, unknown> = {};
+  try { fields = JSON.parse(p.data) as Record<string, unknown>; } catch { /* ignore */ }
+  const titleCase = (s: string) =>
+    s.replace(/([A-Z])/g, " $1").replace(/^./, c => c.toUpperCase()).trim();
+  const stringify = (v: unknown): string => {
+    if (v == null) return "";
+    if (typeof v === "string" || typeof v === "number" || typeof v === "boolean") return String(v);
+    return JSON.stringify(v);
+  };
+  const dynamicKeys = Object.keys(fields).sort();
+  const headers = [
+    "Submission ID", "Report No.", "Submitted By", "Submitted At", "Status",
+    ...dynamicKeys.map(titleCase),
+  ];
+  const values = [
+    p.submissionId,
+    p.reportNumber ?? "",
+    p.submittedByName,
+    p.submittedAt.toISOString(),
+    p.status,
+    ...dynamicKeys.map(k => stringify(fields[k])),
+  ];
+  await appendFormSubmission(p.formCode, headers, values);
+  console.log(`[Sheets] Synced ${p.submissionId} → register for ${p.formCode}`);
+}
 
 // ── Workflow definition ──────────────────────────────────────────────────────
 // Step 1: Supervisor Review      (role: supervisor or admin)
@@ -155,6 +198,17 @@ export const formSubmissionsRouter = router({
           title:   `New Form Submission — ${input.formTitle ?? input.formCode}`,
           content: `Submitted by ${ctx.imsUser.fullName ?? ctx.imsUser.email}. Pending Supervisor Review.\nReport No: ${reportNumber}\nID: ${submissionId}`,
         }).catch(() => {/* non-blocking */});
+
+        // Append to per-form Google Sheet register (non-blocking).
+        syncToSheet({
+          formCode:        input.formCode,
+          submissionId,
+          reportNumber,
+          submittedByName: ctx.imsUser.fullName ?? ctx.imsUser.email,
+          submittedAt:     new Date(),
+          status:          "pending_supervisor_review",
+          data:            input.data,
+        }).catch(err => console.error("[Sheets] sync failed:", err));
 
         // Email all supervisors and admins about the new submission
         const portalUrl = process.env.PORTAL_URL ?? "https://ims.tru-east.com";
