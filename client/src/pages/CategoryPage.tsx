@@ -51,14 +51,17 @@ const CAT_COLORS: Record<string, { bg: string; color: string }> = {
 
 function FormatBadge({ format }: { format?: string }) {
   if (!format) return <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>;
-  const isXlsx = format === "XLSX";
+  // SHEET (live Google Sheet) and XLSX both render as spreadsheet badges,
+  // SHEET in a distinct teal so users can tell live registers apart from xlsx.
+  const isXlsx  = format === "XLSX";
+  const isSheet = format === "SHEET";
+  const isSpreadsheet = isXlsx || isSheet;
+  const bg    = isSheet ? "rgba(20,184,166,0.14)" : isXlsx ? "rgba(39,174,96,0.12)" : "rgba(52,152,219,0.12)";
+  const color = isSheet ? "#0f766e"               : isXlsx ? "#1e8449"               : "#1a6fa8";
   return (
     <span className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded"
-      style={{
-        backgroundColor: isXlsx ? "rgba(39,174,96,0.12)" : "rgba(52,152,219,0.12)",
-        color: isXlsx ? "#1e8449" : "#1a6fa8",
-      }}>
-      {isXlsx ? <FileSpreadsheet size={11} /> : <FileText size={11} />}
+      style={{ backgroundColor: bg, color }}>
+      {isSpreadsheet ? <FileSpreadsheet size={11} /> : <FileText size={11} />}
       {format}
     </span>
   );

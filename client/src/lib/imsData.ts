@@ -1,6 +1,13 @@
 // - IMS Document Portal - True East Mining Company -
 // Central data store for all document categories and document listings
 
+// Per-form Submission Registers — one Google Sheet per IMS form, populated
+// by create-registers.mjs and extended at runtime by formSubmissionsRouter.
+// Loaded as raw text + JSON.parse to defeat Rollup field-level tree-shaking
+// (otherwise registerCode/registerName would be stripped from the bundle).
+import formsManifestRaw from "@/data/forms-manifest.json?raw";
+import formsRegistersRaw from "@/data/forms-registers.json?raw";
+
 export interface DocCategory {
   code: string;
   name: string;
@@ -20,9 +27,55 @@ export interface ImsDocument {
   formUrl?: string; // if set, this document has a live digital form at this URL
   viewUrl?: string; // if set, this document has a live HTML view page at this URL
   driveUrl?: string; // if set, this document has a live file in Google Drive (admin/supervisor only)
-  format?: "XLSX" | "DOCX" | "PDF"; // file format for REG entries
+  format?: "XLSX" | "DOCX" | "PDF" | "SHEET"; // file format for REG entries
   owner?: string; // document owner/responsible role
 }
+
+type ManifestForm = {
+  formCode: string;
+  title: string;
+  revision: string;
+  category: string;
+  registerCode: string;
+  registerName: string;
+};
+type RegisterMapping = Record<string, { fileId: string; fileUrl: string }>;
+
+const FORMS_MANIFEST: ManifestForm[] = JSON.parse(formsManifestRaw);
+const FORMS_REGISTERS: RegisterMapping = JSON.parse(formsRegistersRaw);
+
+// Static reference page (no submissions) — excluded from per-form registers.
+const SUBMISSION_SKIP = new Set(["TE-IMS-FRM-HSE-016"]);
+
+// Owner per category — applied to per-form register entries below.
+const FORM_REG_OWNER: Record<string, string> = {
+  HSE:   "HSE Manager",
+  LOG:   "Operations Manager",
+  MAINT: "Maintenance Supervisor",
+  OPS:   "Operations Manager",
+  SEC:   "Security Manager",
+  SYS:   "COO",
+  TRN:   "HR / Training Manager",
+  REF:   "COO",
+};
+
+const SUBMISSION_REGISTERS: ImsDocument[] = FORMS_MANIFEST
+  .filter((f) => !SUBMISSION_SKIP.has(f.formCode))
+  .map((f) => {
+    const url = FORMS_REGISTERS[f.formCode]?.fileUrl;
+    return {
+      code: f.registerCode,
+      title: f.title + " — Submissions Register",
+      rev: "Rev" + f.revision,
+      date: "Live",
+      status: "approved" as const,
+      slug: f.registerCode,
+      available: !!url,
+      driveUrl: url,
+      format: "SHEET" as const,
+      owner: FORM_REG_OWNER[f.category] ?? "COO",
+    };
+  });
 
 export const categories: DocCategory[] = [
   {
@@ -42,8 +95,8 @@ export const categories: DocCategory[] = [
   {
     code: "REG",
     name: "Registers & Logs",
-    description: "Live registers, tracking logs, compliance records, and performance monitoring tools.",
-    count: 16,
+    description: "Live registers, tracking logs, compliance records, and performance monitoring tools. Per-form submission registers auto-update on every portal submission.",
+    count: 68,
     slug: "reg",
   },
   {
@@ -194,6 +247,8 @@ export const documentsByCategory: Record<string, ImsDocument[]> = {
     { code: "TE-IMS-REG-SYS-004", title: "Corrective Action Request Log", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-REG-SYS-004", available: false, driveUrl: "https://drive.google.com/open?id=1SoRd7yw17cTpXacyRM_n6RosKiB3C1bm", format: "XLSX", owner: "COO" },
     { code: "TE-IMS-REG-SYS-007", title: "Risk and Opportunity Register", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-REG-SYS-007", available: false, driveUrl: "https://drive.google.com/open?id=1owwhYbOCK2rYo8fQHokgXjMHupbn8M3v", format: "XLSX", owner: "COO" },
     { code: "TE-IMS-REG-TRN-001", title: "Training and Competence Matrix", rev: "Rev01", date: "-", status: "pending", slug: "TE-IMS-REG-TRN-001", available: false, driveUrl: "https://drive.google.com/open?id=1YUu_54FE-EynpXvnJvBQSjZ9yxCuKelu", format: "XLSX", owner: "HR / Training Manager" },
+    // ── Per-form Submission Registers (auto-populated, one per form) ───────
+    ...SUBMISSION_REGISTERS,
   ],
   sop: [
     { code: "TE-IMS-SOP-GEO-001", title: "Core Cutting and Handling SOP", rev: "Rev01", date: "10 Apr 2026", status: "approved", slug: "TE-IMS-SOP-GEO-001", available: true, viewUrl: "/docs/sop/TE-IMS-SOP-GEO-001" },
