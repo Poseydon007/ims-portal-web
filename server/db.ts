@@ -6,6 +6,8 @@ import {
   imsUsers, imsSessions,
   InsertImsUser, InsertImsSession, ImsUser,
   imsRegister, InsertImsRegisterEntry, ImsRegisterEntry,
+  magicLinkTokens,
+  InsertMagicLinkToken, MagicLinkToken,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -190,4 +192,27 @@ export async function bulkInsertRegisterEntries(entries: InsertImsRegisterEntry[
     inserted += batch.length;
   }
   return inserted;
+}
+
+// ════════════════════════════════════════════════════════════
+// Magic Link Tokens — passwordless sign-in for external roles
+// ════════════════════════════════════════════════════════════
+
+export async function createMagicLinkToken(data: InsertMagicLinkToken): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(magicLinkTokens).values(data);
+}
+
+export async function getMagicLinkToken(token: string): Promise<MagicLinkToken | null> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(magicLinkTokens).where(eq(magicLinkTokens.token, token)).limit(1);
+  return result[0] ?? null;
+}
+
+export async function markMagicLinkTokenUsed(token: string): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(magicLinkTokens).set({ usedAt: new Date() }).where(eq(magicLinkTokens.token, token));
 }

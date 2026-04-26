@@ -1,6 +1,9 @@
-// IMS Auth Router — email/password login, logout, me, user management
+// IMS Auth Router — email/password login, logout, me, user management,
+// plus passwordless magic-link sign-in for external roles (auditor / client).
 import { z } from "zod";
+import { randomBytes } from "node:crypto";
 import { parse as parseCookie } from "cookie";
+import { TRPCError } from "@trpc/server";
 import { router, publicProcedure, imsProtectedProcedure, imsAdminProcedure } from "../_core/trpc";
 import { getSessionCookieOptions } from "../_core/cookies";
 import {
@@ -11,13 +14,34 @@ import {
 } from "../imsAuth";
 import {
   getImsUserByEmail,
+  getImsUserById,
   createImsUser,
   getAllImsUsers,
   updateImsUser,
   updateImsUserLastSignedIn,
   deleteImsSession,
   deleteImsSessionsByUserId,
+  createMagicLinkToken,
+  getMagicLinkToken,
+  markMagicLinkTokenUsed,
 } from "../db";
+import { sendMagicLinkEmail } from "../sendpulseEmail";
+
+// External roles that may sign in via magic link.
+// Source of truth: shared/permissions.ts → EXTERNAL_READ_ONLY.
+// Hardcoded here to avoid cross-package import friction on the server.
+const MAGIC_LINK_ROLES = ["auditor", "client"] as const;
+type MagicLinkRole = typeof MAGIC_LINK_ROLES[number];
+
+function isMagicLinkRole(r: string): r is MagicLinkRole {
+  return (MAGIC_LINK_ROLES as readonly string[]).includes(r);
+}
+
+// Mask token for logs — never log the full hex token.
+function maskToken(t: string): string {
+  if (t.length < 12) return "****";
+  return `${t.slice(0, 6)}…${t.slice(-4)}`;
+}
 
 export const imsAuthRouter = router({
   // ── Login ──
@@ -203,5 +227,138 @@ export const imsAuthRouter = router({
       const newHash = await hashPassword(input.newPassword);
       await updateImsUser(user.id, { passwordHash: newHash });
       return { success: true };
+    }),
+
+  // ── Admin: Generate Magic Link (auditor / client only) ──
+  generateMagicLink: imsAdminProcedure
+    .input(z.object({
+      userId: z.number().int().positive(),
+      expiresInDays: z.number().int().min(1).max(90).default(30),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const target = await getImsUserById(input.userId);
+      if (!target) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+      if (!isMagicLinkRole(target.role)) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `Magic-link sign-in is only available for external roles (${MAGIC_LINK_ROLES.join(", ")}).`,
+        });
+      }
+      if (target.status !== "active") {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Cannot send magic link to an inactive user.",
+        });
+      }
+
+      const token = randomBytes(32).toString("hex"); // 64-char hex
+      const expiresAt = new Date(Date.now() + input.expiresInDays * 24 * 60 * 60 * 1000);
+
+      await createMagicLinkToken({
+        token,
+        userId: target.id,
+        expiresAt,
+        usedAt: null,
+        createdBy: ctx.imsUser.id,
+      });
+
+      const portalUrl = process.env.PORTAL_URL ?? "https://ims-portal.site";
+      const magicLink = `${portalUrl.replace(/\/$/, "")}/auth/magic?token=${token}`;
+
+      // Fire-and-forget email — log but never block on failure.
+      sendMagicLinkEmail({
+        to: target.email,
+        fullName: target.fullName,
+        magicLink,
+        expiresAt,
+      }).catch(err => {
+        console.warn(`[MagicLink] Email send failed for token ${maskToken(token)} → ${target.email}:`, err?.message ?? err);
+      });
+
+      console.log(`[MagicLink] Generated token ${maskToken(token)} for user #${target.id} (${target.role}) by admin #${ctx.imsUser.id}`);
+
+      return {
+        success: true as const,
+        magicLink, // admin-visible fallback if email fails
+        expiresAt,
+      };
+    }),
+
+  // ── Public: Redeem Magic Link → set ims_session cookie ──
+  // We use a tRPC mutation rather than a plain Express route because the
+  // existing imsAuth.login mutation already sets the session cookie via
+  // ctx.res.cookie(...) — keeping both flows symmetrical avoids duplicating
+  // cookie-option logic and lets the SPA reuse its tRPC client end-to-end.
+  redeemMagicLink: publicProcedure
+    .input(z.object({ token: z.string().regex(/^[a-f0-9]{64}$/i, "Invalid token format") }))
+    .mutation(async ({ input, ctx }) => {
+      const masked = maskToken(input.token);
+      const row = await getMagicLinkToken(input.token);
+      if (!row) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "This sign-in link is invalid." });
+      }
+
+      const now = new Date();
+      if (row.usedAt) {
+        throw new TRPCError({
+          code: "FORBIDDEN", // tRPC has no GONE; FORBIDDEN is the closest semantic
+          message: "This sign-in link has already been used. Please request a new one.",
+        });
+      }
+      if (new Date(row.expiresAt).getTime() < now.getTime()) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "This sign-in link has expired. Please request a new one.",
+        });
+      }
+
+      // Mark single-use BEFORE issuing the session — guarantees the row is
+      // burned even if downstream calls fail. (Race-tolerant: a second click
+      // will see usedAt set on the next read.)
+      await markMagicLinkTokenUsed(input.token);
+
+      const user = await getImsUserById(row.userId);
+      if (!user) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User account no longer exists." });
+      }
+      if (user.status !== "active") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Your account has been deactivated. Contact your administrator.",
+        });
+      }
+      // Defense in depth — only auditor/client can use magic links.
+      if (!isMagicLinkRole(user.role)) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Magic-link sign-in is not available for this account.",
+        });
+      }
+
+      const { token: sessionToken, expiresAt } = await createSessionToken(user);
+      await updateImsUserLastSignedIn(user.id);
+
+      const cookieOptions = getSessionCookieOptions(ctx.req);
+      ctx.res.cookie(IMS_COOKIE_NAME, sessionToken, {
+        ...cookieOptions,
+        maxAge: expiresAt.getTime() - Date.now(),
+      });
+
+      console.log(`[MagicLink] Redeemed token ${masked} → user #${user.id} (${user.role})`);
+
+      return {
+        success: true as const,
+        user: {
+          id: user.id,
+          email: user.email,
+          fullName: user.fullName,
+          employeeId: user.employeeId,
+          role: user.role,
+          department: user.department,
+          position: user.position,
+        },
+      };
     }),
 });

@@ -88,6 +88,28 @@ export default function UserManagement() {
     onError: (e) => toast.error(e.message),
   });
 
+  const generateMagicLink = trpc.imsAuth.generateMagicLink.useMutation({
+    onSuccess: (result) => {
+      // Show the link in the toast so the admin can copy it manually if email failed.
+      toast.success("Magic link sent!", {
+        description: result.magicLink,
+        duration: 12000,
+      });
+    },
+    onError: (e) => toast.error(e.message ?? "Failed to generate magic link"),
+  });
+
+  const isExternalRole = (role: string) => role === "auditor" || role === "client";
+
+  const handleSendMagicLink = (u: { id: number; fullName: string; email: string }) => {
+    const ok = window.confirm(
+      `Send a passwordless sign-in link to ${u.fullName} (${u.email})?\n\n` +
+      `The link will be emailed and is valid for 30 days, single-use.`
+    );
+    if (!ok) return;
+    generateMagicLink.mutate({ userId: u.id });
+  };
+
   // Redirect if not admin
   if (!loading && (!user || user.role !== "admin")) {
     return (
@@ -120,11 +142,23 @@ export default function UserManagement() {
 
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.email || !form.password || !form.fullName) {
-      toast.error("Email, password, and full name are required");
+    if (!form.email || !form.fullName) {
+      toast.error("Email and full name are required");
       return;
     }
-    createUser.mutate(form);
+    // External roles (auditor / client) sign in via magic link, so we auto-fill
+    // a random unguessable password to satisfy the server's password requirement.
+    // The password is never communicated to the user; magic links are the only
+    // documented entry path for these roles.
+    let payload = form;
+    if (isExternalRole(form.role)) {
+      const randomPw = `mlk_${Math.random().toString(36).slice(2)}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}`;
+      payload = { ...form, password: randomPw };
+    } else if (!form.password) {
+      toast.error("Password is required");
+      return;
+    }
+    createUser.mutate(payload);
   };
 
   const handleUpdate = (id: number) => {
@@ -190,27 +224,39 @@ export default function UserManagement() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-1" style={{ color: "#6b7a8d" }}>Password *</label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    value={form.password}
-                    onChange={(e) => setForm({ ...form, password: e.target.value })}
-                    className="w-full px-3 py-2 pr-14 rounded border text-sm"
-                    style={{ borderColor: "#dde3ec" }}
-                    placeholder="Min 6 characters"
-                  />
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    onClick={() => setShowPassword((s) => !s)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-xs px-1.5 py-0.5 rounded hover:bg-gray-100"
-                    style={{ color: "#6b7a8d" }}
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                <label className="block text-xs font-semibold mb-1" style={{ color: "#6b7a8d" }}>
+                  Password {isExternalRole(form.role) ? "" : "*"}
+                </label>
+                {isExternalRole(form.role) ? (
+                  <div
+                    className="px-3 py-2 rounded border text-xs"
+                    style={{ borderColor: "#f0d98a", backgroundColor: "#fffbf0", color: "#5a4a1a" }}
                   >
-                    {showPassword ? "Hide" : "Show"}
-                  </button>
-                </div>
+                    A magic link will be emailed instead of using a password.
+                    Use the <strong>"Send Link"</strong> button after creating the user.
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={form.password}
+                      onChange={(e) => setForm({ ...form, password: e.target.value })}
+                      className="w-full px-3 py-2 pr-14 rounded border text-sm"
+                      style={{ borderColor: "#dde3ec" }}
+                      placeholder="Min 6 characters"
+                    />
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      onClick={() => setShowPassword((s) => !s)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-xs px-1.5 py-0.5 rounded hover:bg-gray-100"
+                      style={{ color: "#6b7a8d" }}
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-1" style={{ color: "#6b7a8d" }}>Employee ID</label>
@@ -397,13 +443,30 @@ export default function UserManagement() {
                           {u.lastSignedIn ? new Date(u.lastSignedIn).toLocaleDateString() : "Never"}
                         </td>
                         <td className="px-4 py-2">
-                          <button
-                            onClick={() => { setEditingId(u.id); setEditForm({}); }}
-                            className="px-2 py-1 rounded text-xs font-bold"
-                            style={{ backgroundColor: "#e3f2fd", color: "#1565c0" }}
-                          >
-                            Edit
-                          </button>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => { setEditingId(u.id); setEditForm({}); }}
+                              className="px-2 py-1 rounded text-xs font-bold"
+                              style={{ backgroundColor: "#e3f2fd", color: "#1565c0" }}
+                            >
+                              Edit
+                            </button>
+                            {isExternalRole(u.role) && (
+                              <button
+                                onClick={() => handleSendMagicLink({ id: u.id, fullName: u.fullName, email: u.email })}
+                                disabled={generateMagicLink.isPending || u.status !== "active"}
+                                title={u.status !== "active" ? "User is inactive" : "Email a passwordless sign-in link"}
+                                className="px-2 py-1 rounded text-xs font-bold"
+                                style={{
+                                  backgroundColor: "#fff8e1",
+                                  color: "#8a6d1a",
+                                  opacity: (generateMagicLink.isPending || u.status !== "active") ? 0.5 : 1,
+                                }}
+                              >
+                                {generateMagicLink.isPending ? "Sending…" : "Send Link"}
+                              </button>
+                            )}
+                          </div>
                         </td>
                       </>
                     )}

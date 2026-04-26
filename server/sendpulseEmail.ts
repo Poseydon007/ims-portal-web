@@ -238,6 +238,44 @@ export async function notifyReturned(opts: {
   });
 }
 
+// ── Notification: Magic link sign-in for external roles (auditor / client) ───
+export async function sendMagicLinkEmail(opts: {
+  to: string;
+  fullName: string;
+  magicLink: string;
+  expiresAt: Date;
+}): Promise<boolean> {
+  const expiresAtRiyadh = opts.expiresAt.toLocaleString("en-GB", {
+    timeZone: "Asia/Riyadh",
+    year: "numeric", month: "short", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", hour12: false,
+  });
+
+  const html = baseHtml(
+    "Your IMS Portal Sign-In Link",
+    `<p>Hello <strong>${opts.fullName}</strong>,</p>
+    <p>Welcome to the True East Mining IMS Portal. Use the secure link below to sign in — no password required.</p>
+    <div style="text-align:center; margin: 24px 0;">
+      <a href="${opts.magicLink}" class="action-btn" style="background:#C49A28;color:#fff;font-size:14px;padding:12px 28px;">Sign In to IMS Portal →</a>
+    </div>
+    <table class="info-table">
+      <tr><td>Expires</td><td>${expiresAtRiyadh} (Asia/Riyadh)</td></tr>
+      <tr><td>Single-use</td><td>This link can be used only once.</td></tr>
+    </table>
+    <div class="notice"><strong>Security note:</strong> This link grants access to your IMS Portal account. Do not forward it. If you did not expect this email, please ignore it — no action is required.</div>
+    <p style="margin-top:18px; font-size:12px; color:#6b7a8d;">If the button doesn't work, copy and paste this URL into your browser:<br/><span style="word-break:break-all; color:#081C2E;">${opts.magicLink}</span></p>`
+  );
+
+  const text = `Hello ${opts.fullName},\n\nYour secure sign-in link for the True East Mining IMS Portal:\n\n${opts.magicLink}\n\nThis link is single-use and expires at ${expiresAtRiyadh} (Asia/Riyadh).\n\nIf you did not expect this email, please ignore it.`;
+
+  return sendEmail({
+    to: [{ name: opts.fullName, email: opts.to }],
+    subject: "[IMS] Your sign-in link for the True East IMS Portal",
+    htmlBody: html,
+    textBody: text,
+  });
+}
+
 // ── Notification: Submission fully closed ────────────────────────────────────
 export async function notifyClosed(opts: {
   submitterName: string;

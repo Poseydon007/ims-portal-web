@@ -167,3 +167,16 @@ export const trainingCompletions = mysqlTable("training_completions", {
 });
 export type TrainingCompletion = typeof trainingCompletions.$inferSelect;
 export type InsertTrainingCompletion = typeof trainingCompletions.$inferInsert;
+
+// ── Magic Link Tokens — passwordless sign-in for external roles (auditor/client) ──
+export const magicLinkTokens = mysqlTable("magic_link_tokens", {
+  id: int("id").autoincrement().primaryKey(),
+  token: varchar("token", { length: 64 }).notNull().unique(), // hex-encoded 32 random bytes
+  userId: int("userId").notNull(),                            // references imsUsers.id
+  expiresAt: timestamp("expiresAt").notNull(),
+  usedAt: timestamp("usedAt"),                                // single-use; set when redeemed
+  createdBy: int("createdBy"),                                // admin user who generated the link
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type MagicLinkToken = typeof magicLinkTokens.$inferSelect;
+export type InsertMagicLinkToken = typeof magicLinkTokens.$inferInsert;

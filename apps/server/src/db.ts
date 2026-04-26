@@ -6,6 +6,8 @@ import {
   imsUsers, imsSessions,
   InsertImsUser, InsertImsSession, ImsUser,
   imsRegister, InsertImsRegisterEntry, ImsRegisterEntry,
+  magicLinkTokens,
+  InsertMagicLinkToken, MagicLinkToken,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
