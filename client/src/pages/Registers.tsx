@@ -14,12 +14,14 @@ import {
   Filter,
   Eye,
 } from "lucide-react";
+import formsManifest from "@/data/forms-manifest.json";
+import formsRegisters from "@/data/forms-registers.json";
 
 interface RegisterEntry {
   code: string;
   title: string;
   rev: string;
-  format: "xlsx" | "docx";
+  format: "xlsx" | "docx" | "sheet";
   category: string;
   department: string;
   driveUrl: string;
@@ -27,7 +29,65 @@ interface RegisterEntry {
   owner?: string;
   standard?: string;
   purpose?: string;
+  /**
+   * Marks this entry as a per-form Submission Register (one Google Sheet
+   * per form, auto-populated via the IMS portal). Distinguishes them from
+   * the hand-curated aggregate registers above.
+   */
+  kind?: "aggregate" | "submission";
 }
+
+// ── Per-form Submission Registers ────────────────────────────────────────
+// Built dynamically from the forms manifest + the provisioned-files mapping
+// (forms-registers.json — populated by scripts/create-registers.mjs). Each
+// IMS form has its own dedicated Google Sheet; submissions append a row to
+// the matching file's "Submissions" tab.
+const SUBMISSION_REGISTER_SKIP = new Set(["TE-IMS-FRM-HSE-016"]); // static reference, no submissions
+
+// Map form category → register owner (single source of truth for both
+// aggregate and per-form rows). Uncategorized → COO.
+const CATEGORY_OWNER: Record<string, string> = {
+  HSE:   "HSE Manager",
+  LOG:   "Operations Manager",
+  MAINT: "Maintenance Supervisor",
+  OPS:   "Operations Manager",
+  SEC:   "Security Manager",
+  SYS:   "COO",
+  TRN:   "HR Manager",
+  REF:   "COO",
+};
+
+type ManifestForm = {
+  formCode: string;
+  title: string;
+  revision: string;
+  category: string;
+  registerCode: string;
+  registerName: string;
+  fieldKeys: string[];
+};
+
+type RegisterMappingEntry = { fileId: string; fileUrl: string };
+
+const REGISTER_MAPPING = formsRegisters as Record<string, RegisterMappingEntry>;
+
+const SUBMISSION_REGISTERS: RegisterEntry[] = (formsManifest as ManifestForm[])
+  .filter((f) => !SUBMISSION_REGISTER_SKIP.has(f.formCode))
+  .map((f) => {
+    const mapping = REGISTER_MAPPING[f.formCode];
+    return {
+      code: f.registerCode,
+      title: `${f.title} — Submissions Register`,
+      rev: `Rev${f.revision}`,
+      format: "sheet" as const,
+      category: f.category,
+      department: f.category,
+      driveUrl: mapping?.fileUrl ?? "",
+      owner: CATEGORY_OWNER[f.category] ?? "COO",
+      purpose: `Auto-populated submission log for ${f.formCode}. One row per submission via the IMS portal.`,
+      kind: "submission" as const,
+    };
+  });
 
 // All 12 confirmed spreadsheet registers from Google Drive (April 11, 2026)
 // Note: TE-IMS-REF-SYS-006 is a REF (Reference) file included as a key data register
@@ -194,26 +254,46 @@ const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string
   REF:   { bg: "#e8edf4", text: "#081C2E", border: "#b0bdd0" },
 };
 
-const CATEGORIES = ["All", "HSE", "SYS", "LOG", "MAINT", "TRN", "REF"];
+// Category colour fallback for form categories not in the original aggregate
+// palette (OPS, SEC). Reuses existing tones for visual consistency.
+CATEGORY_COLORS.OPS = CATEGORY_COLORS.OPS ?? { bg: "#e8f4f0", text: "#1a5c45", border: "#7ac4a8" };
+CATEGORY_COLORS.SEC = CATEGORY_COLORS.SEC ?? { bg: "#fde8e8", text: "#7a1a1a", border: "#f0a0a0" };
+
+const CATEGORIES = ["All", "HSE", "SYS", "LOG", "MAINT", "OPS", "SEC", "TRN", "REF"];
+const KINDS = ["All", "Aggregate", "Submission"] as const;
+type KindFilter = typeof KINDS[number];
+
+// Combined catalogue: hand-curated aggregate registers + per-form submission
+// registers from the manifest. Aggregates first so they keep their existing
+// position at the top of the table.
+const ALL_REGISTERS: RegisterEntry[] = [
+  ...REGISTERS.map((r) => ({ ...r, kind: "aggregate" as const })),
+  ...SUBMISSION_REGISTERS,
+];
 
 export default function Registers() {
   const { user, isAuthenticated } = useImsAuth();
   const [search, setSearch] = useState("");
   const [filterCat, setFilterCat] = useState("All");
+  const [filterKind, setFilterKind] = useState<KindFilter>("All");
   const [preview, setPreview] = useState<RegisterEntry | null>(null);
 
   const canOpenDrive = isAuthenticated && (user?.role === "admin" || user?.role === "supervisor");
 
-  const filtered = REGISTERS.filter((r) => {
+  const filtered = ALL_REGISTERS.filter((r) => {
     const matchSearch =
       r.code.toLowerCase().includes(search.toLowerCase()) ||
       r.title.toLowerCase().includes(search.toLowerCase());
     const matchCat = filterCat === "All" || r.category === filterCat;
-    return matchSearch && matchCat;
+    const matchKind =
+      filterKind === "All" ||
+      (filterKind === "Aggregate" && r.kind !== "submission") ||
+      (filterKind === "Submission" && r.kind === "submission");
+    return matchSearch && matchCat && matchKind;
   });
 
-  const xlsxCount = REGISTERS.filter(r => r.format === "xlsx").length;
-  const catCount = new Set(REGISTERS.map(r => r.category)).size;
+  const xlsxCount = ALL_REGISTERS.filter(r => r.format === "xlsx" || r.format === "sheet").length;
+  const catCount = new Set(ALL_REGISTERS.map(r => r.category)).size;
 
   return (
     <Layout>
@@ -245,7 +325,7 @@ export default function Registers() {
         <div style={{ borderTop: "1px solid rgba(196,154,40,0.2)" }}>
           <div className="container py-2 flex flex-wrap gap-6">
             {[
-              { value: REGISTERS.length, label: "Total Registers" },
+              { value: ALL_REGISTERS.length, label: "Total Registers" },
               { value: xlsxCount, label: "Spreadsheets" },
               { value: catCount, label: "Categories" },
               { value: "Rev01–03", label: "Revision Range" },
@@ -292,6 +372,27 @@ export default function Registers() {
                   }}
                 >
                   {c}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Kind filter (Aggregate vs per-form Submission registers) */}
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs text-gray-500 font-medium">Kind:</span>
+            <div className="flex gap-1 flex-wrap">
+              {KINDS.map(k => (
+                <button
+                  key={k}
+                  onClick={() => setFilterKind(k)}
+                  className="text-xs px-2 py-0.5 rounded font-medium transition-all"
+                  style={{
+                    backgroundColor: filterKind === k ? "#C49A28" : "#e8edf4",
+                    color: filterKind === k ? "white" : "#4a5568",
+                    border: filterKind === k ? "1px solid #C49A28" : "1px solid #dde3ec",
+                  }}
+                >
+                  {k}
                 </button>
               ))}
             </div>
@@ -375,6 +476,11 @@ export default function Registers() {
                             <FileSpreadsheet size={14} className="text-green-600" />
                             <span className="text-xs text-green-700 font-medium">XLSX</span>
                           </div>
+                        ) : reg.format === "sheet" ? (
+                          <div className="flex items-center justify-center gap-1">
+                            <FileSpreadsheet size={14} className="text-emerald-600" />
+                            <span className="text-xs text-emerald-700 font-medium">SHEET</span>
+                          </div>
                         ) : (
                           <div className="flex items-center justify-center gap-1">
                             <FileSpreadsheet size={14} className="text-blue-600" />
@@ -401,8 +507,10 @@ export default function Registers() {
                             Preview
                           </button>
 
-                          {/* Open in Drive — admin and supervisor only */}
-                          {canOpenDrive && (
+                          {/* Open in Drive — admin and supervisor only.
+                              Per-form submission registers without a
+                              provisioned fileId render as disabled. */}
+                          {canOpenDrive && (reg.driveUrl ? (
                             <a
                               href={reg.driveUrl}
                               target="_blank"
@@ -414,7 +522,15 @@ export default function Registers() {
                               <ExternalLink size={11} />
                               Open
                             </a>
-                          )}
+                          ) : (
+                            <span
+                              className="text-xs px-2.5 py-1 rounded font-medium flex items-center gap-1"
+                              style={{ backgroundColor: "#e8edf4", color: "#9ca3af", border: "1px solid #dde3ec" }}
+                              title="Not yet provisioned — run scripts/create-registers.mjs"
+                            >
+                              Pending
+                            </span>
+                          ))}
                         </div>
                       </td>
                     </tr>

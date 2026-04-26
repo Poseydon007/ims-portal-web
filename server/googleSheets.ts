@@ -1,14 +1,52 @@
 import { google } from "googleapis";
+import { readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 
-// Single master spreadsheet (owned by the user account, charged to their
-// 15GB free Drive quota). The service account adds one TAB per form code
-// — adding tabs to an existing sheet doesn't consume new file storage,
-// which sidesteps the service-account "quota exceeded" limitation.
-const SHEET_ID = process.env.GOOGLE_REGISTER_SHEET_ID!;
+// ─── Per-form register mapping ─────────────────────────────────────────────
+// We're migrating from one master sheet (with one tab per formCode) to one
+// dedicated spreadsheet file per form. The `forms-registers.json` mapping is
+// produced by scripts/create-registers.mjs after a one-time provisioning run.
+//
+// At runtime: for each formCode we look up the dedicated fileId from the
+// mapping. If a form isn't mapped (e.g. mapping file missing during a
+// transitional deploy), we fall back to the legacy master-sheet+tab path.
 
-// Initial column allocation when creating a new tab. Generous enough that
-// most forms never need a resize. Sheets is happy with 100 cols on free tier.
+type RegisterEntry = {
+  formCode: string;
+  registerCode: string;
+  fileId: string;
+  fileUrl: string;
+};
+
+function loadRegisterMapping(): Record<string, RegisterEntry> {
+  try {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const mappingPath = resolve(__dirname, "forms-registers.json");
+    if (!existsSync(mappingPath)) {
+      return {};
+    }
+    const raw = readFileSync(mappingPath, "utf8");
+    const parsed = JSON.parse(raw) as Record<string, RegisterEntry>;
+    return parsed ?? {};
+  } catch (e) {
+    console.warn("[Sheets] Failed to load forms-registers.json:", e);
+    return {};
+  }
+}
+
+const REGISTER_MAPPING: Record<string, RegisterEntry> = loadRegisterMapping();
+
+// Legacy master sheet — used as fallback for any formCode not yet in the
+// per-form mapping. Optional in per-form-only deployments.
+const MASTER_SHEET_ID = process.env.GOOGLE_REGISTER_SHEET_ID ?? "";
+
+// Initial column allocation when creating a new tab/sheet. Generous enough
+// that most forms never need a resize.
 const INITIAL_COLUMN_COUNT = 100;
+
+// Per-form sheets created by create-registers.mjs use this tab name.
+const PER_FORM_TAB_NAME = "Submissions";
 
 function getAuth() {
   const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -37,6 +75,7 @@ const DATA_FORMAT = {
 };
 
 type TabInfo = {
+  spreadsheetId: string;
   tabName: string;
   sheetId: number;
   columnCount: number;
@@ -44,40 +83,84 @@ type TabInfo = {
 };
 
 /**
- * Look up a tab in the master sheet, or create it if missing. Returns
- * sheet metadata + the current header row so callers can decide whether
- * to extend it.
+ * Per-form-mode lookup: open the dedicated spreadsheet for `formCode` and
+ * read the current header row from its "Submissions" tab.
  */
-async function getOrCreateTab(
-  formCode: string,
-  initialHeaders: string[]
-): Promise<TabInfo> {
+async function getPerFormTab(formCode: string): Promise<TabInfo | null> {
+  const entry = REGISTER_MAPPING[formCode];
+  if (!entry) return null;
+
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
   const meta = await sheets.spreadsheets.get({
-    spreadsheetId: SHEET_ID,
+    spreadsheetId: entry.fileId,
+    fields: "sheets(properties(sheetId,title,gridProperties(columnCount)))",
+  });
+  // Prefer a sheet literally named "Submissions"; fall back to first sheet.
+  const target =
+    meta.data.sheets?.find((s) => s.properties?.title === PER_FORM_TAB_NAME)
+    ?? meta.data.sheets?.[0];
+  if (!target?.properties || target.properties.sheetId == null) {
+    throw new Error(`Per-form sheet for ${formCode} (${entry.fileId}) has no usable tab`);
+  }
+  const tabName = target.properties.title ?? PER_FORM_TAB_NAME;
+
+  const headerRes = await sheets.spreadsheets.values.get({
+    spreadsheetId: entry.fileId,
+    range: `'${tabName}'!1:1`,
+  });
+  const existingHeaders = (headerRes.data.values?.[0] ?? []).map(String);
+
+  return {
+    spreadsheetId: entry.fileId,
+    tabName,
+    sheetId: target.properties.sheetId,
+    columnCount: target.properties.gridProperties?.columnCount ?? INITIAL_COLUMN_COUNT,
+    existingHeaders,
+  };
+}
+
+/**
+ * Legacy master-sheet+tab mode. Look up a tab in the master sheet, or create
+ * it if missing. Used only when a formCode is not present in the per-form
+ * mapping (graceful fallback during migration).
+ */
+async function getOrCreateLegacyTab(
+  formCode: string,
+  initialHeaders: string[]
+): Promise<TabInfo> {
+  if (!MASTER_SHEET_ID) {
+    throw new Error(
+      `No per-form mapping for ${formCode} and GOOGLE_REGISTER_SHEET_ID is unset — ` +
+      `cannot append. Run scripts/create-registers.mjs to provision a per-form sheet.`
+    );
+  }
+  const auth = getAuth();
+  const sheets = google.sheets({ version: "v4", auth });
+
+  const meta = await sheets.spreadsheets.get({
+    spreadsheetId: MASTER_SHEET_ID,
     fields: "sheets(properties(sheetId,title,gridProperties(columnCount)))",
   });
   const existing = meta.data.sheets?.find(
     (s) => s.properties?.title === formCode
   );
 
-  if (existing && existing.properties?.sheetId !== undefined && existing.properties?.sheetId !== null) {
+  if (existing && existing.properties?.sheetId != null) {
     const sheetId = existing.properties.sheetId;
     const columnCount = existing.properties.gridProperties?.columnCount ?? INITIAL_COLUMN_COUNT;
-    // Read row 1 to learn the actual on-sheet header order
     const headerRes = await sheets.spreadsheets.values.get({
-      spreadsheetId: SHEET_ID,
+      spreadsheetId: MASTER_SHEET_ID,
       range: `'${formCode}'!1:1`,
     });
     const existingHeaders = (headerRes.data.values?.[0] ?? []).map(String);
-    return { tabName: formCode, sheetId, columnCount, existingHeaders };
+    return { spreadsheetId: MASTER_SHEET_ID, tabName: formCode, sheetId, columnCount, existingHeaders };
   }
 
-  // Create the tab with a generous column allocation
+  // Create a new tab.
   const addRes = await sheets.spreadsheets.batchUpdate({
-    spreadsheetId: SHEET_ID,
+    spreadsheetId: MASTER_SHEET_ID,
     requestBody: {
       requests: [
         {
@@ -96,15 +179,16 @@ async function getOrCreateTab(
     },
   });
   const newSheetId = addRes.data.replies?.[0]?.addSheet?.properties?.sheetId;
-  const newColumnCount = addRes.data.replies?.[0]?.addSheet?.properties?.gridProperties?.columnCount
+  const newColumnCount =
+    addRes.data.replies?.[0]?.addSheet?.properties?.gridProperties?.columnCount
     ?? Math.max(INITIAL_COLUMN_COUNT, initialHeaders.length);
-  if (newSheetId === undefined || newSheetId === null) {
+  if (newSheetId == null) {
     throw new Error("Failed to obtain sheetId for newly added tab");
   }
 
-  // Write the styled header row
+  // Write the styled header row.
   await sheets.spreadsheets.batchUpdate({
-    spreadsheetId: SHEET_ID,
+    spreadsheetId: MASTER_SHEET_ID,
     requestBody: {
       requests: [
         {
@@ -132,6 +216,7 @@ async function getOrCreateTab(
   });
 
   return {
+    spreadsheetId: MASTER_SHEET_ID,
     tabName: formCode,
     sheetId: newSheetId,
     columnCount: newColumnCount,
@@ -140,27 +225,38 @@ async function getOrCreateTab(
 }
 
 /**
+ * Resolve the target tab for a formCode — per-form file if mapped, else
+ * legacy master-sheet tab.
+ */
+async function resolveTab(formCode: string, initialHeaders: string[]): Promise<TabInfo> {
+  if (REGISTER_MAPPING[formCode]) {
+    const tab = await getPerFormTab(formCode);
+    if (tab) return tab;
+  }
+  console.warn(`[Sheets] No per-form mapping for ${formCode} — falling back to legacy master sheet`);
+  return getOrCreateLegacyTab(formCode, initialHeaders);
+}
+
+/**
  * Public alias preserved for backward compatibility.
+ * In per-form mode this returns the dedicated spreadsheetId; in legacy mode
+ * it returns the master sheet ID.
  */
 export async function getOrCreateSheet(
   formCode: string,
   headers: string[]
 ): Promise<string> {
-  await getOrCreateTab(formCode, headers);
-  return SHEET_ID;
+  const tab = await resolveTab(formCode, headers);
+  return tab.spreadsheetId;
 }
 
 /**
- * Append one row of data to the form's register tab.
+ * Append one row of data to the form's register.
  *
- * Adaptive: if the incoming headers contain keys not yet present in the
- * tab's header row, those columns are added in place (extending the grid
- * if needed). The data row is reordered to match the tab's actual column
- * order so values always land under the right header.
- *
- * Uses appendCells with explicit DEFAULT formatting (white bg, black
- * non-bold text) to prevent the appended row from inheriting the header
- * row's navy/white styling.
+ * Adaptive: if the incoming headers contain keys not yet present, those
+ * columns are added in place (extending the grid if needed). The data row
+ * is reordered to match the on-sheet column order so values always land
+ * under the right header.
  */
 export async function appendFormSubmission(
   formCode: string,
@@ -174,16 +270,49 @@ export async function appendFormSubmission(
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
-  const tab = await getOrCreateTab(formCode, headers);
-  const sheetId = tab.sheetId;
+  const tab = await resolveTab(formCode, headers);
+  const { spreadsheetId, sheetId, tabName } = tab;
   let workingHeaders = tab.existingHeaders;
   let workingColumnCount = tab.columnCount;
+
+  // If the destination has never had a header row written (empty per-form
+  // sheet, edge case), seed it from the incoming headers.
+  if (workingHeaders.length === 0 && headers.length > 0) {
+    await sheets.spreadsheets.batchUpdate({
+      spreadsheetId,
+      requestBody: {
+        requests: [
+          {
+            updateCells: {
+              range: {
+                sheetId,
+                startRowIndex: 0,
+                startColumnIndex: 0,
+                endRowIndex: 1,
+                endColumnIndex: headers.length,
+              },
+              rows: [
+                {
+                  values: headers.map((h) => ({
+                    userEnteredValue: { stringValue: h },
+                    userEnteredFormat: HEADER_FORMAT,
+                  })),
+                },
+              ],
+              fields: "userEnteredValue,userEnteredFormat",
+            },
+          },
+        ],
+      },
+    });
+    workingHeaders = [...headers];
+  }
 
   // Build a lookup of incoming key → value
   const incoming = new Map<string, string | number | null>();
   for (let i = 0; i < headers.length; i++) incoming.set(headers[i]!, values[i] ?? null);
 
-  // Find headers in the incoming set that aren't on the sheet yet
+  // Find headers in the incoming set that aren't on the sheet yet.
   const newKeys = headers.filter((h) => !workingHeaders.includes(h));
 
   const requests: object[] = [];
@@ -191,7 +320,6 @@ export async function appendFormSubmission(
   if (newKeys.length > 0) {
     const finalColumnCount = workingHeaders.length + newKeys.length;
 
-    // Widen the grid if needed
     if (finalColumnCount > workingColumnCount) {
       requests.push({
         appendDimension: {
@@ -203,7 +331,6 @@ export async function appendFormSubmission(
       workingColumnCount = finalColumnCount;
     }
 
-    // Append the new headers to row 1
     requests.push({
       updateCells: {
         range: {
@@ -248,20 +375,33 @@ export async function appendFormSubmission(
   });
 
   await sheets.spreadsheets.batchUpdate({
-    spreadsheetId: SHEET_ID,
+    spreadsheetId,
     requestBody: { requests },
   });
 
   return {
-    spreadsheetId: SHEET_ID,
-    tabName: tab.tabName,
-    updatedRange: `'${tab.tabName}'`,
+    spreadsheetId,
+    tabName,
+    updatedRange: `'${tabName}'`,
   };
 }
 
 /**
- * Get the Google Sheets URL for the master register.
+ * Get the Google Sheets URL for a form's register. In per-form mode this is
+ * the dedicated spreadsheet URL; in legacy mode it's the master sheet URL.
  */
-export function getSheetUrl(_formCode?: string): string {
-  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}`;
+export function getSheetUrl(formCode?: string): string {
+  if (formCode && REGISTER_MAPPING[formCode]) {
+    return REGISTER_MAPPING[formCode].fileUrl;
+  }
+  return `https://docs.google.com/spreadsheets/d/${MASTER_SHEET_ID}`;
+}
+
+/**
+ * Returns the per-form spreadsheet URL for `formCode`, or null if the form
+ * is not in the per-form mapping. Used by the REG page to render "Open"
+ * links to each form's dedicated submission register.
+ */
+export function getRegisterUrl(formCode: string): string | null {
+  return REGISTER_MAPPING[formCode]?.fileUrl ?? null;
 }
