@@ -19,6 +19,12 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },
+  json: {
+    // Stringify large JSON imports so Rollup can't tree-shake fields
+    // accessed only through type-cast iterators (e.g. forms-manifest.json
+    // accessed as `(formsManifest as ManifestForm[]).map(f => f.registerCode)`).
+    stringify: true,
+  },
   server: {
     host: true,
     allowedHosts: ["localhost", "127.0.0.1"],
