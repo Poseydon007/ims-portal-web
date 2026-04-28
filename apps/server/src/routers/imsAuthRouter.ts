@@ -21,6 +21,7 @@ import {
   updateImsUserLastSignedIn,
   deleteImsSession,
   deleteImsSessionsByUserId,
+  deleteImsUser,
   getDb,
 } from "../db";
 import { magicLinkTokens } from "../../drizzle/schema";
@@ -203,6 +204,17 @@ export const imsAuthRouter = router({
         await deleteImsSessionsByUserId(input.id);
       }
 
+      return { success: true };
+    }),
+
+  // ── Admin: Delete a user (cannot delete self) ──
+  deleteUser: imsAdminProcedure
+    .input(z.object({ userId: z.number().int() }))
+    .mutation(async ({ input, ctx }) => {
+      if (input.userId === ctx.imsUser.id) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "You cannot delete your own account." });
+      }
+      await deleteImsUser(input.userId);
       return { success: true };
     }),
 

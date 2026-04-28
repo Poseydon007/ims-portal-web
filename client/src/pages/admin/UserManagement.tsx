@@ -70,6 +70,10 @@ export default function UserManagement() {
         setShowCreate(false);
         setForm(emptyForm);
         refetch();
+        // Auto-send magic link for external roles immediately after creation
+        if (result.user && (result.user.role === "auditor" || result.user.role === "client")) {
+          generateMagicLink.mutate({ userId: result.user.id });
+        }
       } else {
         toast.error(result.error ?? "Failed to create user");
       }
@@ -91,13 +95,20 @@ export default function UserManagement() {
 
   const generateMagicLink = trpc.imsAuth.generateMagicLink.useMutation({
     onSuccess: (result) => {
-      // Show the link in the toast so the admin can copy it manually if email failed.
       toast.success("Magic link sent!", {
         description: result.magicLink,
-        duration: 12000,
+        duration: 15000,
       });
     },
     onError: (e) => toast.error(e.message ?? "Failed to generate magic link"),
+  });
+
+  const deleteUser = trpc.imsAuth.deleteUser.useMutation({
+    onSuccess: () => {
+      toast.success("User deleted");
+      refetch();
+    },
+    onError: (e) => toast.error(e.message ?? "Failed to delete user"),
   });
 
   const isExternalRole = (role: string) => role === "auditor" || role === "client";
@@ -465,6 +476,20 @@ export default function UserManagement() {
                                 }}
                               >
                                 {generateMagicLink.isPending ? "Sending…" : "Send Link"}
+                              </button>
+                            )}
+                            {u.role !== "admin" && (
+                              <button
+                                onClick={() => {
+                                  if (window.confirm(`Delete ${u.fullName} (${u.email})? This cannot be undone.`)) {
+                                    deleteUser.mutate({ userId: u.id });
+                                  }
+                                }}
+                                disabled={deleteUser.isPending}
+                                className="px-2 py-1 rounded text-xs font-bold"
+                                style={{ backgroundColor: "#fdecea", color: "#b71c1c" }}
+                              >
+                                Delete
                               </button>
                             )}
                           </div>

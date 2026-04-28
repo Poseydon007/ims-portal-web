@@ -131,6 +131,14 @@ export async function deleteImsSessionsByUserId(userId: number) {
   await db.delete(imsSessions).where(eq(imsSessions.userId, userId));
 }
 
+export async function deleteImsUser(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(imsSessions).where(eq(imsSessions.userId, id));
+  await db.delete(magicLinkTokens).where(eq(magicLinkTokens.userId, id));
+  await db.delete(imsUsers).where(eq(imsUsers.id, id));
+}
+
 // ════════════════════════════════════════════════════════════
 // IMS Master Document Register
 // ════════════════════════════════════════════════════════════
