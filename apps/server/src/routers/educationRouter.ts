@@ -1,4 +1,5 @@
 import { imsProtectedProcedure, router } from "../_core/trpc";
+import { TRPCError } from "@trpc/server";
 import { getDb } from "../db";
 import { trainingCompletions } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
@@ -17,6 +18,13 @@ export const educationRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
+      const { role } = ctx.imsUser;
+      if (role === 'client' || role === 'auditor') {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'Training completions are for internal staff only.',
+        });
+      }
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       const userId = ctx.imsUser.id;

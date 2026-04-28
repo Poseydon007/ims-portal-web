@@ -1,5 +1,8 @@
 // IMS Auth Router — email/password login, logout, me, user management
+import { randomBytes } from "crypto";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
+import { and, eq, isNull, gt } from "drizzle-orm";
 import { parse as parseCookie } from "cookie";
 import { router, publicProcedure, imsProtectedProcedure, imsAdminProcedure } from "../_core/trpc";
 import { getSessionCookieOptions } from "../_core/cookies";
@@ -11,13 +14,17 @@ import {
 } from "../imsAuth";
 import {
   getImsUserByEmail,
+  getImsUserById,
   createImsUser,
   getAllImsUsers,
   updateImsUser,
   updateImsUserLastSignedIn,
   deleteImsSession,
   deleteImsSessionsByUserId,
+  getDb,
 } from "../db";
+import { magicLinkTokens } from "../../drizzle/schema";
+import { sendMagicLinkEmail } from "../sendpulseEmail";
 
 export const imsAuthRouter = router({
   // ── Login ──
@@ -101,10 +108,11 @@ export const imsAuthRouter = router({
   createUser: imsAdminProcedure
     .input(z.object({
       email: z.string().email(),
-      password: z.string().min(6, "Password must be at least 6 characters"),
+      // password is optional for auditor/client (they sign in via magic link only)
+      password: z.string().min(6, "Password must be at least 6 characters").optional(),
       fullName: z.string().min(1),
       employeeId: z.string().optional(),
-      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker"]),
+      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker", "auditor", "client"]),
       department: z.string().optional(),
       position: z.string().optional(),
     }))
@@ -115,7 +123,18 @@ export const imsAuthRouter = router({
         return { success: false, error: "A user with this email already exists" };
       }
 
-      const passwordHash = await hashPassword(input.password);
+      const isMagicLinkRole = input.role === "auditor" || input.role === "client";
+
+      if (!isMagicLinkRole && !input.password) {
+        return { success: false, error: "Password is required for this role" };
+      }
+
+      // For auditor/client: generate an unusable password hash so the NOT NULL column stays satisfied.
+      // Nobody knows the plaintext — these users authenticate exclusively via magic link.
+      const passwordHash = isMagicLinkRole && !input.password
+        ? await hashPassword(randomBytes(32).toString("hex"))
+        : await hashPassword(input.password!);
+
       const user = await createImsUser({
         email: input.email.toLowerCase(),
         passwordHash,
@@ -161,7 +180,7 @@ export const imsAuthRouter = router({
       id: z.number(),
       fullName: z.string().min(1).optional(),
       employeeId: z.string().optional(),
-      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker"]).optional(),
+      role: z.enum(["admin", "hse_manager", "supervisor", "field_worker", "auditor", "client"]).optional(),
       department: z.string().optional(),
       position: z.string().optional(),
       status: z.enum(["active", "inactive"]).optional(),
@@ -203,5 +222,116 @@ export const imsAuthRouter = router({
       const newHash = await hashPassword(input.newPassword);
       await updateImsUser(user.id, { passwordHash: newHash });
       return { success: true };
+    }),
+
+  // ── Admin: Generate & email a magic sign-in link (auditor/client only) ──
+  generateMagicLink: imsAdminProcedure
+    .input(z.object({ userId: z.number().int() }))
+    .mutation(async ({ input }) => {
+      const target = await getImsUserById(input.userId);
+      if (!target) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+      if (target.role !== "auditor" && target.role !== "client") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Magic links are only for auditor or client roles" });
+      }
+      if (target.status !== "active") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Cannot send a magic link to an inactive user" });
+      }
+
+      const token = randomBytes(32).toString("hex"); // 64 hex chars
+      const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Delete any existing unused tokens for this user (cleanup)
+      await db.delete(magicLinkTokens)
+        .where(and(eq(magicLinkTokens.userId, input.userId), isNull(magicLinkTokens.usedAt)));
+
+      // Insert new token
+      await db.insert(magicLinkTokens).values({
+        token,
+        userId: input.userId,
+        expiresAt,
+      });
+
+      const portalUrl = process.env.PORTAL_URL ?? "https://ims-portal.site";
+      const magicLink = `${portalUrl}/auth/magic?token=${token}`;
+
+      // Send email — non-blocking: if it fails the admin still gets the link back
+      sendMagicLinkEmail({
+        to: target.email,
+        fullName: target.fullName,
+        magicLink,
+        expiresAt,
+      }).catch((err: unknown) => {
+        console.error("[generateMagicLink] Email send failed:", err instanceof Error ? err.message : err);
+      });
+
+      return { magicLink };
+    }),
+
+  // ── Public: Redeem a magic link token and open a session ──
+  redeemMagicLink: publicProcedure
+    .input(z.object({ token: z.string().min(1).max(64) }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Find valid, unused, non-expired token
+      const now = new Date();
+      const rows = await db.select().from(magicLinkTokens)
+        .where(
+          and(
+            eq(magicLinkTokens.token, input.token),
+            isNull(magicLinkTokens.usedAt),
+            gt(magicLinkTokens.expiresAt, now),
+          )
+        )
+        .limit(1);
+
+      if (rows.length === 0) {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid or expired sign-in link." });
+      }
+
+      const linkRow = rows[0];
+
+      // Mark token as used
+      await db.update(magicLinkTokens)
+        .set({ usedAt: now })
+        .where(eq(magicLinkTokens.id, linkRow.id));
+
+      // Fetch user
+      const user = await getImsUserById(linkRow.userId);
+      if (!user || user.status !== "active") {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid or expired sign-in link." });
+      }
+
+      // Update last signed in
+      await updateImsUserLastSignedIn(user.id);
+
+      // Create session token (JWT + DB row) — same as login mutation
+      const { token: sessionToken, expiresAt } = await createSessionToken(user);
+
+      // Set session cookie — same name, flags, and expiry as login
+      const cookieOptions = getSessionCookieOptions(ctx.req);
+      ctx.res.cookie(IMS_COOKIE_NAME, sessionToken, {
+        ...cookieOptions,
+        maxAge: expiresAt.getTime() - Date.now(),
+      });
+
+      return {
+        success: true,
+        user: {
+          id: user.id,
+          email: user.email,
+          fullName: user.fullName,
+          employeeId: user.employeeId,
+          role: user.role,
+          department: user.department,
+          position: user.position,
+        },
+      };
     }),
 });

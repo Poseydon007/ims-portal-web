@@ -3,7 +3,7 @@ import { imsProtectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "../db";
 import { formResponses, approvalSteps } from "../../drizzle/schema";
-import { eq, desc, and, like, sql } from "drizzle-orm";
+import { eq, desc, and, like, sql, inArray } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
 import {
   notifyNewSubmission,
@@ -538,23 +538,37 @@ export const formSubmissionsRouter = router({
 
       if (actionableStatuses.length === 0) return [];
 
-      const rows = await db
-        .select()
-        .from(formResponses)
-        .orderBy(desc(formResponses.submittedAt));
+      let rows;
+      if (actorRole === "supervisor" && ctx.imsUser.department) {
+        rows = await db
+          .select()
+          .from(formResponses)
+          .where(and(
+            inArray(formResponses.status, actionableStatuses),
+            sql`JSON_UNQUOTE(JSON_EXTRACT(${formResponses.responseData}, '$.department')) = ${ctx.imsUser.department}`,
+          ))
+          .orderBy(desc(formResponses.submittedAt));
+      } else if (actorRole === "supervisor" && !ctx.imsUser.department) {
+        // Supervisor with no department set — return empty rather than all records
+        return [];
+      } else {
+        rows = await db
+          .select()
+          .from(formResponses)
+          .where(inArray(formResponses.status, actionableStatuses))
+          .orderBy(desc(formResponses.submittedAt));
+      }
 
-      return rows
-        .filter(r => actionableStatuses.includes(r.status))
-        .map(r => ({
-          submissionId:    r.submissionId,
-          reportNumber:    r.reportNumber,
-          formCode:        r.formCode,
-          formTitle:       r.formTitle,
-          status:          r.status,
-          currentStep:     r.currentStep,
-          submittedByName: r.submittedByName,
-          submittedAt:     r.submittedAt,
-        }));
+      return rows.map(r => ({
+        submissionId:    r.submissionId,
+        reportNumber:    r.reportNumber,
+        formCode:        r.formCode,
+        formTitle:       r.formTitle,
+        status:          r.status,
+        currentStep:     r.currentStep,
+        submittedByName: r.submittedByName,
+        submittedAt:     r.submittedAt,
+      }));
     }),
 
   // ── List all submissions (admin view) ─────────────────────────────────────
@@ -582,15 +596,50 @@ export const formSubmissionsRouter = router({
     }),
 
   listAll: imsProtectedProcedure.query(async ({ ctx }) => {
-    if (ctx.imsUser.role !== "admin") {
-      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
+    const role = ctx.imsUser.role;
+
+    // field_worker and client have no access to the submissions list
+    if (role === "field_worker" || role === "client") {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Access denied." });
     }
+
     const db = await getDb();
     if (!db) return [];
+
+    // supervisor sees only their department's submissions (by responseData.department)
+    // or submissions they personally filed; return empty if no department is set
+    if (role === "supervisor") {
+      if (!ctx.imsUser.department) return [];
+
+      const rows = await db
+        .select()
+        .from(formResponses)
+        .where(sql`
+          JSON_UNQUOTE(JSON_EXTRACT(${formResponses.responseData}, '$.department')) = ${ctx.imsUser.department}
+          OR ${formResponses.submittedByUserId} = ${ctx.imsUser.id}
+        `)
+        .orderBy(desc(formResponses.submittedAt));
+
+      return rows.map(r => ({
+        submissionId:    r.submissionId,
+        reportNumber:    r.reportNumber,
+        formCode:        r.formCode,
+        formTitle:       r.formTitle,
+        status:          r.status,
+        submittedByName: r.submittedByName,
+        submittedAt:     r.submittedAt,
+        isReadOnly:      false,
+      }));
+    }
+
+    // admin, hse_manager, auditor — full list
     const rows = await db
       .select()
       .from(formResponses)
       .orderBy(desc(formResponses.submittedAt));
+
+    const isReadOnly = role === "auditor";
+
     return rows.map(r => ({
       submissionId:    r.submissionId,
       reportNumber:    r.reportNumber,
@@ -599,6 +648,7 @@ export const formSubmissionsRouter = router({
       status:          r.status,
       submittedByName: r.submittedByName,
       submittedAt:     r.submittedAt,
+      isReadOnly,
     }));
   }),
 
