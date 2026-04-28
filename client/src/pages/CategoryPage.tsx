@@ -70,7 +70,7 @@ function FormatBadge({ format }: { format?: string }) {
 }
 
 // Rich REG category view
-function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenDrive: boolean }) {
+function RegCategoryView({ docs, canOpenDrive, canViewRegister }: { docs: ImsDocument[]; canOpenDrive: boolean; canViewRegister: boolean }) {
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState("All");
 
@@ -173,7 +173,7 @@ function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenD
                     <span className="te-code text-xs font-mono" style={{ color: "#081C2E" }}>{doc.code}</span>
                   </td>
                   <td className="px-4 py-3">
-                    {canOpenDrive && doc.driveUrl ? (
+                    {(canOpenDrive || canViewRegister) && doc.driveUrl ? (
                       <a
                         href={doc.driveUrl}
                         target="_blank"
@@ -214,6 +214,17 @@ function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenD
                         <ExternalLink size={11} />
                         Open
                       </a>
+                    ) : canViewRegister && doc.driveUrl ? (
+                      <a
+                        href={doc.driveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded transition-colors whitespace-nowrap hover:opacity-80"
+                        style={{ border: "1.5px solid #081C2E", color: "#081C2E", backgroundColor: "transparent" }}
+                      >
+                        <ExternalLink size={11} />
+                        View
+                      </a>
                     ) : (
                       <span className="text-xs" style={{ color: "#c0c8d4" }}>—</span>
                     )}
@@ -234,7 +245,9 @@ function RegCategoryView({ docs, canOpenDrive }: { docs: ImsDocument[]; canOpenD
 
       <p className="text-xs mt-3" style={{ color: "#8a9ab0" }}>
         {canOpenDrive
-          ? "Click any title or the Open button to access the live file in Google Drive."
+          ? "Click any title or the Open button to access the live file in Google Drive (edit access)."
+          : canViewRegister
+          ? "Click any title or the View button to open the register in read-only mode."
           : "Contact your supervisor or administrator to access register files."}
       </p>
     </div>
@@ -247,9 +260,10 @@ export default function CategoryPage() {
   const docs = documentsByCategory[slug ?? ""] ?? [];
   const { user, isAuthenticated } = useImsAuth();
   const role = (user?.role ?? "field_worker") as Role;
-  // "Open in Drive" / Edit register button: only admin + hse_manager get the
-  // editable Drive link. Everyone else sees the preview-only behavior.
   const canOpenDrive = isAuthenticated && can.editRegister(role);
+  // Auditors + internal staff can view registers read-only via the Drive link
+  // (sheets are shared "anyone with link → reader").
+  const canViewRegister = isAuthenticated && role !== "client";
 
   // Client redirect: FRM and REG are out of scope for clients. Bounce home with toast.
   const [, navigate] = useLocation();
@@ -307,7 +321,7 @@ export default function CategoryPage() {
 
       {/* REG gets rich view; all other categories get standard table */}
       {slug === "reg" ? (
-        <RegCategoryView docs={docs} canOpenDrive={canOpenDrive} />
+        <RegCategoryView docs={docs} canOpenDrive={canOpenDrive} canViewRegister={canViewRegister} />
       ) : (
         <div className="container py-8">
           <div className="flex items-center justify-between mb-4">
