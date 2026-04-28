@@ -30,8 +30,8 @@ const MAPPING_PATH       = resolve(__dirname, "..", "server", "forms-registers.j
 // access in Drive; all other users keep view-only via the "anyone with
 // link → reader" permission set during create-registers.mjs.
 const EDITORS = [
-  "melo.j@sifa-sa.com",      // HSE Manager
-  "markitekturee@gmail.com", // Admin (real Gmail; melo.j@tru-east.com has no Drive account)
+  "melo.j@sifa-sa.com",  // HSE Manager
+  "melo.j@tru-east.com", // Admin
 ];
 
 if (!existsSync(OAUTH_CLIENT_PATH)) {
