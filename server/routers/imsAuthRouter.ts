@@ -21,6 +21,7 @@ import {
   updateImsUserLastSignedIn,
   deleteImsSession,
   deleteImsSessionsByUserId,
+  deleteImsUser,
   createMagicLinkToken,
   getMagicLinkToken,
   markMagicLinkTokenUsed,
@@ -125,7 +126,7 @@ export const imsAuthRouter = router({
   createUser: imsAdminProcedure
     .input(z.object({
       email: z.string().email(),
-      password: z.string().min(6, "Password must be at least 6 characters"),
+      password: z.string().min(6, "Password must be at least 6 characters").optional(),
       fullName: z.string().min(1),
       employeeId: z.string().optional(),
       role: z.enum(["admin", "hse_manager", "supervisor", "field_worker", "auditor", "client"]),
@@ -133,13 +134,20 @@ export const imsAuthRouter = router({
       position: z.string().optional(),
     }))
     .mutation(async ({ input }) => {
-      // Check if email already exists
       const existing = await getImsUserByEmail(input.email.toLowerCase());
       if (existing) {
         return { success: false, error: "A user with this email already exists" };
       }
 
-      const passwordHash = await hashPassword(input.password);
+      const isMagicLinkOnlyRole = input.role === "auditor" || input.role === "client";
+      if (!isMagicLinkOnlyRole && !input.password) {
+        return { success: false, error: "Password is required for this role" };
+      }
+
+      const passwordHash = isMagicLinkOnlyRole && !input.password
+        ? await hashPassword(randomBytes(32).toString("hex"))
+        : await hashPassword(input.password!);
+
       const user = await createImsUser({
         email: input.email.toLowerCase(),
         passwordHash,
@@ -208,6 +216,17 @@ export const imsAuthRouter = router({
         await deleteImsSessionsByUserId(input.id);
       }
 
+      return { success: true };
+    }),
+
+  // ── Admin: Delete User (cannot delete self) ──
+  deleteUser: imsAdminProcedure
+    .input(z.object({ userId: z.number().int() }))
+    .mutation(async ({ input, ctx }) => {
+      if (input.userId === ctx.imsUser.id) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "You cannot delete your own account." });
+      }
+      await deleteImsUser(input.userId);
       return { success: true };
     }),
 

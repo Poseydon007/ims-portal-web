@@ -96,6 +96,14 @@ export async function updateImsUser(id: number, data: Partial<Pick<ImsUser, "ful
   await db.update(imsUsers).set(data).where(eq(imsUsers.id, id));
 }
 
+export async function deleteImsUser(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(imsSessions).where(eq(imsSessions.userId, id));
+  await db.delete(magicLinkTokens).where(eq(magicLinkTokens.userId, id));
+  await db.delete(imsUsers).where(eq(imsUsers.id, id));
+}
+
 export async function updateImsUserLastSignedIn(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
