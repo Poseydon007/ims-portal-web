@@ -13,6 +13,7 @@ import { z } from "zod";
 import { imsAuthRouter } from "./routers/imsAuthRouter";
 import { formSubmissionsRouter } from "./routers/formSubmissionsRouter";
 import { educationRouter } from "./routers/educationRouter";
+import { hrRouter } from "./routers/hrRouter";
 
 const _appRouterBase = router({
   system: systemRouter,
@@ -154,6 +155,7 @@ export const appRouter = router({
   ..._appRouterBase._def.record,
   register: registerRouter,
   education: educationRouter,
+  hr: hrRouter,
 });
 
 export type AppRouter = typeof appRouter;

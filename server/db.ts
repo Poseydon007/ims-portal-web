@@ -90,7 +90,7 @@ export async function getAllImsUsers(): Promise<ImsUser[]> {
   return db.select().from(imsUsers).orderBy(desc(imsUsers.createdAt));
 }
 
-export async function updateImsUser(id: number, data: Partial<Pick<ImsUser, "fullName" | "employeeId" | "role" | "department" | "status" | "passwordHash">>) {
+export async function updateImsUser(id: number, data: Partial<Pick<ImsUser, "fullName" | "employeeId" | "role" | "department" | "status" | "passwordHash" | "hrEmployeeUuid">>) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.update(imsUsers).set(data).where(eq(imsUsers.id, id));

@@ -32,6 +32,7 @@ export const imsUsers = mysqlTable("ims_users", {
   department: varchar("department", { length: 128 }),
   position: varchar("position", { length: 128 }),
   status: mysqlEnum("status", ["active", "inactive"]).default("active").notNull(),
+  hrEmployeeUuid: varchar("hrEmployeeUuid", { length: 36 }),   // links to HR Service — query HR API, never duplicate data
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn"),

@@ -377,7 +377,22 @@ export const imsAuthRouter = router({
           role: user.role,
           department: user.department,
           position: user.position,
+          hrEmployeeUuid: user.hrEmployeeUuid,
         },
       };
+    }),
+
+  // ── Admin: link an IMS user to their HR Service record ──
+  // Sets hrEmployeeUuid on the ims_users row. After this, the IMS portal
+  // will fetch live HR data (name, dept, title, photo) from the HR Service
+  // instead of relying solely on the local IMS copy.
+  linkHrEmployee: imsAdminProcedure
+    .input(z.object({
+      userId: z.number().int().positive(),
+      hrEmployeeUuid: z.string().uuid().nullable(),
+    }))
+    .mutation(async ({ input }) => {
+      await updateImsUser(input.userId, { hrEmployeeUuid: input.hrEmployeeUuid ?? undefined });
+      return { success: true as const };
     }),
 });
