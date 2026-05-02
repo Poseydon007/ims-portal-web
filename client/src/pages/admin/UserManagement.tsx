@@ -10,21 +10,23 @@ const NAVY = "#081C2E";
 const GOLD = "#C49A28";
 
 const ROLE_LABELS: Record<string, string> = {
-  admin: "Admin",
-  hse_manager: "HSE Manager",
-  supervisor: "Supervisor",
-  field_worker: "User",
-  auditor: "Auditor",
-  client: "Client",
+  admin:          "Admin",
+  top_management: "Top Management",
+  hse_manager:    "HSE Manager",
+  supervisor:     "Supervisor",
+  field_worker:   "Field Worker",
+  auditor:        "Auditor",
+  client:         "Client",
 };
 
 const ROLE_COLORS: Record<string, { backgroundColor: string; color: string }> = {
-  admin:        { backgroundColor: "#fce4ec", color: "#c62828" },
-  hse_manager:  { backgroundColor: "#fff3e0", color: "#e65100" },
-  supervisor:   { backgroundColor: "#e3f2fd", color: "#1565c0" },
-  field_worker: { backgroundColor: "#e8f5e9", color: "#2e7d32" },
-  auditor:      { backgroundColor: "#f3e8ff", color: "#6b21a8" },
-  client:       { backgroundColor: "#e0f2fe", color: "#075985" },
+  admin:          { backgroundColor: "#fce4ec", color: "#c62828" },
+  top_management: { backgroundColor: "#fdf4e7", color: "#92400e" },
+  hse_manager:    { backgroundColor: "#fff3e0", color: "#e65100" },
+  supervisor:     { backgroundColor: "#e3f2fd", color: "#1565c0" },
+  field_worker:   { backgroundColor: "#e8f5e9", color: "#2e7d32" },
+  auditor:        { backgroundColor: "#f3e8ff", color: "#6b21a8" },
+  client:         { backgroundColor: "#e0f2fe", color: "#075985" },
 };
 
 const STATUS_COLORS: Record<string, { backgroundColor: string; color: string }> = {
@@ -37,7 +39,7 @@ type CreateForm = {
   password: string;
   fullName: string;
   employeeId: string;
-  role: "admin" | "hse_manager" | "supervisor" | "field_worker" | "auditor" | "client";
+  role: "admin" | "top_management" | "hse_manager" | "supervisor" | "field_worker" | "auditor" | "client";
   department: string;
 };
 
@@ -111,7 +113,8 @@ export default function UserManagement() {
     onError: (e) => toast.error(e.message ?? "Failed to delete user"),
   });
 
-  const isExternalRole = (role: string) => role === "auditor" || role === "client";
+  // Roles that sign in via magic link (no password set)
+  const isExternalRole = (role: string) => role === "auditor" || role === "client" || role === "top_management";
 
   const handleSendMagicLink = (u: { id: number; fullName: string; email: string }) => {
     const ok = window.confirm(
@@ -289,9 +292,10 @@ export default function UserManagement() {
                   className="w-full px-3 py-2 rounded border text-sm"
                   style={{ borderColor: "#dde3ec" }}
                 >
-                  <option value="field_worker">User (basic)</option>
+                  <option value="field_worker">Field Worker</option>
                   <option value="supervisor">Supervisor</option>
                   <option value="hse_manager">HSE Manager</option>
+                  <option value="top_management">Top Management — view all, no edits</option>
                   <option value="admin">Admin</option>
                   <option value="auditor">Auditor (read-only)</option>
                   <option value="client">Client (tour-only)</option>
@@ -382,9 +386,10 @@ export default function UserManagement() {
                             className="px-2 py-1 rounded border text-xs"
                             style={{ borderColor: "#dde3ec" }}
                           >
-                            <option value="field_worker">User (basic)</option>
+                            <option value="field_worker">Field Worker</option>
                             <option value="supervisor">Supervisor</option>
                             <option value="hse_manager">HSE Manager</option>
+                            <option value="top_management">Top Management</option>
                             <option value="admin">Admin</option>
                             <option value="auditor">Auditor</option>
                             <option value="client">Client</option>
@@ -478,7 +483,7 @@ export default function UserManagement() {
                                 {generateMagicLink.isPending ? "Sending…" : "Send Link"}
                               </button>
                             )}
-                            {u.role !== "admin" && (
+                            {u.role !== "admin" && u.role !== "top_management" && (
                               <button
                                 onClick={() => {
                                   if (window.confirm(`Delete ${u.fullName} (${u.email})? This cannot be undone.`)) {

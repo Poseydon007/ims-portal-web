@@ -7,6 +7,7 @@
 
 export type Role =
   | "admin"
+  | "top_management"
   | "hse_manager"
   | "supervisor"
   | "field_worker"
@@ -15,6 +16,7 @@ export type Role =
 
 export const ALL_ROLES: Role[] = [
   "admin",
+  "top_management",
   "hse_manager",
   "supervisor",
   "field_worker",
@@ -24,6 +26,10 @@ export const ALL_ROLES: Role[] = [
 
 // Roles that fill out & submit forms (internal staff doing real work).
 export const INTERNAL_STAFF: Role[] = ["admin", "hse_manager", "supervisor", "field_worker"];
+
+// Roles with full read visibility but no write/delete/approve.
+// top_management: board / C-suite — sees everything, changes nothing.
+export const READ_ONLY_MANAGEMENT: Role[] = ["top_management"];
 
 // Roles with no write privileges anywhere — external read-only personas.
 export const EXTERNAL_READ_ONLY: Role[] = ["auditor", "client"];
@@ -35,68 +41,67 @@ export const EXTERNAL_READ_ONLY: Role[] = ["auditor", "client"];
 
 export const can = {
   // Documents (POL/PROC/SOP/PLN/REF) — full body
-  viewDocs:        (r: Role) => r !== "client",          // client sees tour previews only
+  viewDocs:        (r: Role) => r !== "client",
 
   // Education
-  browseEducation:    (r: Role) => true,                 // everyone — client gets tour mode
-  consumeEducation:   (r: Role) => r !== "client",       // watch full videos / read full PDFs
+  browseEducation:    (r: Role) => true,
+  consumeEducation:   (r: Role) => r !== "client",
   takeQuiz:           (r: Role) => INTERNAL_STAFF.includes(r),
-  viewOwnTraining:    (r: Role) => INTERNAL_STAFF.includes(r),
-  viewTeamTraining:   (r: Role) => r === "admin" || r === "hse_manager" || r === "supervisor" || r === "auditor",
-  assignTraining:     (r: Role) => r === "admin" || r === "hse_manager",
-  manageEducation:    (r: Role) => r === "admin" || r === "hse_manager",
+  viewOwnTraining:    (r: Role) => INTERNAL_STAFF.includes(r) || r === "top_management",
+  viewTeamTraining:   (r: Role) => r === "admin" || r === "top_management" || r === "hse_manager" || r === "supervisor" || r === "auditor",
+  assignTraining:     (r: Role) => r === "admin" || r === "hse_manager",            // write — top_management excluded
+  manageEducation:    (r: Role) => r === "admin" || r === "hse_manager",            // write — top_management excluded
 
   // Forms
   viewFormCatalog: (r: Role) => r !== "client",
-  submitForm:      (r: Role) => INTERNAL_STAFF.includes(r),
+  submitForm:      (r: Role) => INTERNAL_STAFF.includes(r),                         // write — top_management excluded
 
   // Submissions
-  viewOwnSubmissions: (r: Role) => INTERNAL_STAFF.includes(r),
-  viewAllSubmissions: (r: Role) => r === "admin" || r === "hse_manager" || r === "auditor",
-  viewDeptSubmissions:(r: Role) => r === "supervisor",   // own department only
+  viewOwnSubmissions: (r: Role) => INTERNAL_STAFF.includes(r) || r === "top_management",
+  viewAllSubmissions: (r: Role) => r === "admin" || r === "top_management" || r === "hse_manager" || r === "auditor",
+  viewDeptSubmissions:(r: Role) => r === "supervisor",
 
-  // Approvals
+  // Approvals — top_management can VIEW the approval trail but cannot act
   approveStep1: (r: Role) => r === "supervisor" || r === "hse_manager" || r === "admin",
   approveStep2: (r: Role) => r === "hse_manager" || r === "admin",
   approveStep3: (r: Role) => r === "admin",
 
   // Registers
-  openRegister:        (r: Role) => true,                // everyone gets the preview link
-  editRegister:        (r: Role) => r === "admin" || r === "hse_manager",
+  openRegister:        (r: Role) => true,
+  editRegister:        (r: Role) => r === "admin" || r === "hse_manager",           // write — top_management excluded
 
-  // Exports
-  exportOwn:  (r: Role) => INTERNAL_STAFF.includes(r),
-  exportDept: (r: Role) => r === "supervisor" || r === "hse_manager" || r === "admin",
-  exportAll:  (r: Role) => r === "admin" || r === "hse_manager",
+  // Exports — top_management can export everything (read-only action)
+  exportOwn:  (r: Role) => INTERNAL_STAFF.includes(r) || r === "top_management",
+  exportDept: (r: Role) => r === "supervisor" || r === "hse_manager" || r === "admin" || r === "top_management",
+  exportAll:  (r: Role) => r === "admin" || r === "hse_manager" || r === "top_management",
 
-  // Admin
+  // Admin — top_management cannot manage users or settings
   manageUsers:    (r: Role) => r === "admin",
   manageSettings: (r: Role) => r === "admin",
 
-  // Composite UI helpers — derived from the primitives above.
-  // Use these for nav-tab gating; use the primitives for in-page action gating.
-  seeApprovalsTab:   (r: Role) => r === "supervisor" || r === "hse_manager" || r === "admin",
-  // Auditor needs read-only access to the all-submissions table; supervisor
-  // sees a department-scoped variant; admin + hse_manager see everything.
+  // Composite UI helpers
+  seeApprovalsTab:   (r: Role) => r === "supervisor" || r === "hse_manager" || r === "admin" || r === "top_management",
   seeSubmissionsTab: (r: Role) =>
-    r === "admin" || r === "hse_manager" || r === "auditor" || r === "supervisor",
+    r === "admin" || r === "top_management" || r === "hse_manager" || r === "auditor" || r === "supervisor",
 };
 
 // ── Display helpers ─────────────────────────────────────────────────────────
 
 export const ROLE_LABEL: Record<Role, string> = {
-  admin:        "Admin",
-  hse_manager:  "HSE Manager",
-  supervisor:   "Supervisor",
-  field_worker: "User",          // surfaced as "User Basic" in some contexts
-  auditor:      "Auditor",
-  client:       "Client",
+  admin:          "Admin",
+  top_management: "Top Management",
+  hse_manager:    "HSE Manager",
+  supervisor:     "Supervisor",
+  field_worker:   "Field Worker",
+  auditor:        "Auditor",
+  client:         "Client",
 };
 
 // Roles an admin can create from the user-management UI. Order matters —
 // most senior first.
 export const ASSIGNABLE_ROLES: Role[] = [
   "admin",
+  "top_management",
   "hse_manager",
   "supervisor",
   "field_worker",

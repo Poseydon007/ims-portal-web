@@ -28,7 +28,7 @@ export const imsUsers = mysqlTable("ims_users", {
   passwordHash: text("passwordHash").notNull(),
   fullName: varchar("fullName", { length: 255 }).notNull(),
   employeeId: varchar("employeeId", { length: 64 }),
-  role: mysqlEnum("role", ["admin", "hse_manager", "supervisor", "field_worker", "auditor", "client"]).default("field_worker").notNull(),
+  role: mysqlEnum("role", ["admin", "top_management", "hse_manager", "supervisor", "field_worker", "auditor", "client"]).default("field_worker").notNull(),
   department: varchar("department", { length: 128 }),
   position: varchar("position", { length: 128 }),
   status: mysqlEnum("status", ["active", "inactive"]).default("active").notNull(),
