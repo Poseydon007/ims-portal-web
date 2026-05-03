@@ -180,13 +180,13 @@ export function TopNav() {
 
           {/* User info + sign out — below portal label */}
           {!loading && isAuthenticated && user ? (
-            <div className="flex items-center gap-2 mt-1.5">
+            <div className="flex items-center justify-between gap-3 mt-1.5 w-full">
               <div className="text-left">
                 <div className="text-white text-xs font-semibold leading-tight">
                   {user.fullName}
                 </div>
-                {/* Role-tag pill — visible to user themselves; useful for QA */}
-                <div className="mt-0.5 flex justify-end">
+                {/* Role-tag pill */}
+                <div className="mt-0.5">
                   <span
                     className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-[1px] rounded"
                     style={{ backgroundColor: "rgba(196,154,40,0.18)", color: "#C49A28", border: "1px solid rgba(196,154,40,0.35)" }}
@@ -198,7 +198,7 @@ export function TopNav() {
               </div>
               <button
                 onClick={handleLogout}
-                className="text-xs font-semibold px-2 py-0.5 rounded transition-colors hover:bg-white/10"
+                className="text-xs font-semibold px-2 py-0.5 rounded transition-colors hover:bg-white/10 flex-shrink-0"
                 style={{ color: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.15)" }}
               >
                 Sign Out
