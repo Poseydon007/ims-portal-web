@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Response Procedures Manual — True East Mining Company</title>
+<style>
+:root{
+  --navy:#0B1D33;--navy2:#152A45;--navy3:#1E3A5F;
+  --gold:#D4A843;--gold2:#E8C96A;
+  --red:#dc2626;--red2:#ef4444;--red3:#fee2e2;
+  --orange:#ea580c;--orange2:#fff7ed;
+  --green:#16a34a;--green2:#dcfce7;
+  --blue:#1d4ed8;--blue2:#dbeafe;
+  --teal:#2EAAAA;
+  --cream:#F5F0E8;--bg:#FAF8F5;
+  --txt:#2C2C2C;--txt2:#6B6B6B;--txt3:#999;
+  --hd:Georgia,'Times New Roman',serif;
+  --bd:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --cd:Consolas,'Courier New',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--bd);color:var(--txt);background:var(--bg);line-height:1.7;overflow-x:hidden}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:1000;width:0;transition:width .1s}
+
+/* SIDE NAV */
+.sidenav{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:.7rem;opacity:0;transition:opacity .4s}
+.sidenav.on{opacity:1}
+.sidenav a{width:10px;height:10px;border-radius:50%;background:rgba(11,29,51,.2);display:block;transition:all .3s;text-decoration:none}
+.sidenav a.on{background:var(--red);box-shadow:0 0 10px rgba(220,38,38,.5);transform:scale(1.4)}
+
+/* ANIMATIONS */
+[data-anim]{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+[data-anim].show{opacity:1;transform:translateY(0)}
+[data-anim="left"]{transform:translateX(-40px)}
+[data-anim="left"].show{transform:translateX(0)}
+[data-anim="right"]{transform:translateX(40px)}
+[data-anim="right"].show{transform:translateX(0)}
+[data-anim="scale"]{transform:scale(.9)}
+[data-anim="scale"].show{transform:scale(1)}
+.delay1{transition-delay:.1s}.delay2{transition-delay:.2s}.delay3{transition-delay:.3s}.delay4{transition-delay:.4s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 40%,rgba(220,38,38,.1) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 60%,rgba(212,168,67,.06) 0%,transparent 50%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;animation:gshift 20s linear infinite}
+@keyframes gshift{to{background-position:60px 60px}}
+.dot{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:0;animation:dotf 8s ease-in-out infinite}
+.dot:nth-child(3){left:15%;top:20%;animation-duration:7s;background:var(--gold)}
+.dot:nth-child(4){left:75%;top:30%;animation-delay:1.5s;animation-duration:9s}
+.dot:nth-child(5){left:40%;top:70%;animation-delay:3s;animation-duration:6s;background:var(--gold)}
+.dot:nth-child(6){left:85%;top:60%;animation-delay:.8s;animation-duration:8s}
+.dot:nth-child(7){left:25%;top:80%;animation-delay:2.2s;animation-duration:10s;background:var(--gold)}
+.dot:nth-child(8){left:60%;top:15%;animation-delay:4s;animation-duration:7.5s}
+@keyframes dotf{0%,100%{opacity:0;transform:translateY(0) scale(1)}20%{opacity:.6}50%{opacity:.2;transform:translateY(-40px) scale(1.5)}80%{opacity:.4}}
+.hero-c{text-align:center;color:#fff;z-index:2;padding:2rem;max-width:860px}
+.hero-logo{margin-bottom:2rem;animation:fu 1s .1s both}
+.hero-logo img{height:54px;opacity:.92}
+.hero-tag{display:inline-flex;align-items:center;gap:.7rem;padding:.4rem 1.4rem;border:1px solid var(--red);border-radius:30px;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:2rem;animation:fu 1s .3s both}
+.hero-tag::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.4}}
+.hero-c h1{font-family:var(--hd);font-size:clamp(2.6rem,5.5vw,4.4rem);font-weight:900;line-height:1.08;margin-bottom:1.6rem;animation:fu 1.2s .5s both}
+.hero-c h1 em{font-style:normal;display:block;background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.1rem;font-weight:300;color:rgba(255,255,255,.6);max-width:580px;margin:0 auto 1.5rem;line-height:1.7;animation:fu 1s .8s both}
+.hero-meta{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;animation:fu 1s .9s both}
+.hero-meta-item{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.hero-meta-item span{display:block;font-size:.85rem;color:var(--gold);margin-top:.2rem;letter-spacing:0;text-transform:none;font-weight:500}
+.hero-scroll{animation:bounce 2s 2s infinite,fu 1s 1.2s both;color:rgba(255,255,255,.3);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.hero-scroll svg{display:block;margin:.6rem auto 0;width:22px;height:22px;stroke:rgba(255,255,255,.3);fill:none}
+@keyframes fu{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}60%{transform:translateY(-4px)}}
+
+/* CRITICAL BANNER */
+.critical-banner{background:var(--red);color:#fff;padding:1.2rem 2rem;text-align:center}
+.critical-banner-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.critical-banner strong{font-size:1rem;font-weight:800;letter-spacing:.04em}
+.critical-banner p{font-size:.88rem;opacity:.9}
+
+/* SECTION COMMON */
+.sec{padding:5rem 2rem 4rem;max-width:900px;margin:0 auto}
+.sec-tag{font-family:var(--hd);font-size:.82rem;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+.sec-tag::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.sec-tag.red{color:var(--red)}
+.sec-tag.red::after{background:linear-gradient(90deg,var(--red),transparent)}
+.sec h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.15;color:var(--navy);margin-bottom:1rem}
+.sec-lead{font-size:1.05rem;font-weight:300;color:var(--txt2);line-height:1.8;max-width:680px}
+
+/* EMERGENCY CONTACTS */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:2.5rem auto;padding:0 2rem}
+.contact-card{border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.contact-card:hover{transform:translateY(-5px);box-shadow:0 18px 50px rgba(0,0,0,.12)}
+.contact-card.emergency{background:linear-gradient(145deg,var(--red),#b91c1c)}
+.contact-card.civil{background:linear-gradient(145deg,#1d4ed8,#1e40af)}
+.contact-card.medical{background:linear-gradient(145deg,#16a34a,#15803d)}
+.contact-card.site{background:linear-gradient(145deg,var(--navy),var(--navy3))}
+.contact-card.police{background:linear-gradient(145deg,#7c3aed,#6d28d9)}
+.contact-card.env{background:linear-gradient(145deg,var(--teal),#0e7490)}
+.contact-hd{padding:1.4rem 1.6rem;color:#fff}
+.contact-hd-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:.3rem}
+.contact-number{font-family:var(--hd);font-size:2.4rem;font-weight:900;line-height:1;margin-bottom:.3rem}
+.contact-name{font-size:.88rem;font-weight:600;opacity:.85}
+.contact-bd{background:#fff;padding:1rem 1.4rem;border:1px solid #eee;border-top:none;border-radius:0 0 16px 16px}
+.contact-desc{font-size:.78rem;color:var(--txt2);line-height:1.5}
+
+/* SCENARIO CARDS */
+.scenarios{max-width:900px;margin:0 auto;padding:0 2rem}
+.scenario{border-radius:16px;overflow:hidden;margin-bottom:2rem;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:box-shadow .3s}
+.scenario:hover{box-shadow:0 8px 32px rgba(0,0,0,.1)}
+.scenario-hd{padding:1.6rem 2rem;display:flex;align-items:center;gap:1.2rem;cursor:pointer;user-select:none}
+.scenario-hd.fire{background:linear-gradient(135deg,#7f1d1d,#dc2626)}
+.scenario-hd.medical{background:linear-gradient(135deg,#14532d,#16a34a)}
+.scenario-hd.chemical{background:linear-gradient(135deg,#713f12,#d97706)}
+.scenario-hd.vehicle{background:linear-gradient(135deg,#1e3a5f,#2563eb)}
+.scenario-hd.structural{background:linear-gradient(135deg,#3b0764,#7c3aed)}
+.scenario-hd.missing{background:linear-gradient(135deg,#0c4a6e,#0284c7)}
+.scenario-hd.weather{background:linear-gradient(135deg,#164e63,#0e7490)}
+.scenario-icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.5rem}
+.scenario-title{flex:1}
+.scenario-title h3{font-family:var(--hd);font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.scenario-title p{font-size:.78rem;color:rgba(255,255,255,.65);font-weight:500}
+.scenario-chevron{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.scenario-chevron svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5}
+.scenario.open .scenario-chevron{transform:rotate(180deg)}
+.scenario-body{display:none;background:#fff;border:1px solid #eee;border-top:none;border-radius:0 0 16px 16px}
+.scenario.open .scenario-body{display:block}
+.scenario-inner{padding:2rem}
+.step-list{list-style:none;counter-reset:steps}
+.step-list li{counter-increment:steps;display:flex;gap:1rem;padding:.9rem 0;border-bottom:1px solid #f3f3f3;align-items:flex-start}
+.step-list li:last-child{border-bottom:none}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.step-num.red{background:var(--red)}
+.step-num.gold{background:var(--gold);color:var(--navy)}
+.step-text{flex:1;font-size:.9rem;color:var(--txt);line-height:1.6}
+.step-text strong{color:var(--navy);display:block;margin-bottom:.15rem}
+.alert-box{border-radius:10px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;align-items:flex-start}
+.alert-box.critical{background:#fef2f2;border-left:4px solid var(--red)}
+.alert-box.warning{background:#fffbeb;border-left:4px solid var(--gold)}
+.alert-box.info{background:#eff6ff;border-left:4px solid var(--blue)}
+.alert-box.success{background:#f0fdf4;border-left:4px solid var(--green)}
+.alert-icon{font-size:1.2rem;flex-shrink:0;margin-top:.05rem}
+.alert-text{font-size:.85rem;line-height:1.6;color:var(--txt2)}
+.alert-text strong{color:var(--txt);display:block;margin-bottom:.2rem}
+.scene-sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.sub-panel{background:#f9f9f9;border-radius:10px;padding:1.2rem}
+.sub-panel h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:.8rem}
+.sub-panel ul{list-style:none}
+.sub-panel li{font-size:.82rem;color:var(--txt2);padding:.3rem 0 .3rem 1.2rem;position:relative;line-height:1.5}
+.sub-panel li::before{content:'→';position:absolute;left:0;color:var(--gold);font-weight:700;font-size:.75rem}
+
+/* EVACUATION SECTION */
+.evac-steps{max-width:900px;margin:2rem auto;padding:0 2rem}
+.evac-step{display:flex;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid #eee;align-items:flex-start}
+.evac-step:last-child{border-bottom:none}
+.evac-num{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--hd);font-size:1.4rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.evac-num.red{background:var(--red)}
+.evac-content h4{font-family:var(--hd);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.evac-content p{font-size:.9rem;color:var(--txt2);line-height:1.7}
+.evac-content .tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:4px;margin-bottom:.5rem}
+.tag-critical{background:#fee2e2;color:#991b1b}
+.tag-mandatory{background:#fef9c3;color:#713f12}
+.tag-process{background:#e0f2fe;color:#075985}
+
+/* MUSTER PROTOCOL */
+.muster-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:2rem auto;padding:0 2rem}
+.muster-card{background:#fff;border-radius:14px;padding:2rem;border:1px solid #eee;transition:transform .3s,box-shadow .3s}
+.muster-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.muster-card-ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.5rem}
+.muster-card h3{font-family:var(--hd);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.8rem}
+.muster-card ul{list-style:none}
+.muster-card li{font-size:.85rem;color:var(--txt2);padding:.4rem 0;border-bottom:1px solid #f5f5f5;line-height:1.5;padding-left:1.2rem;position:relative}
+.muster-card li:last-child{border-bottom:none}
+.muster-card li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:.78rem}
+
+/* FIRST AID */
+.firstaid-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:900px;margin:2rem auto;padding:0 2rem}
+.fa-card{border-radius:14px;overflow:hidden;border:1px solid #eee}
+.fa-card-hd{padding:1.2rem 1.5rem;color:#fff}
+.fa-card-hd.cpr{background:linear-gradient(135deg,#dc2626,#991b1b)}
+.fa-card-hd.wound{background:linear-gradient(135deg,#d97706,#92400e)}
+.fa-card-hd.shock{background:linear-gradient(135deg,#7c3aed,#4c1d95)}
+.fa-card-hd.heat{background:linear-gradient(135deg,#0284c7,#075985)}
+.fa-card-hd h3{font-family:var(--hd);font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+.fa-card-hd p{font-size:.75rem;opacity:.7}
+.fa-card-body{background:#fff;padding:1.4rem 1.5rem}
+.fa-steps{list-style:none;counter-reset:fa}
+.fa-steps li{counter-increment:fa;display:flex;gap:.8rem;padding:.6rem 0;border-bottom:1px solid #f5f5f5;font-size:.85rem;color:var(--txt2);line-height:1.5}
+.fa-steps li:last-child{border-bottom:none}
+.fa-steps li::before{content:counter(fa);min-width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.fa-critical{background:#fef2f2;border-radius:8px;padding:.8rem 1rem;margin-top:.8rem;font-size:.8rem;color:#991b1b;font-weight:600;line-height:1.5;border-left:3px solid var(--red)}
+
+/* COMMS CHAIN */
+.comms-chain{max-width:800px;margin:2rem auto;padding:0 2rem}
+.chain-item{display:flex;gap:1.5rem;padding:1.2rem 0;position:relative;align-items:flex-start}
+.chain-item::after{content:'';position:absolute;left:22px;top:60px;bottom:-10px;width:2px;background:linear-gradient(180deg,var(--gold),transparent)}
+.chain-item:last-child::after{display:none}
+.chain-dot{width:44px;height:44px;border-radius:50%;background:var(--navy);border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;font-weight:800;color:var(--gold);z-index:2}
+.chain-content{flex:1;background:#fff;border-radius:12px;padding:1rem 1.4rem;border:1px solid #eee}
+.chain-content h4{font-family:var(--hd);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.chain-content p{font-size:.85rem;color:var(--txt2);line-height:1.6}
+.chain-content .chain-time{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+
+/* DOS DONTS */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:2rem auto;padding:0 2rem}
+.scard{padding:2rem;border-radius:14px}
+.scard.bad{background:linear-gradient(145deg,#FFF5F5,#FFF0F0);border:1px solid rgba(220,38,38,.12)}
+.scard.good{background:linear-gradient(145deg,#F0FFF4,#EDFFF5);border:1px solid rgba(22,163,74,.12)}
+.scard-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.4rem}
+.bad .scard-ico{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.18)}
+.good .scard-ico{background:rgba(22,163,74,.07);border:1.5px solid rgba(22,163,74,.18)}
+.scard h3{font-family:var(--hd);font-size:1.2rem;font-weight:700;margin-bottom:.8rem;color:var(--navy)}
+.scard ul{list-style:none}
+.scard li{padding:.4rem 0 .4rem 1.4rem;position:relative;font-size:.88rem;color:var(--txt2);line-height:1.6}
+.scard li::before{content:'';position:absolute;left:0;top:.85rem;width:7px;height:7px;border-radius:50%}
+.bad li::before{background:var(--red);opacity:.5}
+.good li::before{background:var(--green);opacity:.5}
+
+/* POST-INCIDENT */
+.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:2rem auto;padding:0 2rem}
+.post-card{background:#fff;border-radius:14px;padding:1.8rem;border:1px solid #eee;transition:all .3s}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.07)}
+.post-card-num{font-family:var(--hd);font-size:2rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:.8rem}
+.post-card h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.post-card p{font-size:.82rem;color:var(--txt2);line-height:1.6}
+
+/* EQUIPMENT TABLE */
+.equip-table-wrap{max-width:900px;margin:2rem auto;padding:0 2rem;overflow-x:auto}
+.equip-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.equip-table th{background:var(--navy);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1rem 1.2rem;text-align:left}
+.equip-table td{padding:.9rem 1.2rem;border-bottom:1px solid #f3f3f3;font-size:.85rem;color:var(--txt2);vertical-align:top}
+.equip-table tr:last-child td{border-bottom:none}
+.equip-table tr:hover td{background:#fafafa}
+.equip-table td:first-child{font-weight:600;color:var(--navy)}
+.loc-placeholder{display:inline-block;background:#fff7e6;border:1px dashed var(--gold);border-radius:6px;padding:.2rem .7rem;font-size:.75rem;color:#92400e;font-style:italic}
+
+/* GOLDEN RULES */
+.rules-wrap{max-width:900px;margin:2rem auto;padding:0 2rem}
+.golden-rule{display:flex;gap:1.2rem;padding:1.2rem;background:#fff;border-radius:12px;border:1px solid #eee;margin-bottom:1rem;transition:all .3s;align-items:center}
+.golden-rule:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(220,38,38,.06)}
+.rule-num{width:40px;height:40px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;font-size:.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rule-text{flex:1}
+.rule-text strong{display:block;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.rule-text span{font-size:.82rem;color:var(--txt2);line-height:1.5}
+.rule-icon{font-size:1.8rem;flex-shrink:0;opacity:.6}
+
+/* DARK SECTION */
+.dark{background:var(--navy);color:#fff;padding:5rem 2rem;position:relative;overflow:hidden}
+.dark::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 20%,rgba(220,38,38,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(212,168,67,.04) 0%,transparent 50%)}
+.dark-in{max-width:900px;margin:0 auto;position:relative;z-index:2}
+.dark h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:1rem}
+.dark h2 em{font-style:normal;color:var(--red)}
+
+/* ALARM TABLE */
+.alarm-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}
+.alarm-row{display:grid;grid-template-columns:180px 1fr 1fr;gap:1.5rem;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1.2rem 1.5rem;transition:all .3s}
+.alarm-row:hover{background:rgba(255,255,255,.07);border-color:rgba(212,168,67,.2)}
+.alarm-signal{font-family:var(--cd);font-size:.82rem;font-weight:600;color:var(--gold)}
+.alarm-signal span{display:block;font-size:.72rem;color:rgba(255,255,255,.4);font-family:var(--bd);margin-top:.2rem}
+.alarm-pattern{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.5}
+.alarm-action{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.5}
+.alarm-action strong{color:rgba(255,255,255,.85);display:block;margin-bottom:.2rem}
+
+/* CLOSING */
+.closing{padding:7rem 2rem;text-align:center;background:linear-gradient(180deg,var(--bg),var(--cream))}
+.closing h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--navy);margin-bottom:1rem}
+.closing p{font-size:1rem;color:var(--txt2);max-width:560px;margin:0 auto 2.5rem;line-height:1.8}
+.cbadge{display:inline-flex;align-items:center;gap:.7rem;padding:.9rem 2.2rem;background:var(--navy);color:#fff;border-radius:50px;font-weight:600;font-size:.85rem;letter-spacing:.03em;transition:all .4s;text-decoration:none}
+.cbadge:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(11,29,51,.2)}
+.cbadge.red{background:var(--red)}
+
+/* FOOTER */
+.ft{padding:2.5rem 2rem;text-align:center;font-size:.72rem;color:var(--txt3);border-top:1px solid #eee;background:var(--navy)}
+.ft b{color:var(--gold);font-weight:600}
+.ft .ft-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-doc{font-family:var(--cd);font-size:.72rem;color:rgba(255,255,255,.3)}
+.ft-brand{color:rgba(255,255,255,.4)}
+.ft-brand b{color:var(--gold)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .contact-grid,.muster-grid,.firstaid-grid,.post-grid{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .scene-sub-grid{grid-template-columns:1fr}
+  .alarm-row{grid-template-columns:1fr;gap:.8rem}
+  .sidenav{display:none}
+  .hero-meta{gap:1rem}
+}
+@media(max-width:560px){
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav class="sidenav" id="snav">
+  <a href="#s0" title="Cover"></a>
+  <a href="#s1" title="Emergency Contacts"></a>
+  <a href="#s2" title="Emergency Scenarios"></a>
+  <a href="#s3" title="Evacuation"></a>
+  <a href="#s4" title="First Aid"></a>
+  <a href="#s5" title="Communications"></a>
+  <a href="#s6" title="Do's &amp; Don'ts"></a>
+  <a href="#s7" title="Reporting"></a>
+  <a href="#s8" title="Equipment"></a>
+  <a href="#s9" title="Golden Rules"></a>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section class="hero" id="s0">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="hero-c">
+    <div class="hero-logo">
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png" alt="True East Mining Company">
+    </div>
+    <div class="hero-tag">&#9679; Life-Safety Document &mdash; Read &amp; Know This</div>
+    <h1>Emergency Response<em>Procedures Manual</em></h1>
+    <p class="hero-sub">Your field-ready guide. Every scenario. Every step. Clear, fast, and built for the moment when it matters most.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Document Code<span>TE-IMS-MAN-HSE-003</span></div>
+      <div class="hero-meta-item">Revision<span>Rev 00</span></div>
+      <div class="hero-meta-item">Status<span>Approved for Implementation</span></div>
+      <div class="hero-meta-item">Date<span>May 2026</span></div>
+      <div class="hero-meta-item">Applies To<span>All TEMC Sites &mdash; Kingdom of Saudi Arabia</span></div>
+    </div>
+    <div class="hero-scroll">Scroll to begin<svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></div>
+  </div>
+</section>
+
+<!-- CRITICAL BANNER -->
+<div class="critical-banner">
+  <div class="critical-banner-inner">
+    <div style="font-size:1.5rem">&#9888;</div>
+    <div>
+      <strong>LIFE-SAFETY DOCUMENT</strong>
+      <p>This manual must be read and understood by all personnel before commencing work at any True East Mining site. Keep a printed copy accessible at all times.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SECTION 1: EMERGENCY CONTACTS ======== -->
+<section id="s1">
+  <div class="sec">
+    <div class="sec-tag red" data-anim>Section One &mdash; Act First</div>
+    <h2 data-anim>Emergency<br>Contact Numbers</h2>
+    <p class="sec-lead" data-anim>In an emergency, seconds count. Know these numbers before you need them. Post this page at every workstation, mess, vehicle, and camp.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-card emergency" data-anim>
+      <div class="contact-hd">
+        <div class="contact-hd-label">&#127988; Unified Emergency</div>
+        <div class="contact-number">911</div>
+        <div class="contact-name">All Emergency Services</div>
+      </div>
+      <div class="contact-bd">
+        <div class="contact-desc">Single number for all emergencies in KSA. Police, Fire, Medical, Civil Defense. Call this first if unsure.</div>
+      </div>
+    </div>
+
+    <div class="contact-card civil" data-anim delay1>
+      <div class="contact-hd">
+        <div class="contact-hd-label">&#128293; Civil Defense</div>
+        <div class="contact-number">998</div>
+        <div class="contact-name">Fire, Rescue &amp; HAZMAT</div>
+      </div>
+      <div class="contact-bd">
+        <div class="contact-desc">Primary for fire, structural collapse, chemical releases, and technical rescue. Always notify for Level 2+ emergencies.</div>
+      </div>
+    </div>
+
+    <div class="contact-card medical" data-anim delay2>
+      <div class="contact-hd">
+        <div class="contact-hd-label">&#128657; Red Crescent Ambulance</div>
+        <div class="contact-number">997</div>
+        <div class="contact-name">Medical Emergency &amp; MedEvac</div>
+      </div>
+      <div class="contact-bd">
+        <div class="contact-desc">Saudi Red Crescent Authority. Request ground or air ambulance (MedEvac). State location, number of casualties, and nature of injury.</div>
+      </div>
+    </div>
+
+    <div class="contact-card police" data-anim>
+      <div class="contact-hd">
+        <div class="contact-hd-label">&#128268; Police</div>
+        <div class="contact-number">999</div>
+        <div class="contact-name">Security, Road Accidents, Death</div>
+      </div>
+      <div class="contact-bd">
+        <div class="contact-desc">Vehicle accidents on public roads, security threats, missing persons escalation, and all incidents involving fatality.</div>
+      </div>
+    </div>
+
+    <div class="contact-card env" data-anim delay1>
+      <div class="contact-hd">
+        <div class="contact-hd-label">&#127807; RCRC Environmental</div>
+        <div class="contact-number">920033360</div>
+        <div class="contact-name">Red Crescent &mdash; Emergency Coordination</div>
+      </div>
+      <div class="contact-bd">
+        <div class="contact-desc">National coordination line for major emergencies and environmental incidents requiring multi-agency response.</div>
+      </div>
+    </div>
+
+    <div class="contact-card site" data-anim delay2>
+      <div class="contact-hd">
+        <div class="contact-hd-label">&#127959; True East Site Contacts</div>
+        <div class="contact-number" style="font-size:1.4rem;letter-spacing:-.02em">[SITE SPECIFIC]</div>
+        <div class="contact-name">HSE Manager &middot; OSCEC &middot; HSE Officer</div>
+      </div>
+      <div class="contact-bd">
+        <div class="contact-desc" style="color:#dc2626;font-weight:600">Complete this section before mobilisation. Post at every rig floor, mess, and office. Review on every crew rotation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:900px;margin:1.5rem auto 0;padding:0 2rem">
+    <div class="alert-box critical" data-anim>
+      <div class="alert-icon">&#128680;</div>
+      <div class="alert-text">
+        <strong>When calling emergency services:</strong>
+        State your name, company, and site location (GPS coordinates or nearest landmark). State the nature of the emergency clearly. State the number of casualties. Stay on the line. Do not hang up first.
+      </div>
+    </div>
+    <div class="alert-box info" data-anim>
+      <div class="alert-icon">&#8505;</div>
+      <div class="alert-text">
+        <strong>Site-specific contact list (TE-IMS-FRM-HSE-EC-[SITE]):</strong>
+        Each site must maintain a laminated Emergency Contact Directory at the rig floor, radio room, site office, and main camp mess. Update on every crew rotation and after any personnel change.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 2: EMERGENCY SCENARIOS ======== -->
+<section id="s2">
+  <div class="sec">
+    <div class="sec-tag red" data-anim>Section Two &mdash; Scenario Response</div>
+    <h2 data-anim>Emergency Types &amp;<br>Initial Response</h2>
+    <p class="sec-lead" data-anim>Know your scenario. Follow the steps in order. Do not improvise during the first 2 minutes — the steps below are proven. Every second counts.</p>
+  </div>
+
+  <div class="scenarios">
+
+    <!-- FIRE / EXPLOSION -->
+    <div class="scenario open" id="sc-fire" data-anim>
+      <div class="scenario-hd fire" onclick="toggleScenario('sc-fire')">
+        <div class="scenario-icon">&#128293;</div>
+        <div class="scenario-title">
+          <h3>Fire / Explosion</h3>
+          <p>Rig fire &middot; Diesel fire &middot; Electrical fire &middot; Camp fire &middot; Explosion</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <div class="alert-box critical">
+            <div class="alert-icon">&#128680;</div>
+            <div class="alert-text"><strong>PRIORITY ORDER: Life first. Environment second. Equipment last.</strong> Never re-enter a burning structure or vehicle. Never fight a fire that is larger than a waste bin without firefighting training and correct equipment.</div>
+          </div>
+          <ol class="step-list">
+            <li><div class="step-num red">1</div><div class="step-text"><strong>RAISE THE ALARM IMMEDIATELY</strong>Shout "FIRE! FIRE! FIRE!" and activate the nearest fire alarm or siren. Call the radio operator. Do not wait to confirm — if you see smoke or flames, raise the alarm first.</div></li>
+            <li><div class="step-num red">2</div><div class="step-text"><strong>EVACUATE the area</strong>All non-ERT personnel evacuate to the designated Assembly Point upwind of the fire. Use the nearest safe exit. Do not use elevators. Do not stop to collect personal belongings.</div></li>
+            <li><div class="step-num red">3</div><div class="step-text"><strong>ISOLATE fuel and power</strong>Driller / Operator: shut down rig, isolate all fuel lines and electrical power at isolation points. Only if safe to do so. Do not delay evacuation to perform isolation.</div></li>
+            <li><div class="step-num">4</div><div class="step-text"><strong>ATTACK only if safe and trained</strong>ERT Fire Wardens only: use appropriate extinguisher (CO₂ for electrical, Dry Powder for fuel). Keep your back to the exit. If fire grows beyond incipient stage — withdraw immediately. Do not become a casualty.</div></li>
+            <li><div class="step-num">5</div><div class="step-text"><strong>CALL Civil Defense — 998</strong>OSCEC calls 998. State: location, type of fire, whether anyone is trapped, access route to site. Do not end the call.</div></li>
+            <li><div class="step-num">6</div><div class="step-text"><strong>ACCOUNT for all personnel</strong>Assembly Point Marshals conduct headcount. Report result to OSCEC. Identify any missing persons immediately.</div></li>
+            <li><div class="step-num gold">7</div><div class="step-text"><strong>WAIT for All Clear from OSCEC</strong>Do not return to the site until the OSCEC declares All Clear. Do not re-enter any fire-affected structure.</div></li>
+          </ol>
+          <div class="scene-sub-grid">
+            <div class="sub-panel">
+              <h4>Extinguisher Types — Quick Guide</h4>
+              <ul>
+                <li>Red / Water — paper, wood, cloth only</li>
+                <li>Blue / Dry Powder — flammable liquids, gases</li>
+                <li>Black / CO₂ — electrical fires</li>
+                <li>Cream / Foam — flammable liquids</li>
+                <li>Yellow / Wet Chemical — kitchen / cooking oils</li>
+              </ul>
+            </div>
+            <div class="sub-panel">
+              <h4>Never Do This</h4>
+              <ul>
+                <li>Use water on electrical fires</li>
+                <li>Open doors without checking for heat first</li>
+                <li>Go back in for personal items</li>
+                <li>Let smoke block your exit route</li>
+                <li>Fight a fire without a trained partner</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICAL EMERGENCY -->
+    <div class="scenario" id="sc-medical" data-anim>
+      <div class="scenario-hd medical" onclick="toggleScenario('sc-medical')">
+        <div class="scenario-icon">&#128657;</div>
+        <div class="scenario-title">
+          <h3>Medical Emergency / Injury</h3>
+          <p>Trauma &middot; Cardiac arrest &middot; Heat stroke &middot; Snake bite &middot; Unconscious person</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <div class="alert-box critical">
+            <div class="alert-icon">&#128680;</div>
+            <div class="alert-text"><strong>Before approaching any casualty: Is the scene safe?</strong> Do not become a second casualty. Check for hazards before entering. Only then provide assistance.</div>
+          </div>
+          <ol class="step-list">
+            <li><div class="step-num red">1</div><div class="step-text"><strong>ENSURE SCENE SAFETY</strong>Check for ongoing hazards — fire, electricity, falling objects, chemical exposure. Do not rush in without assessing. Shout to the casualty: "Are you OK?"</div></li>
+            <li><div class="step-num red">2</div><div class="step-text"><strong>CALL FOR HELP via radio</strong>Call on radio: "MAYDAY MAYDAY MAYDAY — Medical Emergency at [location]. One/two/multiple casualties. Send First Aider and call 997." Stay with the casualty.</div></li>
+            <li><div class="step-num red">3</div><div class="step-text"><strong>ASSESS ABC — Airway, Breathing, Circulation</strong>Airway: tilt head, lift chin, check for obstruction. Breathing: look, listen, feel for 10 seconds. Circulation: check carotid pulse. If no pulse and no breathing — begin CPR immediately.</div></li>
+            <li><div class="step-num">4</div><div class="step-text"><strong>CALL Saudi Red Crescent — 997</strong>State: your name, location (GPS if available), nature of injury, age and sex of casualty, current condition. Request ground or air ambulance. Follow dispatcher instructions.</div></li>
+            <li><div class="step-num">5</div><div class="step-text"><strong>CONTROL bleeding and stabilise</strong>Apply direct pressure to wounds. Do not remove embedded objects. Manage for shock — lay flat, elevate legs (unless spinal injury suspected), keep warm and calm.</div></li>
+            <li><div class="step-num">6</div><div class="step-text"><strong>PREPARE for MedEvac</strong>If air MedEvac: clear helicopter landing zone of loose items, mark wind direction with available material. Assign escort to accompany casualty with their ID, medical records, and incident summary.</div></li>
+            <li><div class="step-num gold">7</div><div class="step-text"><strong>NOTIFY OSCEC and HSE Manager</strong>Incident Commander notified. Flash Report issued within 2 hours (TE-IMS-FRM-HSE-022). Next-of-kin notification via HR Manager only — never by field personnel.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHEMICAL SPILL -->
+    <div class="scenario" id="sc-chemical" data-anim>
+      <div class="scenario-hd chemical" onclick="toggleScenario('sc-chemical')">
+        <div class="scenario-icon">&#9878;</div>
+        <div class="scenario-title">
+          <h3>Chemical Spill / Hazardous Material Release</h3>
+          <p>Fuel spill &middot; Drilling fluid &middot; H₂S release &middot; Chemical storage incident</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <div class="alert-box critical">
+            <div class="alert-icon">&#128680;</div>
+            <div class="alert-text"><strong>H₂S ALERT:</strong> H₂S is colourless and smells of rotten eggs. At 10 ppm — don SCBA. At 20 ppm — EVACUATE all non-ERT personnel immediately. Evacuate crosswind or upwind. Do not approach without SCBA.</div>
+          </div>
+          <ol class="step-list">
+            <li><div class="step-num red">1</div><div class="step-text"><strong>STOP THE SOURCE — if safe</strong>Close the valve. Right the drum. Plug the leak. Only attempt if you can do so without PPE exposure. If not safe — evacuate and report.</div></li>
+            <li><div class="step-num red">2</div><div class="step-text"><strong>EVACUATE and raise alarm</strong>Move all personnel upwind or crosswind of the spill. Establish an exclusion zone — minimum 50m for fuel spills, 200m for H₂S events. No ignition sources in exclusion zone.</div></li>
+            <li><div class="step-num red">3</div><div class="step-text"><strong>DON correct PPE before approaching</strong>Chemical-resistant gloves, goggles, and if applicable full-face SCBA. Refer to the Material Safety Data Sheet (MSDS) for the substance. MSDS files are in the HSE site office.</div></li>
+            <li><div class="step-num">4</div><div class="step-text"><strong>CONTAIN the spill</strong>Deploy spill kit — absorbent booms, pads, and granules. Deploy earth berm or sandbags to prevent spread to drainage, wadi, or groundwater. Never wash spill to drain with water.</div></li>
+            <li><div class="step-num">5</div><div class="step-text"><strong>NOTIFY OSCEC and HSE Manager</strong>HSE Manager notified within 1 hour. NCEC / MEWA notified for reportable environmental releases. For H₂S: Civil Defense (998) notified immediately.</div></li>
+            <li><div class="step-num">6</div><div class="step-text"><strong>CLEAN UP and dispose correctly</strong>Place all contaminated material in labelled, sealed containers. Dispose per PROC-HSE-015 Waste and Spill Management. Do not bury, burn, or discharge to ground.</div></li>
+            <li><div class="step-num gold">7</div><div class="step-text"><strong>DOCUMENT and report</strong>Flash Report issued. Spill volume, substance, containment method, and disposal route recorded. Incident investigation initiated within 24 hours.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEHICLE ACCIDENT -->
+    <div class="scenario" id="sc-vehicle" data-anim>
+      <div class="scenario-hd vehicle" onclick="toggleScenario('sc-vehicle')">
+        <div class="scenario-icon">&#128665;</div>
+        <div class="scenario-title">
+          <h3>Vehicle Accident</h3>
+          <p>Road collision &middot; Desert rollover &middot; Vehicle fire &middot; Person struck</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <ol class="step-list">
+            <li><div class="step-num red">1</div><div class="step-text"><strong>STOP safely and secure the scene</strong>Apply handbrake. Turn off ignition. Activate hazard lights. Deploy warning triangles at least 30m from the scene in both directions if on a public road.</div></li>
+            <li><div class="step-num red">2</div><div class="step-text"><strong>ASSESS casualties — do not move unless danger</strong>Only move casualties if vehicle is on fire, in water, or in danger of rolling. Suspect spinal injury in all rollovers — immobilise the neck and spine before any movement.</div></li>
+            <li><div class="step-num red">3</div><div class="step-text"><strong>CALL for help — Radio, then 997 / 999</strong>Radio: "MAYDAY — Vehicle accident at [location / GPS]. [Number] casualties. Request ambulance." Call 997 for injuries. Call 999 for road accidents on public roads (legally required in KSA).</div></li>
+            <li><div class="step-num">4</div><div class="step-text"><strong>PROVIDE first aid</strong>Control bleeding. Maintain airway. Treat for shock. Do not give food or water to seriously injured. Keep casualty warm and calm. Stay with them until ambulance arrives.</div></li>
+            <li><div class="step-num">5</div><div class="step-text"><strong>MANAGE the scene</strong>Assign one person to manage traffic/bystanders. Preserve tyre marks and vehicle positions for investigation. Do not move vehicles until Police have arrived (for public road accidents).</div></li>
+            <li><div class="step-num gold">6</div><div class="step-text"><strong>NOTIFY OSCEC and HSE Manager</strong>Flash Report issued within 2 hours. Journey Management Controller notified. Incident investigation initiated per PROC-HSE-006.</div></li>
+          </ol>
+          <div class="alert-box warning">
+            <div class="alert-icon">&#9888;</div>
+            <div class="alert-text"><strong>KSA legal requirement:</strong> All road traffic accidents involving injury must be reported to Police (999). Do not move injured persons or vehicles from the scene before Police arrive unless there is an ongoing safety risk.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STRUCTURAL COLLAPSE -->
+    <div class="scenario" id="sc-structural" data-anim>
+      <div class="scenario-hd structural" onclick="toggleScenario('sc-structural')">
+        <div class="scenario-icon">&#127959;</div>
+        <div class="scenario-title">
+          <h3>Structural Collapse</h3>
+          <p>Rig mast failure &middot; Trench collapse &middot; Building collapse &middot; Dropped load</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <div class="alert-box critical">
+            <div class="alert-icon">&#128680;</div>
+            <div class="alert-text"><strong>SECONDARY COLLAPSE RISK IS HIGH.</strong> Do not rush into a collapsed structure. Establish an exclusion zone immediately. Only trained rescue personnel approach.</div>
+          </div>
+          <ol class="step-list">
+            <li><div class="step-num red">1</div><div class="step-text"><strong>RAISE ALARM immediately</strong>Activate site siren and radio operator. Declare Major Emergency. All non-essential personnel evacuate the area — minimum distance: mast height + 10m, or 25m, whichever is greater.</div></li>
+            <li><div class="step-num red">2</div><div class="step-text"><strong>ESTABLISH exclusion zone</strong>No entry to collapse zone without OSCEC authorisation. Rope off or mark the exclusion boundary. Assign one person to prevent entry.</div></li>
+            <li><div class="step-num red">3</div><div class="step-text"><strong>ACCOUNT for personnel — identify trapped persons</strong>Assembly Point Marshals conduct headcount. Report names of any missing or trapped persons to OSCEC immediately. Do not attempt self-rescue without structural shoring equipment.</div></li>
+            <li><div class="step-num">4</div><div class="step-text"><strong>CALL Civil Defense — 998</strong>Structural rescue is a Civil Defense specialty. Call immediately. State number of persons believed trapped and nature of collapse. Do not delay this call.</div></li>
+            <li><div class="step-num">5</div><div class="step-text"><strong>CALL 997 for medical standby</strong>Have First Aiders and ambulance ready at the exclusion zone boundary. Prepare for multiple casualties with potential crush injuries, spinal trauma, and dust inhalation.</div></li>
+            <li><div class="step-num gold">6</div><div class="step-text"><strong>DO NOT RE-ENTER until cleared</strong>A competent structural engineer must certify the area safe before re-entry. This decision rests with the OSCEC and Civil Defense — never with individual workers.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISSING PERSON -->
+    <div class="scenario" id="sc-missing" data-anim>
+      <div class="scenario-hd missing" onclick="toggleScenario('sc-missing')">
+        <div class="scenario-icon">&#128270;</div>
+        <div class="scenario-title">
+          <h3>Missing Person</h3>
+          <p>Unaccounted at muster &middot; Overdue vehicle &middot; Lost in field &middot; No comms</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <ol class="step-list">
+            <li><div class="step-num red">1</div><div class="step-text"><strong>CONFIRM the person is genuinely missing</strong>Check their last known location, radio, and buddy. Do they have a satellite phone? Has their vehicle returned? Allow 15 minutes from scheduled return before escalating — no longer.</div></li>
+            <li><div class="step-num red">2</div><div class="step-text"><strong>NOTIFY OSCEC immediately</strong>Report the person's name, role, last known location, time last seen, physical description, and what equipment they had. OSCEC activates the Missing Person protocol.</div></li>
+            <li><div class="step-num">3</div><div class="step-text"><strong>ATTEMPT radio and phone contact</strong>Radio operator broadcasts on all channels. Try satellite phone. Try the person's emergency contact. Log all attempts with time and result.</div></li>
+            <li><div class="step-num">4</div><div class="step-text"><strong>INITIATE Search — trained ERT only</strong>Deploy two-person search teams. Assign grid areas. Maintain radio contact every 15 minutes. Do not send single searchers. Record all areas searched and result.</div></li>
+            <li><div class="step-num">5</div><div class="step-text"><strong>NOTIFY Police — 999 — if not found within 1 hour</strong>In desert environments, a missing person after 1 hour in summer heat is a life-threatening emergency. Call 999 and provide GPS coordinates of search area.</div></li>
+            <li><div class="step-num gold">6</div><div class="step-text"><strong>CONTINUE search until resolved</strong>Do not abandon search. Contact HSE Manager and MD. If the person is found injured, activate the Medical Emergency protocol. Document the full timeline.</div></li>
+          </ol>
+          <div class="alert-box warning">
+            <div class="alert-icon">&#9888;</div>
+            <div class="alert-text"><strong>KSA desert conditions — heat urgency:</strong> In summer months, a person without water in open desert can reach critical heat stroke within 2–3 hours. Treat every missing person as urgent regardless of time of day.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEVERE WEATHER -->
+    <div class="scenario" id="sc-weather" data-anim>
+      <div class="scenario-hd weather" onclick="toggleScenario('sc-weather')">
+        <div class="scenario-icon">&#127788;</div>
+        <div class="scenario-title">
+          <h3>Severe Weather</h3>
+          <p>Sandstorm (Shamal) &middot; Flash flood &middot; Lightning &middot; Extreme heat &gt;45 °C</p>
+        </div>
+        <div class="scenario-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-inner">
+          <div class="scene-sub-grid">
+            <div class="sub-panel">
+              <h4>&#127763; Sandstorm / Shamal</h4>
+              <ul>
+                <li>On warning: secure tarps, loose items, pipe racks, ventilation inlets</li>
+                <li>Stop all outdoor and elevated work immediately</li>
+                <li>Shelter in hard-walled buildings or vehicles — close all doors and windows</li>
+                <li>Wear dust mask (P2 minimum) if outdoors</li>
+                <li>No driving until visibility &gt; 100m and confirmed safe</li>
+                <li>Account for all personnel — radio check every 30 minutes</li>
+              </ul>
+            </div>
+            <div class="sub-panel">
+              <h4>&#127754; Flash Flood</h4>
+              <ul>
+                <li>Evacuate low ground, wadis, and drainage paths immediately — no warning given</li>
+                <li>Move vehicles and equipment to higher ground</li>
+                <li>Never attempt to cross flooded wadi — 30cm of fast water overturns a vehicle</li>
+                <li>Account for all field teams — check isolated crews</li>
+                <li>Notify OSCEC of any team unable to return</li>
+                <li>Await all-clear before returning to low areas</li>
+              </ul>
+            </div>
+            <div class="sub-panel">
+              <h4>&#9928; Lightning</h4>
+              <ul>
+                <li>Suspend all drilling operations if lightning within 10 km</li>
+                <li>Evacuate from high ground, masts, and metal structures</li>
+                <li>No open ground — shelter in hard structures or metal-roofed vehicles</li>
+                <li>Do not shelter under isolated trees</li>
+                <li>Stay away from all rig equipment until 30 minutes after last lightning</li>
+              </ul>
+            </div>
+            <div class="sub-panel">
+              <h4>&#9728; Extreme Heat (&gt;45 °C)</h4>
+              <ul>
+                <li>Suspend all heavy outdoor work immediately — shift to shelter</li>
+                <li>Increase water ration: minimum 1 litre per hour per person</li>
+                <li>WBGT monitoring every 2 hours — log results</li>
+                <li>Monitor all personnel for heat stroke signs (confusion, hot dry skin)</li>
+                <li>Any suspected heat stroke: call 997 immediately — this is life-threatening</li>
+                <li>All vehicles air-conditioned and fuelled before any movement</li>
+              </ul>
+            </div>
+          </div>
+          <div class="alert-box critical" style="margin-top:1rem">
+            <div class="alert-icon">&#128680;</div>
+            <div class="alert-text"><strong>Heat Stroke is a KILLING emergency in KSA.</strong> Body temperature above 40°C with confusion, hot dry skin, and no sweating = CALL 997 NOW. Begin immediate cooling: ice to neck, armpits, groin. Do not delay transport to hospital.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .scenarios -->
+</section>
+
+<!-- ======== SECTION 3: EVACUATION ======== -->
+<section id="s3">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Three</div>
+    <h2 data-anim>Evacuation Procedure</h2>
+    <p class="sec-lead" data-anim>When the Major Emergency alarm sounds — three cycles of 30-second wail with 30-second silence — you move. No exceptions. No hesitation. Every second of delay costs lives.</p>
+  </div>
+
+  <div class="evac-steps">
+    <div class="evac-step" data-anim>
+      <div class="evac-num red">1</div>
+      <div class="evac-content">
+        <span class="tag tag-critical">Critical — Immediate</span>
+        <h4>STOP what you are doing — safely</h4>
+        <p>Stop your task in a safe state. If drilling: engage drill string safety if practical. If operating equipment: park safely, apply brakes, neutral gear. Do not complete your task. Life over equipment — always.</p>
+      </div>
+    </div>
+
+    <div class="evac-step" data-anim>
+      <div class="evac-num red">2</div>
+      <div class="evac-content">
+        <span class="tag tag-critical">Critical — Immediate</span>
+        <h4>ALERT others nearby</h4>
+        <p>Shout the alarm to anyone in your immediate area. Confirm they have heard and are moving. Do not assume the siren reached everyone — especially in noisy areas such as the drill floor or workshop.</p>
+      </div>
+    </div>
+
+    <div class="evac-step" data-anim>
+      <div class="evac-num red">3</div>
+      <div class="evac-content">
+        <span class="tag tag-critical">Critical — Immediate</span>
+        <h4>TAKE the nearest safe evacuation route</h4>
+        <p>Move to the Assembly Point via the posted evacuation route. Stay away from smoke, fire, and chemical releases. Move upwind or crosswind — never downwind of a fire or gas release. Walk briskly, do not run.</p>
+      </div>
+    </div>
+
+    <div class="evac-step" data-anim>
+      <div class="evac-num">4</div>
+      <div class="evac-content">
+        <span class="tag tag-mandatory">Mandatory</span>
+        <h4>DO NOT collect personal belongings</h4>
+        <p>Your phone, wallet, and gear stay behind. Personnel who delay evacuation to collect belongings endanger themselves and the entire response operation. This is a disciplinary matter if the delay is intentional.</p>
+      </div>
+    </div>
+
+    <div class="evac-step" data-anim>
+      <div class="evac-num">5</div>
+      <div class="evac-content">
+        <span class="tag tag-mandatory">Mandatory</span>
+        <h4>REPORT to the Assembly Point Marshal</h4>
+        <p>Go directly to your designated Assembly Point. Report to the Marshal immediately. Give your name. If you know of any person who may be missing or injured, report this to the Marshal — do not wait to be asked.</p>
+      </div>
+    </div>
+
+    <div class="evac-step" data-anim>
+      <div class="evac-num">6</div>
+      <div class="evac-content">
+        <span class="tag tag-process">Process</span>
+        <h4>STAY at the Assembly Point</h4>
+        <p>Do not leave the Assembly Point without OSCEC authorisation. Do not use your mobile phone unless directed. No smoking at Assembly Point. Remain calm and await instructions from the OSCEC or ERT Leader.</p>
+      </div>
+    </div>
+
+    <div class="evac-step" data-anim>
+      <div class="evac-num">7</div>
+      <div class="evac-content">
+        <span class="tag tag-process">Process</span>
+        <h4>AWAIT the All Clear from OSCEC</h4>
+        <p>Only the OSCEC (On-Site Chief Emergency Controller) can declare the All Clear — a continuous 2-minute siren. This signals that the emergency is controlled, all personnel are accounted for, and it is safe to return. Do not return before this signal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUSTER POINT PROTOCOL -->
+  <div class="sec" style="padding-top:1rem">
+    <div class="sec-tag" data-anim>Muster Point Protocol</div>
+    <h2 data-anim>Assembly Point &amp;<br>Roll Call Procedure</h2>
+  </div>
+
+  <div class="muster-grid">
+    <div class="muster-card" data-anim>
+      <div class="muster-card-ico" style="background:#fef2f2">&#127987;</div>
+      <h3>Assembly Point Location Rules</h3>
+      <ul>
+        <li>Minimum 50 metres from any identified hazard (rig, fuel, chemicals, wellhead)</li>
+        <li>Located upwind or crosswind — never downwind of hazard</li>
+        <li>Clearly signed with permanent, lit signage (visible day and night)</li>
+        <li>Every site has a Primary and Secondary Assembly Point</li>
+        <li>Wind sock or flag installed — check before directing personnel</li>
+        <li>Accessible within 5 minutes for entire workforce under normal conditions</li>
+      </ul>
+    </div>
+
+    <div class="muster-card" data-anim delay1>
+      <div class="muster-card-ico" style="background:#fffbeb">&#128203;</div>
+      <h3>Roll Call — Marshal Duties</h3>
+      <ul>
+        <li>Maintain an updated muster sheet at all times — every crew change</li>
+        <li>Call roll immediately on personnel arriving at Assembly Point</li>
+        <li>Record the name and response for every person on the site list</li>
+        <li>Report headcount status to OSCEC within 5 minutes of alarm</li>
+        <li>Report any unaccounted person by name to OSCEC immediately</li>
+        <li>Do not stand down until OSCEC has given written or radio authorisation</li>
+      </ul>
+    </div>
+
+    <div class="muster-card" data-anim>
+      <div class="muster-card-ico" style="background:#eff6ff">&#128100;</div>
+      <h3>Every Person Accounted For</h3>
+      <ul>
+        <li>Employees, contractors, subcontractors, visitors — everyone on the muster list</li>
+        <li>Include any personnel in vehicles or off-site but within 1 km</li>
+        <li>Check tool stores, ablution blocks, and remote work areas via radio</li>
+        <li>A person not on the muster list must be reported — do not assume</li>
+        <li>Any unaccounted person: OSCEC activates Missing Person protocol immediately</li>
+      </ul>
+    </div>
+
+    <div class="muster-card" data-anim delay1>
+      <div class="muster-card-ico" style="background:#f0fdf4">&#128680;</div>
+      <h3>If a Person Is Missing</h3>
+      <ul>
+        <li>Report immediately to OSCEC — name, last seen location, last seen time</li>
+        <li>OSCEC does NOT stand down the emergency until person is found</li>
+        <li>ERT initiates search protocol — 2-person teams, grid search, radio check-in every 15 min</li>
+        <li>Call 999 Police if not found within 60 minutes</li>
+        <li>Never assume a missing person left voluntarily during a declared emergency</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 4: FIRST AID ======== -->
+<section id="s4">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Four</div>
+    <h2 data-anim>First Aid Basics</h2>
+    <p class="sec-lead" data-anim>These steps keep people alive until professional medical care arrives. Every worker should know them. These are not a substitute for formal First Aid training — they are your survival floor.</p>
+  </div>
+
+  <div class="firstaid-grid">
+
+    <div class="fa-card" data-anim>
+      <div class="fa-card-hd cpr">
+        <h3>CPR — Cardiopulmonary Resuscitation</h3>
+        <p>No pulse, no breathing — start immediately</p>
+      </div>
+      <div class="fa-card-body">
+        <ol class="fa-steps">
+          <li>Check for safety — is the scene safe for you to approach?</li>
+          <li>Shake the casualty's shoulders — shout "Are you OK?" No response?</li>
+          <li>Call for help — radio and 997 ambulance immediately</li>
+          <li>Open airway: tilt head back, lift chin, look for obstructions</li>
+          <li>Check breathing: look, listen, feel for 10 seconds. No breathing?</li>
+          <li>Begin chest compressions: heel of hand, centre of chest — 30 compressions, hard and fast (5–6 cm depth, 100–120/min)</li>
+          <li>Give 2 rescue breaths — tilt head, pinch nose, seal lips, breathe until chest rises</li>
+          <li>Continue 30:2 ratio — do not stop until AED arrives, ambulance takes over, or casualty revives</li>
+          <li>Attach AED as soon as available — follow voice prompts exactly</li>
+        </ol>
+        <div class="fa-critical">&#128680; Do not stop CPR for more than 10 seconds. Rotate compressors every 2 minutes to maintain quality. Keep going until help arrives.</div>
+      </div>
+    </div>
+
+    <div class="fa-card" data-anim delay1>
+      <div class="fa-card-hd wound">
+        <h3>Wound Management &amp; Bleeding Control</h3>
+        <p>Major cuts, lacerations, crush injuries, amputations</p>
+      </div>
+      <div class="fa-card-body">
+        <ol class="fa-steps">
+          <li>Don gloves before touching blood or open wounds</li>
+          <li>Apply direct pressure with a clean dressing or cloth — press firmly</li>
+          <li>Maintain pressure continuously — do not lift to check. Add more dressing on top if blood soaks through</li>
+          <li>Elevate the injured limb above the level of the heart if possible</li>
+          <li>For amputations: apply tourniquet 5–8 cm above the wound. Write the time on the tourniquet. Do not remove it</li>
+          <li>Do not remove impaled objects — stabilise them in place</li>
+          <li>Keep the casualty warm, still, and calm</li>
+          <li>Call 997 — prepare for immediate evacuation to hospital</li>
+        </ol>
+        <div class="fa-critical">&#128680; Severe bleeding is fatal within minutes. Control bleeding before anything else. Applying a tourniquet correctly saves a life — fear of it does not.</div>
+      </div>
+    </div>
+
+    <div class="fa-card" data-anim>
+      <div class="fa-card-hd shock">
+        <h3>Managing Shock</h3>
+        <p>After major injury, blood loss, severe burns, or anaphylaxis</p>
+      </div>
+      <div class="fa-card-body">
+        <ol class="fa-steps">
+          <li>Recognise shock: pale/grey clammy skin, rapid weak pulse, confusion, dizziness, rapid shallow breathing</li>
+          <li>Lay the casualty flat on their back on a firm surface</li>
+          <li>Elevate their legs approximately 30 cm — unless suspected spinal, chest, or head injury</li>
+          <li>Keep the casualty warm: blanket over them, off cold ground</li>
+          <li>Do NOT give food or water — they may need surgery</li>
+          <li>Do NOT leave them alone</li>
+          <li>Monitor breathing and pulse continuously</li>
+          <li>Call 997 immediately — shock is life-threatening without IV fluids</li>
+        </ol>
+        <div class="fa-critical">&#128680; Do not let a shocked casualty stand or walk. Do not give pain relief medication without medical authorisation. Transport to hospital urgently.</div>
+      </div>
+    </div>
+
+    <div class="fa-card" data-anim delay1>
+      <div class="fa-card-hd heat">
+        <h3>Heat Stroke — KSA Desert Critical Emergency</h3>
+        <p>Body temp above 40°C — confusion, no sweating, collapse</p>
+      </div>
+      <div class="fa-card-body">
+        <ol class="fa-steps">
+          <li>Recognise it: hot DRY skin (no sweating), confusion/delirium, very high body temperature, rapid pulse, possible collapse or seizure</li>
+          <li>CALL 997 IMMEDIATELY — do not wait to see if they improve. Heat stroke kills.</li>
+          <li>Move the casualty to shade or air-conditioning immediately</li>
+          <li>Begin AGGRESSIVE cooling NOW: ice packs to neck, armpits, and groin. Wet sheets plus fan. Cold water on skin. Every minute counts</li>
+          <li>Remove excess clothing and PPE</li>
+          <li>Do NOT give water to drink if confused or unconscious — aspiration risk</li>
+          <li>If conscious and coherent: small sips of cool water plus electrolytes</li>
+          <li>Continue cooling until ambulance arrives. Do not stop</li>
+          <li>Accompany casualty to hospital with incident details</li>
+        </ol>
+        <div class="fa-critical">&#128680; Heat Exhaustion (heavy sweating, pale, weak) can be managed with rest, shade, and fluids. Heat STROKE (no sweating, confused, hot) is a KILLING emergency requiring immediate hospital care. Know the difference.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== SECTION 5: COMMUNICATIONS ======== -->
+<section class="dark" id="s5">
+  <div class="dark-in">
+    <div class="sec-tag" data-anim style="color:var(--gold)">Section Five</div>
+    <h2 data-anim>Communication Protocol<br>During <em>Emergencies</em></h2>
+    <p data-anim style="color:rgba(255,255,255,.55);font-size:1rem;max-width:620px;line-height:1.8;margin-bottom:.5rem">Clear communication is the backbone of emergency response. Know who to call, in what order, with what information. A confused call wastes critical minutes.</p>
+
+    <div class="comms-chain" style="padding:0">
+      <div class="chain-item" data-anim>
+        <div class="chain-dot">1</div>
+        <div class="chain-content">
+          <div class="chain-time">Immediate — T+0 minutes</div>
+          <h4>Any Worker Detects Emergency</h4>
+          <p>Raise alarm immediately. Shout, activate siren, or call via radio: "MAYDAY MAYDAY MAYDAY — [emergency type] at [location]." Do not investigate first. Alarm first, always.</p>
+        </div>
+      </div>
+
+      <div class="chain-item" data-anim>
+        <div class="chain-dot">2</div>
+        <div class="chain-content">
+          <div class="chain-time">Immediate — T+0 to T+2 minutes</div>
+          <h4>Radio Operator Activates OSCEC</h4>
+          <p>Radio Operator notifies the OSCEC (On-Site Chief Emergency Controller) immediately. OSCEC is the senior TEMC person on site (SSE / Drilling Superintendent). OSCEC takes command from this point.</p>
+        </div>
+      </div>
+
+      <div class="chain-item" data-anim>
+        <div class="chain-dot">3</div>
+        <div class="chain-content">
+          <div class="chain-time">T+2 to T+5 minutes</div>
+          <h4>OSCEC Declares Emergency Level and Calls External Services</h4>
+          <p>OSCEC declares Level 1, 2, or 3. For Level 2+: calls 998 (Civil Defense), 997 (Ambulance), or 999 (Police) as required. States: company name, site location, emergency type, casualties, and access route. Radio Operator logs all external calls with time.</p>
+        </div>
+      </div>
+
+      <div class="chain-item" data-anim>
+        <div class="chain-dot">4</div>
+        <div class="chain-content">
+          <div class="chain-time">T+5 to T+15 minutes</div>
+          <h4>OSCEC Notifies Corporate HSE Manager</h4>
+          <p>HSE Manager notified by phone. HSE Manager notifies the Managing Director if Level 2 or 3. MD activates Crisis Management Team for Level 3. All notifications logged with name, time, and content.</p>
+        </div>
+      </div>
+
+      <div class="chain-item" data-anim>
+        <div class="chain-dot">5</div>
+        <div class="chain-content">
+          <div class="chain-time">Within 2 hours</div>
+          <h4>Flash Report Issued</h4>
+          <p>OSCEC or HSE Manager issues Flash Report (TE-IMS-FRM-HSE-022) to: MD, HSE Manager, QA / MR. Flash Report contains: time, location, incident type, casualties, immediate actions taken, and current status. Posted to IMS portal incident register.</p>
+        </div>
+      </div>
+
+      <div class="chain-item" data-anim>
+        <div class="chain-dot">6</div>
+        <div class="chain-content">
+          <div class="chain-time">Within 24 hours of Level 2 / 3</div>
+          <h4>Regulatory Notification</h4>
+          <p>MHRSD notified for occupational injuries meeting reporting threshold. NCEC / MEWA notified for environmental releases. Civil Defense incident number recorded. All regulatory communications logged by HSE Manager.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alarm-grid" data-anim style="margin-top:3rem">
+      <div style="margin-bottom:1rem;color:rgba(255,255,255,.7);font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Alarm Signal Reference</div>
+      <div class="alarm-row">
+        <div class="alarm-signal">LOCAL EMERGENCY<span>Fire &middot; Local incident</span></div>
+        <div class="alarm-pattern">Continuous wailing siren — approx. 30 seconds</div>
+        <div class="alarm-action"><strong>ERT respond to location.</strong> Non-essential staff: stand by for instruction at workstation.</div>
+      </div>
+      <div class="alarm-row">
+        <div class="alarm-signal">MAJOR EMERGENCY<span>Evacuate immediately</span></div>
+        <div class="alarm-pattern">30s wail / 30s silence — repeated 3 times</div>
+        <div class="alarm-action"><strong>ALL personnel evacuate to Assembly Point.</strong> ERT report to OSCEC. No exceptions.</div>
+      </div>
+      <div class="alarm-row">
+        <div class="alarm-signal">ENVIRONMENTAL EVENT<span>Shelter or evacuate</span></div>
+        <div class="alarm-pattern">Continuous wailing siren — approx. 1 minute</div>
+        <div class="alarm-action"><strong>Shelter-in-place or evacuate per instruction.</strong> Sandstorm, H₂S, chemical, flood.</div>
+      </div>
+      <div class="alarm-row">
+        <div class="alarm-signal">ALL CLEAR<span>Emergency over</span></div>
+        <div class="alarm-pattern">Continuous wailing siren — approx. 2 minutes</div>
+        <div class="alarm-action"><strong>Wait for OSCEC briefing.</strong> Return to duties only after headcount confirmed and debrief complete.</div>
+      </div>
+    </div>
+
+    <div data-anim style="margin-top:1.5rem;padding:1.2rem 1.5rem;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
+      <p style="font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7"><strong style="color:rgba(255,255,255,.85)">Where siren is not available</strong> (small remote sites): radio call-out and air horn are used with the same meaning. Three blasts on air horn = Major Emergency — evacuate immediately.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 6: DO'S & DON'TS ======== -->
+<section id="s6">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Six</div>
+    <h2 data-anim>Emergency Do's &amp; Don'ts</h2>
+    <p class="sec-lead" data-anim>Good intentions in an emergency can cost lives if the wrong action is taken. These rules are absolute.</p>
+  </div>
+
+  <div class="split">
+    <div class="scard good" data-anim>
+      <div class="scard-ico">&#9989;</div>
+      <h3>Always Do This</h3>
+      <ul>
+        <li>Raise the alarm first — before doing anything else</li>
+        <li>Account for your buddy and those nearby</li>
+        <li>Move upwind or crosswind away from fire, smoke, or gas</li>
+        <li>Follow the OSCEC and ERT instructions without question</li>
+        <li>Give your name to the Assembly Point Marshal</li>
+        <li>Report any missing or injured person immediately</li>
+        <li>Keep communication channels clear — radios for emergencies only during response</li>
+        <li>Preserve the scene after the emergency for investigation</li>
+        <li>Cooperate fully with external emergency services</li>
+        <li>Complete the Flash Report honestly and on time</li>
+        <li>Attend all post-emergency debriefs</li>
+        <li>Report near misses — they are warnings, not failures</li>
+      </ul>
+    </div>
+    <div class="scard bad" data-anim>
+      <div class="scard-ico">&#10060;</div>
+      <h3>Never Do This</h3>
+      <ul>
+        <li>Re-enter a fire-affected area — ever</li>
+        <li>Fight a fire that is larger than a waste bin without training and equipment</li>
+        <li>Use water on an electrical fire</li>
+        <li>Move a casualty suspected of spinal injury unless in immediate danger</li>
+        <li>Use mobile phones in exclusion zones (sparks and interference)</li>
+        <li>Leave the Assembly Point without OSCEC authorisation</li>
+        <li>Approach a H₂S or gas release without SCBA</li>
+        <li>Speak to media or external parties about an incident — direct all enquiries to the MD</li>
+        <li>Attempt to manage a Level 2 or 3 emergency without calling external services</li>
+        <li>Make social media posts about site emergencies — this is a disciplinary offence</li>
+        <li>Drink or eat around chemical spills or uncontrolled releases</li>
+        <li>Blame or discipline anyone who reported fatigue, illness, or a near miss</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 7: POST-EMERGENCY REPORTING ======== -->
+<section id="s7">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Seven</div>
+    <h2 data-anim>Post-Emergency<br>Reporting Requirements</h2>
+    <p class="sec-lead" data-anim>Reporting is not paperwork for its own sake. It captures lessons that prevent the next incident. Every report is a commitment to the workforce that this will not happen again.</p>
+  </div>
+
+  <div class="post-grid">
+    <div class="post-card" data-anim>
+      <div class="post-card-num">T+2h</div>
+      <h4>Flash Report</h4>
+      <p>Flash Report (TE-IMS-FRM-HSE-022) issued by OSCEC or HSE Manager within 2 hours of any serious incident. Sent to MD, HSE Manager, and QA. Contains: time, location, type, casualties, immediate actions, current status.</p>
+    </div>
+
+    <div class="post-card" data-anim delay1>
+      <div class="post-card-num">T+24h</div>
+      <h4>Preliminary Investigation</h4>
+      <p>Initial investigation commenced within 24 hours. Scene preserved, photographs taken, witnesses interviewed. Evidence secured. Factual timeline drafted. OSCEC and HSE Manager present.</p>
+    </div>
+
+    <div class="post-card" data-anim delay2>
+      <div class="post-card-num">T+30d</div>
+      <h4>Full Investigation Report</h4>
+      <p>Complete incident investigation per PROC-HSE-006 and PROC-HSE-010. Root cause analysis, contributing factors, corrective actions with owners and dates. Submitted to MD and IMS portal.</p>
+    </div>
+
+    <div class="post-card" data-anim>
+      <div class="post-card-num">T+48h</div>
+      <h4>ERT Debrief</h4>
+      <p>Full debrief with all ERT members within 48 hours. What worked, what failed, what needs to change. Findings converted into Corrective Action Requests (FRM-SYS-003). Plan updated if required.</p>
+    </div>
+
+    <div class="post-card" data-anim delay1>
+      <div class="post-card-num">Reg.</div>
+      <h4>Regulatory Notification</h4>
+      <p>MHRSD: reportable injuries within legal timeframe. NCEC / MEWA: environmental releases above threshold. Civil Defense: incident reference number retained. Legal advice sought for Level 3 incidents.</p>
+    </div>
+
+    <div class="post-card" data-anim delay2>
+      <div class="post-card-num">&#127760;</div>
+      <h4>IMS Portal Filing</h4>
+      <p>All incident records filed in the IMS portal at <strong style="color:var(--navy)">ims-portal.site</strong>. Includes Flash Report, investigation report, photos, witness statements, corrective actions, and close-out evidence. Retention: 10 years minimum.</p>
+    </div>
+  </div>
+
+  <div style="max-width:900px;margin:1rem auto 0;padding:0 2rem">
+    <div class="alert-box info" data-anim>
+      <div class="alert-icon">&#128196;</div>
+      <div class="alert-text">
+        <strong>IMS Portal — Incident Reporting:</strong>
+        Submit Flash Reports, Near Miss Reports, and Hazard Observations at <strong>ims-portal.site</strong>. Log in with your site credentials. Select "Incident Register" &rarr; "New Report." All submissions are time-stamped and assigned to the HSE Manager automatically. For urgent submissions in the field: call the HSE Manager directly — the portal form can be completed on their behalf.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 8: EQUIPMENT LOCATIONS ======== -->
+<section id="s8">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Eight</div>
+    <h2 data-anim>Emergency Equipment<br>Locations</h2>
+    <p class="sec-lead" data-anim>This table must be completed by the Site HSE Officer before any drilling operations commence. Post the completed version at the rig floor, site office, and camp mess. Review and update on every crew rotation.</p>
+  </div>
+
+  <div class="equip-table-wrap" data-anim>
+    <table class="equip-table">
+      <thead>
+        <tr>
+          <th>Equipment</th>
+          <th>Minimum Requirement</th>
+          <th>Location — Site Specific</th>
+          <th>Last Inspected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fire Extinguishers — CO₂</td>
+          <td>One per electrical panel; one per genset</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Fire Extinguishers — Dry Powder</td>
+          <td>Minimum 6 across rig floor, workshop, camp kitchen, fuel area</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>First Aid Kits (Level 2)</td>
+          <td>Rig floor, workshop, camp, and each field vehicle</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Automated External Defibrillator (AED)</td>
+          <td>Minimum 1 per site; within 3 minutes of any work area</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Stretcher / Trauma Board</td>
+          <td>Minimum 1 per site</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Self-Contained Breathing Apparatus (SCBA)</td>
+          <td>As per H₂S risk assessment — minimum 2 sets where H₂S risk identified</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Spill Kit — Fuel / Oil</td>
+          <td>One at fuel storage; one at chemical storage; one on each fuel tanker</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Eye Wash Station</td>
+          <td>Adjacent to chemical handling areas, battery charging, workshop</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Emergency Shower</td>
+          <td>Within 10 seconds travel of any chemical handling area</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>H₂S Monitor / Gas Detector</td>
+          <td>As per H₂S risk — calibrated, alarm tested weekly</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Emergency Radio (VHF/UHF)</td>
+          <td>Minimum 1 at site office, 1 at rig floor, 1 in each vehicle</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Satellite Phone</td>
+          <td>1 per remote site; charged and operational</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Emergency Siren / Air Horn</td>
+          <td>Audible across entire site; air horn backup if siren fails</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Assembly Point Signs</td>
+          <td>Primary and Secondary — lit, visible from all main work areas</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Emergency Muster Sheet</td>
+          <td>Updated on each crew rotation — kept by Assembly Point Marshal</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Emergency Contact Directory</td>
+          <td>Posted at rig floor, radio room, site office, mess</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Emergency Burn Kit</td>
+          <td>At rig floor and camp</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+        <tr>
+          <td>Ice Packs / Cooling Kit (Heat Stroke)</td>
+          <td>At rig floor first aid station and camp — essential for KSA summer operations</td>
+          <td><span class="loc-placeholder">[Fill in — Site HSE Officer]</span></td>
+          <td><span class="loc-placeholder">[Date]</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="max-width:900px;margin:1rem auto 0;padding:0 2rem">
+    <div class="alert-box warning" data-anim>
+      <div class="alert-icon">&#9888;</div>
+      <div class="alert-text"><strong>Monthly inspection required:</strong> All emergency equipment is inspected monthly by the Site HSE Officer. Inspection records are logged in the Emergency Equipment Inspection Register. Any defective item is replaced before the next shift — no exceptions. Do not wait for the next scheduled inspection if defects are found.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 9: GOLDEN RULES ======== -->
+<section id="s9">
+  <div class="sec">
+    <div class="sec-tag red" data-anim>Section Nine &mdash; Non-Negotiable</div>
+    <h2 data-anim>Golden Rules</h2>
+    <p class="sec-lead" data-anim>These are absolute prohibitions. Violating any Golden Rule during an emergency is a disciplinary offence and may constitute criminal negligence. They exist because past incidents — elsewhere and at home — have killed people when they were ignored.</p>
+  </div>
+
+  <div class="rules-wrap">
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">1</div>
+      <div class="rule-text">
+        <strong>Never re-enter a fire-affected building or rig without explicit authorisation from OSCEC and a structural clearance.</strong>
+        <span>Fire can reignite without warning. Structural failures follow fire. Smoke inhalation kills in seconds. The equipment inside is replaceable. You are not.</span>
+      </div>
+      <div class="rule-icon">&#128293;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">2</div>
+      <div class="rule-text">
+        <strong>Never approach a H₂S or uncontrolled gas release without a working SCBA properly donned and a second SCBA-equipped person present.</strong>
+        <span>H₂S at 100 ppm causes unconsciousness in minutes. At 1000 ppm — death is immediate. Smell alone is not a reliable warning — above 200 ppm your sense of smell is paralysed.</span>
+      </div>
+      <div class="rule-icon">&#9878;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">3</div>
+      <div class="rule-text">
+        <strong>Never ignore the Major Emergency alarm or fail to muster. Ever. No exceptions.</strong>
+        <span>A person who fails to muster makes the OSCEC assume they are missing and launches a rescue operation, diverting ERT from active response. This failure can cost lives — including the lives of the rescuers.</span>
+      </div>
+      <div class="rule-icon">&#128680;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">4</div>
+      <div class="rule-text">
+        <strong>Never attempt to move a person with suspected spinal injury unless the scene is immediately life-threatening (fire, flood, or ongoing collapse).</strong>
+        <span>Incorrect movement of a spinal injury casualty can cause permanent paralysis or death. Only move if the risk of staying is greater than the risk of movement.</span>
+      </div>
+      <div class="rule-icon">&#128100;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">5</div>
+      <div class="rule-text">
+        <strong>Never use a mobile phone or create an ignition source within the exclusion zone of a fuel or chemical spill, wellhead event, or gas release.</strong>
+        <span>A single spark in a vapour-rich atmosphere causes an explosion. This includes vehicle engines, radios not rated EX-safe, lighters, and static from synthetic clothing.</span>
+      </div>
+      <div class="rule-icon">&#128267;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">6</div>
+      <div class="rule-text">
+        <strong>Never attempt a single-person rescue in any confined space, collapsed structure, or water incident.</strong>
+        <span>More people have died attempting lone rescues in confined spaces than in the original incident. Two trained rescuers, correct equipment, and authorisation — or you wait.</span>
+      </div>
+      <div class="rule-icon">&#128270;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">7</div>
+      <div class="rule-text">
+        <strong>Never cross a flooded wadi or drive through flood water — regardless of vehicle type, depth estimate, or time pressure.</strong>
+        <span>30 cm of fast-moving water will overturn a 4x4. Flood-water depths are deceiving. The road or ground beneath is gone. People have drowned in KSA flash floods doing exactly this.</span>
+      </div>
+      <div class="rule-icon">&#127754;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">8</div>
+      <div class="rule-text">
+        <strong>Never delay calling 997 / 998 / 999 because you believe you can handle it yourselves.</strong>
+        <span>External agencies are faster, better equipped, and trained for major emergencies. Calling them costs nothing and commits you to nothing. Not calling them and then losing control costs everything.</span>
+      </div>
+      <div class="rule-icon">&#128222;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">9</div>
+      <div class="rule-text">
+        <strong>Never withhold information from incident investigators or the HSE Manager — even if you believe it implicates you.</strong>
+        <span>True East operates a non-punitive reporting culture. Honest reporting is protected. Concealing information that could prevent future incidents is not — and is treated as a serious breach of conduct.</span>
+      </div>
+      <div class="rule-icon">&#128196;</div>
+    </div>
+
+    <div class="golden-rule" data-anim>
+      <div class="rule-num">10</div>
+      <div class="rule-text">
+        <strong>Never ignore a heat stroke casualty and assume they will "walk it off." Act immediately.</strong>
+        <span>In KSA summer operations, heat stroke is the most likely cause of on-site fatality. Every minute without active cooling reduces survival probability. Call 997, cool aggressively, transport urgently — without hesitation.</span>
+      </div>
+      <div class="rule-icon">&#9728;</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CLOSING ======== -->
+<section class="closing">
+  <div class="sec-tag" data-anim style="justify-content:center">True East Mining &mdash; Integrated Management System</div>
+  <h2 data-anim>This document can save your life.<br>Know it before you need it.</h2>
+  <p data-anim>Every person on a True East Mining site is responsible for their own safety and the safety of everyone around them. This manual is not compliance paperwork — it is a life-safety tool. Read it. Know it. Use it.</p>
+  <div data-anim style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="https://ims-portal.site" class="cbadge red">&#128680;&ensp;IMS Portal — Report an Incident</a>
+    <div class="cbadge">&#9733;&ensp;True East Mining &mdash; الشرق الحقيقي</div>
+  </div>
+</section>
+
+<div class="ft">
+  <div class="ft-inner">
+    <div class="ft-brand"><b>True East Mining Company</b> &mdash; الشرق الحقيقي للتعدين<br>Emergency Response Procedures Manual &middot; TE-IMS-MAN-HSE-003 &middot; Rev 00 &middot; May 2026</div>
+    <div style="color:rgba(255,255,255,.3);font-size:.7rem;text-align:right">ISO 45001:2018 &middot; ISO 14001:2015 &middot; ISO 9001:2015<br>Compliant with MHRSD &middot; Saudi Civil Defense &middot; NCEC</div>
+  </div>
+</div>
+
+<script>
+!function(){
+  // scroll reveal
+  var io = new IntersectionObserver(function(ee){
+    for(var i=0;i<ee.length;i++) if(ee[i].isIntersecting) ee[i].target.classList.add('show');
+  },{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('[data-anim]').forEach(function(el){io.observe(el)});
+
+  // progress bar
+  var bar = document.getElementById('prog');
+  window.addEventListener('scroll',function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(h>0) bar.style.width=(window.scrollY/h*100)+'%';
+  });
+
+  // side nav
+  var nav = document.getElementById('snav');
+  var dots = nav.querySelectorAll('a');
+  var ids = ['s0','s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+  var secs = ids.map(function(id){return document.getElementById(id)});
+  window.addEventListener('scroll',function(){
+    nav.classList.toggle('on', window.scrollY > window.innerHeight*0.4);
+    var c=0;
+    for(var i=0;i<secs.length;i++){
+      if(secs[i] && window.scrollY >= secs[i].offsetTop - window.innerHeight*0.4) c=i;
+    }
+    dots.forEach(function(d,i){d.classList.toggle('on',i===c)});
+  });
+  dots.forEach(function(d){
+    d.addEventListener('click',function(e){
+      e.preventDefault();
+      var t=document.querySelector(this.getAttribute('href'));
+      if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+}();
+
+function toggleScenario(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>

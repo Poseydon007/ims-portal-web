@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JHA Field Guide - True East Mining Company</title>
+<style>
+:root {
+  --navy: #081C2E;
+  --navy2: #0B2540;
+  --navy3: #1E3A5F;
+  --gold: #C49A28;
+  --gold2: #E8C96A;
+  --teal: #2EAAAA;
+  --red: #E74C3C;
+  --orange: #E67E22;
+  --green: #2ECC71;
+  --yellow: #F1C40F;
+  --cream: #F5F0E8;
+  --bg: #FAF8F5;
+  --txt: #2C2C2C;
+  --txt2: #6B6B6B;
+  --txt3: #999;
+  --hd: Georgia, 'Times New Roman', serif;
+  --bd: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --cd: Consolas, 'Courier New', monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--bd);color:var(--txt);background:var(--bg);line-height:1.7;overflow-x:hidden}
+
+/* === ANIMATIONS === */
+[data-anim]{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+[data-anim].show{opacity:1;transform:translateY(0)}
+[data-anim="left"]{transform:translateX(-40px)}
+[data-anim="left"].show{transform:translateX(0)}
+[data-anim="right"]{transform:translateX(40px)}
+[data-anim="right"].show{transform:translateX(0)}
+[data-anim="scale"]{transform:scale(.9)}
+[data-anim="scale"].show{transform:scale(1)}
+.delay1{transition-delay:.1s}
+.delay2{transition-delay:.2s}
+.delay3{transition-delay:.3s}
+.delay4{transition-delay:.4s}
+.delay5{transition-delay:.5s}
+
+/* === PROGRESS === */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:1000;width:0;transition:width .1s}
+
+/* === SIDE NAV === */
+.sidenav{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:.7rem;opacity:0;transition:opacity .4s}
+.sidenav.on{opacity:1}
+.sidenav a{width:10px;height:10px;border-radius:50%;background:rgba(8,28,46,.2);display:block;transition:all .3s;text-decoration:none}
+.sidenav a.on{background:var(--gold);box-shadow:0 0 10px rgba(196,154,40,.5);transform:scale(1.4)}
+
+/* === HERO === */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 40%,rgba(196,154,40,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 60%,rgba(46,170,170,.05) 0%,transparent 50%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;animation:gshift 20s linear infinite}
+@keyframes gshift{to{background-position:60px 60px}}
+.dot{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:0;animation:dotf 8s ease-in-out infinite}
+.dot:nth-child(3){left:15%;top:20%;animation-duration:7s}
+.dot:nth-child(4){left:75%;top:30%;animation-delay:1.5s;animation-duration:9s}
+.dot:nth-child(5){left:40%;top:70%;animation-delay:3s;animation-duration:6s}
+.dot:nth-child(6){left:85%;top:60%;animation-delay:.8s;animation-duration:8s}
+.dot:nth-child(7){left:25%;top:80%;animation-delay:2.2s;animation-duration:10s}
+.dot:nth-child(8){left:60%;top:15%;animation-delay:4s;animation-duration:7.5s}
+@keyframes dotf{0%,100%{opacity:0;transform:translateY(0) scale(1)}20%{opacity:.5}50%{opacity:.2;transform:translateY(-40px) scale(1.5)}80%{opacity:.4}}
+.hero-c{text-align:center;color:#fff;z-index:2;padding:2rem;max-width:800px}
+.hero-logo{margin-bottom:2rem;animation:fu 1s .1s both}
+.hero-logo img{height:60px;object-fit:contain;filter:brightness(1.1)}
+.hero-tag{display:inline-block;padding:.4rem 1.4rem;border:1px solid var(--gold);border-radius:30px;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;animation:fu 1s .3s both}
+.hero-c h1{font-family:var(--hd);font-size:clamp(2.4rem,6vw,4.5rem);font-weight:900;line-height:1.08;margin-bottom:1.4rem;animation:fu 1.2s .5s both}
+.hero-c h1 em{font-style:normal;display:block;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 2rem;line-height:1.7;animation:fu 1s .8s both}
+.hero-meta{display:flex;justify-content:center;gap:2rem;margin-bottom:2.5rem;animation:fu 1s 1s both;flex-wrap:wrap}
+.hero-meta-item{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem}
+.hero-meta-item span{color:var(--gold);font-family:var(--cd)}
+.hero-scroll{animation:bounce 2s 2s infinite,fu 1s 1.2s both;color:rgba(255,255,255,.3);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.hero-scroll svg{display:block;margin:.6rem auto 0;width:22px;height:22px;stroke:rgba(255,255,255,.3);fill:none}
+@keyframes fu{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}60%{transform:translateY(-4px)}}
+
+/* === SECTION COMMON === */
+.sec{padding:5rem 2rem 4rem;max-width:820px;margin:0 auto}
+.sec-tag{font-family:var(--hd);font-size:.82rem;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+.sec-tag::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.sec h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.15;color:var(--navy);margin-bottom:1rem}
+.sec-lead{font-size:1.1rem;font-weight:300;color:var(--txt2);line-height:1.8;max-width:620px}
+
+/* === ALERT BOX === */
+.alert{display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem 1.8rem;border-radius:12px;margin:2rem auto;max-width:820px;margin-left:2rem;margin-right:2rem}
+.alert.danger{background:linear-gradient(135deg,rgba(231,76,60,.06),rgba(231,76,60,.03));border:1.5px solid rgba(231,76,60,.18)}
+.alert.warn{background:linear-gradient(135deg,rgba(230,126,34,.06),rgba(230,126,34,.03));border:1.5px solid rgba(230,126,34,.18)}
+.alert.info{background:linear-gradient(135deg,rgba(46,170,170,.06),rgba(46,170,170,.03));border:1.5px solid rgba(46,170,170,.18)}
+.alert-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.alert.danger .alert-ico{background:rgba(231,76,60,.1)}
+.alert.warn .alert-ico{background:rgba(230,126,34,.1)}
+.alert.info .alert-ico{background:rgba(46,170,170,.1)}
+.alert-body h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.alert.danger .alert-body h4{color:var(--red)}
+.alert.warn .alert-body h4{color:var(--orange)}
+.alert.info .alert-body h4{color:var(--teal)}
+.alert-body p{font-size:.88rem;color:var(--txt2);line-height:1.6}
+
+/* === ROLE CARDS === */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.role-card{border-radius:14px;overflow:hidden;transition:transform .4s,box-shadow .4s}
+.role-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.09)}
+.role-hd{padding:1.6rem 1.8rem;color:#fff}
+.role-card.sup .role-hd{background:linear-gradient(135deg,var(--navy),var(--navy3))}
+.role-card.wkr .role-hd{background:linear-gradient(135deg,#2E5A88,#3A7BD5)}
+.role-hd-top{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem}
+.role-badge{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+.role-hd h3{font-family:var(--hd);font-size:1.1rem;font-weight:700}
+.role-hd p{font-size:.8rem;opacity:.65;margin-top:.2rem}
+.role-bd{padding:1.4rem 1.8rem;background:#fff;border:1px solid #eee;border-top:none;border-radius:0 0 14px 14px}
+.role-list{list-style:none}
+.role-list li{padding:.45rem 0 .45rem 1.3rem;position:relative;font-size:.87rem;color:var(--txt2);line-height:1.55;border-bottom:1px solid #f5f5f5}
+.role-list li:last-child{border-bottom:none}
+.role-list li::before{content:'';position:absolute;left:0;top:.85rem;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+/* === STEPS === */
+.steps-wrap{max-width:820px;margin:3rem auto;padding:0 2rem}
+.step{display:flex;gap:1.8rem;margin-bottom:2.2rem;align-items:flex-start}
+.step-num{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--hd);font-size:1.4rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(8,28,46,.25);transition:transform .3s}
+.step:hover .step-num{transform:scale(1.1)}
+.step-body{padding-top:.3rem;flex:1}
+.step-body h3{font-family:var(--hd);font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.step-body p{font-size:.9rem;color:var(--txt2);line-height:1.65}
+.step-example{margin-top:.8rem;padding:.8rem 1.2rem;background:linear-gradient(135deg,rgba(196,154,40,.06),rgba(196,154,40,.03));border-left:3px solid var(--gold);border-radius:0 8px 8px 0;font-size:.83rem;color:var(--txt2);line-height:1.6}
+.step-example strong{color:var(--navy);font-weight:700}
+.step-connector{width:2px;height:28px;background:linear-gradient(180deg,var(--navy3),rgba(30,58,95,.2));margin-left:25px;margin-bottom:0}
+
+/* === RISK MATRIX === */
+.matrix-wrap{max-width:820px;margin:3rem auto;padding:0 2rem}
+.matrix-label{font-size:.75rem;font-weight:700;color:var(--txt2);letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:1rem}
+.matrix-outer{position:relative;padding-top:2rem;padding-left:2.8rem}
+.matrix-axis-y{position:absolute;left:.3rem;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:.68rem;font-weight:700;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.matrix-axis-x{text-align:center;font-size:.68rem;font-weight:700;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;margin-top:.7rem}
+.matrix-grid{display:grid;grid-template-columns:80px repeat(5,1fr);grid-template-rows:repeat(5,1fr) 32px;gap:3px;font-size:.7rem;font-weight:700;text-align:center}
+.m-hdr{background:var(--navy);color:rgba(255,255,255,.7);padding:.5rem .3rem;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;letter-spacing:.04em}
+.m-row-hdr{background:var(--navy);color:rgba(255,255,255,.7);padding:.4rem .3rem;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;text-align:center;line-height:1.3;letter-spacing:.02em}
+.m-cell{padding:.5rem .2rem;border-radius:4px;display:flex;align-items:center;justify-content:center;line-height:1.2;transition:transform .2s,box-shadow .2s;cursor:default}
+.m-cell:hover{transform:scale(1.06);box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:2;position:relative}
+.m-low{background:#27AE60;color:#fff}
+.m-med{background:#F39C12;color:#fff}
+.m-high{background:#E67E22;color:#fff}
+.m-crit{background:#C0392B;color:#fff}
+.matrix-legend{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center}
+.ml-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:600;color:var(--txt2)}
+.ml-dot{width:14px;height:14px;border-radius:3px}
+
+/* === QUOTE === */
+.quote{font-family:var(--hd);font-size:1.35rem;font-style:italic;color:var(--navy);line-height:1.7;text-align:center;max-width:580px;margin:3rem auto;padding:2rem 2rem 2rem 3.5rem;position:relative}
+.quote::before{content:'\201C';font-family:var(--hd);font-size:5rem;font-weight:900;color:var(--gold);opacity:.2;position:absolute;top:-.5rem;left:0;line-height:1}
+
+/* === HAZARD CARDS === */
+.haz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.haz-card{border-radius:14px;background:#fff;border:1px solid #eee;padding:1.6rem 1.4rem;transition:all .4s}
+.haz-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.08);border-color:var(--gold)}
+.haz-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.5rem}
+.haz-card h3{font-family:var(--hd);font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.haz-examples{list-style:none;margin-top:.6rem}
+.haz-examples li{font-size:.8rem;color:var(--txt2);padding:.25rem 0 .25rem 1.1rem;position:relative;line-height:1.5}
+.haz-examples li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* === HIERARCHY === */
+.hier-wrap{max-width:820px;margin:3rem auto;padding:0 2rem}
+.hier-item{display:flex;align-items:stretch;margin-bottom:.8rem;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:all .4s}
+.hier-item:hover{transform:translateX(4px);box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.hier-num{width:56px;display:flex;align-items:center;justify-content:center;font-family:var(--hd);font-size:1.6rem;font-weight:900;color:#fff;flex-shrink:0}
+.hier-num.h1{background:#1A6B3C}
+.hier-num.h2{background:#2E7D32}
+.hier-num.h3{background:#388E3C}
+.hier-num.h4{background:#F57F17}
+.hier-num.h5{background:#E65100}
+.hier-num.h6{background:#B71C1C}
+.hier-body{padding:1.2rem 1.5rem;background:#fff;border:1px solid #eee;border-left:none;flex:1}
+.hier-body h3{font-family:var(--hd);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.hier-body p{font-size:.85rem;color:var(--txt2);line-height:1.55}
+.hier-tag{display:inline-block;padding:.15rem .7rem;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-left:.7rem;vertical-align:middle}
+.tag-best{background:rgba(26,107,60,.1);color:#1A6B3C}
+.tag-pref{background:rgba(46,125,50,.1);color:#2E7D32}
+.tag-good{background:rgba(56,142,60,.1);color:#388E3C}
+.tag-eng{background:rgba(245,127,23,.1);color:#F57F17}
+.tag-admin{background:rgba(230,81,0,.1);color:#E65100}
+.tag-ppe{background:rgba(183,28,28,.1);color:#B71C1C}
+.hier-arrow{display:flex;align-items:center;justify-content:center;padding:0 1rem;background:#f8f8f8;border:1px solid #eee;border-left:none;color:var(--txt3);font-size:.9rem}
+
+/* === WORKED EXAMPLE === */
+.dark{background:var(--navy);color:#fff;padding:5rem 2rem;position:relative;overflow:hidden}
+.dark::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 20%,rgba(196,154,40,.06) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(46,170,170,.04) 0%,transparent 50%)}
+.dark-in{max-width:820px;margin:0 auto;position:relative;z-index:2}
+.dark-tag{font-family:var(--hd);font-size:.82rem;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+.dark-tag::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.dark h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:.5rem}
+.dark h2 em{font-style:normal;color:var(--gold)}
+.dark p.lead{color:rgba(255,255,255,.55);font-size:1rem;max-width:580px;line-height:1.8;margin-bottom:2rem}
+.ex-table{width:100%;border-collapse:separate;border-spacing:0 6px;margin-top:1rem}
+.ex-table thead th{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;padding:.5rem .9rem;text-align:left}
+.ex-table tbody tr{background:rgba(255,255,255,.04);transition:background .3s}
+.ex-table tbody tr:hover{background:rgba(255,255,255,.07)}
+.ex-table td{padding:.8rem .9rem;font-size:.83rem;line-height:1.5;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.ex-table td:first-child{border-left:1px solid rgba(255,255,255,.04);border-radius:8px 0 0 8px;color:rgba(255,255,255,.7);font-weight:600;white-space:nowrap}
+.ex-table td:last-child{border-right:1px solid rgba(255,255,255,.04);border-radius:0 8px 8px 0}
+.risk-badge{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.rb-low{background:rgba(39,174,96,.2);color:#5EDA9E;border:1px solid rgba(39,174,96,.25)}
+.rb-med{background:rgba(243,156,18,.2);color:#F8C66B;border:1px solid rgba(243,156,18,.25)}
+.rb-high{background:rgba(230,126,34,.2);color:#F5A95A;border:1px solid rgba(230,126,34,.25)}
+.rb-crit{background:rgba(192,57,43,.2);color:#F08070;border:1px solid rgba(192,57,43,.25)}
+
+/* === MISTAKES === */
+.mist-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.mist-card{border-radius:12px;background:#fff;border:1px solid rgba(231,76,60,.1);padding:1.5rem 1.6rem;position:relative;transition:all .4s;overflow:hidden}
+.mist-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.mist-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--red)}
+.mist-n{font-family:var(--hd);font-size:2rem;font-weight:900;color:rgba(231,76,60,.12);position:absolute;top:.6rem;right:1rem;line-height:1}
+.mist-card h4{font-size:.95rem;font-weight:700;color:var(--red);margin-bottom:.4rem;padding-right:2rem}
+.mist-card p{font-size:.85rem;color:var(--txt2);line-height:1.6}
+.mist-fix{margin-top:.6rem;font-size:.82rem;color:var(--green);font-weight:600;display:flex;align-items:flex-start;gap:.5rem}
+
+/* === GOLDEN RULES === */
+.rules-wrap{max-width:820px;margin:3rem auto;padding:0 2rem}
+.rule{display:flex;align-items:center;gap:1.5rem;margin-bottom:1.2rem;padding:1.4rem 1.8rem;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--navy3));color:#fff;transition:all .4s;cursor:default}
+.rule:hover{transform:translateX(6px);box-shadow:0 8px 28px rgba(8,28,46,.25)}
+.rule-num{font-family:var(--hd);font-size:2.2rem;font-weight:900;color:var(--gold);opacity:.6;line-height:1;min-width:2.5rem}
+.rule-body h3{font-size:1rem;font-weight:700;margin-bottom:.2rem}
+.rule-body p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.5}
+.rule-icon{width:44px;height:44px;border-radius:50%;background:rgba(196,154,40,.12);border:1.5px solid rgba(196,154,40,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem;margin-left:auto}
+
+/* === QUICK REFERENCE === */
+.qr-wrap{background:linear-gradient(135deg,var(--cream),#EDE8DE);padding:5rem 2rem;border-top:1px solid #e0d8cc}
+.qr-in{max-width:820px;margin:0 auto}
+.qr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.qr-card{background:#fff;border-radius:12px;border:1px solid #e0d8cc;padding:1.4rem;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.qr-card h4{font-family:var(--hd);font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)}
+.qr-list{list-style:none}
+.qr-list li{font-size:.8rem;color:var(--txt2);padding:.3rem 0;border-bottom:1px solid #f3f3f3;line-height:1.4}
+.qr-list li:last-child{border-bottom:none}
+.qr-list li strong{color:var(--navy);font-weight:600}
+.qr-swa{margin-top:1.5rem;padding:1.2rem 1.6rem;background:var(--navy);border-radius:12px;color:#fff;text-align:center}
+.qr-swa h4{font-family:var(--hd);font-size:1.1rem;font-weight:700;margin-bottom:.3rem;color:var(--gold)}
+.qr-swa p{font-size:.85rem;color:rgba(255,255,255,.6)}
+
+/* === CLOSING === */
+.closing{padding:6rem 2rem;text-align:center;background:linear-gradient(180deg,var(--bg),var(--cream))}
+.closing h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--navy);margin-bottom:1rem}
+.closing p{font-size:1rem;color:var(--txt2);max-width:520px;margin:0 auto 2.5rem;line-height:1.8}
+.cbadge{display:inline-flex;align-items:center;gap:.7rem;padding:.9rem 2.2rem;background:var(--navy);color:#fff;border-radius:50px;font-weight:600;font-size:.85rem;letter-spacing:.03em;text-decoration:none;transition:all .4s}
+.cbadge:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(8,28,46,.2)}
+
+/* === FOOTER === */
+.ft{padding:2rem;text-align:center;font-size:.72rem;color:var(--txt3);border-top:1px solid #eee}
+.ft b{color:var(--gold);font-weight:600}
+
+/* === STATS ROW === */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:820px;margin:3rem auto;padding:0 2rem}
+.stat{text-align:center;padding:1.8rem 1rem;border-radius:14px;background:#fff;border:1px solid #eee;transition:all .4s}
+.stat:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.stat-n{font-family:var(--hd);font-size:2.4rem;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.4rem}
+.stat-l{font-size:.75rem;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;line-height:1.3}
+
+/* === RESPONSIVE === */
+@media(max-width:768px){
+  .roles,.mist-grid,.haz-grid,.qr-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .sidenav{display:none}
+  .step{flex-direction:column;gap:1rem}
+  .step-num{width:42px;height:42px;font-size:1.1rem}
+  .hero-meta{flex-direction:column;align-items:center;gap:1rem}
+  .matrix-outer{padding-left:1.8rem}
+  .matrix-grid{font-size:.58rem}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav class="sidenav" id="snav">
+  <a href="#s0"></a>
+  <a href="#s1"></a>
+  <a href="#s2"></a>
+  <a href="#s3"></a>
+  <a href="#s4"></a>
+  <a href="#s5"></a>
+  <a href="#s6"></a>
+  <a href="#s7"></a>
+  <a href="#s8"></a>
+  <a href="#s9"></a>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section class="hero" id="s0">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="hero-c">
+    <div class="hero-logo">
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png" alt="True East Mining Company">
+    </div>
+    <div class="hero-tag">Field Guide &mdash; TE-IMS-GDE-HSE-002 &middot; ISO 45001</div>
+    <h1>Job Hazard<em>Analysis Guide</em></h1>
+    <p class="hero-sub">Before every high-risk task, a JHA is not optional. This guide teaches you exactly how to do one &mdash; correctly, quickly, and in a way that actually keeps people safe.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Document Code: <span>TE-IMS-GDE-HSE-002</span></div>
+      <div class="hero-meta-item">Revision: <span>Rev 00</span></div>
+      <div class="hero-meta-item">Date: <span>May 2026</span></div>
+    </div>
+    <div class="hero-scroll">Scroll to begin<svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></div>
+  </div>
+</section>
+
+<!-- ======== CH1: WHAT IS A JHA ======== -->
+<section id="s1">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 1</div>
+    <h2 data-anim>What is a JHA<br>and why it's mandatory.</h2>
+    <p class="sec-lead" data-anim>A Job Hazard Analysis (JHA) &mdash; also called a Job Safety Analysis (JSA) &mdash; is a structured method to identify hazards in a task, assess the risk of each hazard, and define the controls that will protect the people doing the work.</p>
+  </div>
+
+  <div class="alert danger" data-anim>
+    <div class="alert-ico">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M4.93 19h14.14c1.34 0 2.17-1.46 1.49-2.63L13.49 4.25c-.68-1.17-2.3-1.17-2.98 0L3.44 16.37c-.68 1.17.15 2.63 1.49 2.63z"/></svg>
+    </div>
+    <div class="alert-body">
+      <h4>JHA is mandatory before every high-risk task</h4>
+      <p>At True East Mining, a completed and signed JHA is a condition of work &mdash; not a suggestion. No JHA means no start. This is a Stop Work Authority trigger. Any person can halt work if a valid JHA is not in place.</p>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:2rem;padding-bottom:2rem">
+    <p data-anim style="font-size:.95rem;color:var(--txt2);line-height:1.8;max-width:620px">Think of a JHA as a five-minute safety conversation on paper. It forces the crew to ask three questions before touching the tools:</p>
+    <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem">
+      <div data-anim style="display:flex;align-items:center;gap:1.2rem;padding:1.1rem 1.4rem;background:#fff;border-radius:10px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(196,154,40,.1);border:1.5px solid rgba(196,154,40,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900;color:var(--gold);font-size:.9rem">1</div>
+        <div><strong style="color:var(--navy)">What are we about to do?</strong> <span style="color:var(--txt2);font-size:.9rem">&mdash; Break the task into clear steps.</span></div>
+      </div>
+      <div data-anim class="delay1" style="display:flex;align-items:center;gap:1.2rem;padding:1.1rem 1.4rem;background:#fff;border-radius:10px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(196,154,40,.1);border:1.5px solid rgba(196,154,40,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900;color:var(--gold);font-size:.9rem">2</div>
+        <div><strong style="color:var(--navy)">What could go wrong?</strong> <span style="color:var(--txt2);font-size:.9rem">&mdash; Identify every hazard at each step.</span></div>
+      </div>
+      <div data-anim class="delay2" style="display:flex;align-items:center;gap:1.2rem;padding:1.1rem 1.4rem;background:#fff;border-radius:10px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(196,154,40,.1);border:1.5px solid rgba(196,154,40,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900;color:var(--gold);font-size:.9rem">3</div>
+        <div><strong style="color:var(--navy)">How do we stop it from happening?</strong> <span style="color:var(--txt2);font-size:.9rem">&mdash; Define the controls, then work.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats" data-anim="scale">
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">High-Risk Tasks Require JHA</div></div>
+    <div class="stat"><div class="stat-n">0</div><div class="stat-l">Exceptions to This Rule</div></div>
+    <div class="stat"><div class="stat-n">ISO</div><div class="stat-l">45001:2018 Requirement</div></div>
+    <div class="stat"><div class="stat-n">SWA</div><div class="stat-l">Right to Stop Work</div></div>
+  </div>
+
+  <div class="alert info" data-anim>
+    <div class="alert-ico">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2EAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+    </div>
+    <div class="alert-body">
+      <h4>What triggers a mandatory JHA at True East?</h4>
+      <p>Drilling operations &bull; Working at height (&gt;1.8 m) &bull; Confined space entry &bull; Hot work &bull; Lifting operations &bull; LOTO / maintenance on energized equipment &bull; Chemical handling &bull; Night operations &bull; Any task not covered by an existing procedure &bull; Any task where conditions have changed since the last JHA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CH2: WHO & WHEN ======== -->
+<section id="s2">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 2</div>
+    <h2 data-anim>Who fills it out<br>and when.</h2>
+    <p class="sec-lead" data-anim>A JHA is always a team effort. The Supervisor leads the process. The field workers contribute their knowledge. Everyone signs. Everyone is responsible.</p>
+  </div>
+
+  <div class="roles">
+    <div class="role-card sup" data-anim>
+      <div class="role-hd">
+        <div class="role-hd-top">
+          <div class="role-badge">&#x1F477;</div>
+          <div>
+            <h3>Supervisor / Site Foreman</h3>
+            <p>Leads and is accountable</p>
+          </div>
+        </div>
+      </div>
+      <div class="role-bd">
+        <ul class="role-list">
+          <li>Initiates the JHA before work begins &mdash; no exceptions</li>
+          <li>Facilitates the hazard identification discussion with the crew</li>
+          <li>Selects controls from the hierarchy (Eliminate &rarr; PPE)</li>
+          <li>Signs as the person who assessed and approved the task</li>
+          <li>Ensures everyone on the crew has read and signed the JHA</li>
+          <li>Updates the JHA if site conditions change mid-task</li>
+          <li>Exercises Stop Work Authority if controls fail</li>
+          <li>Submits completed JHA to Site HSE Manager within 24 hours</li>
+        </ul>
+      </div>
+    </div>
+    <div class="role-card wkr" data-anim class="delay1">
+      <div class="role-hd">
+        <div class="role-hd-top">
+          <div class="role-badge">&#x1F6E0;&#xFE0F;</div>
+          <div>
+            <h3>Field Worker / Crew Member</h3>
+            <p>Participates and must understand</p>
+          </div>
+        </div>
+      </div>
+      <div class="role-bd">
+        <ul class="role-list">
+          <li>Actively contributes hazards from personal experience &mdash; you know the job best</li>
+          <li>Asks questions if any step or control is unclear</li>
+          <li>Signs the JHA only when you genuinely understand it</li>
+          <li>Refuse to sign (and refuse to start) if controls are inadequate</li>
+          <li>Apply all identified controls during work</li>
+          <li>Stop work immediately if a new hazard appears not on the JHA</li>
+          <li>Report any incident or near-miss to the Supervisor right away</li>
+          <li>Know that exercising Stop Work Authority is your right &mdash; always</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert warn" data-anim>
+    <div class="alert-ico">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E67E22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M4.93 19h14.14c1.34 0 2.17-1.46 1.49-2.63L13.49 4.25c-.68-1.17-2.3-1.17-2.98 0L3.44 16.37c-.68 1.17.15 2.63 1.49 2.63z"/></svg>
+    </div>
+    <div class="alert-body">
+      <h4>When to redo or update a JHA</h4>
+      <p>A JHA is valid for one shift. If the task extends to the next shift, start a new JHA. If site conditions change (weather, equipment, crew, or scope), stop work and update the JHA before continuing. A JHA written yesterday for different conditions is not valid today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CH3: HOW TO COMPLETE ======== -->
+<section id="s3">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 3</div>
+    <h2 data-anim>How to complete<br>a JHA. Step by step.</h2>
+    <p class="sec-lead" data-anim>Follow these eight steps every time. Do not skip. Do not rush. A JHA done badly is worse than no JHA &mdash; it creates false confidence.</p>
+  </div>
+
+  <div class="steps-wrap">
+
+    <div class="step" data-anim>
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Complete the header information</h3>
+        <p>Fill in: task name, location (GPS or grid ref), date, shift, Supervisor name, crew names, permit-to-work number (if applicable), equipment involved. Every field is mandatory. Missing information means an incomplete JHA &mdash; do not start work.</p>
+        <div class="step-example"><strong>Example:</strong> Task: "Rod change at drill collar &mdash; Rig #3 / Hole TT-07." Location: "Northern Mine, Tathlith, Grid D-4." Date: 03/05/2026. Shift: Day. Permit: PTW-026-014.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Break the task into numbered steps</h3>
+        <p>List each step of the task in the order you will perform it. Keep each step to one action. Be specific &mdash; "set up rig" is too vague. "Position the rod handler arm over the drill collar" is correct. Aim for 5&ndash;15 steps for most tasks. More than 20 means the task is too complex and should be broken into separate JHAs.</p>
+        <div class="step-example"><strong>Example steps for rod change:</strong> 1. Signal driller to stop rotation and raise bit to safe height. 2. Apply LOTO on hydraulic and rotation power. 3. Position rod handler arm. 4. Break joint at drill collar. 5. Extract rod section to laydown area...</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Identify hazards at each step</h3>
+        <p>For every step, ask: what could injure someone here? Consider all hazard categories (see Chapter 5). Write the specific hazard, not just the type. Use the question: "What could go wrong, and what would the injury be?" Multiple hazards per step are common &mdash; list them all. Do not skip a step because it "seems safe".</p>
+        <div class="step-example"><strong>Example:</strong> Step 4 (Break joint) &mdash; Hazard 1: "Unexpected rotation of drill string if LOTO is incomplete &mdash; entanglement / crush injury." Hazard 2: "Release of compressed air from pneumatic lines &mdash; high-pressure injection injury." Hazard 3: "Drop of drill rod section &mdash; foot/leg crush."</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Rate each hazard using the risk matrix</h3>
+        <p>Assign a risk rating to each hazard using the matrix in Chapter 4. Rate the <em>inherent</em> risk first (before controls). This shows why controls are needed. Then rate the <em>residual</em> risk (after controls). Residual risk must be Low or Medium before work can proceed. Any residual High or Critical risk requires sign-off from the Site HSE Manager and Site Supervisor.</p>
+        <div class="step-example"><strong>Example:</strong> Unexpected rotation &rarr; Likelihood 4 (Likely) &times; Consequence 5 (Fatality) = <span style="color:#C0392B;font-weight:700">CRITICAL</span>. After LOTO verification: Likelihood 1 (Rare) &times; Consequence 5 = <span style="color:#27AE60;font-weight:700">LOW</span>.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>Define controls using the hierarchy</h3>
+        <p>For each hazard, list the controls you will apply. Always start from the top of the hierarchy: can you <strong>eliminate</strong> the hazard? If not, can you <strong>substitute</strong>? Work down. You will often end up with multiple controls for a single hazard. PPE should never be the only control for a High or Critical hazard &mdash; it is always a last layer, not a first.</p>
+        <div class="step-example"><strong>Example controls for unexpected rotation:</strong> Engineering: LOTO applied to hydraulic and rotation power (TE-IMS-SOP-HSE-003). Verify zero energy. Admin: visual check by Supervisor before approach. PPE: FR coveralls, hard hat, safety boots. All three layers active.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3>Assign responsibility for each control</h3>
+        <p>Write a person's name or role next to every control. "LOTO applied by: Isolation Officer (Ahmed Al-Rashidi)." If no one owns a control, it will not be done. This is how incidents happen. Ownership is not optional.</p>
+        <div class="step-example"><strong>Rule:</strong> If you write a control and leave the "Responsible" column blank, the JHA is incomplete. Do not submit it. Do not start work.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h3>Brief the whole crew &mdash; everyone reads and signs</h3>
+        <p>The Supervisor walks through every step and every control verbally. Crew members ask questions. No one signs until they understand. Signing is a personal commitment: "I understand what I'm doing, I understand the hazards, and I understand how I am protected." If someone does not understand the language, provide a verbal translation before they sign.</p>
+        <div class="step-example"><strong>Important:</strong> A crew member who does not understand the JHA but signs anyway creates a liability for the company <em>and</em> for themselves. If you are the Supervisor, do not accept a blank signature &mdash; confirm understanding with a direct question.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step" data-anim>
+      <div class="step-num">8</div>
+      <div class="step-body">
+        <h3>Monitor, adapt, and close out</h3>
+        <p>During the task, the Supervisor checks that controls are being applied. If a new hazard is identified, stop work, update the JHA, re-brief, and restart. When the task is complete, the Supervisor signs the close-out section and submits the JHA to the Site HSE Manager within 24 hours. Records are retained in the IMS for a minimum of 5 years.</p>
+        <div class="step-example"><strong>Remember:</strong> A JHA is a living document during the task. Crossing out and initialing a change in the field is better than ignoring a new hazard. If the change is significant, get a new form.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== CH4: RISK MATRIX ======== -->
+<section id="s4">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 4</div>
+    <h2 data-anim>The Risk Matrix.</h2>
+    <p class="sec-lead" data-anim>Use this table to rate every hazard. Find the Likelihood row, find the Consequence column, read the Risk Level where they intersect. Simple. Consistent. Everyone uses the same scale.</p>
+  </div>
+
+  <div class="matrix-wrap">
+    <div class="matrix-label" data-anim>CONSEQUENCE &rarr;</div>
+    <div class="matrix-outer" data-anim="scale">
+      <div class="matrix-axis-y">LIKELIHOOD &uarr;</div>
+      <div class="matrix-grid">
+        <!-- Header row -->
+        <div class="m-hdr" style="grid-column:1"></div>
+        <div class="m-hdr">1&nbsp;&mdash;&nbsp;Negligible<br><span style="opacity:.6;font-weight:400">First Aid</span></div>
+        <div class="m-hdr">2&nbsp;&mdash;&nbsp;Minor<br><span style="opacity:.6;font-weight:400">Medical Treat.</span></div>
+        <div class="m-hdr">3&nbsp;&mdash;&nbsp;Moderate<br><span style="opacity:.6;font-weight:400">Lost Time Inj.</span></div>
+        <div class="m-hdr">4&nbsp;&mdash;&nbsp;Major<br><span style="opacity:.6;font-weight:400">Permanent Disab.</span></div>
+        <div class="m-hdr">5&nbsp;&mdash;&nbsp;Catastrophic<br><span style="opacity:.6;font-weight:400">Fatality</span></div>
+        <!-- Row 5 -->
+        <div class="m-row-hdr">5 &mdash; Almost Certain<br>(&gt;90%)</div>
+        <div class="m-cell m-med">MEDIUM<br>5</div>
+        <div class="m-cell m-high">HIGH<br>10</div>
+        <div class="m-cell m-crit">CRITICAL<br>15</div>
+        <div class="m-cell m-crit">CRITICAL<br>20</div>
+        <div class="m-cell m-crit">CRITICAL<br>25</div>
+        <!-- Row 4 -->
+        <div class="m-row-hdr">4 &mdash; Likely<br>(50–90%)</div>
+        <div class="m-cell m-low">LOW<br>4</div>
+        <div class="m-cell m-med">MEDIUM<br>8</div>
+        <div class="m-cell m-high">HIGH<br>12</div>
+        <div class="m-cell m-crit">CRITICAL<br>16</div>
+        <div class="m-cell m-crit">CRITICAL<br>20</div>
+        <!-- Row 3 -->
+        <div class="m-row-hdr">3 &mdash; Possible<br>(10–50%)</div>
+        <div class="m-cell m-low">LOW<br>3</div>
+        <div class="m-cell m-med">MEDIUM<br>6</div>
+        <div class="m-cell m-med">MEDIUM<br>9</div>
+        <div class="m-cell m-high">HIGH<br>12</div>
+        <div class="m-cell m-crit">CRITICAL<br>15</div>
+        <!-- Row 2 -->
+        <div class="m-row-hdr">2 &mdash; Unlikely<br>(1–10%)</div>
+        <div class="m-cell m-low">LOW<br>2</div>
+        <div class="m-cell m-low">LOW<br>4</div>
+        <div class="m-cell m-med">MEDIUM<br>6</div>
+        <div class="m-cell m-high">HIGH<br>8</div>
+        <div class="m-cell m-high">HIGH<br>10</div>
+        <!-- Row 1 -->
+        <div class="m-row-hdr">1 &mdash; Rare<br>(&lt;1%)</div>
+        <div class="m-cell m-low">LOW<br>1</div>
+        <div class="m-cell m-low">LOW<br>2</div>
+        <div class="m-cell m-low">LOW<br>3</div>
+        <div class="m-cell m-med">MEDIUM<br>4</div>
+        <div class="m-cell m-med">MEDIUM<br>5</div>
+        <!-- Axis row -->
+        <div></div>
+        <div style="grid-column:2/7;text-align:center;font-size:.65rem;color:var(--txt3);padding-top:.5rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">&#8592; Consequence (Severity of worst-case outcome) &#8594;</div>
+      </div>
+      <div class="matrix-legend">
+        <div class="ml-item"><div class="ml-dot" style="background:#27AE60"></div>LOW — Manage with routine procedures</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#F39C12"></div>MEDIUM — Supervisor attention required</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#E67E22"></div>HIGH — Senior management + controls verified</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#C0392B"></div>CRITICAL — HSE Manager approval before start</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" data-anim>
+      <div style="padding:1.4rem;background:#fff;border-radius:12px;border:1px solid #eee">
+        <h4 style="font-family:var(--hd);font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.8rem">Likelihood Definitions</h4>
+        <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">1 Rare</td><td style="color:var(--txt2)">Has not occurred; possible in theory only</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">2 Unlikely</td><td style="color:var(--txt2)">Has occurred in the industry before</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">3 Possible</td><td style="color:var(--txt2)">Has occurred at this site or similar</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">4 Likely</td><td style="color:var(--txt2)">Occurs periodically without controls</td></tr>
+          <tr><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">5 Almost Certain</td><td style="color:var(--txt2)">Will occur if work proceeds as-is</td></tr>
+        </table>
+      </div>
+      <div style="padding:1.4rem;background:#fff;border-radius:12px;border:1px solid #eee">
+        <h4 style="font-family:var(--hd);font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.8rem">Consequence Definitions</h4>
+        <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">1 Negligible</td><td style="color:var(--txt2)">First aid only; back to work same shift</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">2 Minor</td><td style="color:var(--txt2)">Medical treatment; no lost time</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">3 Moderate</td><td style="color:var(--txt2)">Lost-time injury; &gt;1 day off work</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">4 Major</td><td style="color:var(--txt2)">Permanent disability; long-term illness</td></tr>
+          <tr><td style="padding:.4rem 0;font-weight:600;color:var(--navy)">5 Catastrophic</td><td style="color:var(--txt2)">Single or multiple fatality</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote" data-anim>"Rate the risk before controls, then rate it again after. If the residual risk is still High or Critical, the controls are not enough. Add more or do not proceed."</div>
+</section>
+
+<!-- ======== CH5: HAZARD CATEGORIES ======== -->
+<section id="s5">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 5</div>
+    <h2 data-anim>Common hazard categories<br>on drilling sites.</h2>
+    <p class="sec-lead" data-anim>Use this list as a prompt when you are identifying hazards. Run through each category for every task step. If it does not apply, move on. If it might apply, list it.</p>
+  </div>
+
+  <div class="haz-grid">
+
+    <div class="haz-card" data-anim>
+      <div class="haz-icon" style="background:rgba(231,76,60,.07)">&#x2699;&#xFE0F;</div>
+      <h3>Mechanical</h3>
+      <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.3rem">Moving parts, rotation, pressure, crush points.</p>
+      <ul class="haz-examples">
+        <li>Drill string rotation — entanglement, degloving</li>
+        <li>Rod handler arm — pinch, crush</li>
+        <li>High-pressure hydraulic lines — injection injuries</li>
+        <li>Compressed air — pneumatic release, projectiles</li>
+        <li>Dropped rods or casing — impact, crush</li>
+        <li>Mast collapse — structural failure</li>
+      </ul>
+    </div>
+
+    <div class="haz-card" data-anim class="delay1">
+      <div class="haz-icon" style="background:rgba(241,196,15,.07)">&#x26A1;</div>
+      <h3>Electrical</h3>
+      <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.3rem">Shock, arc flash, fire from electrical faults.</p>
+      <ul class="haz-examples">
+        <li>Generator connections — electric shock</li>
+        <li>Damaged cables — earth fault, fire</li>
+        <li>Arc flash from switchgear — burns, blindness</li>
+        <li>Working near live circuits — electrocution</li>
+        <li>Inadequate LOTO on electrical isolation — re-energization</li>
+        <li>Wet conditions + electrical equipment</li>
+      </ul>
+    </div>
+
+    <div class="haz-card" data-anim class="delay2">
+      <div class="haz-icon" style="background:rgba(46,170,170,.07)">&#x2697;&#xFE0F;</div>
+      <h3>Chemical</h3>
+      <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.3rem">Toxic, flammable, corrosive, or reactive substances.</p>
+      <ul class="haz-examples">
+        <li>Drilling fluid additives — skin / eye contact</li>
+        <li>Diesel fuel spill — fire, environmental</li>
+        <li>H₂S gas — toxic inhalation</li>
+        <li>Dust (silica) — long-term lung disease</li>
+        <li>Battery acid — chemical burns</li>
+        <li>Solvents — inhalation, fire</li>
+      </ul>
+    </div>
+
+    <div class="haz-card" data-anim>
+      <div class="haz-icon" style="background:rgba(230,126,34,.07)">&#x26A0;&#xFE0F;</div>
+      <h3>Working at Height</h3>
+      <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.3rem">Any work above 1.8 m from a stable surface.</p>
+      <ul class="haz-examples">
+        <li>Mast work — fall from height</li>
+        <li>Working on rig platform — slip, trip, fall</li>
+        <li>Dropped tools from height — struck-by hazard below</li>
+        <li>Inadequate access ladder — fall during climb</li>
+        <li>Unsecured handrails or grating — sudden collapse</li>
+        <li>Heat + height — dizziness, loss of grip</li>
+      </ul>
+    </div>
+
+    <div class="haz-card" data-anim class="delay1">
+      <div class="haz-icon" style="background:rgba(39,174,96,.07)">&#x1F4AA;</div>
+      <h3>Manual Handling</h3>
+      <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.3rem">Lifting, carrying, pushing, pulling heavy items.</p>
+      <ul class="haz-examples">
+        <li>Drill rod handling — back strain, hernia</li>
+        <li>Core box stacking — shoulder / wrist injury</li>
+        <li>Lifting engine components — crush, muscle tear</li>
+        <li>Repetitive bending / twisting — cumulative injury</li>
+        <li>Sand bags for site prep — strain in heat</li>
+        <li>No team lift plan for heavy items</li>
+      </ul>
+    </div>
+
+    <div class="haz-card" data-anim class="delay2">
+      <div class="haz-icon" style="background:rgba(52,152,219,.07)">&#x1F321;&#xFE0F;</div>
+      <h3>Environmental</h3>
+      <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.3rem">Heat, dust, weather, terrain, wildlife.</p>
+      <ul class="haz-examples">
+        <li>Extreme heat (KSA summer, WBGT &gt;32°C) — heat stroke</li>
+        <li>Silica dust — silicosis over time</li>
+        <li>Loose desert terrain — vehicle rollover</li>
+        <li>Night operations — reduced visibility, fatigue</li>
+        <li>Sandstorms — reduced visibility, inhalation</li>
+        <li>Venomous animals (snakes, scorpions) on site</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="alert info" data-anim>
+    <div class="alert-ico">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2EAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+    </div>
+    <div class="alert-body">
+      <h4>Additional categories to consider</h4>
+      <p>Ergonomic &bull; Fire and explosion &bull; Confined space &bull; Radiation (sun / radon) &bull; Noise and vibration &bull; Biological (waste water, mould in core samples) &bull; Psychosocial (fatigue, stress, heat stress affecting judgment) &bull; Gravity (suspended loads, dropped objects)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CH6: CONTROLS HIERARCHY ======== -->
+<section id="s6">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 6</div>
+    <h2 data-anim>The Hierarchy of Controls.</h2>
+    <p class="sec-lead" data-anim>When you choose controls for a hazard, always start at the top and work down. Higher controls are more effective because they do not rely on human behavior. PPE is the last line of defense &mdash; never the only one.</p>
+  </div>
+
+  <div class="hier-wrap">
+
+    <div class="hier-item" data-anim>
+      <div class="hier-num h1">1</div>
+      <div class="hier-body">
+        <h3>Eliminate <span class="hier-tag tag-best">Most Effective</span></h3>
+        <p>Remove the hazard completely. If there is no hazard, there is no risk. This is the only 100% reliable control. Ask: do we actually need to do this step? Can we redesign the task to remove the hazard?</p>
+      </div>
+      <div class="hier-arrow">&#9650;</div>
+    </div>
+
+    <div class="hier-item" data-anim>
+      <div class="hier-num h2">2</div>
+      <div class="hier-body">
+        <h3>Substitute <span class="hier-tag tag-pref">Preferred</span></h3>
+        <p>Replace the hazardous substance, process, or equipment with something safer. Same outcome, lower risk. Replace a toxic chemical with a safer alternative. Replace a manual lift with a mechanical one.</p>
+      </div>
+      <div class="hier-arrow">&#9650;</div>
+    </div>
+
+    <div class="hier-item" data-anim>
+      <div class="hier-num h3">3</div>
+      <div class="hier-body">
+        <h3>Isolate <span class="hier-tag tag-good">Strong</span></h3>
+        <p>Separate the hazard from people. Physical barriers, guards, enclosures, LOTO, exclusion zones. The hazard still exists but people cannot reach it. LOTO (TE-IMS-SOP-HSE-003) is an isolation control.</p>
+      </div>
+      <div class="hier-arrow">&#9650;</div>
+    </div>
+
+    <div class="hier-item" data-anim>
+      <div class="hier-num h4">4</div>
+      <div class="hier-body">
+        <h3>Engineering Controls <span class="hier-tag tag-eng">Reliable</span></h3>
+        <p>Design the hazard out using physical modifications. Machine guarding, ventilation systems, interlocks, noise enclosures, anti-rollover structures on vehicles. Effective because they do not rely on people remembering.</p>
+      </div>
+      <div class="hier-arrow">&#9650;</div>
+    </div>
+
+    <div class="hier-item" data-anim>
+      <div class="hier-num h5">5</div>
+      <div class="hier-body">
+        <h3>Administrative Controls <span class="hier-tag tag-admin">Moderate</span></h3>
+        <p>Rules, procedures, training, signs, permits, supervision, job rotation. Effective only if people comply consistently. Includes: this JHA, the permit-to-work, toolbox talks, LOTO procedures, shift rotation for heat and fatigue management.</p>
+      </div>
+      <div class="hier-arrow">&#9650;</div>
+    </div>
+
+    <div class="hier-item" data-anim>
+      <div class="hier-num h6">6</div>
+      <div class="hier-body">
+        <h3>Personal Protective Equipment (PPE) <span class="hier-tag tag-ppe">Last Resort</span></h3>
+        <p>Hard hat, safety glasses, FR coveralls, safety boots, gloves, hearing protection, fall harness, respirator. PPE does not eliminate the hazard. It only reduces the injury if the hazard reaches the person. PPE must always be combined with higher-level controls for significant risks. PPE must be inspected before each use.</p>
+      </div>
+      <div class="hier-arrow">&#9660;</div>
+    </div>
+
+  </div>
+
+  <div class="alert warn" data-anim>
+    <div class="alert-ico">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E67E22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M4.93 19h14.14c1.34 0 2.17-1.46 1.49-2.63L13.49 4.25c-.68-1.17-2.3-1.17-2.98 0L3.44 16.37c-.68 1.17.15 2.63 1.49 2.63z"/></svg>
+    </div>
+    <div class="alert-body">
+      <h4>PPE failure is common &mdash; do not rely on it alone</h4>
+      <p>Gloves tear. Hard hats are not worn correctly. Respirators are not fitted. PPE fails under the exact conditions that create the hazard. If PPE is your only control for a High or Critical hazard, your JHA is not adequate. Add engineering or administrative controls above it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CH7: WORKED EXAMPLE ======== -->
+<section class="dark" id="s7">
+  <div class="dark-in">
+    <div class="dark-tag" data-anim>Chapter 7</div>
+    <h2 data-anim>Worked Example:<br><em>Drilling Operations JHA</em></h2>
+    <p class="lead" data-anim>Task: Diamond core drilling &mdash; rod change and core retrieval at surface. Site: Northern Mine, Tathlith. Rig #3, Hole TT-07. Supervisor: Site Foreman. Date: 03/05/2026.</p>
+
+    <div data-anim style="overflow-x:auto">
+      <table class="ex-table">
+        <thead>
+          <tr>
+            <th style="width:5%">#</th>
+            <th style="width:22%">Task Step</th>
+            <th style="width:22%">Hazard Identified</th>
+            <th style="width:9%;text-align:center">Inherent Risk</th>
+            <th style="width:28%">Controls Applied</th>
+            <th style="width:9%;text-align:center">Residual Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Signal driller to stop rotation, raise bit to safe collar height</td>
+            <td>Worker in exclusion zone while rig in motion; struck by rotating rod</td>
+            <td style="text-align:center"><span class="risk-badge rb-crit">CRITICAL</span></td>
+            <td>Eliminate: No personnel within 3 m of rotating string. Engineering: rig interlock confirms stop before approach. Admin: verbal signal protocol. PPE: hard hat, FR coveralls.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Apply LOTO &mdash; hydraulic and rotation power isolation</td>
+            <td>Unexpected re-energization during LOTO application; hydraulic line pressurized</td>
+            <td style="text-align:center"><span class="risk-badge rb-crit">CRITICAL</span></td>
+            <td>Isolate: LOTO per TE-IMS-SOP-HSE-003. Bleed hydraulic lines to zero. Verify zero energy. Admin: Isolation Officer applies lock + tag. Register signed. PPE: FR coveralls, hydraulic gloves, face shield.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Break drill rod joint at surface collar</td>
+            <td>Rod slippage during breakout &mdash; hand / finger crush; joint suddenly releasing &mdash; struck-by</td>
+            <td style="text-align:center"><span class="risk-badge rb-high">HIGH</span></td>
+            <td>Engineering: use pipe wrench with extension — no hand contact with thread. Admin: second person spotting only, standing clear of breakout direction. PPE: heavy leather gloves, hard hat, steel-cap boots.</td>
+            <td style="text-align:center"><span class="risk-badge rb-med">MEDIUM</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Extract rod section to laydown area</td>
+            <td>Drop of rod section (6 m, 25 kg) during extraction &mdash; foot / leg crush, back injury from manual handling</td>
+            <td style="text-align:center"><span class="risk-badge rb-high">HIGH</span></td>
+            <td>Substitute: use rod handler / mechanical assist for all rods &gt;15 kg. Admin: team lift plan (2 persons minimum), lift at knee height. PPE: steel-cap boots, back brace if manual. Exclusion zone: 3 m around laydown area.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Remove inner barrel / core tube</td>
+            <td>Silica-bearing dust released from core &mdash; inhalation; core tube sharp edges &mdash; lacerations</td>
+            <td style="text-align:center"><span class="risk-badge rb-high">HIGH</span></td>
+            <td>Engineering: wet core retrieval where possible to suppress dust. Admin: stay upwind during extraction. PPE: P2 respirator (mandatory), safety glasses, leather gloves. No eating/drinking at core area.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Lay core in core box and label</td>
+            <td>Repetitive bending and lifting of core boxes in heat &mdash; heat exhaustion, musculoskeletal strain</td>
+            <td style="text-align:center"><span class="risk-badge rb-med">MEDIUM</span></td>
+            <td>Admin: rotate core logging personnel every 60 min during summer. Hydration: 500 ml water every 30 min. Schedule heavy lifting outside peak heat (before 10:00 or after 15:00). PPE: sun hat, long sleeves, sunscreen.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Re-run new rod string &mdash; thread and torque</td>
+            <td>Pinch point between rod sections during threading; cross-threading causing sudden drop; over-torquing causing rod failure</td>
+            <td style="text-align:center"><span class="risk-badge rb-high">HIGH</span></td>
+            <td>Admin: use correct torque wrench per manufacturer spec. Trained driller only to operate. Hands clear of thread area during make-up. Visual check of threads before insertion. PPE: gloves, hard hat, safety glasses.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Remove LOTO and restart drilling</td>
+            <td>Personnel still in exclusion zone when rig re-energized; LOTO removed before all workers clear</td>
+            <td style="text-align:center"><span class="risk-badge rb-crit">CRITICAL</span></td>
+            <td>Admin: Supervisor performs headcount and visual check — all personnel clear confirmed verbally. Isolation Officer is last to remove lock. Loudspeaker / horn signal before restart. Rig interlock confirms all-clear before start.</td>
+            <td style="text-align:center"><span class="risk-badge rb-low">LOW</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.4rem 1.8rem;background:rgba(196,154,40,.08);border:1px solid rgba(196,154,40,.2);border-radius:10px" data-anim>
+      <p style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.7"><strong style="color:var(--gold)">Key observation from this example:</strong> Steps 1, 2, and 8 are CRITICAL inherent risk. All three involve rig energization / de-energization. These are the moments where most drilling fatalities occur. The controls bring all three to LOW residual risk &mdash; but only if every control is actually applied. A Supervisor who skips the LOTO verification on step 2 because "we do it every day" is one moment away from a fatality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CH8: MISTAKES ======== -->
+<section id="s8">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 8</div>
+    <h2 data-anim>Common mistakes<br>to avoid.</h2>
+    <p class="sec-lead" data-anim>These are the eight errors that turn a JHA from a protective document into a piece of paper that hangs someone. Every one of these has contributed to a real injury or fatality somewhere in the industry.</p>
+  </div>
+
+  <div class="mist-grid">
+
+    <div class="mist-card" data-anim>
+      <div class="mist-n">01</div>
+      <h4>Filling it out after the work starts</h4>
+      <p>A JHA completed during or after the task is not a safety tool &mdash; it is paperwork. The whole point is to identify hazards before they are encountered. A backdated JHA is a falsified record.</p>
+      <div class="mist-fix">&#10003; Fix: The JHA is the last step before the first tool is picked up. No exceptions.</div>
+    </div>
+
+    <div class="mist-card" data-anim class="delay1">
+      <div class="mist-n">02</div>
+      <h4>Copying the JHA from yesterday</h4>
+      <p>Conditions change. Equipment changes. Personnel change. A JHA for Hole TT-06 is not valid for Hole TT-07. Copying without review is the same as not having a JHA at all &mdash; but worse, because it creates false confidence.</p>
+      <div class="mist-fix">&#10003; Fix: Re-assess every step every time. Reuse the template; not the answers.</div>
+    </div>
+
+    <div class="mist-card" data-anim>
+      <div class="mist-n">03</div>
+      <h4>Only listing "wear PPE" as a control</h4>
+      <p>PPE alone is not adequate for High or Critical hazards. It is the last line of defense. A JHA that lists "safety glasses" as the control for "pressurized hydraulic line failure" has not identified a meaningful control at all.</p>
+      <div class="mist-fix">&#10003; Fix: Always apply the hierarchy. PPE is always the last row, never the only row.</div>
+    </div>
+
+    <div class="mist-card" data-anim class="delay1">
+      <div class="mist-n">04</div>
+      <h4>Supervisor writes it, crew just signs</h4>
+      <p>A JHA completed by one person in isolation is a risk assessment for one person's knowledge. Field workers know hazards that Supervisors do not see. If the crew does not contribute, you are guaranteed to miss hazards.</p>
+      <div class="mist-fix">&#10003; Fix: Ask every crew member: "What could hurt you at Step 3?" before writing anything down.</div>
+    </div>
+
+    <div class="mist-card" data-anim>
+      <div class="mist-n">05</div>
+      <h4>Not updating when conditions change</h4>
+      <p>A sandstorm starts mid-shift. A piece of equipment fails. A second crew joins the work area. Each of these changes the risk profile. The original JHA no longer covers the actual task being performed.</p>
+      <div class="mist-fix">&#10003; Fix: Stop work. Re-assess. Update the JHA. Re-brief and sign. Then restart.</div>
+    </div>
+
+    <div class="mist-card" data-anim class="delay1">
+      <div class="mist-n">06</div>
+      <h4>Using vague task descriptions</h4>
+      <p>"Drilling operations" is not a task step. "Position the rod handler arm over the collar while the bit is at safe height and LOTO is applied" is a task step. Vague steps produce vague hazard identification. Vague hazards get vague controls.</p>
+      <div class="mist-fix">&#10003; Fix: Each step should describe one physical action, specific enough that anyone could read it and know exactly what to do.</div>
+    </div>
+
+    <div class="mist-card" data-anim>
+      <div class="mist-n">07</div>
+      <h4>No accountability for controls</h4>
+      <p>"LOTO to be applied" is not adequate. "LOTO applied by: Isolation Officer (Ahmed Al-Rashidi) — verified by Supervisor (Khalid Mansour)" is adequate. Anonymously assigned controls are rarely performed controls.</p>
+      <div class="mist-fix">&#10003; Fix: Every control gets a name. Every verification gets a second name. No exceptions.</div>
+    </div>
+
+    <div class="mist-card" data-anim class="delay1">
+      <div class="mist-n">08</div>
+      <h4>Treating the JHA as paperwork, not a tool</h4>
+      <p>A JHA completed to satisfy an audit but never actually used on site is a cultural failure. Supervisors who submit JHAs without conducting them are creating liability, not safety. The document is only as strong as the conversation that produced it.</p>
+      <div class="mist-fix">&#10003; Fix: The quality of the JHA conversation is the quality of the safety culture. Make it real.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== CH9: GOLDEN RULES ======== -->
+<section id="s9">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Chapter 9</div>
+    <h2 data-anim>The Five Golden Rules.</h2>
+    <p class="sec-lead" data-anim>Print these. Post them on the rig. Know them by heart. If any one of these is violated, stop work immediately.</p>
+  </div>
+
+  <div class="rules-wrap">
+
+    <div class="rule" data-anim>
+      <div class="rule-num">1</div>
+      <div class="rule-body">
+        <h3>No JHA, No Start.</h3>
+        <p>A completed and signed JHA is required before any high-risk task begins. There are no exceptions. Not for urgency. Not for "we do this every day." Not under any pressure from any person.</p>
+      </div>
+      <div class="rule-icon">&#x1F6AB;</div>
+    </div>
+
+    <div class="rule" data-anim class="delay1">
+      <div class="rule-num">2</div>
+      <div class="rule-body">
+        <h3>Every Person Has Stop Work Authority.</h3>
+        <p>Any worker, at any level, has the unconditional right and duty to stop a task if they see an uncontrolled hazard. There is zero retaliation for exercising this right in good faith. If in doubt &mdash; stop.</p>
+      </div>
+      <div class="rule-icon">&#x270B;</div>
+    </div>
+
+    <div class="rule" data-anim class="delay2">
+      <div class="rule-num">3</div>
+      <div class="rule-body">
+        <h3>Verify Controls Before Proceeding Past Each Step.</h3>
+        <p>Do not move from Step 2 to Step 3 until you have physically confirmed that every control for Step 2 is in place. Verbal confirmation is not enough for critical controls. Verify with your eyes, hands, and instruments.</p>
+      </div>
+      <div class="rule-icon">&#x2705;</div>
+    </div>
+
+    <div class="rule" data-anim class="delay3">
+      <div class="rule-num">4</div>
+      <div class="rule-body">
+        <h3>Never Sign What You Don't Understand.</h3>
+        <p>Signing a JHA means: "I have read this, I understand every step and every control, and I commit to applying them." If you do not understand something, ask. If the answer does not satisfy you, do not sign. Do not start.</p>
+      </div>
+      <div class="rule-icon">&#x270D;&#xFE0F;</div>
+    </div>
+
+    <div class="rule" data-anim class="delay4">
+      <div class="rule-num">5</div>
+      <div class="rule-body">
+        <h3>Update the JHA When Conditions Change.</h3>
+        <p>A JHA written for 7 AM conditions does not cover 2 PM conditions in a Saudi summer. Whenever the task, team, equipment, environment, or scope changes, stop work and update the JHA before proceeding.</p>
+      </div>
+      <div class="rule-icon">&#x1F504;</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== CH10: QUICK REFERENCE ======== -->
+<div class="qr-wrap" id="s10">
+  <div class="qr-in">
+    <div class="sec-tag" data-anim style="justify-content:flex-start">Quick Reference Card</div>
+    <h2 data-anim style="font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--navy);margin-bottom:.5rem">Tear this out. Pin it to the rig.</h2>
+    <p data-anim style="font-size:1rem;color:var(--txt2);max-width:560px;line-height:1.8">Everything you need to conduct a JHA correctly, on a single reference card.</p>
+
+    <div class="qr-grid">
+
+      <div class="qr-card" data-anim>
+        <h4>JHA 8 Steps</h4>
+        <ul class="qr-list">
+          <li><strong>1.</strong> Fill in header information</li>
+          <li><strong>2.</strong> Break task into numbered steps</li>
+          <li><strong>3.</strong> Identify all hazards per step</li>
+          <li><strong>4.</strong> Rate inherent risk (matrix)</li>
+          <li><strong>5.</strong> Define controls (use hierarchy)</li>
+          <li><strong>6.</strong> Assign names to each control</li>
+          <li><strong>7.</strong> Brief crew; everyone signs</li>
+          <li><strong>8.</strong> Monitor, adapt, close out</li>
+        </ul>
+      </div>
+
+      <div class="qr-card" data-anim class="delay1">
+        <h4>Risk Rating</h4>
+        <ul class="qr-list">
+          <li><strong style="color:#C0392B">CRITICAL (15–25):</strong> HSE Manager approval required</li>
+          <li><strong style="color:#E67E22">HIGH (8–12):</strong> Senior management + controls verified</li>
+          <li><strong style="color:#F39C12">MEDIUM (4–9):</strong> Supervisor attention required</li>
+          <li><strong style="color:#27AE60">LOW (1–3):</strong> Manage with routine procedures</li>
+          <li>Rate BEFORE controls (inherent)</li>
+          <li>Rate AFTER controls (residual)</li>
+          <li>Residual must be LOW or MEDIUM to proceed</li>
+        </ul>
+      </div>
+
+      <div class="qr-card" data-anim class="delay2">
+        <h4>Controls Hierarchy</h4>
+        <ul class="qr-list">
+          <li><strong>1. Eliminate</strong> — remove the hazard</li>
+          <li><strong>2. Substitute</strong> — safer alternative</li>
+          <li><strong>3. Isolate</strong> — barrier, LOTO, exclusion</li>
+          <li><strong>4. Engineering</strong> — guards, interlocks</li>
+          <li><strong>5. Administrative</strong> — procedures, signs</li>
+          <li><strong>6. PPE</strong> — last line of defense only</li>
+        </ul>
+      </div>
+
+      <div class="qr-card" data-anim>
+        <h4>6 Hazard Categories</h4>
+        <ul class="qr-list">
+          <li>&#x2699; <strong>Mechanical</strong> — rotating parts, pressure, crush</li>
+          <li>&#x26A1; <strong>Electrical</strong> — shock, arc flash, LOTO</li>
+          <li>&#x2697; <strong>Chemical</strong> — dust, fumes, spills, H₂S</li>
+          <li>&#x26A0; <strong>Height</strong> — falls, dropped objects</li>
+          <li>&#x1F4AA; <strong>Manual Handling</strong> — strain, crush</li>
+          <li>&#x1F321; <strong>Environmental</strong> — heat, dust, terrain</li>
+        </ul>
+      </div>
+
+      <div class="qr-card" data-anim class="delay1">
+        <h4>5 Golden Rules</h4>
+        <ul class="qr-list">
+          <li><strong>1.</strong> No JHA, No Start</li>
+          <li><strong>2.</strong> Everyone has Stop Work Authority</li>
+          <li><strong>3.</strong> Verify controls at each step</li>
+          <li><strong>4.</strong> Never sign what you don't understand</li>
+          <li><strong>5.</strong> Update JHA when conditions change</li>
+        </ul>
+      </div>
+
+      <div class="qr-card" data-anim class="delay2">
+        <h4>When to Redo a JHA</h4>
+        <ul class="qr-list">
+          <li>New shift begins</li>
+          <li>Different crew or new member joins</li>
+          <li>Equipment changes or fails</li>
+          <li>Weather changes (storm, heat spike)</li>
+          <li>Scope of task changes</li>
+          <li>New hazard identified mid-task</li>
+          <li>After any Stop Work event</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="qr-swa" data-anim style="margin-top:2rem">
+      <h4>&#9733; Stop Work Authority</h4>
+      <p>Any person. Any level. Any time. If you see an uncontrolled hazard &mdash; <strong style="color:#fff">stop the work</strong>. No retaliation. Report to Supervisor + HSE immediately. Work restarts only when hazard is controlled, JHA updated, and all parties agree.</p>
+      <p style="margin-top:.5rem;font-size:.75rem;color:rgba(255,255,255,.4)">Reference: TE-IMS-POL-HSE-001 &mdash; Stop Work Authority Policy</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======== CLOSING ======== -->
+<section class="closing">
+  <div class="sec-tag" data-anim style="justify-content:center">True East Mining</div>
+  <h2 data-anim>Every task. Every time.<br>No exceptions.</h2>
+  <p data-anim>A JHA is not bureaucracy. It is the five minutes that stand between a normal day and a life-changing event. The crew that takes a JHA seriously is the crew that goes home safely.</p>
+  <div data-anim>
+    <div style="display:inline-flex;align-items:center;gap:1.2rem;padding:1.2rem 2.4rem;background:var(--navy);color:#fff;border-radius:50px;font-weight:600;font-size:.88rem;letter-spacing:.03em">
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png" alt="True East" style="height:28px;object-fit:contain;filter:brightness(1.2)">
+      True East Mining Company &mdash; الشرق الحقيقي
+    </div>
+  </div>
+</section>
+
+<div class="ft">
+  <b>True East Mining Company</b> &mdash; الشرق الحقيقي للتعدين<br>
+  JHA Field Guide &middot; TE-IMS-GDE-HSE-002 Rev 00 &middot; May 2026 &middot; ISO 45001:2018
+</div>
+
+<script>
+!function(){
+  // scroll reveal
+  var io = new IntersectionObserver(function(ee){
+    for(var i=0;i<ee.length;i++) if(ee[i].isIntersecting) ee[i].target.classList.add('show');
+  },{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  var els = document.querySelectorAll('[data-anim]');
+  for(var i=0;i<els.length;i++) io.observe(els[i]);
+
+  // progress bar
+  var bar = document.getElementById('prog');
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(h>0) bar.style.width = (window.scrollY/h*100)+'%';
+    // side nav
+    nav.classList.toggle('on', window.scrollY > window.innerHeight*0.4);
+    var c=0;
+    for(var i=0;i<secs.length;i++){
+      if(secs[i] && window.scrollY >= secs[i].offsetTop - window.innerHeight*0.4) c=i;
+    }
+    for(var i=0;i<dots.length;i++) dots[i].classList.toggle('on', i===c);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // side nav
+  var nav = document.getElementById('snav');
+  var dots = nav.querySelectorAll('a');
+  var ids = ['s0','s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+  var secs = [];
+  for(var i=0;i<ids.length;i++) secs.push(document.getElementById(ids[i]));
+
+  for(var i=0;i<dots.length;i++){
+    (function(dot){
+      dot.addEventListener('click',function(e){
+        e.preventDefault();
+        var t = document.querySelector(this.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    })(dots[i]);
+  }
+
+  // matrix cell hover tooltip
+  var cells = document.querySelectorAll('.m-cell');
+  for(var i=0;i<cells.length;i++){
+    cells[i].setAttribute('title','Click row/col headers to understand the rating');
+  }
+}();
+</script>
+</body>
+</html>
