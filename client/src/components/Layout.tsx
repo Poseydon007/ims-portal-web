@@ -36,17 +36,17 @@ export function TopNav() {
       style={{ backgroundColor: "#081C2E", borderBottom: "3px solid #C49A28" }}
       className="sticky top-0 z-50 shadow-lg"
     >
-      <div className="container flex items-stretch justify-between" style={{ minHeight: "72px" }}>
+      <div className="container flex items-stretch justify-between" style={{ minHeight: "80px" }}>
 
-        {/* ── Left: Logo + Company Name ── */}
-        <Link href="/" className="flex items-center gap-3 no-underline group py-3 flex-shrink-0">
+        {/* ── Left: Logo + Company Name — items-start so text tops with IMS label ── */}
+        <Link href="/" className="flex items-start gap-3 no-underline group py-2 flex-shrink-0">
           <img
             src={LOGO_WHITE}
             alt="True East Mining Company"
-            style={{ width: "52px", height: "52px", objectFit: "contain" }}
+            style={{ width: "auto", height: "68px", objectFit: "contain" }}
             className="opacity-90 group-hover:opacity-100 transition-opacity"
           />
-          <div className="hidden sm:block">
+          <div className="hidden sm:block pt-0.5">
             <div className="text-white font-bold text-sm leading-tight tracking-wide">
               TRUE EAST MINING COMPANY
             </div>
@@ -56,12 +56,11 @@ export function TopNav() {
           </div>
         </Link>
 
-        {/* ── Center: Nav — always visible ── */}
-        <div className="flex flex-col items-center justify-center px-4 gap-1.5 flex-1">
+        {/* ── Center: Nav top-aligned, Education bottom-aligned ── */}
+        <div className="flex flex-col items-center justify-between px-4 py-2 flex-1">
 
-          {/* Row 1: Home (always) + Admin tabs (admin only) */}
+          {/* Row 1 (top): Home + admin tabs — level with IMS Document Portal */}
           <div className="flex items-center gap-1 flex-wrap justify-center">
-            {/* HOME — always visible for all users */}
             <Link href="/">
               <span
                 className="text-xs font-semibold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:bg-white/10 whitespace-nowrap"
@@ -74,7 +73,6 @@ export function TopNav() {
               </span>
             </Link>
 
-            {/* Approval Queue — supervisor + hse_manager + admin */}
             {!loading && isAuthenticated && user && can.seeApprovalsTab(user.role as Role) && (
               <Link href="/approvals">
                 <span
@@ -89,7 +87,6 @@ export function TopNav() {
               </Link>
             )}
 
-            {/* Submissions tab — admin / hse_manager / auditor (read-only) / supervisor (dept) */}
             {!loading && isAuthenticated && user && can.seeSubmissionsTab(user.role as Role) && (
               <Link href="/admin/all-submissions">
                 <span
@@ -104,7 +101,6 @@ export function TopNav() {
               </Link>
             )}
 
-            {/* Users tab — admin only */}
             {!loading && isAuthenticated && user && can.manageUsers(user.role as Role) && (
               <Link href="/admin/users">
                 <span
@@ -120,7 +116,7 @@ export function TopNav() {
             )}
           </div>
 
-          {/* Row 2: Education — glass morphism, full width, visible when logged in */}
+          {/* Row 2 (bottom): Education — level with ADMIN + Sign Out */}
           {!loading && isAuthenticated && user && (
             <Link href="/education" className="w-full no-underline" style={{ maxWidth: "240px" }}>
               <div
@@ -147,7 +143,6 @@ export function TopNav() {
                   (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
                 }}
               >
-                {/* Shimmer sweep on hover */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover/edu:opacity-100 pointer-events-none"
                   style={{
@@ -163,12 +158,12 @@ export function TopNav() {
           )}
         </div>
 
-        {/* ── Right: IMS Portal label + user info stacked ── */}
+        {/* ── Right: IMS label top, user/sign-out bottom ── */}
         <div
-          className="flex flex-col items-end justify-center py-3 pl-4 flex-shrink-0"
+          className="flex flex-col items-end justify-between py-2 pl-4 flex-shrink-0"
           style={{ borderLeft: "1px solid rgba(255,255,255,0.1)" }}
         >
-          {/* Portal label */}
+          {/* Portal label — top */}
           <div className="text-right">
             <div className="text-white text-xs font-semibold tracking-widest uppercase opacity-80">
               IMS Document Portal
@@ -178,14 +173,13 @@ export function TopNav() {
             </div>
           </div>
 
-          {/* User info + sign out — below portal label */}
+          {/* User info + sign out — bottom */}
           {!loading && isAuthenticated && user ? (
-            <div className="flex items-end justify-between gap-3 mt-1.5 w-full">
+            <div className="flex items-end justify-between gap-3 w-full">
               <div className="text-left">
                 <div className="text-white text-xs font-semibold leading-tight">
                   {user.fullName}
                 </div>
-                {/* Role-tag pill */}
                 <div className="mt-0.5">
                   <span
                     className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-[1px] rounded"
@@ -205,16 +199,14 @@ export function TopNav() {
               </button>
             </div>
           ) : !loading ? (
-            <div className="mt-1.5">
-              <Link href="/login">
-                <span
-                  className="text-xs font-bold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:opacity-90"
-                  style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
-                >
-                  Sign In
-                </span>
-              </Link>
-            </div>
+            <Link href="/login">
+              <span
+                className="text-xs font-bold px-3 py-1 rounded cursor-pointer transition-all duration-200 hover:opacity-90"
+                style={{ backgroundColor: "#C49A28", color: "#081C2E" }}
+              >
+                Sign In
+              </span>
+            </Link>
           ) : null}
         </div>
 
