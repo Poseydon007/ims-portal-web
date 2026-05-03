@@ -92,7 +92,7 @@ export const educationTopics: EducationTopic[] = [
         available: true,
         url: "https://1drv.ms/v/c/3fc547dccdd2997a/IQA5rBpfSLEMTZ3rcEn9wyKDASOPvQcEsMO94xlGLoaPvVM?e=oftyYC",
         thumbnailUrl: "/thumbnails/ims-playbook-thumb.jpg",
-        duration: "15 min",
+        duration: "5 min",
         tags: ["IMS", "orientation", "ISO"],
       },
       {
