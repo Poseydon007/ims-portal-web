@@ -1,0 +1,1382 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permit to Work System — Operational Manual — True East Mining</title>
+<style>
+:root {
+  --navy: #081C2E;
+  --navy2: #0d2540;
+  --navy3: #1a3a5c;
+  --gold: #C49A28;
+  --gold2: #dab840;
+  --teal: #2EAAAA;
+  --red: #E74C3C;
+  --orange: #E67E22;
+  --green: #2ECC71;
+  --cream: #F5F0E8;
+  --bg: #FAF8F5;
+  --txt: #2C2C2C;
+  --txt2: #6B6B6B;
+  --txt3: #999;
+  --hd: Georgia, 'Times New Roman', serif;
+  --bd: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --cd: Consolas, 'Courier New', monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--bd);color:var(--txt);background:var(--bg);line-height:1.75;overflow-x:hidden}
+
+/* === ANIMATIONS === */
+[data-anim]{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+[data-anim].show{opacity:1;transform:translateY(0)}
+[data-anim="left"]{transform:translateX(-40px)}
+[data-anim="left"].show{transform:translateX(0)}
+[data-anim="right"]{transform:translateX(40px)}
+[data-anim="right"].show{transform:translateX(0)}
+[data-anim="scale"]{transform:scale(.9)}
+[data-anim="scale"].show{transform:scale(1)}
+.delay1{transition-delay:.1s}
+.delay2{transition-delay:.2s}
+.delay3{transition-delay:.3s}
+.delay4{transition-delay:.4s}
+.delay5{transition-delay:.5s}
+
+/* === PROGRESS === */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--red),var(--gold2));z-index:1000;width:0;transition:width .1s}
+
+/* === SIDE NAV === */
+.sidenav{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:.7rem;opacity:0;transition:opacity .4s}
+.sidenav.on{opacity:1}
+.sidenav a{width:10px;height:10px;border-radius:50%;background:rgba(8,28,46,.2);display:block;transition:all .3s;text-decoration:none}
+.sidenav a.on{background:var(--gold);box-shadow:0 0 10px rgba(196,154,40,.5);transform:scale(1.4)}
+
+/* === HERO === */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 40%,rgba(231,76,60,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 60%,rgba(196,154,40,.06) 0%,transparent 50%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;animation:gshift 20s linear infinite}
+@keyframes gshift{to{background-position:60px 60px}}
+.dot{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:0;animation:dotf 8s ease-in-out infinite}
+.dot:nth-child(3){left:15%;top:20%;animation-duration:7s}
+.dot:nth-child(4){left:75%;top:30%;animation-delay:1.5s;animation-duration:9s;background:var(--red)}
+.dot:nth-child(5){left:40%;top:70%;animation-delay:3s;animation-duration:6s}
+.dot:nth-child(6){left:85%;top:60%;animation-delay:.8s;animation-duration:8s;background:var(--gold2)}
+.dot:nth-child(7){left:25%;top:80%;animation-delay:2.2s;animation-duration:10s;background:var(--red)}
+.dot:nth-child(8){left:60%;top:15%;animation-delay:4s;animation-duration:7.5s}
+@keyframes dotf{0%,100%{opacity:0;transform:translateY(0) scale(1)}20%{opacity:.5}50%{opacity:.2;transform:translateY(-40px) scale(1.5)}80%{opacity:.4}}
+.hero-c{text-align:center;color:#fff;z-index:2;padding:2rem;max-width:820px}
+.hero-logo{width:80px;height:auto;margin:0 auto 2.5rem;display:block;opacity:.9;animation:fu 1s .1s both}
+.hero-tag{display:inline-block;padding:.4rem 1.4rem;border:1px solid var(--gold);border-radius:30px;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;animation:fu 1s .3s both}
+.hero-c h1{font-family:var(--hd);font-size:clamp(2.6rem,5.5vw,4.6rem);font-weight:900;line-height:1.08;margin-bottom:1.8rem;animation:fu 1.2s .5s both}
+.hero-c h1 em{font-style:normal;display:block;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.1rem;font-weight:300;color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 3rem;line-height:1.75;animation:fu 1s .8s both}
+.hero-scroll{animation:bounce 2s 2s infinite,fu 1s 1.2s both;color:rgba(255,255,255,.3);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.hero-scroll svg{display:block;margin:.6rem auto 0;width:22px;height:22px;stroke:rgba(255,255,255,.3);fill:none}
+@keyframes fu{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}60%{transform:translateY(-4px)}}
+
+/* === SECTION COMMON === */
+.sec{padding:5rem 2rem 4rem;max-width:820px;margin:0 auto}
+.sec-tag{font-family:var(--hd);font-size:.82rem;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+.sec-tag::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.sec h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.15;color:var(--navy);margin-bottom:1.2rem}
+.sec-lead{font-size:1.08rem;font-weight:300;color:var(--txt2);line-height:1.85;max-width:680px}
+.prose{font-size:1rem;color:var(--txt);line-height:1.85;margin-top:1.4rem;max-width:700px}
+.prose p{margin-bottom:1.2rem}
+.prose p:last-child{margin-bottom:0}
+
+/* === QUOTE === */
+.quote{font-family:var(--hd);font-size:1.35rem;font-style:italic;color:var(--navy);line-height:1.7;text-align:center;max-width:600px;margin:3rem auto;padding:2rem 2.5rem;position:relative}
+.quote::before{content:'\201C';font-family:var(--hd);font-size:5rem;font-weight:900;color:var(--gold);opacity:.2;position:absolute;top:-.5rem;left:0;line-height:1}
+.quote-attr{display:block;font-style:normal;font-size:.78rem;font-family:var(--bd);font-weight:600;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;margin-top:.8rem}
+
+/* === ALERT / CALLOUT === */
+.callout{border-left:4px solid var(--gold);background:rgba(196,154,40,.06);padding:1.4rem 1.8rem;border-radius:0 10px 10px 0;margin:2rem 0;max-width:700px}
+.callout.danger{border-color:var(--red);background:rgba(231,76,60,.05)}
+.callout.safe{border-color:var(--green);background:rgba(46,204,113,.05)}
+.callout-title{font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.callout.danger .callout-title{color:var(--red)}
+.callout.safe .callout-title{color:var(--green)}
+.callout-title-gold{color:var(--gold)}
+.callout p{font-size:.93rem;color:var(--txt2);line-height:1.75;margin:0}
+
+/* === TRIANGLE VISUAL === */
+.triangle-wrap{max-width:640px;margin:3rem auto;padding:0 2rem;text-align:center}
+.tri-svg{width:100%;max-width:500px;margin:0 auto;display:block}
+
+/* === SPLIT CARDS === */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:820px;margin:3rem auto;padding:0 2rem}
+.scard{padding:2.2rem;border-radius:14px}
+.scard.bad{background:linear-gradient(145deg,#FFF5F5,#FFF0F0);border:1px solid rgba(231,76,60,.12)}
+.scard.good{background:linear-gradient(145deg,#F0FFF4,#EDFFF5);border:1px solid rgba(46,204,113,.12)}
+.scard.mid{background:linear-gradient(145deg,#FFFBF0,#FFF8E1);border:1px solid rgba(196,154,40,.14)}
+.scard-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+.scard-ico svg{width:22px;height:22px}
+.bad .scard-ico{background:rgba(231,76,60,.07);border:1.5px solid rgba(231,76,60,.18)}
+.good .scard-ico{background:rgba(46,204,113,.07);border:1.5px solid rgba(46,204,113,.18)}
+.mid .scard-ico{background:rgba(196,154,40,.07);border:1.5px solid rgba(196,154,40,.18)}
+.scard h3{font-family:var(--hd);font-size:1.15rem;font-weight:700;margin-bottom:.7rem;color:var(--navy)}
+.scard p{font-size:.88rem;color:var(--txt2);line-height:1.7;margin-bottom:.7rem}
+.scard ul{list-style:none}
+.scard li{padding:.35rem 0 .35rem 1.4rem;position:relative;font-size:.88rem;color:var(--txt2);line-height:1.65}
+.scard li::before{content:'';position:absolute;left:0;top:.8rem;width:7px;height:7px;border-radius:50%}
+.bad li::before{background:var(--red);opacity:.4}
+.good li::before{background:var(--green);opacity:.4}
+.mid li::before{background:var(--gold);opacity:.6}
+
+/* === TIMELINE === */
+.tl-wrap{padding:2rem 2rem 3rem;max-width:820px;margin:0 auto}
+.tl{position:relative;padding-left:2.8rem}
+.tl::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),var(--teal),var(--navy3))}
+.tl-item{position:relative;padding-bottom:2.5rem}
+.tl-dot{position:absolute;left:-2.4rem;top:.25rem;width:20px;height:20px;border-radius:50%;background:var(--navy);border:3px solid var(--gold);z-index:2;transition:transform .3s,box-shadow .3s}
+.tl-item:hover .tl-dot{transform:scale(1.3);box-shadow:0 0 14px rgba(196,154,40,.4)}
+.tl-rev{font-family:var(--cd);font-size:.75rem;font-weight:600;color:var(--gold);margin-bottom:.2rem}
+.tl-title{font-family:var(--hd);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.tl-desc{font-size:.9rem;color:var(--txt2);line-height:1.7}
+.tl-note{font-size:.75rem;color:var(--txt3);margin-top:.4rem;font-style:italic}
+
+/* === STATS === */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:820px;margin:3rem auto;padding:0 2rem}
+.stat{text-align:center;padding:2.2rem 1.2rem;border-radius:14px;background:#fff;border:1px solid #eee;transition:all .4s}
+.stat:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.stat-n{font-family:var(--hd);font-size:2.8rem;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.5rem}
+.stat-n.red{color:var(--red)}
+.stat-n.gold{color:var(--gold)}
+.stat-n.green{color:var(--green)}
+.stat-l{font-size:.8rem;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;line-height:1.4}
+
+/* === STORY CARDS === */
+.stories{max-width:820px;margin:3rem auto;padding:0 2rem;display:flex;flex-direction:column;gap:2rem}
+.story{border-radius:14px;overflow:hidden;background:#fff;border:1px solid #eee;transition:transform .4s,box-shadow .4s}
+.story:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.story-hd{padding:1.6rem 2rem;display:flex;align-items:flex-start;gap:1.2rem;border-bottom:1px solid #f3f3f3}
+.story-ico{width:52px;height:52px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.story-ico svg{width:26px;height:26px}
+.story:nth-child(1) .story-ico{background:rgba(231,76,60,.08);border:1.5px solid rgba(231,76,60,.15)}
+.story:nth-child(2) .story-ico{background:rgba(46,170,170,.08);border:1.5px solid rgba(46,170,170,.15)}
+.story:nth-child(3) .story-ico{background:rgba(196,154,40,.08);border:1.5px solid rgba(196,154,40,.15)}
+.story-hd-txt h4{font-family:var(--hd);font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.story-hd-txt .tag{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3)}
+.story-bd{padding:1.6rem 2rem}
+.story-bd p{font-size:.93rem;color:var(--txt2);line-height:1.8;margin-bottom:1rem}
+.story-bd p:last-child{margin-bottom:0}
+.story-outcome{margin-top:1rem;padding:1rem 1.4rem;border-radius:8px;background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.15);font-size:.85rem;color:var(--txt2);line-height:1.65}
+.story-outcome strong{color:var(--green);display:block;margin-bottom:.3rem;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+
+/* === PERMIT TYPE CARDS === */
+.cats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.cat{padding:1.8rem;border-radius:14px;text-align:center;background:#fff;border:1px solid #eee;transition:all .4s}
+.cat:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.07);border-color:var(--gold)}
+.cat-ico{font-size:2rem;margin-bottom:.8rem}
+.cat h4{font-family:var(--hd);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.cat p{font-size:.82rem;color:var(--txt2);line-height:1.65}
+.cat-label{display:inline-block;margin-top:.7rem;padding:.25rem .9rem;background:var(--navy);color:#fff;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+
+/* === PERMIT GRID (5 types) === */
+.permit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.pcard{padding:2rem;border-radius:14px;background:#fff;border:1px solid #eee;transition:all .4s;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.pcard.hot::before{background:linear-gradient(90deg,var(--red),var(--orange))}
+.pcard.confined::before{background:linear-gradient(90deg,var(--teal),#1a8080)}
+.pcard.loto::before{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.pcard.excavation::before{background:linear-gradient(90deg,#8B5E3C,#b8844e)}
+.pcard.radiation::before{background:linear-gradient(90deg,var(--navy3),var(--navy2))}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.pcard-ico{font-size:2.2rem;margin-bottom:1rem}
+.pcard h3{font-family:var(--hd);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.pcard-meta{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
+.pcard-row{display:flex;gap:.6rem;font-size:.82rem}
+.pcard-row-label{font-weight:700;color:var(--txt3);text-transform:uppercase;font-size:.72rem;letter-spacing:.05em;min-width:90px;padding-top:.05rem}
+.pcard-row-val{color:var(--txt2);line-height:1.55}
+.pcard-wide{grid-column:1/-1}
+
+/* === DARK SECTION === */
+.dark{background:var(--navy);color:#fff;padding:5rem 2rem;position:relative;overflow:hidden}
+.dark::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 20%,rgba(231,76,60,.06) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(196,154,40,.05) 0%,transparent 50%)}
+.dark-in{max-width:820px;margin:0 auto;position:relative;z-index:2}
+.dark .sec-tag{color:var(--gold)}
+.dark h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:1rem;color:#fff}
+.dark h2 em{font-style:normal;color:var(--red)}
+.dark .prose{color:rgba(255,255,255,.65)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.ccard{padding:1.8rem;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:all .4s}
+.ccard:hover{background:rgba(255,255,255,.07);border-color:rgba(196,154,40,.3);transform:translateY(-3px)}
+.ccard-ico{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.ccard-ico svg{width:20px;height:20px}
+.ccard h4{font-size:1rem;font-weight:700;margin-bottom:.4rem;color:#fff}
+.ccard p{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7}
+
+/* === PORTAL STEPS === */
+.steps{max-width:820px;margin:3rem auto;padding:0 2rem}
+.step-row{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2rem;padding:1.5rem;border-radius:12px;background:#fff;border:1px solid #eee;transition:all .4s}
+.step-row:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,.06);transform:translateX(4px)}
+.step-num{width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--hd);font-weight:900;font-size:1rem;flex-shrink:0}
+.step-txt h4{font-family:var(--hd);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.step-txt p{font-size:.88rem;color:var(--txt2);line-height:1.7;margin:0}
+.step-code{font-family:var(--cd);font-size:.78rem;color:var(--gold);font-weight:600;display:inline-block;margin-bottom:.3rem}
+
+/* === LIFECYCLE === */
+.lc-wrap{max-width:820px;margin:3rem auto;padding:0 2rem}
+.lc{display:flex;align-items:flex-start}
+.lc-step{flex:1;text-align:center;position:relative;padding:0 .4rem}
+.lc-step::after{content:'';position:absolute;top:26px;right:-50%;width:100%;height:2px;background:#e0e0e0;z-index:0}
+.lc-step:last-child::after{display:none}
+.lc-step.on::after{background:linear-gradient(90deg,var(--gold),var(--teal))}
+.lc-circ{width:52px;height:52px;border-radius:50%;background:#f0f0f0;border:1.5px solid #ddd;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;position:relative;z-index:2;transition:all .5s}
+.lc-circ svg{width:22px;height:22px;stroke:#aaa;fill:none;transition:stroke .5s}
+.lc-step.on .lc-circ{background:var(--navy);border-color:var(--navy);box-shadow:0 4px 16px rgba(8,28,46,.3);transform:scale(1.1)}
+.lc-step.on .lc-circ svg{stroke:#fff}
+.lc-lab{font-size:.72rem;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em;transition:color .4s}
+.lc-step.on .lc-lab{color:var(--navy)}
+.lc-sub{font-size:.68rem;color:var(--txt2);margin-top:.3rem;line-height:1.4;max-height:0;overflow:hidden;transition:max-height .4s,opacity .4s;opacity:0}
+.lc-step.on .lc-sub{max-height:100px;opacity:1}
+
+/* === ROLES TABLE === */
+.roles-table{max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.role-row{display:grid;grid-template-columns:180px 1fr;gap:0;border-radius:12px;overflow:hidden;margin-bottom:1.2rem;background:#fff;border:1px solid #eee;transition:all .4s}
+.role-row:hover{box-shadow:0 6px 24px rgba(0,0,0,.06);border-color:rgba(196,154,40,.3)}
+.role-label{background:var(--navy);color:var(--gold);padding:1.4rem 1.6rem;font-family:var(--hd);font-weight:700;font-size:.9rem;display:flex;align-items:flex-start;line-height:1.4}
+.role-body{padding:1.4rem 1.8rem}
+.role-body strong{display:block;font-size:.82rem;color:var(--navy);font-weight:700;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em}
+.role-body p{font-size:.88rem;color:var(--txt2);line-height:1.7;margin:0}
+
+/* === ATMOSPHERE TABLE === */
+.atm-table{max-width:700px;margin:2rem auto;padding:0 2rem;border-collapse:collapse;width:100%}
+.atm-table th{background:var(--navy);color:var(--gold);font-family:var(--hd);font-size:.78rem;font-weight:700;padding:.9rem 1.2rem;text-align:left;letter-spacing:.06em;text-transform:uppercase}
+.atm-table td{padding:.9rem 1.2rem;font-size:.88rem;color:var(--txt2);border-bottom:1px solid #eee;line-height:1.55}
+.atm-table tr:last-child td{border-bottom:none}
+.atm-table tr:nth-child(even) td{background:rgba(8,28,46,.02)}
+.atm-val{font-family:var(--cd);color:var(--navy);font-weight:700}
+.atm-ok{color:var(--green);font-weight:700}
+.atm-warn{color:var(--red);font-weight:700}
+
+/* === LOTO STEPS === */
+.loto-steps{max-width:820px;margin:2.5rem auto;padding:0 2rem;display:flex;flex-direction:column;gap:1rem}
+.loto-step{display:flex;align-items:flex-start;gap:1.4rem;padding:1.4rem 1.8rem;border-radius:12px;background:#fff;border:1px solid #eee;transition:all .4s}
+.loto-step:hover{border-color:var(--gold);transform:translateX(6px);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.loto-n{width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--hd);font-weight:900;font-size:1rem;flex-shrink:0}
+.loto-txt strong{display:block;font-family:var(--hd);font-size:1rem;color:var(--navy);margin-bottom:.25rem}
+.loto-txt p{font-size:.88rem;color:var(--txt2);line-height:1.7;margin:0}
+
+/* === VIOLATION CARDS === */
+.violation-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;max-width:820px;margin:2.5rem auto;padding:0 2rem}
+.vcard{padding:1.6rem;border-radius:12px;background:rgba(231,76,60,.04);border:1px solid rgba(231,76,60,.12);transition:all .4s}
+.vcard:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(231,76,60,.08)}
+.vcard-ico{font-size:1.6rem;margin-bottom:.7rem}
+.vcard h4{font-family:var(--hd);font-size:.95rem;font-weight:700;color:var(--red);margin-bottom:.4rem}
+.vcard p{font-size:.85rem;color:var(--txt2);line-height:1.65;margin:0}
+
+/* === CHECKLIST === */
+.checklist{max-width:700px;margin:2rem auto;padding:0 2rem}
+.chk-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.4rem;margin-bottom:.8rem;border-radius:10px;background:#fff;border:1px solid #eee;font-size:.92rem;color:var(--txt2);line-height:1.6;transition:all .3s}
+.chk-item:hover{border-color:var(--gold);background:rgba(196,154,40,.03)}
+.chk-box{width:22px;height:22px;border-radius:5px;border:2px solid var(--gold);flex-shrink:0;margin-top:.05rem;display:flex;align-items:center;justify-content:center}
+.chk-box svg{width:12px;height:12px;stroke:var(--gold);fill:none}
+
+/* === GOLDEN RULES === */
+.rules{max-width:820px;margin:3rem auto;padding:0 2rem;display:flex;flex-direction:column;gap:1.2rem}
+.rule{display:flex;align-items:flex-start;gap:1.4rem;padding:1.5rem 1.8rem;border-radius:12px;background:#fff;border:1px solid #eee;transition:all .4s}
+.rule:hover{border-color:var(--gold);transform:translateX(6px);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.rule-n{font-family:var(--hd);font-size:2rem;font-weight:900;color:var(--gold);line-height:1;flex-shrink:0;min-width:2.4rem}
+.rule-txt{flex:1}
+.rule-txt strong{display:block;font-family:var(--hd);font-size:1.05rem;color:var(--navy);margin-bottom:.3rem}
+.rule-txt p{font-size:.88rem;color:var(--txt2);line-height:1.7;margin:0}
+
+/* === ACTION CARD === */
+.action-card{max-width:820px;margin:3rem auto;padding:0 2rem}
+.ac-inner{background:var(--navy);border-radius:18px;padding:3rem;position:relative;overflow:hidden}
+.ac-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 10% 50%,rgba(196,154,40,.1) 0%,transparent 60%),radial-gradient(ellipse 50% 70% at 90% 30%,rgba(231,76,60,.06) 0%,transparent 60%)}
+.ac-content{position:relative;z-index:2}
+.ac-inner .sec-tag{color:var(--gold);font-size:.8rem}
+.ac-inner .sec-tag::after{background:linear-gradient(90deg,rgba(196,154,40,.4),transparent)}
+.ac-inner h2{font-family:var(--hd);font-size:1.9rem;font-weight:900;color:#fff;margin-bottom:.8rem}
+.ac-inner p{font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:2rem}
+.ac-flow{display:flex;align-items:center;gap:0;margin-bottom:2.5rem}
+.ac-step{flex:1;text-align:center}
+.ac-step-inner{padding:1.2rem .5rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;margin:0 .3rem}
+.ac-step-ico{font-size:1.5rem;margin-bottom:.4rem}
+.ac-step-label{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.06em}
+.ac-arrow{color:var(--gold);font-size:1.2rem;flex-shrink:0;margin:0 .1rem}
+.ac-details{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.ac-detail{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.2rem 1.5rem}
+.ac-detail-label{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.3rem}
+.ac-detail-val{font-family:var(--cd);font-size:.85rem;color:var(--gold);font-weight:600}
+.ac-detail-sub{font-size:.75rem;color:rgba(255,255,255,.45);margin-top:.1rem}
+
+/* === CLOSING === */
+.closing{padding:7rem 2rem;text-align:center;background:linear-gradient(180deg,var(--bg),var(--cream))}
+.closing h2{font-family:var(--hd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--navy);margin-bottom:1rem}
+.closing p{font-size:1.05rem;color:var(--txt2);max-width:540px;margin:0 auto 2.5rem;line-height:1.85}
+.cbadge{display:inline-flex;align-items:center;gap:.7rem;padding:.9rem 2.2rem;background:var(--navy);color:#fff;border-radius:50px;font-weight:600;font-size:.85rem;letter-spacing:.03em;transition:all .4s;text-decoration:none}
+.cbadge:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(8,28,46,.2)}
+
+/* === FOOTER === */
+.ft{padding:2rem;text-align:center;font-size:.72rem;color:var(--txt3);border-top:1px solid #eee;line-height:1.8}
+.ft b{color:var(--gold);font-weight:600}
+.ft .doccode{font-family:var(--cd);color:var(--txt3)}
+
+/* === RESPONSIVE === */
+@media(max-width:768px){
+  .split,.cgrid,.cats,.ac-details,.permit-grid,.violation-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .lc{flex-direction:column;gap:1rem}.lc-step::after{display:none}
+  .sidenav{display:none}
+  .ac-flow{flex-direction:column;gap:.8rem}
+  .ac-arrow{transform:rotate(90deg)}
+  .role-row{grid-template-columns:1fr}
+  .role-label{border-radius:0}
+  .pcard-wide{grid-column:auto}
+}
+@media(max-width:500px){
+  .stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav class="sidenav" id="snav">
+  <a href="#s0" title="Home"></a>
+  <a href="#s1" title="Why Permits Save Lives"></a>
+  <a href="#s2" title="What Is a Permit"></a>
+  <a href="#s3" title="Five PTW Types"></a>
+  <a href="#s4" title="The PTW Process"></a>
+  <a href="#s5" title="Roles &amp; Responsibilities"></a>
+  <a href="#s6" title="Hot Work"></a>
+  <a href="#s7" title="Confined Space"></a>
+  <a href="#s8" title="LOTO"></a>
+  <a href="#s9" title="Violations"></a>
+  <a href="#s10" title="Quick Reference"></a>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section class="hero" id="s0">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="hero-c">
+    <img class="hero-logo" src="https://d2xsxph8kpxj0f.cloudfront.net/310519663473952399/3YVZojsY2rei5QwThHiV6E/logo-trans_6f674faa.png" alt="True East Mining Company" onerror="this.style.display='none'">
+    <div class="hero-tag">TE-IMS-MAN-OPS-001 &middot; OPS &mdash; Learning Materials</div>
+    <h1>Permit to Work System<em>Controlling High-Risk Work.</em></h1>
+    <p class="hero-sub">High-risk work without a permit is not a calculated risk. It is an uncontrolled one. This manual explains the system that keeps workers alive when the margin for error is zero.</p>
+    <div class="hero-scroll">Scroll to read<svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></div>
+  </div>
+</section>
+
+<!-- ======== SECTION 1: WHY PERMITS SAVE LIVES ======== -->
+<section id="s1">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section One</div>
+    <h2 data-anim>Why permits<br>save lives.</h2>
+    <p class="sec-lead" data-anim>Before the first spark is struck or the first bolt is loosened, a permit forces a pause. That pause is where lives are saved. Not in the work itself — in the thinking that happens before it begins.</p>
+
+    <div class="prose" data-anim>
+      <p>A Permit to Work is not a bureaucratic formality invented by safety officers with too much time. It is a formal, documented system developed over decades across the world's most hazardous industries — oil and gas, mining, chemical processing, construction — precisely because experience proved, again and again, that informal approaches to high-risk work end in preventable deaths.</p>
+      <p>The system works by forcing a structured conversation between the people who want to do the work and the people who are authorised to approve it. That conversation surfaces hazards, confirms controls, verifies competence, and establishes a shared understanding of what is about to happen and what will happen if something goes wrong. None of that happens without a formal process to require it.</p>
+      <p>At True East, we operate in remote environments where emergency response is minutes or hours away. That reality makes every preventable accident not just a human tragedy but a logistical one. We cannot afford to learn lessons from accidents that a permit would have prevented. The PTW system is our first, most structured line of defence.</p>
+    </div>
+  </div>
+
+  <!-- Heinrich Triangle connection -->
+  <div class="sec" style="padding-top:0">
+    <h2 data-anim style="font-size:1.6rem">The Heinrich Triangle<br>and where permits intervene.</h2>
+    <div class="prose" data-anim>
+      <p>Heinrich's research established that for every major accident there are approximately 29 minor incidents, and before those, around 300 near misses or unsafe acts. Permits interrupt this chain at the most critical point — before the unsafe act is even performed. A worker who cannot proceed without a signed permit, verified gas test, and confirmed PPE is a worker who has been forced to think before they act. That forced thinking is the permit's most powerful function.</p>
+      <p>The majority of major industrial fatalities that have been studied trace back not to equipment failure but to failures of communication, planning, and hazard recognition — exactly the gaps that a properly executed PTW system closes.</p>
+    </div>
+  </div>
+
+  <!-- Three case studies -->
+  <div class="stories" style="padding-top:0">
+    <div class="story" data-anim>
+      <div class="story-hd">
+        <div class="story-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        </div>
+        <div class="story-hd-txt">
+          <h4>Case Study 1 — The Unlocked Valve</h4>
+          <div class="tag">Maintenance &middot; Chemical Processing Plant</div>
+        </div>
+      </div>
+      <div class="story-bd">
+        <p>A maintenance crew was tasked with replacing a pressure relief valve on a chemical storage tank. No permit was issued. A verbal instruction from a shift supervisor was considered sufficient. The crew isolated the valve they were working on — but not the adjacent inlet line, which remained live. When the first fitter unbolted the flange, the pressurised contents of the inlet line vented directly onto him. He suffered severe chemical burns across his face, neck, and hands. A second worker sustained burns to his forearms.</p>
+        <p>Post-incident investigation found that a full isolation permit — which would have required a complete system diagram to be reviewed and all energy sources mapped — would have identified the live inlet line in the permit preparation phase, before a single tool was picked up.</p>
+        <div class="story-outcome">
+          <strong>The absent control</strong>
+          No permit. No system diagram review. No independent verification of isolation. Three signatures on a single form would have changed everything. The two workers spent weeks in hospital and returned with permanent scarring. The facility faced a regulatory shutdown lasting 11 weeks.
+        </div>
+      </div>
+    </div>
+
+    <div class="story" data-anim>
+      <div class="story-hd">
+        <div class="story-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2EAAAA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="story-hd-txt">
+          <h4>Case Study 2 — The Sewer Entry</h4>
+          <div class="tag">Confined Space &middot; Industrial Facility</div>
+        </div>
+      </div>
+      <div class="story-bd">
+        <p>Two utility workers entered a below-ground sewer access chamber to clear a blockage. The space was one they had entered dozens of times before without incident. Neither worker had atmospheric testing equipment. No confined space entry permit had been applied for or issued. What neither worker knew was that a burst gas main upstream had been slowly venting into the connected drainage network for eleven hours. The chamber contained 23% methane — well above the lower explosive limit.</p>
+        <p>One worker descended the ladder. The other remained at the top of the access shaft. An ignition source — a metal tool striking the concrete wall — triggered a deflagration. The worker in the chamber died at the scene. His colleague at the surface survived with severe burns.</p>
+        <div class="story-outcome">
+          <strong>The absent control</strong>
+          A confined space entry permit mandates atmospheric testing — O₂, LEL, and toxic gases — before entry and at regular intervals during work. That test would have detected the methane in under two minutes. The permit system was in place at the facility. It simply was not used, because "this is just a routine entry." There is no such thing as a routine entry into a confined space.
+        </div>
+      </div>
+    </div>
+
+    <div class="story" data-anim>
+      <div class="story-hd">
+        <div class="story-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#C49A28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="story-hd-txt">
+          <h4>Case Study 3 — The Live Panel</h4>
+          <div class="tag">Electrical Maintenance &middot; Manufacturing Facility</div>
+        </div>
+      </div>
+      <div class="story-bd">
+        <p>An electrician was instructed to replace a faulty contactor in a motor control panel. He was told the panel had been de-energised by the night shift. He opened the panel door and reached for the contactor. What had not been communicated — because there was no permit, no formal isolation log, and no tagged lockout — was that the night shift had only isolated one of two incoming feeds. The second feed was still live at 415V.</p>
+        <p>The electrician made contact with the live busbar while his other hand was resting on the earthed panel casing. He received a full 415V shock across the chest. He survived, but required cardiac intervention and spent three months in rehabilitation before partial return to work. He never fully regained the use of his left hand.</p>
+        <div class="story-outcome">
+          <strong>The absent control</strong>
+          An electrical isolation permit — LOTO procedure — would have required every energy source to be identified, isolated, locked, tagged, and verified dead before the panel was opened. The panel would have carried the electrician's personal lock. No one could have re-energised it without his knowledge. The night shift handover would have been documented. The second feed would not have been missed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote" data-anim>
+    A permit is not bureaucracy. It is the last line of defence between a worker and a catastrophe.
+    <span class="quote-attr">True East Mining Company — PTW System Principle</span>
+  </div>
+</section>
+
+<!-- ======== SECTION 2: WHAT IS A PTW ======== -->
+<section id="s2" style="background:#fff;padding:1px 0">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Two</div>
+    <h2 data-anim>What is a<br>Permit to Work?</h2>
+    <p class="sec-lead" data-anim>A written authority that allows specific high-risk work to be carried out safely — and a structured process that ensures the conditions for that safety are verified before work begins.</p>
+
+    <div class="prose" data-anim>
+      <p>A Permit to Work is a formal written document that defines exactly what work is to be done, where, by whom, and under what conditions. It is not a generalised permission to work. It is a task-specific authority issued for a specific scope of work, at a specific location, within a specific time window. When those parameters change, the permit is no longer valid.</p>
+      <p>The PTW is fundamentally a communication tool. It creates a documented record of the agreement between the person who wants to do the work and the person who has the authority to allow it. That agreement includes: a shared understanding of the hazards involved, confirmation that all required controls are in place, and a clear allocation of responsibility for managing the work safely.</p>
+    </div>
+
+    <h2 data-anim style="font-size:1.5rem;margin-top:2.5rem">Key components of every permit.</h2>
+    <div class="prose" data-anim>
+      <p>Every PTW at True East contains six mandatory components regardless of permit type. Understanding each component helps workers understand why the permit takes the form it does — and why each field exists.</p>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step-row" data-anim>
+      <div class="step-num">1</div>
+      <div class="step-txt">
+        <div class="step-code">Scope of Work</div>
+        <h4>What is being done — precisely</h4>
+        <p>The permit defines the specific task: not "electrical work" but "replacement of contactor K3 in MCC panel B2, Level 1, at coordinates N-14." Vague scope descriptions are the most common cause of permit misuse. If the scope changes during the job, the permit must be suspended and re-issued.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">2</div>
+      <div class="step-txt">
+        <div class="step-code">Hazard Identification</div>
+        <h4>What could go wrong</h4>
+        <p>Every permit requires a completed Job Hazard Analysis (JHA) to be attached or referenced. The JHA identifies all hazards associated with the task — stored energy, flammable atmospheres, working at height, adjacent activities, environmental conditions — and links each hazard to a specific control measure.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">3</div>
+      <div class="step-txt">
+        <div class="step-code">Control Measures</div>
+        <h4>What is being done about each hazard</h4>
+        <p>The permit lists all controls that must be in place before and during the work: isolations confirmed, PPE worn, gas testing completed, exclusion zones established, standby personnel in position, emergency plan briefed. Each control must be physically verified — not assumed — before the permit is signed.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">4</div>
+      <div class="step-txt">
+        <div class="step-code">Authorisation Chain</div>
+        <h4>Who approved it and who is accountable</h4>
+        <p>Every permit carries the signatures of at least the Performing Authority (the person doing the work) and the Issuing Authority (the competent person who has verified the controls). High-risk permits such as confined space entry also require the Area Authority and, in some cases, the HSE Representative. These signatures are not formalities — they are declarations of accountability.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">5</div>
+      <div class="step-txt">
+        <div class="step-code">Time Limits</div>
+        <h4>When the authority expires</h4>
+        <p>Every permit has a start time and an expiry time. No permit at True East may be valid for longer than one shift (12 hours maximum). If work continues beyond that, a fresh permit must be issued. Permits cannot be verbally extended. Any work beyond the expiry time without a re-issued permit is an unauthorised activity.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">6</div>
+      <div class="step-txt">
+        <div class="step-code">Close-Out</div>
+        <h4>Confirmation that the work is done and the area is safe</h4>
+        <p>When work is complete, the site must be inspected, all tools and materials accounted for, all isolations returned to normal service, and the permit formally closed. A permit that is not closed out is a permit that says the work is still in progress — which could prevent re-energisation of equipment or lead to confusion on the next shift.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <h2 data-anim style="font-size:1.5rem">What falls under PTW — and what doesn't.</h2>
+    <div class="prose" data-anim>
+      <p>Not every task on site requires a permit. Routine, low-risk activities within a worker's normal operational scope do not trigger the PTW system. The trigger is a combination of the nature of the hazard and the potential severity of the consequences if something goes wrong.</p>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="scard bad" data-anim>
+      <div class="scard-ico">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+      </div>
+      <h3>Controlled Work — PTW Required</h3>
+      <ul>
+        <li>Welding, cutting, or grinding near flammables</li>
+        <li>Entry into any confined space or enclosed vessel</li>
+        <li>Work on or near live electrical systems</li>
+        <li>Excavation or trenching deeper than 300mm</li>
+        <li>Use of radioactive sources or X-ray equipment</li>
+        <li>Work at height exceeding 1.8m without fall arrest</li>
+        <li>Breaking into pressurised pipelines or vessels</li>
+        <li>Any work in a potentially flammable atmosphere</li>
+      </ul>
+    </div>
+    <div class="scard good" data-anim>
+      <div class="scard-ico">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2ECC71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Uncontrolled Work — PTW Not Required</h3>
+      <ul>
+        <li>Routine drilling operations within established parameters</li>
+        <li>Sample labelling and logging at surface</li>
+        <li>Vehicle driving on established site roads</li>
+        <li>Visual inspections of equipment from outside</li>
+        <li>Office-based administrative tasks</li>
+        <li>Routine cleaning of non-hazardous areas</li>
+        <li>Loading and unloading of standard goods</li>
+        <li>Personal protective maintenance of issued PPE</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:1rem">
+    <div class="callout" data-anim>
+      <div class="callout-title callout-title-gold">Legal Basis</div>
+      <p>The PTW system at True East is anchored in two legal and standards frameworks. Under <strong>MHRSD Occupational Health and Safety Regulations (2021)</strong>, employers must establish formal work controls for high-risk activities including confined space, hot work, and energy isolation. Under <strong>ISO 45001:2018 Clause 8.1.3 — Management of Change</strong>, organisations must control work that introduces new or changed hazards. The PTW system is the primary mechanism for meeting both obligations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 3: FIVE PTW TYPES ======== -->
+<section id="s3">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Three</div>
+    <h2 data-anim>The five PTW types<br>used at True East.</h2>
+    <p class="sec-lead" data-anim>Each permit type addresses a specific category of high-risk work. The type determines the hazard assessment required, the control measures that must be verified, and the authorisation level needed before work can begin.</p>
+  </div>
+
+  <div class="permit-grid" style="padding-bottom:3rem">
+
+    <div class="pcard hot" data-anim>
+      <div class="pcard-ico">&#128293;</div>
+      <h3>Hot Work Permit</h3>
+      <p style="font-size:.88rem;color:var(--txt2);line-height:1.65;margin-top:.4rem">For any work that generates heat, sparks, or open flame in an area where flammable or combustible materials may be present.</p>
+      <div class="pcard-meta">
+        <div class="pcard-row">
+          <span class="pcard-row-label">When Required</span>
+          <span class="pcard-row-val">Welding, oxy-cutting, grinding, brazing, torch operations, or any open-flame activity within 10 metres of a flammable material or atmosphere</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Authorised By</span>
+          <span class="pcard-row-val">Issuing Authority (Site Supervisor or HSE Rep) + Area Authority co-signature required</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Max Validity</span>
+          <span class="pcard-row-val">12 hours / one shift. Re-issue required for next shift.</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Form Code</span>
+          <span class="pcard-row-val" style="font-family:var(--cd)">TE-IMS-FRM-OPS-011</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard confined" data-anim>
+      <div class="pcard-ico">&#9973;&#65039;</div>
+      <h3>Confined Space Entry Permit</h3>
+      <p style="font-size:.88rem;color:var(--txt2);line-height:1.65;margin-top:.4rem">For any entry into a space with restricted entry or exit, or where an atmospheric hazard may exist. The most consequential permit type — mismanagement is frequently fatal.</p>
+      <div class="pcard-meta">
+        <div class="pcard-row">
+          <span class="pcard-row-label">When Required</span>
+          <span class="pcard-row-val">Tanks, vessels, silos, sumps, pits, trenches exceeding 1.5m depth, ducting, and any space with limited ventilation</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Authorised By</span>
+          <span class="pcard-row-val">Issuing Authority + Area Authority + HSE Representative (all three signatures mandatory)</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Max Validity</span>
+          <span class="pcard-row-val">One entry period. Re-test and re-sign required if entrant leaves and re-enters.</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Form Code</span>
+          <span class="pcard-row-val" style="font-family:var(--cd)">TE-IMS-FRM-OPS-012</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard loto" data-anim>
+      <div class="pcard-ico">&#128274;</div>
+      <h3>Electrical Isolation Permit (LOTO)</h3>
+      <p style="font-size:.88rem;color:var(--txt2);line-height:1.65;margin-top:.4rem">For any work on or near electrical systems, equipment, or circuits where unexpected energisation could cause injury. LOTO means Lock Out, Tag Out.</p>
+      <div class="pcard-meta">
+        <div class="pcard-row">
+          <span class="pcard-row-label">When Required</span>
+          <span class="pcard-row-val">Opening electrical panels, working on motors, replacing components in energised circuits, testing conductors, or any task within the limited approach boundary of live conductors</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Authorised By</span>
+          <span class="pcard-row-val">Issuing Authority (must be a qualified Electrician or Electrical Supervisor)</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Max Validity</span>
+          <span class="pcard-row-val">Duration of task. Locks remain on equipment until all work is verified complete.</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Form Code</span>
+          <span class="pcard-row-val" style="font-family:var(--cd)">TE-IMS-FRM-OPS-013</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard excavation" data-anim>
+      <div class="pcard-ico">&#9935;</div>
+      <h3>Excavation &amp; Ground Disturbance Permit</h3>
+      <p style="font-size:.88rem;color:var(--txt2);line-height:1.65;margin-top:.4rem">For any work that breaks the surface — digging, trenching, boring, piling, or driven anchors. Underground services and ground collapse are the primary hazards.</p>
+      <div class="pcard-meta">
+        <div class="pcard-row">
+          <span class="pcard-row-label">When Required</span>
+          <span class="pcard-row-val">Any excavation or penetration deeper than 300mm below existing ground level, or any work within 1.5m of a known or suspected underground service</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Authorised By</span>
+          <span class="pcard-row-val">Issuing Authority (Site Supervisor) — service drawings and underground scan results must be attached</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Max Validity</span>
+          <span class="pcard-row-val">12 hours. Ground conditions must be re-assessed after any rain event regardless of permit validity.</span>
+        </div>
+        <div class="pcard-row">
+          <span class="pcard-row-label">Form Code</span>
+          <span class="pcard-row-val" style="font-family:var(--cd)">TE-IMS-FRM-OPS-014</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard radiation pcard-wide" data-anim>
+      <div class="pcard-ico">&#9762;&#65039;</div>
+      <h3>Radiography &amp; Radiation Permit</h3>
+      <p style="font-size:.88rem;color:var(--txt2);line-height:1.65;margin-top:.4rem">For any use of radioactive isotopes, gamma radiography equipment, or industrial X-ray equipment on site. Restricted to qualified Radiation Protection Supervisors (RPS) only.</p>
+      <div class="pcard-meta" style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+        <div class="pcard-row" style="flex-direction:column;gap:.2rem">
+          <span class="pcard-row-label">When Required</span>
+          <span class="pcard-row-val">Gamma radiography for weld inspection, density gauging using sealed radioactive sources, X-ray imaging of structural components, or any transport of radioactive materials within site</span>
+        </div>
+        <div>
+          <div class="pcard-row" style="flex-direction:column;gap:.2rem;margin-bottom:.8rem">
+            <span class="pcard-row-label">Authorised By</span>
+            <span class="pcard-row-val">Issuing Authority + RPS certificate mandatory + RCRC notification for sealed sources above exempt quantities</span>
+          </div>
+          <div class="pcard-row" style="flex-direction:column;gap:.2rem">
+            <span class="pcard-row-label">Max Validity</span>
+            <span class="pcard-row-val">One radiographic session. Exclusion zone must be manned throughout. Form Code: <span style="font-family:var(--cd)">TE-IMS-FRM-OPS-015</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======== SECTION 4: PTW PROCESS ======== -->
+<section id="s4" style="background:#fff;padding:1px 0">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Four</div>
+    <h2 data-anim>The PTW process —<br>step by step.</h2>
+    <p class="sec-lead" data-anim>A permit has a lifecycle. It is born when a work request is submitted and it closes when the site is confirmed safe and the document is filed. Every step in between is mandatory — none can be skipped.</p>
+    <div class="prose" data-anim>
+      <p>The permit lifecycle is designed so that each step creates the conditions for the next. You cannot issue a permit before the hazard assessment is complete. You cannot start work before the permit is issued and physically present at the worksite. Each gate exists for a reason — bypassing any of them removes the protection it was designed to provide.</p>
+    </div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl">
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 1</div>
+        <div class="tl-title">Work Request submitted by Performing Authority</div>
+        <div class="tl-desc">The Performing Authority (PA) submits a formal work request describing the scope, location, and nature of the task. This initiates the permit cycle. No work may be planned or mobilised until this step is acknowledged by the Issuing Authority.</div>
+        <div class="tl-note">The request must describe work in sufficient detail that the IA can assess hazards without needing clarification on fundamental scope.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 2</div>
+        <div class="tl-title">Hazard Assessment — JHA must be completed first</div>
+        <div class="tl-desc">The PA, with input from the crew, completes a Job Hazard Analysis (JHA) for the task. This identifies every hazard, evaluates risk level, and specifies control measures. The JHA is the technical foundation of the permit — the permit cannot be issued without it.</div>
+        <div class="tl-note">The JHA must be site-specific and task-specific. Generic JHAs copied from previous permits are not acceptable. Each permit cycle requires a fresh assessment.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 3</div>
+        <div class="tl-title">Permit Application filled out</div>
+        <div class="tl-desc">The PA completes the relevant permit form — selecting the correct permit type, entering the precise scope, referencing the JHA, listing all control measures, specifying crew members, and confirming the planned start and end time. All fields are mandatory. Incomplete forms are returned without processing.</div>
+        <div class="tl-note">When the PA signs the application, they declare they understand the scope, hazards, controls, and their full responsibility for their crew during the permitted work period.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 4</div>
+        <div class="tl-title">Issuing Authority review and site inspection</div>
+        <div class="tl-desc">The IA reviews both documents critically, then physically visits the worksite to verify that conditions match the permit document, the proposed controls are feasible and sufficient, and no adjacent hazards exist outside the JHA scope. Site inspection is not optional — it is the IA's personal verification.</div>
+        <div class="tl-note">Signing a permit based on description alone, without visiting the site, removes the independent check that is the permit system's most powerful protective mechanism.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 5</div>
+        <div class="tl-title">Control measures verified</div>
+        <div class="tl-desc">Before the permit is signed, every control measure must be physically verified: PPE correct and worn, isolations applied and tested dead, gas testing completed with results recorded on the permit (timestamp, reading, tester's name), exclusion zones marked, standby persons briefed and in position, emergency plan confirmed and briefed.</div>
+        <div class="tl-note">"Testing completed" without numerical results is not a verified control — it is an unverified assertion. Results must be numbers recorded on paper.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 6</div>
+        <div class="tl-title">Permit signed and issued — time limit set</div>
+        <div class="tl-desc">The IA signs the permit, and where co-signatures are required (hot work, confined space), the Area Authority and HSE Representative also sign. The permit is valid from signing to the recorded expiry time. One copy goes to the PA; one is retained in the permit control register at the site office.</div>
+        <div class="tl-note">The permit must be physically present at the worksite at all times. If it cannot be located, work stops immediately until it is found or a new permit is issued.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 7</div>
+        <div class="tl-title">Work in progress — re-authorisation required if exceeding one shift</div>
+        <div class="tl-desc">Work proceeds within the scope and conditions of the permit. The PA ensures the crew stays within permit boundaries at all times — location, scope, and time. If work continues beyond one shift, a new permit must be issued for each subsequent shift. Permits cannot be carried over or verbally extended by a departing supervisor.</div>
+        <div class="tl-note">If the nature of the work changes — a new hazard discovered, scope expands — work stops, the IA is notified, and the permit must be amended or reissued before work resumes.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 8</div>
+        <div class="tl-title">Permit suspension if conditions change</div>
+        <div class="tl-desc">A permit is immediately suspended if: atmospheric conditions exceed thresholds, area conditions change from those described, an emergency alters the site risk profile, the PA or IA leaves the site, or Stop Work Authority is invoked. All work stops immediately, tools are made safe, and the IA is notified without delay.</div>
+        <div class="tl-note">A suspended permit is not cancelled. If conditions can be restored and re-verified, the IA may re-authorise. If not, the permit is cancelled and a new cycle begins from Step 1.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 9</div>
+        <div class="tl-title">Work complete — joint site inspection</div>
+        <div class="tl-desc">The PA and IA conduct a joint inspection: all work finished to the required standard, no tools or materials left in the work area, all isolations removed and equipment returned to operational readiness, all standby and fire watch stood down, and the area is safe for normal operations to resume.</div>
+        <div class="tl-note">The joint inspection is the final independent check before the controlled state is removed. Both signatures on the close-out section confirm the result.</div>
+      </div>
+      <div class="tl-item" data-anim>
+        <div class="tl-dot"></div>
+        <div class="tl-rev">Step 10</div>
+        <div class="tl-title">Permit closed out and filed</div>
+        <div class="tl-desc">The IA signs the close-out section, recording the time and confirming the area is safe. The permit is filed in the permit register and retained for a minimum of three years. A permit that is never closed is technically still open — creating confusion about equipment readiness and representing an audit trail gap.</div>
+        <div class="tl-note">Every permit opened must be formally closed — including permits where work was abandoned or scope changed mid-task. The close-out record is evidence the controlled state was properly returned to normal.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:0">
+    <div class="callout danger" data-anim>
+      <div class="callout-title">The Most Common Process Failure</div>
+      <p>The step most frequently bypassed is Step 4 — the IA's site inspection. Issuing Authorities under time pressure often sign permits based on description alone. This removes the independent verification that is the permit system's most powerful protective mechanism. If you are an IA: you must visit the site before you sign. Every time. No exceptions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 5: ROLES ======== -->
+<section id="s5">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Five</div>
+    <h2 data-anim>Roles &amp;<br>responsibilities.</h2>
+    <p class="sec-lead" data-anim>The PTW system works because every person in it has a clearly defined role with clearly defined accountability. Understanding your role — and your limits — is the basis of the system's integrity.</p>
+  </div>
+  <div class="roles-table">
+    <div class="role-row" data-anim>
+      <div class="role-label">Performing Authority<br><span style="font-size:.75rem;opacity:.6;font-weight:400">(PA)</span></div>
+      <div class="role-body">
+        <strong>The person doing the work</strong>
+        <p>The PA is the worker or crew leader who will physically carry out the permitted task. They are responsible for: understanding every condition on the permit before signing it, briefing their crew before work begins, ensuring all crew members stay within the permit scope, monitoring conditions continuously during the work, stopping work if any permit condition is no longer met, and returning the permit to the IA when work is complete or conditions change. The PA cannot authorise their own permit. They cannot begin work without a signed permit in hand at the worksite. When unsure whether a task requires a permit — they stop and ask.</p>
+      </div>
+    </div>
+    <div class="role-row" data-anim>
+      <div class="role-label">Issuing Authority<br><span style="font-size:.75rem;opacity:.6;font-weight:400">(IA)</span></div>
+      <div class="role-body">
+        <strong>The competent supervisor who reviews, approves, and issues</strong>
+        <p>The IA is a trained, competent supervisor with authority to issue permits for the relevant work type. For standard permits, this is typically the Site Supervisor. For hot work and confined space permits, the HSE Representative must also co-sign. The IA is responsible for: critically reviewing the JHA, physically inspecting the worksite before signing, verifying all control measures are confirmed not merely claimed, setting a realistic time limit, and completing the close-out when work is done. The IA carries personal accountability for the conditions under which the permit was issued. If they signed and conditions were not verified, they share direct responsibility for any resulting incident.</p>
+      </div>
+    </div>
+    <div class="role-row" data-anim>
+      <div class="role-label">Area Authority<br><span style="font-size:.75rem;opacity:.6;font-weight:400">(AA)</span></div>
+      <div class="role-body">
+        <strong>Controls the physical space where work occurs</strong>
+        <p>The AA is the person responsible for the physical area where permitted work takes place — typically the operational supervisor or area manager for that zone. The AA must co-sign all Confined Space Entry and Hot Work permits. Their signature confirms the area is clear of conflicting activities and can be safely handed over for the duration of the permitted work. The AA must be notified immediately if the permit is suspended, cancelled, or if an incident occurs in the area during the permitted work period.</p>
+      </div>
+    </div>
+    <div class="role-row" data-anim>
+      <div class="role-label">HSE Representative</div>
+      <div class="role-body">
+        <strong>Validates controls, witnesses testing, co-signs complex permits</strong>
+        <p>The HSE Representative is a trained safety professional who plays a technical verification role in the PTW system. They are required to co-sign Confined Space Entry permits (after personally witnessing the atmospheric tests) and Hot Work permits where flammable material proximity triggers additional HSE review. The HSE Rep is also the primary resource for workers or IAs who need guidance on permit type selection or appropriate controls. Their signature on a complex permit means controls have been independently assessed by a competent safety professional.</p>
+      </div>
+    </div>
+    <div class="role-row" data-anim>
+      <div class="role-label">The Worker</div>
+      <div class="role-body">
+        <strong>The last line of defence — and the first to stop</strong>
+        <p>Every worker operating under a permit has the right and responsibility to stop work if permit conditions are not met. This is not insubordination — it is the system working exactly as designed. Workers are the first to notice when something on the permit does not match the site reality. That information must flow upward immediately. Workers should never start work on a permit they have not had the opportunity to read and understand before the first task step begins.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:1rem">
+    <div class="callout safe" data-anim>
+      <div class="callout-title">Stop Work Authority</div>
+      <p>Under <strong>TE-IMS-POL-HSE-001</strong>, every person on site — including workers operating under a permit — has Stop Work Authority. If you believe permit conditions are no longer met, or that continuing creates unacceptable risk, stop the work. You will not face reprisal for exercising Stop Work Authority in good faith. After stopping: notify the PA. The PA notifies the IA. The permit is suspended pending review.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 6: HOT WORK ======== -->
+<section id="s6" style="background:#fff;padding:1px 0">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Six</div>
+    <h2 data-anim>Hot Work —<br>detailed requirements.</h2>
+    <p class="sec-lead" data-anim>Hot work is the leading cause of facility fires and explosions worldwide. The controls exist not because they are convenient but because the fire triangle makes them non-negotiable.</p>
+    <div class="prose" data-anim>
+      <p>Fire requires three elements: fuel, oxygen, and an ignition source. Hot work — welding, cutting, grinding, brazing — is a controlled ignition source that cannot be removed from the task. What can be controlled is the fuel and conditions around it. The Hot Work Permit system ensures that before any ignition source is introduced, every possible fuel source within the hazard radius has been identified, removed or isolated, and verified absent by gas testing.</p>
+      <p>Sparks and hot slag from welding and cutting can travel up to 10 metres from the point of work. A fuel source at 8 metres not noticed during the JHA is still within the ignition radius. The 10-metre check is the minimum — in enclosed spaces or with wind conditions, the exclusion zone must be extended and documented.</p>
+    </div>
+    <h2 data-anim style="font-size:1.5rem;margin-top:2rem">Fire watch requirements.</h2>
+  </div>
+  <div class="rules" style="margin-top:1.5rem">
+    <div class="rule" data-anim>
+      <div class="rule-n">1</div>
+      <div class="rule-txt">
+        <strong>Fire watch is mandatory from first spark to last cooling.</strong>
+        <p>The fire watch must be in position before hot work begins and remain throughout. They cannot assist with the work — their full attention is on monitoring for smoke, smouldering, or ignition. A charged, serviceable fire extinguisher must be within arm's reach at all times.</p>
+      </div>
+    </div>
+    <div class="rule" data-anim>
+      <div class="rule-n">2</div>
+      <div class="rule-txt">
+        <strong>30-minute post-work fire watch is mandatory.</strong>
+        <p>When hot work ceases, the fire watch remains for a minimum of 30 minutes after the last spark or heat application. Fires from hot work frequently begin as smouldering in nearby materials and develop into flames minutes or hours after work stops. The 30-minute watch captures the period when most latent ignitions occur.</p>
+      </div>
+    </div>
+    <div class="rule" data-anim>
+      <div class="rule-n">3</div>
+      <div class="rule-txt">
+        <strong>Re-check at 60 minutes if combustibles are adjacent.</strong>
+        <p>If the area contains or is adjacent to wood, fabric, insulation, or other combustibles, a second inspection is performed at 60 minutes post-work. The time, observer name, and result must be recorded in the permit close-out section.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:1.5rem">
+    <h2 data-anim style="font-size:1.5rem">Flammable atmosphere — LEL thresholds.</h2>
+  </div>
+  <div class="stats">
+    <div class="stat" data-anim>
+      <div class="stat-n gold">&lt;10% LEL</div>
+      <div class="stat-l">Safe to proceed<br>with Hot Work Permit in place</div>
+    </div>
+    <div class="stat" data-anim>
+      <div class="stat-n red">10–25% LEL</div>
+      <div class="stat-l">Work stops immediately<br>Ventilate, re-test, then re-assess</div>
+    </div>
+    <div class="stat" data-anim>
+      <div class="stat-n red">&gt;25% LEL</div>
+      <div class="stat-l">Evacuate the area<br>Treat as emergency. No re-entry.</div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:1rem">
+    <h2 data-anim style="font-size:1.5rem">Scenario walkthrough.</h2>
+    <div class="prose" data-anim>
+      <p>A maintenance technician needs to weld a bracket onto a structural frame. The proposed weld point is 7 metres from a portable chemical storage room containing solvent-based cleaning agents with flammable vapour potential.</p>
+      <p><strong>JHA:</strong> The PA identifies the chemical room as within the 10-metre sparks radius. Controls specified: relocate all chemical containers before work begins, conduct LEL testing, deploy dedicated fire watch, position CO2 extinguisher at work area.</p>
+      <p><strong>IA inspection:</strong> Site Supervisor visits — containers still present. IA declines to sign. PA arranges relocation to 15+ metres. IA revisits, confirms containers gone, LEL reads 0%, fire watch briefed and in position. IA signs.</p>
+      <p><strong>During work:</strong> Fire watch maintains position throughout. After 40 minutes, weld is complete. Fire watch remains for 30 minutes. No anomalies. 60-minute check performed and recorded. Permit returned to IA for formal close-out.</p>
+    </div>
+    <div class="callout" data-anim>
+      <div class="callout-title callout-title-gold">Hot Work Permit Validity</div>
+      <p>Hot Work Permits at True East are valid for a maximum of 12 hours — one shift. Work carrying over to a second shift requires the first permit formally closed, worksite re-inspected, and a new permit issued by the incoming IA. A hot work permit cannot be verbally extended or carried over by a departing supervisor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 7: CONFINED SPACE ======== -->
+<section id="s7">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Seven</div>
+    <h2 data-anim>Confined Space Entry —<br>detailed requirements.</h2>
+    <p class="sec-lead" data-anim>Confined space fatalities are uniquely preventable and uniquely tragic — because the hazards are known, the controls are established, and yet people die because the entry procedures are not followed. This section has no shortcuts.</p>
+    <div class="prose" data-anim>
+      <p>A confined space is any enclosed or partially enclosed space not designed for continuous human occupancy, where access is limited, and where there is foreseeable risk of: flammable atmosphere, oxygen deficiency or enrichment, toxic atmosphere, or engulfment. The hazard is not always visible — atmospheric conditions can change rapidly without warning, without smell, and without colour. Prior history provides no protection.</p>
+    </div>
+    <h2 data-anim style="font-size:1.5rem;margin-top:2rem">What counts as a confined space at True East.</h2>
+  </div>
+  <div class="cats">
+    <div class="cat" data-anim>
+      <div class="cat-ico">&#9651;</div>
+      <h4>Tanks &amp; Vessels</h4>
+      <p>Any storage tank, process vessel, pressure vessel, or liquid holding tank — above-ground, below-ground, or skid-mounted. Prior atmospheric history does not waive the permit requirement.</p>
+      <span class="cat-label">Always CS</span>
+    </div>
+    <div class="cat" data-anim>
+      <div class="cat-ico">&#9680;</div>
+      <h4>Pits, Sumps &amp; Trenches</h4>
+      <p>Any below-grade pit, sump, wet well, or trench deeper than 1.5 metres, measured from surrounding grade to the working surface at the lowest point.</p>
+      <span class="cat-label">Depth &gt;1.5m</span>
+    </div>
+    <div class="cat" data-anim>
+      <div class="cat-ico">&#128268;</div>
+      <h4>Ducting &amp; Pipelines</h4>
+      <p>Any duct, pipeline, tunnel, or conduit large enough to accommodate a person, or any work requiring partial body entry into enclosed conveyance systems.</p>
+      <span class="cat-label">Any entry</span>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:1rem">
+    <h2 data-anim style="font-size:1.5rem">Atmospheric testing sequence.</h2>
+    <div class="prose" data-anim>
+      <p>Mandatory before every entry and at regular intervals throughout. The sequence is non-interchangeable: oxygen first (sensors give false readings in the presence of flammable gases), flammables second (LEL readings can be suppressed in oxygen-deficient atmospheres), then toxics. These are measurement physics, not preferences.</p>
+    </div>
+  </div>
+  <table class="atm-table" data-anim>
+    <thead>
+      <tr><th>Order</th><th>Parameter</th><th>Acceptable Range</th><th>Stop Work If</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="atm-val">1st</span></td>
+        <td>Oxygen (O&#8322;)</td>
+        <td><span class="atm-ok">19.5% – 23.5%</span></td>
+        <td><span class="atm-warn">&lt;19.5% or &gt;23.5%</span></td>
+      </tr>
+      <tr>
+        <td><span class="atm-val">2nd</span></td>
+        <td>Flammable Gases (LEL)</td>
+        <td><span class="atm-ok">&lt;10% LEL</span></td>
+        <td><span class="atm-warn">&#8805;10% LEL</span></td>
+      </tr>
+      <tr>
+        <td><span class="atm-val">3rd</span></td>
+        <td>Hydrogen Sulphide (H&#8322;S)</td>
+        <td><span class="atm-ok">&lt;10 ppm</span></td>
+        <td><span class="atm-warn">&#8805;10 ppm</span></td>
+      </tr>
+      <tr>
+        <td><span class="atm-val">4th</span></td>
+        <td>Carbon Monoxide (CO)</td>
+        <td><span class="atm-ok">&lt;25 ppm</span></td>
+        <td><span class="atm-warn">&#8805;25 ppm</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="sec" style="padding-top:1rem">
+    <div class="callout danger" data-anim>
+      <div class="callout-title">If any reading exceeds the stop-work threshold</div>
+      <p>Evacuate immediately. Do not re-enter to retrieve tools. Apply forced ventilation. Wait a minimum of 15 minutes post-ventilation before re-testing. Do not re-enter until all four parameters are within acceptable ranges on two consecutive tests taken 5 minutes apart. Record all readings, timestamps, and ventilation actions on the permit before any re-entry is authorised.</p>
+    </div>
+    <h2 data-anim style="font-size:1.5rem;margin-top:2rem">Standby person requirements.</h2>
+    <div class="prose" data-anim>
+      <p>Every confined space entry requires a trained standby person at the entry point without exception. Every fatality where a confined space killed both an entrant and a would-be rescuer happened because the rescuer entered without protection. The standby person's job is to summon the rescue team — not to replace the entrant in the hazard.</p>
+    </div>
+  </div>
+  <div class="rules" style="margin-top:1.5rem">
+    <div class="rule" data-anim>
+      <div class="rule-n">&#9679;</div>
+      <div class="rule-txt">
+        <strong>The standby person cannot leave their position.</strong>
+        <p>From first entry to last exit, the standby remains at the entry point. They cannot step away for any reason. If they must leave, the entrant exits the confined space first. If no replacement is available, the work stops.</p>
+      </div>
+    </div>
+    <div class="rule" data-anim>
+      <div class="rule-n">&#9679;</div>
+      <div class="rule-txt">
+        <strong>The standby cannot enter to rescue without their own permit and protection.</strong>
+        <p>If a worker inside becomes incapacitated, the standby raises the alarm and calls for the trained emergency rescue team. Entering an atmosphere that has incapacitated a worker — without personal atmospheric protection and a separate rescue permit — makes you the second casualty.</p>
+      </div>
+    </div>
+    <div class="rule" data-anim>
+      <div class="rule-n">&#9679;</div>
+      <div class="rule-txt">
+        <strong>Emergency rescue plan must be in place before entry begins.</strong>
+        <p>The rescue plan must specify: extraction method, who leads the rescue and their qualifications, emergency services contact and estimated ETA, and route to the nearest medical facility. The plan must be briefed to all permit signatories and the standby before the first entry — not just held on file.</p>
+      </div>
+    </div>
+    <div class="rule" data-anim>
+      <div class="rule-n">&#9679;</div>
+      <div class="rule-txt">
+        <strong>Continuous atmospheric monitoring is mandatory during work.</strong>
+        <p>Every entrant must wear a calibrated personal gas monitor throughout the occupancy, set to alarm at stop-work thresholds. If the monitor alarms at any point, the entrant exits immediately. Standby is notified, permit is suspended, and the cause is investigated before any re-entry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 8: LOTO ======== -->
+<section id="s8" style="background:#fff;padding:1px 0">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Eight</div>
+    <h2 data-anim>Lock Out Tag Out —<br>LOTO.</h2>
+    <p class="sec-lead" data-anim>LOTO prevents unexpected energisation during maintenance. It is a physical protection system — not a procedural one. Physical locks cannot be overridden by verbal instructions, urgency, or management pressure.</p>
+    <div class="prose" data-anim>
+      <p>Electrical systems store and release energy in ways that are not obvious: capacitors retain charge, motors retain rotational inertia, closed valves carry upstream pressure. LOTO identifies every form of stored energy, eliminates or restrains it, and physically prevents re-energisation by anyone other than the person holding the personal lock.</p>
+      <p>The critical distinction: a tag says "do not energise." A lock makes energisation physically impossible. Tags supplement locks — they never replace them. Under no circumstances at True East may a tag alone serve as an energy isolation control for electrical work.</p>
+    </div>
+    <h2 data-anim style="font-size:1.5rem;margin-top:2rem">The six steps of LOTO.</h2>
+  </div>
+  <div class="loto-steps">
+    <div class="loto-step" data-anim>
+      <div class="loto-n">1</div>
+      <div class="loto-txt">
+        <strong>Notify — inform all affected personnel</strong>
+        <p>Before any isolation, notify all persons affected: equipment operators, adjacent workers, shift supervisors, control room. Notification must be two-way — confirmed as received and understood. Document who was notified and when.</p>
+      </div>
+    </div>
+    <div class="loto-step" data-anim>
+      <div class="loto-n">2</div>
+      <div class="loto-txt">
+        <strong>Shut down — bring equipment to a safe stop</strong>
+        <p>Bring the equipment to a safe, normal stop using the established shutdown procedure. Do not attempt to isolate energy from running equipment. Confirm the equipment has reached its safe rest state before proceeding.</p>
+      </div>
+    </div>
+    <div class="loto-step" data-anim>
+      <div class="loto-n">3</div>
+      <div class="loto-txt">
+        <strong>Isolate — disconnect every energy source</strong>
+        <p>Apply isolation at every energy source. For electrical systems, open the disconnect switch or circuit breaker for every incoming feed — not just the apparent main supply. Review the system diagram. Control power circuits, UPS feeds, and secondary supplies must all be captured.</p>
+      </div>
+    </div>
+    <div class="loto-step" data-anim>
+      <div class="loto-n">4</div>
+      <div class="loto-txt">
+        <strong>Lock out — apply personal lock to every isolation point</strong>
+        <p>Apply your personal lock to every isolation point. Your personal lock is keyed specifically to you. If multiple workers share an isolation, each applies their own lock to a group lockout hasp. Every worker's lock must remain until their portion is complete. No person may remove your personal lock without your presence and agreement — including supervisors and site management.</p>
+      </div>
+    </div>
+    <div class="loto-step" data-anim>
+      <div class="loto-n">5</div>
+      <div class="loto-txt">
+        <strong>Release stored energy — bleed, drain, discharge, and block</strong>
+        <p>Identify and safely release all stored energy: discharge capacitors and test for residual voltage; bleed pressurised piping; gravity-block elevated components; allow heated surfaces to cool; drain liquid from vessels; release spring tension. Each form must be individually addressed and the release verified — not assumed.</p>
+      </div>
+    </div>
+    <div class="loto-step" data-anim>
+      <div class="loto-n">6</div>
+      <div class="loto-txt">
+        <strong>Verify — test before you touch</strong>
+        <p>Before any physical contact, test for absence of energy using calibrated instruments at the point of work — not at the isolation point. For electrical systems: confirm zero volts on all phases and earth. Attempt to restart using normal controls — a correctly isolated system will not respond. Record the verification result on the permit. Only then may the work begin.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:1rem">
+    <div class="callout safe" data-anim>
+      <div class="callout-title">Re-energisation sequence — follow in this exact order</div>
+      <p><strong>1.</strong> Verify work is complete: all components reinstalled, covers replaced, no tools inside equipment.<br><br>
+      <strong>2.</strong> Clear all personnel from the work zone — confirm verbally with every crew member.<br><br>
+      <strong>3.</strong> Notify all affected personnel that energy restoration is imminent. Two-way confirmation required.<br><br>
+      <strong>4.</strong> Each worker removes their own personal lock from every isolation point. No person may remove another's lock. Emergency lock removal requires written authorisation and two witnesses.<br><br>
+      <strong>5.</strong> Remove tags after locks, by the person who applied them, in the same sequence.<br><br>
+      <strong>6.</strong> Restore energy following the normal startup procedure. Confirm the equipment responds as expected before returning to service.</p>
+    </div>
+    <div class="callout danger" data-anim>
+      <div class="callout-title">Tags Are Not Lockout Devices</div>
+      <p>A danger tag provides a visible warning. It does not physically prevent energisation. Anyone can remove a tag or operate a switch regardless of what it says. Tags supplement locks — they never replace them. Work on electrical systems without a physical lock on the isolation point is an unprotected system with a warning label on it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SECTION 9: VIOLATIONS ======== -->
+<section id="s9" class="dark">
+  <div class="dark-in">
+    <div class="sec-tag" data-anim>Section Nine</div>
+    <h2 data-anim>Common violations<br>and <em>consequences.</em></h2>
+    <div class="prose" data-anim>
+      <p>The following violations are the most frequently observed across industrial PTW systems. At True East, each constitutes a serious non-conformance that triggers immediate work stoppage and formal investigation. These are not minor administrative errors — each removes a protection designed to prevent fatalities.</p>
+    </div>
+  </div>
+</section>
+
+<div class="violation-grid" style="padding:3rem 2rem 1rem;max-width:820px;margin:0 auto">
+  <div class="vcard" data-anim>
+    <div class="vcard-ico">&#128336;</div>
+    <h4>Working beyond permit time limits</h4>
+    <p>An expired permit is not a permit. When the permit expires, the conditions verified at issuance may no longer apply. Gas test results are time-stamped, fire watches shift change, atmospheric conditions evolve. Working after expiry means working without verified controls in place.</p>
+  </div>
+  <div class="vcard" data-anim>
+    <div class="vcard-ico">&#128396;</div>
+    <h4>Starting work before permit is issued</h4>
+    <p>The permit is not a formality to complete while the job is running. The hazard assessment, control verification, and authorisation chain must all be complete before the first tool is picked up. Starting early with intent to "sort the permit later" means the controls were never verified before work began.</p>
+  </div>
+  <div class="vcard" data-anim>
+    <div class="vcard-ico">&#128682;</div>
+    <h4>No gas test before confined space entry</h4>
+    <p>The most lethal violation in confined space management. A space that tested clear yesterday may have accumulated hazardous gases overnight. Concentrations lethal enough to incapacitate within 60 seconds can be colourless, odourless, and imperceptible without a meter. Every entry. Every time.</p>
+  </div>
+  <div class="vcard" data-anim>
+    <div class="vcard-ico">&#128196;</div>
+    <h4>Using permit for different scope than issued</h4>
+    <p>A permit to weld Bracket A does not authorise Bracket B. A permit to enter Tank 1 does not cover Tank 2. If scope changes for any reason, the current permit must be suspended and a new permit issued for the revised scope. Expanding work under an existing permit is permit misuse.</p>
+  </div>
+  <div class="vcard" data-anim>
+    <div class="vcard-ico">&#128683;</div>
+    <h4>IA signing without site inspection</h4>
+    <p>An IA who signs without visiting the site has endorsed a description, not verified conditions. The permit's entire value rests on the IA's personal confirmation that conditions match the document. A desk-based approval eliminates the independent check that is the system's most powerful protective function.</p>
+  </div>
+  <div class="vcard" data-anim>
+    <div class="vcard-ico">&#128295;</div>
+    <h4>Failure to close out permits</h4>
+    <p>An unclosed permit remains open in the register — creating confusion about equipment status, area safety, and task completion. Every permit opened must be formally closed, including those where work was abandoned or scope changed mid-task.</p>
+  </div>
+</div>
+
+<div class="sec" style="padding-top:1rem">
+  <div class="callout danger" data-anim>
+    <div class="callout-title">Consequences at True East</div>
+    <p>Any of the above violations triggers: <strong>(1)</strong> Immediate work stoppage — regardless of project timeline or commercial pressure. <strong>(2)</strong> Formal incident investigation under TE-IMS-PROC-HSE-007, root cause analysis within 72 hours. <strong>(3)</strong> Escalation to site management and HSE Manager with written report. <strong>(4)</strong> Review of all active permits on site for the same violation pattern. <strong>(5)</strong> Depending on severity and intent — possible removal from site and referral to HR under TE-IMS-POL-HR-002. PTW violations are treated with the same seriousness as recordable injuries. Without intervention, that is exactly what they become.</p>
+  </div>
+</div>
+
+<!-- ======== SECTION 10: QUICK REFERENCE ======== -->
+<section id="s10" style="background:linear-gradient(180deg,var(--bg),var(--cream));padding:1px 0">
+  <div class="sec">
+    <div class="sec-tag" data-anim>Section Ten</div>
+    <h2 data-anim>Quick reference —<br>before you start work.</h2>
+    <p class="sec-lead" data-anim>Use this at the start of every shift involving any non-routine task. Work through the decision points in sequence. If you answer yes to any trigger question, stop and get the correct permit before proceeding.</p>
+  </div>
+  <div class="steps" style="margin-top:0">
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 1 — Nature of Work</div>
+        <h4>Is this a high-risk activity?</h4>
+        <p>Does the task involve fire, heat, or sparks? Entry into an enclosed space? Work on or near electrical systems? Digging deeper than 300mm? Use of radioactive equipment? Working at height above 1.8m without fall arrest? Breaking into a pressurised system? <strong>Yes to any = permit required before the first step.</strong></p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 2 — PTW Category</div>
+        <h4>Which permit type applies?</h4>
+        <p>Match your task: <strong>Hot Work</strong> (fire/sparks), <strong>Confined Space</strong> (enclosed entry), <strong>LOTO</strong> (electrical systems), <strong>Excavation</strong> (&gt;300mm ground disturbance), <strong>Radiography</strong> (radioactive sources or X-ray). Tasks crossing categories require all applicable permits. Most restrictive conditions apply throughout.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 3 — JHA Status</div>
+        <h4>Has the Job Hazard Analysis been completed?</h4>
+        <p>The JHA is a prerequisite for the permit — not part of the permit form. Without a completed, site-specific, task-specific JHA, the permit application cannot be submitted. A JHA from a prior similar task is insufficient. Stop and complete the JHA before approaching the Issuing Authority.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 4 — Authorisation</div>
+        <h4>Has the Issuing Authority reviewed and signed?</h4>
+        <p>The permit must carry the wet-ink signature of the IA obtained after their site inspection. A permit signed without a site visit, or signed on behalf of an absent IA, is not valid. Ask the IA directly whether they visited the site before signing. Do not start work on a permit you cannot verify.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 5 — Controls Present</div>
+        <h4>Are all control measures physically in place?</h4>
+        <p>Walk the worksite before the first step. Verify every control listed in the permit is present and functional. PPE on and correct. Isolations applied and tested dead. Gas readings within limits and recorded. Fire watch in position with extinguisher. Standby at post. If any control is absent or cannot be verified — do not start work. Notify the IA.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 6 — Crew Briefing</div>
+        <h4>Does your crew know the permit conditions?</h4>
+        <p>Hold a pre-work toolbox talk at the worksite. Read through the permit with your crew. Every person must be able to state: what they are authorised to do, the physical limits of the permitted area, the time limit, and their personal stop-work trigger. If any crew member cannot answer — they are not ready to start.</p>
+      </div>
+    </div>
+    <div class="step-row" data-anim>
+      <div class="step-num">?</div>
+      <div class="step-txt">
+        <div class="step-code">Question 7 — Physical Presence</div>
+        <h4>Is the permit physically at the worksite?</h4>
+        <p>The permit must be at the worksite — not in the site office or the truck — throughout the duration of the work. If an inspector visits and the permit is not present, work stops. The permit is the evidence that controls have been authorised and are current.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-card">
+    <div class="ac-inner" data-anim="scale">
+      <div class="ac-content">
+        <div class="sec-tag">Quick Reference Card</div>
+        <h2>Five permit types. One rule.</h2>
+        <p>No work in any PTW category begins without a valid, signed, physically-present permit. When in doubt — stop. Call your supervisor. A 15-minute delay is better than a lifetime of regret.</p>
+        <div class="ac-flow">
+          <div class="ac-step"><div class="ac-step-inner"><div class="ac-step-ico">&#128221;</div><div class="ac-step-label">JHA First</div></div></div>
+          <div class="ac-arrow">&#10142;</div>
+          <div class="ac-step"><div class="ac-step-inner"><div class="ac-step-ico">&#128394;</div><div class="ac-step-label">Get Permit</div></div></div>
+          <div class="ac-arrow">&#10142;</div>
+          <div class="ac-step"><div class="ac-step-inner"><div class="ac-step-ico">&#9989;</div><div class="ac-step-label">Verify Controls</div></div></div>
+          <div class="ac-arrow">&#10142;</div>
+          <div class="ac-step"><div class="ac-step-inner"><div class="ac-step-ico">&#128295;</div><div class="ac-step-label">Work Safely</div></div></div>
+          <div class="ac-arrow">&#10142;</div>
+          <div class="ac-step"><div class="ac-step-inner"><div class="ac-step-ico">&#128203;</div><div class="ac-step-label">Close Out</div></div></div>
+        </div>
+        <div class="ac-details">
+          <div class="ac-detail">
+            <div class="ac-detail-label">Hot Work — Form</div>
+            <div class="ac-detail-val">TE-IMS-FRM-OPS-011</div>
+            <div class="ac-detail-sub">Max 12h. Fire watch from first spark. 30-min post-work watch.</div>
+          </div>
+          <div class="ac-detail">
+            <div class="ac-detail-label">Confined Space — Form</div>
+            <div class="ac-detail-val">TE-IMS-FRM-OPS-012</div>
+            <div class="ac-detail-sub">3 signatures. Gas test every entry. Standby mandatory.</div>
+          </div>
+          <div class="ac-detail">
+            <div class="ac-detail-label">LOTO — Form</div>
+            <div class="ac-detail-val">TE-IMS-FRM-OPS-013</div>
+            <div class="ac-detail-sub">6-step sequence. Personal lock per worker. Verify dead before touch.</div>
+          </div>
+          <div class="ac-detail">
+            <div class="ac-detail-label">Excavation — Form</div>
+            <div class="ac-detail-val">TE-IMS-FRM-OPS-014</div>
+            <div class="ac-detail-sub">Any ground break &gt;300mm. Service drawings required.</div>
+          </div>
+          <div class="ac-detail">
+            <div class="ac-detail-label">Radiography — Form</div>
+            <div class="ac-detail-val">TE-IMS-FRM-OPS-015</div>
+            <div class="ac-detail-sub">RPS certificate required. Exclusion zone manned throughout.</div>
+          </div>
+          <div class="ac-detail">
+            <div class="ac-detail-label">Stop Work Authority</div>
+            <div class="ac-detail-val">TE-IMS-POL-HSE-001</div>
+            <div class="ac-detail-sub">Every person. Any time. No reprisal for good-faith use.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PRE-WORK CHECKLIST ======== -->
+<section style="padding:4rem 0 2rem">
+  <div class="sec" style="padding-bottom:1rem">
+    <div class="sec-tag" data-anim>Pre-Work Checklist</div>
+    <h2 data-anim>Before every permitted task —<br>confirm all seven.</h2>
+  </div>
+  <div class="checklist">
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>The correct permit type has been identified and the permit form is complete with no blank mandatory fields.</div>
+    </div>
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>A site-specific, task-specific JHA has been completed and is attached to or referenced on the permit.</div>
+    </div>
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>The Issuing Authority has physically visited the site, reviewed conditions, and signed the permit. All required co-signatures are present.</div>
+    </div>
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>All control measures listed in the permit are physically verified — gas tests recorded with timestamps, isolations applied and tested, PPE confirmed, fire watch and standby briefed and in position.</div>
+    </div>
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>Every crew member working under the permit has been briefed on its conditions and understands their personal stop-work trigger.</div>
+    </div>
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>The permit is physically present at the worksite and will remain there for the full duration of the work.</div>
+    </div>
+    <div class="chk-item" data-anim>
+      <div class="chk-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>The permit expiry time is known by the PA. A plan is in place to complete before expiry — or to arrange re-issue in advance of the time limit.</div>
+    </div>
+  </div>
+
+  <div class="quote" data-anim>
+    When in doubt — STOP. Call your supervisor. A 15-minute delay is better than a lifetime of regret.
+    <span class="quote-attr">True East Mining Company — Permit to Work System Principle</span>
+  </div>
+</section>
+
+<!-- ======== CLOSING ======== -->
+<section class="closing">
+  <div class="sec-tag" data-anim style="justify-content:center">The Bottom Line</div>
+  <h2 data-anim>The permit is not the paperwork.<br>It is the protection.</h2>
+  <p data-anim>Every field on that form represents a question asked before work began — a hazard identified, a control verified, a person held accountable. When you follow the PTW system, you are not completing a compliance requirement. You are actively protecting yourself and every person working alongside you.</p>
+  <div data-anim>
+    <a href="https://ims-portal.site" class="cbadge" target="_blank">&#9733;&ensp;Open the IMS Portal — ims-portal.site</a>
+  </div>
+</section>
+
+<div class="ft">
+  <b>True East Mining Company</b> &mdash; &#1575;&#1604;&#1588;&#1585;&#1602; &#1575;&#1604;&#1581;&#1602;&#1610;&#1602;&#1610;<br>
+  <span class="doccode">TE-IMS-MAN-OPS-001 &middot; Rev 01 &middot; Permit to Work System — Operational Manual</span><br>
+  ISO 45001:2018 Clause 8.1.3 &middot; MHRSD OHS Regulations 2021 &middot; KSA OHS Framework<br>
+  Permit Forms: <span class="doccode">TE-IMS-FRM-OPS-011 / 012 / 013 / 014 / 015</span> &middot; Policy: <span class="doccode">TE-IMS-POL-HSE-001</span><br>
+  <strong>All printed copies are uncontrolled</strong>
+</div>
+
+<script>
+!function(){
+  var io = new IntersectionObserver(function(ee){
+    for(var i=0;i<ee.length;i++) if(ee[i].isIntersecting) ee[i].target.classList.add('show');
+  },{threshold:0.06,rootMargin:'0px 0px -20px 0px'});
+  var els = document.querySelectorAll('[data-anim]');
+  for(var i=0;i<els.length;i++) io.observe(els[i]);
+
+  var bar = document.getElementById('prog');
+  window.addEventListener('scroll',function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(h>0) bar.style.width = (window.scrollY/h*100)+'%';
+  },{passive:true});
+
+  var nav = document.getElementById('snav');
+  var dots = nav.querySelectorAll('a');
+  var ids = ['s0','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
+  var secs = [];
+  for(var i=0;i<ids.length;i++){
+    var el = document.getElementById(ids[i]);
+    if(el) secs.push(el);
+  }
+  window.addEventListener('scroll',function(){
+    nav.classList.toggle('on', window.scrollY > window.innerHeight*0.4);
+    var c=0;
+    for(var i=0;i<secs.length;i++){
+      if(secs[i] && window.scrollY >= secs[i].offsetTop - window.innerHeight*0.45) c=i;
+    }
+    for(var i=0;i<dots.length;i++) dots[i].classList.toggle('on', i===c);
+  },{passive:true});
+
+  for(var i=0;i<dots.length;i++){
+    dots[i].addEventListener('click',function(e){
+      e.preventDefault();
+      var t = document.querySelector(this.getAttribute('href'));
+      if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+
+  if(window.opener){ window.opener.postMessage({type:'IMS_TRAINING_COMPLETE',resourceId:'ops-002',passed:true},'*') }
+}();
+</script>
+</body>
+</html>
