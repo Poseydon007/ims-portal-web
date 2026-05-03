@@ -48,6 +48,15 @@ export const educationTopics: EducationTopic[] = [
         tags: ["near miss", "reporting", "HSE"],
       },
       {
+        id: "hse-001-guide",
+        title: "Near Miss Reporting — Full Guide",
+        description: "Why near misses matter, the psychology of not reporting, how to submit via the IMS portal, and what happens after. Story-driven, field-worker language.",
+        type: "guide",
+        available: true,
+        url: "/NearMissReporting.html",
+        tags: ["near miss", "reporting", "HSE", "portal"],
+      },
+      {
         id: "hse-002",
         title: "Job Hazard Analysis (JHA) — Field Guide",
         description: "Practical walkthrough for completing a JHA before starting high-risk tasks on site. Includes risk matrix, hazard categories, controls hierarchy, and a worked drilling example.",
