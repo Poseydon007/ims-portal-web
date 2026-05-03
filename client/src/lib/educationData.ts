@@ -45,7 +45,7 @@ export const educationTopics: EducationTopic[] = [
         type: "video",
         available: true,
         url: "https://1drv.ms/v/c/3fc547dccdd2997a/IQCWCTJDjnxjQIVolvkJ-UBZAVFacuctaRJFLsI11BHFKWI?e=POjNa8",
-        thumbnailUrl: "https://1drv.ms/v/c/3fc547dccdd2997a/IQSWCTJDjnxjQIVolvkJ-UBZAXxF5nxzMlQ0yZCZol6WMkQ?width=1920&height=1080",
+        thumbnailUrl: "/thumbnails/nearmiss-thumb.png",
         duration: "8 min",
         tags: ["near miss", "reporting", "HSE"],
       },
