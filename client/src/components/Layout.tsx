@@ -180,7 +180,7 @@ export function TopNav() {
 
           {/* User info + sign out — below portal label */}
           {!loading && isAuthenticated && user ? (
-            <div className="flex items-center justify-between gap-3 mt-1.5 w-full">
+            <div className="flex items-end justify-between gap-3 mt-1.5 w-full">
               <div className="text-left">
                 <div className="text-white text-xs font-semibold leading-tight">
                   {user.fullName}
