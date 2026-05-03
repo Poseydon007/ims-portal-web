@@ -45,7 +45,7 @@ function ResourceCard({
 
   return (
     <div
-      className="rounded border bg-white transition-all duration-200 hover:shadow-md relative"
+      className="rounded border bg-white transition-all duration-200 hover:shadow-md relative flex flex-col"
       style={{ borderColor: completed ? "#22c55e" : "#dde3ec" }}
     >
       {/* Completion badge — top right corner */}
@@ -119,7 +119,7 @@ function ResourceCard({
         </div>
       )}
 
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         {/* Type badge + meta */}
         <div className="flex items-center justify-between mb-2">
           <span
@@ -165,7 +165,7 @@ function ResourceCard({
           <button
             onClick={resource.available && resource.url ? () => onOpen(resource) : undefined}
             disabled={!resource.available}
-            className="w-full py-2 rounded text-xs font-semibold transition-all"
+            className="w-full py-2 rounded text-xs font-semibold transition-all mt-auto"
             style={
               resource.available
                 ? { backgroundColor: "#081C2E", color: "#fff", cursor: "pointer" }
@@ -183,7 +183,7 @@ function ResourceCard({
         {resource.type === "video" && resource.available && resource.url && (
           <button
             onClick={() => onOpen(resource)}
-            className="w-full py-2 rounded text-xs font-semibold transition-all"
+            className="w-full py-2 rounded text-xs font-semibold transition-all mt-auto"
             style={{ backgroundColor: "#C49A28", color: "#081C2E", cursor: "pointer" }}
           >
             Watch Video
