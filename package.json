@@ -10,7 +10,12 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
-    "db:push": "drizzle-kit generate && drizzle-kit migrate"
+    "db:push": "drizzle-kit generate && drizzle-kit migrate",
+    "sync:emails": "node scripts/sync-hr-emails.mjs",
+    "sync:emails:dry": "node scripts/sync-hr-emails.mjs --dry-run",
+    "sync:profile": "node scripts/sync-hr-emails.mjs --profile",
+    "import:form": "node scripts/import-form-responses.mjs",
+    "import:form:dry": "node scripts/import-form-responses.mjs --dry-run"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

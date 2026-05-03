@@ -17,7 +17,8 @@ export interface HrEmployee {
   profilePictureUrl:  string | null;
   location:           string | null;
   timezone:           string | null;
-  authorizedApps:     string[] | null;
+  workerType:         "employee" | "subcontractor" | "consultant";
+  sponsorCompany:     string | null;
   // read:internal fields
   hireDate:           string | null;
   contractType:       string | null;
